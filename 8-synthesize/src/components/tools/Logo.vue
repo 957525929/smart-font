@@ -44,7 +44,7 @@
       box-shadow: none !important;
       transition: background 300ms;
       h1{
-        width:130px;
+        width:200px;
         line-height: 24px;
         font-size: 16px;
       }

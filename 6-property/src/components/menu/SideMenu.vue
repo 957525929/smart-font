@@ -1,7 +1,7 @@
 <template>
   <a-layout-sider
     :class="['sider', isDesktop() ? null : 'shadow', theme, fixSiderbar ? 'ant-fixed-sidemenu' : null ]"
-    width="200px"
+    width="280px"
     :collapsible="collapsible"
     v-model="collapsed"
     :trigger="null">
@@ -79,7 +79,7 @@
     @scrollBarSize: 10px;
 
     ul.ant-menu {
-
+      background-color:#E9F0FC;
       /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
       &::-webkit-scrollbar {
         width: @scrollBarSize;
@@ -137,7 +137,9 @@
         }
       }
     }
-
+  }
+  .sider.light {
+    background-color: #E9F0FC;
   }
 
   /* update_end author:sunjianlei date:20190509 for: 修改侧边导航栏滚动条的样式 */
