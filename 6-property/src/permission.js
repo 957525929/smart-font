@@ -23,13 +23,14 @@ router.beforeEach((to, from, next) => {
       if (store.getters.permissionList.length === 0) {
         store.dispatch('GetPermissionList').then(res => {
               const menuData = res.result.menu;
-              console.log(res.message)
+              // console.log(res.message)
               if (menuData === null || menuData === "" || menuData === undefined) {
                 return;
               }
               let constRoutes = [];
               constRoutes = generateIndexRouter(menuData);
               // 添加主界面路由
+              console.log(constRoutes);
               store.dispatch('UpdateAppRouter',  { constRoutes }).then(() => {
                 // 根据roles权限生成可访问的路由表
                 // 动态添加可访问路由表

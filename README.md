@@ -36,7 +36,7 @@ yarn run build
 			"type": "1",
 			"status": "1"
 		}],
-		"auth": [{
+		"auth": [{ 
 			"action": "user:add",
 			"describe": "添加用户按钮",
 			"type": "1"
