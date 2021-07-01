@@ -82,7 +82,120 @@ export const menu = {
                         "title": "用车记录"
                     },
                     "name": "vehicle-history"
+                },
+                {
+                    "path": "/vehicle/listInfo",
+                    "component": "vehicle/listInfo/index",
+                    "route": "1",
+                    "meta": {
+                        "keepAlive": false,
+                        "internalOrExternal": false,
+                        "icon": "car",
+                        "title": "车辆信息"
+                    },
+                    "name": "vehicle-listInfo"
+                },
+                {
+                    "path": "/vehicle/dispatch",
+                    "component": "vehicle/dispatch/index",
+                    "route": "1",
+                    "meta": {
+                        "keepAlive": false,
+                        "internalOrExternal": false,
+                        "icon": "control",
+                        "title": "车辆调度"
+                    },
+                    "name": "vehicle-dispatch"
+                },
+                {
+                    "path": "/vehicle/supplyRecord",
+                    "component": "vehicle/supplyRecord/index",
+                    "route": "1",
+                    "meta": {
+                        "keepAlive": false,
+                        "internalOrExternal": false,
+                        "icon": "api",
+                        "title": "加油记录"
+                    },
+                    "name": "vehicle-supplyRecord"
+                },
+                {
+                    "path": "/vehicle/maintainRecord",
+                    "component": "vehicle/maintainRecord/index",
+                    "route": "1",
+                    "meta": {
+                        "keepAlive": false,
+                        "internalOrExternal": false,
+                        "icon": "insurance",
+                        "title": "保养记录"
+                    },
+                    "name": "vehicle-maintainRecord"
+                },
+                {
+                    "path": "/vehicle/fixRecord",
+                    "component": "vehicle/fixRecord/index",
+                    "route": "1",
+                    "meta": {
+                        "keepAlive": false,
+                        "internalOrExternal": false,
+                        "icon": "tool",
+                        "title": "维修记录"
+                    },
+                    "name": "vehicle-fixRecord"
                 }]
+            },
+            {
+                "redirect": null,
+                "path": "/personnelMng",
+                "component": "layouts/RouteView",
+                "route": "1",
+                "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon": "audit",
+                    "title": "人员管理"
+                },
+                "name": "personnelMng",
+                "children": [
+                    {
+                        "path": "/personnelMng/driverMng",
+                        "component": "personnelMng/driverMng/index",
+                        "route": "1",
+                        "meta": {
+                            "keepAlive": false,
+                            "internalOrExternal": false,
+                            "icon": "team",
+                            "title": "司机管理"
+                        },
+                        "name": "personnelMng-driverMng"
+                    }
+                ]
+            },
+            {
+                "redirect": null,
+                "path": "/sysCtrl",
+                "component": "layouts/RouteView",
+                "route": "1",
+                "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon": "setting",
+                    "title": "系统管理"
+                },
+                "name": "sysCtrl",
+                "children": [
+                    {
+                        "path": "/sysCtrl/test",
+                        "component": "sysCtrl/test",
+                        "route": "1",
+                        "meta": {
+                            "keepAlive": false,
+                            "internalOrExternal": false,
+                            "title": "开发中..."
+                        },
+                        "name": "sysCtrl-test"
+                    }
+                ]
             }]
     },
     "timestamp": 1624946593208
