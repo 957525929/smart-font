@@ -10,19 +10,19 @@
         <a-list-item slot="renderItem" slot-scope="item, index">
           <a slot="actions" v-if="item.status == '审核中'" @click="pass(index)">通过</a>
           <a slot="actions" v-if="item.status == '已通过'" @click="unpass(index)">不通过</a>
-          <a slot="actions">详情</a>
+          <a slot="actions" @click="showDetails(item)">详情</a>
           <a-list-item-meta>
             <div slot="description">
-              {{'用车人：'+item.user}}
+              {{ '用车人：' + item.user }}
               <a-divider type="vertical" />
-              {{'用车时间：'+item.time}}
+              {{ '用车时间：' + item.time }}
               <a-divider type="vertical" />
-              {{'出发地：'+item.from}}
+              {{ '出发地：' + item.from }}
               <a-divider type="vertical" />
-              {{'目的地：'+item.to}}
+              {{ '目的地：' + item.to }}
             </div>
             <a slot="title">{{ item.licenseNum }}</a>
-            <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
           <div>
             <font :class="item.status == '审核中' ? 'redFont' : 'greenFont'">{{ '状态：' + item.status }}</font>
@@ -30,33 +30,43 @@
         </a-list-item>
       </a-list>
     </div>
+
+    <a-modal v-model="detailsVisible" :footer="null" title="详情" :width="735" :destroyOnClose='true'>
+      <mydetails :id="currentItem" />
+    </a-modal>
   </div>
 </template>
 
 <script>
+import mydetails from './details.vue'
 const listData = [
   {
     licenseNum: '测A123401',
     status: '审核中',
-    user:'香菱',
-    time:'2021-6-29',
-    from:'福州市',
-    to:'南京市'
+    user: '香菱',
+    time: '2021-6-29',
+    from: '福州市',
+    to: '南京市',
   },
   {
     licenseNum: '测A123402',
     status: '已通过',
-    user:'胡桃',
-    time:'2021-6-29',
-    from:'福州市',
-    to:'南京市'
+    user: '胡桃',
+    time: '2021-6-29',
+    from: '福州市',
+    to: '南京市',
   },
 ]
 export default {
   data() {
     return {
       listData: listData,
+      detailsVisible: false,
+      currentItem: null, //点击详情时的记录
     }
+  },
+  components: {
+    mydetails,
   },
   methods: {
     onSearch(value) {
@@ -67,6 +77,10 @@ export default {
     },
     unpass(index) {
       this.listData[index].status = '审核中'
+    },
+    showDetails(item) {
+      this.currentItem = item
+      this.detailsVisible = true
     },
   },
 }
