@@ -4,6 +4,7 @@ import { ACCESS_TOKEN, USER_NAME,USER_INFO,USER_AUTH,SYS_BUTTON_AUTH,UI_CACHE_DB
 import { welcome } from "@/utils/util"
 import { queryPermissionsByUser } from '@/api/api'
 import { getAction } from '@/api/manage'
+import { menu } from '../../mock/menuData'
 
 const user = {
   state: {
@@ -115,6 +116,7 @@ const user = {
         let v_token = Vue.ls.get(ACCESS_TOKEN);
         let params = {token:v_token};
         queryPermissionsByUser(params).then(response => {
+          response=menu
           const menuData = response.result.menu;
           const authData = response.result.auth;
           const allAuthData = response.result.allAuth;
