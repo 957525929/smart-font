@@ -9,6 +9,7 @@
           <a-select-option key="3" value="司机">司机</a-select-option>
         </a-select>
         <a-input-search :placeholder="`请输入${currentCondition}搜索`" style="width: 200px" @search="onSearch" />
+        <a-button type="primary" style="float:right;margin-right:10px">导出</a-button>
       </div>
     </div>
     <div class="listPrt">
@@ -26,7 +27,7 @@
               <a-divider type="vertical" />
               {{ '目的地：' + item.to }}
             </div>
-            <a slot="title">{{ item.licenseNum }}</a>
+            <a slot="title" @click="showDetails(item)">{{ item.licenseNum }}</a>
             <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
           <div>

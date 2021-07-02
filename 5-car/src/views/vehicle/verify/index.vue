@@ -21,7 +21,7 @@
               <a-divider type="vertical" />
               {{ '目的地：' + item.to }}
             </div>
-            <a slot="title">{{ item.licenseNum }}</a>
+            <a slot="title" @click="showDetails(item)">{{ item.licenseNum }}</a>
             <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
           <div>
