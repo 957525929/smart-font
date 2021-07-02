@@ -87,9 +87,9 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a-upload name="file">
-                  <a>上传</a>
-                </a-upload>
+                <!-- <a-upload name="file"> -->
+                <a>上传</a>
+                <!-- </a-upload> -->
               </a-menu-item>
 
               <a-menu-item>
