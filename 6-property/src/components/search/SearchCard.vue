@@ -38,7 +38,8 @@ export default {
         columns: Array,
     },
     mounted() {
-        console.log(this.searchCon)
+        this.columns.filters(item=>!item.ifHideInSearch)
+        console.log(this.columns)
     },
     data() {
         return {

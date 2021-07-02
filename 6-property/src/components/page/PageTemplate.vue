@@ -2,7 +2,7 @@
     <a-row align="top">
         <a-col :span="24">
             <SearchCard  v-on="$listeners" v-bind="$attrs" :columns="columns"></SearchCard>
-            <a-card style="width: 100%">
+            <a-card style="width: 100%;margin-top:10px">
                 <a-table :columns="columns" :data-source="formdata">
                     <span slot="action" slot-scope="text, record">
                         <template v-for="(i,index) in record.action">
