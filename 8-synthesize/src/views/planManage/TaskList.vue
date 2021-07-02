@@ -129,9 +129,6 @@ export default {
   },
   data() {
     return {
-      // description: '计划列表',
-      // // 查询条件
-      // queryParam: {},
       //数据
       data: [
         {
