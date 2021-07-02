@@ -8,13 +8,13 @@
           <a-input style="width:200px" placeholder="请输入任务名称" v-decorator="['planName', {rules: [{ required: true, message: '请输入任务名称!' }]}]" />
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="重要任务" hasFeedback>
-          <a-select style="width:100px" ref="select">
-            <a-select-option value="yes">是</a-select-option>
-            <a-select-option value="no">否</a-select-option>
+          <a-select style="width:100px" ref="select" default-value="0">
+            <a-select-option value="1">是</a-select-option>
+            <a-select-option value="0">否</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务状态">
-          <a-select style="width:100px" ref="select">
+          <a-select style="width:100px" ref="select" default-value="1">
             <a-select-option value="0">进行中</a-select-option>
             <a-select-option value="1">未开始</a-select-option>
             <a-select-option value="2">已完成</a-select-option>

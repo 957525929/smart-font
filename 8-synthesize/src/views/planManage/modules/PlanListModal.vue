@@ -4,19 +4,19 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
 
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="计划名称" hasFeedback>
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="计划名称">
           <a-input style="width:200px" placeholder="请输入计划名称" v-decorator="['planName', {rules: [{ required: true, message: '请输入计划名称!' }]}]" />
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="优先级别" hasFeedback>
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="优先级别" default-value="0">
           <a-select style="width:100px" ref="select">
-            <a-select-option value="yes">是</a-select-option>
-            <a-select-option value="no">否</a-select-option>
+            <a-select-option value="1">是</a-select-option>
+            <a-select-option value="0">否</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="状态">
-          <a-select style="width:100px" ref="select">
-            <a-select-option value="yes">进行中</a-select-option>
-            <a-select-option value="no">未开始</a-select-option>
+          <a-select style="width:100px" ref="select" default-value="0">
+            <a-select-option value="1">进行中</a-select-option>
+            <a-select-option value="0">未开始</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="创建时间">
@@ -40,6 +40,7 @@
 import { httpAction } from '@/api/manage'
 import JCron from "@/components/jeecg/JCron";
 import pick from 'lodash.pick'
+
 // import moment from "moment"
 
 export default {
