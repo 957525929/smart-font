@@ -10,7 +10,9 @@
                             <a-divider type="vertical" v-if="index!==record.action.length-1"/>
                         </template>
                     </span>
+                        <slot name="tableSlot"></slot>
                 </a-table>
+                
             </a-card>
         </a-col>
     </a-row>
