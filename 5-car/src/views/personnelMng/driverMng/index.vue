@@ -3,6 +3,7 @@
     <div class="filterPrt">
       <div class="filterCtx">
         <a-input-search placeholder="请输入车牌号搜索" style="width: 300px" @search="onSearch" />
+        <a-button type="primary" style="float: right; margin-right: 10px" @click="newDriverVisible=true">新增司机</a-button>
       </div>
     </div>
     <div class="listPrt">
@@ -24,6 +25,9 @@
         </a-list-item>
       </a-list>
     </div>
+    <a-modal v-model="newDriverVisible" title="新增司机" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+      <new-driver />
+    </a-modal>
      <a-modal v-model="bindVisible" :footer="null" title="车辆绑定" :destroyOnClose="true">
        <a-transfer
       :data-source="mockData"
@@ -38,6 +42,7 @@
 </template>
 
 <script>
+import newDriver from './newDriver.vue'
 const listData = [
   {
     name:'张三',
@@ -99,12 +104,13 @@ export default {
     return {
       listData: listData,
       bindVisible: false, 
+      newDriverVisible:false,
       mockData:mockData,
       targetKeys:['1','4']
     }
   },
   components: {
-    
+    newDriver
   },
   methods: {
     onSearch(value) {
