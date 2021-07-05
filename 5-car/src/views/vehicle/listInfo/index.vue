@@ -4,7 +4,7 @@
       <div class="filterCtx">
         <a-input-search :placeholder="`请输入车牌号搜索`" style="width: 200px" @search="onSearch" />
         <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
-        <a-button type="primary" style="float: right; margin-right: 10px">新增</a-button>
+        <a-button type="primary" style="float: right; margin-right: 10px" @click="newVehicleVisible=true">新增</a-button>
       </div>
     </div>
     <div class="listPrt">
@@ -34,11 +34,15 @@
     <a-modal v-model="detailsVisible" :footer="null" title="详情" :width="735" :destroyOnClose="true">
       <mydetails :licenseNum="currentLicenseNum" />
     </a-modal>
+    <a-modal v-model="newVehicleVisible" title="新增车辆" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+      <new-vehicle />
+    </a-modal>
   </div>
 </template>
 
 <script>
 import mydetails from './details.vue'
+import newVehicle from './newVehicle.vue'
 const listData = [
   {
     licenseNum: '测A123401',
@@ -74,11 +78,13 @@ export default {
     return {
       listData: listData,
       detailsVisible: false,
+      newVehicleVisible:false,
       currentLicenseNum: null, //记录点击详情时的车牌号
     }
   },
   components: {
     mydetails,
+    newVehicle
   },
   methods: {
     showDetails(item) {
