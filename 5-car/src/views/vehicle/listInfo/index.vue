@@ -11,7 +11,7 @@
       <a-list item-layout="horizontal" :data-source="listData">
         <a-list-item slot="renderItem" slot-scope="item">
           <a slot="actions" @click="showDetails(item)">详情</a>
-          <a slot="actions">修改</a>
+          <a slot="actions" @click="showEditForm(item)">修改</a>
           <a slot="actions">删除</a>
           <a-list-item-meta>
             <div slot="description">
@@ -37,12 +37,16 @@
     <a-modal v-model="newVehicleVisible" title="新增车辆" :destroyOnClose='true' :footer="null" :maskClosable='false'>
       <new-vehicle />
     </a-modal>
+    <a-modal v-model="editFormVisible" title="修改车辆信息" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+      <edit-form :licenseNum="currentLicenseNum" />
+    </a-modal>
   </div>
 </template>
 
 <script>
 import mydetails from './details.vue'
 import newVehicle from './newVehicle.vue'
+import editForm from './edit.vue'
 const listData = [
   {
     licenseNum: '测A123401',
@@ -79,18 +83,24 @@ export default {
       listData: listData,
       detailsVisible: false,
       newVehicleVisible:false,
+      editFormVisible:false,
       currentLicenseNum: null, //记录点击详情时的车牌号
     }
   },
   components: {
     mydetails,
-    newVehicle
+    newVehicle,
+    editForm
   },
   methods: {
     showDetails(item) {
       this.currentLicenseNum = item.licenseNum
       this.detailsVisible = true
     },
+    showEditForm(item){
+      this.currentLicenseNum = item.licenseNum
+      this.editFormVisible = true
+    }
   },
 }
 </script>
