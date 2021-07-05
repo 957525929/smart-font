@@ -16,7 +16,6 @@
       <a-list item-layout="horizontal" :data-source="listData">
         <a-list-item slot="renderItem" slot-scope="item">
           <a slot="actions" @click="showDetails(item)">详情</a>
-          <a slot="actions">编辑</a>
           <a-list-item-meta>
             <div slot="description">
               {{ '用车人：' + item.user }}

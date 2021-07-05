@@ -14,10 +14,11 @@
           </a-col>
 
           <a-col :md="6" :sm="10">
-            <a-form-item label="重要任务">
-              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择重要任务">
-                <a-select-option value="1">是</a-select-option>
-                <a-select-option value="0">否</a-select-option>
+            <a-form-item label="重要性">
+              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择重要性">
+                <a-select-option value="0">高</a-select-option>
+                <a-select-option value="1">中</a-select-option>
+                <a-select-option value="2">低</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -25,16 +26,17 @@
           <a-col :md="6" :sm="9">
             <a-form-item label="任务状态">
               <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择状态">
-                <a-select-option value="1">未开始</a-select-option>
                 <a-select-option value="0">进行中</a-select-option>
+                <a-select-option value="1">未开始</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
+                <a-select-option value="3">未完成</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="10">
             <a-form-item label="时间">
-              <a-date-picker />
+              <a-range-picker />
             </a-form-item>
           </a-col>
 
@@ -106,6 +108,7 @@
           <a-tag v-if="status==='0'" color="orange">未开始</a-tag>
           <a-tag v-if="status==='1'" color="green">进行中</a-tag>
           <a-tag v-if="status==='2'" color="cyan">已完成</a-tag>
+          <a-tag v-if="status==='3'" color="red">未完成</a-tag>
         </template>
       </a-table>
     </div>
@@ -134,7 +137,7 @@ export default {
         {
           key: '1',
           taskName: '2021年第一季度总结',
-          priority: '是',
+          priority: '高',
           status: '2',
           createTime: '2021-01-01',
           deadline: '2021-03-31',
@@ -144,8 +147,8 @@ export default {
         {
           key: '2',
           taskName: '2021年第二季度总结',
-          priority: '否',
-          status: '1',
+          priority: '低',
+          status: '3',
           createTime: '2021-04-01',
           deadline: '2021-06-30',
           startTime: '2021-06-04',
@@ -154,21 +157,21 @@ export default {
         {
           key: '3',
           taskName: '2021年第三季度总结',
-          priority: '否',
-          status: '0',
+          priority: '中',
+          status: '1',
           createTime: '2021-07-01',
           deadline: '2021-09-30'
         },
         {
           key: '4',
           taskName: '2021年第四季度总结',
-          priority: '否',
+          priority: '低',
           status: '0',
-          createTime: '2021-04-01',
-          deadline: '2021-06-30',
+          createTime: '2021-07-01',
+          deadline: '2021-12-31',
         },
       ],
-      // 表头
+      // 表头 
       columns: [
         {
           title: '任务编号',
@@ -191,7 +194,7 @@ export default {
                       }*/
         },
         {
-          title: '重要任务',
+          title: '重要性',
           align: "center",
           width: 100,
           dataIndex: 'priority'
@@ -207,6 +210,7 @@ export default {
             { text: '进行中', value: '0' },
             { text: '未开始', value: '-1' },
             { text: '已完成', value: '1' },
+            { text: '未完成', value: '2' },
           ]
         },
         {
