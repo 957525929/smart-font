@@ -3,6 +3,7 @@
     <div class="filterPrt">
       <div class="filterCtx">
         <a-input-search placeholder="请输入车牌号搜索" style="width: 300px" @search="onSearch" />
+        <a-button @click="showNewTask" type="primary" style="float: right; margin-right: 10px">新建派车</a-button>
       </div>
     </div>
     <div class="listPrt">
@@ -37,12 +38,16 @@
     <a-modal v-model="selectDriverVisible" title="改派司机" :destroyOnClose='true'>
       <select-driver :id="currentItem" />
     </a-modal>
+    <a-modal v-model="newTaskVisible" title="新建派车任务" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+      <new-task :id="currentItem" />
+    </a-modal>
   </div>
 </template>
 
 <script>
 import mydetails from './details.vue'
 import selectDriver from './selectDriver.vue'
+import newTask from './newTask.vue'
 const listData = [
   {
     licenseNum: '测A123402',
@@ -60,11 +65,13 @@ export default {
       detailsVisible: false,
       selectDriverVisible:false,
       currentItem: null, //点击详情时的记录
+      newTaskVisible:false
     }
   },
   components: {
     mydetails,
-    selectDriver
+    selectDriver,
+    newTask
   },
   methods: {
     onSearch(value) {
@@ -77,6 +84,9 @@ export default {
     showSelectDriver(item){
       this.currentItem = item
       this.selectDriverVisible = true
+    },
+    showNewTask(){
+      this.newTaskVisible=true
     }
   },
 }

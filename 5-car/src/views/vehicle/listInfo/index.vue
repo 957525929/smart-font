@@ -4,14 +4,14 @@
       <div class="filterCtx">
         <a-input-search :placeholder="`请输入车牌号搜索`" style="width: 200px" @search="onSearch" />
         <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
-        <a-button type="primary" style="float: right; margin-right: 10px">新增</a-button>
+        <a-button type="primary" style="float: right; margin-right: 10px" @click="newVehicleVisible=true">新增</a-button>
       </div>
     </div>
     <div class="listPrt">
       <a-list item-layout="horizontal" :data-source="listData">
         <a-list-item slot="renderItem" slot-scope="item">
           <a slot="actions" @click="showDetails(item)">详情</a>
-          <a slot="actions">修改</a>
+          <a slot="actions" @click="showEditForm(item)">修改</a>
           <a slot="actions">删除</a>
           <a-list-item-meta>
             <div slot="description">
@@ -34,11 +34,19 @@
     <a-modal v-model="detailsVisible" :footer="null" title="详情" :width="735" :destroyOnClose="true">
       <mydetails :licenseNum="currentLicenseNum" />
     </a-modal>
+    <a-modal v-model="newVehicleVisible" title="新增车辆" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+      <new-vehicle />
+    </a-modal>
+    <a-modal v-model="editFormVisible" title="修改车辆信息" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+      <edit-form :licenseNum="currentLicenseNum" />
+    </a-modal>
   </div>
 </template>
 
 <script>
 import mydetails from './details.vue'
+import newVehicle from './newVehicle.vue'
+import editForm from './edit.vue'
 const listData = [
   {
     licenseNum: '测A123401',
@@ -74,17 +82,25 @@ export default {
     return {
       listData: listData,
       detailsVisible: false,
+      newVehicleVisible:false,
+      editFormVisible:false,
       currentLicenseNum: null, //记录点击详情时的车牌号
     }
   },
   components: {
     mydetails,
+    newVehicle,
+    editForm
   },
   methods: {
     showDetails(item) {
       this.currentLicenseNum = item.licenseNum
       this.detailsVisible = true
     },
+    showEditForm(item){
+      this.currentLicenseNum = item.licenseNum
+      this.editFormVisible = true
+    }
   },
 }
 </script>

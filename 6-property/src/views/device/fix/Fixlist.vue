@@ -1,31 +1,48 @@
 <template>
-  <a-row type="flex" :gutter="16">
-    <a-col :md="5" :sm="24">
-      <address-list-left v-model="currentOrgCode"/>
-    </a-col>
-    <a-col :md="24-5" :sm="24">
-      <address-list-right v-model="currentOrgCode"/>
-    </a-col>
-  </a-row>
+    <div class="wrapper">
+    <a-tabs default-active-key="1" @change="callback" v-for="(item, index) in fixMenu" :key="item" :activeKey="current">
+        <a-tab-pane :tab="item.title" :key="index">
+            <PageTemplate :data="item.content"></PageTemplate>
+                            <!-- :columns="item.fixList.allColumns"
+                :searchCon="item.fixList.allSearchCon"
+                :formdata="item.fixList.allData" -->
+        </a-tab-pane>
+        <!-- <a-tab-pane key="2" tab="Tab 2" force-render> Content of Tab Pane 2 </a-tab-pane>
+            <a-tab-pane key="3" tab="Tab 3"> Content of Tab Pane 3 </a-tab-pane> -->
+    </a-tabs>
+    </div>
 </template>
 
 <script>
-//   import AddressListLeft from './modules/AddressListLeft'
-//   import AddressListRight from './modules/AddressListRight'
+import PageTemplate from '@/components/page/PageTemplate.vue'
+import { fixMenu, fixList } from './index.js'
+const NEW_FIXLIST = Object.freeze({ fixMenu, fixList })
 
-  export default {
-    name: 'deviceList',
-    // components: { AddressListLeft, AddressListRight },
+export default {
+    name: 'fixList',
+    components: { PageTemplate },
     data() {
-      return {
-        description: '设备维修列表页面',
-        currentOrgCode: ''
-      }
+        return {
+            current:0,
+            fixMenu: NEW_FIXLIST.fixMenu,
+            fixList: NEW_FIXLIST.fixList,
+        }
     },
-
-    methods: {}
-  }
+    mounted() {
+        console.log(this.fixList)
+    },
+    methods: {
+        callback(key) {
+          this.current=key
+            console.log(key)
+        },
+    },
+}
 </script>
 <style scoped>
-  @import '~@assets/less/common.less';
+@import '~@assets/less/common.less';
+.wrapper{
+  display: flex;
+  flex-direction: row;
+}
 </style>

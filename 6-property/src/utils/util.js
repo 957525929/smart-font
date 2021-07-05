@@ -104,7 +104,6 @@ function  generateChildRouters (data) {
   const routers = [];
   console.log(data,typeof(data));
   for (let item of data) {
-    console.log(data);
     let component = "";
     if(item.component.indexOf("layouts")>=0){
        component = "components/"+item.component;
@@ -174,7 +173,6 @@ function  generateChildRouters (data) {
     }else{
       routers.push(menu);
     }
-    console.log(' 生成路由：  ',routers);
     //--update-end----author:scott---date:20190320------for:根据后台菜单配置，判断是否路由菜单字段，动态选择是否生成路由（为了支持参数URL菜单）------
   }
   
