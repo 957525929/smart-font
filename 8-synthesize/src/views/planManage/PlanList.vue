@@ -7,32 +7,25 @@
         <a-row :gutter="10">
 
           <a-col :md="6" :sm="10">
-            <a-form-item label="任务类名">
-              <a-input placeholder="请输入任务类名" v-model="queryParam.jobClassName"></a-input>
+            <a-form-item label="计划名称">
+              <a-input placeholder="请输入计划名称"></a-input>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="9">
-            <a-form-item label="任务状态">
-              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择状态">
-                <a-select-option value="1">未开始</a-select-option>
-                <a-select-option value="0">进行中</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-
-          <a-col :md="6" :sm="10">
-            <a-form-item label="优先级别">
-              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择优先级">
-                <a-select-option value="1">是</a-select-option>
-                <a-select-option value="0">否</a-select-option>
+            <a-form-item label="计划状态">
+              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择计划状态">
+                <a-select-option value="0">未开始</a-select-option>
+                <a-select-option value="1">进行中</a-select-option>
+                <a-select-option value="2">已完成</a-select-option>
+                <a-select-option value="3">未完成</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="10">
             <a-form-item label="时间">
-              <a-date-picker />
+              <a-range-picker />
             </a-form-item>
           </a-col>
 
@@ -58,7 +51,7 @@
                 <a-icon type="plus" />上传
               </a-menu-item>
             </a-menu>
-            <a-button @click="menu" style="margin-left: 8px"> 批量操作
+            <a-button style="margin-left: 8px"> 批量操作
               <a-icon type="down" />
             </a-button>
           </a-dropdown>
@@ -68,14 +61,7 @@
 
     <!-- table区域-begin -->
     <div>
-      <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
-        <!-- 字符串超长截取省略号显示-->
-        <span slot="description" slot-scope="text">
-          <j-ellipsis :value="text" :length="20" />
-        </span>
-        <span slot="parameterRender" slot-scope="text">
-          <j-ellipsis :value="text" :length="20" />
-        </span>
+      <a-table ref="table" size="middle" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
 
         <span slot="action" slot-scope="text, record">
           <a @click="gotoMenu">详情</a>
@@ -99,15 +85,17 @@
 
         <!-- 状态渲染模板 -->
         <template slot="customRenderStatus" slot-scope="status">
+          <a-tag v-if="status==='0'" color="orange">未开始</a-tag>
           <a-tag v-if="status==='1'" color="green">进行中</a-tag>
-          <a-tag v-else color="orange">未开始</a-tag>
+          <a-tag v-if="status==='2'" color="cyan">已完成</a-tag>
+          <a-tag v-if="status==='3'" color="red">未完成</a-tag>
         </template>
       </a-table>
     </div>
     <!-- table区域-end -->
 
     <!-- 表单区域 -->
-    <PlanListModal ref="modalForm" @ok="modalFormOk"></PlanListModal>
+    <PlanListModal ref="modalForm" @ok="modalFormOk"> </PlanListModal>
   </a-card>
 </template>
 
@@ -127,33 +115,7 @@ export default {
     const gotoMenu = () => {
       this.$router.replace({ path: '/planManage/tasklist' })
     }
-    return {
-      gotoMenu,
-      // description: '计划列表',
-      // // 查询条件
-      // queryParam: {},
-      //数据
-      data: [
-        {
-          key: '1',
-          planName: '2021年季度总结',
-          priority: '是',
-          createTime: '2021-01-01',
-          status: '1',
-          deadline: '2021-12-31',
-          startTime: '2021-03-04',
-          completionTime: ''
-        },
-        {
-          key: '2',
-          planName: '2021年团建策略',
-          priority: '是',
-          createTime: '2021-05-05',
-          status: '0',
-          deadline: '2021-06-06',
-          completionTime: ''
-        },
-      ],
+    const data = ({
       // 表头
       columns: [
         {
@@ -175,12 +137,6 @@ export default {
           /*            customRender:function (text) {
                         return "*"+text.substring(9,text.length);
                       }*/
-        },
-        {
-          title: '优先级别',
-          align: "center",
-          width: 100,
-          dataIndex: 'priority'
         },
         {
           title: '状态',
@@ -226,6 +182,57 @@ export default {
           scopedSlots: { customRender: 'action' },
         }
       ],
+      dataSource: [
+        {
+          key: '1',
+          planName: '2021年季度总结',
+          createTime: '2021-01-01',
+          status: '1',
+          deadline: '2021-12-31',
+          startTime: '2021-03-04',
+          completionTime: ''
+        },
+        {
+          key: '2',
+          planName: '2021年团建策略',
+          createTime: '2021-05-05',
+          status: '0',
+          deadline: '2021-06-06',
+          completionTime: ''
+        },
+        {
+          key: '3',
+          planName: '2020年团建总结',
+          createTime: '2020-03-05',
+          status: '2',
+          deadline: '2020-05-08',
+          completionTime: ''
+        },
+        {
+          key: '4',
+          planName: '2020年团建策略',
+          createTime: '2020-05-07',
+          status: '3',
+          deadline: '2020-06-08',
+          completionTime: ''
+        },
+      ],
+
+    }
+    )
+    const test = (record) => {
+      console.log(record.id);
+    }
+
+    return {
+      gotoMenu,
+      test,
+      // description: '计划列表',
+      // // 查询条件
+      // queryParam: {},
+      //数据
+      data,
+
       url: {
         list: "/sys/quartzJob/list",
         delete: "/sys/quartzJob/delete",

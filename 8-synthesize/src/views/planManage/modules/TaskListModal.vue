@@ -9,8 +9,9 @@
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="重要任务" hasFeedback>
           <a-select style="width:100px" ref="select" default-value="0">
-            <a-select-option value="1">是</a-select-option>
-            <a-select-option value="0">否</a-select-option>
+            <a-select-option value="0">高</a-select-option>
+            <a-select-option value="1">中</a-select-option>
+            <a-select-option value="2">低</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务状态">
@@ -20,17 +21,11 @@
             <a-select-option value="2">已完成</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="创建时间">
-          <a-date-picker style="width:200px" placeholder="请选择创建时间" v-decorator="['createTime', {rules: [{ required: true, message: '请选择创建时间!' }]}]" />
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">
+          <a-range-picker style="width:200px" v-decorator="['startTime', {rules: [{ required: true, message: '请选择时间!' }]}]" />
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="截止时间">
-          <a-date-picker style="width:200px" placeholder="请选择截止时间" v-decorator="['deadline', {rules: [{ required: true, message: '请选择截止时间!' }]}]" />
-        </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="开始时间">
-          <a-date-picker style="width:200px" placeholder="请选择开始时间" v-decorator="['startTime', {rules: [{ required: true, message: '请选择开始时间!' }]}]" />
-        </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="实际完成时间">
-          <a-date-picker style="width:200px" placeholder="请选择实际完成时间" v-decorator="['completionTime', {rules: [{ required: true, message: '请选择实际完成时间!' }]}]" />
+        <a-form-item label="概述" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-textarea :rows="10" />
         </a-form-item>
       </a-form>
     </a-spin>
