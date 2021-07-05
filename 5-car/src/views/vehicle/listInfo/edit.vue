@@ -123,6 +123,11 @@ export default {
     }
   },
   props: ['licenseNum'],
+  methods:{
+    callback(key) {
+      console.log(key);
+    }
+  }
 }
 </script>
 

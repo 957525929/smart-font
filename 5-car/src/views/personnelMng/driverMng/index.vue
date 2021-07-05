@@ -9,7 +9,7 @@
     <div class="listPrt">
       <a-list item-layout="horizontal" :data-source="listData">
         <a-list-item slot="renderItem" slot-scope="item">
-           <a slot="actions">编辑</a>
+           <a slot="actions" @click="showEditDriver(item)">编辑</a>
            <a slot="actions" @click="bindVisible=true">绑定车辆</a>
            <a slot="actions">删除</a>
           <a-list-item-meta>
@@ -38,11 +38,15 @@
       @change="handleChange"
     />
     </a-modal>
+     <a-modal v-model="editDriverVisible" title="修改司机信息" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+      <edit-driver :originInfo="currentDriver" />
+    </a-modal>
   </div>
 </template>
 
 <script>
 import newDriver from './newDriver.vue'
+import editDriver from './editDriver.vue'
 const listData = [
   {
     name:'张三',
@@ -51,17 +55,17 @@ const listData = [
   },
    {
     name:'卢本伟',
-    phoneNum:'13712341234',
+    phoneNum:'13812341234',
     status:'出勤中'
   },
    {
     name:'孙笑川',
-    phoneNum:'13712341234',
+    phoneNum:'13812342200',
     status:'空闲'
   },
    {
     name:'马保国',
-    phoneNum:'13712341234',
+    phoneNum:'13912341234',
     status:'病假'
   }
 ]
@@ -105,12 +109,15 @@ export default {
       listData: listData,
       bindVisible: false, 
       newDriverVisible:false,
+      editDriverVisible:false,
       mockData:mockData,
-      targetKeys:['1','4']
+      targetKeys:['1','4'],
+      currentDriver:undefined
     }
   },
   components: {
-    newDriver
+    newDriver,
+    editDriver
   },
   methods: {
     onSearch(value) {
@@ -123,6 +130,10 @@ export default {
       console.log('direction: ', direction);
       console.log('moveKeys: ', moveKeys);
     },
+    showEditDriver(item){
+      this.currentDriver=item;
+      this.editDriverVisible=true
+    }
   },
 }
 </script>
