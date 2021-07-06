@@ -37,12 +37,13 @@ export default {
         searchCon: Object,
         columns: {
             type:Array,
+            required: true,
             default:()=> []
         }
     },
     mounted() {
-        this.columns.filters(item=>!item.ifHideInSearch)
-        console.log(this.columns)
+        
+        // console.log(this.columns)
     },
     data() {
         return {

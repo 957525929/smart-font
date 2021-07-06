@@ -92,14 +92,14 @@ export const data = [
         loginTime: '2021-05-22 17：55：55',
         eva:4,
         action:[{
-            tagName:"编辑",
-            url:`<div>123</div>`
+            tagName:"设备信息",
+            com:"TableDrawer"
         },{
-            tagName:"操作",
-            url:`<div>123</div>`
+            tagName:"编辑",
+            com:"TableModal"
         },{
             tagName:"删除",
-            url:`<div>123</div>`
+            com:"TableDelete"
         }]
     },
 ]
