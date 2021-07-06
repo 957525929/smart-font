@@ -38,7 +38,8 @@
         <a-col>
           <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
           <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-          <a-button type="dashed" icon="download" @click="handleExportXls('计划列表')">导出</a-button>
+          <!-- <a-button type="dashed" icon="download" @click="handleExportXls(`${text}`)">导出</a-button> -->
+          <a-button type="dashed" icon="download" @click="handleExportXls(`${currentPlanName}`)">导出</a-button>
           <a-upload name="file" :showUploadList="false" :multiple="false">
             <a-button type="dashed" icon="import">模板下载</a-button>
           </a-upload>
@@ -61,10 +62,12 @@
 
     <!-- table区域-begin -->
     <div>
-      <a-table ref="table" size="middle" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
+      <a-table ref="table" size="middle" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :row-selection="rowSelection">
+
+        <a slot="planNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="gotoMenu">详情</a>
+          <a @click="showDetails(record),gotoMenu(key)">详情</a>
           <!-- <a @click="showDetails(record)">详情</a> -->
 
           <a-divider type="vertical" />
@@ -113,8 +116,26 @@ export default {
     JEllipsis
   },
   data() {
-    const gotoMenu = () => {
-      this.$router.replace({ path: '/planManage/tasklist' })
+    const rowSelection = {
+      onSelect: (record, selected, selectedRows) => {
+        this.currentPlanName = record.planName;
+        console.log(this.currentPlanName);
+      },
+    };
+    const gotoMenu = (key) => {
+      if (key == 1) {
+        this.$router.replace({ path: '/planManage/tasklist' });
+      }
+      if (key == 2) {
+        this.$router.replace({ path: '/planManage/tasklist01' });
+      }
+      if (key == 3) {
+        this.$router.replace({ path: '/planManage/tasklist02' });
+      }
+      if (key == 4) {
+        this.$router.replace({ path: '/planManage/tasklist03' })
+      }
+
     }
     const data = ({
       // 表头
@@ -135,9 +156,7 @@ export default {
           dataIndex: 'planName',
           width: 200,
           sorter: true,
-          /*            customRender:function (text) {
-                        return "*"+text.substring(9,text.length);
-                      }*/
+          scopedSlots: { customRender: 'planNameList' },
         },
         {
           title: '状态',
@@ -186,23 +205,6 @@ export default {
       dataSource: [
         {
           key: '1',
-          planName: '2021年季度总结',
-          createTime: '2021-01-01',
-          status: '1',
-          deadline: '2021-12-31',
-          startTime: '2021-03-04',
-          completionTime: ''
-        },
-        {
-          key: '2',
-          planName: '2021年团建策略',
-          createTime: '2021-05-05',
-          status: '0',
-          deadline: '2021-06-06',
-          completionTime: ''
-        },
-        {
-          key: '3',
           planName: '2020年团建总结',
           createTime: '2020-03-05',
           status: '2',
@@ -211,11 +213,28 @@ export default {
           completionTime: '2020-04-28'
         },
         {
-          key: '4',
+          key: '2',
           planName: '2020年团建策略',
           createTime: '2020-05-07',
           status: '3',
           deadline: '2020-06-08',
+          completionTime: ''
+        },
+        {
+          key: '3',
+          planName: '2021年季度总结',
+          createTime: '2021-01-01',
+          status: '1',
+          deadline: '2021-12-31',
+          startTime: '2021-03-04',
+          completionTime: ''
+        },
+        {
+          key: '4',
+          planName: '2021年团建策略',
+          createTime: '2021-05-05',
+          status: '0',
+          deadline: '2021-06-06',
           completionTime: ''
         },
       ],
@@ -224,6 +243,7 @@ export default {
 
     return {
       gotoMenu,
+      rowSelection,
       // description: '计划列表',
       // // 查询条件
       // queryParam: {},
@@ -242,7 +262,10 @@ export default {
   },
   methods: {
     showDetails(item) {
-      this.currentItem = item
+      this.currentItem = item;
+      console.log(this.currentItem);
+      this.key = item.key;
+      console.log(this.key);
     },
   },
 

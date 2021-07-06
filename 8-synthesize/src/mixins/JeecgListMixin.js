@@ -258,6 +258,21 @@ export const JeecgListMixin = {
         }
       })
     },
+    handleExportXls3(fileName) {
+      if (typeof window.navigator.msSaveBlob !== 'undefined') {
+        window.navigator.msSaveBlob(new Blob([fileName], { type: 'application/vnd.ms-excel' }), fileName + '.xls')
+      } else {
+        let url = window.URL.createObjectURL(new Blob([fileName], { type: 'application/vnd.ms-excel' }))
+        let link = document.createElement('a')
+        link.style.display = 'none'
+        link.href = url
+        link.setAttribute('download', fileName + '.xls')
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link); //下载完成移除元素
+        window.URL.revokeObjectURL(url); //释放掉blob对象
+      }
+    },
     /* 导入 */
     handleImportExcel(info) {
       if (info.file.status !== 'uploading') {

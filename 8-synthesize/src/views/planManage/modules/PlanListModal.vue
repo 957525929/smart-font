@@ -8,7 +8,7 @@
           <a-input style="width:200px" placeholder="请输入计划名称" v-decorator="['planName', {rules: [{ required: true, message: '请输入计划名称!' }]}]" />
         </a-form-item>
         <a-form-item v-if="this.model.key" :labelCol="labelCol" :wrapperCol="wrapperCol" label="状态">
-          <a-select style="width:100px" ref="select">
+          <a-select style="width:100px" ref="select" v-decorator="['status']">
             <a-select-option value="0">未开始</a-select-option>
             <a-select-option value="1">进行中</a-select-option>
             <a-select-option value="2">已完成</a-select-option>
@@ -76,7 +76,7 @@ export default {
       console.log(this.model)
       this.visible = true;
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(this.model, 'jobClassName', 'cronExpression', 'parameter', 'description', 'status'));
+        this.form.setFieldsValue(pick(this.model, 'planName', 'status'));
       });
 
     },
