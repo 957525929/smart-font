@@ -24,7 +24,7 @@
 
     <a-form-item :wrapper-col="{ span: 14, offset: 10 }">
       <a-button type="primary">添加</a-button>
-      <a-button style="margin-left: 10px">取消</a-button>
+      <a-button style="margin-left: 10px">重置</a-button>
     </a-form-item>
   </a-form>
 </template>
