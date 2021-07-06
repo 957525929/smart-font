@@ -14,8 +14,8 @@
             <a-select-option value="2">低</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务状态">
-          <a-select style="width:100px" ref="select" default-value="1">
+        <a-form-item v-if="this.model.key" :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务状态">
+          <a-select style="width:100px" ref="select">
             <a-select-option value="0">进行中</a-select-option>
             <a-select-option value="1">未开始</a-select-option>
             <a-select-option value="2">已完成</a-select-option>

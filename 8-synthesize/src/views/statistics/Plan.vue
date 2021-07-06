@@ -27,7 +27,7 @@
 
           <a-col :md="6" :sm="10">
             <a-form-item label="上传时间">
-              <a-date-picker />
+              <a-range-picker />
             </a-form-item>
           </a-col>
 

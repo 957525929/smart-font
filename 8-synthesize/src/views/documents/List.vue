@@ -5,22 +5,15 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="10">
-
-          <a-col :md="6" :sm="10">
-            <a-form-item label="文档编号">
-              <a-input placeholder="请输入任务类名"></a-input>
-            </a-form-item>
-          </a-col>
-
-          <a-col :md="6" :sm="10">
-            <a-form-item label="文档编号">
-              <a-input placeholder="请输入任务类名"></a-input>
-            </a-form-item>
-          </a-col>
-
           <a-col :md="6" :sm="10">
             <a-form-item label="文档编号">
               <a-input placeholder="请输入文档编号"></a-input>
+            </a-form-item>
+          </a-col>
+
+          <a-col :md="6" :sm="10">
+            <a-form-item label="文档名称">
+              <a-input placeholder="请输入文档名称"></a-input>
             </a-form-item>
           </a-col>
 
