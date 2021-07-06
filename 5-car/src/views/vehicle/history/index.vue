@@ -9,7 +9,7 @@
           <a-select-option key="3" value="司机">司机</a-select-option>
         </a-select>
         <a-input-search :placeholder="`请输入${currentCondition}搜索`" style="width: 200px" @search="onSearch" />
-        <a-button type="primary" style="float:right;margin-right:10px">导出</a-button>
+        <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
       </div>
     </div>
     <div class="listPrt">
@@ -25,6 +25,8 @@
               {{ '出发地：' + item.from }}
               <a-divider type="vertical" />
               {{ '目的地：' + item.to }}
+              <a-divider type="vertical" />
+              {{ item.isBack }}
             </div>
             <a slot="title" @click="showDetails(item)">{{ item.licenseNum }}</a>
             <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
@@ -52,6 +54,7 @@ const listData = [
     time: '2021-6-29',
     from: '福州市',
     to: '南京市',
+    isBack: '双程',
   },
   {
     licenseNum: '测A123404',
@@ -60,6 +63,7 @@ const listData = [
     time: '2021-6-29',
     from: '福州市',
     to: '南京市',
+    isBack: '双程',
   },
 ]
 export default {
