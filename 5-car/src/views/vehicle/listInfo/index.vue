@@ -4,7 +4,7 @@
       <div class="filterCtx">
         <a-input-search :placeholder="`请输入车牌号搜索`" style="width: 200px" @search="onSearch" />
         <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
-        <a-button type="primary" style="float: right; margin-right: 10px" @click="newVehicleVisible=true">新增</a-button>
+        <a-button type="primary" style="float: right; margin-right: 10px" @click="newVehicleVisible=true"><a-icon type="plus" />新增</a-button>
       </div>
     </div>
     <div class="listPrt">

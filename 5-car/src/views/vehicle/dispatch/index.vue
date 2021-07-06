@@ -3,7 +3,7 @@
     <div class="filterPrt">
       <div class="filterCtx">
         <a-input-search placeholder="请输入车牌号搜索" style="width: 300px" @search="onSearch" />
-        <a-button @click="showNewTask" type="primary" style="float: right; margin-right: 10px">新建派车</a-button>
+        <a-button @click="showNewTask" type="primary" style="float: right; margin-right: 10px"><a-icon type="plus" />新建派车</a-button>
       </div>
     </div>
     <div class="listPrt">
