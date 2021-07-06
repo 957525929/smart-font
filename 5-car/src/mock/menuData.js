@@ -173,6 +173,45 @@ export const menu = {
             },
             {
                 "redirect": null,
+                "path": "/statistic",
+                "component": "layouts/RouteView",
+                "route": "1",
+                "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon": "pie-chart",
+                    "title": "数据统计"
+                },
+                "name": "statistic",
+                "children": [
+                    {
+                        "path": "/statistic/vehicleUsage",
+                        "component": "statistic/vehicleUsage/index",
+                        "route": "1",
+                        "meta": {
+                            "keepAlive": false,
+                            "internalOrExternal": false,
+                            "icon": "car",
+                            "title": "车辆使用统计"
+                        },
+                        "name": "statistic-vehicleUsage"
+                    },
+                    {
+                        "path": "/statistic/driverWorkload",
+                        "component": "statistic/driverWorkload/index",
+                        "route": "1",
+                        "meta": {
+                            "keepAlive": false,
+                            "internalOrExternal": false,
+                            "icon": "audit",
+                            "title": "司机工作量统计"
+                        },
+                        "name": "statistic-driverWorkload"
+                    }
+                ]
+            },
+            {
+                "redirect": null,
                 "path": "/sysCtrl",
                 "component": "layouts/RouteView",
                 "route": "1",

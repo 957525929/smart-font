@@ -3,7 +3,7 @@
     <div class="filterPrt">
       <div class="filterCtx">
         <a-input-search placeholder="请输入车牌号搜索" style="width: 300px" @search="onSearch" />
-        <a-button @click="showNewTask" type="primary" style="float: right; margin-right: 10px">新建派车</a-button>
+        <a-button @click="showNewTask" type="primary" style="float: right; margin-right: 10px"><a-icon type="plus" />新建派车</a-button>
       </div>
     </div>
     <div class="listPrt">
@@ -21,6 +21,8 @@
               {{ '出发地：' + item.from }}
               <a-divider type="vertical" />
               {{ '目的地：' + item.to }}
+               <a-divider type="vertical" />
+               {{  item.isBack }}
             </div>
             <a slot="title" @click="showDetails(item)">{{ item.licenseNum }}</a>
             <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
@@ -56,6 +58,7 @@ const listData = [
     time: '2021-6-29',
     from: '福州市',
     to: '南京市',
+    isBack:'双程'
   },
 ]
 export default {

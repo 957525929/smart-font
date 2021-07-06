@@ -1,30 +1,4 @@
-// 全部
-export const fixMenu = [{
-    title:"全部",
-    content:fixList
-},{
-    title:"待审核",
-    content:fixList
-},{
-    title:"待维修",
-    content:fixList
-},{
-    title:"待核查",
-    content:fixList
-},{
-    title:"待评价",
-    content:fixList
-},{
-    title:"待评估",
-    content:fixList
-}]
-
-const fixList = {
-    allColumns,
-    allData,
-    allSearchCon
-}
-const allColumns = [
+export const columns=[
     {
         dataIndex: 'devId',
         slots: { title: '问题编号' },
@@ -91,8 +65,7 @@ const allColumns = [
         ifHideInSearch:true
     },
 ]
-
-const allData = [
+export const data=[
     {
         key: '1',
         devId: '0001',
@@ -117,10 +90,4 @@ const allData = [
         }]
     }
 ]
-
-const allSearchCon = {}
-// export default {
-//     fixMenu,
-//     fixListColumns,
-//     data
-// }
+export const searchCon={}

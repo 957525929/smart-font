@@ -38,7 +38,7 @@
         <a-col>
           <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
           <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-          <a-button type="dashed" icon="download" @click="handleExportXls('定时任务信息')">导出</a-button>
+          <a-button type="dashed" icon="download" @click="handleExportXls('计划列表')">导出</a-button>
           <a-upload name="file" :showUploadList="false" :multiple="false">
             <a-button type="dashed" icon="import">模板下载</a-button>
           </a-upload>
@@ -65,6 +65,7 @@
 
         <span slot="action" slot-scope="text, record">
           <a @click="gotoMenu">详情</a>
+          <!-- <a @click="showDetails(record)">详情</a> -->
 
           <a-divider type="vertical" />
           <a-dropdown>
@@ -95,7 +96,7 @@
     <!-- table区域-end -->
 
     <!-- 表单区域 -->
-    <PlanListModal ref="modalForm" @ok="modalFormOk"> </PlanListModal>
+    <PlanListModal ref="modalForm" @ok="modalFormOk" :id="currentItem"> </PlanListModal>
   </a-card>
 </template>
 
@@ -206,7 +207,8 @@ export default {
           createTime: '2020-03-05',
           status: '2',
           deadline: '2020-05-08',
-          completionTime: ''
+          startTime: '2020-03-08',
+          completionTime: '2020-04-28'
         },
         {
           key: '4',
@@ -218,21 +220,15 @@ export default {
         },
       ],
 
-    }
-    )
-    const test = (record) => {
-      console.log(record.id);
-    }
+    })
 
     return {
       gotoMenu,
-      test,
       // description: '计划列表',
       // // 查询条件
       // queryParam: {},
       //数据
       data,
-
       url: {
         list: "/sys/quartzJob/list",
         delete: "/sys/quartzJob/delete",
@@ -244,7 +240,11 @@ export default {
       },
     }
   },
-
+  methods: {
+    showDetails(item) {
+      this.currentItem = item
+    },
+  },
 
 
 }

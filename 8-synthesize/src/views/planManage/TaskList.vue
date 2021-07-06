@@ -49,7 +49,7 @@
         <a-col>
           <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
           <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-          <a-button type="dashed" icon="download" @click="handleExportXls('定时任务信息')">导出</a-button>
+          <a-button type="dashed" icon="download" @click="handleExportXls('任务列表')">导出</a-button>
           <a-dropdown v-if="selectedRowKeys.length > 0">
             <a-menu slot="overlay">
               <a-menu-item key="1">
@@ -70,14 +70,6 @@
     <!-- table区域-begin -->
     <div>
       <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
-
-        <!-- 字符串超长截取省略号显示-->
-        <span slot="description" slot-scope="text">
-          <j-ellipsis :value="text" :length="20" />
-        </span>
-        <span slot="parameterRender" slot-scope="text">
-          <j-ellipsis :value="text" :length="20" />
-        </span>
 
         <span slot="action" slot-scope="text, record">
           <a @click="handleEdit(record)">编辑</a>
