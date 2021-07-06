@@ -91,6 +91,45 @@ export const menuMock = {
 						"name": "planManage-TaskList",
 						"id": "b1cb0a3fedf7ed0e4653cb5a229837ee"
 					},
+					{
+						"path": "/planManage/tasklist01",
+						"component": "planManage/TaskList01",
+						"route": "1",
+						"meta": {
+							"keepAlive": false,
+							"internalOrExternal": false,
+							"title": "任务列表"
+						},
+						"hidden": true,
+						"name": "planManage-TaskList01",
+						"id": "b1cb0a3fedf7ed0e4653cb5a229837ee"
+					},
+					{
+						"path": "/planManage/tasklist02",
+						"component": "planManage/TaskList02",
+						"route": "1",
+						"meta": {
+							"keepAlive": false,
+							"internalOrExternal": false,
+							"title": "任务列表"
+						},
+						"hidden": true,
+						"name": "planManage-TaskList02",
+						"id": "b1cb0a3fedf7ed0e4653cb5a229837ee"
+					},
+					{
+						"path": "/planManage/tasklist03",
+						"component": "planManage/TaskList03",
+						"route": "1",
+						"meta": {
+							"keepAlive": false,
+							"internalOrExternal": false,
+							"title": "任务列表"
+						},
+						"hidden": true,
+						"name": "planManage-TaskList03",
+						"id": "b1cb0a3fedf7ed0e4653cb5a229837ee"
+					},
 
 				],
 				"meta": {

@@ -1,6 +1,6 @@
 <template>
   <a-card>
-    <span>工号：</span>
+    <span>房间：</span>
     <a-input style="width: 100px"></a-input>
     <a-divider type="vertical" />
     <span>姓名：</span>

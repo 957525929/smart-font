@@ -33,20 +33,20 @@ export const menuMock = {
       "type": "1"
     }],
     "menu": [
-      {
-        "redirect": null,
-        "path": "/dashboard/workplace",
-        "component": "dashboard/Workplace",
-        "route": "1",
-        "meta": {
-          "keepAlive": false,
-          "internalOrExternal": false,
-          "icon": "home",
-          "title": "工作台"
-        },
-        "name": "dashboard-workplace",
-        "id": "9502685863ab87f0ad1134142788a385"
-      },
+      // {
+      //   "redirect": null,
+      //   "path": "/dashboard/workplace",
+      //   "component": "dashboard/Workplace",
+      //   "route": "1",
+      //   "meta": {
+      //     "keepAlive": false,
+      //     "internalOrExternal": false,
+      //     "icon": "home",
+      //     "title": "工作台"
+      //   },
+      //   "name": "dashboard-workplace",
+      //   "id": "9502685863ab87f0ad1134142788a385"
+      // },
       {
         "redirect": null,
         "path": "/lockmanager",
@@ -60,7 +60,7 @@ export const menuMock = {
             "meta": {
               "keepAlive": false,
               "internalOrExternal": false,
-              "title": "智能锁安装配置"
+              "title": "智能锁管理"
             },
             "name": "lockmanager-lockManager",
             "id": "12612132135004528626"
@@ -91,30 +91,30 @@ export const menuMock = {
           "name": "record-lockRecord",
           "id": "1261213213500452866"
         },
-          {
-            "path": "/record/repairrecord",
-            "component": "record/repairRecord",
-            "route": "1",
-            "meta": {
-              "keepAlive": false,
-              "internalOrExternal": false,
-              "title": "维修记录"
-            },
-            "name": "record-repairRecord",
-            "id": "1261213213500452866"
+        {
+          "path": "/record/repairrecord",
+          "component": "record/repairRecord",
+          "route": "1",
+          "meta": {
+            "keepAlive": false,
+            "internalOrExternal": false,
+            "title": "维修记录"
           },
-          {
-            "path": "/record/alertrecord",
-            "component": "record/alertRecord",
-            "route": "1",
-            "meta": {
-              "keepAlive": false,
-              "internalOrExternal": false,
-              "title": "报警记录"
-            },
-            "name": "record-alertRecord",
-            "id": "1261213213500452866"
-          }],
+          "name": "record-repairRecord",
+          "id": "1261213213500452866"
+        },
+        {
+          "path": "/record/alertrecord",
+          "component": "record/alertRecord",
+          "route": "1",
+          "meta": {
+            "keepAlive": false,
+            "internalOrExternal": false,
+            "title": "报警记录"
+          },
+          "name": "record-alertRecord",
+          "id": "1261213213500452866"
+        }],
         "meta": {
           "keepAlive": false,
           "internalOrExternal": false,
@@ -141,30 +141,30 @@ export const menuMock = {
           "name": "count-lockCount",
           "id": "1261213213500452866"
         },
-          {
-            "path": "/count/repaircount",
-            "component": "count/repairCount",
-            "route": "1",
-            "meta": {
-              "keepAlive": false,
-              "internalOrExternal": false,
-              "title": "维修统计"
-            },
-            "name": "count-repairCount",
-            "id": "1261213213500452866"
+        {
+          "path": "/count/repaircount",
+          "component": "count/repairCount",
+          "route": "1",
+          "meta": {
+            "keepAlive": false,
+            "internalOrExternal": false,
+            "title": "维修统计"
           },
-          {
-            "path": "/count/alertcount",
-            "component": "count/alertCount",
-            "route": "1",
-            "meta": {
-              "keepAlive": false,
-              "internalOrExternal": false,
-              "title": "报警统计"
-            },
-            "name": "count-alertCount",
-            "id": "1261213213500452866"
-          }],
+          "name": "count-repairCount",
+          "id": "1261213213500452866"
+        },
+        {
+          "path": "/count/alertcount",
+          "component": "count/alertCount",
+          "route": "1",
+          "meta": {
+            "keepAlive": false,
+            "internalOrExternal": false,
+            "title": "报警统计"
+          },
+          "name": "count-alertCount",
+          "id": "1261213213500452866"
+        }],
         "meta": {
           "keepAlive": false,
           "internalOrExternal": false,

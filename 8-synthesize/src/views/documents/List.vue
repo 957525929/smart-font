@@ -5,22 +5,15 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="10">
-
-          <a-col :md="6" :sm="10">
-            <a-form-item label="文档编号">
-              <a-input placeholder="请输入任务类名"></a-input>
-            </a-form-item>
-          </a-col>
-
-          <a-col :md="6" :sm="10">
-            <a-form-item label="文档编号">
-              <a-input placeholder="请输入任务类名"></a-input>
-            </a-form-item>
-          </a-col>
-
           <a-col :md="6" :sm="10">
             <a-form-item label="文档编号">
               <a-input placeholder="请输入文档编号"></a-input>
+            </a-form-item>
+          </a-col>
+
+          <a-col :md="6" :sm="10">
+            <a-form-item label="文档名称">
+              <a-input placeholder="请输入文档名称"></a-input>
             </a-form-item>
           </a-col>
 
@@ -76,8 +69,10 @@
     <div>
       <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
 
+        <a slot="documentNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
+
         <span slot="action">
-          <a @click="handleExportXls('2020年总结报告')">下载</a>
+          <a @click="handleExportXls(`${currentDocumentName}`)">下载</a>
         </span>
 
         <!-- 状态渲染模板 -->
@@ -109,11 +104,17 @@ export default {
     JEllipsis
   },
   data() {
-
+    const rowSelection = {
+      onSelect: (record, selected, selectedRows) => {
+        this.currentDocumentName = record.documentName;
+        console.log(this.currentDocumentName);
+      },
+    };
     return {
       // description: '计划列表',
       // // 查询条件
       // queryParam: {},
+      rowSelection,
       //数据
       data: [
         {
@@ -149,6 +150,7 @@ export default {
           dataIndex: 'documentName',
           width: 200,
           sorter: true,
+          scopedSlots: { customRender: 'documentNameList' },
           /*            customRender:function (text) {
                         return "*"+text.substring(9,text.length);
                       }*/
@@ -190,7 +192,12 @@ export default {
       },
     }
   },
-
+  methods: {
+    showDetails(item) {
+      this.currentItem = item;
+      console.log(this.currentItem);
+    },
+  },
 }
 </script>
 <style scoped>
