@@ -13,14 +13,7 @@
           </a-row>
           <br />
           <a-row type="flex">
-            <a-col :span="4">工号:</a-col>
-            <a-col :span="10">
-              <a-input></a-input>
-            </a-col>
-          </a-row>
-          <br />
-          <a-row type="flex">
-            <a-col :span="4">姓名:</a-col>
+            <a-col :span="4">房间：</a-col>
             <a-col :span="10">
               <a-input></a-input>
             </a-col>
@@ -37,9 +30,12 @@
           </a-row>
           <br />
           <a-row type="flex">
-            <a-col :span="4">房间：</a-col>
+            <a-col :span="4">姓名:</a-col>
             <a-col :span="10">
-              <a-input></a-input>
+              <a-select style="width: 100%" default-value="name1">
+                <a-select-option value="name1"> 张三</a-select-option>
+                <a-select-option value="name2"> 李四</a-select-option>
+              </a-select>
             </a-col>
           </a-row>
           <br />
