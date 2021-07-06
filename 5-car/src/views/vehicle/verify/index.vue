@@ -20,6 +20,8 @@
               {{ '出发地：' + item.from }}
               <a-divider type="vertical" />
               {{ '目的地：' + item.to }}
+              <a-divider type="vertical" />
+              {{ item.isBack}}
             </div>
             <a slot="title" @click="showDetails(item)">{{ item.licenseNum }}</a>
             <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
@@ -47,6 +49,7 @@ const listData = [
     time: '2021-6-29',
     from: '福州市',
     to: '南京市',
+    isBack:'单程'
   },
   {
     licenseNum: '测A123402',
@@ -55,6 +58,7 @@ const listData = [
     time: '2021-6-29',
     from: '福州市',
     to: '南京市',
+    isBack:'双程'
   },
 ]
 export default {

@@ -2,8 +2,9 @@
   <div class="root">
     <div class="filterPrt">
       <div class="filterCtx">
-        <a-input-search placeholder="请输入车牌号搜索" style="width: 300px" @search="onSearch" />
-        <a-button type="primary" style="float: right; margin-right: 10px" @click="newDriverVisible=true">新增司机</a-button>
+        <a-input-search placeholder="请输入司机名称搜索" style="width: 300px" @search="onSearch" />
+        <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
+        <a-button type="primary" style="float: right; margin-right: 10px" @click="newDriverVisible=true"><a-icon type="plus" />新增司机</a-button>
       </div>
     </div>
     <div class="listPrt">
