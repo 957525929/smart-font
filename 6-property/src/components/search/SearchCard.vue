@@ -9,11 +9,11 @@
                     :style="{ display: index < count ? 'block' : 'none' }"
                 >
                     <a-form-item :label="item.title" :labelCol="{span: 5}" :wrapperCol="{ span: 18 }">
-                        <component 
+                       <component 
                         :is="item.type || 'a-input'" 
                         style="width: 100%"
-                        v-decorator="[`${item.dataIndex}`,]"
-                        :placeholder="`请输入${item.title}`"
+                        v-decorator="[`${item.dataIndex}`]"
+                        :placeholder="ifshowPlace(item.type,item.title)"
                       ></component>
                     </a-form-item>
                 </a-col>
@@ -35,7 +35,10 @@ export default {
     name: 'SearchCard',
     props: {
         searchCon: Object,
-        columns: Array,
+        columns: {
+            type:Array,
+            default:()=> []
+        }
     },
     mounted() {
         this.columns.filters(item=>!item.ifHideInSearch)
@@ -45,6 +48,7 @@ export default {
         return {
             expand: false,
             form: this.$form.createForm(this, { name: 'devList_search' }),
+            
         }
     },
     computed: {
@@ -53,6 +57,13 @@ export default {
         },
     },
     methods: {
+        ifshowPlace(type,title){
+            if(type==='a-input'){
+                return `请输入${title}`
+            }else{
+                 return ""
+            }
+        },
         handleSearch(e) {
             e.preventDefault()
             this.form.validateFields((error, values) => {
