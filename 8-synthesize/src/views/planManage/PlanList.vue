@@ -14,7 +14,7 @@
 
           <a-col :md="5" :sm="9">
             <a-form-item label="计划状态">
-              <a-select style="width:140px" v-model="queryParam.status" placeholder="请选择计划状态">
+              <a-select style="width:145px" v-model="queryParam.status" placeholder="请选择计划状态">
                 <a-select-option value="0">未开始</a-select-option>
                 <a-select-option value="1">进行中</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
