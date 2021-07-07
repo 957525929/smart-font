@@ -1,25 +1,81 @@
 <template>
-    <PageTemplate :columns="devColumns" :searchCon="searchCon" :formdata="data"></PageTemplate>
+    <PageTemplate :columns="devColumns" :searchCon="searchCon">
+       <a-button type="primary" @click="showDevForm" style="float:right;marginBotton:10px">设备登记</a-button>
+       
+        <a-table :columns="devColumns" :data-source="data">
+            <span slot="action" slot-scope="text, record">
+                <template v-for="(i, index) in record.action">
+                    <component :is="i.com" :ref="i.com" :key="index" :title="i.tagName" :infoDetail="infoDetail"></component>
+                    <a-popconfirm
+                        title="确认注销此设备?"
+                        ok-text="是"
+                        cancel-text="否"
+                        @confirm="confirm"
+                        @cancel="cancel"
+                        v-if="i.com==='TableDelete'"
+                    >
+                        <a href="#" @click="showDelete">{{ i.tagName }}</a>
+                    </a-popconfirm>
+                    <a href="#" @click.stop="handleOps(i.com)" v-else>{{ i.tagName }}</a>
+                    <a-divider type="vertical" v-if="index !== record.action.length - 1" />
+                </template>
+            </span>
+        </a-table>
+        <TableModal title="设备登记" :infoDetail="infoDetail" ref="devModal"></TableModal>
+    </PageTemplate>
 </template>
 
 <script>
+// vue
 import PageTemplate from '@/components/page/PageTemplate.vue'
-import {  devColumns , data } from "./index.js";
-const NEW_DEVLIST = Object.freeze({  devColumns , data }) 
+import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
+import TableModal from '@/components/tableOperation/modal/TableModal.vue'
+// js
+import { devColumns, data,infoDetail } from './index.js'
+import { typeToComponent } from '@/utils/tableUtils.js'
+const NEW_DEVLIST = Object.freeze({ devColumns, data, infoDetail,typeToComponent })
 export default {
     name: 'deviceList',
-    components: { PageTemplate },
+    components: { PageTemplate, TableDrawer,TableModal },
     created() {
         // this.getList()
     },
     data() {
         return {
             searchCon: {},
-            data:NEW_DEVLIST.data,
-            devColumns:NEW_DEVLIST.devColumns,
+            data: NEW_DEVLIST.data,
+            devColumns: NEW_DEVLIST.devColumns,
+            infoDetail:NEW_DEVLIST.infoDetail,
+            visible: false,
         }
     },
-    methods: {}
+    methods: {
+        showDevform(){
+            this.$refs.devModal.showModal()
+        },
+        handleOps(type) {
+            let tempValue = [...NEW_DEVLIST.typeToComponent].filter(([key, value]) => key === type)
+            let self = this
+            self.$refs[type][0][tempValue[0][1]]()
+            // type !== 'TableDelete' ?  : this[tempValue[0][1]]()
+        },
+        handleVisibleChange(visible) {
+            if (!visible) {
+                this.visible = false
+                return
+            }
+        },
+        showDelete() {
+            this.visible = true
+        },
+        confirm() {
+            this.visible = false
+            this.$message.success('success')
+        },
+        cancel() {
+            this.visible = false
+        }
+    },
 }
 </script>
 <style scoped>

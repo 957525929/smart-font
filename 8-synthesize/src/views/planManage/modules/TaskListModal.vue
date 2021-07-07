@@ -5,32 +5,37 @@
       <a-form :form="form">
 
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
-          <a-input style="width:200px" placeholder="请输入任务名称" v-decorator="['planName', {rules: [{ required: true, message: '请输入任务名称!' }]}]" />
+          <a-input style="width:200px" placeholder="请输入任务名称" v-decorator="['taskName', {rules: [{ required: true, message: '请输入任务名称!' }]}]" />
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="重要任务" hasFeedback>
-          <a-select style="width:100px" ref="select" default-value="0">
-            <a-select-option value="1">是</a-select-option>
-            <a-select-option value="0">否</a-select-option>
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="重要性" hasFeedback priority>
+          <a-select style="width:130px" placeholder="请选择重要性" ref="select" v-decorator="['priority', {rules: [{ required: true, message: '请选择重要性!' }]}]">
+            <a-select-option value="0">高</a-select-option>
+            <a-select-option value="1">中</a-select-option>
+            <a-select-option value="2">低</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务状态">
-          <a-select style="width:100px" ref="select" default-value="1">
+        <a-form-item v-if="this.model.key" :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务状态">
+          <a-select style="width:100px" ref="select" v-decorator="['status']">
             <a-select-option value="0">进行中</a-select-option>
             <a-select-option value="1">未开始</a-select-option>
             <a-select-option value="2">已完成</a-select-option>
+            <a-select-option value="3">未完成</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="创建时间">
-          <a-date-picker style="width:200px" placeholder="请选择创建时间" v-decorator="['createTime', {rules: [{ required: true, message: '请选择创建时间!' }]}]" />
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">
+          <a-date-picker class="w140" placeholder="开始时间" v-decorator="['startTime', {rules: [{ required: true, message: '请选择开始时间!' }]}]" />
+          ~
+          <a-date-picker class="w140" placeholder="结束时间" v-decorator="['deadline', {rules: [{ required: true, message: '请选择结束时间!' }]}]" />
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="截止时间">
-          <a-date-picker style="width:200px" placeholder="请选择截止时间" v-decorator="['deadline', {rules: [{ required: true, message: '请选择截止时间!' }]}]" />
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上传文件">
+          <a-upload name="file" :multiple="true" :headers="headers" @change="handleChange">
+            <a-input placeholder="请上传文件" v-decorator="[ 'document', validatorRules.document]">
+              <upload-outlined></upload-outlined>
+            </a-input>
+          </a-upload>
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="开始时间">
-          <a-date-picker style="width:200px" placeholder="请选择开始时间" v-decorator="['startTime', {rules: [{ required: true, message: '请选择开始时间!' }]}]" />
-        </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="实际完成时间">
-          <a-date-picker style="width:200px" placeholder="请选择实际完成时间" v-decorator="['completionTime', {rules: [{ required: true, message: '请选择实际完成时间!' }]}]" />
+        <a-form-item label="概述" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-textarea :rows="10" />
         </a-form-item>
       </a-form>
     </a-spin>
@@ -94,7 +99,7 @@ export default {
       console.log(this.model)
       this.visible = true;
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(this.model, 'jobClassName', 'cronExpression', 'parameter', 'description', 'status'));
+        this.form.setFieldsValue(pick(this.model, 'taskName', 'priority', 'status', 'deadline', 'startTime'));
       });
 
     },
@@ -169,4 +174,7 @@ export default {
 </script>
 
 <style scoped>
+.w140 {
+  width: 140px;
+}
 </style>

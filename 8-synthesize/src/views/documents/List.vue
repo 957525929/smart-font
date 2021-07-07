@@ -5,38 +5,32 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="10">
-
           <a-col :md="6" :sm="10">
             <a-form-item label="文档编号">
-              <a-input placeholder="请输入任务类名"></a-input>
+              <a-input class="w140" placeholder="请输入文档编号"></a-input>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="10">
-            <a-form-item label="文档编号">
-              <a-input placeholder="请输入任务类名"></a-input>
-            </a-form-item>
-          </a-col>
-
-          <a-col :md="6" :sm="10">
-            <a-form-item label="文档编号">
-              <a-input placeholder="请输入文档编号"></a-input>
+            <a-form-item label="文档名称">
+              <a-input class="w140" placeholder="请输入文档名称"></a-input>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="9">
             <a-form-item label="文档类型">
-              <a-select style="width: 220px" placeholder="请选择文档类型">
-                <a-select-option value="0">doc</a-select-option>
-                <a-select-option value="1">ppt</a-select-option>
-                <a-select-option value="2">xlsx</a-select-option>
+              <a-select style="width: 150px" placeholder="请选择文档类型">
+                <a-select-option value="0">资产</a-select-option>
+                <a-select-option value="1">会议纪要</a-select-option>
+                <a-select-option value="2">记录</a-select-option>
+                <a-select-option value="3">报告</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="10">
             <a-form-item label="上传时间">
-              <a-date-picker />
+              <a-date-picker placeholder="请选择时间" class="w140" />
             </a-form-item>
           </a-col>
 
@@ -61,7 +55,9 @@
                 <a-icon type="delete" />删除
               </a-menu-item>
               <a-menu-item key="2">
-                <a-icon type="plus" />上传
+                <a-upload name="file" :multiple="true" :headers="headers">
+                  <a-icon type="plus" /> 上传
+                </a-upload>
               </a-menu-item>
             </a-menu>
             <a-button style="margin-left: 8px"> 批量操作
@@ -76,8 +72,10 @@
     <div>
       <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
 
+        <a slot="documentNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
+
         <span slot="action">
-          <a @click="handleExportXls('2020年总结报告')">下载</a>
+          <a @click="handleExportXls(`${currentDocumentName}`)">下载</a>
         </span>
 
         <!-- 状态渲染模板 -->
@@ -109,24 +107,30 @@ export default {
     JEllipsis
   },
   data() {
-
+    const rowSelection = {
+      onSelect: (record, selected, selectedRows) => {
+        this.currentDocumentName = record.documentName;
+        console.log(this.currentDocumentName);
+      },
+    };
     return {
       // description: '计划列表',
       // // 查询条件
       // queryParam: {},
+      rowSelection,
       //数据
       data: [
         {
           key: '1',
           documentName: '2020年总结报告',
-          documentType: 'doc',
+          documentType: '报告',
           uploadTime: '2020-06-04',
           overview: '2020年工作报告总结'
         },
         {
           key: '2',
           documentName: '2021年季度巡查记录',
-          documentType: "ppt",
+          documentType: "记录",
           uploadTime: '2021-06-05',
           overview: '设备硬件巡查检查记录'
         },
@@ -149,6 +153,7 @@ export default {
           dataIndex: 'documentName',
           width: 200,
           sorter: true,
+          scopedSlots: { customRender: 'documentNameList' },
           /*            customRender:function (text) {
                         return "*"+text.substring(9,text.length);
                       }*/
@@ -168,7 +173,7 @@ export default {
         {
           title: '概述',
           align: "center",
-          width: 100,
+          width: 120,
           dataIndex: 'overview',
         },
         {
@@ -190,7 +195,12 @@ export default {
       },
     }
   },
-
+  methods: {
+    showDetails(item) {
+      this.currentItem = item;
+      console.log(this.currentItem);
+    },
+  },
 }
 </script>
 <style scoped>

@@ -113,36 +113,104 @@ const user = {
     GetPermissionList({ commit }) {
       return new Promise((resolve, reject) => {
         let v_token = Vue.ls.get(ACCESS_TOKEN);
-        let params = {token:v_token};
-        queryPermissionsByUser(params).then(response => {
-          const menuData = response.result.menu;
-          const authData = response.result.auth;
-          const allAuthData = response.result.allAuth;
-          //Vue.ls.set(USER_AUTH,authData);
-          sessionStorage.setItem(USER_AUTH,JSON.stringify(authData));
-          sessionStorage.setItem(SYS_BUTTON_AUTH,JSON.stringify(allAuthData));
-          if (menuData && menuData.length > 0) {
-            //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
-            menuData.forEach((item, index) => {
-              if (item["children"]) {
-                let hasChildrenMenu = item["children"].filter((i) => {
-                  return !i.hidden || i.hidden == false
-                })
-                if (hasChildrenMenu == null || hasChildrenMenu.length == 0) {
-                  item["hidden"] = true
-                }
+       // let params = {token:v_token};
+        const response={ "success": true, "message": "查询成功", "code": 200,
+          "result": {
+          "allAuth": [{ "action": "online:goGenerateCode", "describe": "代码生成按钮", "type": "1", "status": "1" }, { "action": "user:form:phone", "describe": "手机号禁用", "type": "2", "status": "1" }, { "action": "user:add", "describe": "添加用户按钮", "type": "1", "status": "1" }],
+            "auth": [{ "action": "user:add", "describe": "添加用户按钮", "type": "1" }, { "action": "user:form:phone", "describe": "手机号禁用", "type": "2" }, { "action": "online:goGenerateCode", "describe": "代码生成按钮", "type": "1" }],
+            "menu": [
+              {"redirect": null, "path": "/dashboard/analysis", "component": "dashboard/Analysis", "route": "1",
+              "meta": { "keepAlive": false, "internalOrExternal": false, "icon": "home", "title": "首页" }, "name": "dashboard-analysis", "id": "9502685863ab87f0ad1134142788a385" },
+
+              { "redirect": null, "path": "/asset_manage", "component": "layouts/RouteView", "route": "1",
+                "children": [
+                  {
+                    "path": "/asset_manage/signin", "component": "asset_manage/signin", "route": "1",
+                    "meta": { "keepAlive": false, "internalOrExternal": false, "title": "资产登记列表" }, "name": "signin", "id": "1244877762060517318"
+                  },
+                  {
+                    "path": "/asset_manage/asset", "component": "asset_manage/asset", "route": "1",
+                    "meta": { "keepAlive": false, "internalOrExternal": false, "title": "资产变化捕捉" }, "name": "asset", "id": "1409704645135192061"
+                  },
+                ],
+              "meta": { "keepAlive": false, "internalOrExternal": false, "icon": "hdd", "title": "资产变化" }, "name": "asset_manage", "id": "1244876622988214274"
+              },
+
+              { "redirect": null, "path": "/rent", "component": "layouts/RouteView", "route": "1",
+                "children": [
+                  {
+                    "path": "/rent/rent", "component": "rent/rent", "route": "1",
+                    "meta": { "keepAlive": false, "internalOrExternal": false, "title": "租赁列表" }, "name": "rent", "id": "1244877762060517371"
+                },
+                  {
+                      "path": "/rent/collect", "component": "rent/collect", "route": "1",
+                      "meta": { "keepAlive": false, "internalOrExternal": false, "title": "收租管理" }, "name": "collect", "id": "1233877762060517389"
+                  },
+                  {
+                    "path": "/rent/lessee", "component": "rent/lessee", "route": "1",
+                    "meta": { "keepAlive": false, "internalOrExternal": false, "title": "承租管理" }, "name": "lessee", "id": "1244877762060517378"
+                  }
+                  ],
+                  "meta": { "keepAlive": false, "internalOrExternal": false, "icon": "hdd", "title": "租赁模块" }, "name": "rent-manage", "id": "1244876622988211111"
+              },
+
+            ]},
+          "timestamp": 1624946593208 };
+        const menuData = response.result.menu;
+        const authData = response.result.auth;
+        const allAuthData = response.result.allAuth;
+        //Vue.ls.set(USER_AUTH,authData);
+        sessionStorage.setItem(USER_AUTH,JSON.stringify(authData));
+        sessionStorage.setItem(SYS_BUTTON_AUTH,JSON.stringify(allAuthData));
+        if (menuData && menuData.length > 0) {
+          //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+          menuData.forEach((item, index) => {
+            if (item["children"]) {
+              let hasChildrenMenu = item["children"].filter((i) => {
+                return !i.hidden || i.hidden == false
+              })
+              if (hasChildrenMenu == null || hasChildrenMenu.length == 0) {
+                item["hidden"] = true
               }
-            })
-            console.log(" menu show json ", menuData)
-            //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
-            commit('SET_PERMISSIONLIST', menuData)
-          } else {
-            reject('getPermissionList: permissions must be a non-null array !')
-          }
-          resolve(response)
-        }).catch(error => {
-          reject(error)
-        })
+            }
+          })
+          console.log(" menu show json ", menuData)
+          //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+          commit('SET_PERMISSIONLIST', menuData)
+        } else {
+          reject('getPermissionList: permissions must be a non-null array !')
+        }
+        resolve(response)
+        // queryPermissionsByUser(params).then(response => {
+        //
+        //   const menuData = response.result.menu;
+        //   const authData = response.result.auth;
+        //   const allAuthData = response.result.allAuth;
+        //   //Vue.ls.set(USER_AUTH,authData);
+        //   sessionStorage.setItem(USER_AUTH,JSON.stringify(authData));
+        //   sessionStorage.setItem(SYS_BUTTON_AUTH,JSON.stringify(allAuthData));
+        //   if (menuData && menuData.length > 0) {
+        //     //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+        //     menuData.forEach((item, index) => {
+        //       if (item["children"]) {
+        //         let hasChildrenMenu = item["children"].filter((i) => {
+        //           return !i.hidden || i.hidden == false
+        //         })
+        //         if (hasChildrenMenu == null || hasChildrenMenu.length == 0) {
+        //           item["hidden"] = true
+        //         }
+        //       }
+        //     })
+        //     console.log(" menu show json ", menuData)
+        //     //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+        //     commit('SET_PERMISSIONLIST', menuData)
+        //   } else {
+        //     reject('getPermissionList: permissions must be a non-null array !')
+        //   }
+        //   resolve(response)
+        // }).catch(error => {
+        //   reject(error)
+        // })
       })
     },
 

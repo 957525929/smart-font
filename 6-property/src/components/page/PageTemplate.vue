@@ -1,16 +1,9 @@
 <template>
     <a-row align="top">
         <a-col :span="24">
-            <SearchCard  v-on="$listeners" v-bind="$attrs" :columns="columns"></SearchCard>
+            <SearchCard  v-on="$listeners" v-bind="$attrs" :columns="searchCols"></SearchCard>
             <a-card style="width: 100%;margin-top:10px">
-                <a-table :columns="columns" :data-source="formdata">
-                    <span slot="action" slot-scope="text, record">
-                        <template v-for="(i,index) in record.action">
-                            <a>{{i.tagName}}</a>
-                            <a-divider type="vertical" v-if="index!==record.action.length-1"/>
-                        </template>
-                    </span>
-                </a-table>
+                <slot></slot>               
             </a-card>
         </a-col>
     </a-row>
@@ -21,14 +14,25 @@ import SearchCard from '../search/SearchCard.vue'
 export default {
     name: 'WrapperdList',
     props: {
-        // searchCon: Object,
-        columns: Array,
-        formdata: Array,
+        columns:{
+            type:Array,
+            default:()=> []
+        },
+        formdata: {
+            type:Array,
+            default:()=> []
+        }
     },
     components: { SearchCard },
+    mounted(){
+        this.searchCols = this.columns.filter(item=>{
+            return !item.hideInSearch
+        })
+    },
     data() {
         return {
             expand: false,
+            searchCols:[]
         }
     },
     inheritAttrs: false,

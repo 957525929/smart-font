@@ -6,33 +6,28 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="10">
 
-          <a-col :md="6" :sm="10">
-            <a-form-item label="任务类名">
-              <a-input placeholder="请输入任务类名" v-model="queryParam.jobClassName"></a-input>
+          <a-col :md="5" :sm="10">
+            <a-form-item label="计划名称">
+              <a-input style="width:140px" placeholder="请输入计划名称"></a-input>
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="9">
-            <a-form-item label="任务状态">
-              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择状态">
-                <a-select-option value="1">未开始</a-select-option>
-                <a-select-option value="0">进行中</a-select-option>
+          <a-col :md="5" :sm="9">
+            <a-form-item label="计划状态">
+              <a-select style="width:145px" v-model="queryParam.status" placeholder="请选择计划状态">
+                <a-select-option value="0">未开始</a-select-option>
+                <a-select-option value="1">进行中</a-select-option>
+                <a-select-option value="2">已完成</a-select-option>
+                <a-select-option value="3">未完成</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="10">
-            <a-form-item label="优先级别">
-              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择优先级">
-                <a-select-option value="1">是</a-select-option>
-                <a-select-option value="0">否</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-
-          <a-col :md="6" :sm="10">
+          <a-col :sm="10">
             <a-form-item label="时间">
-              <a-date-picker />
+              <a-date-picker style="width:140px" placeholder="开始时间" />
+              ~
+              <a-date-picker style="width:140px" placeholder="结束时间" />
             </a-form-item>
           </a-col>
 
@@ -45,20 +40,20 @@
         <a-col>
           <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
           <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-          <a-button type="dashed" icon="download" @click="handleExportXls('定时任务信息')">导出</a-button>
-          <a-upload name="file" :showUploadList="false" :multiple="false">
-            <a-button type="dashed" icon="import">模板下载</a-button>
-          </a-upload>
+          <!-- <a-button type="dashed" icon="download" @click="handleExportXls(`${text}`)">导出</a-button> -->
+          <a-button type="dashed" icon="download" @click="handleExportXls(`${currentPlanName}`)">导出</a-button>
           <a-dropdown v-if="selectedRowKeys.length > 0">
             <a-menu slot="overlay">
               <a-menu-item key="1">
                 <a-icon type="delete" />删除
               </a-menu-item>
               <a-menu-item key="2">
-                <a-icon type="plus" />上传
+                <a-upload name="file" :multiple="true" :headers="headers">
+                  <a-icon type="plus" /> 上传
+                </a-upload>
               </a-menu-item>
             </a-menu>
-            <a-button @click="menu" style="margin-left: 8px"> 批量操作
+            <a-button style="margin-left: 8px"> 批量操作
               <a-icon type="down" />
             </a-button>
           </a-dropdown>
@@ -68,17 +63,13 @@
 
     <!-- table区域-begin -->
     <div>
-      <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
-        <!-- 字符串超长截取省略号显示-->
-        <span slot="description" slot-scope="text">
-          <j-ellipsis :value="text" :length="20" />
-        </span>
-        <span slot="parameterRender" slot-scope="text">
-          <j-ellipsis :value="text" :length="20" />
-        </span>
+      <a-table ref="table" size="middle" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
+
+        <a slot="planNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="gotoMenu">详情</a>
+          <a @click="showDetails(record),gotoMenu(key)">详情</a>
+          <!-- <a @click="showDetails(record)">详情</a> -->
 
           <a-divider type="vertical" />
           <a-dropdown>
@@ -99,15 +90,17 @@
 
         <!-- 状态渲染模板 -->
         <template slot="customRenderStatus" slot-scope="status">
+          <a-tag v-if="status==='0'" color="orange">未开始</a-tag>
           <a-tag v-if="status==='1'" color="green">进行中</a-tag>
-          <a-tag v-else color="orange">未开始</a-tag>
+          <a-tag v-if="status==='2'" color="cyan">已完成</a-tag>
+          <a-tag v-if="status==='3'" color="red">未完成</a-tag>
         </template>
       </a-table>
     </div>
     <!-- table区域-end -->
 
     <!-- 表单区域 -->
-    <PlanListModal ref="modalForm" @ok="modalFormOk"></PlanListModal>
+    <PlanListModal ref="modalForm" @ok="modalFormOk" :id="currentItem"> </PlanListModal>
   </a-card>
 </template>
 
@@ -124,36 +117,28 @@ export default {
     JEllipsis
   },
   data() {
-    const gotoMenu = () => {
-      this.$router.replace({ path: '/planManage/tasklist' })
+    const rowSelection = {
+      onSelect: (record, selected, selectedRows) => {
+        this.currentPlanName = record.planName;
+        console.log(this.currentPlanName);
+      },
+    };
+    const gotoMenu = (key) => {
+      if (key == 1) {
+        this.$router.replace({ path: '/planManage/tasklist' });
+      }
+      if (key == 2) {
+        this.$router.replace({ path: '/planManage/tasklist01' });
+      }
+      if (key == 3) {
+        this.$router.replace({ path: '/planManage/tasklist02' });
+      }
+      if (key == 4) {
+        this.$router.replace({ path: '/planManage/tasklist03' })
+      }
+
     }
-    return {
-      gotoMenu,
-      // description: '计划列表',
-      // // 查询条件
-      // queryParam: {},
-      //数据
-      data: [
-        {
-          key: '1',
-          planName: '2021年季度总结',
-          priority: '是',
-          createTime: '2021-01-01',
-          status: '1',
-          deadline: '2021-12-31',
-          startTime: '2021-03-04',
-          completionTime: ''
-        },
-        {
-          key: '2',
-          planName: '2021年团建策略',
-          priority: '是',
-          createTime: '2021-05-05',
-          status: '0',
-          deadline: '2021-06-06',
-          completionTime: ''
-        },
-      ],
+    const data = ({
       // 表头
       columns: [
         {
@@ -172,15 +157,7 @@ export default {
           dataIndex: 'planName',
           width: 200,
           sorter: true,
-          /*            customRender:function (text) {
-                        return "*"+text.substring(9,text.length);
-                      }*/
-        },
-        {
-          title: '优先级别',
-          align: "center",
-          width: 100,
-          dataIndex: 'priority'
+          scopedSlots: { customRender: 'planNameList' },
         },
         {
           title: '状态',
@@ -226,6 +203,54 @@ export default {
           scopedSlots: { customRender: 'action' },
         }
       ],
+      dataSource: [
+        {
+          key: '1',
+          planName: '2020年团建总结',
+          createTime: '2020-01-06',
+          status: '2',
+          deadline: '2020-12-20',
+          startTime: '2020-01-08',
+          completionTime: '2020-12-19'
+        },
+        {
+          key: '2',
+          planName: '2020年团建策略',
+          createTime: '2020-02-07',
+          status: '3',
+          deadline: '2020-11-08',
+          startTime: '2020-02-08',
+          completionTime: ''
+        },
+        {
+          key: '3',
+          planName: '2021年季度总结',
+          createTime: '2021-01-01',
+          status: '1',
+          deadline: '2021-12-31',
+          startTime: '2021-03-04',
+          completionTime: ''
+        },
+        {
+          key: '4',
+          planName: '2021年团建策略',
+          createTime: '2021-02-05',
+          status: '0',
+          deadline: '2021-11-20',
+          completionTime: ''
+        },
+      ],
+
+    })
+
+    return {
+      gotoMenu,
+      rowSelection,
+      // description: '计划列表',
+      // // 查询条件
+      // queryParam: {},
+      //数据
+      data,
       url: {
         list: "/sys/quartzJob/list",
         delete: "/sys/quartzJob/delete",
@@ -237,7 +262,14 @@ export default {
       },
     }
   },
-
+  methods: {
+    showDetails(item) {
+      this.currentItem = item;
+      // console.log(this.currentItem);
+      this.key = item.key;
+      // console.log(this.key);
+    },
+  },
 
 
 }
