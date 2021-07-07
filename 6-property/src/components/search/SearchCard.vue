@@ -13,15 +13,16 @@
                         :is="item.type || 'a-input'" 
                         style="width: 100%"
                         v-decorator="[`${item.dataIndex}`]"
-                        :placeholder="ifshowPlace(item.type,item.title)"
+                        
                       ></component>
+                      <!-- :placeholder="ifshowPlace(item.type,item.title)" -->
                     </a-form-item>
                 </a-col>
             </a-row>
             <a-row>
                 <a-col :span="24" :style="{ textAlign: 'right' }">
-                    <a-button type="primary" html-type="submit"> 查询 </a-button>
-                    <a-button :style="{ marginLeft: '8px' }" @click="handleReset"> 重置 </a-button>
+                    <a-button type="primary" html-type="submit" icon="search"> 查询 </a-button>
+                    <a-button :style="{ marginLeft: '8px' }" @click="handleReset" icon="reload"> 重置 </a-button>
                     <a :style="{ marginLeft: '8px', fontSize: '12px' }" @click="toggle"
                         >{{ expand ? '收起' : '展开' }} <a-icon :type="expand ? 'up' : 'down'" />
                     </a>

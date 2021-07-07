@@ -7,7 +7,7 @@ export const proMenu = [{
 },{
     key:1,
     title:"待保养",
-    content:"fix"
+    content:"protect"
 },{
     key:2,
     title:"待核查",

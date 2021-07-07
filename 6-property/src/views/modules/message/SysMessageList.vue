@@ -43,7 +43,7 @@
       <a-button type="primary" v-show="show" icon="download" @click="handleExportXls('消息')">导出</a-button>
       <a-upload v-show="show" name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl"
                 @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <!-- <a-button type="primary" icon="import">导入</a-button> -->
       </a-upload>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
@@ -126,7 +126,7 @@
       return {
         description: '消息管理页面',
         // 新增修改按钮是否显示
-        show: false,
+        show: true,
         // 表头
         columns: [
           {

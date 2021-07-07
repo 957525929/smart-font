@@ -1,28 +1,37 @@
 <template>
-    <PageTemplate :columns="devColumns" :searchCon="searchCon">
-       <a-button type="primary" @click="showDevForm" style="float:right;marginBotton:10px">设备登记</a-button>
-       
-        <a-table :columns="devColumns" :data-source="data">
-            <span slot="action" slot-scope="text, record">
-                <template v-for="(i, index) in record.action">
-                    <component :is="i.com" :ref="i.com" :key="index" :title="i.tagName" :infoDetail="infoDetail"></component>
-                    <a-popconfirm
-                        title="确认注销此设备?"
-                        ok-text="是"
-                        cancel-text="否"
-                        @confirm="confirm"
-                        @cancel="cancel"
-                        v-if="i.com==='TableDelete'"
-                    >
-                        <a href="#" @click="showDelete">{{ i.tagName }}</a>
-                    </a-popconfirm>
-                    <a href="#" @click.stop="handleOps(i.com)" v-else>{{ i.tagName }}</a>
-                    <a-divider type="vertical" v-if="index !== record.action.length - 1" />
-                </template>
-            </span>
-        </a-table>
-        <TableModal title="设备登记" :infoDetail="infoDetail" ref="devModal"></TableModal>
-    </PageTemplate>
+    <div>
+        <PageTemplate :columns="devColumns" :searchCon="searchCon">
+            <a-button type="primary" @click="showDevForm">设备登记</a-button>
+            <TableModal title="设备登记" :infoDetail="infoDetail" ref="devModal"></TableModal>
+            <a-table :columns="devColumns" :data-source="data">
+                <span slot="action" slot-scope="text, record">
+                    <template v-for="(i, index) in record.action">
+                        <a-popconfirm
+                            title="确认注销此设备?"
+                            ok-text="是"
+                            cancel-text="否"
+                            @confirm="confirm"
+                            @cancel="cancel"
+                            v-if="i.com === 'TableDelete'"
+                        >
+                            <a href="#" @click="showDelete">{{ i.tagName }}</a>
+                        </a-popconfirm>
+                        <template v-else>
+                            <a href="#" @click.stop="handleOps(i.com)">{{ i.tagName }}</a>
+                            <component
+                                :is="i.com"
+                                :ref="i.com"
+                                :key="index"
+                                :title="i.tagName"
+                                :infoDetail="infoDetail"
+                            ></component>
+                        </template>
+                        <a-divider type="vertical" v-if="index !== record.action.length - 1" />
+                    </template>
+                </span>
+            </a-table>
+        </PageTemplate>
+    </div>
 </template>
 
 <script>
@@ -31,12 +40,12 @@ import PageTemplate from '@/components/page/PageTemplate.vue'
 import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
 import TableModal from '@/components/tableOperation/modal/TableModal.vue'
 // js
-import { devColumns, data,infoDetail } from './index.js'
+import { devColumns, data, infoDetail } from './index.js'
 import { typeToComponent } from '@/utils/tableUtils.js'
-const NEW_DEVLIST = Object.freeze({ devColumns, data, infoDetail,typeToComponent })
+const NEW_DEVLIST = Object.freeze({ devColumns, data, infoDetail, typeToComponent })
 export default {
     name: 'deviceList',
-    components: { PageTemplate, TableDrawer,TableModal },
+    components: { PageTemplate, TableDrawer, TableModal },
     created() {
         // this.getList()
     },
@@ -45,12 +54,12 @@ export default {
             searchCon: {},
             data: NEW_DEVLIST.data,
             devColumns: NEW_DEVLIST.devColumns,
-            infoDetail:NEW_DEVLIST.infoDetail,
+            infoDetail: NEW_DEVLIST.infoDetail,
             visible: false,
         }
     },
     methods: {
-        showDevform(){
+        showDevForm() {
             this.$refs.devModal.showModal()
         },
         handleOps(type) {
@@ -74,7 +83,7 @@ export default {
         },
         cancel() {
             this.visible = false
-        }
+        },
     },
 }
 </script>
