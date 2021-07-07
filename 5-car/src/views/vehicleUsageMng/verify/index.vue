@@ -6,10 +6,18 @@
       </div>
     </div>
     <div class="listPrt">
-      <a-list item-layout="horizontal" :data-source="listData">
+      <a-list item-layout="horizontal" :data-source="listData" :pagination="pagination">
         <a-list-item slot="renderItem" slot-scope="item, index">
-          <a slot="actions" v-if="item.status == '审核中'" @click="pass(index)">通过</a>
-          <a slot="actions" v-if="item.status == '已通过'" @click="unpass(index)">不通过</a>
+          <a-popconfirm
+            slot="actions"
+            title="确认通过该用车申请？"
+            ok-text="是"
+            cancel-text="否"
+            @confirm="pass(index)"
+          >
+            <a>通过</a>
+          </a-popconfirm>
+          <a slot="actions" @click="showUnpassModal(index)">驳回</a>
           <a slot="actions" @click="showDetails(item)">详情</a>
           <a-list-item-meta>
             <div slot="description">
@@ -21,52 +29,46 @@
               <a-divider type="vertical" />
               {{ '目的地：' + item.to }}
               <a-divider type="vertical" />
-              {{ item.isBack}}
+              {{ item.isBack }}
             </div>
-            <a slot="title" @click="showDetails(item)">{{ item.licenseNum }}</a>
+            <a slot="title" @click="showDetails(item)">{{ item.taskName }}</a>
             <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
           <div>
-            <font :class="item.status == '审核中' ? 'redFont' : 'greenFont'">{{ '状态：' + item.status }}</font>
+            <!-- <font :class="item.status == '审核中' ? 'redFont' : 'greenFont'">{{ '状态：' + item.status }}</font> -->
           </div>
         </a-list-item>
       </a-list>
     </div>
 
-    <a-modal v-model="detailsVisible" :footer="null" title="详情" :width="735" :destroyOnClose='true'>
+    <a-modal v-model="detailsVisible" :footer="null" title="详情" :width="735" :destroyOnClose="true">
       <mydetails :id="currentItem" />
+    </a-modal>
+
+    <a-modal v-model="unpassModalVisible" title="用车申请驳回" :destroyOnClose="true" @ok="handleUnpass">
+      <div>驳回理由：</div>
+      <a-textarea placeholder="请输入驳回该申请的原因" :rows="4" />
     </a-modal>
   </div>
 </template>
 
 <script>
 import mydetails from './details.vue'
-const listData = [
-  {
-    licenseNum: '测A123401',
-    status: '审核中',
-    user: '香菱',
-    time: '2021-6-29',
-    from: '福州市',
-    to: '南京市',
-    isBack:'单程'
-  },
-  {
-    licenseNum: '测A123402',
-    status: '已通过',
-    user: '胡桃',
-    time: '2021-6-29',
-    from: '福州市',
-    to: '南京市',
-    isBack:'双程'
-  },
-]
+import { verifyList } from '@/mock/demoData.js'
 export default {
   data() {
     return {
-      listData: listData,
+      listData: verifyList,
       detailsVisible: false,
-      currentItem: null, //点击详情时的记录
+      unpassModalVisible: false,
+      pagination: {
+        onChange: (page) => {
+          console.log(page)
+        },
+        pageSize: 10,
+      },
+      currentItem: undefined, //点击列表操作时的记录
+      currentIndex: undefined,
     }
   },
   components: {
@@ -77,10 +79,15 @@ export default {
       console.log(value)
     },
     pass(index) {
-      this.listData[index].status = '已通过'
+      this.listData.splice(index, 1)
     },
-    unpass(index) {
-      this.listData[index].status = '审核中'
+    showUnpassModal(index) {
+      this.currentIndex = index
+      this.unpassModalVisible = true
+    },
+    handleUnpass() {
+      this.listData.splice(this.currentIndex, 1)
+      this.unpassModalVisible = false
     },
     showDetails(item) {
       this.currentItem = item
@@ -112,12 +119,6 @@ export default {
     width: 98%;
     background-color: #ffffff;
     padding: 20px;
-    .redFont {
-      color: red;
-    }
-    .greenFont {
-      color: green;
-    }
   }
 }
 </style>
