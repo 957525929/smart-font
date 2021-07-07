@@ -97,7 +97,7 @@ export const vehicleList = [
     {
         key: '4',
         licenseNum: '闽A123404',
-        status: '维修中',
+        status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
         NS: '2022-06-03',
@@ -105,7 +105,7 @@ export const vehicleList = [
     {
         key: '5',
         licenseNum: '闽A123405',
-        status: '维修中',
+        status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
         NS: '2022-06-03',
@@ -154,7 +154,17 @@ export const driverList = [
     },
     {
         key: '7',
-        name: '陈睿',
+        name: '袁世凯',
+        phoneNum: generatePhoneNum(),
+    },
+    {
+        key: '8',
+        name: '秦桧',
+        phoneNum: generatePhoneNum(),
+    },
+    {
+        key: '9',
+        name: '魏忠贤',
         phoneNum: generatePhoneNum(),
     }
 ]

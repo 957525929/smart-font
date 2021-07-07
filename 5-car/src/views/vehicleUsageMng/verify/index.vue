@@ -65,7 +65,7 @@ export default {
         onChange: (page) => {
           console.log(page)
         },
-        pageSize: 10,
+        pageSize: 6,
       },
       currentItem: undefined, //点击列表操作时的记录
       currentIndex: undefined,

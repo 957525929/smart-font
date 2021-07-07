@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="listPrt">
-      <a-list item-layout="horizontal" :data-source="listData">
+      <a-list item-layout="horizontal" :data-source="listData" :pagination="pagination">
         <a-list-item slot="renderItem" slot-scope="item">
           <a slot="actions" @click="showDispatchModal(item)">{{ item.driver ? '改派' : '派单' }}</a>
           <a slot="actions" @click="showDetails(item)">详情</a>
@@ -44,17 +44,17 @@
     <a-modal v-model="dispatchVisible" :title="dispatchType" :destroyOnClose="true">
       <!-- <select-driver :id="currentItem" /> -->
       <div>
-        <div style="margin-top:10px;text-align:center">
+        <div style="margin-top: 10px; text-align: center">
           请选择车辆：
-          <a-select  style="width: 200px">
+          <a-select style="width: 200px">
             <a-select-option v-for="d in vehicleList" :key="d.key">
               {{ d.licenseNum }}
             </a-select-option>
           </a-select>
         </div>
-        <div style="margin-top:10px;text-align:center">
+        <div style="margin-top: 10px; text-align: center">
           请选择司机：
-          <a-select  style="width: 200px">
+          <a-select style="width: 200px">
             <a-select-option v-for="d in driverList" :key="d.key">
               {{ d.name }}
             </a-select-option>
@@ -72,18 +72,24 @@
 import mydetails from './details.vue'
 import selectDriver from './selectDriver.vue'
 import newTask from './newTask.vue'
-import { dispatchList, driverList,vehicleList } from '@/mock/demoData.js'
+import { dispatchList, driverList, vehicleList } from '@/mock/demoData.js'
 export default {
   data() {
     return {
       listData: dispatchList,
-      driverList:driverList,
-      vehicleList:vehicleList,
+      driverList: driverList,
+      vehicleList: vehicleList,
       detailsVisible: false,
       dispatchVisible: false,
       currentItem: null, //点击列表操作栏时的记录
       dispatchType: '派单',
       newTaskVisible: false,
+      pagination: {
+        onChange: (page) => {
+          console.log(page)
+        },
+        pageSize: 10,
+      },
     }
   },
   components: {
@@ -101,11 +107,11 @@ export default {
     },
     showDispatchModal(item) {
       this.currentItem = item
-      console.log(item);
-      if(item.driver){
-        this.dispatchType='改派'
-      }else{
-        this.dispatchType='派单'
+      console.log(item)
+      if (item.driver) {
+        this.dispatchType = '改派'
+      } else {
+        this.dispatchType = '派单'
       }
       this.dispatchVisible = true
     },
