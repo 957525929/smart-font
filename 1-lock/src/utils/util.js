@@ -87,7 +87,7 @@ export function generateIndexRouter(data) {
     //component: () => import('@/components/layouts/BasicLayout'),
     component: resolve => require(['@/components/layouts/TabLayout'], resolve),
     meta: { title: '首页' },
-    redirect: '/lockmanager/lockmanager',
+    redirect: '/dashboard/lockmanager',
     children: [
       ...generateChildRouters(data)
     ]
