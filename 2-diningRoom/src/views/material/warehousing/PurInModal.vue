@@ -98,9 +98,11 @@ import { validateEntryNo } from '../../erp/utils/editableTableValidate'
 
 export default {
   name: 'PurInModal',
+
   components: {
     JEditableTable,
   },
+
   props: {
     modalVisible: Boolean,
   },
