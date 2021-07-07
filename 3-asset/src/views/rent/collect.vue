@@ -51,7 +51,7 @@
     
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button type="link" icon="plus">新增</a-button>
+      <a-button type="link"  @click="myHandleAdd"  icon="plus">新增</a-button>
       <a-button type="link" icon="download">导出</a-button>
       <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="link" icon="import">导入</a-button>
@@ -96,14 +96,50 @@
 
       </a-table>
     </div>
-
+    <!-- 添加收租记录 -->
+    <a-modal
+      title="新增收租记录"
+      :visible="visible"
+      :confirm-loading="confirmLoading"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <a-form-model :layout="form.layout" :model="form" >
+        <a-form-model-item label="资产编号" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.assetNunmber" />
+        </a-form-model-item>
+        <a-form-model-item label="资产名称" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.assetName" />
+        </a-form-model-item>
+        <a-form-model-item label="资产租金" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.lentValue" />
+        </a-form-model-item>
+        <a-form-model-item label="资产所有人" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.assetOwner" />
+        </a-form-model-item>
+        <a-form-model-item label="资产使用人" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.assetUser" />
+        </a-form-model-item>
+        <a-form-model-item label="租赁时长" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.lentLength" />
+        </a-form-model-item>
+        <a-form-model-item label="支付周期" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.payCycle" />
+        </a-form-model-item>
+      </a-form-model>
+    </a-modal>
   </a-card>
 </template>
 
 <script>
 
+import JDate from "@comp/jeecg/JDate";
+
 export default {
   name: "collect",
+  components: {
+    JDate,
+  },
   mounted(){
       console.log("1",this.dataSource)
     },
@@ -120,7 +156,7 @@ export default {
           text : '王一',
         },
       ],
-      userSelectData:[
+        userSelectData:[
         {
           value : 1,
           text : '李四',
@@ -130,7 +166,7 @@ export default {
           text : '赵正',
         },
       ],
-      dataSource: [
+        dataSource: [
         {
           key:'1',
           assetNunmber: 'ZCAT2021070500',
@@ -259,6 +295,21 @@ export default {
         dictOptions:{},
         toggleSearchStatus: false,
         selectedRowKeys: [],
+        visible: false,
+        confirmLoading: false,
+        //新增表单
+        form: {
+          assetNunmber: '',
+          assetName: '',
+          lentValue: '',
+          assetOwner: '',
+          assetUser: '',
+          lentLength: '',
+          payCycle: '',
+          payState:'未收租',
+          rentRemind: '短信提示',
+          remark : '查看记录',
+        },
       }
     },
     computed: {
@@ -285,7 +336,30 @@ export default {
     },
     purchaseDateOnChange(date, dateString) {
       console.log(date, dateString);
-    }
+    },
+      //新增模块
+      myHandleAdd() {
+        this.visible = true;
+      },
+      handleOk(e) {
+        this.ModalText = 'The modal will be closed after two seconds';
+        this.confirmLoading = true;
+        const newdata=this.form;
+        setTimeout(() => {
+          this.visible = false;
+          this.confirmLoading = false;
+        }, 2000);
+        // this.dataSource=[...dataSource,form];
+        // console.log("dataSource",this.dataSource)
+        const { dataSource } = this;
+        this.dataSource = [...dataSource, newdata];
+        this.form={};
+        console.log("dataSource",this.dataSource)
+      },
+      handleCancel(e) {
+        console.log('Clicked cancel button');
+        this.visible = false;
+      },
     }
 
   }
