@@ -113,16 +113,82 @@ export const data = [
         fixStaff: '刘涛',
         loginTime: '2021-05-22 17：55：55',
         action:[{
-            tagName:"编辑",
-            url:`<div>123</div>`
+            tagName:"基本信息",
+            com:"TableDrawer"
         },{
-            tagName:"操作",
-            url:`<div>123</div>`
+            tagName:"编辑",
+            com:"TableModal"
+        },{
+            tagName:"维修记录",
+            com:"TableDrawer"
+        },{
+            tagName:"保养记录",
+            com:"TableDrawer"
+        },{
+            tagName:"运行参数",
+            com:"TableDrawer"
         },{
             tagName:"删除",
-            url:`<div>123</div>`
+            com:"TableDelete"
         }]
     },
+]
+
+export const infoDetail =[
+    {
+        title: '设备编号',
+        key: 'devId',
+        value:""
+    },
+    {
+        title: '设备名称',
+        value:"",
+        key: 'devName'
+    },
+    {
+        title: '设备类型',
+        value:"",
+        key: 'devType',
+        type:"a-select"
+    },
+    {
+        title: '实际状态',
+        key: 'devStatus',
+        value:"",
+        type:"a-select"
+    },
+    {
+        title: '所属资产',
+        key: 'assets',
+        value:"",
+    },
+    {
+        key: 'institution',
+        title: '业主单位',
+        value:"",
+    },
+    {
+        title: '业主联系方式',
+        key: 'phone',        
+        value:"",
+    },
+    {
+        title: '技术状况',
+        key: 'techSituation',
+        value:"",
+        type:"a-select"
+    },
+    {
+        title: '维修员',
+        key: 'fixStaff',
+        value:"",
+    },
+    {
+        title: '登记时间',
+        key: 'loginTime',
+        value:"",
+        type:"a-range-picker"
+    }
 ]
 
 // export default {

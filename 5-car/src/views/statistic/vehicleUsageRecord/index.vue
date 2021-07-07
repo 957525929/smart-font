@@ -3,7 +3,13 @@
     <div class="filterPrt">
       <div class="filterCtx">
         请选择统计时间段：
-        <a-range-picker  :default-value="defaultRange" :format="dateFormat" />
+        <a-range-picker  :default-value="defaultRange" :format="dateFormat" />&nbsp;&nbsp;
+         <a-select style="width: 80px" defaultValue="车牌号" @select="conditionOnSelect">
+          <a-select-option key="1" value="车牌号">车牌号</a-select-option>
+          <a-select-option key="2" value="用车人">用车人</a-select-option>
+          <a-select-option key="3" value="司机">司机</a-select-option>
+        </a-select>
+        <a-input-search :placeholder="`请输入${currentCondition}搜索`" style="width: 200px" @search="onSearch" />
         <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
       </div>
     </div>
@@ -184,9 +190,16 @@ export default {
       tableData: tableData,
       dateFormat: 'YYYY/MM/DD',
       defaultRange: [moment(getLastWeekDate(), this.dateFormat), moment(getCurrentDate(), this.dateFormat)],
+      currentCondition: '车牌号',
     }
   },
   components: { Pie },
+  methods:{
+     conditionOnSelect(value, option) {
+      // console.log(value);
+      this.currentCondition = value
+    }
+  }
 }
 </script>
 
