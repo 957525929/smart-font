@@ -6,15 +6,15 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="10">
 
-          <a-col :md="6" :sm="10">
+          <a-col :md="5" :sm="10">
             <a-form-item label="计划名称">
-              <a-input placeholder="请输入计划名称"></a-input>
+              <a-input style="width:140px" placeholder="请输入计划名称"></a-input>
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="9">
+          <a-col :md="5" :sm="9">
             <a-form-item label="计划状态">
-              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择计划状态">
+              <a-select style="width:140px" v-model="queryParam.status" placeholder="请选择计划状态">
                 <a-select-option value="0">未开始</a-select-option>
                 <a-select-option value="1">进行中</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
@@ -23,9 +23,11 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="10">
+          <a-col :sm="10">
             <a-form-item label="时间">
-              <a-range-picker />
+              <a-date-picker style="width:140px" placeholder="开始时间" />
+              ~
+              <a-date-picker style="width:140px" placeholder="结束时间" />
             </a-form-item>
           </a-col>
 
@@ -40,16 +42,15 @@
           <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
           <!-- <a-button type="dashed" icon="download" @click="handleExportXls(`${text}`)">导出</a-button> -->
           <a-button type="dashed" icon="download" @click="handleExportXls(`${currentPlanName}`)">导出</a-button>
-          <a-upload name="file" :showUploadList="false" :multiple="false">
-            <a-button type="dashed" icon="import">模板下载</a-button>
-          </a-upload>
           <a-dropdown v-if="selectedRowKeys.length > 0">
             <a-menu slot="overlay">
               <a-menu-item key="1">
                 <a-icon type="delete" />删除
               </a-menu-item>
               <a-menu-item key="2">
-                <a-icon type="plus" />上传
+                <a-upload name="file" :multiple="true" :headers="headers">
+                  <a-icon type="plus" /> 上传
+                </a-upload>
               </a-menu-item>
             </a-menu>
             <a-button style="margin-left: 8px"> 批量操作
@@ -62,7 +63,7 @@
 
     <!-- table区域-begin -->
     <div>
-      <a-table ref="table" size="middle" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :row-selection="rowSelection">
+      <a-table ref="table" size="middle" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
 
         <a slot="planNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
 
@@ -206,18 +207,19 @@ export default {
         {
           key: '1',
           planName: '2020年团建总结',
-          createTime: '2020-03-05',
+          createTime: '2020-01-06',
           status: '2',
-          deadline: '2020-05-08',
-          startTime: '2020-03-08',
-          completionTime: '2020-04-28'
+          deadline: '2020-12-20',
+          startTime: '2020-01-08',
+          completionTime: '2020-12-19'
         },
         {
           key: '2',
           planName: '2020年团建策略',
-          createTime: '2020-05-07',
+          createTime: '2020-02-07',
           status: '3',
-          deadline: '2020-06-08',
+          deadline: '2020-11-08',
+          startTime: '2020-02-08',
           completionTime: ''
         },
         {
@@ -232,9 +234,9 @@ export default {
         {
           key: '4',
           planName: '2021年团建策略',
-          createTime: '2021-05-05',
+          createTime: '2021-02-05',
           status: '0',
-          deadline: '2021-06-06',
+          deadline: '2021-11-20',
           completionTime: ''
         },
       ],
@@ -263,9 +265,9 @@ export default {
   methods: {
     showDetails(item) {
       this.currentItem = item;
-      console.log(this.currentItem);
+      // console.log(this.currentItem);
       this.key = item.key;
-      console.log(this.key);
+      // console.log(this.key);
     },
   },
 

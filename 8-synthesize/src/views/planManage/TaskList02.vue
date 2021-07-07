@@ -7,15 +7,15 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="10">
 
-          <a-col :md="6" :sm="10">
+          <a-col :md="5" :sm="10">
             <a-form-item label="任务名称">
-              <a-input placeholder="请输入任务名称" v-model="queryParam.jobClassName"></a-input>
+              <a-input class="w140" placeholder="请输入任务名称" v-model="queryParam.jobClassName"></a-input>
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="10">
+          <a-col :md="5" :sm="10">
             <a-form-item label="重要性">
-              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择重要性">
+              <a-select class="w140" v-model="queryParam.status" placeholder="请选择重要性">
                 <a-select-option value="0">高</a-select-option>
                 <a-select-option value="1">中</a-select-option>
                 <a-select-option value="2">低</a-select-option>
@@ -23,9 +23,9 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="9">
+          <a-col :md="5" :sm="9">
             <a-form-item label="任务状态">
-              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择状态">
+              <a-select class="w140" v-model="queryParam.status" placeholder="请选择状态">
                 <a-select-option value="0">进行中</a-select-option>
                 <a-select-option value="1">未开始</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
@@ -34,9 +34,11 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="10">
+          <a-col :sm="9">
             <a-form-item label="时间">
-              <a-range-picker />
+              <a-date-picker placeholder="开始时间" class="w140" />
+              ~
+              <a-date-picker placeholder="结束时间" class="w140" />
             </a-form-item>
           </a-col>
 
@@ -56,7 +58,9 @@
                 <a-icon type="delete" />删除
               </a-menu-item>
               <a-menu-item key="2">
-                <a-icon type="plus" />上传
+                <a-upload name="file" :multiple="true" :headers="headers">
+                  <a-icon type="plus" /> 上传
+                </a-upload>
               </a-menu-item>
             </a-menu>
             <a-button style="margin-left: 8px"> 批量操作
@@ -69,7 +73,7 @@
 
     <!-- table区域-begin -->
     <div>
-      <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :rowSelection="rowSelection">
+      <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
 
         <a slot="taskNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
 
@@ -143,18 +147,18 @@ export default {
           status: '2',
           createTime: '2021-01-01',
           deadline: '2021-03-31',
-          startTime: '2021-03-10',
+          startTime: '2021-03-04',
           completionTime: '2021-03-30'
         },
         {
           key: '2',
           taskName: '2021年第二季度总结',
           priority: '低',
-          status: '3',
+          status: '2',
           createTime: '2021-04-01',
           deadline: '2021-06-30',
-          startTime: '2021-06-04',
-          completionTime: ''
+          startTime: '2021-05-04',
+          completionTime: '2021-06-24'
         },
         {
           key: '3',
@@ -169,7 +173,7 @@ export default {
           taskName: '2021年第四季度总结',
           priority: '低',
           status: '0',
-          createTime: '2021-07-01',
+          createTime: '2021-10-01',
           deadline: '2021-12-31',
         },
       ],
@@ -270,4 +274,7 @@ export default {
 </script>
 <style scoped>
 @import '~@assets/less/common.less';
+.w140 {
+  width: 140px;
+}
 </style>
