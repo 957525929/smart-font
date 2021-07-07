@@ -2,16 +2,18 @@
   <div class="root">
     <div class="filterPrt">
       <div class="filterCtx">
-        <a-input-search placeholder="请输入车牌号搜索" style="width: 300px" @search="onSearch" />
-        <a-button @click="showNewTask" type="primary" style="float: right; margin-right: 10px"><a-icon type="plus" />新建派车</a-button>
+        <a-input-search placeholder="请输入用车人姓名搜索" style="width: 300px" @search="onSearch" />
+        <a-button @click="showNewTask" type="primary" style="float: right; margin-right: 10px"
+          ><a-icon type="plus" />新建派车</a-button
+        >
       </div>
     </div>
     <div class="listPrt">
-      <a-list item-layout="horizontal" :data-source="listData">
+      <a-list item-layout="horizontal" :data-source="listData" :pagination="pagination">
         <a-list-item slot="renderItem" slot-scope="item">
-          <a slot="actions" @click="showSelectDriver(item)">改派</a>
+          <a slot="actions" @click="showDispatchModal(item)">{{ item.driver ? '改派' : '派单' }}</a>
           <a slot="actions" @click="showDetails(item)">详情</a>
-          <a slot="actions">删除</a>
+          <!-- <a slot="actions">删除</a> -->
           <a-list-item-meta>
             <div slot="description">
               {{ '用车人：' + item.user }}
@@ -21,26 +23,46 @@
               {{ '出发地：' + item.from }}
               <a-divider type="vertical" />
               {{ '目的地：' + item.to }}
-               <a-divider type="vertical" />
-               {{  item.isBack }}
+              <a-divider type="vertical" />
+              {{ item.isBack }}
             </div>
-            <a slot="title" @click="showDetails(item)">{{ item.licenseNum }}</a>
+            <a slot="title" @click="showDetails(item)">{{ item.user + '-' + item.time + '-01' }}</a>
             <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
-          <div>
-            司机：<a>{{item.driver}}</a>
+          <div v-if="item.driver">
+            车辆：{{ item.licenseNum }}
+            <a-divider type="vertical" />
+            司机：{{ item.driver }}
           </div>
         </a-list-item>
       </a-list>
     </div>
 
-    <a-modal v-model="detailsVisible" :footer="null" title="详情" :width="735" :destroyOnClose='true'>
+    <a-modal v-model="detailsVisible" :footer="null" title="详情" :width="735" :destroyOnClose="true">
       <mydetails :id="currentItem" />
     </a-modal>
-    <a-modal v-model="selectDriverVisible" title="改派司机" :destroyOnClose='true'>
-      <select-driver :id="currentItem" />
+    <a-modal v-model="dispatchVisible" :title="dispatchType" :destroyOnClose="true">
+      <!-- <select-driver :id="currentItem" /> -->
+      <div>
+        <div style="margin-top: 10px; text-align: center">
+          请选择车辆：
+          <a-select style="width: 200px">
+            <a-select-option v-for="d in vehicleList" :key="d.key">
+              {{ d.licenseNum }}
+            </a-select-option>
+          </a-select>
+        </div>
+        <div style="margin-top: 10px; text-align: center">
+          请选择司机：
+          <a-select style="width: 200px">
+            <a-select-option v-for="d in driverList" :key="d.key">
+              {{ d.name }}
+            </a-select-option>
+          </a-select>
+        </div>
+      </div>
     </a-modal>
-    <a-modal v-model="newTaskVisible" title="新建派车任务" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+    <a-modal v-model="newTaskVisible" title="新建派车任务" :destroyOnClose="true" :footer="null" :maskClosable="false">
       <new-task :id="currentItem" />
     </a-modal>
   </div>
@@ -50,31 +72,30 @@
 import mydetails from './details.vue'
 import selectDriver from './selectDriver.vue'
 import newTask from './newTask.vue'
-const listData = [
-  {
-    licenseNum: '测A123402',
-    driver: '卢本伟',
-    user: '胡桃',
-    time: '2021-6-29',
-    from: '福州市',
-    to: '南京市',
-    isBack:'双程'
-  },
-]
+import { dispatchList, driverList, vehicleList } from '@/mock/demoData.js'
 export default {
   data() {
     return {
-      listData: listData,
+      listData: dispatchList,
+      driverList: driverList,
+      vehicleList: vehicleList,
       detailsVisible: false,
-      selectDriverVisible:false,
-      currentItem: null, //点击详情时的记录
-      newTaskVisible:false
+      dispatchVisible: false,
+      currentItem: null, //点击列表操作栏时的记录
+      dispatchType: '派单',
+      newTaskVisible: false,
+      pagination: {
+        onChange: (page) => {
+          console.log(page)
+        },
+        pageSize: 10,
+      },
     }
   },
   components: {
     mydetails,
     selectDriver,
-    newTask
+    newTask,
   },
   methods: {
     onSearch(value) {
@@ -84,13 +105,19 @@ export default {
       this.currentItem = item
       this.detailsVisible = true
     },
-    showSelectDriver(item){
+    showDispatchModal(item) {
       this.currentItem = item
-      this.selectDriverVisible = true
+      console.log(item)
+      if (item.driver) {
+        this.dispatchType = '改派'
+      } else {
+        this.dispatchType = '派单'
+      }
+      this.dispatchVisible = true
     },
-    showNewTask(){
-      this.newTaskVisible=true
-    }
+    showNewTask() {
+      this.newTaskVisible = true
+    },
   },
 }
 </script>

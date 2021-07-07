@@ -4,11 +4,13 @@
       <div class="filterCtx">
         <a-input-search :placeholder="`请输入车牌号搜索`" style="width: 200px" @search="onSearch" />
         <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
-        <a-button type="primary" style="float: right; margin-right: 10px" @click="newVehicleVisible=true"><a-icon type="plus" />新增</a-button>
+        <a-button type="primary" style="float: right; margin-right: 10px" @click="newVehicleVisible = true"
+          ><a-icon type="plus" />新增</a-button
+        >
       </div>
     </div>
     <div class="listPrt">
-      <a-list item-layout="horizontal" :data-source="listData">
+      <a-list item-layout="horizontal" :data-source="listData" :pagination="pagination">
         <a-list-item slot="renderItem" slot-scope="item">
           <a slot="actions" @click="showDetails(item)">详情</a>
           <a slot="actions" @click="showEditForm(item)">修改</a>
@@ -34,10 +36,10 @@
     <a-modal v-model="detailsVisible" :footer="null" title="详情" :width="735" :destroyOnClose="true">
       <mydetails :licenseNum="currentLicenseNum" />
     </a-modal>
-    <a-modal v-model="newVehicleVisible" title="新增车辆" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+    <a-modal v-model="newVehicleVisible" title="新增车辆" :destroyOnClose="true" :footer="null" :maskClosable="false">
       <new-vehicle />
     </a-modal>
-    <a-modal v-model="editFormVisible" title="修改车辆信息" :destroyOnClose='true' :footer="null" :maskClosable='false'>
+    <a-modal v-model="editFormVisible" title="修改车辆信息" :destroyOnClose="true" :footer="null" :maskClosable="false">
       <edit-form :licenseNum="currentLicenseNum" />
     </a-modal>
   </div>
@@ -47,60 +49,37 @@
 import mydetails from './details.vue'
 import newVehicle from './newVehicle.vue'
 import editForm from './edit.vue'
-const listData = [
-  {
-    licenseNum: '测A123401',
-    status: '正常',
-    BX: '2022-06-03',
-    BY: '2021-12-03',
-    NS: '2022-06-03',
-  },
-  {
-    licenseNum: '测A123402',
-    status: '正常',
-    BX: '2022-06-03',
-    BY: '2021-12-03',
-    NS: '2022-06-03',
-  },
-  {
-    licenseNum: '测A123403',
-    status: '正常',
-    BX: '2022-06-03',
-    BY: '2021-12-03',
-    NS: '2022-06-03',
-  },
-  {
-    licenseNum: '测A123404',
-    status: '维修中',
-    BX: '2022-06-03',
-    BY: '2021-12-03',
-    NS: '2022-06-03',
-  },
-]
+import { vehicleList } from '@/mock/demoData.js'
 export default {
   data() {
     return {
-      listData: listData,
+      listData: vehicleList,
       detailsVisible: false,
-      newVehicleVisible:false,
-      editFormVisible:false,
+      newVehicleVisible: false,
+      editFormVisible: false,
       currentLicenseNum: null, //记录点击详情时的车牌号
+      pagination: {
+        onChange: (page) => {
+          console.log(page)
+        },
+        pageSize: 10,
+      },
     }
   },
   components: {
     mydetails,
     newVehicle,
-    editForm
+    editForm,
   },
   methods: {
     showDetails(item) {
       this.currentLicenseNum = item.licenseNum
       this.detailsVisible = true
     },
-    showEditForm(item){
+    showEditForm(item) {
       this.currentLicenseNum = item.licenseNum
       this.editFormVisible = true
-    }
+    },
   },
 }
 </script>
