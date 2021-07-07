@@ -1,4 +1,73 @@
 import { getCurrentDate } from '@/components/_util/DateUtil.js'
+import { randomInt, generatePhoneNum } from '@/components/_util/mathFunc.js'
+//使用者列表
+const user = [
+    {
+        key: 0,
+        name: '袁林',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 1,
+        name: '姜轶枫',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 2,
+        name: '张家锐',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 3,
+        name: '邝燊楠',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 4,
+        name: '孙颖君',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 5,
+        name: '冯碧颖',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 6,
+        name: '波风水门',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 7,
+        name: '吴成杰',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 8,
+        name: '周德祥',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 9,
+        name: '刘煜',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 10,
+        name: '孙一峰',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 11,
+        name: '袁林',
+        phone: generatePhoneNum()
+    },
+    {
+        key: 12,
+        name: '桐谷和人',
+        phone: generatePhoneNum()
+    }
+]
 //车辆列表
 export const vehicleList = [
     {
@@ -40,22 +109,22 @@ export const driverList = [
     {
         key: '1',
         name: '张三',
-        phoneNum: '13712341234',
+        phoneNum: generatePhoneNum(),
     },
     {
         key: '2',
         name: '卢本伟',
-        phoneNum: '13812341234',
+        phoneNum: generatePhoneNum(),
     },
     {
         key: '3',
         name: '孙笑川',
-        phoneNum: '13812342200',
+        phoneNum: generatePhoneNum(),
     },
     {
         key: '4',
         name: '马保国',
-        phoneNum: '13912341234',
+        phoneNum: generatePhoneNum(),
     }
 ]
 
@@ -63,56 +132,69 @@ export const driverList = [
 export const verifyList = [
     {
         key: 0,
-        taskName: '周德祥-' + getCurrentDate() + '-01',
-        user: '周德祥',
+        user: user[0].name,
         time: getCurrentDate(),
         from: '福州市',
         to: '南京市',
-        isBack: '单程'
+        isBack: '单程',
+        reason: '公务出差', 
+        userContact: generatePhoneNum(),
+        passengerCount: 4
     },
     {
         key: 1,
-        taskName: '吴成杰-' + getCurrentDate() + '-01',
-        user: '吴成杰',
+        user: user[1].name,
         time: getCurrentDate(),
         from: '福州市',
         to: '泉州市',
-        isBack: '双程'
+        isBack: '双程',
+        reason: '公务出差', 
+        userContact: generatePhoneNum(),
+        passengerCount: 4
     },
     {
         key: 2,
-        taskName: '杨柳-' + getCurrentDate() + '-01',
-        user: '杨柳',
+        user: user[2].name,
         time: getCurrentDate(),
         from: '福州市',
         to: '泉州市',
-        isBack: '双程'
+        isBack: '双程',
+        reason: '公务出差', 
+        userContact: generatePhoneNum(),
+        passengerCount: 4,
     },
     {
         key: 3,
-        taskName: '齐琦-' + getCurrentDate() + '-01',
-        user: '齐琦',
+        user: user[3].name,
         time: getCurrentDate(),
         from: '福州市',
         to: '泉州市',
-        isBack: '双程'
+        isBack: '双程',
+        reason: '公务出差', 
+        userContact: generatePhoneNum(),
+        passengerCount: 4,
     },
     {
         key: 4,
-        taskName: '袁林-' + getCurrentDate() + '-01',
-        user: '袁林',
+        user: user[4].name,
         time: getCurrentDate(),
         from: '福州市',
         to: '泉州市',
-        isBack: '双程'
+        isBack: '双程',
+        reason: '公务出差', 
+        userContact: generatePhoneNum(),
+        passengerCount: 4,
     },
     {
         key: 5,
-        taskName: '潘越-' + getCurrentDate() + '-01',
-        user: '潘越',
+        user: user[5].name,
         time: getCurrentDate(),
         from: '福州市',
         to: '泉州市',
-        isBack: '双程'
+        isBack: '双程',
+        reason: '公务出差', 
+        userContact: generatePhoneNum(),
+        passengerCount: 4,
     }
 ]
+

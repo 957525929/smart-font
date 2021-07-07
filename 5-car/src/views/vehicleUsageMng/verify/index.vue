@@ -31,7 +31,7 @@
               <a-divider type="vertical" />
               {{ item.isBack }}
             </div>
-            <a slot="title" @click="showDetails(item)">{{ item.taskName }}</a>
+            <a slot="title" @click="showDetails(item)">{{ item.user+'-'+item.time+'-01' }}</a>
             <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
           <div>
