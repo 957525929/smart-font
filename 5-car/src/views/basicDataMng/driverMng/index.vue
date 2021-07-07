@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="listPrt">
-      <a-list item-layout="horizontal" :data-source="listData">
+      <a-list item-layout="horizontal" :data-source="driverList">
         <a-list-item slot="renderItem" slot-scope="item">
            <a slot="actions" @click="showEditDriver(item)">编辑</a>
            <a slot="actions" @click="bindVisible=true">绑定车辆</a>
@@ -20,9 +20,6 @@
             <a slot="title">{{ item.name }}</a>
             <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
-          <div>
-            <font :class="item.status == '空闲'||item.status =='出勤中' ? 'greenFont' : 'redFont'">{{ '状态：' + item.status }}</font>
-          </div>
         </a-list-item>
       </a-list>
     </div>
@@ -31,7 +28,7 @@
     </a-modal>
      <a-modal v-model="bindVisible" :footer="null" title="车辆绑定" :destroyOnClose="true">
        <a-transfer
-      :data-source="mockData"
+      :data-source="vehicleList"
       :titles="['未绑定的车辆', '该司机绑定的车辆']"
       :target-keys="targetKeys"
       :render="item => item.licenseNum"
@@ -48,70 +45,15 @@
 <script>
 import newDriver from './newDriver.vue'
 import editDriver from './editDriver.vue'
-const listData = [
-  {
-    name:'张三',
-    phoneNum:'13712341234',
-    status:'空闲'
-  },
-   {
-    name:'卢本伟',
-    phoneNum:'13812341234',
-    status:'出勤中'
-  },
-   {
-    name:'孙笑川',
-    phoneNum:'13812342200',
-    status:'空闲'
-  },
-   {
-    name:'马保国',
-    phoneNum:'13912341234',
-    status:'病假'
-  }
-]
-const mockData=[
-  {
-    key:'1',
-    licenseNum: '测A123401',
-    status: '正常',
-    BX: '2022-06-03',
-    BY: '2021-12-03',
-    NS: '2022-06-03',
-  },
-  {
-    key:'2',
-    licenseNum: '测A123402',
-    status: '正常',
-    BX: '2022-06-03',
-    BY: '2021-12-03',
-    NS: '2022-06-03',
-  },
-  {
-    key:'3',
-    licenseNum: '测A123403',
-    status: '正常',
-    BX: '2022-06-03',
-    BY: '2021-12-03',
-    NS: '2022-06-03',
-  },
-  {
-    key:'4',
-    licenseNum: '测A123404',
-    status: '维修中',
-    BX: '2022-06-03',
-    BY: '2021-12-03',
-    NS: '2022-06-03',
-  },
-]
+import {driverList,vehicleList} from '@/mock/demoData.js'
 export default {
   data() {
     return {
-      listData: listData,
+      driverList: driverList,
       bindVisible: false, 
       newDriverVisible:false,
       editDriverVisible:false,
-      mockData:mockData,
+      vehicleList:vehicleList,
       targetKeys:['1','4'],
       currentDriver:undefined
     }
