@@ -20,7 +20,7 @@
               {{ '联系方式：' + item.phoneNum }}
             </div>
             <a slot="title">{{ item.name }}</a>
-            <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
+            <a-avatar slot="avatar" icon="user" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
         </a-list-item>
       </a-list>

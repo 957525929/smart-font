@@ -2,7 +2,10 @@
   <div class="root">
     <div class="filterPrt">
       <div class="filterCtx">
-        请选择结算年月：
+        请选择司机：
+        <a-select :defaultValue="driverList[0].name" style="width: 200px">
+          <a-select-option v-for="d in driverList" :key="d.key">{{ d.name }}</a-select-option> </a-select
+        >&nbsp;&nbsp; 请选择结算年月：
         <a-month-picker :default-value="defaultDate" :format="monthFormat" />
         <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
       </div>
@@ -14,31 +17,34 @@
           <font size="5" color="#FF6701">缺勤/请假次数</font>
         </div>
         <div class="value">
-          <font size="5" color="#3EDBF0">28</font>
-          <font size="5" color="#3EDBF0">2</font>
+          <font size="5" color="#3EDBF0">{{ driverWorkloadPie[0].count }}</font>
+          <font size="5" color="#3EDBF0">{{ driverWorkloadPie[1].count }}</font>
         </div>
       </div>
-      <div class="chartPrt">
-        <Pie :dataSource="dataSource" />
+      <div class="chartPrt1">
+        <Pie :dataSource="driverWorkloadPie" />
+      </div>
+      <div class="chartPrt2">
+        <LineChartMultid :fields="LineChartFields" :dataSource="driverWorkloadLineChart" :aliases="fieldsRename" />
       </div>
     </div>
     <div class="details">
       <a-table :columns="columns" :data-source="tableData">
-        <a slot="user" slot-scope="text">{{ text }}</a>
-        <a slot="driver" slot-scope="text">{{ text }}</a>
+        <a slot="user" slot-scope="text" @click="showpersonalInfoModal(text)">{{ text }}</a>
       </a-table>
     </div>
+    <a-modal v-model="showpersonalInfoVisbile" title="个人信息" :destroyOnClose="true" :footer="null">
+      <personal-info :info="currentInfo" />
+    </a-modal>
   </div>
 </template>
 
 <script>
 import Pie from '@/components/chart/Pie'
+import LineChartMultid from '@/components/chart/LineChartMultid'
 import moment from 'moment'
-import { getCurrentDate, getLastWeekDate } from '@/components/_util/DateUtil.js'
-const dataSource = [
-  { item: '出车次数', count: 28 },
-  { item: '缺勤/请假次数', count: 2 }
-]
+import { driverList, driverWorkloadPie, driverWorkloadLineChart, driverWorkloadList } from '@/mock/demoData.js'
+import personalInfo from '../components/personalInfo.vue'
 const columns = [
   {
     title: '车牌号',
@@ -56,11 +62,6 @@ const columns = [
   {
     title: '乘客数',
     dataIndex: 'passengerCount',
-  },
-  {
-    title: '司机',
-    dataIndex: 'driver',
-    scopedSlots: { customRender: 'driver' },
   },
   {
     title: '发车时间',
@@ -82,103 +83,34 @@ const columns = [
     title: '单双程',
     dataIndex: 'isBack',
   },
-  // {
-  //   title: '票据图片',
-  //   dataIndex: 'img',
-  //   scopedSlots: { customRender: 'img' },
-  // },
-]
-const tableData = [
-  {
-    key:'1',
-    licenseNum: '测A123401',
-    user: '林克',
-    reason: '公务出差',
-    passengerCount: 4,
-    driver: '张三',
-    goTime: '2021-06-23',
-    backTime: '2021-06-29',
-    from: '福州',
-    to: '南京',
-    isBack: '双程',
-  },
-  {
-    key:'2',
-    licenseNum: '测A123401',
-    user: '里昂',
-    reason: '公务出差',
-    passengerCount: 4,
-    driver: '法外狂徒张三',
-    goTime: '2021-06-23',
-    backTime: '2021-06-29',
-    from: '福州',
-    to: '南京',
-    isBack: '双程',
-  },
-  {
-    key:'3',
-    licenseNum: '测A123401',
-    user: '萧炎',
-    reason: '公务出差',
-    passengerCount: 4,
-    driver: '张三',
-    goTime: '2021-06-23',
-    backTime: '2021-06-29',
-    from: '福州',
-    to: '南京',
-    isBack: '双程',
-  },
-  {
-    key:'4',
-    licenseNum: '测A123403',
-    user: '鸣人',
-    reason: '公务出差',
-    passengerCount: 2,
-    driver: '波风水门',
-    goTime: '2021-06-13',
-    backTime: '2021-06-15',
-    from: '福州',
-    to: '泉州',
-    isBack: '双程',
-  },
-  {
-    key:'5',
-    licenseNum: '测A123402',
-    user: '雅修特拉',
-    reason: '公务出差',
-    passengerCount: 4,
-    driver: '卢本伟',
-    goTime: '2021-06-12',
-    backTime: '2021-06-13',
-    from: '福州',
-    to: '南京',
-    isBack: '双程',
-  },
-  {
-    key:'6',
-    licenseNum: '测A123402',
-    user: '诗音',
-    reason: '公务出差',
-    passengerCount: 4,
-    driver: '李舜生',
-    goTime: '2021-06-12',
-    backTime: '2021-06-13',
-    from: '福州',
-    to: '厦门',
-    isBack: '单程',
-  },
 ]
 export default {
   data() {
     return {
-      dataSource: dataSource,
+      driverWorkloadPie: driverWorkloadPie,
       columns: columns,
-      tableData: tableData,
+      tableData: [...driverWorkloadList, ...driverWorkloadList, ...driverWorkloadList, ...driverWorkloadList],
       monthFormat: 'YYYY年MM月',
-      defaultDate: moment('2021/06', this.monthFormat)
+      defaultDate: moment('2021/06', this.monthFormat),
+      driverList: driverList,
+      LineChartFields: ['work', 'absence'],
+      fieldsRename: [
+        { field: 'work', alias: '出车次数' },
+        { field: 'absence', alias: '缺勤次数' },
+      ],
+      driverWorkloadLineChart: driverWorkloadLineChart,
+      showpersonalInfoVisbile: false,
+      currentInfo: undefined,
     }
   },
-  components: { Pie },
+  components: { Pie, LineChartMultid, personalInfo },
+  methods: {
+    showpersonalInfoModal(text) {
+      this.currentInfo = { name: text }
+      console.log(text);
+      this.showpersonalInfoVisbile = true
+    },
+  },
 }
 </script>
 
@@ -202,13 +134,14 @@ export default {
   .overview {
     margin-top: 10px;
     width: 98%;
+    height: 300px;
     background-color: #ffffff;
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     .fontPrt {
-      width: 30%;
+      width: 20%;
       .title {
         width: 100%;
         height: 50%;
@@ -227,10 +160,10 @@ export default {
       }
     }
     .chartPrt1 {
-      width: 33%;
+      width: 18%;
     }
-     .chartPrt2 {
-      width: 33%;
+    .chartPrt2 {
+      width: 50%;
     }
   }
   .details {
