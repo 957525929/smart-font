@@ -2,7 +2,7 @@
   <div class="root">
     <div class="filterPrt">
       <div class="filterCtx">
-        <a-input-search placeholder="请输入车牌号搜索" style="width: 300px" @search="onSearch" />
+        <a-input-search placeholder="请输入用车人姓名搜索" style="width: 300px" @search="onSearch" />
       </div>
     </div>
     <div class="listPrt">

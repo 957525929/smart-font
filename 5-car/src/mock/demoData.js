@@ -59,12 +59,12 @@ const user = [
     },
     {
         key: 11,
-        name: '袁林',
+        name: '吴三桂',
         phone: generatePhoneNum()
     },
     {
         key: 12,
-        name: '桐谷和人',
+        name: '陈晖洁',
         phone: generatePhoneNum()
     }
 ]
@@ -72,7 +72,7 @@ const user = [
 export const vehicleList = [
     {
         key: '1',
-        licenseNum: '测A123401',
+        licenseNum: '闽A123401',
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -80,7 +80,7 @@ export const vehicleList = [
     },
     {
         key: '2',
-        licenseNum: '测A123402',
+        licenseNum: '闽A123402',
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -88,7 +88,7 @@ export const vehicleList = [
     },
     {
         key: '3',
-        licenseNum: '测A123403',
+        licenseNum: '闽A123403',
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -96,12 +96,28 @@ export const vehicleList = [
     },
     {
         key: '4',
-        licenseNum: '测A123404',
+        licenseNum: '闽A123404',
         status: '维修中',
         BX: '2022-06-03',
         BY: '2021-12-03',
         NS: '2022-06-03',
     },
+    {
+        key: '5',
+        licenseNum: '闽A123405',
+        status: '维修中',
+        BX: '2022-06-03',
+        BY: '2021-12-03',
+        NS: '2022-06-03',
+    },
+    {
+        key: '6',
+        licenseNum: '闽A123406',
+        status: '维修中',
+        BX: '2022-06-03',
+        BY: '2021-12-03',
+        NS: '2022-06-03',
+    }
 ];
 
 //司机列表
@@ -124,6 +140,21 @@ export const driverList = [
     {
         key: '4',
         name: '马保国',
+        phoneNum: generatePhoneNum(),
+    },
+    {
+        key: '5',
+        name: '陈睿',
+        phoneNum: generatePhoneNum(),
+    },
+    {
+        key: '6',
+        name: '肖战',
+        phoneNum: generatePhoneNum(),
+    },
+    {
+        key: '7',
+        name: '陈睿',
         phoneNum: generatePhoneNum(),
     }
 ]
@@ -196,5 +227,93 @@ export const verifyList = [
         userContact: generatePhoneNum(),
         passengerCount: 4,
     }
+]
+
+//调度列表
+export const dispatchList=[
+    {
+        key: 1,
+        user: user[6].name,
+        userContact: generatePhoneNum(),
+        time: getCurrentDate(),
+        from: '福州市',
+        to: '泉州市',
+        isBack: '双程',
+        reason: '公务出差', 
+        passengerCount: 4,
+        licenseNum: null,
+        driver: null,
+        driverContact:null
+      },
+      {
+        key: 2,
+        user: user[7].name,
+        userContact: generatePhoneNum(),
+        time: getCurrentDate(),
+        from: '福州市',
+        to: '南京市',
+        isBack: '双程',
+        reason: '公务出差', 
+        passengerCount: 4,
+        licenseNum: null,
+        driver: null,
+        driverContact:null
+      },
+      {
+        key: 3,
+        user: user[8].name,
+        userContact: generatePhoneNum(),
+        time: getCurrentDate(),
+        from: '福州市',
+        to: '上海市',
+        isBack: '双程',
+        reason: '公务出差', 
+        passengerCount: 4,
+        licenseNum: null,
+        driver: null,
+        driverContact:null
+      },
+      {
+        key: 4,
+        user: user[9].name,
+        userContact: generatePhoneNum(),
+        time: getCurrentDate(),
+        from: '福州市',
+        to: '北京市',
+        isBack: '双程',
+        reason: '公务出差', 
+        passengerCount: 4,
+        licenseNum: vehicleList[randomInt(0,vehicleList.length-1)].licenseNum,
+        driver: driverList[randomInt(0,driverList.length-1)].name,
+        driverContact:generatePhoneNum()
+      },
+      {
+        key: 5,
+        user: user[10].name,
+        userContact: generatePhoneNum(),
+        time: getCurrentDate(),
+        from: '福州市',
+        to: '武汉市',
+        isBack: '双程',
+        reason: '公务出差', 
+        passengerCount: 4,
+        licenseNum: vehicleList[randomInt(0,vehicleList.length-1)].licenseNum,
+        driver: driverList[randomInt(0,driverList.length-1)].name,
+        driverContact:generatePhoneNum()
+      },
+      {
+        key: 6,
+        user: user[11].name,
+        userContact: generatePhoneNum(),
+        time: getCurrentDate(),
+        from: '福州市',
+        to: '厦门市',
+        isBack: '双程',
+        reason: '公务出差', 
+        passengerCount: 4,
+        licenseNum: vehicleList[randomInt(0,vehicleList.length-1)].licenseNum,
+        driver: driverList[randomInt(0,driverList.length-1)].name,
+        driverContact:generatePhoneNum()
+      },
 ]
 
