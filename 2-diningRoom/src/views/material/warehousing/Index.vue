@@ -4,32 +4,61 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" >
         <a-row :gutter="24">
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="单据编号">
-              <a-input placeholder="请输入单据编号" ></a-input>
+          <a-col :xl="6" :lg="8" :md="9" :sm="24">
+            <a-form-item label="采购单号">
+              <a-input placeholder="请输入" ></a-input>
             </a-form-item>
           </a-col>
-          <a-col :xl="8" :lg="9" :md="10" :sm="24">
-            <a-form-item label="单据日期">
-              <j-date placeholder="请选择开始" class="query-group-cust"></j-date>
-              <span class="query-group-split-cust"></span>
-              <j-date placeholder="请选择结束" class="query-group-cust"></j-date>
+          <a-col :xl="5" :lg="5" :md="6" :sm="24">
+            <a-form-item label="供应商">
+              <a-select
+                allowClear
+                placeholder="请选择"
+              >
+                <a-select-option v-for="d in manuSelectData" :key="d.value">
+                  {{ d.text }}
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="4" :lg="5" :md="6" :sm="24">
+            <a-form-item label="采购人">
+              <a-select
+                allowClear
+                placeholder="请选择"
+              >
+                <a-select-option v-for="d in purchasePeopleSelectData" :key="d.value">
+                  {{ d.text }}
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="4" :lg="5" :md="6" :sm="24">
+            <a-form-item label="验收人">
+              <a-select
+                allowClear
+                placeholder="请选择"
+              >
+                <a-select-option v-for="d in checkoutPeopleSelectData" :key="d.value">
+                  {{ d.text }}
+                </a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="供应商">
-                <j-dict-select-tag dictCode="bas_supplier,name,id" placeholder="请选择供应商"/>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="采购日期">
+                <a-range-picker @change="purchaseDateOnChange" />
               </a-form-item>
             </a-col>
-            <a-col :xl="4" :lg="6" :md="7" :sm="24">
-              <a-form-item label="是否通过">
-                <j-dict-select-tag dictCode="yn"/>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="采购日期">
+                <a-range-picker @change="purchaseDateOnChange" />
               </a-form-item>
             </a-col>
-            <a-col :xl="4" :lg="6" :md="7" :sm="24">
-              <a-form-item label="是否作废">
-                <j-dict-select-tag dictCode="yn"/>
+            <a-col :xl="5" :lg="8" :md="9" :sm="24">
+              <a-form-item label="标题">
+                <a-input placeholder="请输入" ></a-input>
               </a-form-item>
             </a-col>
           </template>
@@ -52,7 +81,7 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button type="link" icon="plus">新增</a-button>
+      <a-button type="link" icon="plus" @click='purInOnClick'>新增</a-button>
       <a-button type="link" icon="download" :disabled="!hasSelected">导出</a-button>
       <i class="anticon anticon-info-circle ant-alert-icon"></i>已选择<a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
       <a style="margin-left: 12px" @click="onClearSelected" v-if='hasSelected'>清空</a>
@@ -65,57 +94,104 @@
         ref="table"
         size="middle"
         bordered
-        rowKey="key"
-        :scroll="{ x: 2200}"
+        rowKey="id"
         :columns="columns"
         :dataSource="dataSource"
         :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+        :pagination="{total:this.dataSource.length, showTotal:(total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`}"
         >
         <span slot="action" slot-scope="text, record">
-          <a>编辑</a>
+<!--          <a>查看详情</a>-->
+          <router-link :to="{name:'materialManagement-warehousing-warehousingDetails', params:record }">查看详情</router-link>
+<!--          <router-link :to="{path:'/material/warehousing/warehousingDetails', query:record }">查看详情</router-link>-->
           <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
-              <a-menu-item key="1" >
-                <a-popconfirm title="确定删除吗?" >删除</a-popconfirm>
+              <a-menu-item key="1" >编辑</a-menu-item>
+              <a-menu-item key="2" >
+                <a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)">删除</a-popconfirm>
               </a-menu-item>
-              <a-menu-item key="2" >审核</a-menu-item>
+
             </a-menu>
           </a-dropdown>
         </span>
-
       </a-table>
     </div>
+
+    <PurInModal :modalVisible='modalVisible' @handleCancel='handleCancel'></PurInModal>
+
 
   </a-card>
 </template>
 
 <script>
 
-
-import JSelectUserByDep from '@/components/jeecgbiz/JSelectUserByDep'
-import JSuperQuery from '@/components/jeecg/JSuperQuery.vue';
-import JDate from '@/components/jeecg/JDate.vue'
-
+import PurInModal from './PurInModal'
 
 export default {
   name: "Index",
   components: {
-    JDate,
-    JSuperQuery,
-    JSelectUserByDep,
+    PurInModal,
   },
-
   data () {
     return {
+      manuSelectData:[
+        {
+          value : 1,
+          text : '程埔头市场',
+        },
+        {
+          value : 2,
+          text : '闽侯菜市场',
+        },
+      ],
+      purchasePeopleSelectData:[
+        {
+          value : 1,
+          text : '张三',
+        },
+        {
+          value : 2,
+          text : '李四',
+        },
+      ],
+      checkoutPeopleSelectData:[
+        {
+          value : 1,
+          text : '张三',
+        },
+        {
+          value : 2,
+          text : '李四',
+        },
+      ],
       description: '采购入库',
       dataSource: [
         {
-          key:'1',
-          billNo: 'dfh2001',
-          billDate: '2020-01-20 19:55:55',
-        }
+          id:'1',
+          purchaseOrderNumber: 'GZZT20210404001',
+          headline: '4月4号采购单1',
+          purchasePeople: '张三',
+          purchaseDate: '2020-04-04',
+          purchaseNum: '100',
+          totalMoney: '1000.00',
+          checkoutPeople: '李四',
+          checkoutDate: '2020-04-04',
+          provider : '程埔头市场',
+        },
+        {
+          id:'2',
+          purchaseOrderNumber: 'GZZT20210404002',
+          headline: '4月4号采购单2',
+          purchasePeople: '李四',
+          purchaseDate: '2020-04-04',
+          purchaseNum: '200',
+          totalMoney: '2000.00',
+          checkoutPeople: '张三',
+          checkoutDate: '2020-04-04',
+          provider : '闽侯菜市场',
+        },
       ],
       // 表头
       columns: [
@@ -123,144 +199,69 @@ export default {
           title: '#',
           dataIndex: '',
           key:'rowIndex',
-          fixed: 'left',
-          width:40,
           align:"center",
           customRender:function (t,r,index) {
             return parseInt(index)+1;
           }
         },
         {
-          title:'单据编号',
-          fixed: 'left',
-          width:180,
+          title:'采购单号',
           align:"center",
-          dataIndex: 'billNo',
-          scopedSlots: { customRender: 'billNo' }
+          dataIndex: 'purchaseOrderNumber',
         },
         {
-          title:'单据日期',
-          width:90,
+          title:'标题',
           align:"center",
-          dataIndex: 'billDate',
-          customRender:function (text) {
-            return !text?"":(text.length>10?text.substr(0,10):text)
-          }
+          dataIndex: 'headline',
+          // customRender:function (text) {
+          //   return !text?"":(text.length>10?text.substr(0,10):text)
+          // }
         },
         {
-          title:'源单号',
-          width:180,
+          title:'采购人',
           align:"center",
-          dataIndex: 'sourceNo'
+          dataIndex: 'purchasePeople'
         },
         {
-          title:'制单人',
-          width:75,
+          title:'采购日期',
           align:"center",
-          dataIndex: 'createBy_dictText'
+          dataIndex: 'purchaseDate'
         },
         {
-          title:'业务员',
-          width:75,
+          title:'采购总数',
           align:"center",
-          dataIndex: 'clerkId_dictText'
+          dataIndex: 'purchaseNum'
+        },
+        {
+          title:'总金额',
+          align:"center",
+          dataIndex: 'totalMoney'
+        },
+        {
+          title:'验收人',
+          align:"center",
+          dataIndex: 'checkoutPeople'
+        },
+        {
+          title:'验收日期',
+          align:"center",
+          dataIndex: 'checkoutDate'
         },
         {
           title:'供应商',
-          align:"left",
-          dataIndex: 'supplierId_dictText'
-        },
-        {
-          title:'处理状态',
-          width:75,
           align:"center",
-          dataIndex: 'billProcStatus_dictText'
-        },
-        {
-          title:'是否通过',
-          width:75,
-          align:"center",
-          dataIndex: 'isApproved_dictText'
-        },
-        {
-          title:'是否关闭',
-          width:75,
-          align:"center",
-          dataIndex: 'isClosed_dictText'
-        },
-        {
-          title:'是否作废',
-          width:75,
-          align:"center",
-          dataIndex: 'isVoided_dictText'
-        },
-        {
-          title:'备注',
-          align:"left",
-          dataIndex: 'remark'
-        },
-        {
-          title:'生效时间',
-          width:90,
-          align:"center",
-          dataIndex: 'effectiveTime',
-          customRender:function (text) {
-            return !text?"":(text.length>10?text.substr(0,10):text)
-          }
-        },
-        {
-          title:'审核人',
-          width:75,
-          align:"center",
-          dataIndex: 'approverId_dictText'
-        },
-        {
-          title:'流程',
-          width:100,
-          align:"center",
-          dataIndex: 'flowId'
-        },
-        {
-          title:'创建时间',
-          width:90,
-          align:"center",
-          dataIndex: 'createTime',
-          customRender:function (text) {
-            return !text?"":(text.length>10?text.substr(0,10):text)
-          }
-        },
-        {
-          title:'创建部门',
-          width:120,
-          align:"center",
-          dataIndex: 'sysOrgCode_dictText'
-        },
-        {
-          title:'修改时间',
-          width:90,
-          align:"center",
-          dataIndex: 'updateTime',
-          customRender:function (text) {
-            return !text?"":(text.length>10?text.substr(0,10):text)
-          }
-        },
-        {
-          title:'修改人',
-          width:75,
-          align:"center",
-          dataIndex: 'updateBy_dictText'
+          dataIndex: 'provider'
         },
         {
           title: '操作',
           dataIndex: 'action',
-          fixed:'right',
-          width:120,
           align:"center",
           scopedSlots: { customRender: 'action'},
         }
       ],
       toggleSearchStatus: false,
       selectedRowKeys: [],
+      modalVisible:false,
     }
   },
   computed: {
@@ -279,7 +280,20 @@ export default {
     },
     onClearSelected() {
       this.selectedRowKeys = [];
-    }
+    },
+    deletConfirm(e) {
+      console.log(e);
+      this.$message.success('删除成功');
+    },
+    purchaseDateOnChange(date, dateString) {
+      console.log(date, dateString);
+    },
+    purInOnClick() {
+      this.modalVisible = true;
+    },
+    handleCancel() {
+      this.modalVisible = false;
+    },
   }
 
 }

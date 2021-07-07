@@ -7,7 +7,7 @@
 
           <a-col :md="6" :sm="9">
             <a-form-item label="类型">
-              <a-select style="width: 220px" placeholder="请选择类型">
+              <a-select class="w150" placeholder="请选择类型">
                 <a-select-option value="0">计划</a-select-option>
                 <a-select-option value="1">任务</a-select-option>
               </a-select>
@@ -16,7 +16,7 @@
 
           <a-col :md="6" :sm="9">
             <a-form-item label="状态">
-              <a-select style="width: 220px" placeholder="请选择状态">
+              <a-select class="w150" placeholder="请选择状态">
                 <a-select-option value="0">未开始</a-select-option>
                 <a-select-option value="1">进行中</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
@@ -25,9 +25,11 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="10">
+          <a-col :sm="10">
             <a-form-item label="上传时间">
-              <a-range-picker />
+              <a-date-picker class="w140" placeholder="开始时间" />
+              ~
+              <a-date-picker class="w140" placeholder="结束时间" />
             </a-form-item>
           </a-col>
 
@@ -89,4 +91,10 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.w150 {
+  width: 150px;
+}
+.w140 {
+  width: 140px;
+}
 </style>

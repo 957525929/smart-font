@@ -6,17 +6,20 @@
         <a-row :gutter="10">
           <a-col :md="6" :sm="9">
             <a-form-item label="文档类型">
-              <a-select style="width: 220px" placeholder="请选择文档类型">
-                <a-select-option value="0">xlsx</a-select-option>
-                <a-select-option value="1">ppt</a-select-option>
-                <a-select-option value="2">doc</a-select-option>
+              <a-select class="w150" placeholder="请选择文档类型">
+                <a-select-option value="0">资产</a-select-option>
+                <a-select-option value="1">会议纪要</a-select-option>
+                <a-select-option value="2">记录</a-select-option>
+                <a-select-option value="3">报告</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="10">
+          <a-col :sm="10">
             <a-form-item label="上传时间">
-              <a-range-picker />
+              <a-date-picker class="w140" placeholder="开始时间" />
+              ~
+              <a-date-picker class="w140" placeholder="结束时间" />
             </a-form-item>
           </a-col>
 
@@ -48,7 +51,7 @@ export default {
       ],
       dataSource: [
         {
-          "type": "doc", // 列名
+          "type": "资产", // 列名
           "2017": 310,
           "2018": 332,
           "2019": 321,
@@ -56,7 +59,7 @@ export default {
           "2021": 390,
         },
         {
-          "type": "ppt",
+          "type": "会议纪要",
           "2017": 220,
           "2018": 182,
           "2019": 131,
@@ -64,12 +67,20 @@ export default {
           "2021": 290,
         },
         {
-          "type": "xlxs",
+          "type": "记录",
           "2017": 120,
           "2018": 232,
           "2019": 201,
           "2020": 114,
           "2021": 190,
+        },
+        {
+          "type": "报告",
+          "2017": 102,
+          "2018": 20,
+          "2019": 300,
+          "2020": 125,
+          "2021": 40,
         }
       ]
     }
@@ -78,4 +89,10 @@ export default {
 </script>
 <style lang="less" scoped>
 @import '~@assets/less/common.less';
+.w150 {
+  width: 150px;
+}
+.w140 {
+  width: 140px;
+}
 </style>

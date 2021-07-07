@@ -16,7 +16,9 @@
           </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">
-          <a-range-picker style="width:200px" v-decorator="['startTime', {rules: [{ required: true, message: '请选择时间!' }]}]" />
+          <a-date-picker class="w140" placeholder="开始时间" v-decorator="['startTime', {rules: [{ required: true, message: '请选择开始时间!' }]}]" />
+          ~
+          <a-date-picker class="w140" placeholder="结束时间" v-decorator="['deadline', {rules: [{ required: true, message: '请选择结束时间!' }]}]" />
         </a-form-item>
         <a-form-item label="概述" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-textarea :rows="10" />
@@ -132,4 +134,7 @@ export default {
 </script>
 
 <style scoped>
+.w140 {
+  width: 140px;
+}
 </style>

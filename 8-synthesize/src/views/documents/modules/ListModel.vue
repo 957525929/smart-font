@@ -17,7 +17,7 @@
         </a-form-item>
 
         <a-form-item label="上传文件" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-upload name="file" :multiple="true" :headers="headers" @change="handleChange">
+          <a-upload name="file" :multiple="true" :headers="headers">
             <a-input placeholder="请上传文件" v-decorator="[ 'document', validatorRules.document]">
               <upload-outlined></upload-outlined>
             </a-input>
