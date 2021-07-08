@@ -210,13 +210,13 @@ export const menuMock = {
 			},
 			{
 				"redirect": null,
-				"path": "/setup",
+				"path": "/systemSetup",
 				"component": "layouts/RouteView",
 				"route": "1",
 				"children": [
 					{
-						"path": "/setup/setTime",
-						"component": "setup/SetTime",
+						"path": "/systemSetup/setTime",
+						"component": "systemSetup/SetTime",
 						"route": "1",
 						"meta": {
 							"keepAlive": false,
@@ -225,15 +225,26 @@ export const menuMock = {
 						},
 						"name": "setup-setTime",
 						"id": "e41b69c57a941a3bbcce45032fe57605"
+					}, {
+						"path": "/systemSetup/docmentsManage",
+						"component": "systemSetup/DocmentsManage",
+						"route": "1",
+						"meta": {
+							"keepAlive": false,
+							"internalOrExternal": false,
+							"title": "文档类型管理"
+						},
+						"name": "systemSetup-DocmentsManage",
+						"id": "e41b69c57a941a3bbcce45032fe57605"
 					}
 				],
 				"meta": {
 					"keepAlive": false,
 					"internalOrExternal": false,
 					"icon": "cloud",
-					"title": "设置"
+					"title": "系统设置"
 				},
-				"name": "setsetupTime",
+				"name": "systemSetup",
 				"id": "e41b69c57a941a3bbcce45032fe57605"
 			},
 		]

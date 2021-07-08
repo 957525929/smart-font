@@ -18,7 +18,7 @@
 
 
 <script>
-import SetTimeData from './modules/SetTimeData'
+import SetTimeData from './components/SetTimeData.vue'
 
 export default {
   components: {

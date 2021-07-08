@@ -42,6 +42,8 @@
     <a-row type="flex" justify="end">
       <a-col>
         <a-button @click="add">添加房间</a-button>
+
+        <!-- 添加房间功能 -->
         <a-modal v-model="visible" title="添加房间" @ok="handleOk">
           <a-row type="flex" align="middle">
             <a-col :span="4">楼号：</a-col>
@@ -97,10 +99,16 @@
             </a-col>
           </a-row>
         </a-modal>
+        <!-- 添加房间功能结束 -->
+
         <a-divider type="vertical" />
+
         <a-button @click="check">查询</a-button>
+
         <a-divider type="vertical" />
+
         <a-button @click="showConfirm">导出</a-button>
+
         <a-divider type="vertical" />
       </a-col>
     </a-row>

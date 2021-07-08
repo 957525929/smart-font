@@ -46,7 +46,7 @@
 import { httpAction } from '@/api/manage'
 import JCron from "@/components/jeecg/JCron";
 import pick from 'lodash.pick'
-// import moment from "moment"
+import moment from "moment"
 
 export default {
   name: "TaskListModel",
@@ -85,8 +85,12 @@ export default {
   created() {
   },
   methods: {
-    add() {
-      this.edit({});
+    add(record) {
+      let that = this;
+      that.form.resetFields();
+      this.model = Object.assign({}, record);
+      console.log(this.model)
+      this.visible = true;
     },
     edit(record) {
       let that = this;
@@ -94,10 +98,11 @@ export default {
       this.model = Object.assign({}, record);
       console.log(this.model)
       this.visible = true;
+      this.model.startTime = moment(this.model.startTime, 'YYYY-MM-DD');
+      this.model.deadline = moment(this.model.deadline, 'YYYY-MM-DD');
       this.$nextTick(() => {
         this.form.setFieldsValue(pick(this.model, 'taskName', 'priority', 'status', 'deadline', 'startTime'));
       });
-
     },
     close() {
       this.$emit('close');
@@ -109,10 +114,6 @@ export default {
       this.form.validateFields((err, values) => {
         console.log('values', values)
         if (!err) {
-          if (typeof values.cronExpression == "undefined" || Object.keys(values.cronExpression).length == 0) {
-            this.$message.warning('请输入cron表达式!');
-            return false;
-          }
 
           that.confirmLoading = true;
           let httpurl = '';

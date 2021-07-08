@@ -33,7 +33,7 @@ import { httpAction } from '@/api/manage'
 import JCron from "@/components/jeecg/JCron";
 import pick from 'lodash.pick'
 
-// import moment from "moment"
+import moment from "moment"
 
 export default {
   name: "PlanListModal",
@@ -68,8 +68,12 @@ export default {
   created() {
   },
   methods: {
-    add() {
-      this.edit({});
+    add(record) {
+      let that = this;
+      that.form.resetFields();
+      this.model = Object.assign({}, record);
+      console.log(this.model)
+      this.visible = true;
     },
     edit(record) {
       let that = this;
@@ -77,8 +81,11 @@ export default {
       this.model = Object.assign({}, record);
       console.log(this.model)
       this.visible = true;
+      this.model.startTime = moment(this.model.startTime, 'YYYY-MM-DD');
+      this.model.deadline = moment(this.model.deadline, 'YYYY-MM-DD');
+
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(this.model, 'planName', 'status'));
+        this.form.setFieldsValue(pick(this.model, 'planName', 'status', 'startTime', 'deadline'));
       });
 
     },
