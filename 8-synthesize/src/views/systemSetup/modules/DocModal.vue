@@ -1,23 +1,13 @@
 <template>
-  <a-modal :title="title" :width="800" :visible="visible" :confirmLoading="confirmLoading" @ok="handleOk" @cancel="handleCancel" okText="保存文件" cancelText="关闭">
+  <a-modal :title="title" :width="400" :visible="visible" :confirmLoading="confirmLoading" @ok="handleOk" @cancel="handleCancel" okText="提交" cancelText="关闭">
 
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
 
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="文件名称" hasFeedback>
-          <a-input style="width:200px" placeholder="请输入文件名称" v-decorator="['docName', {rules: [{ required: true, message: '请输入任务名称!' }]}]" />
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="文档类型" hasFeedback>
+          <a-input style="width:200px" placeholder="请输入文档类型" v-decorator="['docType', {rules: [{ required: true, message: '请输入文档类型!' }]}]" />
         </a-form-item>
 
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上传文件">
-          <a-upload name="file" :multiple="true" :headers="headers" @change="handleChange">
-            <a-input placeholder="请上传文件" v-decorator="[ 'document', validatorRules.document]">
-              <upload-outlined></upload-outlined>
-            </a-input>
-          </a-upload>
-        </a-form-item>
-        <a-form-item label="概述" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-textarea :rows="10" />
-        </a-form-item>
       </a-form>
     </a-spin>
   </a-modal>
@@ -76,7 +66,7 @@ export default {
       console.log(this.model)
       this.visible = true;
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(this.model, 'docName', 'priority', 'status', 'deadline', 'startTime'));
+        this.form.setFieldsValue(pick(this.model, 'docType'));
       });
 
     },

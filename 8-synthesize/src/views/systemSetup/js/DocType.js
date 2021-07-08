@@ -6,7 +6,7 @@ export const data = [
     },
     {
         key: '2',
-        docType: '会议记要',
+        docType: '会议纪要',
         createTime: '2020-5-23'
     },
     {

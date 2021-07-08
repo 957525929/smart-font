@@ -12,12 +12,7 @@
 
             <a-col :md="5" :sm="10">
               <a-form-item label="文档类型">
-                <a-select style="width: 150px" placeholder="请选择文档类型">
-                  <a-select-option value="0">资产</a-select-option>
-                  <a-select-option value="1">会议纪要</a-select-option>
-                  <a-select-option value="2">记录</a-select-option>
-                  <a-select-option value="3">报告</a-select-option>
-                </a-select>
+                <a-input class="w140" placeholder="请输入文档类型"></a-input>
               </a-form-item>
             </a-col>
 

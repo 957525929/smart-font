@@ -85,8 +85,12 @@ export default {
   created() {
   },
   methods: {
-    add() {
-      this.edit({});
+    add(record) {
+      let that = this;
+      that.form.resetFields();
+      this.model = Object.assign({}, record);
+      console.log(this.model)
+      this.visible = true;
     },
     edit(record) {
       let that = this;
