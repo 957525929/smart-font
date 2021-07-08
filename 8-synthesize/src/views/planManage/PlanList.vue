@@ -156,7 +156,6 @@ export default {
           align: "center",
           dataIndex: 'planName',
           width: 200,
-          sorter: true,
           scopedSlots: { customRender: 'planNameList' },
         },
         {
@@ -165,11 +164,6 @@ export default {
           width: 100,
           dataIndex: 'status',
           scopedSlots: { customRender: 'customRenderStatus' },
-          filterMultiple: false,
-          filters: [
-            { text: '进行中', value: '0' },
-            { text: '未开始', value: '-1' },
-          ]
         },
         {
           title: '创建时间',

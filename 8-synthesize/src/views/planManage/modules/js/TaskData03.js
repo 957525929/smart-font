@@ -33,17 +33,15 @@ export const columns = [
         align: "center",
         dataIndex: 'taskName',
         width: 200,
-        sorter: true,
         scopedSlots: { customRender: 'taskNameList' },
-        /*            customRender:function (text) {
-                      return "*"+text.substring(9,text.length);
-                    }*/
+        unhidden: true,
     },
     {
         title: '重要性',
         align: "center",
         width: 100,
-        dataIndex: 'priority'
+        dataIndex: 'priority',
+        unhidden: true,
     },
     {
         title: '任务状态',
@@ -51,13 +49,7 @@ export const columns = [
         width: 100,
         dataIndex: 'status',
         scopedSlots: { customRender: 'customRenderStatus' },
-        filterMultiple: false,
-        filters: [
-            { text: '进行中', value: '0' },
-            { text: '未开始', value: '-1' },
-            { text: '已完成', value: '1' },
-            { text: '未完成', value: '2' },
-        ]
+        unhidden: true,
     },
     {
         title: '创建时间',

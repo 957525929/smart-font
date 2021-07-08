@@ -10,9 +10,10 @@
 
         <a-form-item label="文档类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select v-decorator="[ 'type', validatorRules.type]" style="width: 220px" placeholder="请选择文档类型">
-            <a-select-option value="0">doc</a-select-option>
-            <a-select-option value="1">ppt</a-select-option>
-            <a-select-option value="2">xlsx</a-select-option>
+            <a-select-option value="0">资产</a-select-option>
+            <a-select-option value="1">会议纪要</a-select-option>
+            <a-select-option value="2">记录</a-select-option>
+            <a-select-option value="3">报告</a-select-option>
           </a-select>
         </a-form-item>
 

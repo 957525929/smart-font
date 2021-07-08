@@ -3,7 +3,7 @@
     <a-col :span="24">
       <a-card style="width: 100%;margin-top:10px">
         <div>
-          <SearchData />
+          <SearchData :columns="searchData" />
           <FunctionButton :selectedRowKeys="selectedRowKeys" />
         </div>
         <slot></slot>
@@ -35,6 +35,16 @@ export default {
       default: () => []
     },
   },
+  mounted() {
+    this.searchData = this.columns.filter(item => {
+      return item.unhidden
+    })
+  },
+  data() {
+    return {
+      searchData: []
+    }
+  }
 }
 </script>
 

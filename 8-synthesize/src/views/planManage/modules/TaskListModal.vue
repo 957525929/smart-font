@@ -74,11 +74,7 @@ export default {
       confirmLoading: false,
       form: this.$form.createForm(this),
       validatorRules: {
-        cron: {
-          rules: [{
-            required: true, message: '请输入cron表达式!'
-          }]
-        }
+
       },
       url: {
         add: "/sys/quartzJob/add",
