@@ -1,9 +1,11 @@
 // 全部
-export const fixMenu = [{
+export const fixMenu = [
+    {
     key:0,
     title:"全部",
     content:"all"
-},{
+},
+{
     key:1,
     title:"待审核",
     content:"verify"
