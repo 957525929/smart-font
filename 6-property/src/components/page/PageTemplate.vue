@@ -3,7 +3,8 @@
         <a-col :span="24">
             <SearchCard  v-on="$listeners" v-bind="$attrs" :columns="searchCols"></SearchCard>
             <a-card style="width: 100%;margin-top:10px">
-                <slot></slot>               
+ 
+                <slot></slot>
             </a-card>
         </a-col>
     </a-row>
@@ -37,6 +38,10 @@ export default {
     },
     inheritAttrs: false,
     methods: {
+
+                    
+            // 
+        // },
     },
 }
 </script>

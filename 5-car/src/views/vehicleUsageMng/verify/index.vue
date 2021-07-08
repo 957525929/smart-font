@@ -32,7 +32,7 @@
               {{ item.isBack }}
             </div>
             <a slot="title" @click="showDetails(item)">{{ item.user+'-'+item.time+'-01' }}</a>
-            <a-avatar slot="avatar" icon="car" style="backgroundcolor: #04009a" />
+            <a-avatar slot="avatar" icon="solution" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
           <div>
             <!-- <font :class="item.status == '审核中' ? 'redFont' : 'greenFont'">{{ '状态：' + item.status }}</font> -->

@@ -8,7 +8,7 @@
           <a-input style="width:200px" placeholder="请输入任务名称" v-decorator="['taskName', {rules: [{ required: true, message: '请输入任务名称!' }]}]" />
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="重要性" hasFeedback priority>
-          <a-select style="width:100px" ref="select" v-decorator="['priority', {rules: [{ required: true, message: '请选择重要性!' }]}]">
+          <a-select style="width:130px" placeholder="请选择重要性" ref="select" v-decorator="['priority', {rules: [{ required: true, message: '请选择重要性!' }]}]">
             <a-select-option value="0">高</a-select-option>
             <a-select-option value="1">中</a-select-option>
             <a-select-option value="2">低</a-select-option>
@@ -74,11 +74,7 @@ export default {
       confirmLoading: false,
       form: this.$form.createForm(this),
       validatorRules: {
-        cron: {
-          rules: [{
-            required: true, message: '请输入cron表达式!'
-          }]
-        }
+
       },
       url: {
         add: "/sys/quartzJob/add",

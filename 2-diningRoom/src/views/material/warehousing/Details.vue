@@ -1,0 +1,162 @@
+<template>
+  <a-card :bordered="false">
+    <h1 style="font-weight:bold">基本信息：</h1>
+    <a-divider/>
+    <a-row :gutter="16">
+      <a-col :xl="5" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>采购单号：</div>
+          <div>{{ detailsData.purchaseOrderNumber }}</div>
+        </div>
+      </a-col>
+      <a-col :xl="5" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>标题：</div>
+          <div>{{ detailsData.headline }}</div>
+        </div>
+      </a-col>
+      <a-col :xl="5" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>采购人：</div>
+          <div>{{ detailsData.purchasePeople }}</div>
+        </div>
+      </a-col>
+      <a-col :xl="5" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>采购日期：</div>
+          <div>{{ detailsData.purchaseDate }}</div>
+        </div>
+      </a-col>
+      <a-col :xl="4" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>总金额：</div>
+          <div>{{ detailsData.totalMoney }}</div>
+        </div>
+      </a-col>
+      <a-col :xl="5" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>采购总数：</div>
+          <div>{{ detailsData.purchaseNum }}</div>
+        </div>
+      </a-col>
+      <a-col :xl="5" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>供应商：</div>
+          <div>{{ detailsData.provider }}</div>
+        </div>
+      </a-col>
+      <a-col :xl="5" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>验收人：</div>
+          <div>{{ detailsData.checkoutPeople }}</div>
+        </div>
+      </a-col>
+      <a-col :xl="5" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>验收日期：</div>
+          <div>{{ detailsData.checkoutDate }}</div>
+        </div>
+      </a-col>
+    </a-row>
+
+    <h1 style="font-weight:bold">采购明细：</h1>
+    <a-divider/>
+    <a-table
+      size="middle"
+      bordered
+      rowKey="id"
+      :columns="columns"
+      :dataSource="dataSource"
+      :pagination="{total:this.dataSource.length, showTotal:(total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`}"
+    >
+    </a-table>
+
+  </a-card>
+</template>
+
+<script>
+export default {
+  name: 'Details',
+
+  mounted () {
+    console.log(this.detailsData)
+  },
+  data () {
+    return {
+      detailsData:this.$route.params,
+      dataSource: [
+        {
+          id:'1',
+          materialName: '油麦菜',
+          materialCategory: '青菜类',
+          materialUnits: 'KG',
+          materialPrice: '10.00',
+          materialNum: '10',
+          materialTotalValue: '100.00',
+        },
+        {
+          id:'2',
+          materialName: '鸡肉',
+          materialCategory: '肉类',
+          materialUnits: 'KG',
+          materialPrice: '10.00',
+          materialNum: '10',
+          materialTotalValue: '100.00',
+        },
+      ],
+      columns: [
+        {
+          title: '#',
+          dataIndex: '',
+          key:'rowIndex',
+          align:"center",
+          customRender:function (t,r,index) {
+            return parseInt(index)+1;
+          }
+        },
+        {
+          title:'物料名称',
+          align:"center",
+          dataIndex: 'materialName',
+        },
+        {
+          title:'物料类别',
+          align:"center",
+          dataIndex: 'materialCategory',
+        },
+        {
+          title:'单位',
+          align:"center",
+          dataIndex: 'materialUnits'
+        },
+        {
+          title:'单价',
+          align:"center",
+          dataIndex: 'materialPrice'
+        },
+        {
+          title:'采购数量',
+          align:"center",
+          dataIndex: 'materialNum'
+        },
+        {
+          title:'总价',
+          align:"center",
+          dataIndex: 'materialTotalValue'
+        },
+      ],
+    }
+  },
+
+}
+</script>
+
+<style lang="less" scoped>
+@import '~@assets/less/common.less';
+
+.detail-top {
+  vertical-align: middle;
+  margin-bottom: 20px;
+}
+
+</style>

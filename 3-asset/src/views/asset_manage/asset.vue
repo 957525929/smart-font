@@ -51,7 +51,7 @@
     
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button type="link" icon="plus">新增</a-button>
+<!--      <a-button type="link"  @click="myHandleAdd"  icon="plus">新增</a-button>-->
       <a-button type="link" icon="download">导出</a-button>
       <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="link" icon="import">导入</a-button>
@@ -80,7 +80,6 @@
         :dataSource="dataSource"
         :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
         >
-
         <span slot="action" slot-scope="text, record">
           <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
           <a-divider type="vertical" />
@@ -97,7 +96,28 @@
 
       </a-table>
     </div>
-
+    <!-- 添加资产变化记录 -->
+<!--    <a-modal-->
+<!--      title="新增资产变化记录"-->
+<!--      :visible="visible"-->
+<!--      :confirm-loading="confirmLoading"-->
+<!--      @ok="handleOk"-->
+<!--      @cancel="handleCancel"-->
+<!--    >-->
+<!--      <a-form-model :layout="form.layout" :model="form" >-->
+<!--        <a-form-model-item label="资产编号">-->
+<!--          <a-input v-model="form.fieldA" placeholder="input placeholder" />-->
+<!--        </a-form-model-item>-->
+<!--        <a-form-model-item label="资产名称">-->
+<!--          <a-input v-model="form.fieldB" placeholder="input placeholder" />-->
+<!--        </a-form-model-item>-->
+<!--&lt;!&ndash;        <a-form-model-item >&ndash;&gt;-->
+<!--&lt;!&ndash;          <a-button type="primary">&ndash;&gt;-->
+<!--&lt;!&ndash;            Submit&ndash;&gt;-->
+<!--&lt;!&ndash;          </a-button>&ndash;&gt;-->
+<!--&lt;!&ndash;        </a-form-model-item>&ndash;&gt;-->
+<!--      </a-form-model>-->
+<!--    </a-modal>-->
   </a-card>
 </template>
 
@@ -105,7 +125,6 @@
 
 export default {
   name: "asset",
- 
 data () {
       return {
         description: '资产变化表',
@@ -118,17 +137,17 @@ data () {
           value : 2,
           text : '王一',
         },
-      ],
-      userSelectData:[
-        {
+          ],
+        userSelectData:[
+          {
           value : 1,
           text : '李四',
-        },
-        {
+          },
+          {
           value : 2,
           text : '赵正',
-        },
-      ],
+         },
+         ],
         dataSource: [
         {
           key:'1',
@@ -229,6 +248,8 @@ data () {
         dictOptions:{},
         toggleSearchStatus: false,
         selectedRowKeys: [],
+        visible: false,
+        confirmLoading: false,
       }
     },
     computed: {
@@ -238,24 +259,27 @@ data () {
    },
     methods: {
       handleToggleSearch() {
-      if(this.toggleSearchStatus) this.toggleSearchStatus=false;
-      else this.toggleSearchStatus=true;
-    },
-    onSelectChange(selectedRowKeys) {
-      console.log('selectedRowKeys changed: ', selectedRowKeys);
-      this.selectedRowKeys = selectedRowKeys;
-    },
-    onClearSelected() {
+        if(this.toggleSearchStatus)
+          this.toggleSearchStatus=false;
+        else
+          this.toggleSearchStatus=true;
+      },
+      onSelectChange(selectedRowKeys) {
+        console.log('selectedRowKeys changed: ', selectedRowKeys);
+        this.selectedRowKeys = selectedRowKeys;
+      },
+     onClearSelected() {
       this.selectedRowKeys = [];
+      },
+      deletConfirm(e) {
+        console.log(e);
+        this.$message.success('删除成功');
+      },
+      purchaseDateOnChange(date, dateString) {
+        console.log(date, dateString);
+      },
+
     },
-    deletConfirm(e) {
-      console.log(e);
-      this.$message.success('删除成功');
-    },
-    purchaseDateOnChange(date, dateString) {
-      console.log(date, dateString);
-    }
-    }
 
   }
 </script>

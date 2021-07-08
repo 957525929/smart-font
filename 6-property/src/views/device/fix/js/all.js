@@ -12,6 +12,7 @@ export const columns=[
         dataIndex: 'devName',
         width: 100,
         key: 'devName',
+        ellipsis: true,
     },
     {
         title: '问题上报时间',
@@ -69,7 +70,7 @@ export const data=[
     {
         key: '1',
         devId: '0001',
-        devName: 32,
+        devName: "停电",
         devType: 0,
         devStatus: 0,
         assets: '烟草大厦',

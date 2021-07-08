@@ -51,7 +51,8 @@
     
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button type="link" icon="plus">新增</a-button>
+<!--      <a-button type="link" @click="myHandleAdd"  icon="plus">新增</a-button>-->
+      <a-button type="link"  @click="myHandleAdd"  icon="plus">新增</a-button>
       <a-button type="link" icon="download">导出</a-button>
       <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="link" icon="import">导入</a-button>
@@ -97,14 +98,29 @@
 
       </a-table>
     </div>
-
+    <sal-receivable-modal ref="modalForm" @ok="modalFormOk"></sal-receivable-modal>
   </a-card>
 </template>
 
 <script>
-export default {
-  name: "signin",
-  data () {
+  // import { billListMixin } from '../erp/mixins/billListMixin.js'
+  import JDictSelectTag from "@comp/dict/JDictSelectTag";
+  import JDate from "@comp/jeecg/JDate";
+  import ListColumnsSetter from "@views/erp/components/ListColumnsSetter";
+  import SalReceivableModal from "@views/erp/finance/modules/SalReceivableModal";
+  import {JeecgListMixin} from "@/mixins/JeecgListMixin";
+  import {billListMixin} from "@views/erp/mixins/billListMixin";
+
+  export default {
+    name: "signin",
+    mixins:[JeecgListMixin, billListMixin],
+    components: {
+      JDictSelectTag,
+      JDate,
+      ListColumnsSetter,
+      SalReceivableModal
+    },
+    data () {
       return {
         description: '资产列表',
         manuSelectData:[
@@ -117,16 +133,16 @@ export default {
           text : '王一',
         },
       ],
-      userSelectData:[
-        {
-          value : 1,
-          text : '李四',
-        },
-        {
-          value : 2,
-          text : '赵正',
-        },
-      ],
+        userSelectData:[
+          {
+            value : 1,
+            text : '李四',
+          },
+          {
+            value : 2,
+            text : '赵正',
+          },
+        ],
         dataSource: [
         {
           key:'1',
@@ -206,38 +222,33 @@ export default {
         dictOptions:{},
         toggleSearchStatus: false,
         selectedRowKeys: [],
-      }
-    },
+        }
+      },
     computed: {
       hasSelected() {
         return this.selectedRowKeys.length > 0;
       },
-   },
+    },
     methods: {
       handleToggleSearch() {
       if(this.toggleSearchStatus) this.toggleSearchStatus=false;
       else this.toggleSearchStatus=true;
-    },
-    onSelectChange(selectedRowKeys) {
+     },
+      onSelectChange(selectedRowKeys) {
       console.log('selectedRowKeys changed: ', selectedRowKeys);
       this.selectedRowKeys = selectedRowKeys;
-    },
-    onClearSelected() {
+      },
+      onClearSelected() {
       this.selectedRowKeys = [];
-    },
-    deletConfirm(e) {
-      console.log(e);
-      this.$message.success('删除成功');
-    },
-    purchaseDateOnChange(date, dateString) {
-      console.log(date, dateString);
+      },
+      deletConfirm(e) {
+        console.log(e);
+        this.$message.success('删除成功');
+      },
+      purchaseDateOnChange(date, dateString) {
+        console.log(date, dateString);
+      },
     }
-    },
-    // myHandleAdd(){
-    //     this.$refs.modalForm.action = "add";
-    //     this.handleAdd();
-    //   },
-
   }
 </script>
 
