@@ -1,10 +1,11 @@
+import { devType ,devStatus,techSituation} from "@/utils/dataDictionary.js";
 export const devColumns = [
     {
         dataIndex: 'devId',
         slots: { title: '设备编号' },
         scopedSlots: { customRender: 'devId' },
         title: '设备编号',
-        width: 80,
+        width: 40,
         key: 'devId'
     },
     {
@@ -18,10 +19,7 @@ export const devColumns = [
         dataIndex: 'devType',
         key: 'devType',
         width: 50,
-        valueEnum: {
-            0: { tableValue: '空调', searchValue: '空调', code: 0 },
-            1: { tableValue: '管网', searchValue: '管网', code: 1 },
-        },
+        valueEnum: devType,
         type: 'a-select',
     },
     {
@@ -31,17 +29,7 @@ export const devColumns = [
         scopedSlots: { customRender: 'devStatus' },
         width: 50,
         type: 'a-select',
-        valueEnum: {
-            0: { tableValue: '规划中', searchValue: '规划中', code: 0 },
-            1: { tableValue: '在部署', searchValue: '在部署', code: 1 },
-            2: { tableValue: '待交货', searchValue: '待交货', code: 2 },
-            3: { tableValue: '未投产', searchValue: '未投产', code: 3 },
-            4: { tableValue: '在用', searchValue: '在用', code: 4 },
-            5: { tableValue: '在修', searchValue: '在修', code: 5 },
-            6: { tableValue: '停用', searchValue: '停用', code: 6 },
-            7: { tableValue: '闲置', searchValue: '闲置', code: 7 },
-            8: { tableValue: '库存封存', searchValue: '库存封存', code: 8 },
-        },
+        valueEnum:devStatus ,
     },
     {
         title: '所属资产',
@@ -67,20 +55,14 @@ export const devColumns = [
         dataIndex: 'techSituation',
         width: 80,
         type: 'a-select',
-        valueEnum: {
-            0: { tableValue: '完好', searchValue: '完好', code: 0 },
-            1: { tableValue: '带病运转', searchValue: '带病运转', code: 1 },
-            2: { tableValue: '待修', searchValue: '待修', code: 2 },
-            3: { tableValue: '在修', searchValue: '在修', code: 3 },
-            4: { tableValue: '待报废', searchValue: '待报废', code: 4 },
-        },
+        valueEnum: techSituation,
     },
     {
         title: '维修员',
         key: 'fixStaff',
         dataIndex: 'fixStaff',
         scopedSlots: { customRender: 'tags' },
-        width: 80,
+        width: 50,
     },
     {
         title: '登记时间',
@@ -101,17 +83,17 @@ export const devColumns = [
 
 export const data = [
     {
-        key: '1',
-        devId: '0001',
-        devName: 32,
+        key: 0,
+        devId: '1001',
+        devName: "waterPipe_1001",
         devType: 0,
         devStatus: 0,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
         techSituation: 0,
-        fixStaff: '刘涛',
-        loginTime: '2021-05-22 17：55：55',
+        fixStaff: '张英',
+        loginTime: '2021-06-22 17：55：55',
         action:[{
             tagName:"基本信息",
             com:"TableDrawer"
@@ -132,6 +114,69 @@ export const data = [
             com:"TableDelete"
         }]
     },
+    {
+        key: 1,
+        devId: '2001',
+        devName: "wire_2001",
+        devType: 1,
+        devStatus: 1,
+        assets: '烟草大厦',
+        institution: '福建烟草公司',
+        phone: '18232145698',
+        techSituation: 1,
+        fixStaff: '刘涛',
+        loginTime: '2021-06-21 10：55：55',
+        action:[{
+            tagName:"基本信息",
+            com:"TableDrawer"
+        },{
+            tagName:"编辑",
+            com:"TableModal"
+        },{
+            tagName:"维修记录",
+            com:"TableDrawer"
+        },{
+            tagName:"保养记录",
+            com:"TableDrawer"
+        },{
+            tagName:"运行参数",
+            com:"TableDrawer"
+        },{
+            tagName:"删除",
+            com:"TableDelete"
+        }]
+    },    {
+        key: 2,
+        devId: '3001',
+        devName: "air_3001",
+        devType: 2,
+        devStatus: 2,
+        assets: '烟草大厦',
+        institution: '福建烟草公司',
+        phone: '18232145698',
+        techSituation: 2,
+        fixStaff: '王翔',
+        loginTime: '2021-06-29 08：55：55',
+        action:[{
+            tagName:"基本信息",
+            com:"TableDrawer"
+        },{
+            tagName:"编辑",
+            com:"TableModal"
+        },{
+            tagName:"维修记录",
+            com:"TableDrawer"
+        },{
+            tagName:"保养记录",
+            com:"TableDrawer"
+        },{
+            tagName:"运行参数",
+            com:"TableDrawer"
+        },{
+            tagName:"删除",
+            com:"TableDelete"
+        }]
+    }
 ]
 
 export const infoDetail =[
@@ -191,7 +236,35 @@ export const infoDetail =[
     }
 ]
 
-// export default {
-//     devColumns,
-//     data
+export const loginInfo = [{
+    title: '设备编号',
+    key: 'devId',
+    value:""
+},
+{
+    title: '设备名称',
+    value:"",
+    key: 'devName'
+},
+{
+    title: '设备类型',
+    value:"",
+    key: 'devType',
+    type:"a-select",
+    valueEnum:devType
+},
+{
+    title: '实际状态',
+    key: 'devStatus',
+    value:"",
+    type:"a-select",
+    valueEnum:devStatus
+},
+// {
+//     key: 'manufacturer',
+//     title: '生产厂家',
+//     value:"",
+//     type:"a-select",
+//     valueEnum:manufacturer
 // }
+]

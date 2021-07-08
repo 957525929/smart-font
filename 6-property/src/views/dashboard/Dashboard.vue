@@ -51,13 +51,13 @@
                                             <head-info title="待维修" :content="loginfo.todayVisitCount"></head-info>
                                         </a-col>
                                         <a-col :span="4">
-                                            <head-info title="待核查" :content="loginfo.totalVisitCount"></head-info>
+                                            <head-info title="待核查" :content="loginfo.todayVisitCount"></head-info>
                                         </a-col>
                                         <a-col :span="4">
-                                            <head-info title="待评价" :content="loginfo.totalVisitCount"></head-info>
+                                            <head-info title="待评价" :content="loginfo.todayIp"></head-info>
                                         </a-col>
                                         <a-col :span="5">
-                                            <head-info title="待评估" :content="loginfo.totalVisitCount"></head-info>
+                                            <head-info title="待评估" :content="loginfo.todayIp"></head-info>
                                         </a-col>
                                     </a-row>
                                 </a-col>
@@ -217,7 +217,7 @@ export default {
                     },
                 },
                 {
-                    title: '烟草大厦18楼断电',
+                    title: '中央空调故障',
                     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
                     description: '福建省福州市烟草大厦',
                     owner: '付晓晓',
@@ -227,7 +227,7 @@ export default {
                     },
                 },
                 {
-                    title: '烟草大厦18楼断电',
+                    title: '停水',
                     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
                     description: '福建省福州市烟草大厦',
                     owner: '付晓晓',

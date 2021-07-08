@@ -21,13 +21,14 @@
 <script>
 import PageTemplate from '@/components/page/PageTemplate.vue'
 import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
+import TableModal from '@/components/tableOperation/modal/TableModal.vue'
 //js
 import { proMenu } from './js/index.js'
 const NEW_PROLIST = Object.freeze({ proMenu })
 
 export default {
     name: 'proList',
-    components: { PageTemplate, TableDrawer },
+    components: { PageTemplate, TableDrawer,TableModal },
     created() {
         this.loadMenu()
     },
@@ -51,12 +52,22 @@ export default {
             this.searchCon = result.searchCon
             this.data = result.data
             this.infoDetail = result.infoDetail
+            this.loadData()
         },
         loadData() {
             // 请求数据
+                        this.columns.forEach((item) => {
+                if (item.valueEnum) {
+                    this.data.map((res) => {
+                        res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
+                        return res
+                    })
+                }
+            })
         },
         callback(key) {
             this.current = key
+            this.loadMenu()
         },
     },
 }
