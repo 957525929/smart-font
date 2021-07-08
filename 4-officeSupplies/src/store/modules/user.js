@@ -240,7 +240,7 @@ const user = {
                 "keepAlive": false,
                 "internalOrExternal": false,
                 "icon": "table",
-                "title": "数据统计管理"
+                "title": "统计管理"
               },
               "name": "statistics-manage",
               "id": "1242263502445903874"
