@@ -114,35 +114,194 @@ const user = {
       return new Promise((resolve, reject) => {
         let v_token = Vue.ls.get(ACCESS_TOKEN);
         let params = {token:v_token};
-        queryPermissionsByUser(params).then(response => {
-          const menuData = response.result.menu;
-          const authData = response.result.auth;
-          const allAuthData = response.result.allAuth;
-          //Vue.ls.set(USER_AUTH,authData);
-          sessionStorage.setItem(USER_AUTH,JSON.stringify(authData));
-          sessionStorage.setItem(SYS_BUTTON_AUTH,JSON.stringify(allAuthData));
-          if (menuData && menuData.length > 0) {
-            //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
-            menuData.forEach((item, index) => {
-              if (item["children"]) {
-                let hasChildrenMenu = item["children"].filter((i) => {
-                  return !i.hidden || i.hidden == false
-                })
-                if (hasChildrenMenu == null || hasChildrenMenu.length == 0) {
-                  item["hidden"] = true
-                }
+        let response = {
+          "success": true,
+          "message": "查询成功",
+          "code": 200,
+          "result": {
+            "allAuth": [{
+              "action": "online:goGenerateCode",
+              "describe": "代码生成按钮",
+              "type": "1",
+              "status": "1"
+            }, {
+              "action": "user:form:phone",
+              "describe": "手机号禁用",
+              "type": "2",
+              "status": "1"
+            }, {
+              "action": "user:add",
+              "describe": "添加用户按钮",
+              "type": "1",
+              "status": "1"
+            }],
+            "auth": [{
+              "action": "user:add",
+              "describe": "添加用户按钮",
+              "type": "1"
+            }, {
+              "action": "user:form:phone",
+              "describe": "手机号禁用",
+              "type": "2"
+            }, {
+              "action": "online:goGenerateCode",
+              "describe": "代码生成按钮",
+              "type": "1"
+            }],
+            "menu": [{
+              "redirect": null,
+              "path": "/dashboard/analysis",
+              "component": "procurement/procurementList",
+              "route": "1",
+              "meta": {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "icon": "home",
+                "title": "首页"
+              },
+              "name": "dashboard-analysis",
+              "id": "9502685863ab87f0ad1134142788a385"
+            }, {
+              "redirect": null,
+              "path": "/store/manage",
+              "component": "layouts/RouteView",
+              "route": "1",
+              "children": [{
+                "path": "/procurement/manage/procurementList",
+                "component": "procurement/procurementList",
+                "route": "1",
+                "meta": {
+                  "keepAlive": false,
+                  "internalOrExternal": true,
+                  "title": "采购管理"
+                },
+                "name": "procurement-manage-procurementList",
+                "id": "1265365136117207042"
+              }, {
+                "path": "/store/manage/stockList",
+                "component": "store/stockList",
+                "route": "1",
+                "meta": {
+                  "keepAlive": false,
+                  "internalOrExternal": true,
+                  "title": "库存管理"
+                },
+                "name": "store-manage-stockList",
+                "id": "1265462136117207042"
+              },{
+                "path": "/receive/manage/receiveList",
+                "component": "receive/receiveList",
+                "route": "1",
+                "meta": {
+                  "keepAlive": false,
+                  "internalOrExternal": true,
+                  "title": "领用管理",
+                },
+                "name": "receive-manage-stockList",
+                "id": "1265462116117207042"
+              },{
+                "path": "/article/manage/articleList",
+                "component": "article/articleList",
+                "route": "1",
+                "meta": {
+                  "keepAlive": false,
+                  "internalOrExternal": true,
+                  "title": "用品种类管理"
+                },
+                "name": "article-manage-articleList",
+                "id": "1265462116547207042"
+              }],
+              "meta": {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "icon": "layout",
+                "title": "办公用品管理"
+              },
+              "name": "store-manage",
+              "id": "1249544156015607810"
+            },  {
+              "redirect": null,
+              "path": "/statistics/manage",
+              "component": "layouts/RouteView",
+              "route": "1",
+              "children": [{
+                "path": "/statistics/manage/stock",
+                "component": "statistics/stock",
+                "route": "1",
+                "meta": {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "title": "物品数据统计"
+                },
+                "name": "statistics-manage-stock",
+                "id": "1245154914959151105"
+              }],
+              "meta": {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "icon": "table",
+                "title": "数据统计管理"
+              },
+              "name": "statistics-manage",
+              "id": "1242263502445903874"
+            }]
+          },
+          "timestamp": 1625195766991
+        };
+        const menuData = response.result.menu;
+        const authData = response.result.auth;
+        const allAuthData = response.result.allAuth;
+        //Vue.ls.set(USER_AUTH,authData);
+        sessionStorage.setItem(USER_AUTH,JSON.stringify(authData));
+        sessionStorage.setItem(SYS_BUTTON_AUTH,JSON.stringify(allAuthData));
+        if (menuData && menuData.length > 0) {
+          //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+          menuData.forEach((item, index) => {
+            if (item["children"]) {
+              let hasChildrenMenu = item["children"].filter((i) => {
+                return !i.hidden || i.hidden == false
+              })
+              if (hasChildrenMenu == null || hasChildrenMenu.length == 0) {
+                item["hidden"] = true
               }
-            })
-            console.log(" menu show json ", menuData)
-            //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
-            commit('SET_PERMISSIONLIST', menuData)
-          } else {
-            reject('getPermissionList: permissions must be a non-null array !')
-          }
-          resolve(response)
-        }).catch(error => {
-          reject(error)
-        })
+            }
+          })
+          console.log(" menu show json ", menuData)
+          //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+          commit('SET_PERMISSIONLIST', menuData)
+        } else {
+          reject('getPermissionList: permissions must be a non-null array !')
+        }
+        resolve(response);
+        // queryPermissionsByUser(params).then(response => {
+        //   const menuData = response.result.menu;
+        //   const authData = response.result.auth;
+        //   const allAuthData = response.result.allAuth;
+        //   //Vue.ls.set(USER_AUTH,authData);
+        //   sessionStorage.setItem(USER_AUTH,JSON.stringify(authData));
+        //   sessionStorage.setItem(SYS_BUTTON_AUTH,JSON.stringify(allAuthData));
+        //   if (menuData && menuData.length > 0) {
+        //     //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+        //     menuData.forEach((item, index) => {
+        //       if (item["children"]) {
+        //         let hasChildrenMenu = item["children"].filter((i) => {
+        //           return !i.hidden || i.hidden == false
+        //         })
+        //         if (hasChildrenMenu == null || hasChildrenMenu.length == 0) {
+        //           item["hidden"] = true
+        //         }
+        //       }
+        //     })
+        //     console.log(" menu show json ", menuData)
+        //     //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+        //     commit('SET_PERMISSIONLIST', menuData)
+        //   } else {
+        //     reject('getPermissionList: permissions must be a non-null array !')
+        //   }
+        //   resolve(response)
+        // }).catch(error => {
+        //   reject(error)
+        // })
       })
     },
 
