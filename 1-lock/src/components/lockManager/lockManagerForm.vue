@@ -5,7 +5,13 @@
       <a-divider type="vertical" /> -->
       <!-- <a>初始化</a>
       <a-divider type="vertical" /> -->
-      <a-popconfirm title="确定远程开锁吗？" ok-text="确定" cancel-text="取消" @confirm="confirm" @cancel="cancel">
+      <a-popconfirm
+        title="确定远程开锁当前房间吗？"
+        ok-text="确定"
+        cancel-text="取消"
+        @confirm="confirm"
+        @cancel="cancel"
+      >
         <a href="#">远程开锁</a>
       </a-popconfirm>
     </span>
