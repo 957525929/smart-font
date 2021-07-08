@@ -64,11 +64,11 @@ const columns = [
     dataIndex: 'driver',
     scopedSlots: { customRender: 'driver' },
   },
-  {
-    title: '关联用车记录',
-    dataIndex: 'record',
-    scopedSlots: { customRender: 'record' },
-  },
+  // {
+  //   title: '关联用车记录',
+  //   dataIndex: 'record',
+  //   scopedSlots: { customRender: 'record' },
+  // },
   {
     title: '票据图片',
     dataIndex: 'img',
@@ -85,7 +85,7 @@ const tableData = [
     unitPrice: '8.01元/升',
     distance: '4.6',
     driver: '张三',
-    record: '测A123404-2021-06-29-001',
+    // record: '测A123404-2021-06-29-001',
   },
   {
     licenseNum: '测A123401',
@@ -96,7 +96,7 @@ const tableData = [
     unitPrice: '8.01元/升',
     distance: '4.6',
     driver: '张三',
-    record: '测A123404-2021-06-29-001',
+    // record: '测A123404-2021-06-29-001',
   },
   {
     licenseNum: '测A123401',
@@ -107,7 +107,7 @@ const tableData = [
     unitPrice: '8.01元/升',
     distance: '4.6',
     driver: '张三',
-    record: '测A123404-2021-06-29-001',
+    // record: '测A123404-2021-06-29-001',
   },
   {
     licenseNum: '测A123401',
@@ -118,7 +118,7 @@ const tableData = [
     unitPrice: '8.01元/升',
     distance: '4.6',
     driver: '张三',
-    record: '测A123404-2021-06-29-001',
+    // record: '测A123404-2021-06-29-001',
   },
   {
     licenseNum: '测A123401',
@@ -129,7 +129,7 @@ const tableData = [
     unitPrice: '8.01元/升',
     distance: '4.6',
     driver: '张三',
-    record: '测A123404-2021-06-29-001',
+    // record: '测A123404-2021-06-29-001',
   },
   {
     licenseNum: '测A123401',
@@ -140,7 +140,7 @@ const tableData = [
     unitPrice: '8.01元/升',
     distance: '4.6',
     driver: '张三',
-    record: '测A123404-2021-06-29-001',
+    // record: '测A123404-2021-06-29-001',
   }
 ]
 export default {

@@ -3,8 +3,8 @@
     <div class="filterPrt">
       <div class="filterCtx">
         请选择统计时间段：
-        <a-range-picker  :default-value="defaultRange" :format="dateFormat" />&nbsp;&nbsp;
-         <a-select style="width: 80px" defaultValue="车牌号" @select="conditionOnSelect">
+        <a-range-picker :default-value="defaultRange" :format="dateFormat" />&nbsp;&nbsp;
+        <a-select style="width: 80px" defaultValue="车牌号" @select="conditionOnSelect">
           <a-select-option key="1" value="车牌号">车牌号</a-select-option>
           <a-select-option key="2" value="用车人">用车人</a-select-option>
           <a-select-option key="3" value="司机">司机</a-select-option>
@@ -36,10 +36,13 @@
     </div>
     <div class="details">
       <a-table :columns="columns" :data-source="tableData">
-        <a slot="user" slot-scope="text">{{ text }}</a>
-        <a slot="driver" slot-scope="text">{{ text }}</a>
+        <a slot="user" slot-scope="text" @click="showpersonalInfoModal(text)">{{ text }}</a>
+        <a slot="driver" slot-scope="text" @click="showpersonalInfoModal(text)">{{ text }}</a>
       </a-table>
     </div>
+    <a-modal v-model="showpersonalInfoVisbile" title="个人信息" :destroyOnClose="true" :footer="null">
+      <personal-info :info="currentInfo" />
+    </a-modal>
   </div>
 </template>
 
@@ -47,7 +50,8 @@
 import Pie from '@/components/chart/Pie'
 import moment from 'moment'
 import { getCurrentDate, getLastWeekDate } from '@/components/_util/DateUtil.js'
-import {vehicleUsageRecord} from '@/mock/demoData.js'
+import { vehicleUsageRecord } from '@/mock/demoData.js'
+import personalInfo from '../components/personalInfo.vue'
 const dataSource = [
   { item: '前30日使用', count: 21 },
   { item: '前7日使用', count: 17 },
@@ -107,15 +111,22 @@ export default {
       dateFormat: 'YYYY/MM/DD',
       defaultRange: [moment(getLastWeekDate(), this.dateFormat), moment(getCurrentDate(), this.dateFormat)],
       currentCondition: '车牌号',
+      showpersonalInfoVisbile: false,
+      currentInfo: undefined,
     }
   },
-  components: { Pie },
-  methods:{
-     conditionOnSelect(value, option) {
+  components: { Pie, personalInfo },
+  methods: {
+    conditionOnSelect(value, option) {
       // console.log(value);
       this.currentCondition = value
-    }
-  }
+    },
+    showpersonalInfoModal(text) {
+      this.currentInfo = { name: text }
+      console.log(text)
+      this.showpersonalInfoVisbile = true
+    },
+  },
 }
 </script>
 
@@ -139,6 +150,7 @@ export default {
   .overview {
     margin-top: 10px;
     width: 98%;
+    height: 260px;
     background-color: #ffffff;
     padding: 10px;
     display: flex;

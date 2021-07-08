@@ -73,11 +73,25 @@ export const mockMenuData = {
               "route": "1",
               "meta":
                 {
-                  "keepAlive": false,
+                  "keepAlive": true,
                   "internalOrExternal": false,
                   "title": "入库管理"
                 },
               "name": "materialManagement-warehousing-warehousingIndex",
+              "id": "8fb8172747a78756c11916216b8b8066"
+            },
+            {
+              "hidden": true,
+              "path": "/material/warehousing/warehousingDetails",
+              "component": "material/warehousing/Details",
+              "route": "1",
+              "meta":
+                {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "title": "入库详情"
+                },
+              "name": "materialManagement-warehousing-warehousingDetails",
               "id": "8fb8172747a78756c11916216b8b8066"
             },
           ],

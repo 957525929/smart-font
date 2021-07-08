@@ -80,14 +80,8 @@ export const data=[
         fixStaff: '刘涛',
         loginTime: '2021-05-22 17：55：55',
         action:[{
-            tagName:"编辑",
-            url:`<div>123</div>`
-        },{
-            tagName:"操作",
-            url:`<div>123</div>`
-        },{
-            tagName:"删除",
-            url:`<div>123</div>`
+            tagName:"详情",
+            com:"TableDrawer"
         }]
     }
 ]

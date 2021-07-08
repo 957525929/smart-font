@@ -1,10 +1,15 @@
 <template>
-    <a-drawer :title="title" :width="520" :visible="visible" :body-style="{ paddingBottom: '80px' }" @close="onClose">
+    <a-drawer :title="title" :width="720" :visible="visible" :body-style="{ paddingBottom: '80px' }" @close="onClose">
         <a-descriptions bordered>
             <!-- <view> -->
-<a-descriptions-item :label="item.title" :span="2" v-for="(item, index) in infoDetailData" :key="item.key">{{ item.value }}</a-descriptions-item>
+            <a-descriptions-item
+                :label="item.title"
+                :span="3"
+                v-for="item in infoDetailData"
+                :key="item.key"
+                >{{ item.value }}</a-descriptions-item
+            >
             <!-- </view> -->
-            
         </a-descriptions>
         <div
             :style="{
@@ -42,7 +47,7 @@ export default {
     },
     data() {
         return {
-            infoDetailData:[],
+            infoDetailData: [],
             visible: false,
         }
     },

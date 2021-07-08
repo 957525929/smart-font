@@ -58,7 +58,7 @@
     
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button type="link" icon="plus">新增</a-button>
+      <a-button type="link"  @click="myHandleAdd"   icon="plus">新增</a-button>
       <a-button type="link" icon="download">导出</a-button>
       <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="link" icon="import">导入</a-button>
@@ -87,7 +87,6 @@
         :dataSource="dataSource"
         :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
         >
-
         <span slot="action" slot-scope="text, record">
           <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
           <a-divider type="vertical" />
@@ -104,17 +103,49 @@
 
       </a-table>
     </div>
-
+    <!-- 添加租赁合同记录 -->
+    <a-modal
+      title="新增租赁合同记录"
+      :visible="visible"
+      :confirm-loading="confirmLoading"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <a-form-model :layout="form.layout" :model="form" >
+        <a-form-model-item label="资产编号" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.assetNunmber" />
+        </a-form-model-item>
+        <a-form-model-item label="资产名称" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.assetName" />
+        </a-form-model-item>
+        <a-form-model-item label="资产租金" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.lentValue" />
+        </a-form-model-item>
+        <a-form-model-item label="资产所有人" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.assetOwner" />
+        </a-form-model-item>
+        <a-form-model-item label="资产使用人" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.assetUser" />
+        </a-form-model-item>
+        <a-form-model-item label="流转原因" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.transReason" />
+        </a-form-model-item>
+        <a-form-model-item label="租出日期" :labelCol='{span:5}' :wrapperCol='{span: 14}'>
+          <a-input v-model="form.lentTime" />
+        </a-form-model-item>
+      </a-form-model>
+    </a-modal>
   </a-card>
 </template>
 
 <script>
-import JDate from '@/components/jeecg/JDate.vue'
+import {setDataSource} from "@views/modules/online/cgform/util/TableUtils";
+import JDate from "@comp/jeecg/JDate";
 export default {
   name: "rent",
   components: {
-      JDate,
-    },
+    JDate,
+  },
   data () {
       return {
         description: '资产变化表',
@@ -128,7 +159,7 @@ export default {
           text : '王一',
         },
       ],
-      userSelectData:[
+        userSelectData:[
         {
           value : 1,
           text : '李四',
@@ -147,7 +178,6 @@ export default {
           assetOwner: '张三',
           assetUser: '李四',
           recordDate: '2020-07-05',
-          assetStates:'已租出',
           transReason: '流转原因',
           contractDetail:'合同详情',
           remark : '无',
@@ -160,7 +190,6 @@ export default {
           assetOwner: '张三',
           assetUser: '李四',
           recordDate: '2020-07-05',
-          assetStates:'已租出',
           transReason: '流转原因',
           contractDetail:'合同详情',
           remark : '无',
@@ -190,11 +219,6 @@ export default {
             title:'资产名称',
             align:"center",
             dataIndex: 'assetName'
-          },
-          {
-            title:'资产状态',
-            align:"center",
-            dataIndex: 'assetStates'
           },
           {
             title:'资产租金',
@@ -245,6 +269,21 @@ export default {
         dictOptions:{},
         toggleSearchStatus: false,
         selectedRowKeys: [],
+        visible: false,
+        confirmLoading: false,
+        //新增表单
+        form: {
+          assetNunmber: '',
+          assetName: '',
+          lentValue: '',
+          assetOwner: '',
+          assetUser: '',
+          transReason: '',
+          lentTime: '',
+          recordDate: '2020-07-05',
+          contractDetail:'合同详情',
+          remark : '无',
+        },
       }
     },
     computed: {
@@ -265,12 +304,38 @@ export default {
       this.selectedRowKeys = [];
     },
     deletConfirm(e) {
-      console.log(e);
+      console.log("e",e);
+      // const dataSource = [...this.dataSource];
+      // this.dataSource = dataSource.filter(item => item.key !== key);
       this.$message.success('删除成功');
+      console.log("ddddataSource",this.dataSource)
     },
     purchaseDateOnChange(date, dateString) {
       console.log(date, dateString);
-    }
+    },
+      //新增模块
+      myHandleAdd() {
+        this.visible = true;
+      },
+      handleOk(e) {
+        this.ModalText = 'The modal will be closed after two seconds';
+        this.confirmLoading = true;
+        const newdata=this.form;
+        setTimeout(() => {
+          this.visible = false;
+          this.confirmLoading = false;
+        }, 2000);
+        // this.dataSource=[...dataSource,form];
+        // console.log("dataSource",this.dataSource)
+        const { dataSource } = this;
+        this.dataSource = [...dataSource,  newdata];
+        console.log("dataSource",this.dataSource)
+        this.form={};
+      },
+      handleCancel(e) {
+        console.log('Clicked cancel button');
+        this.visible = false;
+      },
     }
 
   }
