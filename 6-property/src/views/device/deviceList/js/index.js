@@ -84,9 +84,9 @@ export const devColumns = [
 export const data = [
     {
         key: 0,
-        devId: '1001',
+        devId: 1001,
         devName: "waterPipe_1001",
-        devType: 0,
+        devType: 2,
         devStatus: 0,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -94,7 +94,13 @@ export const data = [
         techSituation: 0,
         fixStaff: '张英',
         loginTime: '2021-06-22 17：55：55',
+        manufacturer:"日丰企业集团有限公司",
+        batch:"M127894",
         action:[{
+            tagName:"详情",
+            url:"device-DevDetail",
+            com:"router-link"
+        },{
             tagName:"基本信息",
             com:"TableDrawer"
         },{
@@ -116,7 +122,7 @@ export const data = [
     },
     {
         key: 1,
-        devId: '2001',
+        devId: 2001,
         devName: "wire_2001",
         devType: 1,
         devStatus: 1,
@@ -126,6 +132,8 @@ export const data = [
         techSituation: 1,
         fixStaff: '刘涛',
         loginTime: '2021-06-21 10：55：55',
+        manufacturer:"国网福建省电力有限公司",
+        batch:"N2169",
         action:[{
             tagName:"基本信息",
             com:"TableDrawer"
@@ -145,11 +153,11 @@ export const data = [
             tagName:"删除",
             com:"TableDelete"
         }]
-    },    {
+    }, {
         key: 2,
-        devId: '3001',
+        devId: 3001,
         devName: "air_3001",
-        devType: 2,
+        devType: 0,
         devStatus: 2,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -157,6 +165,8 @@ export const data = [
         techSituation: 2,
         fixStaff: '王翔',
         loginTime: '2021-06-29 08：55：55',
+        manufacturer:"珠海格力电器股份有限公司",
+        batch:"A2421",
         action:[{
             tagName:"基本信息",
             com:"TableDrawer"
@@ -183,7 +193,8 @@ export const infoDetail =[
     {
         title: '设备编号',
         key: 'devId',
-        value:""
+        value:"",
+        hideInLogin:true
     },
     {
         title: '设备名称',

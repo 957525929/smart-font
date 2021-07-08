@@ -15,14 +15,15 @@ export const columns = [{
     width: 80,
     key: 'devId'
   },
-  {
-    title: '任务状态',
-    key: 'taskStatus',
-    dataIndex: 'taskStatus',
-    width: 80,
-    type: 'a-select',
-    valueEnum: protaskStatus
-  },
+//   {
+//     title: '任务状态',
+//     key: 'taskStatus',
+//     dataIndex: 'taskStatus',
+//     width: 80,
+//     type: 'a-select',
+//     valueEnum: protaskStatus,
+//     hideInSearch:true,
+//   },
   {
     title: '任务描述',
     dataIndex: 'devName',

@@ -45,19 +45,19 @@
                                 <a-col>
                                     <a-row>
                                         <a-col :span="5">
-                                            <head-info title="待审核" :content="loginfo.todayIp"></head-info>
+                                            <head-info title="待审核" :content="1"></head-info>
                                         </a-col>
                                         <a-col :span="4">
-                                            <head-info title="待维修" :content="loginfo.todayVisitCount"></head-info>
+                                            <head-info title="待维修" :content="1"></head-info>
                                         </a-col>
                                         <a-col :span="4">
-                                            <head-info title="待核查" :content="loginfo.todayVisitCount"></head-info>
+                                            <head-info title="待核查" :content="1"></head-info>
                                         </a-col>
                                         <a-col :span="4">
-                                            <head-info title="待评价" :content="loginfo.todayIp"></head-info>
+                                            <head-info title="待评价" :content="1"></head-info>
                                         </a-col>
                                         <a-col :span="5">
-                                            <head-info title="待评估" :content="loginfo.todayIp"></head-info>
+                                            <head-info title="待评估" :content="1"></head-info>
                                         </a-col>
                                     </a-row>
                                 </a-col>
@@ -207,35 +207,35 @@ export default {
             //row3
             dataSource: [
                 {
-                    title: '烟草大厦18楼断电',
+                    title: '18楼断电',
                     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
                     description: '福建省福州市烟草大厦',
-                    owner: '付晓晓',
-                    startAt: '2021-06-26 22:44',
+                    owner: '刘涛',
+                    startAt: '2021-06-22 17:55:55',
                     progress: {
                         value: 90,
                     },
                 },
-                {
-                    title: '中央空调故障',
-                    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
-                    description: '福建省福州市烟草大厦',
-                    owner: '付晓晓',
-                    startAt: '2021-06-26 22:44',
-                    progress: {
-                        value: 90,
-                    },
-                },
-                {
-                    title: '停水',
-                    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
-                    description: '福建省福州市烟草大厦',
-                    owner: '付晓晓',
-                    startAt: '2021-06-26 22:44',
-                    progress: {
-                        value: 90,
-                    },
-                },
+                // {
+                //     title: '中央空调故障',
+                //     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
+                //     description: '福建省福州市烟草大厦',
+                //     owner: '付晓晓',
+                //     startAt: '2021-06-26 22:44',
+                //     progress: {
+                //         value: 90,
+                //     },
+                // },
+                // {
+                //     title: '停水',
+                //     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
+                //     description: '福建省福州市烟草大厦',
+                //     owner: '付晓晓',
+                //     startAt: '2021-06-26 22:44',
+                //     progress: {
+                //         value: 90,
+                //     },
+                // },
             ],
             loading: true,
             center: null,
@@ -274,22 +274,31 @@ export default {
             })
         },
         loadRankListData() {
-            this.rankList = this.loadData('name', 'total', 2000, 100, '北京朝阳 ', ' 号店')
-        },
-        loadData(x, y, max, min, before = '', after = '月') {
-            let data = []
-            for (let i = 0; i < 6; i += 1) {
-                data.push({
-                    [x]: `${before}${i + 1}${after}`,
-                    [y]: Math.floor(Math.random() * max) + min,
-                })
-            }
-            return data
+            this.rankList = [{
+                ['name']:"wire_2001",
+                ['total']:2
+            },{
+                ['name']:"air_3001",
+                ['total']:1
+            },{
+                ['name']:"waterPipe_1001",
+                ['total']:0
+            }]
         },
         // 加载AreaChartTy的数据
         loadAreaData() {
             this.areaData = this.loadData('x', 'y', 500, 100)
         },
+              loadData(x, y, max, min, before = '', after = '月') {
+        let data = []
+        for (let i = 0; i < 12; i += 1) {
+          data.push({
+            [x]: `${before}${i + 1}${after}`,
+            [y]: Math.floor(Math.random() * max) + min
+          })
+        }
+        return data
+      },
         //row3
         goPage() {
             // this.$message.success("请根据具体业务跳转页面")
