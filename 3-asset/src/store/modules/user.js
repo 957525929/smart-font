@@ -119,29 +119,66 @@ const user = {
           "allAuth": [{ "action": "online:goGenerateCode", "describe": "代码生成按钮", "type": "1", "status": "1" }, { "action": "user:form:phone", "describe": "手机号禁用", "type": "2", "status": "1" }, { "action": "user:add", "describe": "添加用户按钮", "type": "1", "status": "1" }],
             "auth": [{ "action": "user:add", "describe": "添加用户按钮", "type": "1" }, { "action": "user:form:phone", "describe": "手机号禁用", "type": "2" }, { "action": "online:goGenerateCode", "describe": "代码生成按钮", "type": "1" }],
             "menu": [
-              {"redirect": null, "path": "/dashboard/analysis", "component": "dashboard/Analysis", "route": "1",
-              "meta": { "keepAlive": false, "internalOrExternal": false, "icon": "home", "title": "首页" }, "name": "dashboard-analysis", "id": "9502685863ab87f0ad1134142788a385" },
-
-              { "redirect": null, "path": "/asset_manage/asset", "component": "asset_manage/asset", "route": "1",
-              "meta": { "keepAlive": false, "internalOrExternal": false, "icon": "hdd", "title": "资产变化捕捉" }, "name": "asset_manage", "id": "1244876622988214274"
+              {
+                  "redirect": null,
+                  "path": "/dashboard/analysis",
+                  "component": "dashboard/Analysis", "route": "1",
+                  "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon": "home",
+                    "title": "首页"
+                    },
+                  "name": "dashboard-analysis",
+                  "id": "9502685863ab87f0ad1134142788a385" },
+              {
+                  "redirect": null,
+                  "path": "/asset_manage/asset",
+                  "component": "asset_manage/asset",
+                  "route": "1",
+                  "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon": "hdd",
+                    "title": "资产变化捕捉" },
+                  "name": "asset_manage",
+                  "id": "1244876622988214274"
               },
-
-              { "redirect": null, "path": "/rent", "component": "layouts/RouteView", "route": "1",
-                "children": [
-                  {
-                    "path": "/rent/rent", "component": "rent/rent", "route": "1",
-                    "meta": { "keepAlive": false, "internalOrExternal": false, "title": "租赁列表" }, "name": "rent", "id": "1244877762060517371"
-                },
-                  {
-                      "path": "/rent/collect", "component": "rent/collect", "route": "1",
-                      "meta": { "keepAlive": false, "internalOrExternal": false, "title": "收租管理" }, "name": "collect", "id": "1233877762060517389"
-                  },
-                  // {
-                  //   "path": "/rent/lessee", "component": "rent/lessee", "route": "1",
-                  //   "meta": { "keepAlive": false, "internalOrExternal": false, "title": "承租管理" }, "name": "lessee", "id": "1244877762060517378"
-                  // }
-                  ],
-                  "meta": { "keepAlive": false, "internalOrExternal": false, "icon": "hdd", "title": "租赁模块" }, "name": "rent-manage", "id": "1244876622988211111"
+              {
+                 "hidden":true,
+                 "redirect": null,
+                 "path": "/asset_manage/history",
+                 "component": "asset_manage/history",
+                 "route": "1",
+                 "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "title": "历史流转记录" },
+                  "name": "history",
+                  "id": "12448777620605173753"
+              },
+              {
+                 "redirect": null,
+                 "path": "/rent",
+                 "component": "layouts/RouteView",
+                 "route": "1",
+                 "children": [
+                    {
+                      "path": "/rent/rent", "component": "rent/rent", "route": "1",
+                      "meta": { "keepAlive": false, "internalOrExternal": false, "title": "租赁列表" }, "name": "rent", "id": "1244877762060517371"
+                    },
+                    {
+                        "path": "/rent/collect", "component": "rent/collect", "route": "1",
+                        "meta": { "keepAlive": false, "internalOrExternal": false, "title": "收租管理" }, "name": "collect", "id": "1233877762060517389"
+                    },
+                    ],
+                "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon": "hdd",
+                    "title": "租赁模块" },
+                  "name": "rent-manage",
+                  "id": "1244876622988211111"
               },
 
             ]},

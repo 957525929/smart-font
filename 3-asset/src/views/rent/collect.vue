@@ -57,17 +57,51 @@
         <a-button type="link" icon="import">导入</a-button>
       </a-upload> -->
 
-      <!-- <a-dropdown v-if="selectedRowKeys.length > 0">
-        <a-menu slot="overlay">
-          <a-menu-item :disabled="!isBatchDelEnabled" key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
-        </a-menu>
-        <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
-      </a-dropdown> -->
       <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
       <a style="margin-left: 12px" @click="onClearSelected">清空</a>
 
     </div>
 
+    <!-- 统计数值区域 -->
+    <div class="table-statistic " style="background: #ECECEC; padding: 15px">
+      <a-row :gutter="16">
+        <a-col :span="12">
+          <a-card>
+            <a-statistic
+              title="收租总次数"
+              :value="21"
+              suffix="次"
+              :value-style="{ color: '#3f8600' }"
+              style="margin-right: 50px"
+            >
+              <template #prefix>
+                <a-icon type="fund" />
+                <!--                <a-icon type="arrow-up" />-->
+              </template>
+            </a-statistic>
+          </a-card>
+        </a-col>
+        <a-col :span="12">
+          <a-card>
+            <a-statistic
+              title="收租总金额"
+              :value="24"
+              :precision="2"
+              suffix="万"
+              class="demo-class"
+              :value-style="{ color: '#cf1322' }"
+            >
+              <template #prefix>
+                <a-icon type="dollar" />
+                <!--                <a-icon type="arrow-down" />-->
+              </template>
+            </a-statistic>
+          </a-card>
+        </a-col>
+      </a-row>
+    </div>
+
+    <br/>
     <!-- table区域-begin -->
     <div>
       <a-table
@@ -80,9 +114,10 @@
         :dataSource="dataSource"
         :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
         >
+        <span slot="rentRemind">
+           <a class="ant-dropdown-link" @click="textMessage()"  >发送提示短信</a>
+        </span>
         <span slot="action" slot-scope="text, record">
-          <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
-          <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
@@ -177,8 +212,7 @@ export default {
           lentLength:'2010-07-05至2025-07-05',
           payCycle:'12个月',
           payState:'未收租',
-          rentRemind: '短信提示',
-          remark : '查看记录',
+
         },
         {
           key:'2',
@@ -190,8 +224,7 @@ export default {
           lentLength:'2014-01-01至2024-12-31',
           payCycle:'1个月',
           payState:'未收租',
-          rentRemind: '短信提示',
-          remark : '查看记录',
+
         },
         {
           key:'3',
@@ -203,8 +236,7 @@ export default {
           lentLength:'2020-07-05至2022-07-05',
           payCycle:'6个月',
           payState:'已收租',
-          rentRemind: '短信提示',
-          remark : '查看记录',
+
         },
         {
           key:'4',
@@ -216,8 +248,7 @@ export default {
           lentLength:'2020-01-01至2022-12-31',
           payCycle:'6个月',
           payState:'已收租',
-          rentRemind: '短信提示',
-          remark : '查看记录',
+
         },
       ],
         // 表头
@@ -278,13 +309,10 @@ export default {
           {
             title:'收租提醒',
             align:"center",
-            dataIndex: 'rentRemind'
+            dataIndex: 'rentRemind',
+            scopedSlots: { customRender: 'rentRemind' },
           },
-          {
-            title:'历史记录',
-            align:"center",
-            dataIndex: 'remark'
-          },
+
           {
             title: '操作',
             dataIndex: 'action',
@@ -322,21 +350,21 @@ export default {
       handleToggleSearch() {
       if(this.toggleSearchStatus) this.toggleSearchStatus=false;
       else this.toggleSearchStatus=true;
-    },
-    onSelectChange(selectedRowKeys) {
-      console.log('selectedRowKeys changed: ', selectedRowKeys);
-      this.selectedRowKeys = selectedRowKeys;
-    },
-    onClearSelected() {
-      this.selectedRowKeys = [];
-    },
-    deletConfirm(e) {
-      console.log(e);
-      this.$message.success('删除成功');
-    },
-    purchaseDateOnChange(date, dateString) {
-      console.log(date, dateString);
-    },
+      },
+      onSelectChange(selectedRowKeys) {
+        console.log('selectedRowKeys changed: ', selectedRowKeys);
+        this.selectedRowKeys = selectedRowKeys;
+      },
+      onClearSelected() {
+        this.selectedRowKeys = [];
+      },
+      deletConfirm(e) {
+        console.log(e);
+        this.$message.success('删除成功');
+      },
+      purchaseDateOnChange(date, dateString) {
+        console.log(date, dateString);
+      },
       //新增模块
       myHandleAdd() {
         this.visible = true;
@@ -359,6 +387,20 @@ export default {
       handleCancel(e) {
         console.log('Clicked cancel button');
         this.visible = false;
+      },
+
+      //收租提示
+      textMessage(){
+        let secondsToGo = 5;
+        const modal = this.$success({
+          title: '收租短信提醒已发送',
+          // content: `收租短信提醒已发送`,
+        });
+
+        setTimeout(() => {
+          clearInterval(interval);
+          modal.destroy();
+        }, secondsToGo * 1000);
       },
     }
 

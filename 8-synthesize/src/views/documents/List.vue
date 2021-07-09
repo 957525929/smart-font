@@ -124,14 +124,14 @@ export default {
           key: '1',
           documentName: '2020年总结报告',
           documentType: '报告',
-          uploadTime: '2020-06-04',
+          uploadTime: '2020-06-04 18:01:21',
           overview: '2020年工作报告总结'
         },
         {
           key: '2',
           documentName: '2021年季度巡查记录',
           documentType: "记录",
-          uploadTime: '2021-06-05',
+          uploadTime: '2021-06-05 12:05:09',
           overview: '设备硬件巡查检查记录'
         },
       ],

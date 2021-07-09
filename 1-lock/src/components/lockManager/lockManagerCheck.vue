@@ -48,7 +48,6 @@
         <a-button @click="check">查询</a-button>
         <a-divider type="vertical" />
         <a-button @click="showConfirm">导出</a-button>
-        <a-divider type="vertical" />
       </a-col>
     </a-row>
   </a-card>

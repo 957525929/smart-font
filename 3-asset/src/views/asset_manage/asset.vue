@@ -67,6 +67,46 @@
       <a style="margin-left: 12px" @click="onClearSelected">清空</a>
 
     </div>
+    <!-- 统计数值区域 -->
+    <div class="table-statistic " style="background: #ECECEC; padding: 15px">
+      <a-row :gutter="16">
+        <a-col :span="12">
+          <a-card>
+            <a-statistic
+              title="资产流转次数"
+              :value="21"
+              suffix="次"
+              :value-style="{ color: '#3f8600' }"
+              style="margin-right: 50px"
+            >
+              <template #prefix>
+                <a-icon type="sync" />
+<!--                <a-icon type="arrow-up" />-->
+              </template>
+            </a-statistic>
+          </a-card>
+        </a-col>
+        <a-col :span="12">
+          <a-card>
+            <a-statistic
+              title="资产流转总额"
+              :value="24"
+              :precision="2"
+              suffix="万"
+              class="demo-class"
+              :value-style="{ color: '#cf1322' }"
+            >
+              <template #prefix>
+                <a-icon type="transaction" />
+<!--                <a-icon type="arrow-down" />-->
+              </template>
+            </a-statistic>
+          </a-card>
+        </a-col>
+      </a-row>
+    </div>
+
+    <br/>
 
     <!-- table区域-begin -->
     <div>
@@ -93,31 +133,12 @@
             </a-menu>
           </a-dropdown>
         </span>
-
+        <span slot="historyDetail">
+          <router-link :to="{path:'/asset_manage/history', params:{data:record} }">查看历史流转记录</router-link>
+        </span>
       </a-table>
     </div>
-    <!-- 添加资产变化记录 -->
-<!--    <a-modal-->
-<!--      title="新增资产变化记录"-->
-<!--      :visible="visible"-->
-<!--      :confirm-loading="confirmLoading"-->
-<!--      @ok="handleOk"-->
-<!--      @cancel="handleCancel"-->
-<!--    >-->
-<!--      <a-form-model :layout="form.layout" :model="form" >-->
-<!--        <a-form-model-item label="资产编号">-->
-<!--          <a-input v-model="form.fieldA" placeholder="input placeholder" />-->
-<!--        </a-form-model-item>-->
-<!--        <a-form-model-item label="资产名称">-->
-<!--          <a-input v-model="form.fieldB" placeholder="input placeholder" />-->
-<!--        </a-form-model-item>-->
-<!--&lt;!&ndash;        <a-form-model-item >&ndash;&gt;-->
-<!--&lt;!&ndash;          <a-button type="primary">&ndash;&gt;-->
-<!--&lt;!&ndash;            Submit&ndash;&gt;-->
-<!--&lt;!&ndash;          </a-button>&ndash;&gt;-->
-<!--&lt;!&ndash;        </a-form-model-item>&ndash;&gt;-->
-<!--      </a-form-model>-->
-<!--    </a-modal>-->
+
   </a-card>
 </template>
 
@@ -158,7 +179,6 @@ data () {
           assetUser: '李四',
           recordDate: '2020-07-05',
           assetStates:'已租出',
-          transRecord: '查看记录',
           remark : '无',
         },
         {
@@ -170,7 +190,6 @@ data () {
           assetUser: '李四',
           recordDate: '2020-07-05',
           assetStates:'已租出',
-          transRecord: '查看记录',
           remark : '无',
         },
       ],
@@ -221,7 +240,6 @@ data () {
           },
            {
             title:'交易日期',
-            width:90,
             align:"center",
             dataIndex: 'recordDate',
             customRender:function (text) {
@@ -231,7 +249,9 @@ data () {
           {
             title:'流转记录',
             align:"center",
-            dataIndex: 'transRecord'
+            dataIndex: 'historyDetail',
+            scopedSlots: { customRender: 'historyDetail' },
+
           },
           {
             title:'备注',
