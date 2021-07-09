@@ -64,12 +64,6 @@
         <a-button type="link" icon="import">导入</a-button>
       </a-upload> -->
 
-      <!-- <a-dropdown v-if="selectedRowKeys.length > 0">
-        <a-menu slot="overlay">
-          <a-menu-item :disabled="!isBatchDelEnabled" key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
-        </a-menu>
-        <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
-      </a-dropdown> -->
       <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
       <a style="margin-left: 12px" @click="onClearSelected">清空</a>
 
@@ -87,10 +81,14 @@
         :dataSource="dataSource"
         :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
         >
-        <span slot="action" slot-scope="text, record">
+        <span slot="contractDetail">
+           <a class="ant-dropdown-link" @click="viewDetail"  >查看合同</a>
+        </span>
+        <span slot="action" slot-scope="text,record">
           <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
           <a-divider type="vertical" />
           <a-dropdown>
+
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
               <a-menu-item key="1" >编辑</a-menu-item>
@@ -135,6 +133,51 @@
         </a-form-model-item>
       </a-form-model>
     </a-modal>
+    <!-- 查看合同详情 -->
+    <a-modal
+      title="合同详情"
+      :visible="detailvisible"
+      :confirm-loading="confirmLoading"
+      @ok="handleOk1"
+      @cancel="handleCancel1"
+      width="70%"
+    >
+      <a-descriptions title="资产租赁合同详情" layout="vertical" bordered >
+        <a-descriptions-item label="资产名称">
+          B107—24号宗地
+        </a-descriptions-item>
+        <a-descriptions-item label="资产编号">
+          ZCAT2021070500
+        </a-descriptions-item>
+        <a-descriptions-item label="租金">
+          400000
+        </a-descriptions-item>
+        <a-descriptions-item label="出租方">
+          烟草公司
+        </a-descriptions-item>
+        <a-descriptions-item label="承租方" >
+          福州纵图有限科技公司
+        </a-descriptions-item>
+        <a-descriptions-item label="合同有效期" >
+          2018-04-24———2025-04-24
+        </a-descriptions-item>
+        <a-descriptions-item label="支付方式" :span="3">
+          <a-badge status="processing" text="网络转账" />
+        </a-descriptions-item>
+        <a-descriptions-item label="卡号">
+          ××××××××××
+        </a-descriptions-item>
+        <a-descriptions-item label="收缴凭证">
+          ××××××××××
+        </a-descriptions-item>
+        <a-descriptions-item label="付款周期">
+          24个月
+        </a-descriptions-item>
+<!--        <a-descriptions-item label="Config Info">-->
+<!--        </a-descriptions-item>-->
+      </a-descriptions>
+    </a-modal>
+
   </a-card>
 </template>
 
@@ -178,8 +221,8 @@ export default {
           assetOwner: '张三',
           assetUser: '李四',
           recordDate: '2020-07-05',
-          transReason: '流转原因',
-          contractDetail:'合同详情',
+          transReason: '商用',
+         // contractDetail:'查看详情',
           remark : '无',
         },
         {
@@ -190,8 +233,8 @@ export default {
           assetOwner: '张三',
           assetUser: '李四',
           recordDate: '2020-07-05',
-          transReason: '流转原因',
-          contractDetail:'合同详情',
+          transReason: '商用',
+        //  contractDetail:'查看详情',
           remark : '无',
         },
       ],
@@ -257,7 +300,8 @@ export default {
           {
             title:'合同详情',
             align:"center",
-            dataIndex: 'contractDetail'
+            dataIndex: 'contractDetail',
+            scopedSlots: { customRender: 'contractDetail' },
           },
           {
             title: '操作',
@@ -269,7 +313,8 @@ export default {
         dictOptions:{},
         toggleSearchStatus: false,
         selectedRowKeys: [],
-        visible: false,
+        visible: false,   //新增面板
+        detailvisible:false,  //合同详情
         confirmLoading: false,
         //新增表单
         form: {
@@ -290,29 +335,33 @@ export default {
       hasSelected() {
         return this.selectedRowKeys.length > 0;
       },
-   },
+      },
     methods: {
       handleToggleSearch() {
       if(this.toggleSearchStatus) this.toggleSearchStatus=false;
       else this.toggleSearchStatus=true;
     },
-    onSelectChange(selectedRowKeys) {
+      onSelectChange(selectedRowKeys) {
       console.log('selectedRowKeys changed: ', selectedRowKeys);
       this.selectedRowKeys = selectedRowKeys;
     },
-    onClearSelected() {
+      onClearSelected() {
       this.selectedRowKeys = [];
     },
-    deletConfirm(e) {
+      deletConfirm(e) {
       console.log("e",e);
       // const dataSource = [...this.dataSource];
       // this.dataSource = dataSource.filter(item => item.key !== key);
       this.$message.success('删除成功');
       console.log("ddddataSource",this.dataSource)
     },
-    purchaseDateOnChange(date, dateString) {
+      purchaseDateOnChange(date, dateString) {
       console.log(date, dateString);
     },
+      //查看合同详情
+      viewDetail() {
+        this.detailvisible = true;
+      },
       //新增模块
       myHandleAdd() {
         this.visible = true;
@@ -335,6 +384,12 @@ export default {
       handleCancel(e) {
         console.log('Clicked cancel button');
         this.visible = false;
+      },
+      handleCancel1(e) {
+        this.detailvisible = false;
+      },
+      handleOk1(e) {
+        this.detailvisible = false;
       },
     }
 
