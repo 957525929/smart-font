@@ -74,6 +74,7 @@ export const vehicleList = [
         key: '1',
         licenseNum: '闽A123401',
         status: '正常',
+        seatNum:4,
         BX: '2022-06-03',
         BY: '2021-12-03',
         NS: '2022-06-03',
@@ -81,6 +82,7 @@ export const vehicleList = [
     {
         key: '2',
         licenseNum: '闽A123402',
+        seatNum:6,
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -89,6 +91,7 @@ export const vehicleList = [
     {
         key: '3',
         licenseNum: '闽A123403',
+        seatNum:4,
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -97,6 +100,7 @@ export const vehicleList = [
     {
         key: '4',
         licenseNum: '闽A123404',
+        seatNum:4,
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -105,6 +109,7 @@ export const vehicleList = [
     {
         key: '5',
         licenseNum: '闽A123405',
+        seatNum:5,
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -113,6 +118,7 @@ export const vehicleList = [
     {
         key: '6',
         licenseNum: '闽A123406',
+        seatNum:5,
         status: '维修中',
         BX: '2022-06-03',
         BY: '2021-12-03',
