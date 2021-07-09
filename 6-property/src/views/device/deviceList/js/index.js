@@ -35,13 +35,10 @@ export const devColumns = [
         title: '所属资产',
         key: 'assets',
         width: 80,
-        type: 'a-select',
         dataIndex:'assets'
     },
     {
         dataIndex: 'institution',
-        slots: { title: '设备编号' },
-        scopedSlots: { customRender: 'name' },
         title: '业主单位',
         width: 80,
     },
@@ -77,7 +74,7 @@ export const devColumns = [
         key: 'action',
         scopedSlots: { customRender: 'action' },
         width: 80,
-        ifHideInSearch:true
+        hideInSearch:true
     },
 ]
 

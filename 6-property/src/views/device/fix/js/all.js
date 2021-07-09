@@ -1,4 +1,10 @@
 import { devType ,taskStatus} from "@/utils/dataDictionary.js";
+import { columns as checkCol } from "./check.js";
+import { columns as evaCol } from "./evaluation";
+import { columns as fixCol } from "./fix.js";
+import { columns as reviewCol } from "./review";
+import { columns as verifyCol } from "./verify";
+
 export const columns=[
     {
         dataIndex: 'devId',
@@ -71,7 +77,7 @@ export const columns=[
         dataIndex: 'action',
         scopedSlots: { customRender: 'action' },
         width: 80,
-        ifHideInSearch:true
+        hideInSearch:true
     },
 ]
 export const data=[
@@ -81,6 +87,7 @@ export const data=[
         devName: "18楼停电",
         taskStatus:1,
         devType: 1,
+        devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
@@ -103,6 +110,7 @@ export const data=[
         devName: "18楼频繁断电停电",
         taskStatus:2,
         devType: 1,
+        devStatus: 5,
         deliveryTime:"2021-06-22 10：55：55",
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -121,6 +129,7 @@ export const data=[
         devName: "卫生间停水",
         taskStatus:3,
         devType: 2,
+        devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
@@ -137,6 +146,7 @@ export const data=[
         devName: "空调调控温度无反应",
         taskStatus:4,
         devType: 0,
+        devStatus: 5,
         deliveryTime:"2021-06-19 17：55：55",
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -153,6 +163,7 @@ export const data=[
         devId: '5',
         devName: "18楼停电",
         taskStatus:5,
+        devStatus: 5,
         devType: 1,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -181,7 +192,8 @@ export const infoDetail =[
         title: '设备类型',
         value:"",
         key: 'devType',
-        type:"a-select"
+        type:"a-select",
+        valueEnum:devType
     },
     {
         title: '所属资产',
@@ -213,6 +225,7 @@ export const infoDetail =[
         title: '登记时间',
         key: 'fixedTime',
         value:"",
-        type:"a-range-picker"
+        type:"a-range-picker",
+        hideInDetail:true
     }
 ]

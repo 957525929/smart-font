@@ -1,4 +1,4 @@
-import { devType} from "@/utils/dataDictionary.js";
+import { devType,devStatus} from "@/utils/dataDictionary.js";
 // 待维修
 export const columns=[
     {
@@ -70,7 +70,7 @@ export const columns=[
         dataIndex: 'action',
         scopedSlots: { customRender: 'action' },
         width: 80,
-        ifHideInSearch:true
+        hideInSearch:true
     },
 ]
 export const data=[
@@ -79,13 +79,13 @@ export const data=[
         devId: '2',
         devName:"18楼频繁断电停电",
         devType:1,
-        devStatus: 0,
+        devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
         fixStaff: '刘涛',
-        deliveryTime:"2021-06-22 10：55：55",
-        fixedTime: '2021-06-22 20：00：00',
+        deliveryTime:"2021-06-22 10:55:55",
+        fixedTime: '2021-06-22 20:00:00',
         action:[{
             tagName:"详情",
             com:"TableDrawer"
@@ -108,14 +108,16 @@ export const infoDetail =[
         title: '设备类型',
         value:"",
         key: 'devType',
-        type:"a-select"
+        type:"a-select",
+        valueEnum:devType
     },
-    // {
-    //     title: '实际状态',
-    //     key: 'devStatus',
-    //     value:"",
-    //     type:"a-select"
-    // },
+    {
+        title: '实际状态',
+        key: 'devStatus',
+        value:"",
+        type:"a-select",
+        valueEnum:devStatus
+    },
     {
         title: '所属资产',
         key: 'assets',
@@ -140,8 +142,7 @@ export const infoDetail =[
     {
         title: '维修员',
         key: 'fixStaff',
-        value:"",
-        hideInDetail:true
+        value:""
     },
     {
         title: '上报时间',

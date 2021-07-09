@@ -1,7 +1,6 @@
 
 //"待评估"
-import { devType} from "@/utils/dataDictionary.js";
-// 待维修
+import { devType,devStatus} from "@/utils/dataDictionary.js";
 export const columns=[
     {
         dataIndex: 'devId',
@@ -72,7 +71,7 @@ export const columns=[
         dataIndex: 'action',
         scopedSlots: { customRender: 'action' },
         width: 80,
-        ifHideInSearch:true
+        hideInSearch:true
     },
 ]
 export const data=[
@@ -81,7 +80,7 @@ export const data=[
         devId: '1',
         devName:"18楼停电",
         devType:1,
-        devStatus: 0,
+        devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
@@ -110,14 +109,16 @@ export const infoDetail =[
         title: '设备类型',
         value:"",
         key: 'devType',
-        type:"a-select"
+        type:"a-select",
+        valueEnum:devType
     },
-    // {
-    //     title: '实际状态',
-    //     key: 'devStatus',
-    //     value:"",
-    //     type:"a-select"
-    // },
+    {
+        title: '实际状态',
+        key: 'devStatus',
+        value:"",
+        type:"a-select",
+        valueEnum:devStatus
+    },
     {
         title: '所属资产',
         key: 'assets',

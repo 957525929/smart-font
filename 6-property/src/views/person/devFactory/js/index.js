@@ -38,13 +38,14 @@ export const columns = [
         dataIndex: 'loginTime',
         width: 80,
         type: 'a-range-picker',
+        hideInDetail:true
     },
     {
         title: '操作',
         key: 'action',
         scopedSlots: { customRender: 'action' },
         width: 80,
-        ifHideInSearch:true
+        hideInSearch:true
     },
 ]
 

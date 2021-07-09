@@ -7,7 +7,7 @@
                         <span slot="action" slot-scope="text, record">
                             <template v-for="(i, index) in record.action">
                                 <TableDrawer :ref="item.key" :title="i.tagName" :infoDetail="infoDetail"></TableDrawer>
-                                <a @click.stop="show(item.key)">{{ i.tagName }}</a>
+                                <a @click.stop="show(item.key, record.devId, record.taskStatus)">{{ i.tagName }}</a>
                                 <a-divider type="vertical" v-if="index !== record.action.length - 1" />
                             </template>
                         </span>
@@ -28,7 +28,7 @@ const NEW_PROLIST = Object.freeze({ proMenu })
 
 export default {
     name: 'proList',
-    components: { PageTemplate, TableDrawer,TableModal },
+    components: { PageTemplate, TableDrawer, TableModal },
     created() {
         this.loadMenu()
     },
@@ -43,7 +43,19 @@ export default {
         }
     },
     methods: {
-        show(type) {
+        show(type, id, taskType) {
+            if (this.current === 0) {
+                let menuData = NEW_PROLIST.proMenu.filter((item) => item.title == taskType)[0]
+                let tempCol = require('./js/' + menuData.content + '.js')
+                let result = Object.freeze(tempCol)
+                this.infoDetail = result.infoDetail.filter((item) => !item.hideInDetail)
+            }
+            //请求详情(无网络)
+            let temp = this.data.filter((item) => item.devId == id)[0]
+            this.infoDetail = this.infoDetail.map((item) => {
+                item.value = temp[item.key]
+                return item
+            })
             this.$refs[type][0].showDrawer()
         },
         loadMenu() {
@@ -51,12 +63,12 @@ export default {
             this.columns = result.columns
             this.searchCon = result.searchCon
             this.data = result.data
-            this.infoDetail = result.infoDetail
+            this.infoDetail = result.infoDetail.filter((item) => !item.hideInDetail)
             this.loadData()
         },
         loadData() {
             // 请求数据
-                        this.columns.forEach((item) => {
+            this.columns.forEach((item) => {
                 if (item.valueEnum) {
                     this.data.map((res) => {
                         res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue

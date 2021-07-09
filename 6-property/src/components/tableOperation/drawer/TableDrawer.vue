@@ -5,13 +5,13 @@
             <a-descriptions-item
                 :label="item.title"
                 :span="3"
-                v-for="item in infoDetailData"
+                v-for="item in infoDetail"
                 :key="item.key"
                 >{{ item.value }}</a-descriptions-item
             >
             <!-- </view> -->
         </a-descriptions>
-        <div
+        <!-- <div
             :style="{
                 position: 'absolute',
                 right: 0,
@@ -26,7 +26,7 @@
         >
             <a-button type="primary" @click="onClose"> 编辑 </a-button>
             <a-button :style="{ marginLight: '8px' }" @click="onClose"> 取消 </a-button>
-        </div>
+        </div> -->
     </a-drawer>
 </template>
  
@@ -47,12 +47,13 @@ export default {
     },
     data() {
         return {
-            infoDetailData: [],
+            // infoDetailData: [],
             visible: false,
         }
     },
     mounted() {
-        this.getDetail()
+        console.log(this.infoDetail);
+        // this.getDetail()
     },
     methods: {
         showDrawer() {
@@ -61,9 +62,9 @@ export default {
         onClose() {
             this.visible = false
         },
-        getDetail() {
-            this.infoDetailData = this.infoDetail
-        },
+        // getDetail() {
+        //     this.infoDetailData = this.infoDetail
+        // },
     },
 }
 </script>
