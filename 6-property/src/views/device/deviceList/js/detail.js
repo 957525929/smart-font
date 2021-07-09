@@ -1,9 +1,5 @@
-import { devType ,devStatus,techSituation} from "@/utils/dataDictionary.js";
-export default {
-    basicInfo,
-    basicData
-}
-const basicInfo = [
+import { devType ,devStatus,techSituation,taskStatus,protaskStatus,taskType} from "@/utils/dataDictionary.js";
+export const basicInfo = [
     {
         title: '设备编号',
         key: 'devId',
@@ -38,11 +34,11 @@ const basicInfo = [
         value:"",
         type:"a-select"
     },
-    {
-        title: '维修员',
-        key: 'fixStaff',
-        value:"",
-    },
+    // {
+    //     title: '维修员',
+    //     key: 'fixStaff',
+    //     value:"",
+    // },
     {
         title: '登记时间',
         key: 'loginTime',
@@ -62,228 +58,155 @@ const basicInfo = [
     }
 ]
 
-const basicData = [
-    {
-        key: 0,
-        devId: 1001,
-        devName: "waterPipe_1001",
-        devType: 2,
-        devStatus: 0,
-        assets: '烟草大厦',
-        institution: '福建烟草公司',
-        phone: '18232145698',
-        techSituation: 0,
-        fixStaff: '张英',
-        loginTime: '2021-06-22 17：55：55',
-        manufacturer:"日丰企业集团有限公司",
-        batch:"M127894",
-        action:[{
-            tagName:"详情",
-            url:"device-DevDetail",
-            com:"router-link"
-        },{
-            tagName:"基本信息",
-            com:"TableDrawer"
-        },{
-            tagName:"编辑",
-            com:"TableModal"
-        },{
-            tagName:"维修记录",
-            com:"TableDrawer"
-        },{
-            tagName:"保养记录",
-            com:"TableDrawer"
-        },{
-            tagName:"运行参数",
-            com:"TableDrawer"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
-        }]
-    },
-    {
-        key: 1,
-        devId: 2001,
-        devName: "wire_2001",
-        devType: 1,
-        devStatus: 1,
-        assets: '烟草大厦',
-        institution: '福建烟草公司',
-        phone: '18232145698',
-        techSituation: 1,
-        fixStaff: '刘涛',
-        loginTime: '2021-06-21 10：55：55',
-        manufacturer:"国网福建省电力有限公司",
-        batch:"N2169",
-        action:[{
-            tagName:"基本信息",
-            com:"TableDrawer"
-        },{
-            tagName:"编辑",
-            com:"TableModal"
-        },{
-            tagName:"维修记录",
-            com:"TableDrawer"
-        },{
-            tagName:"保养记录",
-            com:"TableDrawer"
-        },{
-            tagName:"运行参数",
-            com:"TableDrawer"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
-        }]
-    }, {
-        key: 2,
-        devId: 3001,
-        devName: "air_3001",
-        devType: 0,
-        devStatus: 2,
-        assets: '烟草大厦',
-        institution: '福建烟草公司',
-        phone: '18232145698',
-        techSituation: 2,
-        fixStaff: '王翔',
-        loginTime: '2021-06-29 08：55：55',
-        manufacturer:"珠海格力电器股份有限公司",
-        batch:"A2421",
-        action:[{
-            tagName:"基本信息",
-            com:"TableDrawer"
-        },{
-            tagName:"编辑",
-            com:"TableModal"
-        },{
-            tagName:"维修记录",
-            com:"TableDrawer"
-        },{
-            tagName:"保养记录",
-            com:"TableDrawer"
-        },{
-            tagName:"运行参数",
-            com:"TableDrawer"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
-        }]
-    }
-]
-
-export const loginInfo = [{
+export const fixInfo = [{
+    dataIndex: 'id',
     title: '设备编号',
-    key: 'devId',
-    value:""
+    width: 50,
+    key: 'id'
 },
 {
-    title: '设备名称',
-    value:"",
+    dataIndex: 'devId',
+    slots: { title: '问题编号' },
+    scopedSlots: { customRender: 'devId' },
+    title: '问题编号',
+    width: 50,
+    key: 'devId'
+},
+{
+    dataIndex: 'taskStatus',
+    title: '任务状态',
+    width: 80,
+    key: 'taskStatus',
+    type:"a-select",
+    valueEnum:taskStatus
+},
+{
+    title: '问题类型',
+    dataIndex: 'devName',
+    width: 100,
     key: 'devName'
 },
 {
-    title: '设备类型',
-    value:"",
+    title: '问题类型',
+    dataIndex: 'devType',
+    width: 100,
     key: 'devType',
-    type:"a-select",
     valueEnum:devType
 },
 {
-    title: '实际状态',
-    key: 'devStatus',
-    value:"",
-    type:"a-select",
-    valueEnum:devStatus
+    title: '问题上报时间',
+    key: 'deliveryTime',
+    dataIndex: 'deliveryTime',
+    scopedSlots: { customRender: 'tags' },
+    width: 100,
+    type: 'a-range-picker',
 },
-// {
-//     key: 'manufacturer',
-//     title: '生产厂家',
-//     value:"",
-//     type:"a-select",
-//     valueEnum:manufacturer
-// }
-]
-export const fixColumns = [
-    {
-        dataIndex: 'devId',
-        slots: { title: '设备编号' },
-        scopedSlots: { customRender: 'devId' },
-        title: '设备编号',
-        width: 40,
-        key: 'devId'
-    },
-    {
-        title: '设备名称',
-        dataIndex: 'devName',
-        width: 80,
-        key: 'devName'
-    },
-    {
-        title: '设备类型',
-        dataIndex: 'devType',
-        key: 'devType',
-        width: 50,
-        valueEnum: devType,
-        type: 'a-select',
-    },
-    {
-        title: '实际状态',
-        key: 'devStatus',
-        dataIndex: 'devStatus',
-        scopedSlots: { customRender: 'devStatus' },
-        width: 50,
-        type: 'a-select',
-        valueEnum:devStatus ,
-    },
-    {
-        title: '所属资产',
-        key: 'assets',
-        width: 80,
-        type: 'a-select',
-        dataIndex:'assets'
-    },
-    {
-        dataIndex: 'institution',
-        slots: { title: '设备编号' },
-        scopedSlots: { customRender: 'name' },
-        title: '业主单位',
-        width: 80,
-    },
-    {
-        title: '业主联系方式',
-        dataIndex: 'phone',
-        width: 80,
-    },
-    {
-        title: '技术状况',
-        dataIndex: 'techSituation',
-        width: 80,
-        type: 'a-select',
-        valueEnum: techSituation,
-    },
-    {
-        title: '维修员',
-        key: 'fixStaff',
-        dataIndex: 'fixStaff',
-        scopedSlots: { customRender: 'tags' },
-        width: 50,
-    },
-    {
-        title: '登记时间',
-        key: 'loginTime',
-        dataIndex: 'loginTime',
-        scopedSlots: { customRender: 'tags' },
-        width: 80,
-        type: 'a-range-picker',
-    },
-    {
-        title: '操作',
-        key: 'action',
-        scopedSlots: { customRender: 'action' },
-        width: 80,
-        ifHideInSearch:true
-    },
+{
+    dataIndex: 'institution',
+    key:'institution',
+    slots: { title: '业主单位' },
+    scopedSlots: { customRender: 'name' },
+    title: '业主单位',
+    width: 80,
+},
+{
+    title: '业主联系方式',
+    dataIndex: 'phone',
+    key:'phone',
+    width: 80,
+},
+{
+    title: '维修员',
+    key: 'fixStaff',
+    dataIndex: 'fixStaff',
+    scopedSlots: { customRender: 'tags' },
+    width: 80,
+},
+{
+    title: '维修完成时间',
+    key: 'fixedTime',
+    dataIndex: 'fixedTime',
+    scopedSlots: { customRender: 'tags' },
+    width: 80,
+    type: 'a-range-picker',
+},
 ]
 
+export const proInfo = [{
+    dataIndex: 'id',
+      title: '设备编号',
+    width: 50,
+    key: 'id',
+  },{
+    dataIndex: 'devId',
+    title: '任务编号',
+    width: 50,
+    key: 'devId'
+  },
+  {
+    title: '任务状态',
+    key: 'taskStatus',
+    dataIndex: 'taskStatus',
+    width: 80,
+    type: 'a-select',
+    valueEnum: protaskStatus
+  },
+  {
+    title: '任务描述',
+    dataIndex: 'devName',
+    width: 100,
+    key: 'devName',
+    hideInSearch: true
+  },
+  {
+    title: '任务下发时间',
+    key: 'fixedTime',
+    dataIndex: 'fixedTime',
+    scopedSlots: {
+      customRender: 'tags'
+    },
+    width: 100,
+    type: 'a-range-picker',
+  },
+  {
+    title: '任务地点',
+    key: 'assets',
+    dataIndex: 'assets',
+    width: 80,
+  },
+  {
+    dataIndex: 'taskType',
+    key: 'taskType',
+    title: '任务类型',
+    width: 80,
+    type: 'a-select',
+    valueEnum: taskType
+  },
+  {
+    title: '保养员',
+    key: 'fixStaff',
+    dataIndex: 'fixStaff',
+    scopedSlots: {
+      customRender: 'tags'
+    },
+    width: 80,
+  },
+  {
+    title: '联系方式',
+    dataIndex: 'phone',
+    key: 'phone',
+    width: 80,
+  },
+
+  {
+    title: '预计完成时间',
+    key: 'expectTime',
+    dataIndex: 'expectTime',
+    width: 80,
+    type: 'a-range-picker',
+  }]
+
+export const runInfo = []
 export const data = [
     {
         key: 0,

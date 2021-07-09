@@ -92,7 +92,7 @@ export const columns = [{
 ]
 export const data = [{
   key: 0,
-  devId: '0001',
+  devId: '1',
   devName: "烟草大厦18楼频繁断电",
   taskType: 2,
   taskStatus: 2,

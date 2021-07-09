@@ -1,53 +1,57 @@
 <template>
   <a-card>
     <a-table :columns="columns" :data-source="data">
-      <a slot="name" slot-scope="text">{{ text }}</a>
+      <span slot="action" slot-scope="text, record, index">
+        <a @click="showModal(index)">详情</a>
+        <a-modal v-model="visible" title="报警记录详情" :footer="null">
+          <a-timeline mode="alternate">
+            <a-timeline-item v-for="(item, index) in alertDate[rowIndex]" :key="index">{{ item }}</a-timeline-item>
+          </a-timeline>
+          <br />
+        </a-modal>
+      </span>
     </a-table>
   </a-card>
 </template>
 <script>
 const columns = [
   {
-    title: 'id',
-    dataIndex: 'id',
-    key: 'id',
-    width: 80,
-  },
-  {
     title: '锁编号',
     dataIndex: 'lockNum',
     key: 'lockNum',
   },
   {
-    title: '房间',
-    dataIndex: 'room',
-    key: 'room',
+    title: '楼号',
+    dataIndex: 'buildNum',
+    key: 'buildNum',
   },
-
   {
-    title: '姓名',
-    dataIndex: 'name',
-    key: 'name',
+    title: '房间',
+    dataIndex: 'roomNum',
+    key: 'roomNum',
   },
-
   {
     title: '部门',
-    dataIndex: 'apartment',
-    key: 'apartment',
+    dataIndex: 'dept',
+    key: 'dept',
   },
-
   {
-    title: '日',
+    title: '本日',
     dataIndex: 'day',
     key: 'day',
   },
   {
-    title: '月',
+    title: '本周',
+    dataIndex: 'week',
+    key: 'week',
+  },
+  {
+    title: '本月',
     dataIndex: 'month',
     key: 'month',
   },
   {
-    title: '年',
+    title: '本年',
     dataIndex: 'year',
     key: 'year',
   },
@@ -56,44 +60,61 @@ const columns = [
     dataIndex: 'all',
     key: 'all',
   },
+  {
+    title: '操作',
+    key: 'action',
+    scopedSlots: { customRender: 'action' },
+  },
 ]
 
 const data = [
   {
     key: '1',
-    id: 1,
     lockNum: 'S0001',
-    name: '张三',
-    apartment: '配送部',
-    room: 'B-402',
+    buildNum: '1号楼',
+    roomNum: '101',
+    dept: '办公室',
     day: '0',
-    month: '1',
-    year: '3',
-    all: '5',
+    week: '0',
+    month: '0',
+    year: '2',
+    all: '3',
   },
   {
     key: '2',
-    id: 2,
     lockNum: 'S0002',
-    name: '李四',
-    apartment: '营销部',
-    room: 'C-305',
+    buildNum: '2号楼',
+    roomNum: '211',
+    dept: '生产部',
     day: '1',
+    week: '1',
+    month: '1',
+    year: '4',
+    all: '7',
+  },
+  {
+    key: '3',
+    lockNum: 'S0003',
+    buildNum: '1号楼',
+    roomNum: '203',
+    dept: '购销部',
+    day: '0',
+    week: '0',
     month: '1',
     year: '2',
     all: '4',
   },
   {
-    key: '3',
-    id: 3,
-    lockNum: 'S0003',
-    name: '王五',
-    apartment: '营销部',
-    room: 'D-205',
+    key: '4',
+    lockNum: 'S0004',
+    buildNum: '1号楼',
+    roomNum: '402',
+    dept: '信息中心',
     day: '0',
-    month: '2',
-    year: '5',
-    all: '7',
+    week: '1',
+    month: '1',
+    year: '2',
+    all: '3',
   },
 ]
 
@@ -102,7 +123,22 @@ export default {
     return {
       data,
       columns,
+      visible: false,
+      alertDate: [
+        ['电量不足 2021-05-01', '密码锁故障 2021-03-22', '密码锁故障 2021-01-05'],
+        ['电量不足 2021-05-01', '密码锁故障 2021-03-22', '密码锁故障 2021-01-05'],
+        ['电量不足 2021-05-01', '密码锁故障 2021-03-22', '密码锁故障 2021-01-05'],
+        ['电量不足 2021-05-01', '密码锁故障 2021-03-22', '密码锁故障 2021-01-05'],
+      ],
+      rowIndex: 0,
     }
+  },
+  methods: {
+    showModal(value) {
+      this.visible = true
+      this.rowIndex = value
+      console.log(this.rowIndex)
+    },
   },
 }
 </script>

@@ -42,7 +42,7 @@ export default {
     },
     data() {
         return {
-            current: 1,
+            current: 0,
             fixMenu: { ...NEW_FIXLIST.fixMenu },
             columns: [],
             searchCon: {},

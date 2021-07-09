@@ -76,7 +76,7 @@ export const columns=[
 export const data=[
     {
         key: '1',
-        devId: '0001',
+        devId: '2',
         devName:"18楼频繁断电停电",
         devType:1,
         devStatus: 0,
@@ -84,7 +84,7 @@ export const data=[
         institution: '福建烟草公司',
         phone: '18232145698',
         fixStaff: '刘涛',
-        deliveryTime:"2021-06-22 17：55：55",
+        deliveryTime:"2021-06-22 10：55：55",
         fixedTime: '2021-06-22 20：00：00',
         action:[{
             tagName:"详情",

@@ -92,7 +92,7 @@ export const columns = [{
 ]
 export const data = [{
   key: 1,
-  devId: '0002',
+  devId: '2',
   devName: "空调漏水",
   taskType: 1,
   taskStatus: 3,

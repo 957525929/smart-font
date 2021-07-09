@@ -70,7 +70,7 @@ export const columns = [
 export const data = [
     {
         key: 0,
-        devId: '0001',
+        devId: '1',
         devName: "刘涛",
         devType: 1,
         staffStatus: 0,
@@ -91,7 +91,7 @@ export const data = [
     },
     {
         key: 1,
-        devId: '0002',
+        devId: '2',
         devName: "张英",
         devType: 0,
         staffStatus: 1,
@@ -112,7 +112,7 @@ export const data = [
     },
     {
         key: 2,
-        devId: '0003',
+        devId: '3',
         devName: "王翔",
         devType: 2,
         staffStatus: 2,
