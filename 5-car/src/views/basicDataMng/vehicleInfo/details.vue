@@ -3,10 +3,10 @@
     <a-tabs default-active-key="1" @change="callback">
       <a-tab-pane key="1" tab="基本信息">
         <a-descriptions bordered>
+          <a-descriptions-item label="车牌品牌" :span="3">{{ data.brand }}</a-descriptions-item>
           <a-descriptions-item label="车牌号" :span="3">{{ licenseNum }}</a-descriptions-item>
-          <a-descriptions-item label="号牌种类" :span="3">{{ data.licenseType }}</a-descriptions-item>
-           <a-descriptions-item label="车牌品牌" :span="3">{{ data.brand }}</a-descriptions-item>
-            <a-descriptions-item label="购车时间" :span="3">{{ data.buyTime }}</a-descriptions-item>
+          <a-descriptions-item label="车辆种类" :span="3">{{ data.licenseType }}</a-descriptions-item>
+          <a-descriptions-item label="购车时间" :span="3">{{ data.buyTime }}</a-descriptions-item>
           <a-descriptions-item label="座位数" :span="3">{{ data.seatNum }}</a-descriptions-item>
           <a-descriptions-item label="车辆状态" :span="3">{{ data.status }}</a-descriptions-item>
           <a-descriptions-item label="司机" :span="3">
@@ -44,10 +44,10 @@
 
 <script>
 const mockData = {
-  licenseType: '小型车',
+  licenseType: '小型轿车',
   seatNum: 5,
-  brand:'奥迪',
-  buyTime:'2019-03-15',
+  brand: '奥迪',
+  buyTime: '2019-03-15',
   status: '正常',
   driver: '张三',
 }
@@ -61,11 +61,11 @@ export default {
     }
   },
   props: ['licenseNum'],
-  methods:{
+  methods: {
     callback(key) {
-      console.log(key);
-    }
-  }
+      console.log(key)
+    },
+  },
 }
 </script>
 

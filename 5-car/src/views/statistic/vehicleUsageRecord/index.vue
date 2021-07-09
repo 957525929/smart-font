@@ -1,26 +1,13 @@
 <template>
   <div class="root">
-    <div class="filterPrt">
-      <div class="filterCtx">
-        请选择统计时间段：
-        <a-range-picker :default-value="defaultRange" :format="dateFormat" />&nbsp;&nbsp;
-        <a-select style="width: 80px" defaultValue="车牌号" @select="conditionOnSelect">
-          <a-select-option key="1" value="车牌号">车牌号</a-select-option>
-          <a-select-option key="2" value="用车人">用车人</a-select-option>
-          <a-select-option key="3" value="司机">司机</a-select-option>
-        </a-select>
-        <a-input-search :placeholder="`请输入${currentCondition}搜索`" style="width: 200px" @search="onSearch" />
-        <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
-      </div>
-    </div>
     <div class="overview">
       <div class="fontPrt">
         <div class="title">
-          <font size="5" color="#FF6701">总计使用</font>
-          <font size="5" color="#FEA82F">前30日使用</font>
-          <font size="5" color="#FFC288">前7日使用</font>
-          <font size="5" color="#77ACF1">昨日使用</font>
-          <font size="5" color="#04009A">今日使用</font>
+          <font size="5" color="#FF6701">总计用车次数</font>
+          <font size="5" color="#FEA82F">前30日用车次数</font>
+          <font size="5" color="#FFC288">前7日用车次数</font>
+          <font size="5" color="#77ACF1">昨日用车次数</font>
+          <font size="5" color="#04009A">今日用车次数</font>
         </div>
         <div class="value">
           <font size="5" color="#3EDBF0">60</font>
@@ -32,6 +19,19 @@
       </div>
       <div class="chartPrt">
         <Pie :dataSource="dataSource" />
+      </div>
+    </div>
+    <div class="filterPrt">
+      <div class="filterCtx">
+        请选择统计时间段：
+        <a-range-picker :default-value="defaultRange" :format="dateFormat" />&nbsp;&nbsp;
+        <a-select style="width: 80px" defaultValue="车牌号" @select="conditionOnSelect">
+          <a-select-option key="1" value="车牌号">车牌号</a-select-option>
+          <a-select-option key="2" value="用车人">用车人</a-select-option>
+          <a-select-option key="3" value="司机">司机</a-select-option>
+        </a-select>
+        <a-input-search :placeholder="`请输入${currentCondition}搜索`" style="width: 200px" @search="onSearch" />
+        <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
       </div>
     </div>
     <div class="details">
@@ -142,13 +142,13 @@ export default {
     width: 98%;
     height: 50px;
     background-color: #ffffff;
+    margin-top: 10px;
     .filterCtx {
       margin-left: 20px;
       margin-top: 8px;
     }
   }
   .overview {
-    margin-top: 10px;
     width: 98%;
     height: 260px;
     background-color: #ffffff;

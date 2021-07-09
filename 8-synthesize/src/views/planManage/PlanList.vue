@@ -67,7 +67,7 @@
 
         <a slot="planNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
 
-        <span slot="action" slot-scope="text, record">
+        <span slot="action" slot-scope="text, record,index">
           <a @click="showDetails(record),gotoMenu(key)">详情</a>
           <!-- <a @click="showDetails(record)">详情</a> -->
 
@@ -79,7 +79,7 @@
             <a-menu slot="overlay">
               <a-menu-item><a @click="handleEdit(record)">编辑</a></a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+                <a-popconfirm title="确定删除吗?" @confirm="() =>  deleteIndex(index)">
                   <a>删除</a>
                 </a-popconfirm>
               </a-menu-item>
@@ -204,8 +204,8 @@ export default {
           createTime: '2020-01-06',
           status: '2',
           deadline: '2020-12-20',
-          startTime: '2020-01-08',
-          completionTime: '2020-12-19'
+          startTime: '2020-01-08 11:20:50',
+          completionTime: '2020-12-19 16:10:20'
         },
         {
           key: '2',
@@ -213,7 +213,7 @@ export default {
           createTime: '2020-02-07',
           status: '3',
           deadline: '2020-11-08',
-          startTime: '2020-02-08',
+          startTime: '2020-02-08 10:40:52',
           completionTime: ''
         },
         {
@@ -222,7 +222,7 @@ export default {
           createTime: '2021-01-01',
           status: '1',
           deadline: '2021-12-31',
-          startTime: '2021-03-04',
+          startTime: '2021-03-04 12:40:55',
           completionTime: ''
         },
         {
@@ -262,6 +262,10 @@ export default {
       // console.log(this.currentItem);
       this.key = item.key;
       // console.log(this.key);
+    },
+    deleteIndex(index) {
+      this.currentIndex = index;
+      this.data.dataSource.splice(this.currentIndex, 1)
     },
   },
 

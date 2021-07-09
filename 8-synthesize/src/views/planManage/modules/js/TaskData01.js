@@ -6,8 +6,8 @@ export const data = [
         status: '2',
         createTime: '2020-02-07',
         deadline: '2020-03-31',
-        startTime: '2020-02-08',
-        completionTime: '2020-03-30'
+        startTime: '2020-02-08 10:40:52',
+        completionTime: '2020-03-30 11:22:31'
     },
     {
         key: '2',
@@ -16,7 +16,7 @@ export const data = [
         status: '3',
         createTime: '2020-04-01',
         deadline: '2020-06-30',
-        startTime: '2020-06-04',
+        startTime: '2020-06-04 17:05:24',
         completionTime: ''
     },
     {
@@ -26,8 +26,8 @@ export const data = [
         status: '2',
         createTime: '2020-07-01',
         deadline: '2020-09-30',
-        startTime: '2020-08-01',
-        completionTime: '2020-09-30'
+        startTime: '2020-08-01 14:08:57',
+        completionTime: '2020-09-30 08:39:51'
     },
     {
         key: '4',

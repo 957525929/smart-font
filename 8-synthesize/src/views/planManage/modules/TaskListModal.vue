@@ -23,9 +23,9 @@
           </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">
-          <a-date-picker class="w140" placeholder="开始时间" v-decorator="['startTime', {rules: [{ required: true, message: '请选择开始时间!' }]}]" />
+          <a-date-picker format="YYYY-MM-DD HH:mm:ss" placeholder="开始时间" v-decorator="['startTime', {rules: [{ required: true, message: '请选择开始时间!' }]}]" />
           ~
-          <a-date-picker class="w140" placeholder="结束时间" v-decorator="['deadline', {rules: [{ required: true, message: '请选择结束时间!' }]}]" />
+          <a-date-picker format="YYYY-MM-DD HH:mm:ss" placeholder="结束时间" v-decorator="['completionTime', {rules: [{ required: true, message: '请选择结束时间!' }]}]" />
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上传文件">
           <a-upload name="file" :multiple="true" :headers="headers" @change="handleChange">
@@ -85,6 +85,7 @@ export default {
   created() {
   },
   methods: {
+    moment,
     add(record) {
       let that = this;
       that.form.resetFields();
@@ -98,10 +99,10 @@ export default {
       this.model = Object.assign({}, record);
       console.log(this.model)
       this.visible = true;
-      this.model.startTime = moment(this.model.startTime, 'YYYY-MM-DD');
-      this.model.deadline = moment(this.model.deadline, 'YYYY-MM-DD');
+      this.model.startTime = this.model.startTime ? moment(this.model.startTime, 'YYYY/MM/DD HH:mm:ss') : null;
+      this.model.completionTime = this.model.completionTime ? moment(this.model.completionTime, 'YYYY/MM/DD HH:mm:ss') : null;
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(this.model, 'taskName', 'priority', 'status', 'deadline', 'startTime'));
+        this.form.setFieldsValue(pick(this.model, 'taskName', 'priority', 'status', 'completionTime', 'startTime'));
       });
     },
     close() {
