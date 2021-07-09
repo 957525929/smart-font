@@ -16,6 +16,11 @@
                         >
                             <a href="#" @click="showDelete">{{ i.tagName }}</a>
                         </a-popconfirm>
+                        <template v-else-if="i.com === 'router-link'">
+                            <!-- <a href="#" @click="goto(i.url,record.devId)">{{ i.tagName }}</a> -->
+                            <router-link :to="{name:i.url, params: {id:record.devId}}">{{ i.tagName }}</router-link>
+                        </template>
+                        
                         <template v-else>
                             <a href="#" @click.stop="handleOps(i.com)">{{ i.tagName }}</a>
                             <component
@@ -40,7 +45,7 @@ import PageTemplate from '@/components/page/PageTemplate.vue'
 import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
 import TableModal from '@/components/tableOperation/modal/TableModal.vue'
 // js
-import { devColumns, data, infoDetail,loginInfo } from './index.js'
+import { devColumns, data, infoDetail,loginInfo } from './js/index.js'
 import { typeToComponent } from '@/utils/dataDictionary.js'
 const NEW_DEVLIST = Object.freeze({ devColumns, data, infoDetail, typeToComponent,loginInfo })
 export default {
@@ -60,6 +65,9 @@ export default {
         }
     },
     methods: {
+        goto(url,id){
+            this.$router.push({name:url, params: {id:id}})
+        },
         getList(){
             devColumns.forEach(item=>{
                 if(item.valueEnum){

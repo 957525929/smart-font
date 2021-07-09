@@ -70,7 +70,7 @@ export const data=[
     {
         key: 0,
         devId: '0002',
-        devName: "停电",
+        devName: "18楼停电",
         devType: 0,
         devStatus: 0,
         assets: '烟草大厦',

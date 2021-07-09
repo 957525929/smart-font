@@ -125,8 +125,8 @@ function generateChildRouters(data) {
 
     //online菜单路由加载逻辑
     let componentPath
-    // if(item.component=="modules/online/cgform/OnlCgformHeadList"){
-    //   componentPath = onlineCommons.OnlCgformHeadList
+    // if(item.component=="device/deviceList/DevDetail"){
+    //   componentPath = device-DevDetail
     // }else if(item.component=="modules/online/cgform/OnlCgformCopyList"){
     //   componentPath = onlineCommons.OnlCgformCopyList
     // }else if(item.component=="modules/online/cgform/auto/OnlCgformAutoList"){

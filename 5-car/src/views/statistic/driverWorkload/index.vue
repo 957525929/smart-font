@@ -13,12 +13,12 @@
     <div class="overview">
       <div class="fontPrt">
         <div class="title">
-          <font size="5" color="#04009A">出车次数</font>
-          <font size="5" color="#FF6701">缺勤/请假次数</font>
+          <font size="5" color="#04009A">总计出车次数</font>
+          <font size="5" color="#FF6701">平均出车次数</font>
         </div>
         <div class="value">
-          <font size="5" color="#3EDBF0">{{ driverWorkloadPie[0].count }}</font>
-          <font size="5" color="#3EDBF0">{{ driverWorkloadPie[1].count }}</font>
+          <font size="5" color="#3EDBF0">{{ driverWorkloadPie[0].count+'次' }}</font>
+          <font size="5" color="#3EDBF0">{{ driverWorkloadPie[1].count +'次/天'}}</font>
         </div>
       </div>
       <div class="chartPrt1">

@@ -2,10 +2,10 @@
   <div class="root">
     <div class="filterPrt">
       <div class="filterCtx">
-        <a-date-picker />&nbsp;&nbsp;
+        请选择统计时间段：
+        <a-range-picker />&nbsp;&nbsp;
         <a-select style="width: 80px" defaultValue="车牌号" @select="conditionOnSelect">
           <a-select-option key="1" value="车牌号">车牌号</a-select-option>
-          <a-select-option key="2" value="用车人">用车人</a-select-option>
           <a-select-option key="3" value="司机">司机</a-select-option>
         </a-select>
         <a-input-search :placeholder="`请输入${currentCondition}搜索`" style="width: 200px" @search="onSearch" />
@@ -55,19 +55,19 @@ const columns = [
     dataIndex: 'distance',
   },
   {
-    title: '油卡',
-    dataIndex: 'card',
-    scopedSlots: { customRender: 'card' },
-  },
-  {
-    title: '报销司机',
+    title: '司机',
     dataIndex: 'driver',
-    scopedSlots: { customRender: 'driver' },
+    // scopedSlots: { customRender: 'driver' },
   },
   // {
   //   title: '关联用车记录',
   //   dataIndex: 'record',
   //   scopedSlots: { customRender: 'record' },
+  // },
+  // {
+  //   title: '油卡',
+  //   dataIndex: 'card',
+  //   scopedSlots: { customRender: 'card' },
   // },
   {
     title: '票据图片',
