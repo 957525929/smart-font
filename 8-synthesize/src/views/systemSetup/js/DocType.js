@@ -38,6 +38,7 @@ export const columns = [
         dataIndex: 'docType',
         width: 200,
         scopedSlots: { customRender: 'docTypeList' }
+
     },
     {
         title: '创建时间',

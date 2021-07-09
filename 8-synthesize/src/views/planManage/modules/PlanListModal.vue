@@ -2,7 +2,7 @@
   <a-modal :title="title" :width="800" :visible="visible" :confirmLoading="confirmLoading" @ok="handleOk" @cancel="handleCancel" okText="保存计划" cancelText="关闭">
 
     <a-spin :spinning="confirmLoading">
-      <a-form :form="form">
+      <a-form :form="form" :model="form_modal" ref="form_modal_refs">
 
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="计划名称">
           <a-input style="width:200px" placeholder="请输入计划名称" v-decorator="['planName', {rules: [{ required: true, message: '请输入计划名称!' }]}]" />
@@ -16,20 +16,20 @@
           </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">
-          <a-date-picker class="w140" placeholder="开始时间" v-decorator="['startTime', {rules: [{ required: true, message: '请选择开始时间!' }]}]" />
+          <a-date-picker format="YYYY-MM-DD HH:mm:ss" placeholder="开始时间" v-decorator="['startTime', {rules: [{ required: true, message: '请选择开始时间!' }]}]" />
           ~
-          <a-date-picker class="w140" placeholder="结束时间" v-decorator="['deadline', {rules: [{ required: true, message: '请选择结束时间!' }]}]" />
+          <a-date-picker format="YYYY-MM-DD HH:mm:ss" placeholder="结束时间" v-decorator="['completionTime', {rules: [{ required: true, message: '请选择结束时间!' }]}]" />
         </a-form-item>
         <a-form-item label="概述" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-textarea :rows="10" />
         </a-form-item>
+
       </a-form>
     </a-spin>
   </a-modal>
 </template>
 
 <script>
-import { httpAction } from '@/api/manage'
 import JCron from "@/components/jeecg/JCron";
 import pick from 'lodash.pick'
 
@@ -79,13 +79,20 @@ export default {
       let that = this;
       that.form.resetFields();
       this.model = Object.assign({}, record);
-      console.log(this.model)
+      // console.log(this.model)
       this.visible = true;
-      this.model.startTime = moment(this.model.startTime, 'YYYY-MM-DD');
-      this.model.deadline = moment(this.model.deadline, 'YYYY-MM-DD');
-
+      // if (this.model.startTime) {
+      //   this.model.startTime = moment(this.model.startTime, 'YYYY-MM-DD');
+      // }
+      // if (this.model.deadline) {
+      //   this.model.deadline = moment(this.model.deadline, 'YYYY-MM-DD');
+      // }
+      this.model.startTime = this.model.startTime ? moment(this.model.startTime, 'YYYY/MM/DD HH:mm:ss') : null;
+      this.model.completionTime = this.model.completionTime ? moment(this.model.completionTime, 'YYYY/MM/DD HH:mm:ss') : null;
+      console.log(this.model.startTime)
+      // console.log(this.model.deadline)
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(this.model, 'planName', 'status', 'startTime', 'deadline'));
+        this.form.setFieldsValue(pick(this.model, 'planName', 'status', 'startTime', 'completionTime'));
       });
 
     },
@@ -94,44 +101,8 @@ export default {
       this.visible = false;
     },
     handleOk() {
-      // const that = this;
-      // // 触发表单验证
-      // this.form.validateFields((err, values) => {
-      //   console.log('values', values)
-      //   if (!err) {
-      //     if (typeof values.cronExpression == "undefined" || Object.keys(values.cronExpression).length == 0) {
-      //       this.$message.warning('请输入cron表达式!');
-      //       return false;
-      //     }
-
-      //     that.confirmLoading = true;
-      //     let httpurl = '';
-      //     let method = '';
-      //     if (!this.model.id) {
-      //       httpurl += this.url.add;
-      //       method = 'post';
-      //     } else {
-      //       httpurl += this.url.edit;
-      //       method = 'put';
-      //     }
-      //     let formData = Object.assign(this.model, values);
-      //     //时间格式化
-
-      //     console.log('提交参数', formData)
-      //     httpAction(httpurl, formData, method).then((res) => {
-      //       if (res.success) {
-      //         that.$message.success(res.message);
-      //         that.$emit('ok');
-      //       } else {
-      //         that.$message.warning(res.message);
-      //       }
-      //     }).finally(() => {
-      //       that.confirmLoading = false;
-      //       that.close();
-      //     })
-
-      //   }
-      // })
+      let that = this;
+      that.form.resetFields();
     },
     handleCancel() {
       this.close()

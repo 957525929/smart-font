@@ -6,8 +6,8 @@ export const data = [
         status: '2',
         createTime: '2021-01-01',
         deadline: '2021-03-31',
-        startTime: '2021-03-04',
-        completionTime: '2021-03-30'
+        startTime: '2021-03-04 12:40:55',
+        completionTime: '2021-03-30 16:32:24'
     },
     {
         key: '2',
@@ -16,8 +16,8 @@ export const data = [
         status: '2',
         createTime: '2021-04-01',
         deadline: '2021-06-30',
-        startTime: '2021-05-04',
-        completionTime: '2021-06-24'
+        startTime: '2021-05-04 09:10:42',
+        completionTime: '2021-06-24 10:51:21'
     },
     {
         key: '3',
