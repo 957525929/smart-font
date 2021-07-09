@@ -7,7 +7,7 @@
                         <template v-for="(i, index) in record.action">
                             <a href="#" @click.stop="handleOps(i.com, record.devId, record.taskStatus)">{{
                                 i.tagName
-                            }}</a>
+                            }}</a>   
                             <component
                                 :is="i.com"
                                 :ref="i.com"

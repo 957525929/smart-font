@@ -53,7 +53,7 @@ export default {
             searchCon: {},
             data: NEW_STAFFLIST.data,
             columns: NEW_STAFFLIST.columns,
-            infoDetail: NEW_STAFFLIST.infoDetail,
+            infoDetail: NEW_STAFFLIST.infoDetail.filter((item) => !item.hideInDetail),
             loginInfo: NEW_STAFFLIST.infoDetail,
             detailData: {},
             devDetail: NEW_STAFFLIST.devDetail,
@@ -77,21 +77,27 @@ export default {
             this.$refs.devModal.showModal()
         },
         handleOps(type, id) {
-            if (type === 'TableDrawer') {
-                this.infoDetail = this.devDetail.filter((item) => !item.hideInDetail)
-                //请求详情(无网络)
-                this.detailData = this.detailDevData.filter((item) => item.Id == id)[0]
-                this.infoDetail = this.infoDetail.map((item) => {
-                    item.value = this.detailData[item.key]
-                    return item
-                })
-            } else {
-                this.infoDetail = this.infoDetail.filter((item) => !item.hideInDetail)
-                //请求详情(无网络)
-                this.detailData = this.data.filter((item) => item.Id === id)[0]
-            }
+            // if (type === 'TableDrawer') {
+            //     this.infoDetail = this.devDetail.filter((item) => !item.hideInDetail)
+            //     //请求详情(无网络)
+            //     this.detailData = this.detailDevData.filter((item) => item.Id == id)[0]
+            //     this.infoDetail = this.infoDetail.map((item) => {
+            //         item.value = this.detailData[item.key]
+            //         return item
+            //     })
+            // } else {
+            //     this.infoDetail = this.infoDetail.filter((item) => !item.hideInDetail)
+            //     //请求详情(无网络)
+            //     this.detailData = this.data.filter((item) => item.Id === id)[0]
+            // }
 
             let tempValue = [...NEW_STAFFLIST.typeToComponent].filter(([key, value]) => key === type)
+                        //处理数据
+            let tempData = this.data.filter((item) => item.devId === id)[0]
+            this.infoDetail = this.infoDetail.map((item) => {
+                item.value = tempData[item.key]
+                return item
+            })
             this.$refs[type][0][tempValue[0][1]]()
             // type !== 'TableDelete' ?  : this[tempValue[0][1]]()
         },

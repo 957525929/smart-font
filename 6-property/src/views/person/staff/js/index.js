@@ -1,4 +1,4 @@
-import { devType ,staffStatus} from "@/utils/dataDictionary.js";
+import { devType ,devStatus,staffStatus,techSituation} from "@/utils/dataDictionary.js";
 export const columns = [
     {
         dataIndex: 'devId',
@@ -79,7 +79,7 @@ export const data = [
         loginTime: '2021-05-21 17：55：55',
         eva:4.5,
         action:[{
-            tagName:"设备信息",
+            tagName:"详情",
             com:"TableDrawer"
         },{
             tagName:"编辑",
@@ -100,7 +100,7 @@ export const data = [
         loginTime: '2021-05-21 17：55：55',
         eva:4,
         action:[{
-            tagName:"设备信息",
+            tagName:"详情",
             com:"TableDrawer"
         },{
             tagName:"编辑",
@@ -121,7 +121,7 @@ export const data = [
         loginTime: '2021-05-20 17：55：55',
         eva:5,
         action:[{
-            tagName:"设备信息",
+            tagName:"详情",
             com:"TableDrawer"
         },{
             tagName:"编辑",
@@ -155,13 +155,14 @@ export const infoDetail =[
         value:"",
         key: 'devType',
         type:"a-select",
-        // valueEnum:devType      
+        valueEnum:devType      
     },
     {
         title: '工作状态',
         key: 'devStatus',
         value:"",
         type:"a-select",
+        valueEnum:devStatus,
         hideInLogin:true,
         hideInDetail:true
     },
@@ -170,7 +171,6 @@ export const infoDetail =[
         key: 'assets',
         value:"",
         hideInLogin:true,
-        type:"a-select"
     },
     {
         title: '入职时间',
@@ -231,7 +231,8 @@ export const devDetail =[
         title: '技术状况',
         key: 'techSituation',
         value:"",
-        type:"a-select"
+        type:"a-select",
+        valueEnum:techSituation
     },
     {
         title: '维修员',
