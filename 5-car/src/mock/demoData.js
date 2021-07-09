@@ -425,8 +425,8 @@ export const vehicleUsageRecord = [
 
 //司机工作量
 export const driverWorkloadPie = [
-    { item: '出车次数', count: 56 },
-    { item: '缺勤/请假次数', count: 2 },
+    { item: '总计出车次数', count: 60 },
+    { item: '平均出车次数', count: 2 },
 ]
 
 export const driverWorkloadLineChart = [
