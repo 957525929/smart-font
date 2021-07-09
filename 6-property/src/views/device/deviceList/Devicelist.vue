@@ -17,12 +17,10 @@
                             <a href="#" @click="showDelete">{{ i.tagName }}</a>
                         </a-popconfirm>
                         <template v-else-if="i.com === 'router-link'">
-                            <!-- <a href="#" @click="goto(i.url,record.devId)">{{ i.tagName }}</a> -->
                             <router-link :to="{name:i.url, params: {id:record.devId}}">{{ i.tagName }}</router-link>
                         </template>
-                        
                         <template v-else>
-                            <a href="#" @click.stop="handleOps(i.com)">{{ i.tagName }}</a>
+                            <a href="#" @click.stop="handleOps(i.com,record.devId)">{{ i.tagName }}</a>
                             <component
                                 :is="i.com"
                                 :ref="i.com"
@@ -59,9 +57,9 @@ export default {
             searchCon: {},
             data: NEW_DEVLIST.data,
             devColumns: NEW_DEVLIST.devColumns,
-            infoDetail: NEW_DEVLIST.infoDetail,
-            loginInfo:NEW_DEVLIST.loginInfo,
-            visible: false,
+            infoDetail: NEW_DEVLIST.infoDetail.filter((item)=>!item.hideInDetail),
+            loginInfo:NEW_DEVLIST.loginInfo.filter(item=>!item.hideInLogin),
+            visible: false
         }
     },
     methods: {
@@ -81,11 +79,21 @@ export default {
         showDevForm() {
             this.$refs.devModal.showModal()
         },
-        handleOps(type) {
-            let tempValue = [...NEW_DEVLIST.typeToComponent].filter(([key, value]) => key === type)
-            let self = this
-            self.$refs[type][0][tempValue[0][1]]()
-            // type !== 'TableDelete' ?  : this[tempValue[0][1]]()
+        handleOps(type,id) {
+            let tempValue = [...NEW_DEVLIST.typeToComponent].filter(([key, value]) => key === type)[0]
+             let self = this
+            
+            //处理数据
+            let tempData = this.data.filter(item=>item.devId===id)[0]
+        
+            this.infoDetail = this.infoDetail.map(item=>{
+                // if(!item.hideInDetail){
+                    item.value = tempData[item.key] 
+                    return item       
+                // }
+
+            })
+            this.$refs[type][0][tempValue[1]]()            
         },
         handleVisibleChange(visible) {
             if (!visible) {

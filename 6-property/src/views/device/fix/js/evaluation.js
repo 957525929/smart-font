@@ -78,15 +78,15 @@ export const columns=[
 export const data=[
     {
         key: '1',
-        devId: '0001',
-        devName:"停电",
+        devId: '1',
+        devName:"18楼停电",
         devType:1,
         devStatus: 0,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
         fixStaff: '刘涛',
-        deliveryTime:"2021-06-22 17：55：55",
+        deliveryTime:"2021-06-18 17：55：55",
         fixedTime: '2021-06-22 20：00：00',
         action:[{
             tagName:"详情",

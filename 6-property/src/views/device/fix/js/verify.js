@@ -69,9 +69,9 @@ export const columns=[
 export const data=[
     {
         key: 0,
-        devId: '0002',
+        devId: '1',
         devName: "18楼停电",
-        devType: 0,
+        devType: 1,
         devStatus: 0,
         assets: '烟草大厦',
         institution: '福建烟草公司',

@@ -1,19 +1,31 @@
 <template>
-    <a-modal :visible="visible" :title="title" okText="提交" @cancel="handleCancel" @ok="handleCancel" :width="750">
+    <a-modal :visible="visible" :title="title" okText="提交" @cancel="handleCancel" @ok="handleCancel" :width="750" destroyOnClose>
         <a-form layout="vertical" :form="form">
             <a-row :gutter="28" type="flex" justify="center" class="formWrapper">
                 <a-card :bordered="false">
-                    <a-col v-for="(item, index) in infoDetail" :key="item.key" :span="12">
+                    <a-col v-for="item in infoDetail" :key="item.key" :span="infoDetail.length>6?12:24">
                         <a-form-item
                             :label="item.title"
                             class="formItem"
                             :labelCol="{ span: 5 }"
                             :wrapperCol="{ span: 19 }"
                         >
+                            <a-select
+                                v-if="item.type === 'a-select'"
+                                :default-value="`${item.value}`"
+                            >
+                                <a-select-option
+                                    :value="x.tableValue"
+                                    v-for="x in Object.values(item.valueEnum)"
+                                    :key="x.code"
+                                    >{{ x.tableValue}}
+                                </a-select-option>
+                            </a-select>
                             <component
-                                :is="item.type || 'a-input'"
                                 style="width: 100%"
-                                v-decorator="[`${item.key}`]"
+                                :is="item.type || 'a-input'"
+                                v-decorator="[`${item.key}`,{ initialValue: `${item.value}` }]"
+                                v-else
                             ></component>
                         </a-form-item>
                     </a-col>
@@ -23,6 +35,7 @@
     </a-modal>
 </template>
 <script>
+import moment from 'moment';
 export default {
     props: {
         title: {
@@ -36,13 +49,17 @@ export default {
             require: true,
         },
     },
+    mounted() {
+        console.log(this.infoDetail)
+    },
     data() {
         return {
             visible: false,
-            form:this.$form.createForm(this, { name: 'modal_list' }),
+            form: this.$form.createForm(this, { name: 'modal_list' }),
         }
     },
     methods: {
+        moment,
         showModal() {
             this.visible = true
         },
@@ -57,7 +74,7 @@ export default {
     justify-content: center;
     align-items: center;
 }
-.formItem{
+.formItem {
     flex-direction: row;
     align-items: center;
 }

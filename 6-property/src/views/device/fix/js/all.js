@@ -77,7 +77,7 @@ export const columns=[
 export const data=[
     {
         key: 0,
-        devId: '0001',
+        devId: '1',
         devName: "18楼停电",
         taskStatus:1,
         devType: 1,
@@ -85,7 +85,7 @@ export const data=[
         institution: '福建烟草公司',
         phone: '18232145698',
         fixStaff: '刘涛',
-        deliveryTime: '2021-06-21 17：55：55',
+        deliveryTime: '2021-06-22 17：55：55',
         action:[{
             tagName:"详情",
             com:"TableDrawer"
@@ -99,17 +99,66 @@ export const data=[
     },
     {
         key: 1,
-        devId: '0002',
+        devId: '2',
         devName: "18楼频繁断电停电",
         taskStatus:2,
         devType: 1,
-        deliveryTime:"2021-06-22 17：55：55",
+        deliveryTime:"2021-06-22 10：55：55",
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
         techSituation: 0,
         fixStaff: '刘涛',
         fixedTime: "2021-06-22 20：00：00",
+        action:[{
+            tagName:"详情",
+            com:"TableDrawer"
+        }]
+    },
+    {
+        key: 2,
+        devId: '3',
+        devName: "卫生间停水",
+        taskStatus:3,
+        devType: 2,
+        assets: '烟草大厦',
+        institution: '福建烟草公司',
+        phone: '18232145698',
+        fixStaff: '王翔',
+        deliveryTime: '2021-06-20 17：55：55',
+        action:[{
+            tagName:"详情",
+            com:"TableDrawer"
+        }]
+    },
+    {
+        key: 3,
+        devId: '4',
+        devName: "空调调控温度无反应",
+        taskStatus:4,
+        devType: 0,
+        deliveryTime:"2021-06-19 17：55：55",
+        assets: '烟草大厦',
+        institution: '福建烟草公司',
+        phone: '18232145698',
+        techSituation: 0,
+        fixStaff: '刘涛',
+        fixedTime: "2021-06-22 20：00：00",
+        action:[{
+            tagName:"详情",
+            com:"TableDrawer"
+        }]
+    },{
+        key:4,
+        devId: '5',
+        devName: "18楼停电",
+        taskStatus:5,
+        devType: 1,
+        assets: '烟草大厦',
+        institution: '福建烟草公司',
+        phone: '18232145698',
+        fixStaff: '刘涛',
+        deliveryTime: '2021-06-18 17：55：55',
         action:[{
             tagName:"详情",
             com:"TableDrawer"

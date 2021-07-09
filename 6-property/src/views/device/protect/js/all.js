@@ -91,7 +91,7 @@ export const columns = [{
 ]
 export const data = [{
     key: 0,
-    devId: '0001',
+    devId: '1',
     devName: "烟草大厦18楼频繁断电",
     taskType: 2,
     taskStatus: 1,
@@ -109,7 +109,7 @@ export const data = [{
   },
   {
     key: 1,
-    devId: '0002',
+    devId: '2',
     devName: "空调漏水",
     taskType: 1,
     taskStatus: 2,
@@ -127,7 +127,7 @@ export const data = [{
   },
   {
     key: 2,
-    devId: '0003',
+    devId: '3',
     devName: "电路老化检查",
     taskType: 0,
     taskStatus: 3,
