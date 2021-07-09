@@ -11,10 +11,18 @@
     </div>
     <div class="listPrt">
       <a-list item-layout="horizontal" :data-source="driverList" :pagination="pagination">
-        <a-list-item slot="renderItem" slot-scope="item">
+        <a-list-item slot="renderItem" slot-scope="item, index">
           <a slot="actions" @click="showEditDriver(item)">编辑</a>
-          <a slot="actions" @click="bindVisible = true">绑定车辆</a>
-          <a slot="actions">删除</a>
+          <!-- <a slot="actions" @click="bindVisible = true">绑定车辆</a> -->
+          <a-popconfirm
+            slot="actions"
+            title="确认删除该司机及其全部相关信息吗？"
+            ok-text="是"
+            cancel-text="否"
+            @confirm="deleteDriver(index)"
+          >
+            <a>删除</a>
+          </a-popconfirm>
           <a-list-item-meta>
             <div slot="description">
               {{ '联系方式：' + item.phoneNum }}
@@ -22,6 +30,13 @@
             <a slot="title">{{ item.name }}</a>
             <a-avatar slot="avatar" icon="user" style="backgroundcolor: #04009a" />
           </a-list-item-meta>
+          <div>
+            绑定车辆：
+            <span v-for="(d, index) in item.bindCar" :key="d">
+              <a-divider v-if="index != 0" type="vertical" />
+              {{ vehicleList[Number(d) - 1].licenseNum }}
+            </span>
+          </div>
         </a-list-item>
       </a-list>
     </div>
@@ -38,13 +53,7 @@
         @change="handleChange"
       />
     </a-modal>
-    <a-modal
-      v-model="editDriverVisible"
-      title="修改司机信息"
-      :destroyOnClose="true"
-      :footer="null"
-      :maskClosable="false"
-    >
+    <a-modal v-model="editDriverVisible" title="编辑" :destroyOnClose="true" :footer="null" :maskClosable="false">
       <edit-driver :originInfo="currentDriver" />
     </a-modal>
   </div>
@@ -82,7 +91,6 @@ export default {
     },
     handleChange(nextTargetKeys, direction, moveKeys) {
       this.targetKeys = nextTargetKeys
-
       console.log('targetKeys: ', nextTargetKeys)
       console.log('direction: ', direction)
       console.log('moveKeys: ', moveKeys)
@@ -90,6 +98,9 @@ export default {
     showEditDriver(item) {
       this.currentDriver = item
       this.editDriverVisible = true
+    },
+    deleteDriver(index) {
+      this.driverList.splice(index, 1)
     },
   },
 }

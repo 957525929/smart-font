@@ -93,7 +93,7 @@ export const data = [
         phone: '18232145698',
         techSituation: 0,
         fixStaff: '张英',
-        loginTime: '2021-06-22 17：55：55',
+        loginTime: '2021-06-22 17:55:55',
         manufacturer:"日丰企业集团有限公司",
         batch:"M127894",
         action:[{
@@ -101,20 +101,8 @@ export const data = [
             url:"device-DevDetail",
             com:"router-link"
         },{
-            tagName:"基本信息",
-            com:"TableDrawer"
-        },{
             tagName:"编辑",
             com:"TableModal"
-        },{
-            tagName:"维修记录",
-            com:"TableDrawer"
-        },{
-            tagName:"保养记录",
-            com:"TableDrawer"
-        },{
-            tagName:"运行参数",
-            com:"TableDrawer"
         },{
             tagName:"删除",
             com:"TableDelete"
@@ -131,24 +119,16 @@ export const data = [
         phone: '18232145698',
         techSituation: 1,
         fixStaff: '刘涛',
-        loginTime: '2021-06-21 10：55：55',
+        loginTime: '2021-06-21 10:55:55',
         manufacturer:"国网福建省电力有限公司",
         batch:"N2169",
         action:[{
-            tagName:"基本信息",
-            com:"TableDrawer"
+            tagName:"详情",
+            url:"device-DevDetail",
+            com:"router-link"
         },{
             tagName:"编辑",
             com:"TableModal"
-        },{
-            tagName:"维修记录",
-            com:"TableDrawer"
-        },{
-            tagName:"保养记录",
-            com:"TableDrawer"
-        },{
-            tagName:"运行参数",
-            com:"TableDrawer"
         },{
             tagName:"删除",
             com:"TableDelete"
@@ -164,32 +144,24 @@ export const data = [
         phone: '18232145698',
         techSituation: 2,
         fixStaff: '王翔',
-        loginTime: '2021-06-29 08：55：55',
+        loginTime: '2021-06-29 08:55:55',
         manufacturer:"珠海格力电器股份有限公司",
         batch:"A2421",
         action:[{
-            tagName:"基本信息",
-            com:"TableDrawer"
+            tagName:"详情",
+            url:"device-DevDetail",
+            com:"router-link"
         },{
             tagName:"编辑",
             com:"TableModal"
         },{
-            tagName:"维修记录",
-            com:"TableDrawer"
-        },{
-            tagName:"保养记录",
-            com:"TableDrawer"
-        },{
-            tagName:"运行参数",
-            com:"TableDrawer"
-        },{
             tagName:"删除",
-            com:"TableDelete"
+            com:""
         }]
     }
 ]
 
-export const infoDetail =[
+export const infoDetail = [
     {
         title: '设备编号',
         key: 'devId',
@@ -205,34 +177,37 @@ export const infoDetail =[
         title: '设备类型',
         value:"",
         key: 'devType',
-        type:"a-select"
+        type:"a-select",
+        valueEnum: devType,
     },
     {
         title: '实际状态',
         key: 'devStatus',
         value:"",
-        type:"a-select"
+        type:"a-select",
+        valueEnum:devStatus ,
     },
     {
         title: '所属资产',
         key: 'assets',
         value:"",
     },
-    {
-        key: 'institution',
-        title: '业主单位',
-        value:"",
-    },
-    {
-        title: '业主联系方式',
-        key: 'phone',        
-        value:"",
-    },
+    // {
+    //     key: 'institution',
+    //     title: '业主单位',
+    //     value:"",
+    // },
+    // {
+    //     title: '业主联系方式',
+    //     key: 'phone',        
+    //     value:"",
+    // },
     {
         title: '技术状况',
         key: 'techSituation',
         value:"",
-        type:"a-select"
+        type:"a-select" ,
+        valueEnum: techSituation,
     },
     {
         title: '维修员',
@@ -243,14 +218,16 @@ export const infoDetail =[
         title: '登记时间',
         key: 'loginTime',
         value:"",
-        type:"a-range-picker"
+        type:"a-date-picker",
+        hideInDetail:true
     }
 ]
 
 export const loginInfo = [{
     title: '设备编号',
     key: 'devId',
-    value:""
+    value:"",
+    hideInLogin:true
 },
 {
     title: '设备名称',

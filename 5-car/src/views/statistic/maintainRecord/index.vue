@@ -2,10 +2,10 @@
   <div class="root">
     <div class="filterPrt">
       <div class="filterCtx">
-        <a-date-picker />&nbsp;&nbsp;
+        请选择统计时间段：
+        <a-range-picker />&nbsp;&nbsp;
         <a-select style="width: 80px" defaultValue="车牌号" @select="conditionOnSelect">
           <a-select-option key="1" value="车牌号">车牌号</a-select-option>
-          <a-select-option key="2" value="用车人">用车人</a-select-option>
           <a-select-option key="3" value="司机">司机</a-select-option>
         </a-select>
         <a-input-search :placeholder="`请输入${currentCondition}搜索`" style="width: 200px" @search="onSearch" />
@@ -56,7 +56,7 @@ const columns = [
     dataIndex: 'amount',
   },
   {
-    title: '验收人',
+    title: '司机',
     dataIndex: 'charger',
   },
   {

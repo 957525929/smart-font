@@ -8,17 +8,17 @@
         <a-form layout="inline">
           <a-row :gutter="10">
 
-            <a slot="docTypeList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
-
             <a-col :md="5" :sm="10">
               <a-form-item label="文档类型">
                 <a-input class="w140" placeholder="请输入文档类型"></a-input>
               </a-form-item>
             </a-col>
 
-            <a-col :md="5" :sm="10">
+            <a-col :sm="10">
               <a-form-item label="创建时间">
-                <a-date-picker placeholder="创建时间" class="w140" />
+                <a-date-picker class="w140" placeholder="请选择时间" />
+                ~
+                <a-date-picker class="w140" placeholder="请选择时间" />
               </a-form-item>
             </a-col>
 
@@ -55,11 +55,15 @@
       <div :columns="columns" :selectedRowKeys="selectedRowKeys">
         <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
 
-          <span slot="action" slot-scope="text, record">
+          <!-- <a slot="docTypeList" slot-scope="text" @click="showDetails(text)">{{text}}</a> -->
+
+          <span slot="action" slot-scope="text, record,index">
             <a @click="handleEdit(record)">编辑</a>
             <a-divider type="vertical" />
-            <a class="ant-dropdown-link">删除</a>
 
+            <a-popconfirm title="确定删除吗?" @confirm="() =>  deleteIndex(index)">
+              <a>删除</a>
+            </a-popconfirm>
           </span>
 
         </a-table>
@@ -93,7 +97,6 @@ export default {
       onSelect: (record) => {
         this.currentTaskName = record.taskName;
         console.log(this.currentTaskName);
-
       },
 
     };
@@ -101,6 +104,7 @@ export default {
       rowSelection,
       data: NEW_DEVLIST.data,
       columns: NEW_DEVLIST.columns,
+      deleteModalVisible: false,
       url: {
         list: "/sys/quartzJob/list",
         delete: "/sys/quartzJob/delete",
@@ -113,9 +117,9 @@ export default {
     }
   },
   methods: {
-    showDetails(item) {
-      this.currentItem = item;
-      console.log(this.currentItem);
+    deleteIndex(index) {
+      this.currentIndex = index;
+      this.data.splice(this.currentIndex, 1)
     },
   },
 }

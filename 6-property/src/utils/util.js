@@ -108,7 +108,6 @@ export function generateIndexRouter(data) {
 
 function generateChildRouters(data) {
   const routers = [];
-  console.log(data, typeof (data));
   for (let item of data) {
     let component = "";
     if (item.component.indexOf("layouts") >= 0) {

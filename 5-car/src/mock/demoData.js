@@ -74,6 +74,7 @@ export const vehicleList = [
         key: '1',
         licenseNum: '闽A123401',
         status: '正常',
+        seatNum:4,
         BX: '2022-06-03',
         BY: '2021-12-03',
         NS: '2022-06-03',
@@ -81,6 +82,7 @@ export const vehicleList = [
     {
         key: '2',
         licenseNum: '闽A123402',
+        seatNum:6,
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -89,6 +91,7 @@ export const vehicleList = [
     {
         key: '3',
         licenseNum: '闽A123403',
+        seatNum:4,
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -97,6 +100,7 @@ export const vehicleList = [
     {
         key: '4',
         licenseNum: '闽A123404',
+        seatNum:4,
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -105,6 +109,7 @@ export const vehicleList = [
     {
         key: '5',
         licenseNum: '闽A123405',
+        seatNum:5,
         status: '正常',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -113,6 +118,7 @@ export const vehicleList = [
     {
         key: '6',
         licenseNum: '闽A123406',
+        seatNum:5,
         status: '维修中',
         BX: '2022-06-03',
         BY: '2021-12-03',
@@ -126,46 +132,55 @@ export const driverList = [
         key: '1',
         name: '张三',
         phoneNum: generatePhoneNum(),
+        bindCar:['1', '4']
     },
     {
         key: '2',
         name: '卢本伟',
         phoneNum: generatePhoneNum(),
+        bindCar:['1', '3']
     },
     {
         key: '3',
         name: '孙笑川',
         phoneNum: generatePhoneNum(),
+        bindCar:['2']
     },
     {
         key: '4',
         name: '马保国',
         phoneNum: generatePhoneNum(),
+        bindCar:['5']
     },
     {
         key: '5',
         name: '陈睿',
         phoneNum: generatePhoneNum(),
+        bindCar:['3','5']
     },
     {
         key: '6',
         name: '肖战',
         phoneNum: generatePhoneNum(),
+        bindCar:['3','6']
     },
     {
         key: '7',
         name: '袁世凯',
         phoneNum: generatePhoneNum(),
+        bindCar:['2','3','6']
     },
     {
         key: '8',
         name: '秦桧',
         phoneNum: generatePhoneNum(),
+        bindCar:['2','4','6']
     },
     {
         key: '9',
         name: '魏忠贤',
         phoneNum: generatePhoneNum(),
+        bindCar:['1','3','4','6']
     }
 ]
 
@@ -410,8 +425,8 @@ export const vehicleUsageRecord = [
 
 //司机工作量
 export const driverWorkloadPie = [
-    { item: '出车次数', count: 56 },
-    { item: '缺勤/请假次数', count: 2 },
+    { item: '总计出车次数', count: 60 },
+    { item: '平均出车次数', count: 2 },
 ]
 
 export const driverWorkloadLineChart = [

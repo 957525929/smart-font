@@ -12,7 +12,7 @@
       <a-list item-layout="horizontal" :data-source="listData" :pagination="pagination">
         <a-list-item slot="renderItem" slot-scope="item">
           <a slot="actions" @click="showDispatchModal(item)">{{ item.driver ? '改派' : '派单' }}</a>
-          <a slot="actions" @click="showDetails(item)">详情</a>
+          <!-- <a slot="actions" @click="showDetails(item)">详情</a> -->
           <!-- <a slot="actions">删除</a> -->
           <a-list-item-meta>
             <div slot="description">
@@ -42,13 +42,14 @@
       <mydetails :id="currentItem" />
     </a-modal>
     <a-modal v-model="dispatchVisible" :title="dispatchType" :destroyOnClose="true">
+      <mydetails :id="currentItem" />
       <!-- <select-driver :id="currentItem" /> -->
       <div>
         <div style="margin-top: 10px; text-align: center">
           请选择车辆：
           <a-select style="width: 200px">
             <a-select-option v-for="d in vehicleList" :key="d.key">
-              {{ d.licenseNum }}
+              {{ d.licenseNum+'（座位数：'+d.seatNum+'）' }}
             </a-select-option>
           </a-select>
         </div>
@@ -70,7 +71,6 @@
 
 <script>
 import mydetails from './details.vue'
-import selectDriver from './selectDriver.vue'
 import newTask from './newTask.vue'
 import { dispatchList, driverList, vehicleList } from '@/mock/demoData.js'
 export default {
@@ -94,7 +94,6 @@ export default {
   },
   components: {
     mydetails,
-    selectDriver,
     newTask,
   },
   methods: {

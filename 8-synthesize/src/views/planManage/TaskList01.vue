@@ -21,8 +21,8 @@
               </a-menu-item>
 
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  删除
+                <a-popconfirm title="确定删除吗?" @confirm="() =>  deleteIndex(index)">
+                  <a>删除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -88,6 +88,10 @@ export default {
     showDetails(item) {
       this.currentItem = item;
       console.log(this.currentItem);
+    },
+    deleteIndex(index) {
+      this.currentIndex = index;
+      this.data.splice(this.currentIndex, 1)
     },
   },
 }

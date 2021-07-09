@@ -9,13 +9,23 @@
                     :style="{ display: index < count ? 'block' : 'none' }"
                 >
                     <a-form-item :label="item.title" :labelCol="{span: 5}" :wrapperCol="{ span: 18 }">
-                       <component 
-                        :is="item.type || 'a-input'" 
-                        style="width: 100%"
-                        v-decorator="[`${item.dataIndex}`]"
-                        
-                      ></component>
-                      <!-- :placeholder="ifshowPlace(item.type,item.title)" -->
+                            <a-select
+                                v-if="item.type === 'a-select'"
+                                style="width: 100%"
+                            >
+                                <a-select-option
+                                    v-for="x in Object.values(item.valueEnum)"
+                                    :key="x.code"
+                                    >{{ x.tableValue}}
+                                </a-select-option>
+                            </a-select>
+                            <component
+                                style="width: 100%"
+                                :is="item.type || 'a-input'"
+                                
+                                v-else
+                            ></component>
+                      <!-- :placeholder="ifshowPlace(item.type,item.title)" v-decorator="[`${item.key}`]"-->
                     </a-form-item>
                 </a-col>
             </a-row>
