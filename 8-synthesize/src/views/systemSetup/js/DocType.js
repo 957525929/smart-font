@@ -2,22 +2,22 @@ export const data = [
     {
         key: '1',
         docType: '资产',
-        createTime: '2020-5-23'
+        createTime: '2020-5-23 10:21:12'
     },
     {
         key: '2',
         docType: '会议纪要',
-        createTime: '2020-5-23'
+        createTime: '2020-5-23 12:21:18'
     },
     {
         key: '3',
         docType: '记录',
-        createTime: '2020-6-21'
+        createTime: '2020-6-21 13:01:46'
     },
     {
         key: '4',
         docType: '总结',
-        createTime: '2020-2-28'
+        createTime: '2020-2-28 17:33:58'
     },
 
 ]
