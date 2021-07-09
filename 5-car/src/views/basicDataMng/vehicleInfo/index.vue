@@ -2,7 +2,7 @@
   <div class="root">
     <div class="filterPrt">
       <div class="filterCtx">
-        <a-input-search :placeholder="`请输入车牌号搜索`" style="width: 200px" @search="onSearch" />
+        <a-input-search :placeholder="`请输入车牌号搜索`" style="width: 200px" />
         <a-button type="primary" style="float: right; margin-right: 10px">导出</a-button>
         <a-button type="primary" style="float: right; margin-right: 10px" @click="newVehicleVisible = true"
           ><a-icon type="plus" />新增</a-button
@@ -11,10 +11,18 @@
     </div>
     <div class="listPrt">
       <a-list item-layout="horizontal" :data-source="listData" :pagination="pagination">
-        <a-list-item slot="renderItem" slot-scope="item">
+        <a-list-item slot="renderItem" slot-scope="item, index">
           <a slot="actions" @click="showDetails(item)">详情</a>
           <a slot="actions" @click="showEditForm(item)">修改</a>
-          <a slot="actions">删除</a>
+          <a-popconfirm
+            slot="actions"
+            title="确认删除该车辆及其全部相关信息吗？"
+            ok-text="是"
+            cancel-text="否"
+            @confirm="listData.splice(index, 1)"
+          >
+            <a>删除</a>
+          </a-popconfirm>
           <a-list-item-meta>
             <div slot="description">
               {{ '保险到期' + item.BX }}

@@ -132,46 +132,55 @@ export const driverList = [
         key: '1',
         name: '张三',
         phoneNum: generatePhoneNum(),
+        bindCar:['1', '4']
     },
     {
         key: '2',
         name: '卢本伟',
         phoneNum: generatePhoneNum(),
+        bindCar:['1', '3']
     },
     {
         key: '3',
         name: '孙笑川',
         phoneNum: generatePhoneNum(),
+        bindCar:['2']
     },
     {
         key: '4',
         name: '马保国',
         phoneNum: generatePhoneNum(),
+        bindCar:['5']
     },
     {
         key: '5',
         name: '陈睿',
         phoneNum: generatePhoneNum(),
+        bindCar:['3','5']
     },
     {
         key: '6',
         name: '肖战',
         phoneNum: generatePhoneNum(),
+        bindCar:['3','6']
     },
     {
         key: '7',
         name: '袁世凯',
         phoneNum: generatePhoneNum(),
+        bindCar:['2','3','6']
     },
     {
         key: '8',
         name: '秦桧',
         phoneNum: generatePhoneNum(),
+        bindCar:['2','4','6']
     },
     {
         key: '9',
         name: '魏忠贤',
         phoneNum: generatePhoneNum(),
+        bindCar:['1','3','4','6']
     }
 ]
 
