@@ -63,7 +63,7 @@
 
     <!-- table区域-begin -->
     <div>
-      <a-table ref="table" size="middle" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
+      <a-table ref="table" size="middle" :model="data" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
 
         <a slot="planNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
 
@@ -89,18 +89,22 @@
         </span>
 
         <!-- 状态渲染模板 -->
-        <template slot="customRenderStatus" slot-scope="status">
+        <template slot="customRenderStatus" slot-scope="status,record">
           <a-tag v-if="status==='0'" color="orange">未开始</a-tag>
           <a-tag v-if="status==='1'" color="green">进行中</a-tag>
           <a-tag v-if="status==='2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status==='3'" color="red">未完成</a-tag>
+          <a-tag v-if="status==='3'" color="red">
+            <a-popconfirm title="是否确认延长时间?" ok-text="确定" cancel-text="取消" @confirm="confirm(record)" @cancel="cancel">
+              未完成
+            </a-popconfirm>
+          </a-tag>
         </template>
       </a-table>
     </div>
     <!-- table区域-end -->
 
     <!-- 表单区域 -->
-    <PlanListModal ref="modalForm" @ok="modalFormOk" :id="currentItem"> </PlanListModal>
+    <PlanListModal ref="modalForm" @ok="modalFormOk"> </PlanListModal>
   </a-card>
 </template>
 
@@ -257,6 +261,7 @@ export default {
         exportXlsUrl: "sys/quartzJob/exportXls",
         importExcelUrl: "sys/quartzJob/importExcel",
       },
+      table_status: "未完成"
     }
   },
   methods: {
@@ -269,6 +274,14 @@ export default {
     deleteIndex(index) {
       this.currentIndex = index;
       this.data.dataSource.splice(this.currentIndex, 1)
+    },
+    confirm(record) {
+      record.status = "1";
+      this.$message.success('延期成功');
+    },
+    cancel(e) {
+      // console.log(e);
+      // this.$message.error('Click on No');
     },
   },
 
