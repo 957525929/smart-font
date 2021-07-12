@@ -302,7 +302,6 @@
     methods: {
       initDictConfig() {}
     }
-
   }
 </script>
 

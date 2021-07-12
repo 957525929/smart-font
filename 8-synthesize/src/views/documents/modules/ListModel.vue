@@ -5,19 +5,24 @@
       <a-form :form="form">
 
         <a-form-item label="文档名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="[ 'accountNo', validatorRules.accountNo]" placeholder="请输入文档名称"></a-input>
+          <a-input v-decorator="[ 'name', validatorRules.name]" placeholder="请输入文档名称"></a-input>
         </a-form-item>
 
-        <a-form-item label="文档类型" :labelCol="labelCol" :wrapperCol="wrapperCol" placeholder="请输入文档名称">
-          <a-select style="width: 220px" placeholder="请选择文档类型">
-            <a-select-option value="0">doc</a-select-option>
-            <a-select-option value="1">ppt</a-select-option>
-            <a-select-option value="2">xlsx</a-select-option>
+        <a-form-item label="文档类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-select v-decorator="[ 'type', validatorRules.type]" style="width: 220px" placeholder="请选择文档类型">
+            <a-select-option value="0">资产</a-select-option>
+            <a-select-option value="1">会议纪要</a-select-option>
+            <a-select-option value="2">记录</a-select-option>
+            <a-select-option value="3">报告</a-select-option>
           </a-select>
         </a-form-item>
 
-        <a-form-item label="上传时间" :labelCol="labelCol" :wrapperCol="wrapperCol" placeholder="请选择上传时间">
-          <j-date v-decorator="[ 'updateTime']" :trigger-change="true" style="width: 100%" />
+        <a-form-item label="上传文件" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-upload name="file" :multiple="true" :headers="headers">
+            <a-input placeholder="请上传文件" v-decorator="[ 'document', validatorRules.document]">
+              <upload-outlined></upload-outlined>
+            </a-input>
+          </a-upload>
         </a-form-item>
 
         <a-form-item label="概述" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -68,64 +73,19 @@ export default {
       },
       confirmLoading: false,
       validatorRules: {
-        accountNo: {
-          rules: [
-            { required: true, message: '请输入账号!' },
-          ]
-        },
         name: {
           rules: [
+            { required: true, message: '请输入文档名称!' },
           ]
         },
-        currency: {
+        type: {
           rules: [
-            { required: true, message: '请输入币种!' },
+            { required: true, message: '请选择上传文件类型!' },
           ]
         },
-        initBal: {
+        document: {
           rules: [
-            { required: true, message: '请输入初始余额!' },
-          ]
-        },
-        bankNo: {
-          rules: [
-          ]
-        },
-        bankAddress: {
-          rules: [
-          ]
-        },
-        manager: {
-          rules: [
-          ]
-        },
-        note: {
-          rules: [
-          ]
-        },
-        attachment: {
-          rules: [
-          ]
-        },
-        isEnabled: {
-          rules: [
-            { required: true, message: '请输入是否启用!' },
-          ]
-        },
-        createBy: {
-          rules: [
-          ]
-        },
-        createTime: {
-          rules: [
-          ]
-        },
-        updateBy: {
-          rules: [
-          ]
-        },
-        updateTime: {
-          rules: [
+            { required: true, message: '请上传文件' },
           ]
         },
       },

@@ -157,7 +157,8 @@
           fullPath: indexKey,
           meta: {
             icon: 'dashboard',
-            title: '首页'
+            title: '入库管理',
+            // title: '首页',
           }
         })
         this.linkList.splice(0, 0, indexKey)

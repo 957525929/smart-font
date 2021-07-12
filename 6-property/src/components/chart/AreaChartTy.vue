@@ -2,11 +2,11 @@
   <div :style="{ padding: '0' }">
     <h4 :style="{ marginBottom: '20px' }">{{ title }}</h4>
 
-    <v-chart ref="chart" :forceFit="true" :height="height" :data="dataSource" :scale="scale">
+    <v-chart ref="chart" :forceFit="true" :height="height" :data="dataSource" :scale="scale" :autoFit="true">
       <v-tooltip :shared="false"/>
       <v-axis/>
-      <v-line position="x*y" :size="lineSize" :color="lineColor"/>
-      <v-area position="x*y" :color="color"/>
+      <v-line position="x*y" :size="lineSize" :color="lineColor" :smooth="true"/>
+      <v-area position="x*y" :color="color" :smooth="true"/>
     </v-chart>
 
   </div>

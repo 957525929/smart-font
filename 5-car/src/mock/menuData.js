@@ -48,20 +48,20 @@ export const menu = {
             },
             {
                 "redirect": null,
-                "path": "/vehicle",
+                "path": "/vehicleUsageMng",
                 "component": "layouts/RouteView",
                 "route": "1",
                 "meta": {
                     "keepAlive": false,
                     "internalOrExternal": false,
                     "icon": "car",
-                    "title": "车辆管理"
+                    "title": "用车管理"
                 },
-                "name": "vehicle",
+                "name": "vehicleUsageMng",
                 "id": "9502685863ab87f0ad1134142788a385",
                 "children": [{
-                    "path": "/vehicle/verify",
-                    "component": "vehicle/verify/index",
+                    "path": "/vehicleUsageMng/verify",
+                    "component": "vehicleUsageMng/verify/index",
                     "route": "1",
                     "meta": {
                         "keepAlive": false,
@@ -69,35 +69,11 @@ export const menu = {
                         "icon": "profile",
                         "title": "用车审核"
                     },
-                    "name": "vehicle-verify"
+                    "name": "vehicleUsageMng-verify"
                 },
                 {
-                    "path": "/vehicle/history",
-                    "component": "vehicle/history/index",
-                    "route": "1",
-                    "meta": {
-                        "keepAlive": false,
-                        "internalOrExternal": false,
-                        "icon": "database",
-                        "title": "用车记录"
-                    },
-                    "name": "vehicle-history"
-                },
-                {
-                    "path": "/vehicle/listInfo",
-                    "component": "vehicle/listInfo/index",
-                    "route": "1",
-                    "meta": {
-                        "keepAlive": false,
-                        "internalOrExternal": false,
-                        "icon": "car",
-                        "title": "车辆信息"
-                    },
-                    "name": "vehicle-listInfo"
-                },
-                {
-                    "path": "/vehicle/dispatch",
-                    "component": "vehicle/dispatch/index",
+                    "path": "/vehicleUsageMng/dispatch",
+                    "component": "vehicleUsageMng/dispatch/index",
                     "route": "1",
                     "meta": {
                         "keepAlive": false,
@@ -105,61 +81,38 @@ export const menu = {
                         "icon": "control",
                         "title": "车辆调度"
                     },
-                    "name": "vehicle-dispatch"
+                    "name": "vehicleUsageMng-dispatch"
                 },
-                {
-                    "path": "/vehicle/supplyRecord",
-                    "component": "vehicle/supplyRecord/index",
-                    "route": "1",
-                    "meta": {
-                        "keepAlive": false,
-                        "internalOrExternal": false,
-                        "icon": "api",
-                        "title": "加油记录"
-                    },
-                    "name": "vehicle-supplyRecord"
-                },
-                {
-                    "path": "/vehicle/maintainRecord",
-                    "component": "vehicle/maintainRecord/index",
-                    "route": "1",
-                    "meta": {
-                        "keepAlive": false,
-                        "internalOrExternal": false,
-                        "icon": "insurance",
-                        "title": "保养记录"
-                    },
-                    "name": "vehicle-maintainRecord"
-                },
-                {
-                    "path": "/vehicle/fixRecord",
-                    "component": "vehicle/fixRecord/index",
-                    "route": "1",
-                    "meta": {
-                        "keepAlive": false,
-                        "internalOrExternal": false,
-                        "icon": "tool",
-                        "title": "维修记录"
-                    },
-                    "name": "vehicle-fixRecord"
-                }]
+               ]
             },
             {
                 "redirect": null,
-                "path": "/personnelMng",
+                "path": "/basicDataMng",
                 "component": "layouts/RouteView",
                 "route": "1",
                 "meta": {
                     "keepAlive": false,
                     "internalOrExternal": false,
                     "icon": "audit",
-                    "title": "人员管理"
+                    "title": "基础数据"
                 },
-                "name": "personnelMng",
+                "name": "basicDataMng",
                 "children": [
                     {
-                        "path": "/personnelMng/driverMng",
-                        "component": "personnelMng/driverMng/index",
+                        "path": "/basicDataMng/vehicleInfo",
+                        "component": "basicDataMng/vehicleInfo/index",
+                        "route": "1",
+                        "meta": {
+                            "keepAlive": false,
+                            "internalOrExternal": false,
+                            "icon": "car",
+                            "title": "车辆信息"
+                        },
+                        "name": "basicDataMng-vehicleInfo"
+                    },
+                    {
+                        "path": "/basicDataMng/driverMng",
+                        "component": "basicDataMng/driverMng/index",
                         "route": "1",
                         "meta": {
                             "keepAlive": false,
@@ -167,36 +120,112 @@ export const menu = {
                             "icon": "team",
                             "title": "司机管理"
                         },
-                        "name": "personnelMng-driverMng"
+                        "name": "basicDataMng-driverMng"
                     }
                 ]
             },
             {
                 "redirect": null,
-                "path": "/sysCtrl",
+                "path": "/statistic",
                 "component": "layouts/RouteView",
                 "route": "1",
                 "meta": {
                     "keepAlive": false,
                     "internalOrExternal": false,
-                    "icon": "setting",
-                    "title": "系统管理"
+                    "icon": "pie-chart",
+                    "title": "查询统计"
                 },
-                "name": "sysCtrl",
+                "name": "statistic",
                 "children": [
                     {
-                        "path": "/sysCtrl/test",
-                        "component": "sysCtrl/test",
+                        "path": "/statistic/vehicleUsageRecord",
+                        "component": "statistic/vehicleUsageRecord/index",
                         "route": "1",
                         "meta": {
                             "keepAlive": false,
                             "internalOrExternal": false,
-                            "title": "开发中..."
+                            "icon": "car",
+                            "title": "用车记录"
                         },
-                        "name": "sysCtrl-test"
+                        "name": "statistic-vehicleUsageRecord"
+                    },
+                    {
+                        "path": "/statistic/driverWorkload",
+                        "component": "statistic/driverWorkload/index",
+                        "route": "1",
+                        "meta": {
+                            "keepAlive": false,
+                            "internalOrExternal": false,
+                            "icon": "audit",
+                            "title": "司机工作量"
+                        },
+                        "name": "statistic-driverWorkload"
+                    },
+                    {
+                        "path": "/statistic/supplyRecord",
+                        "component": "statistic/supplyRecord/index",
+                        "route": "1",
+                        "meta": {
+                            "keepAlive": false,
+                            "internalOrExternal": false,
+                            "icon": "api",
+                            "title": "加油记录"
+                        },
+                        "name": "statistic-supplyRecord"
+                    },
+                    {
+                        "path": "/statistic/maintainRecord",
+                        "component": "statistic/maintainRecord/index",
+                        "route": "1",
+                        "meta": {
+                            "keepAlive": false,
+                            "internalOrExternal": false,
+                            "icon": "insurance",
+                            "title": "保养记录"
+                        },
+                        "name": "statistic-maintainRecord"
+                    },
+                    {
+                        "path": "/statistic/fixRecord",
+                        "component": "statistic/fixRecord/index",
+                        "route": "1",
+                        "meta": {
+                            "keepAlive": false,
+                            "internalOrExternal": false,
+                            "icon": "tool",
+                            "title": "维修记录"
+                        },
+                        "name": "statistic-fixRecord"
                     }
                 ]
-            }]
+            },
+            // {
+            //     "redirect": null,
+            //     "path": "/sysCtrl",
+            //     "component": "layouts/RouteView",
+            //     "route": "1",
+            //     "meta": {
+            //         "keepAlive": false,
+            //         "internalOrExternal": false,
+            //         "icon": "setting",
+            //         "title": "系统管理"
+            //     },
+            //     "name": "sysCtrl",
+            //     "children": [
+            //         {
+            //             "path": "/sysCtrl/test",
+            //             "component": "sysCtrl/test",
+            //             "route": "1",
+            //             "meta": {
+            //                 "keepAlive": false,
+            //                 "internalOrExternal": false,
+            //                 "title": "开发中..."
+            //             },
+            //             "name": "sysCtrl-test"
+            //         }
+            //     ]
+            // }
+        ]
     },
     "timestamp": 1624946593208
 }

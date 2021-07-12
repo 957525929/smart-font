@@ -1,59 +1,157 @@
 <template>
   <a-card>
-    <span>工号：</span>
-    <a-input style="width: 150px"></a-input>
-    <a-divider type="vertical"/>
-    <span>姓名：</span>
-    <a-input style="width: 150px"></a-input>
-    <a-divider type="vertical"/>
-    <span>部门：</span>
-    <a-select default-value="market" style="width: 150px">
-      <a-select-option value="market"> 营销部</a-select-option>
-      <a-select-option value="distribution"> 配送部</a-select-option>
-    </a-select>
-    <a-divider type="vertical"/>
-    <span>开锁时间：</span>
-    <a-time-picker :default-value="moment('12:08', 'HH:mm')" format="HH:mm" style="width: 150px"/>
-    <a-divider type="vertical"/>
-    <span>开锁方式：</span>
-    <a-select default-value="remote" style="width: 150px">
-      <a-select-option value="remote"> 远程开锁</a-select-option>
-      <a-select-option value="finger"> 指纹</a-select-option>
+    <!-- 上部 -->
+
+    <span class="lockNum">锁编号：</span>
+    <a-input style="width: 11%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
+
+    <a-divider type="vertical" />
+
+    <span>楼号：</span>
+    <a-select style="width: 11%" placeholder="请选择楼号" @change="buildChange" allowClear>
+      <a-select-option value="1"> 1号楼 </a-select-option>
+      <a-select-option value="2"> 2号楼 </a-select-option>
+      <a-select-option value="3"> 3号楼 </a-select-option>
+      <a-select-option value="4"> 4号楼 </a-select-option>
     </a-select>
 
-    <br/><br/>
-    <a-row justify="end" type="flex">
+    <a-divider type="vertical" />
+
+    <span>房间：</span>
+    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
+
+    <a-divider type="vertical" />
+
+    <span>部门：</span>
+    <a-select style="width: 11%" placeholder="请选择部门" @change="deptChange" allowClear>
+      <a-select-option value="1"> 办公室 </a-select-option>
+      <a-select-option value="2"> 生产部 </a-select-option>
+      <a-select-option value="3"> 购销部 </a-select-option>
+      <a-select-option value="4"> 信息中心 </a-select-option>
+    </a-select>
+
+    <br /><br />
+
+    <span>开锁时间段：</span>
+    <a-date-picker
+      v-model="startValue"
+      :disabled-date="disabledStartDate"
+      show-time
+      format="YYYY-MM-DD HH:mm:ss"
+      placeholder="开始时间"
+      @openChange="handleStartOpenChange"
+    />
+    <a-divider type="vertical" />
+    <a-date-picker
+      v-model="endValue"
+      :disabled-date="disabledEndDate"
+      show-time
+      format="YYYY-MM-DD HH:mm:ss"
+      placeholder="结束时间"
+      :open="endOpen"
+      @openChange="handleEndOpenChange"
+    />
+
+    <a-divider type="vertical" />
+
+    <span>开锁方式：</span>
+    <a-select style="width: 15%" placeholder="请选择开锁方式" @change="openlockChange" allowClear>
+      <a-select-option value="1"> 指纹开锁 </a-select-option>
+      <a-select-option value="2"> 密码开锁 </a-select-option>
+      <a-select-option value="3"> 远程开锁 </a-select-option>
+    </a-select>
+
+    <br /><br />
+
+    <!-- 下部 -->
+    <a-row type="flex" justify="end">
       <a-col>
-        <a-button type="primary">查询</a-button>
-        <a-divider type="vertical"/>
+        <a-button @click="check">查询</a-button>
+        <a-divider type="vertical" />
         <a-button @click="showConfirm">导出</a-button>
       </a-col>
-
     </a-row>
   </a-card>
 </template>
 <script>
-import moment from "moment";
-
 export default {
-  methods: {
-    moment,
-
-    // 查询点击功能
-    showConfirm() {
-      this.$confirm({
-        title: "是否导出当前表单？",
-        okText: "确认",
-        cancelText: "取消",
-        onOk() {
-          console.log("OK");
-        },
-        onCancel() {
-          console.log("Cancel");
-        },
-        class: "test",
-      });
+  data() {
+    return {
+      lockNum: '',
+      roomNum: '',
+      startValue: null,
+      endValue: null,
+      endOpen: false,
+    }
+  },
+  watch: {
+    startValue(val) {
+      console.log('startValue', val)
+    },
+    endValue(val) {
+      console.log('endValue', val)
     },
   },
-};
+  methods: {
+    //查询
+    check() {
+      console.log('点击查询')
+      console.log(this.lockNum)
+    },
+    //获取单选框值
+    buildChange(value) {
+      console.log(value)
+    },
+    deptChange(value) {
+      console.log(value)
+    },
+
+    // 开锁方式
+    openlockChange(value) {
+      console.log(value)
+    },
+
+    //日期选择
+    disabledStartDate(startValue) {
+      const endValue = this.endValue
+      if (!startValue || !endValue) {
+        return false
+      }
+      return startValue.valueOf() > endValue.valueOf()
+    },
+    disabledEndDate(endValue) {
+      const startValue = this.startValue
+      if (!endValue || !startValue) {
+        return false
+      }
+      return startValue.valueOf() >= endValue.valueOf()
+    },
+    handleStartOpenChange(open) {
+      if (!open) {
+        this.endOpen = true
+      }
+    },
+    handleEndOpenChange(open) {
+      this.endOpen = open
+    },
+
+    // 导出点击功能
+    showConfirm() {
+      this.$confirm({
+        title: '是否导出当前表单？',
+        okText: '确认',
+        cancelText: '取消',
+        onOk() {
+          console.log('OK')
+        },
+        onCancel() {
+          console.log('Cancel')
+        },
+        class: 'test',
+      })
+    },
+  },
+}
 </script>
+<style>
+</style>
