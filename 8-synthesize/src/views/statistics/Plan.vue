@@ -26,7 +26,7 @@
           </a-col>
 
           <a-col :sm="10">
-            <a-form-item label="上传时间">
+            <a-form-item label="时间">
               <a-date-picker class="w140" placeholder="请选择时间" />
               ~
               <a-date-picker class="w140" placeholder="请选择时间" />

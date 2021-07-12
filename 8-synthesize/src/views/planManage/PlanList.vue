@@ -136,7 +136,6 @@ export default {
       if (key == 4) {
         this.$router.replace({ path: '/planManage/tasklist03' })
       }
-
     }
     const data = ({
       // 表头
@@ -205,7 +204,8 @@ export default {
           status: '2',
           deadline: '2020-12-20',
           startTime: '2020-01-08 11:20:50',
-          completionTime: '2020-12-19 16:10:20'
+          completionTime: '2020-12-19 16:10:20',
+          content: "当工作到了一定的阶段，总结便是必不可少的。让我们从中发现优点，摒弃缺点，积累经验，推动未来工作的进展！"
         },
         {
           key: '2',
@@ -214,7 +214,8 @@ export default {
           status: '3',
           deadline: '2020-11-08',
           startTime: '2020-02-08 10:40:52',
-          completionTime: ''
+          completionTime: '',
+          content: ""
         },
         {
           key: '3',
@@ -223,7 +224,8 @@ export default {
           status: '1',
           deadline: '2021-12-31',
           startTime: '2021-03-04 12:40:55',
-          completionTime: ''
+          completionTime: '',
+          content: ""
         },
         {
           key: '4',
@@ -231,7 +233,8 @@ export default {
           createTime: '2021-02-05',
           status: '0',
           deadline: '2021-11-20',
-          completionTime: ''
+          completionTime: '',
+          content: ""
         },
       ],
 

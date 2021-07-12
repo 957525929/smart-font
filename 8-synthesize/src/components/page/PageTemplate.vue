@@ -4,7 +4,7 @@
       <a-card style="width: 100%;margin-top:10px">
         <div>
           <SearchData :columns="searchData" />
-          <FunctionButton :selectedRowKeys="selectedRowKeys" />
+          <!-- <FunctionButton :selectedRowKeys="selectedRowKeys" /> -->
         </div>
         <slot></slot>
       </a-card>
@@ -13,12 +13,12 @@
 </template> 
 
 <script>
-import FunctionButton from "../button/FunctionButton.vue"
+// import FunctionButton from "../button/FunctionButton.vue"
 import SearchData from "../search/SearchData.vue"
 export default {
   name: 'WrapperdList',
   components: {
-    FunctionButton,
+    // FunctionButton,
     SearchData
   },
   props: {

@@ -1,6 +1,32 @@
 <template>
   <div>
-    <PageTemplate :columns="columns" :selectedRowKeys="selectedRowKeys">
+    <PageTemplate :columns="columns">
+
+      <div class="table-operator">
+        <a-row type="flex" justify="end">
+          <a-col>
+            <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+            <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+            <a-button type="dashed" icon="download" @click="handleExportXls(`${currentTaskName}`)">导出</a-button>
+            <a-dropdown v-if="selectedRowKeys.length > 0">
+              <a-menu slot="overlay">
+                <a-menu-item key="1">
+                  <a-icon type="delete" />删除
+                </a-menu-item>
+                <a-menu-item key="2">
+                  <a-upload name="file" :multiple="true" :headers="headers">
+                    <a-icon type="plus" /> 上传
+                  </a-upload>
+                </a-menu-item>
+              </a-menu>
+              <a-button style="margin-left: 8px"> 批量操作
+                <a-icon type="down" />
+              </a-button>
+            </a-dropdown>
+          </a-col>
+        </a-row>
+      </div>
+
       <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
 
         <a slot="taskNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
