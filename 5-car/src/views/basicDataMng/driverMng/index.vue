@@ -53,7 +53,7 @@
         @change="handleChange"
       />
     </a-modal>
-    <a-modal v-model="editDriverVisible" title="编辑" :destroyOnClose="true" :footer="null" :maskClosable="false">
+    <a-modal v-model="editDriverVisible" title="编辑" :destroyOnClose="true" :footer="null" :maskClosable="false" width='760px'>
       <edit-driver :originInfo="currentDriver" />
     </a-modal>
   </div>
