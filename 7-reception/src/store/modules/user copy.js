@@ -1,119 +1,4 @@
-import Vue from 'vue'
-import { login, logout, phoneLogin, thirdLogin } from "@/api/login"
-import { ACCESS_TOKEN, USER_NAME,USER_INFO,USER_AUTH,SYS_BUTTON_AUTH,UI_CACHE_DB_DICT_DATA } from "@/store/mutation-types"
-import { welcome } from "@/utils/util"
-import { queryPermissionsByUser } from '@/api/api'
-import { getAction } from '@/api/manage'
-const user = {
-  state: {
-    token: '',
-    username: '',
-    realname: '',
-    welcome: '',
-    avatar: '',
-    permissionList: [],
-    info: {}
-  },
-
-  mutations: {
-    SET_TOKEN: (state, token) => {
-      state.token = token
-    },
-    SET_NAME: (state, { username, realname, welcome }) => {
-      state.username = username
-      state.realname = realname
-      state.welcome = welcome
-    },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
-    },
-    SET_PERMISSIONLIST: (state, permissionList) => {
-      state.permissionList = permissionList
-    },
-    SET_INFO: (state, info) => {
-      state.info = info
-    },
-  },
-
-  actions: {
-    // CAS验证登录
-    ValidateLogin({ commit }, userInfo) {
-      return new Promise((resolve, reject) => {
-        getAction("/cas/client/validateLogin",userInfo).then(response => {
-          console.log("----cas 登录--------",response);
-          if(response.success){
-            const result = response.result
-            const userInfo = result.userInfo
-            Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_NAME, userInfo.username, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000)
-            commit('SET_TOKEN', result.token)
-            commit('SET_INFO', userInfo)
-            commit('SET_NAME', { username: userInfo.username,realname: userInfo.realname, welcome: welcome() })
-            commit('SET_AVATAR', userInfo.avatar)
-            resolve(response)
-          }else{
-            resolve(response)
-          }
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
-    // 登录
-    Login({ commit }, userInfo) {
-      return new Promise((resolve, reject) => {
-        login(userInfo).then(response => {
-          if(response.code =='200'){
-            const result = response.result
-            const userInfo = result.userInfo
-            Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_NAME, userInfo.username, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(UI_CACHE_DB_DICT_DATA, result.sysAllDictItems, 7 * 24 * 60 * 60 * 1000)
-            commit('SET_TOKEN', result.token)
-            commit('SET_INFO', userInfo)
-            commit('SET_NAME', { username: userInfo.username,realname: userInfo.realname, welcome: welcome() })
-            commit('SET_AVATAR', userInfo.avatar)
-            resolve(response)
-          }else{
-            reject(response)
-          }
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
-    //手机号登录
-    PhoneLogin({ commit }, userInfo) {
-      return new Promise((resolve, reject) => {
-          phoneLogin(userInfo).then(response => {
-          if(response.code =='200'){
-        const result = response.result
-        const userInfo = result.userInfo
-        Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-        Vue.ls.set(USER_NAME, userInfo.username, 7 * 24 * 60 * 60 * 1000)
-        Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000)
-        Vue.ls.set(UI_CACHE_DB_DICT_DATA, result.sysAllDictItems, 7 * 24 * 60 * 60 * 1000)
-        commit('SET_TOKEN', result.token)
-        commit('SET_INFO', userInfo)
-        commit('SET_NAME', { username: userInfo.username,realname: userInfo.realname, welcome: welcome() })
-        commit('SET_AVATAR', userInfo.avatar)
-        resolve(response)
-      }else{
-        reject(response)
-      }
-    }).catch(error => {
-        reject(error)
-      })
-    })
-    },
-    // 获取用户信息
-    GetPermissionList({ commit }) {
-      return new Promise((resolve, reject) => {
-        let v_token = Vue.ls.get(ACCESS_TOKEN);
-        let params = {token:v_token};
-        let response={
+     let response = {
           "success": true,
           "message": "查询成功",
           "code": 200,
@@ -134,7 +19,7 @@ const user = {
               "type": "1",
               "status": "1"
             }],
-            "auth": [{
+            "auth": [{ 
               "action": "user:add",
               "describe": "添加用户按钮",
               "type": "1"
@@ -147,231 +32,8 @@ const user = {
               "describe": "代码生成按钮",
               "type": "1"
             }],
-            "menu": [ 
-              //shiyan
+            "menu": [
               {
-                "redirect": null,
-                "path": "/hotel/Analysisyyy",
-                "component": "hotel/Analysisyyy",
-                "route": "1",
-                "meta": {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "icon": "home",
-                  "title": "sss"
-                },
-                "name": "hotel-analysisyyy",
-                "id": "9502685863ab87f0ad1134142788a385"
-              }, 
-              //申请       
-              {
-                "redirect": null,
-                "path": "/meetingOrganization",
-                "component":"layouts/RouteView",
-                "route": "1",
-                "children": [
-                  {
-                    "path": "/meetingOrganization/MeetingApply",
-                    "component": "meetingOrganization/MeetingApply",
-                    "route": "1",
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "icon": "edit",
-                      "title": "会议申请"
-                    },
-                    "name": "meetingOrganization-apply",
-                    "id": "1245154570166390786"
-                  },
-                  {
-                    "path": "/meetingOrganization/MeetingAudit",
-                    "component": "meetingOrganization/MeetingAudit",
-                    "route": "1",
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "title": "会议审核"
-                    },
-                    "name": "meetingOrganization-audit",
-                    "id": "1245154914959151105"
-                  },
-                  {
-                    "path": "/meetingOrganization/MeetingArrange",
-                    "component": "meetingOrganization/MeetingArrange",
-                    "route": "1",
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "icon":"bars",
-                      "title": "会议安排"
-                    },
-                    "name": "meetingOrganization-arrange",
-                    "id": "1245154050731200514"
-                  },
-                  {
-                    "path": "/meetingOrganization/MeetingArrangeEdit",
-                    "component": "meetingOrganization/MeetingArrangeEdit",
-                    "route": "1",
-                    "hidden":true,
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "title": "会议安排编辑"
-                    },
-                    "name": "meetingOrganization-edit",
-                    "id": "1245154050731200514"
-                  },
-                  {
-                    "path": "/meetingOrganization/MeetingNotice",
-                    "component": "meetingOrganization/MeetingNotice",
-                    "route": "1",
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "icon":"sound",
-                      "title": "会议通知"
-                    },
-                    "name": "meetingOrganization-notice",
-                    "id": "1244271300749729794"
-                  },
-                  {
-                    "path": "/meetingOrganization/MeetingSettlement",
-                    "component": "meetingOrganization/MeetingSettlement",
-                    "route": "1",
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "title": "会议结算"
-                    },
-                    "name": "meetingOrganization-settlement",
-                    "id": "1244271300749729794"
-                  },
-                  {
-                    "path": "/meetingOrganization/MeetingSettlementIn",
-                    "component": "meetingOrganization/MeetingSettlementIn",
-                    "hidden":true,
-                    "route": "1",
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "title": "会议结算文档信息"
-                    },
-                    "name": "meetingOrganization-settlementIn",
-                    "id": "1244271300749729794"
-                  },
-                  {
-                    "path": "/meetingOrganization/MeetingStatistical",
-                    "component": "meetingOrganization/MeetingStatistical",
-                    "route": "1",
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "icon": "pie-chart",
-                      "title": "会议统计"
-                    },
-                    "name": "meetingOrganization-statistical",
-                    "id": "1244271300749729794"
-                  },
-                ],
-                "meta": {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  // "MyFont": "icon-zuzhiguanli",
-                  "icon": "home",
-                  "title": "会议组织"
-                },
-                "name": "meetingOrganization",
-                "id": "08e6b9dc3c04489c8e1ff2ce6f105aa4"
-              },
-             
-             // 、、、、、、、、、、、酒店预订// 、、、、、、、、、、、
-             {
-              "redirect": null,
-              "path": "/hotel",
-              "component": "layouts/RouteView",
-              "route": "1",
-              "children": [
-                {
-                  "path": "/hotel/HotelInformation",
-                  "component": "hotel/HotelInformation",
-                  "route": "1",
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "icon":"bars",
-                    "title": "信息管理"
-                  },
-                  "name": "hotel-Information",
-                  "id": "1245154570166390786"
-                },
-              ],
-              "meta": {
-                "keepAlive": false,
-                "internalOrExternal": false,
-                "icon": "home",
-                "title": "酒店预订"
-              },
-              "name": "hotelReservation",
-              "id": "08e6b9dc3c04489c8e1ff2ce6f105aa4"
-            },
-            // 、、、、、、、、、、、会议室预约// 、、、、、、、、、、、
-            {
-              "redirect": null,
-              "path": "/meetingRoom",
-              "component": "layouts/RouteView",
-              "route": "1",
-              "children": [
-                {
-                  "path": "/meetingRoom/RoomInformation",
-                  "component": "meetingRoom/RoomInformation",
-                  "route": "1",
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "icon":"bars",
-                    "title": "信息管理"
-                  },
-                  "name": "meetingRoom-Information",
-                  "id": "1245154570166390786"
-                },
-                {
-                  "path": "/meetingRoom/AppointmentExamine",
-                  "component": "meetingRoom/AppointmentExamine",
-                  "route": "1",
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "title": "预约审核"
-                  },
-                  "name": "meetingRoom-AppointmentExamine",
-                  "id": "1245154914959151105"
-                },
-                {
-                  "path": "/meetingRoom/UseStatistics",
-                  "component": "meetingRoom/UseStatistics",
-                  "route": "1",
-                 
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                     "icon": "pie-chart",
-                    "title": "使用统计"
-                  },
-                  "name": "meetingRoom-UseStatistics",
-                  "id": "1245154050731200514"
-                },
-              ],
-              "meta": {
-                "keepAlive": false,
-                "internalOrExternal": false,
-                "icon": "home",
-                "title": "会议室预约"
-              },
-              "name": "meetingRoomAppointmen",
-              "id": "08e6b9dc3c04489c8e1ff2ce6f105aa4"
-            },
-            ////原始的参考、、、、、
-            {
               "redirect": null,
               "path": "/dashboard/analysis",
               "component": "dashboard/Analysis",
@@ -394,73 +56,73 @@ const user = {
                 "path": "/erp/stock/in",
                 "component": "layouts/RouteView",
                 "route": "1",
-                "children": [{
-                  "path": "/erp/stock/firstList",
-                  "component": "erp/stock/MyFirstList",
-                  "route": "1",
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "title": "再次采购入库"
-                  },
-                  "name": "erp-stock-firstList",
-                  "id": "1409704645135192066"
-                }, {
-                  "path": "/erp/stock/purIn",
-                  "component": "erp/stock/PurInBillList",
-                  "route": "1",
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "title": "采购入库"
-                  },
-                  "name": "erp-stock-purIn",
-                  "id": "1244877762060517378"
-                }, {
-                  "path": "/erp/stock/checkIn",
-                  "component": "erp/stock/CheckInBillList",
-                  "route": "1",
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "title": "盘盈入库"
-                  },
-                  "name": "erp-stock-checkIn",
-                  "id": "1263131054251114497"
-                }, {
-                  "path": "/erp/stock/swellIn",
-                  "component": "erp/stock/SwellInBillList",
-                  "route": "1",
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "title": "涨库入库"
-                  },
-                  "name": "erp-stock-swellIn",
-                  "id": "1263272675325341697"
-                }, {
-                  "path": "/erp/stock/otherIn",
-                  "component": "erp/stock/OtherInBillList",
-                  "route": "1",
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "title": "其他入库"
-                  },
-                  "name": "erp-stock-otherIn",
-                  "id": "1257326494815248386"
-                }, {
-                  "path": "/erp/stock/rubricPurIn",
-                  "component": "erp/stock/RubricPurInBillList",
-                  "route": "1",
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "title": "采购退货出库"
-                  },
-                  "name": "erp-stock-rubricPurIn",
-                  "id": "1260464092879609857"
-                }],
+                // "children": [{
+                //   "path": "/erp/stock/firstList",
+                //   "component": "erp/stock/MyFirstList",
+                //   "route": "1",
+                //   "meta": {
+                //     "keepAlive": false,
+                //     "internalOrExternal": false,
+                //     "title": "再次采购入库"
+                //   },
+                //   "name": "erp-stock-firstList",
+                //   "id": "1409704645135192066"
+                // }, {
+                //   "path": "/erp/stock/purIn",
+                //   "component": "erp/stock/PurInBillList",
+                //   "route": "1",
+                //   "meta": {
+                //     "keepAlive": false,
+                //     "internalOrExternal": false,
+                //     "title": "采购入库"
+                //   },
+                //   "name": "erp-stock-purIn",
+                //   "id": "1244877762060517378"
+                // }, {
+                //   "path": "/erp/stock/checkIn",
+                //   "component": "erp/stock/CheckInBillList",
+                //   "route": "1",
+                //   "meta": {
+                //     "keepAlive": false,
+                //     "internalOrExternal": false,
+                //     "title": "盘盈入库"
+                //   },
+                //   "name": "erp-stock-checkIn",
+                //   "id": "1263131054251114497"
+                // }, {
+                //   "path": "/erp/stock/swellIn",
+                //   "component": "erp/stock/SwellInBillList",
+                //   "route": "1",
+                //   "meta": {
+                //     "keepAlive": false,
+                //     "internalOrExternal": false,
+                //     "title": "涨库入库"
+                //   },
+                //   "name": "erp-stock-swellIn",
+                //   "id": "1263272675325341697"
+                // }, {
+                //   "path": "/erp/stock/otherIn",
+                //   "component": "erp/stock/OtherInBillList",
+                //   "route": "1",
+                //   "meta": {
+                //     "keepAlive": false,
+                //     "internalOrExternal": false,
+                //     "title": "其他入库"
+                //   },
+                //   "name": "erp-stock-otherIn",
+                //   "id": "1257326494815248386"
+                // }, {
+                //   "path": "/erp/stock/rubricPurIn",
+                //   "component": "erp/stock/RubricPurInBillList",
+                //   "route": "1",
+                //   "meta": {
+                //     "keepAlive": false,
+                //     "internalOrExternal": false,
+                //     "title": "采购退货出库"
+                //   },
+                //   "name": "erp-stock-rubricPurIn",
+                //   "id": "1260464092879609857"
+                // }],
                 "meta": {
                   "keepAlive": false,
                   "internalOrExternal": false,
@@ -2116,114 +1778,7 @@ const user = {
               },
               "name": "online",
               "id": "e41b69c57a941a3bbcce45032fe57605"
-            }
-            ]
+            }]
           },
           "timestamp": 1624946593208
-
-        }
-   
-          const menuData = response.result.menu;
-          const authData = response.result.auth;
-          const allAuthData = response.result.allAuth;
-          //Vue.ls.set(USER_AUTH,authData);
-          sessionStorage.setItem(USER_AUTH,JSON.stringify(authData));
-          sessionStorage.setItem(SYS_BUTTON_AUTH,JSON.stringify(allAuthData));
-          if (menuData && menuData.length > 0) {
-            //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
-            menuData.forEach((item, index) => {
-              if (item["children"]) {
-                let hasChildrenMenu = item["children"].filter((i) => {
-                  return !i.hidden || i.hidden == false
-                })
-                if (hasChildrenMenu == null || hasChildrenMenu.length == 0) {
-                  item["hidden"] = true
-                }
-              }
-            })
-            console.log(" menu show json ", menuData)
-            //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
-            commit('SET_PERMISSIONLIST', menuData)
-          } else {
-            reject('getPermissionList: permissions must be a non-null array !')
-          }
-          resolve(response)
-        // queryPermissionsByUser(params).then(response => {
-        //   const menuData = response.result.menu;
-        //   const authData = response.result.auth;
-        //   const allAuthData = response.result.allAuth;
-        //   //Vue.ls.set(USER_AUTH,authData);
-        //   sessionStorage.setItem(USER_AUTH,JSON.stringify(authData));
-        //   sessionStorage.setItem(SYS_BUTTON_AUTH,JSON.stringify(allAuthData));
-        //   if (menuData && menuData.length > 0) {
-        //     //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
-        //     menuData.forEach((item, index) => {
-        //       if (item["children"]) {
-        //         let hasChildrenMenu = item["children"].filter((i) => {
-        //           return !i.hidden || i.hidden == false
-        //         })
-        //         if (hasChildrenMenu == null || hasChildrenMenu.length == 0) {
-        //           item["hidden"] = true
-        //         }
-        //       }
-        //     })
-        //     console.log(" menu show json ", menuData)
-        //     //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
-        //     commit('SET_PERMISSIONLIST', menuData)
-        //   } else {
-        //     reject('getPermissionList: permissions must be a non-null array !')
-        //   }
-        //   resolve(response)
-        // }).catch(error => {
-        //   reject(error)
-        // })
-      })
-    },
-
-    // 登出
-    Logout({ commit, state }) {
-      return new Promise((resolve) => {
-        let logoutToken = state.token;
-        commit('SET_TOKEN', '')
-        commit('SET_PERMISSIONLIST', [])
-        Vue.ls.remove(ACCESS_TOKEN)
-        Vue.ls.remove(UI_CACHE_DB_DICT_DATA)
-        //console.log('logoutToken: '+ logoutToken)
-        logout(logoutToken).then(() => {
-          //let sevice = "http://"+window.location.host+"/";
-          //let serviceUrl = encodeURIComponent(sevice);
-          //window.location.href = window._CONFIG['casPrefixUrl']+"/logout?service="+serviceUrl;
-          resolve()
-        }).catch(() => {
-          resolve()
-        })
-      })
-    },
-    // 第三方登录
-    ThirdLogin({ commit }, token) {
-      return new Promise((resolve, reject) => {
-        thirdLogin(token).then(response => {
-          if(response.code =='200'){
-            const result = response.result
-            const userInfo = result.userInfo
-            Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_NAME, userInfo.username, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000)
-            commit('SET_TOKEN', result.token)
-            commit('SET_INFO', userInfo)
-            commit('SET_NAME', { username: userInfo.username,realname: userInfo.realname, welcome: welcome() })
-            commit('SET_AVATAR', userInfo.avatar)
-            resolve(response)
-          }else{
-            reject(response)
-          }
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
-
-  }
-}
-
- export default user
+        };

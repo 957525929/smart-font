@@ -42,11 +42,21 @@ export const devColumns = [
         title: '业主单位',
         width: 80,
     },
+    // {
+    //     title: '业主联系方式',
+    //     dataIndex: 'phone',
+    //     width: 80,
+    // },
     {
-        title: '业主联系方式',
-        dataIndex: 'phone',
+        dataIndex: 'manufacturer',
+        title: '厂商单位',
         width: 80,
     },
+    // {
+    //     title: '厂商联系方式',
+    //     dataIndex: 'devPhone',
+    //     width: 80,
+    // },
     {
         title: '技术状况',
         dataIndex: 'techSituation',
@@ -93,6 +103,7 @@ export const data = [
         loginTime: '2021-06-22 17:55:55',
         manufacturer:"日丰企业集团有限公司",
         batch:"M127894",
+        devPhone:"18259529231",
         action:[{
             tagName:"详情",
             url:"device-DevDetail",
@@ -119,6 +130,7 @@ export const data = [
         loginTime: '2021-06-21 10:55:55',
         manufacturer:"国网福建省电力有限公司",
         batch:"N2169",
+        devPhone:"18259529299",
         action:[{
             tagName:"详情",
             url:"device-DevDetail",
@@ -144,6 +156,7 @@ export const data = [
         loginTime: '2021-06-29 08:55:55',
         manufacturer:"珠海格力电器股份有限公司",
         batch:"A2421",
+        devPhone:"18259529290",
         action:[{
             tagName:"详情",
             url:"device-DevDetail",

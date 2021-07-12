@@ -41,21 +41,23 @@
     <a-modal v-model="detailsVisible" :footer="null" title="详情" :width="735" :destroyOnClose="true">
       <mydetails :id="currentItem" />
     </a-modal>
-    <a-modal v-model="dispatchVisible" :title="dispatchType" :destroyOnClose="true">
+    <a-modal v-model="dispatchVisible" :title="dispatchType" :destroyOnClose="true" width="660px">
+      <a-divider>调度信息</a-divider>
       <mydetails :id="currentItem" />
+      <a-divider>车辆/司机指派</a-divider>
       <!-- <select-driver :id="currentItem" /> -->
       <div>
         <div style="margin-top: 10px; text-align: center">
           请选择车辆：
-          <a-select style="width: 200px">
+          <a-select style="width: 200px" @change="onCarChange" v-model="selectedCar">
             <a-select-option v-for="d in vehicleList" :key="d.key">
-              {{ d.licenseNum+'（座位数：'+d.seatNum+'）' }}
+              {{ d.licenseNum + '（座位数：' + d.seatNum + '）' }}
             </a-select-option>
           </a-select>
         </div>
         <div style="margin-top: 10px; text-align: center">
           请选择司机：
-          <a-select style="width: 200px">
+          <a-select style="width: 200px" v-model="selectedDriver">
             <a-select-option v-for="d in driverList" :key="d.key">
               {{ d.name }}
             </a-select-option>
@@ -74,10 +76,27 @@ import mydetails from './details.vue'
 import newTask from './newTask.vue'
 import { dispatchList, driverList, vehicleList } from '@/mock/demoData.js'
 export default {
+  mounted() {
+    let alterList = []
+    for (let i = 0; i < driverList.length; ++i) {
+       //对象深度复制
+      let temp = {};
+      temp.key=driverList[i].key
+      temp.name=driverList[i].name
+      temp.phoneNum=driverList[i].phoneNum
+      temp.bindCar=driverList[i].bindCar
+      if (temp.name == '张三' || temp.name == '卢本伟' || temp.name == '孙笑川') {
+        temp.name += '*'
+      }
+      alterList[i] = temp
+    }
+    this.driverList = alterList
+    // console.log(alterList);
+  },
   data() {
     return {
       listData: dispatchList,
-      driverList: driverList,
+      driverList: undefined,
       vehicleList: vehicleList,
       detailsVisible: false,
       dispatchVisible: false,
@@ -90,6 +109,8 @@ export default {
         },
         pageSize: 10,
       },
+      selectedDriver: null,
+      selectedCar: null,
     }
   },
   components: {
@@ -116,6 +137,9 @@ export default {
     },
     showNewTask() {
       this.newTaskVisible = true
+    },
+    onCarChange() {
+      this.selectedDriver = '张三*'
     },
   },
 }

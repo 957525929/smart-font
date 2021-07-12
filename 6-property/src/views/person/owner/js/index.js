@@ -2,25 +2,17 @@ import { devType ,devStatus,techSituation} from "@/utils/dataDictionary.js";
 export const columns = [
     {
         dataIndex: 'devId',
-        slots: { title: '厂商编号' },
+        slots: { title: '业主编号' },
         scopedSlots: { customRender: 'devId' },
-        title: '厂商编号',
+        title: '业主编号',
         width: 40,
         key: 'devId'
     },
     {
-        title: '厂商名称',
+        title: '业主名称',
         dataIndex: 'devName',
         width: 80,
         key: 'devName'
-    },
-    {
-        title: '厂商类型',
-        dataIndex: 'devType',
-        key: 'devType',
-        width: 50,
-        valueEnum: devType,
-        type: 'a-select',
     },
     {
         dataIndex: 'principal',
@@ -39,25 +31,18 @@ export const columns = [
         width: 80,
         type: 'a-range-picker',
         hideInDetail:true
-    },
-    {
-        title: '操作',
-        key: 'action',
-        scopedSlots: { customRender: 'action' },
-        width: 80,
-        hideInSearch:true
-    },
+    }
 ]
 
 export const data = [
     {
         key: 0,
         devId: '1001',
-        devName: "日丰企业集团有限公司",
+        devName: "福建烟草有限公司",
         devType: 0,
         phone: '18259529231',
-        principal: '马梓荣',
-        loginTime: '2021-04-22 17：55：55',
+        principal: '乔峰',
+        loginTime: '2021-04-11 08：55：55',
         action:[{
             tagName:"详情",
             com:"TableDrawer"
@@ -79,12 +64,12 @@ export const data = [
     {
         key: 1,
         devId: '2001',
-        devName: "国网福建省电力有限公司",
+        devName: "福建聚星园餐饮有限公司",
         devType: 1,
         devStatus: 1,
         phone: '18259529299',
-        principal: '郭靖',
-        loginTime: '2021-04-21 10：55：55',
+        principal: '段誉',
+        loginTime: '2021-04-11 10：55：55',
         action:[{
             tagName:"详情",
             com:"TableDrawer"
@@ -100,29 +85,6 @@ export const data = [
             com:"TableDelete"
         },{
             tagName:"电闸",
-            com:"TableDelete"
-        }]
-    },    {
-        key: 2,
-        devId: '3001',
-        devName: "珠海格力电器股份有限公司",
-        devType: 2,
-        devStatus: 2,
-        phone: '18232145690',
-        principal: '黄蓉',
-        loginTime: '2021-04-29 08：55：55',
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
-        }],
-        euips:[{
-            tagName:"冷凝管",
-            com:"TableDrawer"
-        },{
-            tagName:"空调主机",
             com:"TableDelete"
         }]
     }

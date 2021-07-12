@@ -17,7 +17,7 @@
           @change="handleChange"
         />
       </a-form-model-item>
-      <a-form-model-item :wrapper-col="{ span: 14, offset: 16 }">
+      <a-form-model-item :wrapper-col="{ span: 14, offset: 15 }">
         <a-button type="primary"> 确定 </a-button>
         <a-button style="margin-left: 10px"> 取消 </a-button>
       </a-form-model-item>
@@ -32,7 +32,7 @@ export default {
     return {
       vehicleList: vehicleList,
       targetKeys: this.originInfo.bindCar,
-      labelCol: { span: 7 },
+      labelCol: { span: 5 },
       wrapperCol: { span: 15 },
       driverInfo: {
         name: this.originInfo.name,

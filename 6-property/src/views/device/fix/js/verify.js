@@ -1,3 +1,4 @@
+import { devType } from "@/utils/dataDictionary.js";
 // 待审核
 export const columns=[
     {
@@ -72,6 +73,7 @@ export const data=[
         devId: '1',
         devName: "18楼停电",
         devType: 1,
+        taskStatus:1,
         devStatus: 0,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -85,7 +87,7 @@ export const data=[
             tagName:"审核下发",
             com:"TableModal"
         },{
-            tagName:"不通过",
+            tagName:"忽略",
             com:""
         }]
     }
@@ -97,27 +99,31 @@ export const taskList = [
     {
         title: '维修类型',
         key: 'devType',
-        value:"电网",
-        type:'a-select',
+        value:"电网"
     },
     {
         title: '执行人',
         key: 'staffId',
-        value:"刘涛",
+        value:"",
         type:'a-select',
         valueEnum:{0:{tableValue:"刘涛"}}
     },
     {
         title: '预计完成时间',
-        value:"2021-06-22 20：00：00",
+        value:"",
         key: 'expectTime',
         type:"a-date-picker"
     },
     {
-        title: '审核意见',
-        key: 'addition',
-        value:"通过"
-    }
+        title: '任务地点',
+        value:"",
+        key: 'taskPlace'
+    },
+    // {
+    //     title: '审核意见',
+    //     key: 'addition',
+    //     value:"通过"
+    // }
 ]
 
 export const infoDetail =[
