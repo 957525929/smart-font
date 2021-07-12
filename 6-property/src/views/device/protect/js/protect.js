@@ -1,8 +1,8 @@
 // 待保养
 import {
-    taskType,
-    protaskStatus
-  } from "@/utils/dataDictionary.js";
+  taskType,
+  protaskStatus
+} from "@/utils/dataDictionary.js";
 export const columns = [{
     dataIndex: 'devId',
     slots: {
@@ -15,14 +15,14 @@ export const columns = [{
     width: 80,
     key: 'devId'
   },
-//   {
-//     title: '任务状态',
-//     key: 'taskStatus',
-//     dataIndex: 'taskStatus',
-//     width: 80,
-//     type: 'a-select',
-//     valueEnum: protaskStatus
-//   },
+  //   {
+  //     title: '任务状态',
+  //     key: 'taskStatus',
+  //     dataIndex: 'taskStatus',
+  //     width: 80,
+  //     type: 'a-select',
+  //     valueEnum: protaskStatus
+  //   },
   {
     title: '任务描述',
     dataIndex: 'devName',
@@ -109,3 +109,55 @@ export const data = [{
   }]
 }]
 export const searchCon = {}
+export const infoDetail = [{
+    dataIndex: 'devId',
+    value: "",
+    title: '设备编号',
+    width: 80,
+    key: 'devId'
+  },
+  {
+    title: '任务描述',
+    dataIndex: 'devName',
+    value: "",
+    key: 'devName',
+    hideInSearch: true
+  },
+  {
+    title: '任务下发时间',
+    key: 'fixedTime',
+    value: "",
+    type: 'a-range-picker',
+  },
+  {
+    title: '任务地点',
+    key: 'assets',
+    value: "",
+  },
+  {
+    dataIndex: 'taskType',
+    key: 'taskType',
+    title: '任务类型',
+    value: "",
+    type: 'a-select',
+    valueEnum: taskType
+  },
+  {
+    title: '保养员',
+    key: 'fixStaff',
+    value: "",
+  },
+  {
+    title: '联系方式',
+    dataIndex: 'phone',
+    key: 'phone',
+    value: "",
+  },
+
+  {
+    title: '预计完成时间',
+    key: 'expectTime',
+    value: "",
+    type: 'a-range-picker',
+  }
+]

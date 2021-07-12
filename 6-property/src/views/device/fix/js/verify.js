@@ -63,7 +63,7 @@ export const columns=[
         dataIndex: 'action',
         scopedSlots: { customRender: 'action' },
         width: 80,
-        ifHideInSearch:true
+        hideInSearch:true
     },
 ]
 export const data=[

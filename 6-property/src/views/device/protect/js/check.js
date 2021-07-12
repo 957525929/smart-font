@@ -15,14 +15,6 @@ export const columns = [{
     width: 80,
     key: 'devId'
   },
-//   {
-//     title: '任务状态',
-//     key: 'taskStatus',
-//     dataIndex: 'taskStatus',
-//     width: 80,
-//     type: 'a-select',
-//     valueEnum: protaskStatus
-//   },
   {
     title: '任务描述',
     dataIndex: 'devName',
@@ -109,3 +101,74 @@ export const data = [{
   }]
 }]
 export const searchCon = {}
+
+export const infoDetail =[{
+
+  title: '设备编号',
+  width: 80,
+  key: 'devId',
+  value:""
+},
+{
+  title: '任务描述',
+  dataIndex: 'devName',
+  width: 100,
+  key: 'devName',
+  value:""
+},
+{
+  title: '任务下发时间',
+  key: 'fixedTime',
+  dataIndex: 'fixedTime',
+  scopedSlots: {
+    customRender: 'tags'
+  },
+  width: 100,
+  type: 'a-range-picker',
+  value:""
+},
+{
+  title: '任务地点',
+  key: 'assets',
+  dataIndex: 'assets',
+  width: 80,
+  value:""
+},
+{
+  dataIndex: 'taskType',
+  key: 'taskType',
+  title: '任务类型',
+  width: 80,
+  type: 'a-select',
+  valueEnum: taskType,
+  value:""
+},
+{
+  title: '保养员',
+  key: 'fixStaff',
+  dataIndex: 'fixStaff',
+  scopedSlots: {
+    customRender: 'tags'
+  },
+  width: 80,
+  value:""
+},
+{
+  title: '联系方式',
+  dataIndex: 'phone',
+  key: 'phone',
+  width: 80,
+  value:""
+},
+
+{
+  title: '预计完成时间',
+  key: 'expectTime',
+  dataIndex: 'expectTime',
+  scopedSlots: {
+    customRender: 'tags'
+  },
+  width: 80,
+  type: 'a-range-picker',
+  value:""
+}]

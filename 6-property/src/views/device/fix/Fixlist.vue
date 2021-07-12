@@ -1,12 +1,13 @@
 <template>
-    <!-- <div class=""> -->
     <a-tabs default-active-key="1" :activeKey="current" @change="callback">
         <a-tab-pane v-for="item in fixMenu" :tab="item.title" :key="item.key">
             <PageTemplate :columns="columns" :searchCon="searchCon">
                 <a-table :columns="columns" :data-source="data">
                     <span slot="action" slot-scope="text, record">
                         <template v-for="(i, index) in record.action">
-                            <a href="#" @click.stop="handleOps(i.com, record.devId)">{{ i.tagName }}</a>
+                            <a href="#" @click.stop="handleOps(i.com, record.devId, record.taskStatus)">{{
+                                i.tagName
+                            }}</a>   
                             <component
                                 :is="i.com"
                                 :ref="i.com"
@@ -21,10 +22,8 @@
             </PageTemplate>
         </a-tab-pane>
     </a-tabs>
-
-    <!-- </div> -->
 </template>
-
+ 
 <script>
 import PageTemplate from '@/components/page/PageTemplate.vue'
 import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
@@ -43,34 +42,39 @@ export default {
     data() {
         return {
             current: 0,
-            fixMenu: { ...NEW_FIXLIST.fixMenu },
+            fixMenu: NEW_FIXLIST.fixMenu,
             columns: [],
             searchCon: {},
             data: [],
             infoDetail: [],
-            taskList: []
+            taskList: [],
         }
     },
     mounted() {
         // console.log(this.fixMenu[0].content)
     },
     methods: {
-        handleOps(type, id) {
+        handleOps(type, id, taskType) {
             if (type === 'TableDrawer') {
-                this.infoDetail = this.infoDetail.filter((item) => !item.hideInDetail)
+                if (this.current === 0) {
+                    let menuData = NEW_FIXLIST.fixMenu.filter((item) => item.title == taskType)[0]
+                    let tempCol = require('./js/' + menuData.content + '.js')
+                    let result = Object.freeze(tempCol)
+                    this.infoDetail = result.infoDetail.filter((item) => !item.hideInDetail)
+                }
                 //请求详情(无网络)
-                // let temp = this.data.filter((item) => item.devId == id)[0]
+                let temp = this.data.filter((item) => item.devId == id)[0]
                 this.infoDetail = this.infoDetail.map((item) => {
-                    item.value = this.data[0][item.key]
+                    item.value = temp[item.key]
                     return item
                 })
             } else {
-                this.infoDetail = this.taskList.filter((item) => !item.hideInDetail)
+                if (taskType == '待审核') {
+                    this.infoDetail = this.taskList.filter((item) => !item.hideInDetail)
+                }
             }
-
             let tempValue = [...NEW_FIXLIST.typeToComponent].filter(([key, value]) => key === type)
             this.$refs[type][0][tempValue[0][1]]()
-            // type !== 'TableDelete' ?  : this[tempValue[0][1]]()
         },
         loadMenu() {
             let temp = require('./js/' + this.fixMenu[this.current].content + '.js')
@@ -78,8 +82,7 @@ export default {
             this.columns = result.columns
             this.searchCon = result.searchCon
             this.data = result.data
-            this.taskList = result.taskList
-            this.infoDetail = result.infoDetail
+            this.infoDetail = result.infoDetail.filter((item) => !item.hideInDetail)
             this.loadData()
         },
         loadData() {

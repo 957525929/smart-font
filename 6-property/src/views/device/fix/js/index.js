@@ -19,7 +19,7 @@ export const fixMenu = [
     content:"check"
 },{
     key:4,
-    title:"待评价",
+    title:"已完成",
     content:"review"
 },{
     key:5,

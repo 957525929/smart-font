@@ -51,8 +51,8 @@ export const techSituation = {
   1: { tableValue: '带病运转', searchValue: '带病运转', code: 1 },
   2: { tableValue: '待修', searchValue: '待修', code: 2 },
   3: { tableValue: '在修', searchValue: '在修', code: 3 },
-  4: { tableValue: '在保养', searchValue: '在修', code: 4},
-  5: { tableValue: '维修中保养', searchValue: '在修', code: 5 },
+  4: { tableValue: '在保养', searchValue: '在保养', code: 4},
+  5: { tableValue: '维修中保养', searchValue: '维修中保养', code: 5 },
   6: { tableValue: '待报废', searchValue: '待报废', code: 6 },
 }
 /*设备状态staffStatus*/

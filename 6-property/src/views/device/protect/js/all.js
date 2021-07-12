@@ -145,3 +145,59 @@ export const data = [{
   }
 ]
 export const searchCon = {}
+export const infoDetail = [{
+  title: '设备编号',
+  width: 80,
+  key: 'devId',
+  value:""
+},
+{
+  title: '任务状态',
+  key: 'taskStatus',
+  dataIndex: 'taskStatus',
+  width: 80,
+  type: 'a-select',
+  valueEnum: protaskStatus,
+  value:""
+},
+{
+  title: '任务描述',
+  key: 'devName',
+  value:""
+},
+{
+  title: '任务下发时间',
+  key: 'fixedTime',
+  type: 'a-range-picker',
+  value:""
+},
+{
+  title: '任务地点',
+  key: 'assets',
+  value:""
+},
+{
+  key: 'taskType',
+  title: '任务类型',
+  type: 'a-select',
+  valueEnum: taskType,
+  value:""
+},
+{
+  title: '保养员',
+  key: 'fixStaff',
+  value:""
+},
+{
+  title: '联系方式',
+  dataIndex: 'phone',
+  key: 'phone',
+  value:""
+},
+
+{
+  title: '预计完成时间',
+  key: 'expectTime',
+  type: 'a-range-picker',
+}
+]

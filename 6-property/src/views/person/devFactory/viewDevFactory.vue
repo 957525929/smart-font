@@ -58,10 +58,16 @@ export default {
             this.loginInfo = this.infoDetail.filter(item=>!item.hideInLogin)
         },
         handleDetail(id) {
-            this.infoDetail = this.infoDetail.filter(item=>!item.hideInDetail)
-            //请求详情(无网络)
-            this.detailData = this.data.filter(item=>item.devId===id)[0]
+            // this.infoDetail = this.infoDetail.filter(item=>!item.hideInDetail)
+            // //请求详情(无网络)
+            // this.detailData = this.data.filter(item=>item.devId===id)[0]
             
+                        //处理数据
+            let tempData = this.data.filter((item) => item.devId === id)[0]
+            this.infoDetail = this.infoDetail.map((item) => {
+                item.value = tempData[item.key]
+                return item
+            })
             this.$refs.devDrawer.showDrawer()
         },
         confirm() {

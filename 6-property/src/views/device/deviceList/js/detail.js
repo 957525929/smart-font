@@ -15,7 +15,8 @@ export const basicInfo = [
         title: '设备类型',
         value:"",
         key: 'devType',
-        type:"a-select"
+        type:"a-select",
+        valueEnum:devType
     },
     {
         title: '实际状态',
@@ -43,7 +44,8 @@ export const basicInfo = [
         title: '登记时间',
         key: 'loginTime',
         value:"",
-        type:"a-range-picker"
+        type:"a-range-picker",
+        hideInDetail:true
     },
     {
         title: '生产厂家',

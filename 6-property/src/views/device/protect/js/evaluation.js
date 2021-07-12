@@ -13,17 +13,18 @@ export const columns = [{
     },
     title: '设备编号',
     width: 80,
-    key: 'devId'
+    key: 'devId',
+    value: ""
   },
-//   {
-//     title: '任务状态',
-//     key: 'taskStatus',
-//     dataIndex: 'taskStatus',
-//     width: 80,
-//     type: 'a-select',
-//     valueEnum: protaskStatus,
-//     hideInSearch:true,
-//   },
+  //   {
+  //     title: '任务状态',
+  //     key: 'taskStatus',
+  //     dataIndex: 'taskStatus',
+  //     width: 80,
+  //     type: 'a-select',
+  //     valueEnum: protaskStatus,
+  //     hideInSearch:true,
+  //   },
   {
     title: '任务描述',
     dataIndex: 'devName',
@@ -111,3 +112,63 @@ export const data = [{
 }]
 
 export const searchCon = {}
+export const infoDetail = [{
+    title: '设备编号',
+    width: 80,
+    key: 'devId',
+    value: ""
+  },
+  //   {
+  //     title: '任务状态',
+  //     key: 'taskStatus',
+  //     dataIndex: 'taskStatus',
+  //     width: 80,
+  //     type: 'a-select',
+  //     valueEnum: protaskStatus,
+  //     hideInSearch:true,
+  //   },
+  {
+    title: '任务描述',
+    value: "",
+    key: 'devName',
+    hideInSearch: true
+  },
+  {
+    title: '任务下发时间',
+    key: 'fixedTime',
+    value: "",
+    type: 'a-range-picker',
+  },
+  {
+    title: '任务地点',
+    key: 'assets',
+    dataIndex: 'assets',
+    value: "",
+  },
+  {
+    dataIndex: 'taskType',
+    key: 'taskType',
+    title: '任务类型',
+    value: "",
+    type: 'a-select',
+    valueEnum: taskType
+  },
+  {
+    title: '保养员',
+    key: 'fixStaff',
+    value: "",
+  },
+  {
+    title: '联系方式',
+    value: "",
+    key: 'phone',
+    width: 80,
+  },
+
+  {
+    title: '预计完成时间',
+    key: 'expectTime',
+    value: "",
+    type: 'a-range-picker',
+  }
+]
