@@ -79,6 +79,7 @@ export const data=[
         key: '1',
         devId: '1',
         devName:"18楼停电",
+        taskStatus:5,
         devType:1,
         devStatus: 5,
         assets: '烟草大厦',
@@ -112,13 +113,13 @@ export const infoDetail =[
         type:"a-select",
         valueEnum:devType
     },
-    {
-        title: '实际状态',
-        key: 'devStatus',
-        value:"",
-        type:"a-select",
-        valueEnum:devStatus
-    },
+    // {
+    //     title: '实际状态',
+    //     key: 'devStatus',
+    //     value:"",
+    //     type:"a-select",
+    //     valueEnum:devStatus
+    // },
     {
         title: '所属资产',
         key: 'assets',

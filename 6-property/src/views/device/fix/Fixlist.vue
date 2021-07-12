@@ -7,7 +7,7 @@
                         <template v-for="(i, index) in record.action">
                             <a href="#" @click.stop="handleOps(i.com, record.devId, record.taskStatus)">{{
                                 i.tagName
-                            }}</a>   
+                            }}</a>
                             <component
                                 :is="i.com"
                                 :ref="i.com"
@@ -55,9 +55,9 @@ export default {
     },
     methods: {
         handleOps(type, id, taskType) {
+            const menuData = this.fixMenu.filter((item) => item.title == taskType || item.key == taskType)[0]
             if (type === 'TableDrawer') {
                 if (this.current === 0) {
-                    let menuData = NEW_FIXLIST.fixMenu.filter((item) => item.title == taskType)[0]
                     let tempCol = require('./js/' + menuData.content + '.js')
                     let result = Object.freeze(tempCol)
                     this.infoDetail = result.infoDetail.filter((item) => !item.hideInDetail)
@@ -69,8 +69,10 @@ export default {
                     return item
                 })
             } else {
-                if (taskType == '待审核') {
-                    this.infoDetail = this.taskList.filter((item) => !item.hideInDetail)
+                if (taskType == '待审核' || taskType == 1) {
+                    let tempModal = require('./js/' + menuData.content + '.js')
+                    // let result = Object.freeze(tempModal)
+                    this.infoDetail = tempModal.taskList.filter((item) => !item.hideInDetail)
                 }
             }
             let tempValue = [...NEW_FIXLIST.typeToComponent].filter(([key, value]) => key === type)

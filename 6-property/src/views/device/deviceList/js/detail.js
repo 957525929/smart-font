@@ -11,13 +11,13 @@ export const basicInfo = [
         value:"",
         key: 'devName'
     },
-    {
-        title: '设备类型',
-        value:"",
-        key: 'devType',
-        type:"a-select",
-        valueEnum:devType
-    },
+    // {
+    //     title: '设备类型',
+    //     value:"",
+    //     key: 'devType',
+    //     type:"a-select",
+    //     valueEnum:devType
+    // },
     {
         title: '实际状态',
         key: 'devStatus',

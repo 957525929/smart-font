@@ -1,5 +1,5 @@
 <template>
-    <page-layout title="设备详情">
+    <!-- <page-layout title="设备详情"> -->
         <a-card :bordered="false">
             <a-descriptions title="基本信息">
                 <a-descriptions-item :label="item.title" v-for="item in basicInfo" :key="item.key">{{
@@ -17,7 +17,7 @@
             <div class="title">运维参数</div>
             <a-table style="margin-bottom: 24px" :columns="runInfo" :data-source="runData"> </a-table>
         </a-card>
-    </page-layout>
+    <!-- </page-layout> -->
 </template>
 
 <script>
@@ -98,7 +98,7 @@ const fix = [
             tagName:"审核下发",
             com:"TableModal"
         },{
-            tagName:"不通过",
+            tagName:"忽略",
             com:""
         }]
     },
@@ -269,7 +269,7 @@ export default {
             })[0]
             this.basicInfo.map((item) => {
                 if (item.valueEnum) {
-                    this.basicData[item.key] = item.valueEnum[this.basicData].tableValue
+                    this.basicData[item.key] = item.valueEnum[this.basicData[item.key]].tableValue
                 } else {
                     item.value = this.basicData[item.key]
                 }

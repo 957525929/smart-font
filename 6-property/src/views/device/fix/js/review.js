@@ -79,6 +79,7 @@ export const data=[
         key: '1',
         devId: '4',
         devName:"空调调控温度无反应",
+        taskStatus:4,
         devType:0,
         devStatus: 5,
         assets: '烟草大厦',
@@ -112,13 +113,13 @@ export const infoDetail =[
         type:"a-select",
         valueEnum:devType
     },
-    {
-        title: '实际状态',
-        key: 'devStatus',
-        value:"",
-        type:"a-select",
-        valueEnum:devStatus
-    },
+    // {
+    //     title: '实际状态',
+    //     key: 'devStatus',
+    //     value:"",
+    //     type:"a-select",
+    //     valueEnum:devStatus
+    // },
     {
         title: '所属资产',
         key: 'assets',

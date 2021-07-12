@@ -79,6 +79,7 @@ export const data=[
         devId: '2',
         devName:"18楼频繁断电停电",
         devType:1,
+        taskStatus:2,
         devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -111,13 +112,13 @@ export const infoDetail =[
         type:"a-select",
         valueEnum:devType
     },
-    {
-        title: '实际状态',
-        key: 'devStatus',
-        value:"",
-        type:"a-select",
-        valueEnum:devStatus
-    },
+    // {
+    //     title: '实际状态',
+    //     key: 'devStatus',
+    //     value:"",
+    //     type:"a-select",
+    //     valueEnum:devStatus
+    // },
     {
         title: '所属资产',
         key: 'assets',

@@ -100,7 +100,7 @@ export const data=[
             tagName:"审核下发",
             com:"TableModal"
         },{
-            tagName:"不通过",
+            tagName:"忽略",
             com:""
         }]
     },
