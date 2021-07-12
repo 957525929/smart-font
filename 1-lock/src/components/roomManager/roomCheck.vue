@@ -2,20 +2,15 @@
   <a-card>
     <!-- 上部 -->
 
-    <span>楼号：</span>
-    <a-select style="width: 11%" placeholder="请选择楼号" @change="buildChange" allowClear>
-      <a-select-option value="1"> 1号楼 </a-select-option>
-      <a-select-option value="2"> 2号楼 </a-select-option>
-      <a-select-option value="3"> 3号楼 </a-select-option>
-      <a-select-option value="4"> 4号楼 </a-select-option>
-    </a-select>
+    <span>区域：</span>
+    <a-cascader :options="selectOptions" change-on-select @change="onChange" placeholder="请选择区域" />
 
     <a-divider type="vertical" />
 
     <span>房间：</span>
     <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
 
-    <a-divider type="vertical" />
+    <br /><br />
 
     <span>部门：</span>
     <a-select style="width: 11%" placeholder="请选择部门" @change="deptChange" allowClear>
@@ -46,14 +41,9 @@
         <!-- 添加房间功能 -->
         <a-modal v-model="visible" title="添加房间" @ok="handleOk">
           <a-row type="flex" align="middle">
-            <a-col :span="4">楼号：</a-col>
+            <a-col :span="4">区域：</a-col>
             <a-col :span="10">
-              <a-select style="width: 100%" @change="buildChange" placeholder="请选择楼号" allowClear>
-                <a-select-option value="1"> 1号楼 </a-select-option>
-                <a-select-option value="2"> 2号楼 </a-select-option>
-                <a-select-option value="3"> 3号楼 </a-select-option>
-                <a-select-option value="4"> 4号楼 </a-select-option>
-              </a-select>
+              <a-cascader :options="selectOptions" change-on-select @change="onChange" placeholder="请选择区域" />
             </a-col>
           </a-row>
 
@@ -124,6 +114,32 @@ export default {
       roomNum: '',
       visible: false,
       selectedItems: [],
+      selectOptions: [
+        {
+          value: 'FJYC',
+          label: '福建烟草',
+          children: [
+            {
+              value: 'A',
+              label: 'A区域',
+              children: [
+                {
+                  value: '1',
+                  label: '1号楼',
+                },
+                {
+                  value: '2',
+                  label: '2号楼',
+                },
+              ],
+            },
+            {
+              value: 'B',
+              label: 'B区域',
+            },
+          ],
+        },
+      ],
     }
   },
   computed: {
@@ -133,6 +149,11 @@ export default {
     },
   },
   methods: {
+    //区域
+    onChange(value) {
+      console.log(value)
+    },
+
     //查询
     check() {
       console.log('点击查询')
