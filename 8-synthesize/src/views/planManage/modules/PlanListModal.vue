@@ -2,7 +2,7 @@
   <a-modal :title="title" :width="800" :visible="visible" :confirmLoading="confirmLoading" @ok="handleOk" @cancel="handleCancel" okText="保存计划" cancelText="关闭">
 
     <a-spin :spinning="confirmLoading">
-      <a-form :form="form" :model="form_modal" ref="form_modal_refs">
+      <a-form :form="form">
 
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="计划名称">
           <a-input style="width:200px" placeholder="请输入计划名称" v-decorator="['planName', {rules: [{ required: true, message: '请输入计划名称!' }]}]" />
@@ -21,7 +21,7 @@
           <a-date-picker format="YYYY-MM-DD HH:mm:ss" placeholder="结束时间" v-decorator="['completionTime', {rules: [{ required: true, message: '请选择结束时间!' }]}]" />
         </a-form-item>
         <a-form-item label="概述" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-textarea :rows="10" />
+          <a-textarea :rows="10" v-decorator="['content']" />
         </a-form-item>
 
       </a-form>
@@ -92,7 +92,7 @@ export default {
       console.log(this.model.startTime)
       // console.log(this.model.deadline)
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(this.model, 'planName', 'status', 'startTime', 'completionTime'));
+        this.form.setFieldsValue(pick(this.model, 'planName', 'status', 'startTime', 'completionTime', 'content'));
       });
 
     },
