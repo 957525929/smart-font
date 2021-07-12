@@ -93,11 +93,18 @@
           <a-tag v-if="status==='0'" color="orange">未开始</a-tag>
           <a-tag v-if="status==='1'" color="green">进行中</a-tag>
           <a-tag v-if="status==='2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status==='3'" color="red">
-            <a-popconfirm title="是否确认延长时间?" ok-text="确定" cancel-text="取消" @confirm="confirm(record)" @cancel="cancel">
+          <a-tag v-if="status==='3'" color="red" @click="showModal">
+            <!-- <a-popconfirm title="是否确认延长时间?" ok-text="确定" cancel-text="取消" @confirm="confirm(record)" @cancel="cancel">
               未完成
-            </a-popconfirm>
+            </a-popconfirm> -->
+            未完成
+            <a-modal v-model="status_visible" width="350px" title="延长时间" @ok="confirm(record)">
+              <a-form-item label="时间">
+                <a-date-picker placeholder="开始时间" />
+              </a-form-item>
+            </a-modal>
           </a-tag>
+          <a-tag v-if="status==='4'" color="pink">延期中</a-tag>
         </template>
       </a-table>
     </div>
@@ -261,7 +268,7 @@ export default {
         exportXlsUrl: "sys/quartzJob/exportXls",
         importExcelUrl: "sys/quartzJob/importExcel",
       },
-      table_status: "未完成"
+      status_visible: false
     }
   },
   methods: {
@@ -275,8 +282,11 @@ export default {
       this.currentIndex = index;
       this.data.dataSource.splice(this.currentIndex, 1)
     },
+    showModal() {
+      this.status_visible = true;
+    },
     confirm(record) {
-      record.status = "1";
+      record.status = "4";
       this.$message.success('延期成功');
     },
     cancel(e) {
