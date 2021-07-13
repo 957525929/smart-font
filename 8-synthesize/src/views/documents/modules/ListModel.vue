@@ -1,5 +1,5 @@
 <template>
-  <a-drawer :title="title" :width="width" placement="right" @close="close" :visible="visible">
+  <a-Modal :title="title" :width="width" placement="right" :visible="visible" @ok="handleOk" @cancel="handleCancel">
 
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
@@ -31,12 +31,7 @@
 
       </a-form>
     </a-spin>
-
-    <div>
-      <a-button type="primary" @click="handleOk">确定</a-button>
-      <a-button @click="handleCancel">取消</a-button>
-    </div>
-  </a-drawer>
+  </a-Modal>
 </template>
 
 <script>

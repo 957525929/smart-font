@@ -14,9 +14,9 @@
 
           <a-col :md="10" :sm="12">
             <a-form-item label="时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
-              <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择开始时间" ></j-date>
+              <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date>
               <span style="width: 10px;">~</span>
-              <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择结束时间"></j-date>
+              <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择结束时间"></j-date>
             </a-form-item>
           </a-col>
 
@@ -188,7 +188,7 @@
     },
     data () {
       return {
-        description: '库存统计页面',
+        description: '办公用品统计页面',
         // 查询条件
         queryParam: {roleName:'',},
         total: {

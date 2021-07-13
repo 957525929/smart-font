@@ -2,11 +2,11 @@
   <a-card :bordered="false">
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
-      <a-form layout="inline" >
+      <a-form layout="inline" :form="form1">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="8" :md="9" :sm="24">
             <a-form-item label="采购单号">
-              <a-input placeholder="请输入" ></a-input>
+              <a-input placeholder="请输入" v-decorator="['purchaseOrderNumber']"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="5" :lg="5" :md="6" :sm="24">
@@ -14,6 +14,7 @@
               <a-select
                 allowClear
                 placeholder="请选择"
+                v-decorator="['provider']"
               >
                 <a-select-option v-for="d in manuSelectData" :key="d.value">
                   {{ d.text }}
@@ -26,6 +27,7 @@
               <a-select
                 allowClear
                 placeholder="请选择"
+                v-decorator="['purchasePeople']"
               >
                 <a-select-option v-for="d in purchasePeopleSelectData" :key="d.value">
                   {{ d.text }}
@@ -38,6 +40,7 @@
               <a-select
                 allowClear
                 placeholder="请选择"
+                v-decorator="['checkoutPeople']"
               >
                 <a-select-option v-for="d in checkoutPeopleSelectData" :key="d.value">
                   {{ d.text }}
@@ -48,25 +51,25 @@
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="采购日期">
-                <a-range-picker @change="purchaseDateOnChange" />
+                <a-range-picker @change="purchaseDateOnChange" v-decorator="['purchaseDate']"/>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
-              <a-form-item label="采购日期">
-                <a-range-picker @change="purchaseDateOnChange" />
+              <a-form-item label="验收日期">
+                <a-range-picker @change="purchaseDateOnChange" v-decorator="['checkoutDate']"/>
               </a-form-item>
             </a-col>
             <a-col :xl="5" :lg="8" :md="9" :sm="24">
               <a-form-item label="标题">
-                <a-input placeholder="请输入" ></a-input>
+                <a-input placeholder="请输入" v-decorator="['headline']"></a-input>
               </a-form-item>
             </a-col>
           </template>
 
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :md="6" :sm="24">
-              <a-button type="primary" icon="search">查询</a-button>
-              <a-button icon="reload" style="margin-left: 8px">重置</a-button>
+              <a-button icon="search" @click='handleOk'>查询</a-button>
+              <a-button icon="reload" style="margin-left: 8px" @click='handleReset'>重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
                 {{ toggleSearchStatus ? '收起' : '展开' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
@@ -101,20 +104,19 @@
         :pagination="{total:this.dataSource.length, showTotal:(total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`}"
         >
         <span slot="action" slot-scope="text, record">
-<!--          <a>查看详情</a>-->
-          <router-link :to="{name:'materialManagement-warehousing-warehousingDetails', params:record }">查看详情</router-link>
+          <router-link :to="{name:'material-warehousing-warehousingDetails', params:record }">查看详情</router-link>
 <!--          <router-link :to="{path:'/material/warehousing/warehousingDetails', query:record }">查看详情</router-link>-->
-          <a-divider type="vertical" />
-          <a-dropdown>
-            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
-            <a-menu slot="overlay">
-              <a-menu-item key="1" >编辑</a-menu-item>
-              <a-menu-item key="2" >
-                <a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)">删除</a-popconfirm>
-              </a-menu-item>
-
-            </a-menu>
-          </a-dropdown>
+          <a><a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style='margin-left: 10%;'>删除</a-popconfirm></a>
+<!--          <a-divider type="vertical" />-->
+<!--          <a-dropdown>-->
+<!--            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>-->
+<!--            <a-menu slot="overlay">-->
+<!--              <a-menu-item key="1" >编辑</a-menu-item>-->
+<!--              <a-menu-item key="2" >-->
+<!--                <a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)">删除</a-popconfirm>-->
+<!--              </a-menu-item>-->
+<!--            </a-menu>-->
+<!--          </a-dropdown>-->
         </span>
       </a-table>
     </div>
@@ -128,6 +130,7 @@
 <script>
 
 import PurInModal from './PurInModal'
+import moment from 'moment'
 
 export default {
   name: "Index",
@@ -136,6 +139,7 @@ export default {
   },
   data () {
     return {
+      form1: this.$form.createForm(this),
       manuSelectData:[
         {
           value : 1,
@@ -274,8 +278,9 @@ export default {
       if(this.toggleSearchStatus) this.toggleSearchStatus=false;
       else this.toggleSearchStatus=true;
     },
-    onSelectChange(selectedRowKeys) {
-      console.log('selectedRowKeys changed: ', selectedRowKeys);
+    onSelectChange(selectedRowKeys, selectedRows) {
+      console.log('selectedRowKeys: ', selectedRowKeys);
+      console.log('selectedRows: ', selectedRows);
       this.selectedRowKeys = selectedRowKeys;
     },
     onClearSelected() {
@@ -293,6 +298,16 @@ export default {
     },
     handleCancel() {
       this.modalVisible = false;
+    },
+    handleReset() {
+      this.form1.resetFields();//重置基本信息
+    },
+    handleOk() {
+      this.form1.validateFields((err, values) => {
+        if (!err) {
+          console.log('基本信息：', values)
+        }
+      })
     },
   }
 

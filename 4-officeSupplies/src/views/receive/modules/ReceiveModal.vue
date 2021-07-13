@@ -14,10 +14,11 @@
       <a-form :form="form">
         <a-form-item label="部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select v-decorator.trim="[ 'receiveDepertment', validatorRules.receiveDepertment]" placeholder="请选择领用部门" :getPopupContainer= "(target) => target.parentNode">
-            <a-select-option value="1">营销部</a-select-option>
-            <a-select-option value="2">专卖部</a-select-option>
-            <a-select-option value="3">配送部</a-select-option>
-            <a-select-option value="4">后勤部</a-select-option>
+            <a-select-option value="">不限</a-select-option>
+            <a-select-option value="1">卷烟销售管理处</a-select-option>
+            <a-select-option value="2">物流管理处</a-select-option>
+            <a-select-option value="3">烟叶管理处</a-select-option>
+            <a-select-option value="4">人事处</a-select-option>
           </a-select>
         </a-form-item>
 
@@ -31,17 +32,10 @@
         </a-form-item>
 
         <a-form-item label="办公用品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-select v-decorator.trim="[ 'articleName', validatorRules.name]" placeholder="请选择办公用品名称" :getPopupContainer= "(target) => target.parentNode">
+          <a-select v-decorator.trim="[ 'articleName', validatorRules.name]" placeholder="请选择办公用品名称" @change="handleChange" :getPopupContainer= "(target) => target.parentNode">
             <a-select-option :value="1">马克笔</a-select-option>
             <a-select-option :value="2">打印机</a-select-option>
             <a-select-option :value="3">A4纸</a-select-option>
-          </a-select>
-        </a-form-item>
-
-        <a-form-item label="批次" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-select v-decorator.trim="[ 'batch', validatorRules.batch]" placeholder="请输入购入批次" :getPopupContainer= "(target) => target.parentNode">
-            <a-select-option :value="1">20210514</a-select-option>
-            <a-select-option :value="2">20210320</a-select-option>
           </a-select>
         </a-form-item>
 
@@ -57,7 +51,7 @@
         </a-form-item>
 
         <a-form-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-select v-decorator.trim="[ 'unit', validatorRules.unit]" placeholder="请选择计量单位" :getPopupContainer= "(target) => target.parentNode">
+          <a-select v-decorator.trim="[ 'unit', validatorRules.unit]" placeholder="请选择计量单位" :getPopupContainer= "(target) => target.parentNode" :disabled="true">
             <a-select-option :value="1">个</a-select-option>
             <a-select-option :value="2">盒</a-select-option>
             <a-select-option :value="3">箱</a-select-option>
@@ -74,12 +68,12 @@
           <j-date class="inputWitdh" v-decorator.trim="[ 'receiveTime', validatorRules.receiveTime]"  :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择领用时间" ></j-date>
         </a-form-item>
 
-        <a-form-item v-if="!!model.id"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="金额(元)">
-          <a-input-number  class="inputWitdh" placeholder="请输入金额"   v-decorator.trim="['receivePrice', validatorRules.receivePrice]"  :min="1" :max="10000000"/>
-        </a-form-item>
+<!--        <a-form-item v-if="!!model.id"-->
+<!--          :labelCol="labelCol"-->
+<!--          :wrapperCol="wrapperCol"-->
+<!--          label="金额(元)">-->
+<!--          <a-input-number  class="inputWitdh" placeholder="请输入金额"   v-decorator.trim="['receivePrice', validatorRules.receivePrice]"  :min="1" :max="10000000"/>-->
+<!--        </a-form-item>-->
 
       </a-form>
     </a-spin>
@@ -94,7 +88,7 @@
   export default {
     name: "ReceiveModal",
     components: {
-      JDate
+      JDate,
     },
     data () {
       return {
@@ -217,7 +211,24 @@
             }
           });
         }
-      }
+      },
+      handleChange(value) {
+        switch (value) {
+          case 1:
+            this.model.unit='盒';
+            this.model.price='20';
+            break;
+          case 2:
+            this.model.unit='台';
+            this.model.price='1600';
+            break;
+          case 3:
+            this.model.unit='箱';
+            this.model.price='128';
+            break;
+        }
+        this.form.setFieldsValue(pick(this.model, 'price','unit'))
+      },
 
     }
   }
@@ -226,5 +237,10 @@
 <style scoped>
 .inputWitdh {
   width: 100%;
+}
+.link {
+  position: absolute;
+  right: -30px;
+  top:1%;
 }
 </style>

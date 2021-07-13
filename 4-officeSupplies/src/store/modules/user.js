@@ -148,22 +148,9 @@ const user = {
               "describe": "代码生成按钮",
               "type": "1"
             }],
-            "menu": [{
+            "menu": [ {
               "redirect": null,
               "path": "/dashboard/analysis",
-              "component": "procurement/procurementList",
-              "route": "1",
-              "meta": {
-                "keepAlive": false,
-                "internalOrExternal": false,
-                "icon": "home",
-                "title": "首页"
-              },
-              "name": "dashboard-analysis",
-              "id": "9502685863ab87f0ad1134142788a385"
-            }, {
-              "redirect": null,
-              "path": "/store/manage",
               "component": "layouts/RouteView",
               "route": "1",
               "children": [{
@@ -173,17 +160,31 @@ const user = {
                 "meta": {
                   "keepAlive": false,
                   "internalOrExternal": true,
-                  "title": "采购管理"
+                  "icon": "shop",
+                  "title": "采购申请"
                 },
                 "name": "procurement-manage-procurementList",
                 "id": "1265365136117207042"
               }, {
+                "path": "/procurement/manage/uncheckProcurementList",
+                "component": "procurement/uncheckProcurementList",
+                "route": "1",
+                "meta": {
+                  "keepAlive": false,
+                  "internalOrExternal": true,
+                  "icon": "shop",
+                  "title": "采购审批"
+                },
+                "name": "procurement-manage-uncheckProcurementList",
+                "id": "1265365136587207042"
+              },{
                 "path": "/store/manage/stockList",
                 "component": "store/stockList",
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
                   "internalOrExternal": true,
+                  "icon": "bank",
                   "title": "库存管理"
                 },
                 "name": "store-manage-stockList",
@@ -195,6 +196,7 @@ const user = {
                 "meta": {
                   "keepAlive": false,
                   "internalOrExternal": true,
+                  "icon": "file-protect",
                   "title": "领用管理",
                 },
                 "name": "receive-manage-stockList",
@@ -206,6 +208,7 @@ const user = {
                 "meta": {
                   "keepAlive": false,
                   "internalOrExternal": true,
+                  "icon": "schedule",
                   "title": "用品种类管理"
                 },
                 "name": "article-manage-articleList",
@@ -217,7 +220,7 @@ const user = {
                 "icon": "layout",
                 "title": "办公用品管理"
               },
-              "name": "store-manage",
+              "name": "dashboard-analysis",
               "id": "1249544156015607810"
             },  {
               "redirect": null,
@@ -225,22 +228,48 @@ const user = {
               "component": "layouts/RouteView",
               "route": "1",
               "children": [{
-                "path": "/statistics/manage/stock",
-                "component": "statistics/stock",
+                "path": "/statistics/manage/limitMgr",
+                "component": "statistics/limitMgr",
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
                   "internalOrExternal": false,
-                  "title": "物品数据统计"
+                  "icon": "red-envelope",
+                  "title": "部门领用限额管理"
                 },
-                "name": "statistics-manage-stock",
+                "name": "statistics-manage-limitMgr",
+                "id": "1245154914959151105"
+              },
+                {
+                  "path": "/statistics/manage/department",
+                  "component": "statistics/department",
+                  "route": "1",
+                  "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon": "line-chart",
+                    "title": "部门领用数据统计"
+                  },
+                  "name": "statistics-manage-department",
+                  "id": "1245124914959151105"
+                },{
+                "path": "/statistics/manage/office",
+                "component": "statistics/office",
+                "route": "1",
+                "meta": {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "icon": "fund",
+                  "title": "办公用品数据统计"
+                },
+                "name": "statistics-manage-office",
                 "id": "1245154914959151105"
               }],
               "meta": {
                 "keepAlive": false,
                 "internalOrExternal": false,
                 "icon": "table",
-                "title": "统计管理"
+                "title": "数据管理"
               },
               "name": "statistics-manage",
               "id": "1242263502445903874"

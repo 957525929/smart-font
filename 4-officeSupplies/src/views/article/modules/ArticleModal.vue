@@ -17,15 +17,11 @@
           <a-input v-decorator.trim="[ 'articleName', validatorRules.name]" placeholder="请输入办公用品名称" :disabled="disableSubmit"/>
         </a-form-item>
 
-        <a-form-item label="批次" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator.trim="[ 'batch', validatorRules.batch]" placeholder="请输入购入批次" :disabled="disableSubmit"/>
-        </a-form-item>
-
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="单价(元)">
-          <a-input-number  class="inputWitdh" placeholder="请输入单价"   v-decorator.trim="['price', validatorRules.price]"  :min="1" :max="10000000"/>
+          label="警示阀值">
+          <a-input-number  class="inputWitdh" placeholder="请输入单价"   v-decorator.trim="['threshold', validatorRules.threshold]"  :min="1" :max="10000000"/>
         </a-form-item>
 
         <a-form-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -73,17 +69,13 @@
             rules: [
               { required: true, message: '请输入办公用品名称!' },
             ]},
-          batch:{
+          threshold:{
             rules: [
-              { required: true, message: '请输入购入批次!'}
+              { required: true, message: '请输入购入警示阀值!'}
             ]},
           unit: {
             rules: [
             { required: true, message: '请选择计量单位!' }
-          ]},
-          price: {
-            rules: [
-            { required: true, message: '请输入购买单价!' }
           ]}
         },
       }
@@ -100,7 +92,7 @@
         this.visible = true;
 
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'id', 'articleName', 'batch','unit', 'price'))
+          this.form.setFieldsValue(pick(this.model,'id', 'articleName', 'threshold','unit'))
         });
 
       },

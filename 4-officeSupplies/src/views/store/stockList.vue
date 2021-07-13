@@ -19,6 +19,14 @@
             </a-form-item>
           </a-col>
 
+          <a-col :md="10" :sm="12">
+            <a-form-item label="时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
+              <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date>
+              <span style="width: 10px;">~</span>
+              <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择结束时间"></j-date>
+            </a-form-item>
+          </a-col>
+
           <a-col :md="4" :sm="6">
             <a-form-item label="库存状态">
               <a-select v-model="queryParam.sex" placeholder="请选择库存状态">
@@ -29,6 +37,7 @@
               </a-select>
             </a-form-item>
           </a-col>
+
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :md="6" :sm="24">
               <a-button type="primary" @click="searchQuery">查询</a-button>
@@ -79,19 +88,9 @@
         <span slot="action" slot-scope="text, record">
           <a @click="handleEdit(record)">编辑</a>
           <a-divider type="vertical" />
-
-          <a-dropdown>
-            <a class="ant-dropdown-link">
-              更多 <a-icon type="down" />
-            </a>
-            <a-menu slot="overlay">
-              <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
-                </a-popconfirm>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
+          <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+              <a>删除</a>
+          </a-popconfirm>
         </span>
         <template slot="stockStatus" slot-scope="status">
           <a-tag v-if="status == '1'" color="green">充裕</a-tag>
@@ -128,19 +127,18 @@
           {
             id:1,
             articleName: '马克笔',
-            batch: '20210514',
+            enterTime: '2021-05-14 14:36:45',
             stockNum: '20',
             price: '20',
             stockPrice: '400',
             threshold: '10',
             unit:'盒',
             status: '1'
-
           },
           {
             id:2,
             articleName: '打印机',
-            batch: '20210324',
+            enterTime: '2021-03-24 09:31:45',
             stockNum: '2',
             price: '1600',
             stockPrice: '3200',
@@ -151,7 +149,7 @@
           {
             id:3,
             articleName: 'A4纸',
-            batch: '20210105',
+            enterTime: '2021-01-05 16:26:15',
             stockNum: '0',
             price: '128',
             stockPrice: '0',
@@ -178,9 +176,9 @@
             dataIndex: 'articleName'
           },
           {
-            title: '批次',
+            title: '入库时间',
             align:"center",
-            dataIndex: 'batch'
+            dataIndex: 'enterTime'
           },
           {
             title: '库存数量',

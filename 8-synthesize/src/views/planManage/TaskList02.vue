@@ -59,7 +59,11 @@
           <a-tag v-if="status==='0'" color="orange">未开始</a-tag>
           <a-tag v-if="status==='1'" color="green">进行中</a-tag>
           <a-tag v-if="status==='2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status==='3'" color="red">未完成</a-tag>
+          <a-tag v-if="status==='3'" color="red">
+            <a-popconfirm title="是否确认延长时间?" ok-text="确定" cancel-text="取消" @confirm="confirm(record)" @cancel="cancel">
+              未完成
+            </a-popconfirm>
+          </a-tag>
         </template>
       </a-table>
     </PageTemplate>
@@ -117,6 +121,13 @@ export default {
     deleteIndex(index) {
       this.currentIndex = index;
       this.data.splice(this.currentIndex, 1)
+    },
+    confirm(record) {
+      record.status = "1";
+      this.$message.success('延期成功');
+    },
+    cancel(e) {
+
     },
   },
 }

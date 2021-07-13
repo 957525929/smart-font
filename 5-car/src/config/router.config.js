@@ -295,6 +295,17 @@ export const asyncRouterMap = [
  */
 export const constantRouterMap = [
   {
+    path: '/navPage',
+    component: BlankLayout,
+    children: [
+      {
+        path: '/',
+        name: 'navPage',
+        component: () => import('@/views/navPage/index')
+      }
+    ]
+  },
+  {
     path: '/user',
     component: UserLayout,
     redirect: '/user/login',

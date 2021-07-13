@@ -40,6 +40,42 @@ export const menuMock = {
         "route": "1",
         "children": [
           {
+            "path": "/dashboard/roommanager",
+            "component": "dashboard/roomManager",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "internalOrExternal": false,
+              "title": "房间管理"
+            },
+            "name": "dashboard-roomManager",
+            "id": "1261213213500452866"
+          },
+          {
+            "path": "/isystem/permission",
+            "component": "system/PermissionList",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "internalOrExternal": false,
+              "title": "菜单管理"
+            },
+            "name": "isystem-permission",
+            "id": "12612132135004528626"
+          },
+          {
+            "path": "/areamanager/areaManager",
+            "component": "areamanager/areaManager",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "internalOrExternal": false,
+              "title": "区域位置管理"
+            },
+            "name": "areamanager-areaManager",
+            "id": "12612132135004528626"
+          },
+          {
             "path": "/dashboard/lockmanager",
             "component": "dashboard/lockManager",
             "route": "1",
@@ -51,18 +87,7 @@ export const menuMock = {
             "name": "dashboard-lockmanager",
             "id": "12612132135004528626"
           },
-          {
-            "path": "/roommanager/roommanager",
-            "component": "roommanager/roomManager",
-            "route": "1",
-            "meta": {
-              "keepAlive": false,
-              "internalOrExternal": false,
-              "title": "房间管理"
-            },
-            "name": "roommanager-roomManager",
-            "id": "1261213213500452866"
-          },],
+        ],
         "meta": {
           "keepAlive": false,
           "internalOrExternal": false,

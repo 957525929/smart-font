@@ -6,8 +6,8 @@
       <!-- 房间变更功能 -->
       <a-modal v-model="visible" title="变更" @ok="handleOk">
         <a-row type="flex" align="middle">
-          <a-col :span="4">楼号：</a-col>
-          <a-col :span="10"> {{ rowRecord.buildingNum }} </a-col>
+          <a-col :span="4">区域：</a-col>
+          <a-col :span="10"> {{ rowRecord.area }} </a-col>
         </a-row>
 
         <br />
@@ -15,27 +15,6 @@
         <a-row type="flex" align="middle">
           <a-col :span="4">房间号：</a-col>
           <a-col :span="10"> {{ rowRecord.roomNum }} </a-col>
-        </a-row>
-
-        <br />
-
-        <a-row type="flex" align="middle">
-          <a-col :span="4">所属部门：</a-col>
-          <a-col :span="10"> {{ rowRecord.dept }} </a-col>
-        </a-row>
-
-        <br />
-
-        <a-row type="flex" align="middle">
-          <a-col :span="4"> 更改部门： </a-col>
-          <a-col :span="10">
-            <a-select style="width: 100%" placeholder="请选择部门" @change="deptChange" allowClear>
-              <a-select-option value="1"> 办公室 </a-select-option>
-              <a-select-option value="2"> 生产部 </a-select-option>
-              <a-select-option value="3"> 购销部 </a-select-option>
-              <a-select-option value="4"> 信息中心 </a-select-option>
-            </a-select>
-          </a-col>
         </a-row>
 
         <br />
@@ -65,8 +44,8 @@
       <a @click="add(record)">添加人员</a>
       <a-modal v-model="visibleAdd" title="添加人员" @ok="handleOkAdd">
         <a-row type="flex" align="middle">
-          <a-col :span="4">楼号：</a-col>
-          <a-col :span="10"> {{ rowRecord.buildingNum }} </a-col>
+          <a-col :span="4">区域：</a-col>
+          <a-col :span="10"> {{ rowRecord.area }} </a-col>
         </a-row>
 
         <br />
@@ -79,36 +58,27 @@
         <br />
 
         <a-row type="flex" align="middle">
-          <a-col :span="4">部门：</a-col>
-          <a-col :span="10"> {{ rowRecord.dept }} </a-col>
-        </a-row>
-
-        <br />
-
-        <a-row type="flex" align="middle">
-          <a-col :span="4">工号：</a-col>
-          <a-col :span="10"
-            ><a-input style="width: 100%" placeholder="请输入工号" v-model="Num" allowClear></a-input
-          ></a-col>
+          <a-col :span="4"> 部门： </a-col>
+          <a-col :span="10">
+            <a-select style="width: 100%" placeholder="请选择部门" @change="deptChange" allowClear>
+              <a-select-option value="1"> 办公室 </a-select-option>
+              <a-select-option value="2"> 生产部 </a-select-option>
+              <a-select-option value="3"> 购销部 </a-select-option>
+              <a-select-option value="4"> 信息中心 </a-select-option>
+            </a-select>
+          </a-col>
         </a-row>
 
         <br />
 
         <a-row type="flex" align="middle">
           <a-col :span="4">姓名：</a-col>
-          <a-col :span="10"
-            ><a-input style="width: 100%" placeholder="请输入姓名" v-model="name" allowClear></a-input
-          ></a-col>
-        </a-row>
-
-        <br />
-
-        <a-row type="flex" align="middle">
-          <a-col :span="4"> 性别： </a-col>
           <a-col :span="10">
-            <a-select style="width: 100%" placeholder="请选择性别" @change="genderChange" allowClear>
-              <a-select-option value="1"> 男 </a-select-option>
-              <a-select-option value="2"> 女 </a-select-option>
+            <a-select style="width: 100%" placeholder="请选择姓名" @change="handleChange" allowClear>
+              <a-select-option value="name1"> 张三 </a-select-option>
+              <a-select-option value="name2"> 李四 </a-select-option>
+              <a-select-option value="name3"> 王五 </a-select-option>
+              <a-select-option value="name4"> 赵六 </a-select-option>
             </a-select>
           </a-col>
         </a-row>
@@ -156,93 +126,105 @@
 </template>
 <script>
 const columns = [
-  { title: '楼号', dataIndex: 'buildingNum', key: 'buildingNum' },
-  { title: '房间号', dataIndex: 'roomNum', key: 'roomNum' },
-  { title: '部门', dataIndex: 'dept', key: 'dept' },
+  { title: '区域', dataIndex: 'area', key: 'area', width: '30%' },
+  { title: '房间号', dataIndex: 'roomNum', key: 'roomNum', width: '30%' },
   { title: '操作', key: 'operation', scopedSlots: { customRender: 'operation' } },
 ]
 
 const data = [
   {
     key: 1,
-    buildingNum: '1号楼',
+    area: '福建烟草公司/A区域/1号楼',
     roomNum: '101',
-    dept: '办公室',
     innerData: [
       {
         key: 11,
+        dept: '财务管理处',
         num: 'A001',
         name: '张三',
         gender: '男',
+        phone: '15860273034',
       },
       {
         key: 12,
+        dept: '财务管理处',
         num: 'A111',
         name: '李丝',
         gender: '女',
+        phone: '13854641624',
       },
       {
         key: 13,
+        dept: '安全管理处',
         num: 'B221',
         name: '王五',
         gender: '男',
+        phone: '13235905384',
       },
     ],
   },
   {
     key: 2,
-    buildingNum: '2号楼',
+    area: '福建烟草公司/A区域/2号楼',
     roomNum: '202',
-    dept: '生产部',
     innerData: [
       {
         key: 21,
+        dept: '物流管理处',
         num: 'A111',
         name: '张山',
         gender: '男',
+        phone: '13459773253',
       },
       {
         key: 22,
+        dept: '物流管理处',
         num: 'C311',
         name: '李斯',
         gender: '男',
+        phone: '17656871251',
       },
     ],
   },
   {
     key: 3,
-    buildingNum: '2号楼',
+    area: '福建烟草公司/A区域/2号楼',
     roomNum: '303',
-    dept: '生产部',
     innerData: [
       {
         key: 31,
+        dept: '物流管理处',
         num: 'A221',
         name: '张珊',
         gender: '女',
+        phone: '15860173035',
       },
       {
         key: 32,
+        dept: '物流管理处',
         num: 'B654',
         name: '李思',
         gender: '女',
+        phone: '17651258645',
       },
       {
         key: 33,
+        dept: '烟叶管理处',
         num: 'A112',
         name: '王武',
         gender: '男',
+        phone: '13850641598',
       },
     ],
   },
   {
     key: 4,
-    buildingNum: '1号楼',
+    area: '福建烟草公司/B区域/1号楼',
     roomNum: '404',
-    dept: '购销部',
     innerData: [
       {
         key: 41,
+        dept: '信息中心',
         num: 'D221',
         name: '赵柳',
         gender: '女',
@@ -251,16 +233,17 @@ const data = [
   },
   {
     key: 5,
-    buildingNum: '3号楼',
+    area: '福建烟草公司/A区域/3号楼',
     roomNum: '503',
-    dept: '信息中心',
   },
 ]
 
 const innerColumns = [
+  { title: '部门', dataIndex: 'dept', key: 'dept', width: '15%' },
   { title: '工号', dataIndex: 'num', key: 'num', width: '10%' },
   { title: '姓名', dataIndex: 'name', key: 'name', width: '10%' },
   { title: '性别', dataIndex: 'gender', key: 'gender', width: '10%' },
+  { title: '联系电话', dataIndex: 'phone', key: 'phone', width: '20%' },
   { title: '操作', key: 'operation', scopedSlots: { customRender: 'operation' } },
 ]
 
@@ -337,6 +320,9 @@ export default {
     // handleOkMove() {
     //   this.visibleMove = false
     // },
+    handleChange(value) {
+      console.log(value)
+    },
   },
 }
 </script>

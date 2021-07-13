@@ -10,10 +10,10 @@
             <a-form-item label="部门">
               <a-select v-model="queryParam.department" placeholder="请选择部门">
                 <a-select-option value="">不限</a-select-option>
-                <a-select-option value="1">营销部</a-select-option>
-                <a-select-option value="2">专卖部</a-select-option>
-                <a-select-option value="3">配送部</a-select-option>
-                <a-select-option value="4">后勤部</a-select-option>
+                <a-select-option value="1">卷烟销售管理处</a-select-option>
+                <a-select-option value="2">物流管理处</a-select-option>
+                <a-select-option value="3">烟叶管理处</a-select-option>
+                <a-select-option value="4">人事处</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -28,9 +28,9 @@
 
           <a-col :md="10" :sm="12">
             <a-form-item label="时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
-              <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择开始时间" ></j-date>
+              <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date>
               <span style="width: 10px;">~</span>
-              <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择结束时间"></j-date>
+              <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择结束时间"></j-date>
             </a-form-item>
           </a-col>
 
@@ -84,19 +84,9 @@
         <span slot="action" slot-scope="text, record">
           <a @click="handleEdit(record)">编辑</a>
           <a-divider type="vertical" />
-
-          <a-dropdown>
-            <a class="ant-dropdown-link">
-              更多 <a-icon type="down" />
-            </a>
-            <a-menu slot="overlay">
-              <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
-                </a-popconfirm>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
+          <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+            <a>删除</a>
+          </a-popconfirm>
         </span>
       </a-table>
     </div>
@@ -120,16 +110,15 @@
     },
     data () {
       return {
-        description: '库存管理页面',
+        description: '领用管理页面',
         // 查询条件
         queryParam: {roleName:'',},
         dataSource: [
           {
             id:1,
-            receiveDepertment:'营销部',
+            receiveDepertment:'卷烟销售管理处',
             receiveName:'张丰',
             articleName: '马克笔',
-            batch: '20210514',
             receiveNum: '2',
             price: '20',
             receivePrice: '40',
@@ -138,10 +127,9 @@
           },
           {
             id:2,
-            receiveDepertment:'专卖部',
+            receiveDepertment:'物流管理处',
             receiveName:'林俐',
             articleName: '打印机',
-            batch: '20210324',
             receiveNum: '1',
             price: '1600',
             receivePrice: '1600',
@@ -150,10 +138,9 @@
           },
           {
             id:3,
-            receiveDepertment:'后勤部',
+            receiveDepertment:'人事处',
             receiveName:'陈琳',
             articleName: 'A4纸',
-            batch: '20210105',
             receiveNum: '1',
             price: '128',
             receivePrice: '128',
@@ -187,11 +174,6 @@
             title: '办公用品名称',
             align:"center",
             dataIndex: 'articleName'
-          },
-          {
-            title: '批次',
-            dataIndex: 'batch',
-            align:"center"
           },
           {
             title: '领用数量',

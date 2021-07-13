@@ -7,19 +7,19 @@
         <a-row :gutter="10">
           <a-col :md="6" :sm="10">
             <a-form-item label="文档编号">
-              <a-input class="w140" placeholder="请输入文档编号"></a-input>
+              <a-input class="w150" placeholder="请输入文档编号"></a-input>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="10">
             <a-form-item label="文档名称">
-              <a-input class="w140" placeholder="请输入文档名称"></a-input>
+              <a-input class="w150" placeholder="请输入文档名称"></a-input>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="9">
             <a-form-item label="文档类型">
-              <a-select style="width: 150px" placeholder="请选择文档类型">
+              <a-select class="w150" placeholder="请选择文档类型">
                 <a-select-option value="0">资产</a-select-option>
                 <a-select-option value="1">会议纪要</a-select-option>
                 <a-select-option value="2">记录</a-select-option>
@@ -29,8 +29,17 @@
           </a-col>
 
           <a-col :md="6" :sm="10">
+            <a-form-item label="文档格式">
+              <a-select class="w150" placeholder="请选择文档格式">
+                <a-select-option value="0">doc</a-select-option>
+                <a-select-option value="1">xlsx</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+
+          <a-col :md="6" :sm="10">
             <a-form-item label="上传时间">
-              <a-date-picker placeholder="请选择时间" class="w140" />
+              <a-date-picker class="w150" placeholder="请选择时间" />
             </a-form-item>
           </a-col>
 
@@ -124,6 +133,7 @@ export default {
           key: '1',
           documentName: '2020年总结报告',
           documentType: '报告',
+          documentFormat: 'doc',
           uploadTime: '2020-06-04 18:01:21',
           overview: '2020年工作报告总结'
         },
@@ -131,6 +141,7 @@ export default {
           key: '2',
           documentName: '2021年季度巡查记录',
           documentType: "记录",
+          documentFormat: 'xlsx',
           uploadTime: '2021-06-05 12:05:09',
           overview: '设备硬件巡查检查记录'
         },
@@ -152,7 +163,6 @@ export default {
           align: "center",
           dataIndex: 'documentName',
           width: 200,
-          sorter: true,
           scopedSlots: { customRender: 'documentNameList' },
           /*            customRender:function (text) {
                         return "*"+text.substring(9,text.length);
@@ -163,6 +173,12 @@ export default {
           align: "center",
           width: 100,
           dataIndex: 'documentType'
+        },
+        {
+          title: '文档格式',
+          align: "center",
+          width: 100,
+          dataIndex: 'documentFormat'
         },
         {
           title: '上传时间',
@@ -205,4 +221,7 @@ export default {
 </script>
 <style scoped>
 @import '~@assets/less/common.less';
+.w150 {
+  width: 150px;
+}
 </style>
