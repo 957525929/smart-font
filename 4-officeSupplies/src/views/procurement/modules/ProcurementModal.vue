@@ -14,10 +14,11 @@
       <a-form :form="form">
         <a-form-item label="申请部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select v-decorator.trim="[ 'applyDepertment', validatorRules.applyDepertment]" placeholder="请选择申请部门" :getPopupContainer= "(target) => target.parentNode" :disabled="disableSubmit">
-            <a-select-option value="1">营销部</a-select-option>
-            <a-select-option value="2">专卖部</a-select-option>
-            <a-select-option value="3">配送部</a-select-option>
-            <a-select-option value="4">后勤部</a-select-option>
+            <a-select-option value="">不限</a-select-option>
+            <a-select-option value="1">卷烟销售管理处</a-select-option>
+            <a-select-option value="2">物流管理处</a-select-option>
+            <a-select-option value="3">烟叶管理处</a-select-option>
+            <a-select-option value="4">人事处</a-select-option>
           </a-select>
         </a-form-item>
 
@@ -39,8 +40,14 @@
         </a-form-item>
 
         <a-form-item label="办公用品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator.trim="[ 'articleName', validatorRules.name]" placeholder="请输入办公用品名称" :disabled="disableSubmit"/>
+          <office-category v-if="!disableSubmit"></office-category>
+          <a-select v-decorator.trim="[ 'articleName', validatorRules.articleName]" placeholder="请选择办公用品名称" :getPopupContainer= "(target) => target.parentNode" :disabled="disableSubmit">
+            <a-select-option :value="1">马克笔</a-select-option>
+            <a-select-option :value="2">A4纸</a-select-option>
+            <a-select-option :value="3">打印机</a-select-option>
+          </a-select>
         </a-form-item>
+
 
         <a-form-item
           :labelCol="labelCol"
@@ -49,7 +56,7 @@
           <a-input-number class="inputWitdh"  placeholder="请输入申请数量"   v-decorator.trim="[ 'applyNum', validatorRules.applyNum]"  :min="1" :max="10000000" :decimalSeparator="0" :disabled="disableSubmit"/>
         </a-form-item>
 
-        <a-form-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id">
           <a-select v-decorator.trim="[ 'unit', validatorRules.unit]" placeholder="请选择计量单位" :getPopupContainer= "(target) => target.parentNode" :disabled="disableSubmit">
             <a-select-option :value="1">个</a-select-option>
             <a-select-option :value="2">盒</a-select-option>
@@ -71,6 +78,13 @@
           <a-textarea v-decorator.trim="[ 'applyReason', validatorRules.applyReason]"  placeholder="请输入申请理由" auto-size :disabled="disableSubmit"/>
         </a-form-item>
 
+        <a-form-item v-if="!!model.id"
+                     :labelCol="labelCol"
+                     :wrapperCol="wrapperCol"
+                     label="审核时间">
+          <j-date class="inputWitdh" v-decorator.trim="[ 'checkTime', validatorRules.checkTime]"  :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择审核时间" :disabled="disableSubmit"></j-date>
+        </a-form-item>
+
         <a-form-item label="备注" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id">
           <a-textarea v-decorator.trim="[ 'remark', validatorRules.remark]"  placeholder="" auto-size :disabled="disableSubmit"/>
         </a-form-item>
@@ -88,11 +102,13 @@
   import pick from 'lodash.pick'
   import {addRole,editRole,duplicateCheck } from '@/api/api'
   import JDate from '@/components/jeecg/JDate'
+  import OfficeCategory from '@/components/table/officeCategory'
 
   export default {
     name: "ReceiveModal",
     components: {
-      JDate
+      JDate,
+      OfficeCategory
     },
     data () {
       return {
@@ -124,9 +140,9 @@
             rules: [
               { required: true, message: '请选择审批状态!' },
             ]},
-          name:{
+          articleName:{
             rules: [
-              { required: true, message: '请输入办公用品名称!' },
+              { required: true, message: '请选择办公用品名称!' },
             ]},
           applyNum: {
             rules: [
@@ -159,7 +175,7 @@
         this.visible = true;
 
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'id', 'applyDepertment', 'applyName', 'status','articleName', 'applyNum','unit','applyTime', 'applyReason', 'remark'))
+          this.form.setFieldsValue(pick(this.model,'id', 'applyDepertment', 'applyName', 'status','articleName', 'applyNum','unit','applyTime', 'applyReason', 'checkTime', 'remark'))
         });
 
       },

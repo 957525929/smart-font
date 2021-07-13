@@ -11,18 +11,6 @@
               <a-input placeholder="请输入办公用品名称查询" v-model="queryParam.name"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="8">
-            <a-form-item label="批次" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
-              <a-input placeholder="请输入批次查询" v-model="queryParam.batch"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :md="6" :sm="8">
-            <a-form-item label="单价" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
-              <a-input-number v-model="queryParam.min" :min="1" :max="10000000" :decimalSeparator="0" />
-                <span style="width: 10px;">~</span>
-              <a-input-number v-model="queryParam.max" :min="1" :max="10000000" :decimalSeparator="0" />
-            </a-form-item>
-          </a-col>
 
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :md="6" :sm="24">
@@ -118,22 +106,19 @@
           {
             id:1,
             articleName: '马克笔',
-            batch: '20210514',
-            price: '20',
+            threshold: '10',
             unit:'盒'
           },
           {
             id:2,
             articleName: '打印机',
-            batch: '20210324',
-            price: '1600',
+            threshold: '2',
             unit:'台'
           },
           {
             id:3,
             articleName: 'A4纸',
-            batch: '20210105',
-            price: '128',
+            threshold: '5',
             unit:'箱',
           },
         ],
@@ -155,13 +140,8 @@
             dataIndex: 'articleName'
           },
           {
-            title: '批次',
-            align:"center",
-            dataIndex: 'batch'
-          },
-          {
-            title: '单价(元)',
-            dataIndex: 'price',
+            title: '警示阀值',
+            dataIndex: 'threshold',
             align:"center"
           },
           {
