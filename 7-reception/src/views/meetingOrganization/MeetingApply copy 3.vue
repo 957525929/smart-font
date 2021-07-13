@@ -6,19 +6,14 @@
       <tbody>
         <tr>
           <td colspan="2">
-            <label for="meetingTheme" :style="{marginLeft:'20px'}">会议主题</label>
+            <label :style="{marginLeft:'20px'}">会议主题</label>
             <div class="bgc">
-              <a-select
-                id="meetingTheme"
-                :default-value="meetingTheme"
-                :style="{width:'80%'}"
-                @change="handleChange"
-              >
+              <a-select default-value="周例会" :style="{width:'80%'}" showSearch  @change="handleChange">
                 <a-select-option value="周例会">周例会</a-select-option>
                 <a-select-option value="项目会议">项目会议</a-select-option>
-                <a-select-option value="物流会议">物流管理会议</a-select-option>
-                <a-select-option value="安全会议">安全管理会议</a-select-option>
-                <a-select-option value="管理会议">年度总结会议</a-select-option>
+                <a-select-option value="物流会议">物流管理</a-select-option>
+                <a-select-option value="安全会议">安全管理</a-select-option>
+                <a-select-option value="管理会议">年度总结</a-select-option>
               </a-select>
             </div>
           </td>
@@ -27,13 +22,14 @@
             <div class="bgc">
               <a-input
                 id="meetingName"
-                placeholder="请输入会议名称"
+                placeholder="请输入负责人姓名"
                 :style="{width:'80%'}"
                 :value="meetingName"
               ></a-input>
             </div>
           </td>
         </tr>
+        <tr></tr>
         <tr>
           <td colspan="2">
             <label for="responsibleName" :style="{marginLeft:'20px'}">负责人姓名</label>
@@ -97,27 +93,19 @@
             <label :style="{marginLeft:'20px'}">会议成员</label>
             <div class="bgc">
               <span>请从右侧选择参会人员</span>
-              <!-- <div style="tex-align:left">
-                    <a-tag v-for="(item) in meetingJoinsMembers" :key="item.key"  closable  color='#77acf1'  @close="handleClose(item)">
-                      {{ item.title }}
-                    </a-tag>
-              </div>-->
               <ul class="clearfix">
                 <li
                   class="fl"
                   v-for="(item) in meetingJoinsMembers"
                   :key="item.key"
                   :style="{position:'relative'}"
-                >{{item.title}}</li>
-              </ul>
-              <!-- <ul class="clearfix">
-                    <li class="fl" v-for="(item) in meetingJoinsMembers" :key="item.key" :style="{position:'relative'}">
-                      {{item.title}}
-                      <a-avatar shape="square" :size="64" :src="item.imageSrc" ></a-avatar>
+                >
+                  {{item.title}}
+                  <!-- <a-avatar shape="square" :size="64" :src="item.imageSrc" ></a-avatar>
                       <a-icon type="minus-square"  :style="{fontSize: '24px', position:'absolute', top:'40px', left: '40px', backgroundColor: '#77acf1', color: '#fff'}" />
-                      <p>{{item.name}}</p>
-                    </li>
-              </ul>-->
+                  <p>{{item.name}}</p>-->
+                </li>
+              </ul>
             </div>
           </td>
         </tr>
@@ -137,7 +125,6 @@
         <tr>
           <td colspan="3" style="text-align:center">
             <a-button
-              @click="submitApply"
               shape="round"
               size="large"
               :style="{ width: '300px', background: '#77acf1', color: 'white', marginRight: '20PX'}"
@@ -189,63 +176,63 @@ const treeData = [
     title: '物流管理处',
     key: '0-0',
     children: [
-      { title: '王小帅', key: '0-0-0-0' },
-      { title: '刘晓霞', key: '0-0-0-1' },
-      { title: '游小美', key: '0-0-0-2' }
+      { title: '0-0-0-0', key: '0-0-0-0' },
+      { title: '0-0-0-1', key: '0-0-0-1' },
+      { title: '0-0-0-2', key: '0-0-0-2' }
     ]
   },
   {
     title: '信息中心',
     key: '0-1',
     children: [
-      { title: '刘晓梅', key: '0-1-0-0' },
-      { title: '陈小媚', key: '0-1-0-1' },
-      { title: '刘小小', key: '0-1-0-2' }
+      { title: '0-1-0-0', key: '0-1-0-0' },
+      { title: '0-1-0-1', key: '0-1-0-1' },
+      { title: '0-1-0-2', key: '0-1-0-2' }
     ]
   },
   {
     title: '烟叶管理处',
     key: '0-2',
     children: [
-      { title: '吴芳菲', key: '0-2-0-0' },
-      { title: '李丽晶', key: '0-2-0-1' },
-      { title: '王亚亚', key: '0-2-0-2' }
+      { title: '0-2-0-0', key: '0-2-0-0' },
+      { title: '0-2-0-1', key: '0-2-0-1' },
+      { title: '0-2-0-2', key: '0-2-0-2' }
     ]
   },
   {
     title: '安全管理处',
     key: '0-3',
     children: [
-      { title: '陈思思', key: '0-3-0-0' },
-      { title: '刘潇', key: '0-3-0-1' },
-      { title: '王菲', key: '0-3-0-2' }
+      { title: '0-3-0-0', key: '0-3-0-0' },
+      { title: '0-3-0-1', key: '0-3-0-1' },
+      { title: '0-3-0-2', key: '0-3-0-2' }
     ]
   },
   {
     title: '卷烟销售管理处',
     key: '0-4',
     children: [
-      { title: '吴燕燕', key: '0-4-0-0' },
-      { title: '陈思成', key: '0-4-0-1' },
-      { title: '刘雨菲', key: '0-4-0-2' }
+      { title: '0-4-0-0', key: '0-4-0-0' },
+      { title: '0-4-0-1', key: '0-4-0-1' },
+      { title: '0-4-0-2', key: '0-4-0-2' }
     ]
   }
 ]
 export default {
   data() {
     return {
-      meetingTheme: '周例会', //会议主题
       meetingName: '项目周例会', //会议名称
       responsibleName: '张三', //负责人姓名
       responsibleTelphone: '188600111111', //负责人电话
       dateFormat: 'YYYY年MM月DD日', //会议时间
-      meetingAddress: '会议室203', //会议地点
+      meetingAddress: '省公司会议室302', //会议地点
       meetingBarget: 1000, //会议预算
       meetingJoinsMembers: [], //会议成员
       meetingComments: '第一期项目周例会', //备注
 
       //会议人员目录树
-      treeDatas: [], //目录树信息汇总
+      //treeDatas: [], //目录树信息汇总
+      treeDatas,
       MembersAll: [], //所有待选参会人员汇总
       expandedKeys: [],
       autoExpandParent: true,
@@ -255,6 +242,7 @@ export default {
   },
   watch: {
     checkedKeys(val) {
+      console.log('onCheck', val)
       this.meetingJoinsMembers = this.MembersAll.filter(item => {
         return val.includes(item.key)
       })
@@ -272,58 +260,48 @@ export default {
     // console.log(datas)
 
     //模拟参会人员列表数据
-    // let departmentsLists = Mock.mock({
-    //     'treeDatas|4': [{
-    //         'title|1': ["运营A组", "运营B组", "研发A组",  "研发B组"],
-    //         'key': '@guid()',
-    //         'children|4': [{
-    //           'title|1':'@cname()',
-    //           'key|+1': '@guid()',
-    //         }]
-    //     }]
-    // })
-    // console.log(departmentsLists)
-    // this.treeDatas = departmentsLists.treeDatas;
-
-    this.treeDatas = treeData
+    let departmentsLists = Mock.mock({
+      'treeDatas|4': [
+        {
+          'title|1': ['物流管理处', '信息中心', '烟叶管理处', '安全管理处','卷烟销售管理处'],
+          key: '@guid()',
+          'children|4': [
+            {
+              'title|1': '@cname()',
+              'key|+1': 1110000
+            }
+          ]
+        }
+      ]
+    })
+     this.treeDatas = departmentsLists.treeDatas
+       
     //汇总所有人员名单
     this.meetingJoinsMembers = this.treeDatas.forEach(item => {
       this.MembersAll = this.MembersAll.concat(item.children)
     })
   },
   methods: {
-    handleChange(value) {
-      this.meetingTheme = value
-    },
     timeChange(date, dateString) {
       console.log(date, dateString)
     },
-    menbersInfoChange() {},
-    // handleClose(tag){
-    //   var arr = this.checkedKeys;
-    //   this.checkedKeys = [];
-    //   arr.forEach(item=>{
-    //     if(item != tag.key){
-    //       this.checkedKeys.push(item);
-    //     }
-    //   })
-    //   console.log( this.checkedKeys )
-    // },
+    menbersInfoChange() {
+     
+    },
+
     //目录树选择变更
     onExpand(expandedKeys) {
       this.expandedKeys = expandedKeys
       this.autoExpandParent = false
     },
     onCheck(checkedKeys) {
-      console.log(checkedKeys)
       this.checkedKeys = checkedKeys
-      console.log(this.checkedKeys)
     },
     onSelect(selectedKeys, info) {
       this.selectedKeys = selectedKeys
     },
-    submitApply(event) {
-      var apllyMeetingInfos = {}
+    handleChange(value){
+      this.meetingName=value;
     }
   }
 }
