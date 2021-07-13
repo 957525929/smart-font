@@ -21,9 +21,8 @@
     <span>房间：</span>
     <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
 
-    <a-divider type="vertical" />
-
     <template v-if="toggleSearchStatus">
+      <br /><br />
       <span>工号：</span>
       <a-input style="width: 11%" placeholder="请输入工号" v-model="Num" allowClear></a-input>
 
@@ -33,7 +32,7 @@
       <a-input style="width: 11%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
     </template>
 
-    <br /><br />
+    <a-divider type="vertical" />
 
     <!-- 下部 -->
     <a @click="handleToggleSearch">
@@ -60,7 +59,7 @@ export default {
       roomNum: '',
       Num: '',
       name: '',
-      toggleSearchStatus: '',
+      toggleSearchStatus: false,
     }
   },
   methods: {
@@ -85,6 +84,9 @@ export default {
           // console.log('Cancel')
         },
       })
+    },
+    handleToggleSearch() {
+      this.toggleSearchStatus = !this.toggleSearchStatus
     },
   },
 }
