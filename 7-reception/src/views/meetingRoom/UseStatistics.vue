@@ -65,7 +65,7 @@ const dataSta=[
     number:"6",
   },
     {
-    id:"F1201",
+    id:"F1202",
     address:"会议室204",
     number:"5",
   },
@@ -79,11 +79,6 @@ const dataSta=[
     address:"会议室206",
     number:"20",
   },
-    {
-      id:"F1205",
-    address:"会议室207",
-    number:"30",
-  }
 ]
 export default {
   data() {
