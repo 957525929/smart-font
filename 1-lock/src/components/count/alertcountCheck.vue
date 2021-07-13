@@ -21,9 +21,11 @@
     <span>房间：</span>
     <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
 
+    <a-divider type="vertical" />
+
     <br /><br />
 
-    <span>报警时间段：</span>
+    <span>时间段：</span>
     <a-date-picker
       v-model="startValue"
       :disabled-date="disabledStartDate"
@@ -31,7 +33,6 @@
       format="YYYY-MM-DD HH:mm:ss"
       placeholder="开始时间"
       @openChange="handleStartOpenChange"
-      style="width: 19.6%"
     />
     <a-divider type="vertical" />
     <a-date-picker
@@ -42,10 +43,15 @@
       placeholder="结束时间"
       :open="endOpen"
       @openChange="handleEndOpenChange"
-      style="width: 19.6%"
     />
 
     <br /><br />
+
+    <span>报警方式：</span>
+    <a-select style="width: 15%" placeholder="请选择开锁方式" @change="openlockChange" allowClear>
+      <a-select-option value="1"> 低电量</a-select-option>
+      <a-select-option value="2"> 密码错误多次</a-select-option>
+    </a-select>
 
     <!-- 下部 -->
     <a-row type="flex" justify="end">
@@ -58,7 +64,7 @@
   </a-card>
 </template>
 <script>
-import { areaData } from '../roomManager/data/area'
+import { areaData } from '../roomManager/data/area.js'
 
 export default {
   data() {
@@ -106,10 +112,14 @@ export default {
       this.endOpen = open
     },
 
+    openlockChange(value) {},
+
+    //查询
     check() {
       // console.log(this.lockNum)
     },
 
+    // 导出点击功能
     showConfirm() {
       this.$confirm({
         title: '是否导出当前表单？',

@@ -7,13 +7,14 @@
 
     <a-divider type="vertical" />
 
-    <span>楼号：</span>
-    <a-select style="width: 11%" placeholder="请选择楼号" @change="buildChange" allowClear>
-      <a-select-option value="1"> 1号楼 </a-select-option>
-      <a-select-option value="2"> 2号楼 </a-select-option>
-      <a-select-option value="3"> 3号楼 </a-select-option>
-      <a-select-option value="4"> 4号楼 </a-select-option>
-    </a-select>
+    <span>区域：</span>
+    <a-cascader
+      style="width: 19%"
+      :options="selectOptions"
+      change-on-select
+      @change="areaChange"
+      placeholder="请选择区域"
+    />
 
     <a-divider type="vertical" />
 
@@ -22,15 +23,41 @@
 
     <a-divider type="vertical" />
 
-    <span>部门：</span>
-    <a-select style="width: 11%" placeholder="请选择部门" @change="deptChange" allowClear>
-      <a-select-option value="1"> 办公室 </a-select-option>
-      <a-select-option value="2"> 生产部 </a-select-option>
-      <a-select-option value="3"> 购销部 </a-select-option>
-      <a-select-option value="4"> 信息中心 </a-select-option>
-    </a-select>
+    <br /><br />
+
+    <span>时间段：</span>
+    <a-date-picker
+      v-model="startValue"
+      :disabled-date="disabledStartDate"
+      show-time
+      format="YYYY-MM-DD HH:mm:ss"
+      placeholder="开始时间"
+      @openChange="handleStartOpenChange"
+    />
+    <a-divider type="vertical" />
+    <a-date-picker
+      v-model="endValue"
+      :disabled-date="disabledEndDate"
+      show-time
+      format="YYYY-MM-DD HH:mm:ss"
+      placeholder="结束时间"
+      :open="endOpen"
+      @openChange="handleEndOpenChange"
+    />
 
     <br /><br />
+
+    <span>开锁方式：</span>
+    <a-select style="width: 15%" placeholder="请选择开锁方式" @change="openlockChange" allowClear>
+      <a-select-option value="1"> 指纹开锁</a-select-option>
+      <a-select-option value="2"> 密码开锁</a-select-option>
+      <a-select-option value="3"> 远程开锁</a-select-option>
+    </a-select>
+
+    <a-divider type="vertical" />
+
+    <span>开锁人：</span>
+    <a-input style="width: 11%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
 
     <!-- 下部 -->
     <a-row type="flex" justify="end">
@@ -43,14 +70,18 @@
   </a-card>
 </template>
 <script>
+import { areaData } from '../roomManager/data/area.js'
+
 export default {
   data() {
     return {
       lockNum: '',
+      selectOptions: areaData,
       roomNum: '',
       startValue: null,
       endValue: null,
       endOpen: false,
+      name: '',
     }
   },
   watch: {
@@ -62,23 +93,7 @@ export default {
     },
   },
   methods: {
-    //查询
-    check() {
-      console.log('点击查询')
-      console.log(this.lockNum)
-    },
-    //获取单选框值
-    buildChange(value) {
-      console.log(value)
-    },
-    deptChange(value) {
-      console.log(value)
-    },
-
-    // 开锁方式
-    openlockChange(value) {
-      console.log(value)
-    },
+    areaChange(value) {},
 
     //日期选择
     disabledStartDate(startValue) {
@@ -104,6 +119,13 @@ export default {
       this.endOpen = open
     },
 
+    openlockChange(value) {},
+
+    //查询
+    check() {
+      // console.log(this.lockNum)
+    },
+
     // 导出点击功能
     showConfirm() {
       this.$confirm({
@@ -111,12 +133,11 @@ export default {
         okText: '确认',
         cancelText: '取消',
         onOk() {
-          console.log('OK')
+          // console.log('OK')
         },
         onCancel() {
-          console.log('Cancel')
+          // console.log('Cancel')
         },
-        class: 'test',
       })
     },
   },

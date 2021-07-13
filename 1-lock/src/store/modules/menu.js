@@ -52,13 +52,13 @@ export const menuMock = {
             "id": "1261213213500452866"
           },
           {
-            "path": "/isystem/permission",
-            "component": "system/PermissionList",
+            "path": "/erp/bas/material",
+            "component": "erp/bas/BasMaterialList",
             "route": "1",
             "meta": {
               "keepAlive": false,
               "internalOrExternal": false,
-              "title": "菜单管理"
+              "title": "物料"
             },
             "name": "isystem-permission",
             "id": "12612132135004528626"
@@ -218,7 +218,7 @@ export const menuMock = {
         "meta": {
           "keepAlive": false,
           "internalOrExternal": false,
-          "icon": "home",
+          "icon": "bar-chart",
           "title": "统计"
         },
         "name": "count",
