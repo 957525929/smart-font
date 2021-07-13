@@ -1,17 +1,17 @@
 <template>
   <div>
-    <countCheck />
+    <alertcountCheck />
 
     <alertcountForm />
   </div>
 </template>
 <script>
-import countCheck from '../../components/count/countCheck.vue'
+import alertcountCheck from '../../components/count/alertcountCheck.vue'
 import alertcountForm from '../../components/count/alertcountForm.vue'
 
 export default {
   components: {
-    countCheck,
+    alertcountCheck,
     alertcountForm,
   },
 }

@@ -1,89 +1,139 @@
 <template>
   <div>
     <div class="table-operator">
-      <a-button @click="handleAdd">新增</a-button>
+      <a-button @click="handleAdd" class="butt">新增</a-button>
+      <a-modal v-model="addVisible" title="新增" @ok="addOk">
+        <a-row type="flex" align="middle">
+          <a-col :span="4">类型：</a-col>
+          <a-col>
+            <a-radio-group v-model="addValue" @change="addChange">
+              <a-radio :value="1"> 公司 </a-radio>
+              <a-radio :value="2"> 区域 </a-radio>
+              <a-radio :value="3"> 楼房 </a-radio>
+            </a-radio-group>
+          </a-col>
+        </a-row>
+        <br />
+        <a-row type="flex" align="middle">
+          <a-col :span="4">名称：</a-col>
+          <a-col :span="10">
+            <a-input style="width: 100%" placeholder="请输入名称" v-model="name" allowClear></a-input>
+          </a-col>
+        </a-row>
+      </a-modal>
     </div>
-    <!-- defaultExpandAllRows="{true}" -->
-    <a-table :columns="columns" :data-source="dataSource" :expanded-row-keys.sync="expandedRowKeys"> </a-table>
+    <a-table :columns="columns" :data-source="dataSource" :expandedRowsChange="expandedRowKeys">
+      <span slot="action" slot-scope="text, record">
+        <a @click="edit(record)">编辑</a>
+        <a-modal v-model="editVisible" title="编辑" @ok="editOk">
+          <a-row type="flex" align="middle">
+            <a-col :span="4">类型：</a-col>
+            <a-col>
+              <a-radio-group v-model="rowRecord.value" @change="addChange">
+                <a-radio :value="1"> 公司 </a-radio>
+                <a-radio :value="2"> 区域 </a-radio>
+                <a-radio :value="3"> 楼房 </a-radio>
+              </a-radio-group>
+            </a-col>
+          </a-row>
+
+          <br />
+
+          <a-row type="flex" align="middle">
+            <a-col :span="4">名称：</a-col>
+            <a-col :span="10">
+              <a-input style="width: 100%" v-model="rowRecord.name" allowClear></a-input>
+            </a-col>
+          </a-row>
+          <br />
+
+          <a-row type="flex" align="middle" v-if="rowRecord.value == 2 || rowRecord.value == 3">
+            <a-col :span="4">上级名称：</a-col>
+            <a-col :span="10">
+              <a-input style="width: 100%" v-model="rowRecord.upName" allowClear></a-input>
+            </a-col>
+          </a-row>
+        </a-modal>
+        <a-divider type="vertical" />
+        <a @click="nextAdd(record)">添加下级</a>
+        <a-modal v-model="nextAddVisible" title="添加下级" @ok="nextAddOk">
+          <a-row type="flex" align="middle">
+            <a-col :span="4">类型：</a-col>
+            <a-col>
+              <a-radio-group v-model="nextAddValue" @change="addChange">
+                <a-radio :value="1"> 公司 </a-radio>
+                <a-radio :value="2"> 区域 </a-radio>
+                <a-radio :value="3"> 楼房 </a-radio>
+              </a-radio-group>
+            </a-col>
+          </a-row>
+          <br />
+          <a-row type="flex" align="middle">
+            <a-col :span="4">名称：</a-col>
+            <a-col :span="10">
+              <a-input style="width: 100%" placeholder="请输入名称" v-model="name" allowClear></a-input>
+            </a-col>
+          </a-row>
+          <br />
+          <a-row type="flex" align="middle" v-if="rowRecord.value == 2 || rowRecord.value == 3">
+            <a-col :span="4">上级名称：</a-col>
+            <a-col :span="10">
+              <a-input style="width: 100%" v-model="rowRecord.upName" allowClear></a-input>
+            </a-col>
+          </a-row>
+        </a-modal>
+      </span>
+    </a-table>
   </div>
 </template>
 <script>
-const columns = [
-  {
-    title: '名称',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: '操作',
-    dataIndex: 'action',
-    fixed: 'right',
-    scopedSlots: { customRender: 'action' },
-    align: 'center',
-    width: 150,
-  },
-]
+import { data } from './data/areaData.js'
 
-const data = [
-  {
-    key: 1,
-    name: '福建烟草公司',
-    children: [
-      {
-        key: 11,
-        name: 'A区域',
-        children: [
-          {
-            key: 111,
-            name: '1号楼',
-          },
-          {
-            key: 112,
-            name: '2号楼',
-          },
-        ],
-      },
-      {
-        key: 12,
-        name: 'B区域',
-        children: [
-          {
-            key: 121,
-            name: '1号楼',
-          },
-          {
-            key: 122,
-            name: '2号楼',
-          },
-        ],
-      },
-    ],
-  },
+const columns = [
+  { title: '名称', dataIndex: 'name', key: 'name', width: '20%' },
+  { title: '类型', dataIndex: 'type', key: 'type', width: '20%' },
+  { title: '操作', dataIndex: 'action', scopedSlots: { customRender: 'action' } },
 ]
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-  },
-  onSelect: (record, selected, selectedRows) => {
-    console.log(record, selected, selectedRows)
-  },
-  onSelectAll: (selected, selectedRows, changeRows) => {
-    console.log(selected, selectedRows, changeRows)
-  },
-}
 
 export default {
   data() {
     return {
       columns: columns,
       expandedRowKeys: [],
-      rowSelection,
       dataSource: data,
+      addVisible: false,
+      addValue: 1,
+      name: '',
+      editVisible: false,
+      rowRecord: '',
+      nextAddVisible: false,
+      nextAddValue: 0,
     }
   },
   methods: {
     handleAdd() {
-      console.log('handleAdd')
+      this.addVisible = true
+    },
+    addOk() {
+      this.addVisible = false
+    },
+    addChange(e) {
+      // console.log('radio checked', e.target.value)
+    },
+    edit(value) {
+      this.editVisible = true
+      this.rowRecord = value
+    },
+    editOk() {
+      this.editVisible = false
+    },
+    nextAdd(value) {
+      this.nextAddVisible = true
+      this.nextAddValue = value.value + 1
+      this.rowRecord = value
+    },
+    nextAddOk() {
+      this.nextAddVisible = false
     },
   },
 }

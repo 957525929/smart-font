@@ -81,6 +81,19 @@ export const mockMenuData = {
               "id": "2"
             },
             {
+              "path": "/material/warehousing/warehousingCheck",
+              "component": "material/warehousing/Check",
+              "route": "1",
+              "meta":
+                {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "title": "入库审核"
+                },
+              "name": "material-warehousing-warehousingCheck",
+              "id": "2111"
+            },
+            {
               "hidden": true,
               "path": "/material/warehousing/warehousingDetails",
               "component": "material/warehousing/Details",
@@ -119,6 +132,19 @@ export const mockMenuData = {
                 },
               "name": "material-manu-Index",
               "id": "5"
+            },
+            {
+              "path": "/material/warehousing/manuCategory",
+              "component": "material/warehousing/Category",
+              "route": "1",
+              "meta":
+                {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "title": "物料类别管理"
+                },
+              "name": "material-warehousing-Category",
+              "id": "21111"
             },
           ],
 

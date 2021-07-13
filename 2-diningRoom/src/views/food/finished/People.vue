@@ -182,7 +182,7 @@ export default {
       console.log("采购人:", record);
     },
     switchcheckoutPeople(record) {
-      console.log("验收人:", record);
+      console.log("审核人:", record);
     },
 
     add () {
