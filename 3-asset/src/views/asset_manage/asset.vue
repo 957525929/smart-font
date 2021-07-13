@@ -9,11 +9,23 @@
               <a-input placeholder="请输入资产名称"></a-input>
             </a-form-item>
           </a-col>
-         <a-col :xl="5" :lg="5" :md="6" :sm="24">
-            <a-form-item label="资产所有人">
+          <a-col :xl="5" :lg="5" :md="6" :sm="24">
+            <a-form-item label="资产类型">
               <a-select
                 allowClear
-                placeholder="请选择资产所有人"
+                placeholder="请选择资产类型"
+              >
+                <a-select-option v-for="d in typeSelectData" :key="d.value">
+                  {{ d.text }}
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+         <a-col :xl="5" :lg="5" :md="6" :sm="24">
+            <a-form-item label="资产所有方">
+              <a-select
+                allowClear
+                placeholder="请选择资产所有方"
               >
                 <a-select-option v-for="d in manuSelectData" :key="d.value">
                   {{ d.text }}
@@ -22,10 +34,10 @@
             </a-form-item>
           </a-col>
           <a-col :xl="5" :lg="5" :md="6" :sm="24">
-            <a-form-item label="资产使用人">
+            <a-form-item label="资产使用方">
               <a-select
                 allowClear
-                placeholder="请选择资产使用人"
+                placeholder="请选择资产使用方"
               >
                 <a-select-option v-for="d in userSelectData" :key="d.value">
                   {{ d.text }}
@@ -33,14 +45,29 @@
               </a-select>
             </a-form-item>
           </a-col>
+          <a-col :xl="5" :lg="5" :md="6" :sm="24">
+            <a-form-item label="资产状态">
+              <a-select
+                allowClear
+                placeholder="请选择资产状态"
+              >
+                <a-select-option v-for="d in stateSelectData" :key="d.value">
+                  {{ d.text }}
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="8" :lg="9" :md="10" :sm="24">
+            <a-form-item label="时间范围">
+              <j-date placeholder="请选择开始" class="query-group-cust"  v-model="time.Date_begin"></j-date>
+              <span class="query-group-split-cust"></span>
+              <j-date placeholder="请选择结束" class="query-group-cust"  v-model="time.Date_end"></j-date>
+            </a-form-item>
+          </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" icon="search">查询</a-button>
               <a-button icon="reload" style="margin-left: 8px">重置</a-button>
-              <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
-                <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
-              </a>
             </span>
           </a-col>
 
@@ -48,7 +75,7 @@
       </a-form>
     </div>
     <!-- 查询区域-END -->
-    
+
     <!-- 操作按钮区域 -->
     <div class="table-operator">
 <!--      <a-button type="link"  @click="myHandleAdd"  icon="plus">新增</a-button>-->
@@ -57,12 +84,6 @@
         <a-button type="link" icon="import">导入</a-button>
       </a-upload> -->
 
-      <!-- <a-dropdown v-if="selectedRowKeys.length > 0">
-        <a-menu slot="overlay">
-          <a-menu-item :disabled="!isBatchDelEnabled" key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
-        </a-menu>
-        <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
-      </a-dropdown> -->
       <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
       <a style="margin-left: 12px" @click="onClearSelected">清空</a>
 
@@ -120,21 +141,19 @@
         :dataSource="dataSource"
         :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
         >
-        <span slot="action" slot-scope="text, record">
-          <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
-          <a-divider type="vertical" />
+        <span slot="action" slot-scope="text">
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
               <a-menu-item key="1" >编辑</a-menu-item>
               <a-menu-item key="2" >
-                <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>
+                <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm()">删除</a-popconfirm>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
         </span>
         <span slot="historyDetail">
-          <router-link :to="{path:'/asset_manage/history', params:{data:record} }">查看历史流转记录</router-link>
+          <router-link :to="{path:'/asset_manage/history', params:{} }">查看历史流转记录</router-link>
         </span>
       </a-table>
     </div>
@@ -144,41 +163,98 @@
 
 <script>
 
+import JDate from "@comp/jeecg/JDate";
 export default {
   name: "asset",
-data () {
+  components: {
+    JDate,
+  },
+  data () {
       return {
         description: '资产变化表',
+        //资产类型
+        typeSelectData:[
+          {
+            value : 1,
+            text : '房屋和建筑物',
+          },
+          {
+            value : 2,
+            text : '一般办公设备',
+          },
+          {
+            value : 3,
+            text : '专用设备',
+          },
+          {
+            value : 4,
+            text : '运输设备',
+          },
+          {
+            value : 5,
+            text : '其它资产',
+          }
+        ],
+        //资产所有方
         manuSelectData:[
         {
           value : 1,
-          text : '张三',
+          text : '烟草公司',
         },
-        {
-          value : 2,
-          text : '王一',
-        },
-          ],
+          {
+            value : 2,
+            text : '福州朝阳贸易有限公司',
+          },
+          {
+            value : 3,
+            text : '福州烟草加工厂',
+          },
+        ],
+        //资产使用方
         userSelectData:[
           {
           value : 1,
-          text : '李四',
+          text : '烟草公司',
           },
           {
           value : 2,
-          text : '赵正',
+          text : '方正有限公司',
          },
+          {
+            value : 3,
+            text : '卷烟厂',
+          },
          ],
+        //资产状态
+        stateSelectData:[
+          {
+            value : 1,
+            text : '闲置',
+          },
+          {
+            value : 2,
+            text : '使用中',
+          },
+          {
+            value : 3,
+            text : '租出',
+          },
+          {
+            value : 4,
+            text : '租入',
+          },
+        ],
         dataSource: [
         {
           key:'1',
           assetNunmber: 'ZCAT2021070500',
-          assetName: 'B107—24号宗地',
+          assetName: '9号办公楼',
+          assetType:'房屋和建筑物',
           assetValue: '3000000.00',
-          assetOwner: '张三',
-          assetUser: '李四',
-          recordDate: '2020-07-05',
-          assetStates:'已租出',
+          assetOwner: '烟草公司',
+          assetUser: '方正有限公司',
+          recordDate: '2018-07-05',
+          assetStates:'租出',
           remark : '无',
         },
         {
@@ -186,12 +262,61 @@ data () {
           assetNunmber: 'ZCAT2021070501',
           assetName: '烟草烘干机',
           assetValue: '10000.00',
-          assetOwner: '张三',
-          assetUser: '李四',
-          recordDate: '2020-07-05',
-          assetStates:'已租出',
+          assetType:'专用设备',
+          assetOwner: '烟草公司',
+          assetUser: '卷烟厂',
+          recordDate: '2015-07-05',
+          assetStates:'租出',
           remark : '无',
         },
+          {
+            key:'3',
+            assetNunmber: 'ZCAT2021070502',
+            assetName: '联想M710S',
+            assetType:'专用设备',
+            assetValue: '5000.00',
+            assetOwner: '烟草公司',
+            assetUser: '暂无',
+            recordDate: '',
+            assetStates:'闲置',
+            remark : '无',
+          },
+          {
+            key:'4',
+            assetNunmber: 'ZCAT2021070503',
+            assetName: '丰田汽车',
+            assetType:'运输设备',
+            assetValue: '15000.00',
+            assetOwner: '烟草公司',
+            assetUser: '烟草公司',
+            recordDate: '2020-07-05',
+            assetStates:'使用中',
+            remark : '无',
+          },
+          {
+            key:'5',
+            assetNunmber: 'ZCAT2021070504',
+            assetName: '四角办公大楼负一楼仓库',
+            assetType:'房屋和建筑物',
+            assetValue: '135000.00',
+            assetOwner: '福州朝阳贸易有限公司',
+            assetUser: '烟草公司',
+            recordDate: '2020-07-05',
+            assetStates:'租入',
+            remark : '无',
+          },
+          {
+            key:'6',
+            assetNunmber: 'ZCAT2021070505',
+            assetName: '卷烟厂污水处理设备',
+            assetType:'专用设备',
+            assetValue: '15000.00',
+            assetOwner: '福州烟草加工厂',
+            assetUser: '烟草公司',
+            recordDate: '2018-07-05',
+            assetStates:'租入',
+            remark : '无',
+          },
       ],
         // 表头
         columns: [
@@ -219,17 +344,22 @@ data () {
             dataIndex: 'assetName'
           },
           {
+            title:'资产类型',
+            align:"center",
+            dataIndex: 'assetType'
+          },
+          {
             title:'资产价值',
             align:"center",
             dataIndex: 'assetValue'
           },
           {
-            title:'资产所有人',
+            title:'资产所有方',
             align:"center",
             dataIndex: 'assetOwner'
           },
           {
-            title:'资产使用人',
+            title:'资产使用方',
             align:"center",
             dataIndex: 'assetUser'
           },
@@ -239,7 +369,7 @@ data () {
             dataIndex: 'assetStates'
           },
            {
-            title:'交易日期',
+            title:'启用日期',
             align:"center",
             dataIndex: 'recordDate',
             customRender:function (text) {
@@ -247,11 +377,10 @@ data () {
             }
           },
           {
-            title:'流转记录',
+            title:'历史流转记录',
             align:"center",
             dataIndex: 'historyDetail',
             scopedSlots: { customRender: 'historyDetail' },
-
           },
           {
             title:'备注',
@@ -270,6 +399,10 @@ data () {
         selectedRowKeys: [],
         visible: false,
         confirmLoading: false,
+        time:{
+          Date_begin:'',
+          Date_end:'',
+        },
       }
     },
     computed: {
@@ -284,19 +417,19 @@ data () {
         else
           this.toggleSearchStatus=true;
       },
-      onSelectChange(selectedRowKeys) {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        this.selectedRowKeys = selectedRowKeys;
+        onSelectChange(selectedRowKeys) {
+          console.log('selectedRowKeys changed: ', selectedRowKeys);
+          this.selectedRowKeys = selectedRowKeys;
       },
-     onClearSelected() {
-      this.selectedRowKeys = [];
+       onClearSelected() {
+          this.selectedRowKeys = [];
       },
-      deletConfirm(e) {
-        console.log(e);
-        this.$message.success('删除成功');
+        deletConfirm(e) {
+          console.log(e);
+          this.$message.success('删除成功');
       },
-      purchaseDateOnChange(date, dateString) {
-        console.log(date, dateString);
+        purchaseDateOnChange(date, dateString) {
+          console.log(date, dateString);
       },
 
     },

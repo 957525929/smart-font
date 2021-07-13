@@ -164,13 +164,17 @@ const user = {
                  "route": "1",
                  "children": [
                     {
-                      "path": "/rent/rent", "component": "rent/rent", "route": "1",
-                      "meta": { "keepAlive": false, "internalOrExternal": false, "title": "租赁列表" }, "name": "rent", "id": "1244877762060517371"
+                      "path": "/rent/contractManage/index", "component": "rent/contractManage/index", "route": "1",
+                      "meta": { "keepAlive": false, "internalOrExternal": false, "title": "合同管理" }, "name": "contractManage", "id": "1244877762060517371"
                     },
                     {
-                        "path": "/rent/collect", "component": "rent/collect", "route": "1",
-                        "meta": { "keepAlive": false, "internalOrExternal": false, "title": "收租管理" }, "name": "collect", "id": "1233877762060517389"
+                        "path": "/rent/rentManage/index", "component": "rent/rentManage/index", "route": "1",
+                        "meta": { "keepAlive": false, "internalOrExternal": false, "title": "租金收缴" }, "name": "rentManage", "id": "1233877762060517389"
                     },
+                   {
+                     "path": "/rent/configuration", "component": "rent/configuration", "route": "1",
+                     "meta": { "keepAlive": false, "internalOrExternal": false, "title": "收缴配置" }, "name": "configuration", "id": "1233877762060517339"
+                   },
                     ],
                 "meta": {
                     "keepAlive": false,
