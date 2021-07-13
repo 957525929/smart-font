@@ -6,8 +6,8 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="12" :sm="24">
-            <a-form-item label="负责人或编号：">
-              <a-input placeholder="请输入负责人或编号" v-model="queryParam.IDName"></a-input>
+            <a-form-item label="地点或编号：">
+              <a-input placeholder="请输入地点或编号" v-model="queryParam.IDName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="4" :lg="1" :md="12" :sm="24">
@@ -58,9 +58,6 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item ref="id" label="协议酒店编号" prop="id" placeholder="请输入协议酒店编号">
-          <a-input v-model="formAdd.id" @blur="() => {$refs.id.onFieldBlur()}"></a-input>
-        </a-form-model-item>
         <a-form-model-item ref="dutyName" label="负责人" prop="dutyName" placeholder="请输入负责人">
           <a-input v-model="formAdd.dutyName"></a-input>
         </a-form-model-item>
@@ -146,13 +143,6 @@ export default {
         remark: ''
       },
       rules: {
-        id: [
-          {
-            required: true,
-            message: '请输入协议酒店编号',
-            trigger: 'blur'
-          }
-        ],
         dutyName: [
           {
             required: true,
@@ -183,7 +173,7 @@ export default {
       let newListData = []
       if (IDName) {
         this.dataHotel.filter(item => {
-          if (item.id.includes(IDName) || item.dutyName.includes(IDName)) {
+          if (item.id.includes(IDName) || item.address.includes(address)) {
             newListData.push(item)
           }
         })
@@ -203,7 +193,7 @@ export default {
           // let length = this.dataHotel.length;
           // this.dataHotel[length] = this.formAdd;
           this.dataHotel.push(this.formAdd)
-          alert('创建成功!')
+         this.$message.success('添加成功!')
           this.formAdd = {}
           this.visibleAdd = false
           // this.$confirm({

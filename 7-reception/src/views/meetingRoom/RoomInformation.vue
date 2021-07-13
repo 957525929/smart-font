@@ -6,8 +6,8 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="5" :lg="7" :md="8" :sm="24">
-            <a-form-item label="名称或编号：">
-              <a-input placeholder="请输入名称或编号" v-model="queryParam.IDName"></a-input>
+            <a-form-item label="地点或编号：">
+              <a-input placeholder="请输入地点或会议室编号" v-model="queryParam.IDName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="4" :lg="1" :md="1" :sm="24">
@@ -39,7 +39,7 @@
     <!-- table区域-begin -->
     <div>
       <a-table :data-source="dataRoom" :scroll="{ y: 450 }" :pagination="false" rowKey="id">
-        <a-table-column title="预约编号" data-index="id" align="left" width="150px"></a-table-column>
+        <a-table-column title="会议室编号" data-index="id" align="left" width="150px"></a-table-column>
         <a-table-column title="负责人" data-index="dutyName" align="center"></a-table-column>
         <a-table-column title="负责人电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="地点" data-index="address" align="center"></a-table-column>
@@ -75,9 +75,6 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item ref="id" label="预约编号" prop="id" placeholder="请输入预约编号">
-          <a-input v-model="formAdd.id" @blur="() => {$refs.id.onFieldBlur()}"></a-input>
-        </a-form-model-item>
         <a-form-model-item ref="dutyName" label="负责人" prop="dutyName" placeholder="请输入负责人">
           <a-input v-model="formAdd.dutyName"></a-input>
         </a-form-model-item>
@@ -93,7 +90,6 @@
             <a-select-option value="1">1：饮料、风扇、多媒体</a-select-option>
             <a-select-option value="2">2：饮料、风扇、空调、多媒体</a-select-option>
             <a-select-option value="3">3：饮料、风扇、景观、多媒体</a-select-option>
-            <a-select-option value="4">无</a-select-option>
           </a-select>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
@@ -111,44 +107,30 @@ const dataRoom = [
     id: 'F1201',
     dutyName: '小李',
     dutyTel: '13759655332',
-    address: '省公司203会议室',
+    address: '会议室203',
     condition: '0'
   },
   {
     id: 'F1202',
     dutyName: '小王',
     dutyTel: '13759655348',
-    address: '省公司204会议室',
+    address: '会议室204',
     condition: '1'
   },
   {
     id: 'F1203',
     dutyName: '小林',
     dutyTel: '13053955537',
-    address: '省公司205会议室',
+    address: '会议室205',
     condition: '2'
   },
   {
     id: 'F1204',
     dutyName: '小黄',
     dutyTel: '13659655381',
-    address: '省公司206会议室',
+    address: '会议室206',
     condition: '2'
   },
-  {
-    id: 'F1205',
-    dutyName: '小张',
-    dutyTel: '13659055939',
-    address: '省公司207会议室',
-    condition: '3'
-  },
-  {
-    id: 'F1206',
-    dutyName: '郑文',
-    dutyTel: '13556826132',
-    address: '省公司208会议室',
-    condition: '0'
-  }
 ]
 
 export default {
@@ -169,13 +151,6 @@ export default {
         condition: ''
       },
       rules: {
-        id: [
-          {
-            required: true,
-            message: '请输入预约编号',
-            trigger: 'blur'
-          }
-        ],
         dutyName: [
           {
             required: true,
@@ -213,7 +188,7 @@ export default {
       let newListData = []
       if (IDName) {
         this.dataRoom.filter(item => {
-          if (item.id.includes(IDName) || item.dutyName.includes(IDName)) {
+          if (item.id.includes(IDName) || item.address.includes(address)) {
             newListData.push(item)
           }
         })
@@ -233,7 +208,7 @@ export default {
           // let length = this.dataRoom.length
           // this.dataRoom[length] = this.formAdd
           this.dataRoom.push(this.formAdd)
-          alert('创建成功!')
+         this.$message.success('添加成功!')
           this.formAdd = {}
           this.visibleAdd = false
         } else {

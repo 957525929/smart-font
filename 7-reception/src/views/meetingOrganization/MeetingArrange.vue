@@ -62,13 +62,16 @@
     <!-- 查询区域-END -->
     <!-- table区域-begin -->
     <div>
-      <a-table :data-source="dataArrange" :scroll="{ y: 450 }" :pagination="false" rowKey="id">
-        <a-table-column title="会议编号" data-index="id" align="left" width="150px"></a-table-column>
-        <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>
+      <a-table :data-source="data"  :pagination="false" rowKey="id">
+        <a-table-column title="会议编号" data-index="id" align="left" width="150px" fixed="left"></a-table-column>
+         <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
+         <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>
+         <a-table-column title="会议预算" data-index="budget" align="left"></a-table-column>
         <a-table-column title="会议时间" data-index="dateTime" align="center"></a-table-column>
         <a-table-column title="会议地点" data-index="address" align="center"></a-table-column>
         <a-table-column title="会议成员" data-index="members" align="center"></a-table-column>
-        <a-table-column title="备注" data-index="remark" align="center"></a-table-column>
+        <a-table-column title="负责人姓名" data-index="dutyName" align="center"></a-table-column>
+        <a-table-column title="负责人电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="操作" align="center">
           <router-link
             :to="{ path: '/meetingOrganization/MeetingArrangeEdit', query: { record } }"
@@ -83,70 +86,98 @@
     </div>
   </a-card>
 </template>
-
 <script>
-const dataArrange = [
+const data = [
   {
     id: 'A1201',
-    name: 'XX项目周例会0605',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司',
+    budget: '1000',
+    name: '2020年年度总结',
+    theme:"年度总结",
+    dateTime: '2021年01月15日~2021年01月16日共2天',
+    address: '会议室203',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第一期项目周例会'
+    dutyName: '陈宏涛',
+    dutyTel: '152690314587',
+    audit: '已通过'
   },
-  {
-    id: 'A1202',
-    name: 'XX项目周例会0605',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司',
-    members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第一期项目周例会'
-  },
-  {
-    id: 'A1203',
-    name: 'XX项目周例会0605',
-    dateTime: '2021年06月05日~2021年06月07日共2天',
-    address: '省公司',
-    members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第一期项目周例会'
-  },
-  {
-    id: 'A1204',
-    name: 'XX项目周例会0605',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司',
-    members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第一期项目周例会'
-  },
+  // {
+  //   id: 'A1202',
+  //   budget: '2000',
+  //   name: '零售项目开展会议',
+  //   theme:"项目会议",
+  //   dateTime: '2021年06月05日~2021年06月08日共3天',
+  //   address: '会议室204',
+  //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
+  //   dutyName: '李小玲',
+  //   dutyTel: '152690314587',
+  //   audit: '0'
+  // },
+  // {
+  //   id: 'A1203',
+  //   budget: '2000',
+  //   name: '物流管理会议',
+  //   theme:"物流管理",
+  //   dateTime: '2021年05月05日~2021年05月07日共2天',
+  //   address: '会议室203',
+  //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
+  //   dutyName: '林诺汐',
+  //   dutyTel: '152690314587',
+  //   audit: '0'
+  // },
+  // {
+  //   id: 'A1204',
+  //   budget: '3000',
+  //   name: '安全管理会议',
+  //   theme:"安全管理",
+  //   dateTime: '2021年05月20日~2021年05月21日共2天',
+  //   address: '会议室205',
+  //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
+  //   dutyName: '林诺汐',
+  //   dutyTel: '152690314587',
+  //    audit: '未通过'
+  // },
   {
     id: 'A1205',
-    name: 'XX项目周例会0605',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司',
+    budget: '5000',
+     name: '安全管理会议',
+    theme:"安全管理",
+    dateTime: '2021年05月20日~2021年05月21日共2天',
+    address: '会议室205',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第一期项目周例会'
+    dutyName: '林诺汐',
+    dutyTel: '152690314587',
+    audit: '已通过'
   },
-  {
-    id: 'A1206',
-    name: 'XX项目周例会0605',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司',
-    members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第一期项目周例会'
-  },
+  // {
+  //   id: 'A1206',
+  //   budget: '5000',
+  //  name: '物流管理会议',
+  //   theme:"物流管理",
+  //   dateTime: '2021年05月05日~2021年05月07日共2天',
+  //   address: '会议室205',
+  //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
+  //   dutyName: '林诺汐',
+  //   dutyTel: '152690314587',
+  //   audit: '未通过'
+  // },
   {
     id: 'A1207',
-    name: 'XX项目周例会0605',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司',
+    budget: '5000',
+    name: '安全管理会议',
+    theme:"安全管理",
+    dateTime: '2021年06月03日~2021年06月05日共2天',
+    address: '会议室205',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第一期项目周例会'
+    dutyName: '林诺汐',
+    dutyTel: '152690314587',
+    audit: '已通过'
   }
 ]
 export default {
   data() {
     return {
-      dataArrange,
+      data,
+      // dataSelet:[],
       queryParam: {
         IDName: '',
         dateOne: undefined,
@@ -156,8 +187,8 @@ export default {
     }
   },
   methods: {
-    onChange(date, dateString) {
-      console.log(date, dateString)
+    onChange() {
+      //console.log(date, dateString)
       // console.log(dateString);
     },
     searchQuery() {
@@ -167,40 +198,40 @@ export default {
       let date2 = this.queryParam.dateTwo
       if (IDName && date1 && date2) {
         let dateSearch = date1.format('YYYY年MM月DD日') + '~' + date2.format('YYYY年MM月DD日')
-        this.dataArrange.filter(item => {
+        this.data.filter(item => {
           if ((item.id.includes(IDName) || item.name.includes(IDName)) && item.dateTime.includes(dateSearch)) {
             newListData.push(item)
           }
         })
-        this.dataArrange = newListData
+        this.data = newListData
       } else {
         if (IDName) {
-          this.dataArrange.filter(item => {
+          this.data.filter(item => {
             if (item.id.includes(IDName) || item.name.includes(IDName)) {
               newListData.push(item)
             }
           })
-          this.dataArrange = newListData
+          this.data = newListData
         }
         if (date1 && date2) {
           let dateSearch = date1.format('YYYY年MM月DD日') + '~' + date2.format('YYYY年MM月DD日')
           //console.log(dateSearch);
-          this.dataArrange.filter(item => {
+          this.data.filter(item => {
             if (item.dateTime.includes(dateSearch)) {
               console.log(111)
               newListData.push(item)
             }
           })
-          this.dataArrange = newListData
+          this.data = newListData
         }
       }
     },
     searchReset() {
-      this.dataArrange = dataArrange
+      this.data = data
       this.queryParam.IDName = ''
       this.queryParam.dateOne = undefined
       this.queryParam.dateTwo = undefined
-    }
+    },
   }
 }
 </script>

@@ -1,143 +1,111 @@
 <template>
-<!-- 会议统计 -->
-  <div class="page-header-index-wide">
-    <a-row :gutter="24">
-      <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">
-        <a-icon type="line" :rotate="90" :style="{'color':'#49a9ee'}" />按日期选择：
-        <br />
-           <a-range-picker
-      :default-value="[moment('2021/06/05', dateFormat), moment('2021/06/08', dateFormat)]"
-      :format="dateFormat"
-    />
-      </a-col>
-      <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px'}">
-        <mini-bar :dataSource="barData" :width="400" :height="200" />
-      </a-col>
-      <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">
-        <div style="padding-top: 150px;width:600px;height:200px">
-          <mini-area :dataSource="areaData" x="月份" y="销售额" :height="height" />
-        </div>
-      </a-col>
-    </a-row>
-    <a-row :gutter="24">
-      <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">
-        <a-icon type="line" :rotate="90" :style="{'color':'#49a9ee'}" />按主题筛选：
-        <br />
-        <a-button :style="{ background: '#49a9ee', color: 'white' }">例会</a-button>
-        <a-button>项管</a-button>
-        <a-button>外宾到访会</a-button>
-        <a-button>项管</a-button>
-        <a-button>专家评审会</a-button>
-        <a-button>项管</a-button>
-        <a-button>项管</a-button>
-      </a-col>
-      <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px'}">
-        <pie title="饼图" :height="height" />
-      </a-col>
-      <a-col :sm="24" :md="24" :xl="8" :style="{ marginBottom: '24px' }">
-        <div style="padding-top: 150px;width:600px;height:200px">
-          <mini-progress :percentage="30" :target="40" :height="30" />
-          <mini-progress :percentage="51" :target="60" :height="30" color="#FFA500" />
-          <mini-progress :percentage="66" :target="80" :height="30" color="#1E90FF" />
-          <mini-progress :percentage="74" :target="70" :height="30" color="#FF4500" />
-          <mini-progress :percentage="92" :target="100" :height="30" color="#49CC49" />
-        </div>
-      </a-col>
-    </a-row>
-  </div>
+  <!-- 会议统计 -->
+  <a-card :bordered="false">
+    <!-- 查询区域 -->
+    <div class="table-page-search-wrapper">
+      <a-form layout="inline" @keyup.enter.native="searchQuery">
+        <a-row :gutter="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            按主题筛选：
+            <a-select  :style="{width:'60%'}" showSearch @change="handleChange">
+              <a-select-option value="周例会">周例会</a-select-option>
+              <a-select-option value="项目会议">项目会议</a-select-option>
+              <a-select-option value="物流会议">物流管理</a-select-option>
+              <a-select-option value="安全会议">安全管理</a-select-option>
+              <a-select-option value="管理会议">年度总结</a-select-option>
+            </a-select>
+          </a-col>
+          <a-col :xl="10" :lg="9" :md="10" :sm="24">
+            按日期选择： <a-icon type="calendar" :style="{ fontSize: '20px', marginRight: '5px' }" />
+            <!-- <a-range-picker            
+              :format="dateFormat"
+            /> -->
+             <span>从&nbsp;</span>
+              <a-date-picker
+                placeholder="请选择开始"
+                :format="dateFormat"
+              >
+                <a-icon slot="suffixIcon" type="suffixIcon" />
+              </a-date-picker>
+              <span>&nbsp;到&nbsp;</span>
+              <a-date-picker
+                placeholder="请选择结束"
+                :format="dateFormat"
+              >
+                <a-icon slot="suffixIcon" type="suffixIcon" />
+              </a-date-picker>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-button
+              :style="{ background: '#49a9ee', color: 'white' }"
+              icon="search"
+              @click="searchQuery"
+            >查询</a-button>
+            <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
+          </a-col>
+        </a-row>
+      </a-form>
+    </div>
+    <!-- 查询区域-END -->
+    <!-- table区域-begin -->
+    <div style="margin-top: 20px">
+      <a-table :data-source="dataSta" :pagination="false" rowKey="theme">
+        <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
+        <a-table-column title="会议次数" data-index="number" align="center"></a-table-column>
+        <a-table-column title="与会人数" data-index="membersNumber" align="center"></a-table-column>
+        <a-table-column title="会议预算" data-index="budget" align="center"></a-table-column>
+      </a-table>
+    </div>
+  </a-card>
 </template>
 <script>
-import AreaChartTy from '@/components/chart/AreaChartTy'
-import Bar from '@/components/chart/Bar'
-import BarMultid from '@/components/chart/BarMultid'
-import DashChartDemo from '@/components/chart/DashChartDemo'
-import LineChartMultid from '@/components/chart/LineChartMultid'
-import Liquid from '@/components/chart/Liquid'
-import MiniBar from '@/components/chart/MiniBar'
-import MiniArea from '@/components/chart/MiniArea'
-import MiniProgress from '@/components/chart/MiniProgress'
-import Pie from '@/components/chart/Pie'
-import Radar from '@/components/chart/Radar'
-import RankList from '@/components/chart/RankList'
-import TransferBar from '@/components/chart/TransferBar'
-import Trend from '@/components/chart/Trend'
-import BarAndLine from '@/components/chart/BarAndLine'
-import moment from 'moment';
-export default {
-  components: {
-    Bar,
-    MiniBar,
-    BarMultid,
-    AreaChartTy,
-    LineChartMultid,
-    Pie,
-    Radar,
-    DashChartDemo,
-    MiniProgress,
-    RankList,
-    TransferBar,
-    Trend,
-    Liquid,
-    MiniArea,
-    BarAndLine
+import moment from 'moment'
+const dataSta=[
+  {
+    theme:"周例会",
+    number:"10",
+    membersNumber:"6",
+    budget:"10000"
   },
+    {
+    theme:"项目会议",
+    number:"30",
+    membersNumber:"10",
+    budget:"12500"
+  },
+    {
+    theme:"物流管理",
+    number:"4",
+    membersNumber:"5",
+    budget:"900"
+  },
+    {
+    theme:"安全管理",
+    number:"9",
+    membersNumber:"20",
+    budget:"18000"
+  },
+    {
+    theme:"年度总结",
+    number:"6",
+    membersNumber:"30",
+    budget:"21000"
+  }
+]
+export default {
   data() {
     return {
        dateFormat: 'YYYY年MM月DD日',
-      height: 420,
-      rankList: [],
-      barData: [],
-      areaData: []
+       dataSta
     }
-  },
-  created() {
-    setTimeout(() => {
-      this.loadBarData()
-      this.loadAreaData()
-      this.loadRankListData()
-    }, 100)
   },
   methods: {
      moment,
-    loadData(x, y, max, min, before = '', after = '月') {
-      let data = []
-      for (let i = 0; i < 12; i += 1) {
-        data.push({
-          [x]: `${before}${i + 1}${after}`,
-          [y]: Math.floor(Math.random() * max) + min
-        })
-      }
-      return data
-    },
-    // 加载柱状图数据
-    loadBarData() {
-      this.barData = this.loadData('x', 'y', 1000, 200)
-    },
-    // 加载AreaChartTy的数据
-    loadAreaData() {
-      this.areaData = this.loadData('x', 'y', 500, 100)
-    },
-    loadRankListData() {
-      this.rankList = this.loadData('name', 'total', 2000, 100, '北京朝阳 ', ' 号店')
+    handleChange(){},
+    searchQuery(){},
+    searchReset(){
+      this.dataSta=dataSta;
     }
   }
 }
 </script>
-<style>
-/* #components-layout-demo-basic .ant-layout-header,
-#components-layout-demo-basic .ant-layout-footer {
-  background: #7dbcea;
-  color: #fff;
-} */
-#components-layout-demo-basic .ant-layout-footer {
-  line-height: 1.5;
-}
-#app #components-layout-demo-basic .ant-layout-sider {
-  background: transparent;
-}
-
-#components-layout-demo-basic > .ant-layout:last-child {
-  margin: 0;
-}
-</style>
-

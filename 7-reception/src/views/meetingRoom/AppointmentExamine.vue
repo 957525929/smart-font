@@ -67,7 +67,7 @@
                 @click="sureClick(record,index)"
               >通过</a-button>
             </div>
-            <div v-else-if="state == '1'">
+            <div v-else-if="state == '已通过'">
               <span :style="{ color: 'green' }">已通过</span>
             </div>
             <div v-else>
@@ -85,66 +85,66 @@
 const data = [
   {
     id: 'D1201',
-    name: 'XX项目周例会0605',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司203会议室',
+    name: '2020年年度总结',
+    dateTime: '2021年01月15日~2021年01月16日共2天',
+    address: '会议室203',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第一期项目周例会',
-    state: '0'
+    remark: '年度总结',
+    state: '已通过'
   },
   {
     id: 'D1202',
-    name: 'XX项目周例会0606',
+    name: '零售项目开展会议',
     dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司204会议室',
+    address: '会议室204',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第二期项目周例会',
+    remark: '项目会议',
     state: '0'
   },
   {
-    id: 'A1203',
-    name: 'XX项目周例会0607',
-    dateTime: '2021年6月5日~2021年6月8日共3天',
-    address: '省公司205会议室',
+    id: 'D1203',
+    name: '物流管理会议',
+    dateTime:'2021年05月05日~2021年05月07日共2天',
+    address: '会议室203',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第三期项目周例会',
-    state: '1'
+    remark: '物流管理',
+    state: '0'
   },
   {
-    id: 'A1204',
-    name: 'XX项目周例会0608',
-    dateTime: '2021年06月05日~2021年06月07日共2天',
-    address: '省公司206会议室',
+    id: 'D1204',
+    name: '安全管理会议',
+    dateTime: '2021年05月20日~2021年05月21日共2天',
+    address: '会议室205',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第四期项目周例会',
-    state: '2'
+    remark: '安全管理',
+    state: '未通过'
   },
   {
-    id: 'A1205',
-    name: 'XX项目周例会0609',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
+    id: 'D1205',
+    name: '安全管理会议',
+    dateTime: '2021年05月20日~2021年05月21日共2天',
     address: '省公司207会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第五期项目周例会',
-    state: '1'
+    remark: '安全管理',
+    state: '已通过'
   },
   {
-    id: 'A1206',
-    name: 'XX项目周例会0610',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司208会议室',
+    id: 'D1206',
+    name: '物流管理会议',
+    dateTime: '2021年05月05日~2021年05月07日共2天',
+    address: '会议室205',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第六期项目周例会',
-    state: '1'
+    remark: '物流管理',
+    state: '未通过'
   },
   {
-    id: 'A1207',
-    name: 'XX项目周例会0611',
-    dateTime: '2021年06月05日~2021年06月08日共3天',
-    address: '省公司204会议室',
+    id: 'D1207',
+    name: '安全管理会议',
+    dateTime: '2021年06月03日~2021年06月05日共2天',
+    address: '会议室205',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    remark: '第七期项目周例会',
-    state: '1'
+    remark: '安全管理',
+    state: '已通过'
   }
 ]
 
@@ -204,10 +204,10 @@ export default {
       this.queryParam.dateTwo = undefined
     },
     ignoreClick(record, index) {
-      this.data[index].state = 2
+      this.data[index].state = "未通过"
     },
     sureClick(record, index) {
-      this.data[index].state = 1
+      this.data[index].state = "已通过"
     }
   }
 }

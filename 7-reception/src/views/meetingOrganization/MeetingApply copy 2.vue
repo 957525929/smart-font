@@ -6,20 +6,20 @@
       <tbody>
         <tr>
           <td colspan="2">
-            <label :style="{marginLeft:'20px'}">会议主题</label>
-            <div class="bgc">
-              <a-select default-value="周例会" :style="{width:'80%'}" showSearch  @change="handleChange">
-                <a-select-option value="周例会">周例会</a-select-option>
+            <label for="meetingName" :style="{marginLeft:'20px'}">会议主题</label>
+            <div>
+              <a-select :style="{width:'80%'}" showSearch  @change="handleChange">
+                <a-select-option value="项目会议">周例会</a-select-option>
                 <a-select-option value="项目会议">项目会议</a-select-option>
-                <a-select-option value="物流会议">物流管理</a-select-option>
-                <a-select-option value="安全会议">安全管理</a-select-option>
-                <a-select-option value="管理会议">年度总结</a-select-option>
+                <a-select-option value="物流会议">物流管理会议</a-select-option>
+                <a-select-option value="安全会议">安全管理会议</a-select-option>
+                <a-select-option value="管理会议">年度总结会议</a-select-option>
               </a-select>
             </div>
           </td>
           <td>
             <label for="meetingName" :style="{marginLeft:'20px'}">会议名称</label>
-            <div class="bgc">
+            <div>
               <a-input
                 id="meetingName"
                 placeholder="请输入负责人姓名"
@@ -33,7 +33,7 @@
         <tr>
           <td colspan="2">
             <label for="responsibleName" :style="{marginLeft:'20px'}">负责人姓名</label>
-            <div class="bgc">
+            <div>
               <a-input
                 id="responsibleName"
                 placeholder="请输入负责人姓名"
@@ -44,7 +44,7 @@
           </td>
           <td>
             <label for="responsibleTelphone" :style="{marginLeft:'20px'}">负责人电话</label>
-            <div class="bgc">
+            <div>
               <a-input
                 id="responsibleTelphone"
                 placeholder="请输入负责电话"
@@ -57,7 +57,7 @@
         <tr>
           <td colspan="3">
             <label :style="{marginLeft:'20px'}">会议时间</label>
-            <div class="bgc">
+            <div>
               <a-icon type="schedule" :style="{ fontSize: '24px', marginRight: '2px' }" />
               <a-range-picker @change="timeChange" :style="{width:'60%', border:'none'}" />
             </div>
@@ -66,7 +66,7 @@
         <tr>
           <td colspan="2">
             <label for="meetingAddress" :style="{marginLeft:'20px'}">会议地点</label>
-            <div class="bgc">
+            <div>
               <a-input
                 id="meetingAddress"
                 placeholder="请输入会议地点"
@@ -77,7 +77,7 @@
           </td>
           <td colspan="2">
             <label for="meetingBarget" :style="{marginLeft:'20px'}">会议预算</label>
-            <div class="bgc">
+            <div>
               <a-input
                 id="meetingBarget"
                 placeholder="请输入会议预算"
@@ -91,7 +91,7 @@
         <tr>
           <td colspan="3">
             <label :style="{marginLeft:'20px'}">会议成员</label>
-            <div class="bgc">
+            <div>
               <span>请从右侧选择参会人员</span>
               <ul class="clearfix">
                 <li
@@ -112,7 +112,7 @@
         <tr>
           <td colspan="3">
             <label for="meetingComments" :style="{marginLeft:'20px'}">备注</label>
-            <div class="bgc">
+            <div>
               <a-textarea
                 id="meetingComments"
                 :value="meetingComments"
@@ -260,7 +260,7 @@ export default {
 
     //模拟参会人员列表数据
     let departmentsLists = Mock.mock({
-      'treeDatas|4': [
+      'treeDatas|5': [
         {
           'title|1': ['物流管理处', '信息中心', '烟叶管理处', '安全管理处','卷烟销售管理处'],
           key: '@guid()',
@@ -348,7 +348,7 @@ button {
 .meetingInfo tr:nth-of-type(1) td {
   width: 30%;
 }
-.meetingInfo tr td .bgc {
+.meetingInfo tr td div {
   padding: 8px 8px;
   background-color: #f5f8fe;
   border-radius: 20px;

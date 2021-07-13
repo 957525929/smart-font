@@ -190,6 +190,7 @@ const user = {
                     "meta": {
                       "keepAlive": false,
                       "internalOrExternal": false,
+                      "icon":"solution",
                       "title": "会议审核"
                     },
                     "name": "meetingOrganization-audit",
@@ -222,14 +223,55 @@ const user = {
                     "id": "1245154050731200514"
                   },
                   {
-                    "path": "/meetingOrganization/MeetingNotice",
-                    "component": "meetingOrganization/MeetingNotice",
+                    "path": "/meetingOrganization/MeetingIn",
+                    "component": "meetingOrganization/MeetingIn",
                     "route": "1",
+                    "meta": {
+                      "keepAlive": false,
+                      "internalOrExternal": false,  
+                      "icon":"folder",
+                      "title": "会议总览"
+                    },
+                    "name": "meetingOrganization-in",
+                    "id": "1244271300749729794"
+                  },
+                  {
+                    "path": "/meetingOrganization/MeetingDetails",
+                    "component": "meetingOrganization/MeetingDetails",
+                    "route": "1",
+                    "hidden":true,
+                    "meta": {
+                      "keepAlive": false,
+                      "internalOrExternal": false,                      
+                      "title": "会议总览"
+                    },
+                    "name": "meetingOrganization-details",
+                    "id": "1244271300749729794"
+                  },
+                  // {
+                  //   "path": "/meetingOrganization/MeetingNotice",
+                  //   "component": "meetingOrganization/MeetingNotice",
+                  //   "route": "1",
+                  //   "hidden":true,
+                  //   "meta": {
+                  //     "keepAlive": false,
+                  //     "internalOrExternal": false,
+                  //     "icon":"sound",
+                  //     "title": "会议通知"
+                  //   },
+                  //   "name": "meetingOrganization-notice",
+                  //   "id": "1244271300749729794"
+                  // },
+                  {
+                    "path": "/meetingOrganization/Notice",
+                    "component": "meetingOrganization/Notice",
+                    "route": "1",
+                    "hidden":true,
                     "meta": {
                       "keepAlive": false,
                       "internalOrExternal": false,
                       "icon":"sound",
-                      "title": "会议通知"
+                      "title": "通知"
                     },
                     "name": "meetingOrganization-notice",
                     "id": "1244271300749729794"
@@ -238,6 +280,7 @@ const user = {
                     "path": "/meetingOrganization/MeetingSettlement",
                     "component": "meetingOrganization/MeetingSettlement",
                     "route": "1",
+                    "hidden":true,
                     "meta": {
                       "keepAlive": false,
                       "internalOrExternal": false,
@@ -277,7 +320,7 @@ const user = {
                   "keepAlive": false,
                   "internalOrExternal": false,
                   // "MyFont": "icon-zuzhiguanli",
-                  "icon": "home",
+                  "icon": "usergroup-delete",
                   "title": "会议组织"
                 },
                 "name": "meetingOrganization",
@@ -308,7 +351,7 @@ const user = {
               "meta": {
                 "keepAlive": false,
                 "internalOrExternal": false,
-                "icon": "home",
+                "icon": "phone",
                 "title": "酒店预订"
               },
               "name": "hotelReservation",
@@ -341,6 +384,7 @@ const user = {
                   "meta": {
                     "keepAlive": false,
                     "internalOrExternal": false,
+                    'icon':"solution",
                     "title": "预约审核"
                   },
                   "name": "meetingRoom-AppointmentExamine",
@@ -364,7 +408,7 @@ const user = {
               "meta": {
                 "keepAlive": false,
                 "internalOrExternal": false,
-                "icon": "home",
+                "icon": "phone",
                 "title": "会议室预约"
               },
               "name": "meetingRoomAppointmen",
