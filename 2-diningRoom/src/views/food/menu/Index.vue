@@ -7,13 +7,53 @@
           <a-row :gutter="24">
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="菜品名称">
-                <a-input placeholder="请输入" v-decorator="['purchaseOrderNumber']"></a-input>
+                <a-input placeholder="请输入" v-decorator="['name']"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="菜品类别">
+                <a-select v-decorator="['type']" allowClear >
+                  <a-select-option value="荤菜">荤菜</a-select-option>
+                  <a-select-option value="素菜">素菜</a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="菜品分类">
+                <a-select v-decorator="['category']" allowClear >
+                  <a-select-option value="客家菜">客家菜</a-select-option>
+                  <a-select-option value="粤菜">粤菜</a-select-option>
+                </a-select>
               </a-form-item>
             </a-col>
             <template v-if="toggleSearchStatus">
-              <a-col :xl="5" :lg="8" :md="9" :sm="24">
-                <a-form-item label="菜品分类">
-                  <a-input placeholder="请输入" v-decorator="['headline']"></a-input>
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="辣度">
+                  <a-select v-decorator="['degree']" allowClear >
+                    <a-select-option value="不辣">不辣</a-select-option>
+                    <a-select-option value="微辣">微辣</a-select-option>
+                    <a-select-option value="中辣">中辣</a-select-option>
+                    <a-select-option value="重辣">重辣</a-select-option>
+                  </a-select>
+                </a-form-item>
+              </a-col>
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="开始时间">
+                  <j-date  v-decorator="['startDate']" style='width: 100%'/>
+                </a-form-item>
+              </a-col>
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="结束时间">
+                  <j-date  v-decorator="['endDate']" style='width: 100%'/>
+                </a-form-item>
+              </a-col>
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="是否启用">
+                  <a-select v-decorator="['isApply']" allowClear >
+                    <a-select-option value="全部">全部</a-select-option>
+                    <a-select-option value="是">是</a-select-option>
+                    <a-select-option value="否">否</a-select-option>
+                  </a-select>
                 </a-form-item>
               </a-col>
             </template>
@@ -117,10 +157,13 @@
 <script>
 
 import moment from 'moment';
+import JDate from '../../../components/jeecg/JDate'
 
 export default {
   name: "Index",
-  components: {},
+  components: {
+    JDate,
+  },
   data () {
     return {
       todayTime:moment(new Date().toLocaleDateString(), 'YYYY-MM-DD'),

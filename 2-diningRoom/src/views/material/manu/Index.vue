@@ -5,29 +5,45 @@
       <div class="table-page-search-wrapper">
         <a-form layout="inline" :form="form1">
           <a-row :gutter="24">
-            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+            <a-col :xl="5" :lg="8" :md="9" :sm="24">
               <a-form-item label="供应商">
                 <a-input placeholder="请输入" v-decorator="['manuName']"></a-input>
               </a-form-item>
             </a-col>
-            <template v-if="toggleSearchStatus">
-              <a-col :xl="5" :lg="8" :md="9" :sm="24">
-                <a-form-item label="联系人">
-                  <a-input placeholder="请输入" v-decorator="['manuPeople']"></a-input>
-                </a-form-item>
-              </a-col>
-            </template>
+            <a-col :xl="5" :lg="8" :md="9" :sm="24">
+              <a-form-item label="地址">
+                <a-input placeholder="请输入" v-decorator="['address']"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="5" :lg="8" :md="9" :sm="24">
+              <a-form-item label="联系人">
+                <a-input placeholder="请输入" v-decorator="['people']"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="5" :lg="8" :md="9" :sm="24">
+              <a-form-item label="电话">
+                <a-input placeholder="请输入" v-decorator="['phone']"></a-input>
+              </a-form-item>
+            </a-col>
+
+<!--            <template v-if="toggleSearchStatus">-->
+<!--              <a-col :xl="5" :lg="8" :md="9" :sm="24">-->
+<!--                <a-form-item label="联系人">-->
+<!--                  <a-input placeholder="请输入" v-decorator="['manuPeople']"></a-input>-->
+<!--                </a-form-item>-->
+<!--              </a-col>-->
+<!--            </template>-->
 
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-            <a-col :md="6" :sm="24">
-              <a-button icon="search" @click='handleQueryOk'>查询</a-button>
-              <a-button icon="reload" style="margin-left: 8px" @click='handleReset'>重置</a-button>
-              <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
-                <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
-              </a>
-            </a-col>
-          </span>
+              <a-col :md="6" :sm="24">
+                <a-button icon="search" @click='handleQueryOk'>查询</a-button>
+                <a-button icon="reload" style="margin-left: 8px" @click='handleReset'>重置</a-button>
+<!--                <a @click="handleToggleSearch" style="margin-left: 8px">-->
+<!--                  {{ toggleSearchStatus ? '收起' : '展开' }}-->
+<!--                  <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>-->
+<!--                </a>-->
+              </a-col>
+             </span>
 
           </a-row>
         </a-form>

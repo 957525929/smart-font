@@ -7,13 +7,39 @@
           <a-row :gutter="24">
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="留样编号">
-                <a-input placeholder="请输入" v-decorator="['purchaseOrderNumber']"></a-input>
+                <a-input placeholder="请输入" v-decorator="['number']"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="菜品名称">
+                <a-input placeholder="请输入" v-decorator="['name']"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="餐别">
+                <a-select v-decorator="['type']" allowClear >
+                  <a-select-option value="早餐">早餐</a-select-option>
+                  <a-select-option value="午餐">午餐</a-select-option>
+                  <a-select-option value="晚餐">晚餐</a-select-option>
+                </a-select>
               </a-form-item>
             </a-col>
             <template v-if="toggleSearchStatus">
-              <a-col :xl="5" :lg="8" :md="9" :sm="24">
-                <a-form-item label="菜品名称">
-                  <a-input placeholder="请输入" v-decorator="['headline']"></a-input>
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="留样人员">
+                  <a-select v-decorator="['people']" allowClear >
+                    <a-select-option value="邝木木">邝木木</a-select-option>
+                  </a-select>
+                </a-form-item>
+              </a-col>
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="开始时间">
+                  <j-date  v-decorator="['startDate']" style='width: 100%'/>
+                </a-form-item>
+              </a-col>
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="结束时间">
+                  <j-date  v-decorator="['endDate']" style='width: 100%'/>
                 </a-form-item>
               </a-col>
             </template>
@@ -72,9 +98,9 @@
 
       <a-spin :spinning="confirmLoading">
         <a-form-model ref="form"  v-bind="layout"  :model="model" :rules="validatorRules">
-          <a-form-model-item label="留样编号" prop="code">
-            <a-input v-model="model.code" placeholder="系统自动生成" disabled/>
-          </a-form-model-item>
+<!--          <a-form-model-item label="留样编号" prop="code">-->
+<!--            <a-input v-model="model.code" placeholder="系统自动生成" disabled/>-->
+<!--          </a-form-model-item>-->
           <a-form-model-item label="菜品名称" required prop="name">
             <a-select allowClear v-model="model.name" placeholder="请选择菜品名称">
               <a-select-option value="小鸡炖蘑菇">小鸡炖蘑菇</a-select-option>
@@ -113,10 +139,12 @@
 
 <script>
 
-
+import JDate from '../../../components/jeecg/JDate'
 export default {
   name: "Index",
-  components: {},
+  components: {
+    JDate,
+  },
   data () {
     return {
       form1: this.$form.createForm(this),

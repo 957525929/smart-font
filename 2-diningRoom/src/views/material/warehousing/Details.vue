@@ -11,7 +11,7 @@
       </a-col>
       <a-col :xl="5" :lg="8" :md="9" :sm="24">
         <div class="detail-top">
-          <div>标题：</div>
+          <div>采购标题：</div>
           <div>{{ detailsData.headline }}</div>
         </div>
       </a-col>
@@ -46,17 +46,23 @@
         </div>
       </a-col>
       <a-col :xl="5" :lg="8" :md="9" :sm="24">
-        <div class="detail-top">
-          <div>验收人：</div>
+        <div class="detail-top" v-if='detailsData.checkState!=0'>
+          <div>审核人：</div>
           <div>{{ detailsData.checkoutPeople }}</div>
         </div>
       </a-col>
       <a-col :xl="5" :lg="8" :md="9" :sm="24">
-        <div class="detail-top">
-          <div>验收日期：</div>
+        <div class="detail-top" v-if='detailsData.checkState!=0'>
+          <div>审核日期：</div>
           <div>{{ detailsData.checkoutDate }}</div>
         </div>
       </a-col>
+    </a-row>
+    <a-row>
+      <div class="detail-top" v-if='detailsData.checkState==-1'>
+        <div>未通过理由：</div>
+        <div style='font-size: large;font-family: fangsong;font-weight: bold; color:red'>{{ '鸡肉变质' }}</div>
+      </div>
     </a-row>
 
     <h1 style="font-weight:bold">采购明细：</h1>
