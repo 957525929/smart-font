@@ -51,18 +51,18 @@ export const menuMock = {
             "name": "dashboard-roomManager",
             "id": "1261213213500452866"
           },
-          {
-            "path": "/erp/bas/material",
-            "component": "erp/bas/BasMaterialList",
-            "route": "1",
-            "meta": {
-              "keepAlive": false,
-              "internalOrExternal": false,
-              "title": "物料"
-            },
-            "name": "isystem-permission",
-            "id": "12612132135004528626"
-          },
+          // {
+          //   "path": "/erp/stock/rubricPurIn",
+          //   "component": "erp/stock/RubricPurInBillList",
+          //   "route": "1",
+          //   "meta": {
+          //     "keepAlive": false,
+          //     "internalOrExternal": false,
+          //     "title": "采购退货出库"
+          //   },
+          //   "name": "isystem-permission",
+          //   "id": "12612132135004528626"
+          // },
           {
             "path": "/areamanager/areaManager",
             "component": "areamanager/areaManager",
