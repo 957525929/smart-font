@@ -45,6 +45,20 @@
         <a-table-column title="负责人电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="地点" data-index="address" align="center"></a-table-column>
         <a-table-column title="备注信息" data-index="remark" align="center"></a-table-column>
+        <a-table-column title="操作" align="center">
+          <template slot-scope="record">
+            <!-- <a-button :style="{ background: 'orange', color: 'white' }" @click="Modify(record)">修改</a-button> -->
+            <a href="javascript:;" @click="Modify(record)" :style="{  color: 'orange' }">修改</a>
+            <a-divider type="vertical" />
+            <a href="javascript:;" @click="Download(record)">下载</a>
+            <!-- <a-button :style="{ background: 'orange', color: 'white' }" @click="Download(record)">下载</a-button> -->
+            <a-divider type="vertical" />
+            <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+              <!-- <a-button :style="{ background: 'red', color: 'white' }">删除</a-button> -->
+              <a href="javascript:;" :style="{  color: 'red' }">删除</a>
+            </a-popconfirm>
+          </template>
+        </a-table-column>
       </a-table>
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
@@ -76,126 +90,157 @@
         </a-form-model-item>
       </a-form-model>
     </a-Modal>
+    <!--修改信息 -->
+    <a-Modal v-model="visibleModify" title="修改酒店信息" footer>
+      <a-form-model
+        :label-col="labelCol"
+        :model="formModify"
+        :wrapper-col="wrapperCol"
+        :rules="rules"
+      >
+        <a-form-model-item label="协议酒店编号">
+          <a-input v-model="formModify.id" disabled></a-input>
+        </a-form-model-item>
+        <a-form-model-item ref="dutyName" label="负责人" prop="dutyName">
+          <a-input v-model="formModify.dutyName"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="负责人电话" prop="dutyTel">
+          <a-input v-model="formModify.dutyTel"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="地点" prop="address">
+          <a-input v-model="formModify.address"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="备注信息">
+          <a-input v-model="formModify.remark" type="textarea" />
+        </a-form-model-item>
+        <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
+          <a-button type="primary" @click="onSubmitModify()">修改</a-button>
+          <a-button style="margin-left: 10px;" @click="CancelModify()">取消</a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </a-Modal>
   </a-card>
 </template>
 
 <script>
 const dataHotel = [
   {
-    id: 'N1201',
-    dutyName: '小李',
-    dutyTel: '13759655332',
-    address: '香格里拉酒店',
-    remark: '折扣力度3折'
+    id: "N1201",
+    dutyName: "小李",
+    dutyTel: "13759655332",
+    address: "香格里拉酒店",
+    remark: "折扣力度3折"
   },
   {
-    id: 'N1202',
-    dutyName: '小王',
-    dutyTel: '13759655348',
-    address: '好利来酒店',
-    remark: '折扣力度2折'
+    id: "N1202",
+    dutyName: "小王",
+    dutyTel: "13759655348",
+    address: "好利来酒店",
+    remark: "折扣力度2折"
   },
   {
-    id: 'N1203',
-    dutyName: '小林',
-    dutyTel: '13053955537',
-    address: '康特大酒店',
-    remark: '折扣力度4折'
+    id: "N1203",
+    dutyName: "小林",
+    dutyTel: "13053955537",
+    address: "康特大酒店",
+    remark: "折扣力度4折"
   },
   {
-    id: 'N1204',
-    dutyName: '小黄',
-    dutyTel: '13659655381',
-    address: '世纪金源酒店',
-    remark: '折扣力度3折'
+    id: "N1204",
+    dutyName: "小黄",
+    dutyTel: "13659655381",
+    address: "世纪金源酒店",
+    remark: "折扣力度3折"
   },
   {
-    id: 'N1205',
-    dutyName: '小张',
-    dutyTel: '13659055939',
-    address: '阿弥陀佛酒店',
-    remark: '折扣力度3折'
+    id: "N1205",
+    dutyName: "小张",
+    dutyTel: "13659055939",
+    address: "阿弥陀佛酒店",
+    remark: "折扣力度3折"
   },
   {
-    id: 'N1206',
-    dutyName: '郑文',
-    dutyTel: '13556826132',
-    address: '富士酒店',
-    remark: '折扣力度3.5折'
+    id: "N1206",
+    dutyName: "郑文",
+    dutyTel: "13556826132",
+    address: "富士酒店",
+    remark: "折扣力度3.5折"
   }
-]
+];
 
 export default {
   data() {
     return {
       dataHotel,
       queryParam: {
-        IDName: ''
+        IDName: ""
       },
       visibleAdd: false,
+      visibleModify: false,
       labelCol: { span: 6 },
       wrapperCol: { span: 18 },
       formAdd: {
-        id: '',
-        dutyName: '',
-        dutyTel: '',
-        address: '',
-        remark: ''
+        id: "",
+        dutyName: "",
+        dutyTel: "",
+        address: "",
+        remark: ""
       },
+      formModify: {},
       rules: {
         dutyName: [
           {
             required: true,
-            message: '请输入负责人',
-            trigger: 'blur'
+            message: "请输入负责人",
+            trigger: "blur"
           }
         ],
         dutyTel: [
           {
             required: true,
-            message: '请输入负责人电话',
-            trigger: 'blur'
+            message: "请输入负责人电话",
+            trigger: "blur"
           }
         ],
         address: [
           {
             required: true,
-            message: '请输入地点',
-            trigger: 'blur'
+            message: "请输入地点",
+            trigger: "blur"
           }
         ]
       }
-    }
+    };
   },
   methods: {
     searchQuery() {
-      let IDName = this.queryParam.IDName
-      let newListData = []
+      let IDName = this.queryParam.IDName;
+      let newListData = [];
       if (IDName) {
         this.dataHotel.filter(item => {
-          if (item.id.includes(IDName) || item.address.includes(address)) {
-            newListData.push(item)
+          if (item.id.includes(IDName) || item.address.includes(IDName)) {
+            newListData.push(item);
           }
-        })
-        this.dataHotel = newListData
+        });
+        this.dataHotel = newListData;
       }
     },
     searchReset() {
-      this.dataHotel = dataHotel
-      this.queryParam.IDName = ''
+      this.dataHotel = dataHotel;
+      this.queryParam.IDName = "";
     },
     addHotel() {
-      this.visibleAdd = true
+      this.visibleAdd = true;
     },
     onSubmitAdd() {
       this.$refs.ruleForm.validate(valid => {
         if (valid) {
           // let length = this.dataHotel.length;
           // this.dataHotel[length] = this.formAdd;
-          this.dataHotel.push(this.formAdd)
-         this.$message.success('添加成功!')
-          this.formAdd = {}
-          this.visibleAdd = false
+          this.dataHotel.push(this.formAdd);
+          this.$message.success("添加成功!");
+          this.formAdd = {};
+          this.visibleAdd = false;
           // this.$confirm({
           //   title: "您是否确定新建此会议安排？",
           //   content: <div style="color:red;"></div>,
@@ -208,14 +253,41 @@ export default {
           //   class: "test"
           // });
         } else {
-          console.log('error submit!!')
-          return false
+          console.log("error submit!!");
+          return false;
         }
-      })
+      });
     },
     resetFormAdd() {
-      this.$refs.ruleForm.resetFields()
+      this.$refs.ruleForm.resetFields();
+    },
+    onDelete(id) {
+      const dataHotel = [...this.dataHotel];
+      this.dataHotel = dataHotel.filter(item => item.id !== id);
+    },
+    Download() {
+      console.log("下载");
+    },
+    Modify(record) {
+      this.visibleModify = true;
+      console.log(record);
+      this.formModify.id = record.id;
+      this.formModify.dutyName = record.dutyName;
+      this.formModify.dutyTel = record.dutyTel;
+      this.formModify.address = record.address;
+      this.formModify.remark = record.remark;
+    },
+    onSubmitModify() {
+      this.visibleModify = false;
+      // this.dataHotel.dutyName = this.formModify.dutyName;
+      // this.dataHotel.dutyTel = this.formModify.dutyTel;
+      // this.dataHotel.address = this.formModify.address;
+      // this.dataHotel.remark = this.formModify.remark;
+      this.$message.success("修改成功");
+    },
+    CancelModify() {
+      this.visibleModify = false;
     }
   }
-}
+};
 </script>

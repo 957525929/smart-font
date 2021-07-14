@@ -2,9 +2,7 @@
   <a-card :bordered="false">
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
-
         <a-row :gutter="10">
-
           <a-col :md="6" :sm="9">
             <a-form-item label="类型">
               <a-select class="w150" placeholder="请选择类型">
@@ -27,19 +25,24 @@
 
           <a-col :sm="10">
             <a-form-item label="时间">
-              <a-date-picker class="w140" placeholder="请选择时间" />
+              <a-date-picker
+                class="w150"
+                format="YYYY-MM-DD"
+                :default-value="moment(current_start_date, 'YYYY/MM/DD')"
+              />
               ~
-              <a-date-picker class="w140" placeholder="请选择时间" />
+              <a-date-picker
+                class="w150"
+                format="YYYY-MM-DD"
+                :default-value="moment(current_stop_date, 'YYYY/MM/DD')"
+              />
             </a-form-item>
           </a-col>
 
           <a-col>
-            <a-button style="float:right;margin-right:10px" type="primary"> 查询
-            </a-button>
+            <a-button style="float: right; margin-right: 10px" type="primary"> 查询 </a-button>
           </a-col>
-
         </a-row>
-
       </a-form>
 
       <BarMultid :dataSource="dataSource" :fields="field" :height="420" />
@@ -48,46 +51,102 @@
 </template>
 
 <script>
-
 import BarMultid from '@/components/chart/BarMultid'
+import moment from 'moment'
 export default {
   name: 'ChartDemo',
   components: {
-    BarMultid
+    BarMultid,
   },
   data() {
     return {
-      field: [
-        "2017", "2018", "2019", "2020", "2021"
-      ],
+      moment,
+      field: ['2021.01', '2021.02', '2021.03', '2021.04', '2021.05', '2021.06'],
       dataSource: [
         {
-          "type": "未完成", // 列名
-          "2017": 320,
-          "2018": 332,
-          "2019": 301,
-          "2020": 334,
-          "2021": 390,
+          type: '未完成', // 列名
+          2021.01: 8,
+          2021.02: 0,
+          2021.03: 1,
+          2021.04: 4,
+          2021.05: 5,
+          2021.06: 2,
         },
         {
-          "type": "进行中",
-          "2017": 220,
-          "2018": 182,
-          "2019": 191,
-          "2020": 234,
-          "2021": 290,
+          type: '进行中',
+          2021.01: 8,
+          2021.02: 7,
+          2021.03: 5,
+          2021.04: 18,
+          2021.05: 8,
+          2021.06: 12,
         },
         {
-          "type": "已完成",
-          "2017": 150,
-          "2018": 232,
-          "2019": 201,
-          "2020": 154,
-          "2021": 190,
-        }
-      ]
+          type: '已完成',
+          2021.01: 12,
+          2021.02: 10,
+          2021.03: 8,
+          2021.04: 10,
+          2021.05: 5,
+          2021.06: 2,
+        },
+      ],
     }
-  }
+  },
+  computed: {
+    current_stop_date() {
+      var nowDate = new Date()
+      let date = {
+        year: nowDate.getFullYear(),
+        month: nowDate.getMonth() + 1,
+        date: nowDate.getDate(),
+        hour: nowDate.getHours(),
+        minutes: nowDate.getMinutes(),
+        seconds: nowDate.getSeconds(),
+      }
+      // console.log(date);
+      let systemDate =
+        date.year +
+        '年' +
+        date.month +
+        '月' +
+        date.date +
+        '日' +
+        date.hour +
+        '时' +
+        date.minutes +
+        '分' +
+        date.seconds +
+        '秒'
+      return systemDate
+    },
+    current_start_date() {
+      var nowDate = new Date()
+      let date = {
+        year: nowDate.getFullYear(),
+        month: nowDate.getMonth(),
+        date: nowDate.getDate(),
+        hour: nowDate.getHours(),
+        minutes: nowDate.getMinutes(),
+        seconds: nowDate.getSeconds(),
+      }
+      // console.log(date);
+      let systemDate =
+        date.year +
+        '年' +
+        date.month +
+        '月' +
+        date.date +
+        '日' +
+        date.hour +
+        '时' +
+        date.minutes +
+        '分' +
+        date.seconds +
+        '秒'
+      return systemDate
+    },
+  },
 }
 </script>
 <style lang="less" scoped>
