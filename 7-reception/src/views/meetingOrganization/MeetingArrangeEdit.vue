@@ -22,7 +22,7 @@
               <a-select-option value="好利来酒店">好利来酒店</a-select-option>
               <a-select-option value="康特大酒店">康特大酒店</a-select-option>
               <a-select-option value="世纪金源酒店">世纪金源酒店</a-select-option>
-               <a-select-option value="富士酒店">富士酒店</a-select-option>
+              <a-select-option value="富士酒店">富士酒店</a-select-option>
             </a-select>
           </a-form-model-item>
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
@@ -63,7 +63,8 @@
           </a-form-model-item>
           <a-form-model-item label="就餐地点" prop="way">
             <a-select v-model="formEat.way" placeholder="选择就餐方式">
-              <a-select-option value="酒店">酒店</a-select-option>
+              <!-- <a-select-option value="酒店">{{eatHotel}}</a-select-option> -->
+              <a-select-option :value="eatHotel">{{eatHotel}}</a-select-option>
               <a-select-option value="食堂">食堂</a-select-option>
             </a-select>
           </a-form-model-item>
@@ -130,9 +131,10 @@
 export default {
   data() {
     return {
-      formLayout: 'horizontal',
+      formLayout: "horizontal",
       labelCol: { span: 4 },
       wrapperCol: { span: 7 },
+      eatHotel: "",
       formHotel: {
         hotel: undefined,
         date1: undefined,
@@ -143,35 +145,35 @@ export default {
         hotel: [
           {
             required: true,
-            message: '请选择协议酒店',
-            trigger: 'change'
+            message: "请选择协议酒店",
+            trigger: "change"
           }
         ],
-        date1: [{ required: true, message: '请选择日期', trigger: 'change' }]
+        date1: [{ required: true, message: "请选择日期", trigger: "change" }]
       },
       formEat: {
         date1: undefined,
         date2: undefined,
-        type: '',
-        way: ''
+        type: "",
+        way: ""
       },
       dataEat: [],
       rulesEat: {
         type: [
           {
             required: true,
-            message: '请选择餐别',
-            trigger: 'change'
+            message: "请选择餐别",
+            trigger: "change"
           }
         ],
         way: [
           {
             required: true,
-            message: '请选择就餐方式',
-            trigger: 'change'
+            message: "请选择就餐方式",
+            trigger: "change"
           }
         ],
-        date1: [{ required: true, message: '请选择日期', trigger: 'change' }]
+        date1: [{ required: true, message: "请选择日期", trigger: "change" }]
       },
       formRoom: {
         room: undefined,
@@ -184,114 +186,115 @@ export default {
         room: [
           {
             required: true,
-            message: '请选择预约的会议室',
-            trigger: 'change'
+            message: "请选择预约的会议室",
+            trigger: "change"
           }
         ],
-        date1: [{ required: true, message: '请选择日期', trigger: 'change' }]
+        date1: [{ required: true, message: "请选择日期", trigger: "change" }]
       }
-    }
+    };
   },
   methods: {
     callback(key) {
-      console.log(key)
+      console.log(key);
     },
     onChange() {
-      console.log()
+      console.log();
     },
     onSubmitHotel() {
       this.$refs.ruleFormHotel.validate(valid => {
         if (valid) {
           if (!this.formHotel.date2) {
-            this.$message.error('请输入结束日期')
+            this.$message.error("请输入结束日期");
           }
-          let startDate = this.formHotel.date1.format('YYYY年MM月DD日')
-          let endDate = this.formHotel.date2.format('YYYY年MM月DD日')
-          let dateTime = startDate + '~' + endDate
-          console.log(dateTime)
+          let startDate = this.formHotel.date1.format("YYYY年MM月DD日");
+          let endDate = this.formHotel.date2.format("YYYY年MM月DD日");
+          let dateTime = startDate + "~" + endDate;
+          console.log(dateTime);
           let a = {
             dateTime: dateTime,
             hotel: this.formHotel.hotel
-          }
-          this.dataHotel.push(a)
+          };
+          this.dataHotel.push(a);
           // alert("添加成功!");
-          this.$message.success('添加成功!')
-          this.formHotel.date1 = undefined
-          this.formHotel.date2 = undefined
-          this.formHotel.hotel = undefined
+          this.$message.success("添加成功!");
+          this.eatHotel = this.formHotel.hotel;
+          this.formHotel.date1 = undefined;
+          this.formHotel.date2 = undefined;
+          this.formHotel.hotel = undefined;
         } else {
-          console.log('error submit!!')
-          return false
+          console.log("error submit!!");
+          return false;
         }
-      })
+      });
     },
     resetFormHotel() {
-      this.$refs.ruleFormHotel.resetFields()
-      this.formHotel.date2 = undefined
+      this.$refs.ruleFormHotel.resetFields();
+      this.formHotel.date2 = undefined;
     },
     onSubmitEat() {
       this.$refs.ruleFormEat.validate(valid => {
         if (valid) {
           if (!this.formEat.date2) {
             // alert("请输入结束日期");
-            this.$message.error('请输入结束日期')
+            this.$message.error("请输入结束日期");
           }
-          let startDate = this.formEat.date1.format('YYYY年MM月DD日')
-          let endDate = this.formEat.date2.format('YYYY年MM月DD日')
-          let dateTime = startDate + '~' + endDate
-          console.log(dateTime)
+          let startDate = this.formEat.date1.format("YYYY年MM月DD日");
+          let endDate = this.formEat.date2.format("YYYY年MM月DD日");
+          let dateTime = startDate + "~" + endDate;
+          console.log(dateTime);
           let a = {
             dateTime: dateTime,
             type: this.formEat.type,
             way: this.formEat.way
-          }
-          this.dataEat.push(a)
-          this.$message.success('添加成功!')
-          this.formEat.date1 = undefined
-          this.formEat.date2 = undefined
-          this.formEat.type = undefined
-          this.formEat.way = undefined
+          };
+          this.dataEat.push(a);
+          this.$message.success("添加成功!");
+          this.formEat.date1 = undefined;
+          this.formEat.date2 = undefined;
+          this.formEat.type = undefined;
+          this.formEat.way = undefined;
         } else {
-          console.log('error submit!!')
-          return false
+          console.log("error submit!!");
+          return false;
         }
-      })
+      });
     },
     resetFormEat() {
-      this.$refs.ruleFormEat.resetFields()
-      this.formEat.date2 = undefined
+      this.$refs.ruleFormEat.resetFields();
+      this.formEat.date2 = undefined;
     },
     onSubmitRoom() {
       this.$refs.ruleFormRoom.validate(valid => {
         if (valid) {
           if (!this.formRoom.date2) {
-            this.$message.error('请输入结束日期')
+            this.$message.error("请输入结束日期");
           }
-          let startDate = this.formRoom.date1.format('YYYY年MM月DD日')
-          let endDate = this.formRoom.date2.format('YYYY年MM月DD日')
-          let dateTime = startDate + '~' + endDate
-          console.log(dateTime)
+          let startDate = this.formRoom.date1.format("YYYY年MM月DD日");
+          let endDate = this.formRoom.date2.format("YYYY年MM月DD日");
+          let dateTime = startDate + "~" + endDate;
+          console.log(dateTime);
           let a = {
             dateTime: dateTime,
             room: this.formRoom.room
-          }
-          this.dataRoom.push(a)
-          this.$message.success('添加成功!')
-          this.formRoom.date1 = undefined
-          this.formRoom.date2 = undefined
-          this.formRoom.room = undefined
+          };
+          this.dataRoom.push(a);
+          this.$message.success("添加成功!");
+          this.formRoom.date1 = undefined;
+          this.formRoom.date2 = undefined;
+          this.formRoom.room = undefined;
 
-          this.formRoom.number = undefined
+          this.formRoom.number = undefined;
         } else {
-          console.log('error submit!!')
-          return false
+          console.log("error submit!!");
+          return false;
         }
-      })
+      });
     },
     resetFormRoom() {
-      this.$refs.ruleFormRoom.resetFields()
-      this.formRoom.date2 = undefined
+      this.$refs.ruleFormRoom.resetFields();
+      this.formRoom.date2 = undefined;
     }
   }
-}
+};
 </script>

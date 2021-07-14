@@ -64,30 +64,30 @@ const dataSta=[
   {
     theme:"周例会",
     number:"10",
-    membersNumber:"6",
+    membersNumber:"56",
     budget:"10000"
   },
     {
     theme:"项目会议",
     number:"30",
-    membersNumber:"10",
+    membersNumber:"90",
     budget:"12500"
   },
     {
     theme:"物流管理",
     number:"4",
-    membersNumber:"5",
+    membersNumber:"12",
     budget:"900"
   },
     {
     theme:"安全管理",
     number:"9",
-    membersNumber:"20",
+    membersNumber:"30",
     budget:"18000"
   },
     {
     theme:"年度总结",
-    number:"6",
+    number:"1",
     membersNumber:"30",
     budget:"21000"
   }
