@@ -1,6 +1,5 @@
 <template>
   <a-card :bordered="false">
-
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
@@ -37,9 +36,17 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="10">
-            <a-form-item label="上传时间">
-              <a-date-picker class="w150" placeholder="请选择时间" />
+          <a-col :sm="10">
+            <a-form-item label="时间">
+              <a-date-picker
+                format="YYYY-MM-DD HH:mm:ss"
+                :default-value="moment(current_start_date, 'YYYY/MM/DD HH:mm:ss')"
+              />
+              ~
+              <a-date-picker
+                format="YYYY-MM-DD HH:mm:ss"
+                :default-value="moment(current_stop_date, 'YYYY/MM/DD HH:mm:ss')"
+              />
             </a-form-item>
           </a-col>
 
@@ -48,7 +55,6 @@
               <a-input placeholder="请输入概述"></a-input>
             </a-form-item>
           </a-col>
-
         </a-row>
       </a-form>
     </div>
@@ -60,16 +66,13 @@
           <a-button @click="handleAdd" type="dashed" icon="plus">新增</a-button>
           <a-dropdown v-if="selectedRowKeys.length > 0">
             <a-menu slot="overlay">
-              <a-menu-item key="1">
-                <a-icon type="delete" />删除
-              </a-menu-item>
+              <a-menu-item key="1"> <a-icon type="delete" />删除 </a-menu-item>
               <a-menu-item key="2">
-                <a-upload name="file" :multiple="true" :headers="headers">
-                  <a-icon type="plus" /> 上传
-                </a-upload>
+                <a-upload name="file" :multiple="true" :headers="headers"> <a-icon type="plus" /> 上传 </a-upload>
               </a-menu-item>
             </a-menu>
-            <a-button style="margin-left: 8px"> 批量操作
+            <a-button style="margin-left: 8px">
+              批量操作
               <a-icon type="down" />
             </a-button>
           </a-dropdown>
@@ -79,9 +82,19 @@
 
     <!-- table区域-begin -->
     <div>
-      <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :loading="loading" :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}">
-
-        <a slot="documentNameList" slot-scope="text" @click="showDetails(text),handleExportXls3(`${currentItem}`)">{{ text }}</a>
+      <a-table
+        ref="table"
+        size="middle"
+        bordered
+        rowKey="id"
+        :columns="columns"
+        :dataSource="data"
+        :loading="loading"
+        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+      >
+        <a slot="documentNameList" slot-scope="text" @click="showDetails(text), handleExportXls3(`${currentItem}`)">{{
+          text
+        }}</a>
 
         <span slot="action">
           <a @click="handleExportXls(`${currentDocumentName}`)">下载</a>
@@ -89,7 +102,7 @@
 
         <!-- 状态渲染模板 -->
         <template slot="customRenderStatus" slot-scope="status">
-          <a-tag v-if="status==='1'" color="green">进行中</a-tag>
+          <a-tag v-if="status === '1'" color="green">进行中</a-tag>
           <a-tag v-else color="orange">未开始</a-tag>
         </template>
       </a-table>
@@ -105,27 +118,29 @@
 // import QuartzJobModal from './modules/QuartzJobModal'
 import { getAction } from '@/api/manage'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-import JEllipsis from "@/components/jeecg/JEllipsis";
+import JEllipsis from '@/components/jeecg/JEllipsis'
 import ListModel from './modules/ListModel'
+import moment from 'moment'
 
 export default {
-  name: "List",
+  name: 'List',
   mixins: [JeecgListMixin],
   components: {
     ListModel,
-    JEllipsis
+    JEllipsis,
   },
   data() {
     const rowSelection = {
       onSelect: (record, selected, selectedRows) => {
-        this.currentDocumentName = record.documentName;
-        console.log(this.currentDocumentName);
+        this.currentDocumentName = record.documentName
+        console.log(this.currentDocumentName)
       },
-    };
+    }
     return {
       // description: '计划列表',
       // // 查询条件
       // queryParam: {},
+      moment,
       rowSelection,
       //数据
       data: [
@@ -135,15 +150,15 @@ export default {
           documentType: '报告',
           documentFormat: 'doc',
           uploadTime: '2020-06-04 18:01:21',
-          overview: '2020年工作报告总结'
+          overview: '2020年工作报告总结',
         },
         {
           key: '2',
           documentName: '2021年季度巡查记录',
-          documentType: "记录",
+          documentType: '记录',
           documentFormat: 'xlsx',
           uploadTime: '2021-06-05 12:05:09',
-          overview: '设备硬件巡查检查记录'
+          overview: '设备硬件巡查检查记录',
         },
       ],
       // 表头
@@ -153,14 +168,14 @@ export default {
           dataIndex: '',
           key: 'rowIndex',
           width: 90,
-          align: "center",
+          align: 'center',
           customRender: function (t, r, index) {
-            return parseInt(index) + 1;
-          }
+            return parseInt(index) + 1
+          },
         },
         {
           title: '文档名称',
-          align: "center",
+          align: 'center',
           dataIndex: 'documentName',
           width: 200,
           scopedSlots: { customRender: 'documentNameList' },
@@ -170,51 +185,106 @@ export default {
         },
         {
           title: '文档类型',
-          align: "center",
+          align: 'center',
           width: 100,
-          dataIndex: 'documentType'
+          dataIndex: 'documentType',
         },
         {
           title: '文档格式',
-          align: "center",
+          align: 'center',
           width: 100,
-          dataIndex: 'documentFormat'
+          dataIndex: 'documentFormat',
         },
         {
           title: '上传时间',
-          align: "center",
+          align: 'center',
           width: 100,
           dataIndex: 'uploadTime',
         },
         {
           title: '概述',
-          align: "center",
+          align: 'center',
           width: 120,
           dataIndex: 'overview',
         },
         {
           title: '操作',
           dataIndex: 'action',
-          align: "center",
+          align: 'center',
           width: 180,
           scopedSlots: { customRender: 'action' },
-        }
+        },
       ],
       url: {
-        list: "/sys/quartzJob/list",
-        delete: "/sys/quartzJob/delete",
-        deleteBatch: "/sys/quartzJob/deleteBatch",
-        pause: "/sys/quartzJob/pause",
-        resume: "/sys/quartzJob/resume",
-        exportXlsUrl: "sys/quartzJob/exportXls",
-        importExcelUrl: "sys/quartzJob/importExcel",
+        list: '/sys/quartzJob/list',
+        delete: '/sys/quartzJob/delete',
+        deleteBatch: '/sys/quartzJob/deleteBatch',
+        pause: '/sys/quartzJob/pause',
+        resume: '/sys/quartzJob/resume',
+        exportXlsUrl: 'sys/quartzJob/exportXls',
+        importExcelUrl: 'sys/quartzJob/importExcel',
       },
     }
   },
   methods: {
     showDetails(item) {
-      this.currentItem = item;
-      console.log(this.currentItem);
+      this.currentItem = item
+      console.log(this.currentItem)
+    },
+  },
+
+  computed: {
+    current_stop_date() {
+      var nowDate = new Date()
+      let date = {
+        year: nowDate.getFullYear(),
+        month: nowDate.getMonth() + 1,
+        date: nowDate.getDate(),
+        hour: nowDate.getHours(),
+        minutes: nowDate.getMinutes(),
+        seconds: nowDate.getSeconds(),
+      }
+      // console.log(date);
+      let systemDate =
+        date.year +
+        '年' +
+        date.month +
+        '月' +
+        date.date +
+        '日' +
+        date.hour +
+        '时' +
+        date.minutes +
+        '分' +
+        date.seconds +
+        '秒'
+      return systemDate
+    },
+    current_start_date() {
+      var nowDate = new Date()
+      let date = {
+        year: nowDate.getFullYear(),
+        month: nowDate.getMonth(),
+        date: nowDate.getDate(),
+        hour: nowDate.getHours(),
+        minutes: nowDate.getMinutes(),
+        seconds: nowDate.getSeconds(),
+      }
+      // console.log(date);
+      let systemDate =
+        date.year +
+        '年' +
+        date.month +
+        '月' +
+        date.date +
+        '日' +
+        date.hour +
+        '时' +
+        date.minutes +
+        '分' +
+        date.seconds +
+        '秒'
+      return systemDate
     },
   },
 }
