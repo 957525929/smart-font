@@ -38,7 +38,7 @@ import Contextmenu from '@/components/menu/Contextmenu'
 import { mixin, mixinDevice } from '@/utils/mixin.js'
 import { triggerWindowResizeEvent } from '@/utils/util'
 
-const indexKey = '/dashboard/roommanager'
+const indexKey = '/dashboard/areaManager'
 
 export default {
   name: 'TabLayout',
@@ -150,7 +150,7 @@ export default {
     // 将首页添加到第一位
     addIndexToFirst() {
       this.pageList.splice(0, 0, {
-        name: 'dashboard-roomManager',
+        name: 'dashboard-areaManager',
         path: indexKey,
         fullPath: indexKey,
         meta: {

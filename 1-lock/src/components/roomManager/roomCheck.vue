@@ -2,9 +2,9 @@
   <a-card>
     <!-- 上部 -->
 
-    <span>区域：</span>
+    <span>位置：</span>
     <a-cascader
-      style="width: 19%"
+      style="width: 23%"
       :options="selectOptions"
       change-on-select
       @change="areaChange"
@@ -14,12 +14,12 @@
     <a-divider type="vertical" />
 
     <span>房间：</span>
-    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
+    <a-input style="width: 15%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
 
     <br /><br />
 
     <span>部门：</span>
-    <a-select style="width: 19%" placeholder="请选择部门" @change="deptChange" allowClear>
+    <a-select style="width: 11%" placeholder="请选择部门" @change="deptChange" allowClear>
       <a-select-option v-for="(item, index) in deptData" :key="index">
         {{ item.deptName }}
       </a-select-option>
@@ -40,6 +40,12 @@
     <!-- 下部 -->
 
     <a-row type="flex" justify="end">
+      <a-upload>
+        <a-button>导入房间</a-button>
+      </a-upload>
+
+      <a-divider type="vertical" />
+
       <a-col>
         <a-button @click="roomAdd">添加房间</a-button>
 

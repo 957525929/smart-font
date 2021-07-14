@@ -4,15 +4,16 @@
 
     <span>开锁时间段：</span>
     <a-date-picker
+      style="width: 18.3%"
       v-model="startValue"
       :disabled-date="disabledStartDate"
       show-time
       format="YYYY-MM-DD HH:mm:ss"
-      placeholder="开始时间"
       @openChange="handleStartOpenChange"
     />
-    <a-divider type="vertical"/>
+    <a-divider type="vertical" />
     <a-date-picker
+      style="width: 18%"
       v-model="endValue"
       :disabled-date="disabledEndDate"
       show-time
@@ -22,66 +23,73 @@
       @openChange="handleEndOpenChange"
     />
 
-    <br/><br/>
+    <br /><br />
 
-    <span>锁编号：</span>
-    <a-input style="width: 11%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
-
-    <a-divider type="vertical"/>
-
-    <span>区域：</span>
-    <a-cascader
-      style="width: 19%"
-      :options="selectOptions"
-      change-on-select
-      @change="areaChange"
-      placeholder="请选择区域"
-    />
-
-    <a-divider type="vertical"/>
-
-    <span>房间：</span>
-    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
-
-    <br/><br/>
-
-    <span>开锁方式：</span>
-    <a-select style="width: 15%" placeholder="请选择开锁方式" @change="openlockChange" allowClear>
-      <a-select-option value="1"> 指纹开锁</a-select-option>
-      <a-select-option value="2"> 密码开锁</a-select-option>
-      <a-select-option value="3"> 远程开锁</a-select-option>
-    </a-select>
-
-    <a-divider type="vertical"/>
-
-    <span>开锁人所属部门：</span>
-    <a-select style="width: 19%" placeholder="请选择部门" @change="deptChange" allowClear>
+    <span>开锁人部门：</span>
+    <a-select style="width: 18%" placeholder="请选择部门" @change="deptChange" allowClear>
       <a-select-option v-for="(item, index) in deptData" :key="index">
         {{ item.deptName }}
       </a-select-option>
     </a-select>
 
-    <a-divider type="vertical"/>
+    <a-divider type="vertical" />
 
     <span>开锁人：</span>
-    <a-input style="width: 11%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
+    <a-input style="width: 13.6%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
 
+    <br /><br />
 
-    <br/><br/>
+    <span>位置： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
+    <a-cascader
+      style="width: 22%"
+      :options="selectOptions"
+      change-on-select
+      @change="areaChange"
+      placeholder="请选择位置"
+    />
+
+    <a-divider type="vertical" />
+
+    <span>房间：</span>
+    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
+
+    <a-divider type="vertical" />
+
+    <template v-if="toggleSearchStatus">
+      <br /><br />
+      <span>锁编号： &nbsp; &nbsp; &nbsp; </span>
+      <a-input style="width: 13%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
+
+      <a-divider type="vertical" />
+
+      <span>开锁方式：</span>
+      <a-select style="width: 17.8%" placeholder="请选择开锁方式" @change="openlockChange" allowClear>
+        <a-select-option value="1"> 指纹开锁</a-select-option>
+        <a-select-option value="2"> 密码开锁</a-select-option>
+        <a-select-option value="3"> 远程开锁</a-select-option>
+      </a-select>
+
+      <a-divider type="vertical" />
+    </template>
 
     <!-- 下部 -->
+    <a @click="handleToggleSearch">
+      {{ toggleSearchStatus ? '收起' : '展开' }}
+      <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
+    </a>
     <a-row type="flex" justify="end">
       <a-col>
         <a-button @click="check">查询</a-button>
-        <a-divider type="vertical"/>
+        <a-divider type="vertical" />
         <a-button @click="showConfirm">导出</a-button>
       </a-col>
     </a-row>
   </a-card>
 </template>
 <script>
-import {areaData} from '../roomManager/data/area'
-import {deptData} from '../roomManager/data/dept'
+import { areaData } from '../roomManager/data/area'
+import { deptData } from '../roomManager/data/dept'
+import Pie from '@/components/chart/Pie'
 
 export default {
   data() {
@@ -94,6 +102,7 @@ export default {
       roomNum: '',
       deptData: deptData,
       name: '',
+      toggleSearchStatus: false,
     }
   },
   watch: {
@@ -129,14 +138,11 @@ export default {
       this.endOpen = open
     },
 
-    areaChange(value) {
-    },
+    areaChange(value) {},
 
-    openlockChange(value) {
-    },
+    openlockChange(value) {},
 
-    deptChange(value) {
-    },
+    deptChange(value) {},
 
     check() {
       // console.log(this.lockNum)
@@ -154,6 +160,9 @@ export default {
           // console.log('Cancel')
         },
       })
+    },
+    handleToggleSearch() {
+      this.toggleSearchStatus = !this.toggleSearchStatus
     },
   },
 }

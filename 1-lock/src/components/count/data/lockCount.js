@@ -1,7 +1,7 @@
 export const lockCount = [
     {
         key: 1,
-        area: '福建烟草公司/A区域/1号楼',
+        area: '福建烟草公司机关.A区域.1号楼',
         roomNum: '101',
         lockNum: 'S0001',
         figerLock: '83',
@@ -13,6 +13,7 @@ export const lockCount = [
             {
                 key: 11,
                 name: '张三',
+                dept: '财务管理处',
                 figerLock: '40',
                 numLock: '2',
                 remoteLock: '1',
@@ -20,6 +21,7 @@ export const lockCount = [
             {
                 key: 12,
                 name: '李四',
+                dept: '财务管理处',
                 figerLock: '21',
                 numLock: '12',
                 remoteLock: '0',
@@ -27,6 +29,7 @@ export const lockCount = [
             {
                 key: 13,
                 name: '王五',
+                dept: '安全管理处',
                 figerLock: '22',
                 numLock: '18',
                 remoteLock: '3',
@@ -35,7 +38,7 @@ export const lockCount = [
     },
     {
         key: 2,
-        area: '福建烟草公司/A区域/1号楼',
+        area: '福建烟草公司机关.A区域.1号楼',
         roomNum: '201',
         lockNum: 'S0001',
         figerLock: '77',
@@ -47,6 +50,7 @@ export const lockCount = [
             {
                 key: 21,
                 name: '张尚',
+                dept: '物流管理处',
                 figerLock: '34',
                 numLock: '10',
                 remoteLock: '0',
@@ -54,6 +58,7 @@ export const lockCount = [
             {
                 key: 22,
                 name: '赵柳',
+                dept: '物流管理处',
                 figerLock: '43',
                 numLock: '32',
                 remoteLock: '0',
@@ -62,7 +67,7 @@ export const lockCount = [
     },
     {
         key: '3',
-        area: '福建烟草公司/B区域/1号楼',
+        area: '福建烟草公司机关.B区域.1号楼',
         roomNum: '405',
         lockNum: 'S0001',
         figerLock: '91',
@@ -74,6 +79,7 @@ export const lockCount = [
             {
                 key: 31,
                 name: '王武',
+                peopleDept: '信息中心',
                 figerLock: '33',
                 numLock: '7',
                 remoteLock: '0',
@@ -81,6 +87,7 @@ export const lockCount = [
             {
                 key: 32,
                 name: '赵鎏',
+                peopleDept: '信息中心',
                 figerLock: '31',
                 numLock: '10',
                 remoteLock: '1',
@@ -89,6 +96,7 @@ export const lockCount = [
             {
                 key: 33,
                 name: '里斯',
+                peopleDept: '安全管理处',
                 figerLock: '27',
                 numLock: '10',
                 remoteLock: '1',
