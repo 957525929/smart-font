@@ -1,97 +1,75 @@
 <template>
   <!-- 会议申请 -->
-  <a-card :bordered="false">
-    <div class="meetingApply">
-      <!-- 会议申请信息 -->
-      <table class="meetingInfo">
-        <tbody>
-          <tr>
-            <td colspan="2">
-              <label for="meetingTheme" :style="{marginLeft:'20px'}">会议主题</label>
-              <div class="bgc">
-                <a-select
-                  id="meetingTheme"
-                  :default-value="meetingTheme"
-                  :style="{width:'80%'}"
-                  @change="handleChange"
-                >
-                  <a-select-option value="年度总结">年度总结</a-select-option>
-                  <a-select-option value="项目会议">项目会议</a-select-option>
-                  <a-select-option value="物流管理">物流管理</a-select-option>
-                  <a-select-option value="安全管理">安全管理</a-select-option>
-                  <a-select-option value="表彰大会">表彰大会</a-select-option>
-                </a-select>
-              </div>
-            </td>
-            <td>
-              <label for="meetingName" :style="{marginLeft:'20px'}">会议名称</label>
-              <div class="bgc">
-                <a-input
-                  id="meetingName"
-                  placeholder="请输入会议名称"
-                  :style="{width:'80%'}"
-                  :value="meetingName"
-                ></a-input>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <label for="responsibleName" :style="{marginLeft:'20px'}">负责人姓名</label>
-              <div class="bgc">
-                <a-input
-                  id="responsibleName"
-                  placeholder="请输入负责人姓名"
-                  :style="{width:'80%'}"
-                  :value="responsibleName"
-                ></a-input>
-              </div>
-            </td>
-            <td>
-              <label for="responsibleTelphone" :style="{marginLeft:'20px'}">负责人电话</label>
-              <div class="bgc">
-                <a-input
-                  id="responsibleTelphone"
-                  placeholder="请输入负责电话"
-                  :style="{width:'80%'}"
-                  :value="responsibleTelphone"
-                ></a-input>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <label :style="{marginLeft:'20px'}">会议时间</label>
-              <div class="bgc">
-                <a-icon type="schedule" :style="{ fontSize: '24px', marginRight: '2px' }" />
-                <a-range-picker @change="timeChange" :style="{width:'75%', border:'none'}" />
-              </div>
-            </td>
-            <td colspan="2">
-              <label for="meetingAddress" :style="{marginLeft:'20px'}">会议地点</label>
-              <div class="bgc">
-                <a-input
-                  id="meetingAddress"
-                  placeholder="请输入会议地点"
-                  :style="{width:'80%'}"
-                  :value="meetingAddress"
-                ></a-input>
-              </div>
-            </td>
-            <!-- <td colspan="1">
-            <label for="meetingBarget" :style="{marginLeft:'20px'}">会议预算（元）</label>
-            <div class="bgcg">
-              <a-input
-                id="meetingBarget"
-                placeholder="请输入会议预算"
+   <a-card :bordered="false">
+  <div class="meetingApply">
+    <!-- 会议申请信息 -->
+    <table class="meetingInfo">
+      <tbody>
+        <tr>
+          <td colspan="2">
+            <label for="meetingTheme" :style="{marginLeft:'20px'}">会议主题</label>
+            <div class="bgc">
+              <a-select
+                id="meetingTheme"
+                :default-value="meetingTheme"
                 :style="{width:'80%'}"
-                :value="meetingBarget"
+                @change="handleChange"
+              >
+                <a-select-option value="年度总结">年度总结</a-select-option>
+                <a-select-option value="项目会议">项目会议</a-select-option>
+                <a-select-option value="物流管理">物流管理</a-select-option>
+                <a-select-option value="安全管理">安全管理</a-select-option>
+                <a-select-option value="表彰大会">表彰大会</a-select-option>
+              </a-select>
+            </div>
+          </td>
+          <td>
+            <label for="meetingName" :style="{marginLeft:'20px'}">会议名称</label>
+            <div class="bgc">
+              <a-input
+                id="meetingName"
+                placeholder="请输入会议名称"
+                :style="{width:'80%'}"
+                :value="meetingName"
               ></a-input>
             </div>
-            </td>-->
-          </tr>
-          <tr>
-            <!-- <td colspan="2">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="responsibleName" :style="{marginLeft:'20px'}">负责人姓名</label>
+            <div class="bgc">
+              <a-input
+                id="responsibleName"
+                placeholder="请输入负责人姓名"
+                :style="{width:'80%'}"
+                :value="responsibleName"
+              ></a-input>
+            </div>
+          </td>
+          <td>
+            <label for="responsibleTelphone" :style="{marginLeft:'20px'}">负责人电话</label>
+            <div class="bgc">
+              <a-input
+                id="responsibleTelphone"
+                placeholder="请输入负责电话"
+                :style="{width:'80%'}"
+                :value="responsibleTelphone"
+              ></a-input>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <label :style="{marginLeft:'20px'}">会议时间</label>
+            <div class="bgc">
+              <a-icon type="schedule" :style="{ fontSize: '24px', marginRight: '2px' }" />
+              <a-range-picker @change="timeChange" :style="{width:'60%', border:'none'}" />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
             <label for="meetingAddress" :style="{marginLeft:'20px'}">会议地点</label>
             <div class="bgc">
               <a-input
@@ -101,102 +79,91 @@
                 :value="meetingAddress"
               ></a-input>
             </div>
-            </td>-->
-            <td colspan="2">
-              <label for="meetingBarget" :style="{marginLeft:'20px'}">会议预算（元）</label>
-              <div class="bgcg">
-                <a-input
-                  id="meetingBarget"
-                  placeholder="请输入会议预算"
-                  :style="{width:'30%'}"
-                  :value="meetingBarget"
-                ></a-input>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="3">
-              <label :style="{marginLeft:'20px'}">会议成员</label>
-              <div class="bgcr">
-                <span>请从右侧选择参会人员</span>
-                <!-- <div style="tex-align:left">
+          </td>
+          <td colspan="2">
+            <label for="meetingBarget" :style="{marginLeft:'20px'}">会议预算（元）</label>
+            <div class="bgc">
+              <a-input
+                id="meetingBarget"
+                placeholder="请输入会议预算"
+                :style="{width:'30%'}"
+                :value="meetingBarget"
+              ></a-input>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <label :style="{marginLeft:'20px'}">会议成员</label>
+            <div  class="bgcr">
+              <span>请从右侧选择参会人员</span>
+              <!-- <div style="tex-align:left">
                     <a-tag v-for="(item) in meetingJoinsMembers" :key="item.key"  closable  color='#77acf1'  @close="handleClose(item)">
                       {{ item.title }}
                     </a-tag>
-                </div>-->
-                <ul class="clearfix">
-                  <li
-                    class="fl"
-                    v-for="(item) in meetingJoinsMembers"
-                    :key="item.key"
-                    :style="{position:'relative'}"
-                  >{{item.title}}</li>
-                </ul>
-                <!-- <ul class="clearfix">
+              </div>-->
+              <ul class="clearfix">
+                <li
+                  class="fl"
+                  v-for="(item) in meetingJoinsMembers"
+                  :key="item.key"
+                  :style="{position:'relative'}"
+                >{{item.title}}</li>
+              </ul>
+              <!-- <ul class="clearfix">
                     <li class="fl" v-for="(item) in meetingJoinsMembers" :key="item.key" :style="{position:'relative'}">
                       {{item.title}}
                       <a-avatar shape="square" :size="64" :src="item.imageSrc" ></a-avatar>
                       <a-icon type="minus-square"  :style="{fontSize: '24px', position:'absolute', top:'40px', left: '40px', backgroundColor: '#77acf1', color: '#fff'}" />
                       <p>{{item.name}}</p>
                     </li>
-                </ul>-->
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="3">
-              <label for="meetingComments" :style="{marginLeft:'20px'}">备注</label>
-              <div class="bgc">
-                <a-textarea
-                  id="meetingComments"
-                  :value="meetingComments"
-                  placeholder="请输入会议备注信息"
-                  :auto-size="{ minRows: 3, maxRows: 5 }"
-                />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <label :style="{marginLeft:'20px'}">上传附件：</label>
-            <a-upload
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              :default-file-list="defaultFileList"
-            >
-              <a-button>
-                <a-icon type="upload" />
-              </a-button>
-            </a-upload>
-          </tr>
-          <tr>
-            <td colspan="3" style="text-align:center">
-              <a-button
-                @click="submitApply"
-                shape="round"
-                size="large"
-                :style="{ width: '150px', background: '#77acf1', color: 'white', marginRight: '20PX'}"
-              >提交申请</a-button>
-              <a-button
-                shape="round"
-                size="large"
-                :style="{ width: '150px', background: '#77acf1', color: 'white' }"
-              >保存草稿</a-button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- 会议成员 -->
-      <div class="nemberList">
-        <a-tree
-          :tree-data="treeDatas"
-          v-model="checkedKeys"
-          checkable
-          :expanded-keys="expandedKeys"
-          :auto-expand-parent="autoExpandParent"
-          :selected-keys="selectedKeys"
-          @expand="onExpand"
-          @select="onSelect"
-        />
-        <!-- <div class="departmentLists">
+              </ul>-->
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <label for="meetingComments" :style="{marginLeft:'20px'}">备注</label>
+            <div class="bgc">
+              <a-textarea
+                id="meetingComments"
+                :value="meetingComments"
+                placeholder="请输入会议备注信息"
+                :auto-size="{ minRows: 3, maxRows: 5 }"
+              />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" style="text-align:center">
+            <a-button
+              @click="submitApply"
+              shape="round"
+              size="large"
+              :style="{ width: '300px', background: '#77acf1', color: 'white', marginRight: '20PX'}"
+            >提交申请</a-button>
+            <a-button
+              shape="round"
+              size="large"
+              :style="{ width: '300px', background: '#77acf1', color: 'white' }"
+            >保存草稿</a-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 会议成员 -->
+    <div class="nemberList">
+      <a-tree
+        :tree-data="treeDatas"
+        v-model="checkedKeys"
+        checkable
+        :expanded-keys="expandedKeys"
+        :auto-expand-parent="autoExpandParent"
+        :selected-keys="selectedKeys"
+        @expand="onExpand"
+        @select="onSelect"
+      />
+      <!-- <div class="departmentLists">
             <div class="departmentName">
               <a-checkbox @change="menbersInfoChange">运营A组 (1/5) </a-checkbox>
               <a-icon type="caret-down" />
@@ -211,10 +178,10 @@
                 </li>
               </ul>
             </div>
-        </div>-->
-      </div>
+      </div>-->
     </div>
-  </a-card>
+  </div>
+  </a-card >
 </template>
 <script>
 import Mock from 'mockjs'
@@ -273,7 +240,7 @@ export default {
       responsibleName: '张三', //负责人姓名
       responsibleTelphone: '188600111111', //负责人电话
       dateFormat: 'YYYY年MM月DD日', //会议时间
-      meetingAddress: '总公司机关', //会议地点
+      meetingAddress: '', //会议地点
       meetingBarget: 1000, //会议预算
       meetingJoinsMembers: [], //会议成员
       meetingComments: '2020年年度总结', //备注
@@ -284,8 +251,7 @@ export default {
       expandedKeys: [],
       autoExpandParent: true,
       checkedKeys: [],
-      selectedKeys: [],
-      defaultFileList: []
+      selectedKeys: []
     }
   },
   watch: {
@@ -360,8 +326,8 @@ export default {
     submitApply(event) {
       var apllyMeetingInfos = {}
     },
-    handleChange(value) {
-      this.meetingName = value
+        handleChange(value){
+      this.meetingName=value;
     }
   }
 }
@@ -372,7 +338,9 @@ ul li {
   list-style: none;
   margin-right: 10px;
 }
-
+button {
+  background-color: #77acf1;
+}
 .clearfix {
   display: block;
   content: '';
@@ -407,7 +375,7 @@ ul li {
 }
 .meetingInfo tr:nth-of-type(1) td {
   width: 20%;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .meetingInfo tr td .bgc {
   padding: 6px 6px;
@@ -420,11 +388,6 @@ ul li {
   background-color: #f5f8fe;
   border-radius: 10px;
   text-align: center;
-}
-.meetingInfo tr td .bgcg {
-  padding: 6px 6px;
-  /* background-color: #f5f8fe; */
-  border-radius: 10px;
 }
 .nemberList .departmentName {
   width: 200px;

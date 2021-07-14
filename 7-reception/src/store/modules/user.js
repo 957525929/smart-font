@@ -181,7 +181,7 @@ const user = {
                       "title": "会议申请"
                     },
                     "name": "meetingOrganization-apply",
-                    "id": "1245154570166390786"
+                    "id": "1245154914959151105"
                   },
                   {
                     "path": "/meetingOrganization/MeetingAudit",

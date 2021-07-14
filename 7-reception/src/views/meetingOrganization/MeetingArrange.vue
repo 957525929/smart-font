@@ -88,18 +88,18 @@
 </template>
 <script>
 const data = [
-  {
-    id: 'A1201',
-    budget: '1000',
-    name: '2020年年度总结',
-    theme:"年度总结",
-    dateTime: '2021年01月15日~2021年01月16日共2天',
-    address: '会议室203',
-    members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    dutyName: '陈宏涛',
-    dutyTel: '152690314587',
-    audit: '已通过'
-  },
+  // {
+  //   id: 'A1201',
+  //   budget: '1000',
+  //   name: '2020年年度总结',
+  //   theme:"年度总结",
+  //   dateTime: '2021年01月15日~2021年01月16日共2天',
+  //   address: '会议室203',
+  //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
+  //   dutyName: '陈宏涛',
+  //   dutyTel: '152690314587',
+  //   audit: '已通过'
+  // },
   // {
   //   id: 'A1202',
   //   budget: '2000',
@@ -141,8 +141,10 @@ const data = [
     budget: '5000',
      name: '安全管理会议',
     theme:"安全管理",
-    dateTime: '2021年05月20日~2021年05月21日共2天',
-    address: '会议室205',
+    dateStart:"2021-07-15",
+    dateEnd:"2021-07-16",
+    dateTime: '2021年07月15日~2021年07月16日',
+    address: '总公司机关',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     dutyName: '林诺汐',
     dutyTel: '152690314587',
@@ -163,10 +165,12 @@ const data = [
   {
     id: 'A1207',
     budget: '5000',
-    name: '安全管理会议',
-    theme:"安全管理",
-    dateTime: '2021年06月03日~2021年06月05日共2天',
-    address: '会议室205',
+    name: '物流管理会议',
+    theme:"物流管理",
+    dateStart:"2021-07-16",
+    dateEnd:"2021-07-17",
+    dateTime: '2021年07月16日~2021年07月17日',
+    address: '总公司机关',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     dutyName: '林诺汐',
     dutyTel: '152690314587',
