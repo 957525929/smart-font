@@ -87,7 +87,7 @@ const dataSta=[
   },
     {
     theme:"年度总结",
-    number:"6",
+    number:"1",
     membersNumber:"30",
     budget:"21000"
   }
