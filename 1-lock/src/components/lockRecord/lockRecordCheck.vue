@@ -5,20 +5,20 @@
     <span>开锁时间段：</span>
     <a-date-picker
       style="width: 18.3%"
+      :default-value="moment('2021-07-07')"
       v-model="startValue"
       :disabled-date="disabledStartDate"
-      show-time
-      format="YYYY-MM-DD HH:mm:ss"
+      format="YYYY-MM-DD"
       @openChange="handleStartOpenChange"
     />
     <a-divider type="vertical" />
+    <!-- :placeholder="endDate" -->
     <a-date-picker
       style="width: 18%"
+      :default-value="moment('2021-07-09')"
       v-model="endValue"
       :disabled-date="disabledEndDate"
-      show-time
-      format="YYYY-MM-DD HH:mm:ss"
-      placeholder="结束时间"
+      format="YYYY-MM-DD"
       :open="endOpen"
       @openChange="handleEndOpenChange"
     />
@@ -89,11 +89,18 @@
 <script>
 import { areaData } from '../roomManager/data/area'
 import { deptData } from '../roomManager/data/dept'
-import Pie from '@/components/chart/Pie'
+import moment from 'moment'
+// import { formatDate } from '@/utils/util'
 
 export default {
+  // mounted() {
+  //   this.endDate = formatDate(new Date().getTime() - 0 * 24 * 3600 * 1000, 'yyyy/MM/dd')
+  //   this.starDate = formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyy/MM/dd')
+  // },
   data() {
     return {
+      starDate: '',
+      endDate: '',
       startValue: null,
       endValue: null,
       endOpen: false,
@@ -114,6 +121,7 @@ export default {
     },
   },
   methods: {
+    moment,
     //日期选择
     disabledStartDate(startValue) {
       const endValue = this.endValue

@@ -2,12 +2,42 @@
   <a-card>
     <a-table :columns="columns" :data-source="roomData">
       <span slot="operation" slot-scope="record">
-        <a @click="roomChange(record)">变更</a>
-
-        <!-- 房间变更功能 -->
-        <a-modal v-model="roomVisible" title="变更" @ok="roomOk">
+        <a @click="roomChange(record)">编辑房间</a>
+        <a-modal v-model="roomVisible" title="编辑房间" @ok="roomOk">
           <a-row type="flex" align="middle">
-            <a-col :span="4">区域：</a-col>
+            <a-col :span="4">位置：</a-col>
+            <a-col :span="10"> {{ rowRecord.area }} </a-col>
+          </a-row>
+
+          <br />
+
+          <a-row type="flex" align="middle">
+            <a-col :span="4">房间号：</a-col>
+            <a-col :span="10"> <a-input style="width: 100%" v-model="rowRecord.roomNum" allowClear></a-input> </a-col>
+          </a-row>
+
+          <br />
+        </a-modal>
+
+        <a-divider type="vertical" />
+
+        <a-popconfirm
+          title="确定删除当前房间吗？"
+          ok-text="确定"
+          cancel-text="取消"
+          @confirm="confirm"
+          @cancel="cancel"
+        >
+          <a href="#">删除房间</a>
+        </a-popconfirm>
+
+        <a-divider type="vertical" />
+        <a @click="personChange(record)">人员变更</a>
+
+        <!-- 人员变更功能 -->
+        <a-modal v-model="personVisible" title="人员变更" @ok="personOk">
+          <a-row type="flex" align="middle">
+            <a-col :span="4">位置：</a-col>
             <a-col :span="10"> {{ rowRecord.area }} </a-col>
           </a-row>
 
@@ -39,10 +69,8 @@
         </a-modal>
         <!-- 房间变更功能结束 -->
 
-        <a-divider type="vertical" />
-
         <!-- 添加人员 -->
-        <a @click="penpleAdd(record)">添加人员</a>
+        <!-- <a @click="penpleAdd(record)">添加人员</a>
         <a-modal v-model="visibleAdd" title="添加人员" @ok="addOk">
           <a-row type="flex" align="middle">
             <a-col :span="4">区域：</a-col>
@@ -79,7 +107,7 @@
               </a-select>
             </a-col>
           </a-row>
-        </a-modal>
+        </a-modal> -->
         <!-- 添加人员结束 -->
       </span>
 
@@ -91,7 +119,7 @@
         :pagination="false"
         size="small"
       >
-        <span slot="operation">
+        <!-- <span slot="operation">
           <a-popconfirm
             title="确定解绑当前员工吗？"
             ok-text="确定"
@@ -101,7 +129,7 @@
           >
             <a href="#">解绑</a>
           </a-popconfirm>
-        </span>
+        </span> -->
       </a-table>
     </a-table>
   </a-card>
@@ -122,7 +150,7 @@ const innerColumns = [
   { title: '姓名', dataIndex: 'name', key: 'name', width: '10%' },
   { title: '性别', dataIndex: 'gender', key: 'gender', width: '10%' },
   { title: '联系电话', dataIndex: 'phone', key: 'phone', width: '20%' },
-  { title: '操作', key: 'operation', scopedSlots: { customRender: 'operation' } },
+  // { title: '操作', key: 'operation', scopedSlots: { customRender: 'operation' } },
 ]
 
 const OPTIONS = ['张三', '李四', '王五', '赵柳']
@@ -132,13 +160,14 @@ export default {
     return {
       roomData: roomData,
       columns,
-      roomVisible: false,
+      personVisible: false,
       rowRecord: {},
       selectedItems: [],
       visibleAdd: false,
       deptData: deptData,
       Person: OPTIONS,
       innerColumns,
+      roomVisible: false,
     }
   },
   computed: {
@@ -148,8 +177,8 @@ export default {
     },
   },
   methods: {
-    roomChange(value) {
-      this.roomVisible = true
+    personChange(value) {
+      this.personVisible = true
       this.rowRecord = value
       let arr = []
       value.innerData.forEach((e) => {
@@ -158,25 +187,32 @@ export default {
       })
       // console.log(this.selectedItems)
     },
-    roomOk() {
-      this.roomVisible = false
+    personOk() {
+      this.personVisible = false
     },
     peopleChange(selectedItems) {
       this.selectedItems = selectedItems
     },
-    penpleAdd(value) {
-      this.visibleAdd = true
-      this.rowRecord = value
+    roomChange(record) {
+      this.rowRecord = record
+      this.roomVisible = true
     },
-    addOk() {
-      this.visibleAdd = false
+    roomOk() {
+      this.roomVisible = false
     },
-    deptChange(value) {
-      // console.log(value)
-    },
-    selectPeople(value) {
-      // console.log(value)
-    },
+    // penpleAdd(value) {
+    //   this.visibleAdd = true
+    //   this.rowRecord = value
+    // },
+    // addOk() {
+    //   this.visibleAdd = false
+    // },
+    // deptChange(value) {
+    //   // console.log(value)
+    // },
+    // selectPeople(value) {
+    //   // console.log(value)
+    // },
 
     confirm() {
       // console.log('ok')

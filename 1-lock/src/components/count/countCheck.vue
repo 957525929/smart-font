@@ -8,8 +8,7 @@
           style="width: 30%"
           v-model="startValue"
           :disabled-date="disabledStartDate"
-          show-time
-          format="YYYY-MM-DD HH:mm:ss"
+          format="YYYY-MM-DD"
           @openChange="handleStartOpenChange"
         />
         <a-divider type="vertical" />
@@ -17,8 +16,7 @@
           style="width: 31%"
           v-model="endValue"
           :disabled-date="disabledEndDate"
-          show-time
-          format="YYYY-MM-DD HH:mm:ss"
+          format="YYYY-MM-DD"
           placeholder="结束时间"
           :open="endOpen"
           @openChange="handleEndOpenChange"
