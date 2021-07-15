@@ -209,7 +209,7 @@ const user = {
                   "keepAlive": false,
                   "internalOrExternal": true,
                   "icon": "schedule",
-                  "title": "用品种类管理"
+                  "title": "办公用品种类"
                 },
                 "name": "article-manage-articleList",
                 "id": "1265462116547207042"

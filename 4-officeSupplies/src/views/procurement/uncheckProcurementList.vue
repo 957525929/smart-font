@@ -73,15 +73,14 @@
         @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
-            <a-popconfirm
-              title="提交审批结果?"
-              ok-text="通过"
-              cancel-text="不通过"
-              @confirm="confirm"
-              @cancel="cancel"
-            >
-                <a href="javascript:;" @click="handleCheck(record.id)">审批</a>
-            </a-popconfirm>
+           <a-button
+             :style="btnredStyle"
+             @click="handleCheck(record.id,1)"
+           >不通过</a-button>
+              <a-button
+                :style="btnStyle"
+                @click="handleCheck(record.id,2)"
+              >通过</a-button>
         </span>
       </a-table>
     </div>
@@ -118,6 +117,14 @@
           time_end:formatDate(new Date().getTime(),"yyyy-MM-dd")
         },
         visible:false,
+        btnStyle:{
+          background: 'green',
+          color: 'white'
+        },
+        btnredStyle:{
+          background: 'red',
+          color: 'white'
+        },
         dataSource: [
           {
             id:1,
@@ -225,8 +232,13 @@
       onChangeDate(date, dateString) {
         console.log(date, dateString);
       },
-      handleCheck(id) {
+      handleCheck(id, index) {
         this.editId = id;
+        if(index == 1) {
+          this.visible = true;
+        }else {
+          this.confirm();
+        }
       },
       confirm(e) {
         var self = this;
