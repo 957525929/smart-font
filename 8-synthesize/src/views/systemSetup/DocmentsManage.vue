@@ -14,17 +14,9 @@
 
             <a-col :sm="10">
               <a-form-item label="时间">
-                <a-date-picker
-                  class="w140"
-                  format="YYYY-MM-DD"
-                  :default-value="moment(current_start_date, 'YYYY/MM/DD')"
-                />
+                <a-date-picker class="w140" format="YYYY-MM-DD" :default-value="moment(current_start_date)" />
                 ~
-                <a-date-picker
-                  class="w140"
-                  format="YYYY-MM-DD"
-                  :default-value="moment(current_stop_date, 'YYYY/MM/DD ')"
-                />
+                <a-date-picker class="w140" format="YYYY-MM-DD" :default-value="moment(current_stop_date)" />
               </a-form-item>
             </a-col>
           </a-row>
@@ -91,6 +83,7 @@ import { columns, data } from './js/DocType'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import JEllipsis from '@/components/jeecg/JEllipsis'
 import moment from 'moment'
+import { formatDate } from '@/utils/util'
 const NEW_DEVLIST = Object.freeze({ columns, data })
 export default {
   name: 'TaksList01',
@@ -108,6 +101,8 @@ export default {
       },
     }
     return {
+      current_start_date: formatDate(new Date().getTime() - 30 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
       moment,
       rowSelection,
       data: NEW_DEVLIST.data,
@@ -128,60 +123,6 @@ export default {
     deleteIndex(index) {
       this.currentIndex = index
       this.data.splice(this.currentIndex, 1)
-    },
-  },
-  computed: {
-    current_stop_date() {
-      var nowDate = new Date()
-      let date = {
-        year: nowDate.getFullYear(),
-        month: nowDate.getMonth() + 1,
-        date: nowDate.getDate(),
-        hour: nowDate.getHours(),
-        minutes: nowDate.getMinutes(),
-        seconds: nowDate.getSeconds(),
-      }
-      // console.log(date);
-      let systemDate =
-        date.year +
-        '年' +
-        date.month +
-        '月' +
-        date.date +
-        '日' +
-        date.hour +
-        '时' +
-        date.minutes +
-        '分' +
-        date.seconds +
-        '秒'
-      return systemDate
-    },
-    current_start_date() {
-      var nowDate = new Date()
-      let date = {
-        year: nowDate.getFullYear(),
-        month: nowDate.getMonth(),
-        date: nowDate.getDate(),
-        hour: nowDate.getHours(),
-        minutes: nowDate.getMinutes(),
-        seconds: nowDate.getSeconds(),
-      }
-      // console.log(date);
-      let systemDate =
-        date.year +
-        '年' +
-        date.month +
-        '月' +
-        date.date +
-        '日' +
-        date.hour +
-        '时' +
-        date.minutes +
-        '分' +
-        date.seconds +
-        '秒'
-      return systemDate
     },
   },
 }

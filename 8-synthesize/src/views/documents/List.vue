@@ -4,11 +4,11 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="10">
-<!--          <a-col :md="6" :sm="10">-->
-<!--            <a-form-item label="文档编号">-->
-<!--              <a-input class="w150" placeholder="请输入文档编号"></a-input>-->
-<!--            </a-form-item>-->
-<!--          </a-col>-->
+          <!--          <a-col :md="6" :sm="10">-->
+          <!--            <a-form-item label="文档编号">-->
+          <!--              <a-input class="w150" placeholder="请输入文档编号"></a-input>-->
+          <!--            </a-form-item>-->
+          <!--          </a-col>-->
 
           <a-col :md="5" :sm="10">
             <a-form-item label="文档名称">
@@ -38,25 +38,17 @@
 
           <a-col :sm="6">
             <a-form-item label="时间">
-              <a-date-picker
-                format="YYYY-MM-DD"
-                class="w150"
-                :default-value="moment(current_start_date, 'YYYY/MM/DD')"
-              />
+              <a-date-picker format="YYYY-MM-DD" class="w150" :default-value="moment(current_start_date)" />
               ~
-              <a-date-picker
-                format="YYYY-MM-DD"
-                class="w150"
-                :default-value="moment(current_stop_date, 'YYYY/MM/DD')"
-              />
+              <a-date-picker format="YYYY-MM-DD" class="w150" :default-value="moment(current_stop_date)" />
             </a-form-item>
           </a-col>
 
-<!--          <a-col :md="6" :sm="10">-->
-<!--            <a-form-item label="概述">-->
-<!--              <a-input placeholder="请输入概述"></a-input>-->
-<!--            </a-form-item>-->
-<!--          </a-col>-->
+          <!--          <a-col :md="6" :sm="10">-->
+          <!--            <a-form-item label="概述">-->
+          <!--              <a-input placeholder="请输入概述"></a-input>-->
+          <!--            </a-form-item>-->
+          <!--          </a-col>-->
         </a-row>
       </a-form>
     </div>
@@ -118,11 +110,12 @@
 
 <script>
 // import QuartzJobModal from './modules/QuartzJobModal'
-import { getAction } from '@/api/manage'
+// import { getAction } from '@/api/manage'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import JEllipsis from '@/components/jeecg/JEllipsis'
 import ListModel from './modules/ListModel'
 import moment from 'moment'
+import { formatDate } from '@/utils/util'
 
 export default {
   name: 'List',
@@ -142,24 +135,26 @@ export default {
       // description: '计划列表',
       // // 查询条件
       // queryParam: {},
+      current_start_date: formatDate(new Date().getTime() - 30 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
       moment,
       rowSelection,
       //数据
       data: [
         {
           key: '1',
-          documentName: '2020年总结报告',
+          documentName: '2021年总结报告',
           documentType: '报告',
           documentFormat: 'doc',
-          uploadTime: '2021-06-04 18:01:21',
-          overview: '2020年工作报告总结',
+          uploadTime: formatDate(new Date().getTime() - 10 * 24 * 2580 * 740, 'yyyy-MM-dd hh:mm:ss'),
+          overview: '2021年工作报告总结',
         },
         {
           key: '2',
           documentName: '2021年季度巡查记录',
           documentType: '记录',
           documentFormat: 'xlsx',
-          uploadTime: '2021-06-05 12:05:09',
+          uploadTime: formatDate(new Date().getTime() - 17 * 24 * 1550 * 850, 'yyyy-MM-dd hh:mm:ss'),
           overview: '设备硬件巡查检查记录',
         },
       ],
@@ -232,61 +227,6 @@ export default {
     showDetails(item) {
       this.currentItem = item
       console.log(this.currentItem)
-    },
-  },
-
-  computed: {
-    current_stop_date() {
-      var nowDate = new Date()
-      let date = {
-        year: nowDate.getFullYear(),
-        month: nowDate.getMonth() + 1,
-        date: nowDate.getDate(),
-        hour: nowDate.getHours(),
-        minutes: nowDate.getMinutes(),
-        seconds: nowDate.getSeconds(),
-      }
-      // console.log(date);
-      let systemDate =
-        date.year +
-        '年' +
-        date.month +
-        '月' +
-        date.date +
-        '日' +
-        date.hour +
-        '时' +
-        date.minutes +
-        '分' +
-        date.seconds +
-        '秒'
-      return systemDate
-    },
-    current_start_date() {
-      var nowDate = new Date()
-      let date = {
-        year: nowDate.getFullYear(),
-        month: nowDate.getMonth(),
-        date: nowDate.getDate(),
-        hour: nowDate.getHours(),
-        minutes: nowDate.getMinutes(),
-        seconds: nowDate.getSeconds(),
-      }
-      // console.log(date);
-      let systemDate =
-        date.year +
-        '年' +
-        date.month +
-        '月' +
-        date.date +
-        '日' +
-        date.hour +
-        '时' +
-        date.minutes +
-        '分' +
-        date.seconds +
-        '秒'
-      return systemDate
     },
   },
 }

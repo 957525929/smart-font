@@ -72,7 +72,7 @@
             </a-modal>
             未完成
           </a-tag>
-          <a-tag v-if="status === '5'" color="pink">延期中</a-tag>
+          <a-tag v-if="status === '4'" color="pink">延期中</a-tag>
           <!-- <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
               <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" format="YYYY-MM-DD" />
@@ -182,7 +182,7 @@ export default {
     confirm() {
       // record.status = "1";
       console.log(this.rowIndex)
-      this.rowIndex.status = '5'
+      this.rowIndex.status = '4'
       this.$message.success('延期成功')
       this.visible = false
       console.log(this.rowIndex.deadline)
