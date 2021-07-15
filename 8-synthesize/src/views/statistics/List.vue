@@ -18,14 +18,14 @@
             <a-form-item label="时间">
               <a-date-picker
                 class="w150"
-                format="YYYY-MM-DD"
-                :default-value="moment(current_start_date, 'YYYY/MM/DD')"
+                format="YYYY-MM"
+                :default-value="moment(current_start_date, 'YYYY/MM')"
               />
               ~
               <a-date-picker
                 class="w150"
-                format="YYYY-MM-DD"
-                :default-value="moment(current_stop_date, 'YYYY/MM/DD')"
+                format="YYYY-MM"
+                :default-value="moment(current_stop_date, 'YYYY/MM')"
               />
             </a-form-item>
           </a-col>

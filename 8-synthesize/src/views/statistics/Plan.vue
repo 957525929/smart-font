@@ -19,6 +19,7 @@
                 <a-select-option value="1">进行中</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
                 <a-select-option value="3">未完成</a-select-option>
+                <a-select-option value="4">延期中</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -27,14 +28,14 @@
             <a-form-item label="时间">
               <a-date-picker
                 class="w150"
-                format="YYYY-MM-DD"
-                :default-value="moment(current_start_date, 'YYYY/MM/DD')"
+                format="YYYY-MM"
+                :default-value="moment(current_start_date, 'YYYY/MM')"
               />
               ~
               <a-date-picker
                 class="w150"
-                format="YYYY-MM-DD"
-                :default-value="moment(current_stop_date, 'YYYY/MM/DD')"
+                format="YYYY-MM"
+                :default-value="moment(current_stop_date, 'YYYY/MM')"
               />
             </a-form-item>
           </a-col>

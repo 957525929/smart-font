@@ -15,7 +15,7 @@
       </a-select>
     </a-form-item>
 
-    <a-form-item label="开始后（天）">
+    <a-form-item label="结束前（天）">
       <a-Input v-model="form.deadlineTask" placeholder="请输入天数"></a-Input>
     </a-form-item>
 

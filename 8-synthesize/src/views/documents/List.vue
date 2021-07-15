@@ -4,19 +4,19 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="10">
-          <a-col :md="6" :sm="10">
-            <a-form-item label="文档编号">
-              <a-input class="w150" placeholder="请输入文档编号"></a-input>
-            </a-form-item>
-          </a-col>
+<!--          <a-col :md="6" :sm="10">-->
+<!--            <a-form-item label="文档编号">-->
+<!--              <a-input class="w150" placeholder="请输入文档编号"></a-input>-->
+<!--            </a-form-item>-->
+<!--          </a-col>-->
 
-          <a-col :md="6" :sm="10">
+          <a-col :md="5" :sm="10">
             <a-form-item label="文档名称">
               <a-input class="w150" placeholder="请输入文档名称"></a-input>
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="9">
+          <a-col :md="5" :sm="9">
             <a-form-item label="文档类型">
               <a-select class="w150" placeholder="请选择文档类型">
                 <a-select-option value="0">资产</a-select-option>
@@ -27,7 +27,7 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="10">
+          <a-col :md="5" :sm="10">
             <a-form-item label="文档格式">
               <a-select class="w150" placeholder="请选择文档格式">
                 <a-select-option value="0">doc</a-select-option>
@@ -36,7 +36,7 @@
             </a-form-item>
           </a-col>
 
-          <a-col :sm="10">
+          <a-col :sm="6">
             <a-form-item label="时间">
               <a-date-picker
                 format="YYYY-MM-DD"
@@ -52,11 +52,11 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="6" :sm="10">
-            <a-form-item label="概述">
-              <a-input placeholder="请输入概述"></a-input>
-            </a-form-item>
-          </a-col>
+<!--          <a-col :md="6" :sm="10">-->
+<!--            <a-form-item label="概述">-->
+<!--              <a-input placeholder="请输入概述"></a-input>-->
+<!--            </a-form-item>-->
+<!--          </a-col>-->
         </a-row>
       </a-form>
     </div>
@@ -151,7 +151,7 @@ export default {
           documentName: '2020年总结报告',
           documentType: '报告',
           documentFormat: 'doc',
-          uploadTime: '2020-06-04 18:01:21',
+          uploadTime: '2021-06-04 18:01:21',
           overview: '2020年工作报告总结',
         },
         {

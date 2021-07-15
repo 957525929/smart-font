@@ -27,6 +27,7 @@
               <a-select-option value="1">未开始</a-select-option>
               <a-select-option value="2">已完成</a-select-option>
               <a-select-option value="3">未完成</a-select-option>
+              <a-select-option value="4">延期中</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
