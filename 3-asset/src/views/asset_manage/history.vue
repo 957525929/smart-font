@@ -1,92 +1,109 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
-      <a-form layout="inline" :form="form1">
-        <a-row :gutter="24">
-          <a-col :xl="5" :lg="5" :md="6" :sm="24">
-            <a-form-item label="资产所有方">
-              <a-select
-                allowClear
-                placeholder="请选择资产所有方"
-              >
-                <a-select-option v-for="d in manuSelectData" :key="d.value">
-                  {{ d.text }}
-                </a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="5" :lg="5" :md="6" :sm="24">
-            <a-form-item label="资产使用方">
-              <a-select
-                allowClear
-                placeholder="请选择资产使用方"
-              >
-                <a-select-option v-for="d in userSelectData" :key="d.value">
-                  {{ d.text }}
-                </a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="8" :lg="9" :md="10" :sm="24">
-            <a-form-item label="时间范围">
-              <j-date placeholder="请选择开始" class="query-group-cust" ></j-date>
-              <span class="query-group-split-cust"></span>
-              <j-date placeholder="请选择结束" class="query-group-cust"></j-date>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" icon="search" @click="queryOK">查询</a-button>
-              <a-button icon="reload" style="margin-left: 8px">重置</a-button>
-            </span>
-          </a-col>
-
-        </a-row>
-      </a-form>
-    </div>
-    <!-- 查询区域-END -->
-
-    <!-- 操作按钮区域 -->
-    <div class="table-operator">
-      <!--      <a-button type="link"  @click="myHandleAdd"  icon="plus">新增</a-button>-->
-      <a-button type="link" icon="download">导出</a-button>
-      <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="link" icon="import">导入</a-button>
-      </a-upload> -->
-      <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
-      <a style="margin-left: 12px" @click="onClearSelected">清空</a>
-
-    </div>
-
-    <!-- table区域-begin -->
     <div>
-      <a-table
-        ref="table"
-        size="middle"
-        bordered
-        rowKey="id"
-        :scroll="{x:2500}"
-        :columns="columns"
-        :dataSource="dataSource"
-        :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
+      <a-page-header
+        style="border: 1px solid rgb(235, 237, 240)"
+        title="9号办公楼"
+        @back="() => $router.push('/asset_manage/asset')"
       >
-        <span slot="action" slot-scope="text, record">
-          <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
-          <a-divider type="vertical" />
-          <a-dropdown>
-            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
-            <a-menu slot="overlay">
-              <a-menu-item key="1" >编辑</a-menu-item>
-              <a-menu-item key="2" >
-                <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
-        </span>
-
-      </a-table>
+        <div class="content">
+          <div class="main">
+            <a-descriptions size="small" :column="2">
+              <a-descriptions-item label="资产编号">
+                ZCAT2021070500
+              </a-descriptions-item>
+              <a-descriptions-item label="资产类型">
+                房屋和建筑物
+              </a-descriptions-item>
+              <a-descriptions-item label="资产价值">
+                3000000.00
+              </a-descriptions-item>
+              <a-descriptions-item label="资产所有方">
+                烟草公司
+              </a-descriptions-item>
+              <a-descriptions-item label="备注">
+                无
+              </a-descriptions-item>
+            </a-descriptions>
+          </div>
+        </div>
+      </a-page-header>
     </div>
+    <br/>
+    <!-- 时间树 -->
+    <div>
+        <a-statistic
+          title=""
+          value="资产历史流转记录"
+          :style="{
+          marginRight: '32px',
+          }"
+        />
+        <br/>
+        <a-timeline
+          :style="{
+          height: '500px',
+          width:'500px',
+          margin:'0 0 0 40px',
+          fontsize:'30px',
+          }"
+        >
+          <a-timeline-item  color="red">
+            2019-01-01至2023-01-01
+            <br/>
+            <br/>
+            方正有限公司  使用中
+          </a-timeline-item>
+          <br/>
+          <a-timeline-item  color="green">
+            2015-01-01至2019-01-01
+            <br/>
+            <br/>
+            闲置
+          </a-timeline-item>
+          <br/>
+          <a-timeline-item  color="red">
+            2010-01-01至2015-01-01
+            <br/>
+            <br/>
+            烟草公司   使用中
+          </a-timeline-item>
+          <br/>
+          <a-timeline-item  color="green">
+            2005-01-01至2010-01-01
+            <br/>
+            <br/>
+            闲置 </a-timeline-item>
+        </a-timeline>
+      </div>
+    <br/>
+    <!-- table区域-begin -->
+<!--    <div>-->
+<!--      <a-table-->
+<!--        ref="table"-->
+<!--        size="middle"-->
+<!--        bordered-->
+<!--        rowKey="id"-->
+<!--        :scroll="{x:2500}"-->
+<!--        :columns="columns"-->
+<!--        :dataSource="dataSource"-->
+<!--        :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"-->
+<!--      >-->
+<!--        <span slot="action" slot-scope="text, record">-->
+<!--          &lt;!&ndash; <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> &ndash;&gt;-->
+<!--          <a-divider type="vertical" />-->
+<!--          <a-dropdown>-->
+<!--            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>-->
+<!--            <a-menu slot="overlay">-->
+<!--              <a-menu-item key="1" >编辑</a-menu-item>-->
+<!--              <a-menu-item key="2" >-->
+<!--                <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>-->
+<!--              </a-menu-item>-->
+<!--            </a-menu>-->
+<!--          </a-dropdown>-->
+<!--        </span>-->
+<!--      </a-table>-->
+<!--    </div>-->
 
   </a-card>
 </template>
@@ -135,7 +152,7 @@ export default {
           assetOwner: '烟草公司',
           assetUser: '方正有限公司',
           recordDate: '2019-01-01至2023-01-01',
-          assetStates:'租出',
+          assetStates:'使用中',
           remark : '无',
         },
         {
@@ -290,5 +307,26 @@ export default {
 .table-page-search-wrapper .table-page-search-submitButtons {
   margin-top: 12px;
   margin-bottom: 12px;
+}
+tr:last-child td {
+  padding-bottom: 0;
+}
+#components-page-header-demo-responsive .content {
+  display: flex;
+}
+#components-page-header-demo-responsive .ant-statistic-content {
+  font-size: 20px;
+  line-height: 28px;
+}
+@media (max-width: 576px) {
+  #components-page-header-demo-responsive .content {
+    display: block;
+  }
+
+  #components-page-header-demo-responsive .main {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
 }
 </style>
