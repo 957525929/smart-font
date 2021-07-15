@@ -436,7 +436,8 @@ export default {
         okText: '是',
         cancelText: '否'
       })
-    }
+    },
+    onSubmitB(){}
   }
 }
 </script>
