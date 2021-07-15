@@ -5,7 +5,7 @@
 
     <a-select style="width: 11%" default-value="1" @change="lockChange" allowClear>
       <a-select-option value="1"> 低电量 </a-select-option>
-      <a-select-option value="2"> 关闭 </a-select-option>
+      <a-select-option value="2"> 关锁 </a-select-option>
       <a-select-option value="3"> 开锁 </a-select-option>
     </a-select>
 

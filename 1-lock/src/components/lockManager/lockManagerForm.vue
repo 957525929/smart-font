@@ -24,7 +24,7 @@
   </a-card>
 </template>
 <script>
-import { roomData } from '@comp/roomManager/data/room'
+import { lockData } from '@comp/roomManager/data/lock'
 
 const columns = [
   { title: '锁编号', dataIndex: 'lockNum', key: 'lockNum' },
@@ -45,7 +45,7 @@ const innerColumns = [
 export default {
   data() {
     return {
-      lockData: roomData,
+      lockData: lockData,
       informationVisible: false,
       columns,
       innerColumns,

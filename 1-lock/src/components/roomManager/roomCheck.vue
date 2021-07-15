@@ -8,7 +8,7 @@
       :options="selectOptions"
       change-on-select
       @change="areaChange"
-      placeholder="请选择区域"
+      placeholder="请选择位置"
     />
 
     <a-divider type="vertical" />
@@ -44,17 +44,22 @@
         <a-button>导入房间</a-button>
       </a-upload>
 
-      <a-divider type="vertical" />
-
       <a-col>
+        <a-divider type="vertical" />
         <a-button @click="roomAdd">添加房间</a-button>
 
         <!-- 添加房间功能 -->
         <a-modal v-model="roomVisible" title="添加房间" @ok="roomOk">
           <a-row type="flex" align="middle">
-            <a-col :span="4">区域：</a-col>
-            <a-col :span="10">
-              <a-cascader :options="selectOptions" change-on-select @change="areaChange" placeholder="请选择区域" />
+            <a-col :span="4">位置：</a-col>
+            <a-col :span="13">
+              <a-cascader
+                style="width: 100%"
+                :options="selectOptions"
+                change-on-select
+                @change="areaChange"
+                placeholder="请选择位置"
+              />
             </a-col>
           </a-row>
 
@@ -62,7 +67,7 @@
 
           <a-row type="flex" align="middle">
             <a-col :span="4">房间号：</a-col>
-            <a-col :span="10">
+            <a-col :span="13">
               <a-input style="width: 100%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
             </a-col>
           </a-row>
@@ -71,7 +76,7 @@
 
           <a-row type="flex" align="middle">
             <a-col :span="4">员工：</a-col>
-            <a-col :span="10">
+            <a-col :span="13">
               <a-select
                 mode="multiple"
                 placeholder="请选择员工"

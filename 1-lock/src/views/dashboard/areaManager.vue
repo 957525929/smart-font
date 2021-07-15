@@ -2,7 +2,7 @@
   <div>
     <a-card>
       <div class="table-operator">
-        <a-button @click="handleAdd" class="butt">新增</a-button>
+        <a-button @click="handleAdd">新增</a-button>
         <a-modal v-model="addVisible" title="新增" @ok="addOk">
           <a-row type="flex" align="middle">
             <a-col :span="4">名称：</a-col>
@@ -19,7 +19,7 @@
             <a-row type="flex" align="middle">
               <a-col :span="4">名称：</a-col>
               <a-col :span="10">
-                <a-input style="width: 100%" placeholder="请输入名称" v-model="name" allowClear></a-input>
+                <a-input style="width: 100%" placeholder="请输入名称" v-model="nextName" allowClear></a-input>
               </a-col>
             </a-row>
             <br />
@@ -80,6 +80,9 @@ export default {
       editVisible: false,
       rowRecord: '',
       nextAddVisible: false,
+      count: 2,
+      nextName: '',
+      upName: '',
     }
   },
   methods: {
@@ -88,6 +91,16 @@ export default {
     },
     addOk() {
       this.addVisible = false
+      if (this.name != '') {
+        const newData = {
+          key: this.count,
+          name: this.name,
+          value: 1,
+          children: [],
+        }
+        this.dataSource = [...this.dataSource, newData]
+        this.count = this.count + 1
+      }
     },
     addChange(e) {
       // console.log('radio checked', e.target.value)
@@ -105,6 +118,18 @@ export default {
     },
     nextAddOk() {
       this.nextAddVisible = false
+      console.log(this.rowRecord)
+      if (this.nextName != '') {
+        const newData = {
+          key: this.count * 10,
+          name: this.nextName,
+          value: 2,
+          upName: this.upName,
+          children: [],
+        }
+        this.rowRecord.children = [...this.rowRecord.children, newData]
+        this.count = this.count * 10 + 1
+      }
     },
     confirm() {},
     cancel() {},
