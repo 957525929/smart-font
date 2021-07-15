@@ -342,9 +342,22 @@ const user = {
                     "keepAlive": false,
                     "internalOrExternal": false,
                     "icon":"bars",
-                    "title": "信息管理"
+                    "title": "酒店信息管理"
                   },
                   "name": "hotel-Information",
+                  "id": "1245154570166390786"
+                },
+                {
+                  "path": "/hotel/HotelStatistical",
+                  "component": "hotel/HotelStatistical",
+                  "route": "1",
+                  "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon":"pie-chart",
+                    "title": "预约统计"
+                  },
+                  "name": "hotel-statistical",
                   "id": "1245154570166390786"
                 },
               ],
@@ -372,9 +385,22 @@ const user = {
                     "keepAlive": false,
                     "internalOrExternal": false,
                     "icon":"bars",
-                    "title": "信息管理"
+                    "title": "会议室管理"
                   },
                   "name": "meetingRoom-Information",
+                  "id": "1245154570166390786"
+                },
+                {
+                  "path": "/meetingRoom/RoomDuty",
+                  "component": "meetingRoom/RoomDuty",
+                  "route": "1",
+                  "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon":"team",
+                    "title": "会议室管理人员"
+                  },
+                  "name": "meetingRoom-duty",
                   "id": "1245154570166390786"
                 },
                 {
@@ -399,7 +425,7 @@ const user = {
                     "keepAlive": false,
                     "internalOrExternal": false,
                      "icon": "pie-chart",
-                    "title": "使用统计"
+                    "title": "预约统计"
                   },
                   "name": "meetingRoom-UseStatistics",
                   "id": "1245154050731200514"
