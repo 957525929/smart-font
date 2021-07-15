@@ -19,6 +19,9 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/user/login') {
       next({ path: INDEX_MAIN_PAGE_PATH })
       NProgress.done()
+    } else if (to.path === '/navPage') {
+      next({ path: '/navPage' })
+      NProgress.done()
     } else {
       if (store.getters.permissionList.length === 0) {
         store.dispatch('GetPermissionList').then(res => {
