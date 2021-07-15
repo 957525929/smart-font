@@ -1,8 +1,12 @@
 <template>
 	<view>
-		<cu-custom bgColor="cu-tag light bg-yellow">
+		<cu-custom bgColor="bg-yellow">
 			<block slot="content">申请记录</block>
 		</cu-custom>
+		<!-- <cu-custom bgColor="cu-tag bg-yellow" :isBack="true">
+			<block slot="backText">返回</block>
+			<block slot="content">申请记录</block>
+		</cu-custom> -->
 		<!-- 
 		<scroll-view scroll-x class="bg-white nav">
 			<view class="flex text-center">
@@ -29,13 +33,15 @@
 		</scroll-view>
 
 		<block v-if="TabCur==0">
-			<recordCard />
+			<recordCard :cardType="type[0]" />
 		</block>
-		<block v-if="TabCur==1"> </block>
-		<block v-if="TabCur==2"> 
-		<recordCard />
+		<block v-if="TabCur==1">
+			<recordCard :cardType="type[1]" />
 		</block>
-		
+		<block v-if="TabCur==2">
+			<recordCard :cardType="type[2]" />
+		</block>
+
 	</view>
 </template>
 
@@ -45,10 +51,22 @@
 		data() {
 			return {
 				TabCur: 0,
-				scrollLeft: 0
+				scrollLeft: 0,
+				type: [{
+					id: 0,
+					type: "待审核"
+				}, {
+					id: 1,
+					type: "已通过"
+				}, {
+					id: 2,
+					type: "已拒绝"
+				}, ],
 			};
 		},
-
+		components: {
+			recordCard,
+		},
 		methods: {
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id;

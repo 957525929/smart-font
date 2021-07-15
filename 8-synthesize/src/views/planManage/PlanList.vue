@@ -17,6 +17,7 @@
                 <a-select-option value="1">进行中</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
                 <a-select-option value="3">未完成</a-select-option>
+                <a-select-option value="4">延期中</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -97,18 +98,20 @@
           <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
           <a-tag v-if="status === '1'" color="green">进行中</a-tag>
           <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status === '3'" color="red" @click="showModal">
-            <!-- <a-popconfirm title="是否确认延长时间?" ok-text="确定" cancel-text="取消" @confirm="confirm(record)" @cancel="cancel">
-              未完成
-            </a-popconfirm> -->
-            未完成
-            <a-modal v-model="status_visible" width="350px" title="延长时间" @ok="confirm(record)">
-              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">
-                <a-date-picker v-model="click_deadline" placeholder="请选择延长时间" />
+          <a-tag v-if="status === '3'" color="red" @click="change(record)">
+            <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
+              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
+                <a-date-picker @change="getDateTime" style="width: 200px" />
               </a-form-item>
             </a-modal>
+            未完成
           </a-tag>
           <a-tag v-if="status === '4'" color="pink">延期中</a-tag>
+          <!-- <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
+            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
+              <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" />
+            </a-form-item>
+          </a-modal> -->
         </template>
       </a-table>
     </div>
@@ -256,7 +259,7 @@ export default {
     }
 
     return {
-      click_deadline: '',
+      timeOut: '',
       gotoMenu,
       rowSelection,
       // description: '计划列表',
@@ -281,7 +284,7 @@ export default {
         xs: { span: 24 },
         sm: { span: 16 },
       },
-      status_visible: false,
+      visible: false,
     }
   },
   methods: {
@@ -298,14 +301,30 @@ export default {
     showModal() {
       this.status_visible = true
     },
-    confirm(record) {
-      record.status = '4'
-      console.log(click_deadline)
+    change(index) {
+      this.visible = true
+      this.rowIndex = index
+    },
+    confirm() {
+      // record.status = "1";
+      console.log(this.rowIndex)
+      this.rowIndex.status = '4'
       this.$message.success('延期成功')
+      console.log(this.rowIndex.deadline)
+      this.rowIndex.deadline = this.timeOut
+      this.visible = false
+    },
+    getDateTime(value, dateString) {
+      console.log('Selected Time: ', value)
+      console.log('Formatted Selected Time: ', dateString)
+      this.timeOut = dateString
+      console.log('----------------------')
+      console.log(this.timeOut)
     },
     cancel(e) {
       // console.log(e);
       // this.$message.error('Click on No');
+      this.visible = false
     },
   },
 }

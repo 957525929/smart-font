@@ -98,6 +98,7 @@
   import ProcurementModal from './modules/ProcurementModal'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
+  import { formatDate } from '@/utils/util'
 
   export default {
     name: "ProcurementList",
@@ -109,8 +110,13 @@
     data () {
       return {
         description: '审批管理页面',
+        editId:'',
         // 查询条件
-        queryParam: {roleName:'',},
+        queryParam: {
+          roleName:'',
+          time_begin:formatDate(new Date().getTime()-7*24*3600*1000,"yyyy-MM-d"),
+          time_end:formatDate(new Date().getTime(),"yyyy-MM-dd")
+        },
         visible:false,
         dataSource: [
           {
@@ -121,8 +127,22 @@
             applyNum: '3',
             unit:'台',
             status:1,
-            applyTime: '2021-07-07 09:48:59',
+            applyTime: formatDate(new Date().getTime(),"yyyy-MM-dd") + ' 09:48:59',
             applyReason: '办公需要',
+            checkTime: '',
+            remark:''
+          },
+          {
+            id:4,
+            applyDepertment:'烟叶管理处',
+            applyName:'张军',
+            articleName: '马克笔',
+            applyNum: '2',
+            unit:'盒',
+            status:1,
+            applyTime: formatDate(new Date().getTime(),"yyyy-MM-dd") + ' 09:01:29',
+            applyReason: '办公需要',
+            checkTime: '',
             remark:''
           }
         ],
@@ -195,6 +215,8 @@
         return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;
       }
     },
+    mounted() {
+    },
     methods: {
       handlePerssion: function(roleId){
        // alert(roleId);
@@ -204,12 +226,14 @@
         console.log(date, dateString);
       },
       handleCheck(id) {
-
+        this.editId = id;
       },
       confirm(e) {
-        console.log(e);
+        var self = this;
+        this.dataSource = this.dataSource.filter((item)=> {
+          return item.id != self.editId;
+        });
         this.$message.success('审批通过');
-
       },
       cancel(e) {
         this.visible = true;

@@ -16,17 +16,9 @@
 
           <a-col :sm="10">
             <a-form-item label="时间">
-              <a-date-picker
-                class="w150"
-                format="YYYY-MM-DD"
-                :default-value="moment(current_start_date, 'YYYY/MM/DD')"
-              />
+              <a-date-picker class="w150" format="YYYY-MM" :default-value="moment(current_start_date)" />
               ~
-              <a-date-picker
-                class="w150"
-                format="YYYY-MM-DD"
-                :default-value="moment(current_stop_date, 'YYYY/MM/DD')"
-              />
+              <a-date-picker class="w150" format="YYYY-MM" :default-value="moment(current_stop_date)" />
             </a-form-item>
           </a-col>
 
@@ -44,6 +36,8 @@
 <script>
 import BarMultid from '@/components/chart/BarMultid'
 import moment from 'moment'
+import { formatDate } from '@/utils/util'
+
 export default {
   name: 'ChartDemo',
   components: {
@@ -52,100 +46,48 @@ export default {
   data() {
     return {
       moment,
-      field: ['2021.01', '2021.02', '2021.03', '2021.04', '2021.05', '2021.06'],
+      current_start_date: formatDate(new Date().getTime() - 150 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
+      field: ['2021.02', '2021.03', '2021.04', '2021.05', '2021.06', '2021.07'],
       dataSource: [
         {
           type: '资产', // 列名
-          2021.01: 20,
           2021.02: 10,
           2021.03: 8,
           2021.04: 5,
           2021.05: 15,
           2021.06: 12,
+          2021.07: 20,
         },
         {
           type: '会议纪要',
-          2021.01: 12,
           2021.02: 1,
           2021.03: 6,
           2021.04: 12,
           2021.05: 11,
           2021.06: 15,
+          2021.07: 12,
         },
         {
           type: '记录',
-          2021.01: 12,
           2021.02: 9,
           2021.03: 1,
           2021.04: 5,
           2021.05: 13,
           2021.06: 21,
+          2021.07: 12,
         },
         {
           type: '报告',
-          2021.01: 10,
           2021.02: 15,
           2021.03: 21,
           2021.04: 3,
           2021.05: 5,
           2021.06: 25,
+          2021.07: 10,
         },
       ],
     }
-  },
-  computed: {
-    current_stop_date() {
-      var nowDate = new Date()
-      let date = {
-        year: nowDate.getFullYear(),
-        month: nowDate.getMonth() + 1,
-        date: nowDate.getDate(),
-        hour: nowDate.getHours(),
-        minutes: nowDate.getMinutes(),
-        seconds: nowDate.getSeconds(),
-      }
-      // console.log(date);
-      let systemDate =
-        date.year +
-        '年' +
-        date.month +
-        '月' +
-        date.date +
-        '日' +
-        date.hour +
-        '时' +
-        date.minutes +
-        '分' +
-        date.seconds +
-        '秒'
-      return systemDate
-    },
-    current_start_date() {
-      var nowDate = new Date()
-      let date = {
-        year: nowDate.getFullYear(),
-        month: nowDate.getMonth(),
-        date: nowDate.getDate(),
-        hour: nowDate.getHours(),
-        minutes: nowDate.getMinutes(),
-        seconds: nowDate.getSeconds(),
-      }
-      // console.log(date);
-      let systemDate =
-        date.year +
-        '年' +
-        date.month +
-        '月' +
-        date.date +
-        '日' +
-        date.hour +
-        '时' +
-        date.minutes +
-        '分' +
-        date.seconds +
-        '秒'
-      return systemDate
-    },
   },
 }
 </script>

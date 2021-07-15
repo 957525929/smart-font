@@ -1,23 +1,24 @@
+import { formatDate } from '@/utils/util'
 export const data = [
     {
         key: '1',
         docType: '资产',
-        createTime: '2020-5-23 10:21:12'
+        createTime: formatDate(new Date().getTime() - 5 * 24 * 3000 * 740, 'yyyy-MM-dd hh:mm:ss')
     },
     {
         key: '2',
         docType: '会议纪要',
-        createTime: '2020-5-23 12:21:18'
+        createTime: formatDate(new Date().getTime() - 10 * 24 * 2180 * 740, 'yyyy-MM-dd hh:mm:ss')
     },
     {
         key: '3',
         docType: '记录',
-        createTime: '2020-6-21 13:01:46'
+        createTime: formatDate(new Date().getTime() - 18 * 18 * 2580 * 740, 'yyyy-MM-dd hh:mm:ss')
     },
     {
         key: '4',
         docType: '总结',
-        createTime: '2020-2-28 17:33:58'
+        createTime: formatDate(new Date().getTime() - 25 * 24 * 2080 * 740, 'yyyy-MM-dd hh:mm:ss')
     },
 
 ]

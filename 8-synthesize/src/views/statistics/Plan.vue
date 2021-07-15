@@ -19,23 +19,16 @@
                 <a-select-option value="1">进行中</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
                 <a-select-option value="3">未完成</a-select-option>
+                <a-select-option value="4">延期中</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
 
           <a-col :sm="10">
             <a-form-item label="时间">
-              <a-date-picker
-                class="w150"
-                format="YYYY-MM-DD"
-                :default-value="moment(current_start_date, 'YYYY/MM/DD')"
-              />
+              <a-date-picker class="w150" format="YYYY-MM" :default-value="moment(current_start_date)" />
               ~
-              <a-date-picker
-                class="w150"
-                format="YYYY-MM-DD"
-                :default-value="moment(current_stop_date, 'YYYY/MM/DD')"
-              />
+              <a-date-picker class="w150" format="YYYY-MM" :default-value="moment(current_stop_date)" />
             </a-form-item>
           </a-col>
 
@@ -53,6 +46,7 @@
 <script>
 import BarMultid from '@/components/chart/BarMultid'
 import moment from 'moment'
+import { formatDate } from '@/utils/util'
 export default {
   name: 'ChartDemo',
   components: {
@@ -61,91 +55,57 @@ export default {
   data() {
     return {
       moment,
-      field: ['2021.01', '2021.02', '2021.03', '2021.04', '2021.05', '2021.06'],
+      current_start_date: formatDate(new Date().getTime() - 150 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
+      field: ['2021.02', '2021.03', '2021.04', '2021.05', '2021.06', '2021.07'],
       dataSource: [
         {
-          type: '未完成', // 列名
-          2021.01: 8,
-          2021.02: 0,
+          type: '未开始', // 列名
+          2021.02: 8,
           2021.03: 1,
           2021.04: 4,
           2021.05: 5,
           2021.06: 2,
+          2021.07: 8,
         },
         {
           type: '进行中',
-          2021.01: 8,
           2021.02: 7,
           2021.03: 5,
           2021.04: 18,
           2021.05: 8,
           2021.06: 12,
+          2021.07: 8,
         },
         {
           type: '已完成',
-          2021.01: 12,
           2021.02: 10,
           2021.03: 8,
           2021.04: 10,
           2021.05: 5,
           2021.06: 2,
+          2021.07: 12,
+        },
+        {
+          type: '未完成',
+          2021.02: 12,
+          2021.03: 7,
+          2021.04: 5,
+          2021.05: 12,
+          2021.06: 17,
+          2021.07: 2,
+        },
+        {
+          type: '延期中',
+          2021.02: 5,
+          2021.03: 8,
+          2021.04: 2,
+          2021.05: 5,
+          2021.06: 2,
+          2021.07: 1,
         },
       ],
     }
-  },
-  computed: {
-    current_stop_date() {
-      var nowDate = new Date()
-      let date = {
-        year: nowDate.getFullYear(),
-        month: nowDate.getMonth() + 1,
-        date: nowDate.getDate(),
-        hour: nowDate.getHours(),
-        minutes: nowDate.getMinutes(),
-        seconds: nowDate.getSeconds(),
-      }
-      // console.log(date);
-      let systemDate =
-        date.year +
-        '年' +
-        date.month +
-        '月' +
-        date.date +
-        '日' +
-        date.hour +
-        '时' +
-        date.minutes +
-        '分' +
-        date.seconds +
-        '秒'
-      return systemDate
-    },
-    current_start_date() {
-      var nowDate = new Date()
-      let date = {
-        year: nowDate.getFullYear(),
-        month: nowDate.getMonth(),
-        date: nowDate.getDate(),
-        hour: nowDate.getHours(),
-        minutes: nowDate.getMinutes(),
-        seconds: nowDate.getSeconds(),
-      }
-      // console.log(date);
-      let systemDate =
-        date.year +
-        '年' +
-        date.month +
-        '月' +
-        date.date +
-        '日' +
-        date.hour +
-        '时' +
-        date.minutes +
-        '分' +
-        date.seconds +
-        '秒'
-      return systemDate
-    },
   },
 }
 </script>

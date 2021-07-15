@@ -11,22 +11,34 @@
               <a-row :gutter="16" style="height: 100%">
                 <a-col :span="6" style="height: 100%">
                   <div class="ControlWarp">
-                    <a-card hoverable class="ControlCard prt1"> 模块一 </a-card>
+                    <a-card hoverable class="ControlCard prt1 text" @click="goto(1)">
+                      <a-icon type="lock" class="icon" />
+                      安消管理系统
+                    </a-card>
                   </div>
                 </a-col>
                 <a-col :span="6" style="height: 100%">
                   <div class="ControlWarp">
-                    <a-card hoverable class="ControlCard"> 模块二 </a-card>
+                    <a-card hoverable class="ControlCard prt2 text" @click="goto(2)">
+                      <a-icon type="lock" class="icon" />
+                      食堂管理系统
+                    </a-card>
                   </div>
                 </a-col>
                 <a-col :span="6" style="height: 100%">
                   <div class="ControlWarp">
-                    <a-card hoverable class="ControlCard"> 模块三 </a-card>
+                    <a-card hoverable class="ControlCard prt3 text" @click="goto(3)">
+                      <a-icon type="lock" class="icon" />
+                      资产管理系统
+                    </a-card>
                   </div>
                 </a-col>
                 <a-col :span="6" style="height: 100%">
                   <div class="ControlWarp">
-                    <a-card hoverable class="ControlCard"> 模块四 </a-card>
+                    <a-card hoverable class="ControlCard prt4 text" @click="goto(4)">
+                      <a-icon type="lock" class="icon" />
+                      办公用品管理系统
+                    </a-card>
                   </div>
                 </a-col>
               </a-row>
@@ -37,22 +49,33 @@
               <a-row :gutter="16" style="height: 100%">
                 <a-col :span="6" style="height: 100%">
                   <div class="ControlWarp">
-                    <a-card hoverable class="ControlCard"> 模块五 </a-card>
+                    <a-card hoverable class="ControlCard prt5 text" @click="goto(5)">
+                      <a-icon type="lock" class="icon" />
+                      车辆管理系统
+                    </a-card>
                   </div>
                 </a-col>
                 <a-col :span="6" style="height: 100%">
                   <div class="ControlWarp">
-                    <a-card hoverable class="ControlCard"> 模块六 </a-card>
+                    <a-card hoverable class="ControlCard prt6 text" @click="goto(6)">
+                      <a-icon type="lock" class="icon" />
+                      车辆管理系统</a-card>
                   </div>
                 </a-col>
                 <a-col :span="6" style="height: 100%">
                   <div class="ControlWarp">
-                    <a-card hoverable class="ControlCard"> 模块七 </a-card>
+                    <a-card hoverable class="ControlCard prt7 text" @click="goto(7)">
+                      <a-icon type="lock" class="icon" />
+                      车辆管理系统
+                    </a-card>
                   </div>
                 </a-col>
                 <a-col :span="6" style="height: 100%">
                   <div class="ControlWarp">
-                    <a-card hoverable class="ControlCard"> 模块八 </a-card>
+                    <a-card hoverable class="ControlCard prt8 text" @click="goto(8)">
+                      <a-icon type="lock" class="icon" />
+                      车辆管理系统
+                    </a-card>
                   </div>
                 </a-col>
               </a-row>
@@ -65,7 +88,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods:{
+    goto(index) {
+      window.open( 'https://www.baidu.com');
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -102,6 +131,37 @@ export default {}
   top: 2%;
 }
 .prt1 {
-  // background-image: url(~@/assets/cardbg.png);
+   background-image: url(~@/assets/image/bg1.png);
+}
+.prt2 {
+  background-image: url(~@/assets/image/bg2.png);
+}
+.prt3 {
+  background-image: url(~@/assets/image/bg3.png);
+}
+.prt4 {
+  background-image: url(~@/assets/image/bg4.png);
+}
+.prt5 {
+  background-image: url(~@/assets/image/bg5.png);
+}
+.prt6 {
+  background-image: url(~@/assets/image/bg6.png);
+}
+.prt7 {
+  background-image: url(~@/assets/image/bg7.png);
+}
+.prt8 {
+  background-image: url(~@/assets/image/bg8.png);
+}
+.text {
+  color: whitesmoke;
+  text-align: center;
+  font-size: 40px;
+  line-height: 3
+}
+.icon {
+  display: block;
+  font-size: 100px;
 }
 </style>

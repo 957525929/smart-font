@@ -60,7 +60,7 @@ export const mockMenuData = {
             "keepAlive": false,
             "internalOrExternal": false,
             "icon": "form",
-            "title": "物料管理"
+            "title": "食料管理"
           },
         "name": "material-warehousing",
         "id": "1",
@@ -141,7 +141,7 @@ export const mockMenuData = {
                 {
                   "keepAlive": false,
                   "internalOrExternal": false,
-                  "title": "物料类别管理"
+                  "title": "食料类别管理"
                 },
               "name": "material-warehousing-Category",
               "id": "21111"

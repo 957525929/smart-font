@@ -13,13 +13,13 @@
                     <a-input placeholder="请输入合同编号"></a-input>
                   </a-form-item>
                 </a-col>
-               <a-col :xl="5" :lg="5" :md="6" :sm="24">
-                  <a-form-item label="出租方">
+                <a-col :xl="5" :lg="7" :md="8" :sm="24">
+                  <a-form-item label="合同名称">
                     <a-select
                       allowClear
-                      placeholder="请选择出租方"
+                      placeholder="请选择合同名称"
                     >
-                      <a-select-option v-for="d in manuSelectData" :key="d.value">
+                      <a-select-option v-for="d in ConNameSelectData" :key="d.value">
                         {{ d.text }}
                       </a-select-option>
                     </a-select>
@@ -93,8 +93,8 @@
               :dataSource="dataSource"
               :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
               >
-              <span slot="contractAsset">
-                 <a class="ant-dropdown-link" @click="viewDetail" >租赁资产</a>
+              <span slot="electContract">
+                 <a class="ant-dropdown-link"  >下载</a>
               </span>
               <span slot="action" slot-scope="text,record">
                 <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
@@ -137,7 +137,7 @@
               </div>
           </a-modal>
           <!-- 添加租赁合同记录 -->
-            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel'></EnrollLent>
+<!--            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel'></EnrollLent>-->
           </a-card>
       </a-tab-pane>
  <!-- 承租列表 -->
@@ -152,6 +152,18 @@
                       <a-input placeholder="请输入合同编号"></a-input>
                     </a-form-item>
                   </a-col>
+                  <a-col :xl="5" :lg="7" :md="8" :sm="24">
+                    <a-form-item label="合同名称">
+                      <a-select
+                        allowClear
+                        placeholder="请选择合同名称"
+                      >
+                        <a-select-option v-for="d in ConNameSelectDatapay" :key="d.value">
+                          {{ d.text }}
+                        </a-select-option>
+                      </a-select>
+                    </a-form-item>
+                  </a-col>
                   <a-col :xl="5" :lg="5" :md="6" :sm="24">
                     <a-form-item label="出租方">
                       <a-select
@@ -159,18 +171,6 @@
                         placeholder="请选择出租方"
                       >
                         <a-select-option v-for="d in manuSelectData1" :key="d.value">
-                          {{ d.text }}
-                        </a-select-option>
-                      </a-select>
-                    </a-form-item>
-                  </a-col>
-                  <a-col :xl="5" :lg="5" :md="6" :sm="24">
-                    <a-form-item label="承租方">
-                      <a-select
-                        allowClear
-                        placeholder="请选择承租方"
-                      >
-                        <a-select-option v-for="d in userSelectData1" :key="d.value">
                           {{ d.text }}
                         </a-select-option>
                       </a-select>
@@ -226,13 +226,13 @@
                 bordered
                 rowKey="id"
                 :scroll="{x:2500}"
-                :columns="columns"
+                :columns="columnspay"
                 :dataSource="dataSourcepay"
                 :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
               >
-        <span slot="contractAsset">
-           <a class="ant-dropdown-link" @click="viewDetailpay" >租赁资产</a>
-        </span>
+              <span slot="electContract">
+                 <a class="ant-dropdown-link"  >下载</a>
+              </span>
                 <span slot="action" slot-scope="text,record">
           <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
           <a-divider type="vertical" />
@@ -273,7 +273,7 @@
                 </a-table>
               </div>
             </a-modal>
-            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel'></EnrollLent>
+<!--            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel'></EnrollLent>-->
           </a-card>
       </a-tab-pane>
     </a-tabs>
@@ -293,6 +293,36 @@ export default {
   data () {
       return {
         description: '资产变化表',
+        //合同名称
+        ConNameSelectData:[
+          {
+            value : 1,
+            text : '烟草公司房屋和建筑物合同',
+          },
+          {
+            value : 2,
+            text : '方正有限公司房屋和建筑物合同',
+          },
+          {
+            value : 3,
+            text : '卷烟厂房屋和建筑物合同',
+          },
+        ],
+        //承租合同名称选择
+        ConNameSelectDatapay:[
+          {
+            value : 1,
+            text : '福州朝阳贸易有限公司房屋和建筑物合同',
+          },
+          {
+            value : 2,
+            text : '福州烟草加工厂房屋和建筑物合同',
+          },
+          {
+            value : 3,
+            text : '福州卷烟厂房屋和建筑物合同',
+          },
+        ],
         //出租方
         manuSelectData:[
           {
@@ -357,27 +387,29 @@ export default {
         {
           key:'1',
           contractNunmber: 'ZC0001',
-          assetOwner: '烟草公司',
+          contractName:'方正有限公司房屋和建筑物合同',
           assetUser: '方正有限公司',
           recordDate: '2010-07-05至2025-07-05',
-          payCycle:'1年1付',
+          payCycle:'按年付',
           lentValue: '100000.00',
           worker:'王一',
-          workerPhone:'15877875112',
-          contractAsset:'租赁资产',
+          noticeWay:'短信通知',
+          noticeDay:'3',
+          electContract:'合同电子版',
           remark : '承租方负责维护',
         },
           {
             key:'2',
             contractNunmber: 'ZC0002',
-            assetOwner: '烟草公司',
+            contractName:'卷烟厂房屋和建筑物合同',
             assetUser: '卷烟厂',
             recordDate: '2020-07-05至2025-07-05',
-            payCycle:'2季1付',
+            payCycle:'按年付',
             lentValue: '10000.00',
             worker:'王一',
-            workerPhone:'15877875112',
-            contractAsset:'租赁资产',
+            noticeWay:'',
+            noticeDay:'',
+            electContract:'合同电子版',
             remark : '承租方负责维护',
           },
       ],
@@ -387,26 +419,26 @@ export default {
             key:'1',
             contractNunmber: 'CC0001',
             assetOwner: '福州朝阳贸易有限公司',
-            assetUser: '烟草公司',
+            contractName:'福州朝阳贸易有限公司房屋和建筑物合同',
             recordDate: '2020-07-05至2025-07-05',
-            payCycle:'1季1付',
+            payCycle:'按季付',
             lentValue: '10000.00',
+            noticeWay:'短信通知',
+            noticeDay:'3',
             worker:'王一',
-            workerPhone:'15877875112',
-            contractAsset:'租赁资产',
             remark : '无',
           },
           {
             key:'2',
             contractNunmber: 'CC0002',
             assetOwner: '福州烟草加工厂',
-            assetUser: '烟草公司',
+            contractName:'福州烟草加工厂房屋和建筑物合同',
             recordDate: '2018-07-05至2025-07-05',
-            payCycle:'2季1付',
+            payCycle:'按季付',
             lentValue: '50000.00',
+            noticeWay:'短信通知',
+            noticeDay:'3',
             worker:'王一',
-            workerPhone:'15877875112',
-            contractAsset:'租赁资产',
             remark : '承租方负责维护',
           },
         ],
@@ -435,10 +467,17 @@ export default {
             dataIndex: 'contractNunmber',
           },
           {
-            title:'出租方',
+            title:'合同名称',
             align:"center",
-            dataIndex: 'assetOwner'
+            fixed: 'left',
+            width:220,
+            dataIndex: 'contractName',
           },
+          // {
+          //   title:'出租方',
+          //   align:"center",
+          //   dataIndex: 'assetOwner'
+          // },
           {
             title:'承租方',
             align:"center",
@@ -468,15 +507,110 @@ export default {
             dataIndex: 'worker'
           },
           {
-            title:'承办人手机号码',
+            title:'收租提醒方式',
             align:"center",
-            dataIndex: 'workerPhone'
+            dataIndex: 'noticeWay'
           },
           {
-            title:'租赁资产',
+            title:'提前通知天数',
             align:"center",
-            dataIndex: 'contractAsset',
-            scopedSlots: { customRender: 'contractAsset' },
+            dataIndex: 'noticeDay'
+          },
+          {
+            title:'合同电子版',
+            align:"center",
+            dataIndex: 'electContract',
+            scopedSlots: { customRender: 'electContract' },
+           // scopedSlots: { customRender: 'contractAsset' },
+          },
+          {
+            title:'备注',
+            align:"center",
+            dataIndex: 'remark'
+          },
+          {
+            title: '操作',
+            dataIndex: 'action',
+            align:"center",
+            scopedSlots: { customRender: 'action' },
+          }
+        ],
+        //承租列表
+        columnspay: [
+          {
+            title: '#',
+            dataIndex: '',
+            key:'rowIndex',
+            fixed: 'left',
+            width:40,
+            align:"center",
+            customRender:function (t,r,index) {
+              return parseInt(index)+1;
+            }
+          },
+          {
+            title:'合同编号',
+            align:"center",
+            fixed: 'left',
+            width:120,
+            dataIndex: 'contractNunmber',
+          },
+          {
+            title:'合同名称',
+            align:"center",
+            fixed: 'left',
+            width:220,
+            dataIndex: 'contractName',
+          },
+          {
+            title:'出租方',
+            align:"center",
+            dataIndex: 'assetOwner'
+          },
+          // {
+          //   title:'承租方',
+          //   align:"center",
+          //   dataIndex: 'assetUser'
+          // },
+          {
+            title:'合同有效期',
+            align:"center",
+            dataIndex: 'recordDate',
+            // customRender:function (text) {
+            //   return !text?"":(text.length>10?text.substr(0,10):text)
+            // }
+          },
+          {
+            title:'付款周期',
+            align:"center",
+            dataIndex: 'payCycle'
+          },
+          {
+            title:'租金',
+            align:"center",
+            dataIndex: 'lentValue'
+          },
+          {
+            title:'承办人',
+            align:"center",
+            dataIndex: 'worker'
+          },
+          {
+            title:'缴租提醒方式',
+            align:"center",
+            dataIndex: 'noticeWay'
+          },
+          {
+            title:'提前通知天数',
+            align:"center",
+            dataIndex: 'noticeDay'
+          },
+          {
+            title:'合同电子版',
+            align:"center",
+            dataIndex: 'electContract',
+            scopedSlots: { customRender: 'electContract' },
+            // scopedSlots: { customRender: 'contractAsset' },
           },
           {
             title:'备注',
@@ -649,20 +783,20 @@ export default {
         console.log('Clicked cancel button');
         this.visible = false;
       },
-      //关闭包含资产详情
-      handleCancel1(e) {
-        this.detailvisible = false;
-      },
-      //关闭包含资产详情
-      handleCancelpay(e) {
-        this.detailvisiblepay = false;
-      },
-      handleOk1(e) {
-        this.detailvisible = false;
-      },
-      handleOkpay(e) {
-        this.detailvisiblepay = false;
-      },
+      // //关闭包含资产详情
+      // handleCancel1(e) {
+      //   this.detailvisible = false;
+      // },
+      // //关闭包含资产详情
+      // handleCancelpay(e) {
+      //   this.detailvisiblepay = false;
+      // },
+      // handleOk1(e) {
+      //   this.detailvisible = false;
+      // },
+      // handleOkpay(e) {
+      //   this.detailvisiblepay = false;
+      // },
     }
 
   }

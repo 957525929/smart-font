@@ -36,22 +36,22 @@
         </a-row>
       </a-form>
     </div>
-
+    <bar :data-source="dataSource" :fields="fields" :height="height"></bar>
     <!-- table区域-begin -->
-    <div>
-      <a-table
-        ref="table"
-        size="middle"
-        bordered
-        rowKey="id"
-        :columns="columns"
-        :dataSource="dataSource"
-        :pagination="ipagination"
-        :loading="loading"
-        @change="handleTableChange">
+<!--    <div>-->
+<!--      <a-table-->
+<!--        ref="table"-->
+<!--        size="middle"-->
+<!--        bordered-->
+<!--        rowKey="id"-->
+<!--        :columns="columns"-->
+<!--        :dataSource="dataSource"-->
+<!--        :pagination="ipagination"-->
+<!--        :loading="loading"-->
+<!--        @change="handleTableChange">-->
 
-      </a-table>
-    </div>
+<!--      </a-table>-->
+<!--    </div>-->
     <!-- table区域-end -->
   </a-card>
 </template>
@@ -60,48 +60,35 @@
 <script>
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
+  import {formatDate} from "@/utils/util";
+  import Bar from "@/components/chart/BarMultid";
 
   export default {
     name: "StocK",
     mixins:[JeecgListMixin],
     components: {
-      JDate
+      JDate,
+      Bar
     },
     data () {
       return {
         description: '部门领用统计页面',
         // 查询条件
-        queryParam: {},
-        dataSource: [
-          {
-            id:1,
-            department:'卷烟销售管理处',
-            limitPrice:'2000',
-            receiveNum: '8',
-            receivePrice: '1348'
-          },
-          {
-            id:2,
-            department:'物流管理处',
-            limitPrice:'1500',
-            receiveNum: '10',
-            receivePrice: '2120'
-          },
-          {
-            id:3,
-            department:'人事处',
-            limitPrice:'1000',
-            receiveNum: '5',
-            receivePrice: '630'
-          },
-          {
-            id:4,
-            department:'烟叶管理处',
-            limitPrice:'1500',
-            receiveNum: '12',
-            receivePrice: '780'
-          }
+        queryParam: {
+          time_begin:formatDate(new Date().getTime()-30*24*3600*1000,"yyyy-MM-dd"),
+          time_end:formatDate(new Date().getTime(),"yyyy-MM-dd")
+        },
+        dataSource:  [
+            { type: '领用次数', '卷烟销售管理处': 8, '物流管理处': 10, '人事处': 5, '烟叶管理处': 12 },
+            { type: '领用价值(元)', '卷烟销售管理处': 1348, '物流管理处': 2120, '人事处': 630, '烟叶管理处': 780 }
+          ],
+        fields: [
+          '卷烟销售管理处',
+          '物流管理处',
+          '人事处',
+          '烟叶管理处'
         ],
+        height:500,
         // 表头
         columns: [
           {

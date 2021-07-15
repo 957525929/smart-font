@@ -7,8 +7,7 @@
         <a-date-picker
           v-model="startValue"
           :disabled-date="disabledStartDate"
-          show-time
-          format="YYYY-MM-DD HH:mm:ss"
+          format="YYYY-MM-DD"
           placeholder="开始时间"
           @openChange="handleStartOpenChange"
           style="width: 30%"
@@ -17,8 +16,7 @@
         <a-date-picker
           v-model="endValue"
           :disabled-date="disabledEndDate"
-          show-time
-          format="YYYY-MM-DD HH:mm:ss"
+          format="YYYY-MM-DD"
           placeholder="结束时间"
           :open="endOpen"
           @openChange="handleEndOpenChange"
@@ -159,6 +157,7 @@ export default {
     handleToggleSearch() {
       this.toggleSearchStatus = !this.toggleSearchStatus
     },
+    openlockChange(value) {},
   },
 }
 </script>

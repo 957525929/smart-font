@@ -1,35 +1,60 @@
 <template>
-  <a-modal :title="title" :width="800" :visible="visible" :confirmLoading="confirmLoading" @ok="handleOk" @cancel="handleCancel" okText="保存任务" cancelText="关闭">
-
+  <a-modal
+    :title="title"
+    :width="800"
+    :visible="visible"
+    :confirmLoading="confirmLoading"
+    @ok="handleOk"
+    @cancel="handleCancel"
+    okText="保存任务"
+    cancelText="关闭"
+  >
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
-
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
-          <a-input style="width:200px" placeholder="请输入任务名称" v-decorator="['taskName', {rules: [{ required: true, message: '请输入任务名称!' }]}]" />
+          <a-input
+            style="width: 200px"
+            placeholder="请输入任务名称"
+            v-decorator="['taskName', { rules: [{ required: true, message: '请输入任务名称!' }] }]"
+          />
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="重要性" hasFeedback priority>
-          <a-select style="width:130px" placeholder="请选择重要性" ref="select" v-decorator="['priority', {rules: [{ required: true, message: '请选择重要性!' }]}]">
+          <a-select
+            style="width: 130px"
+            placeholder="请选择重要性"
+            ref="select"
+            v-decorator="['priority', { rules: [{ required: true, message: '请选择重要性!' }] }]"
+          >
             <a-select-option value="0">高</a-select-option>
             <a-select-option value="1">中</a-select-option>
             <a-select-option value="2">低</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item v-if="this.model.key" :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务状态">
-          <a-select style="width:100px" ref="select" v-decorator="['status']">
+          <a-select style="width: 100px" ref="select" v-decorator="['status']">
             <a-select-option value="0">进行中</a-select-option>
             <a-select-option value="1">未开始</a-select-option>
             <a-select-option value="2">已完成</a-select-option>
             <a-select-option value="3">未完成</a-select-option>
+            <a-select-option value="4">延时中</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">
-          <a-date-picker format="YYYY-MM-DD HH:mm:ss" placeholder="开始时间" v-decorator="['startTime', {rules: [{ required: true, message: '请选择开始时间!' }]}]" />
+          <a-date-picker
+            format="YYYY-MM-DD HH:mm:ss"
+            placeholder="开始时间"
+            v-decorator="['startTime', { rules: [{ required: true, message: '请选择开始时间!' }] }]"
+          />
           ~
-          <a-date-picker format="YYYY-MM-DD HH:mm:ss" placeholder="结束时间" v-decorator="['completionTime', {rules: [{ required: true, message: '请选择结束时间!' }]}]" />
+          <a-date-picker
+            format="YYYY-MM-DD HH:mm:ss"
+            placeholder="结束时间"
+            v-decorator="['completionTime', { rules: [{ required: true, message: '请选择结束时间!' }] }]"
+          />
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上传文件">
           <a-upload name="file" :multiple="true" :headers="headers" @change="handleChange">
-            <a-input placeholder="请上传文件" v-decorator="[ 'document', validatorRules.document]">
+            <a-input placeholder="请上传文件" v-decorator="['document', validatorRules.document]">
               <upload-outlined></upload-outlined>
             </a-input>
           </a-upload>
@@ -44,18 +69,18 @@
 
 <script>
 import { httpAction } from '@/api/manage'
-import JCron from "@/components/jeecg/JCron";
+import JCron from '@/components/jeecg/JCron'
 import pick from 'lodash.pick'
-import moment from "moment"
+import moment from 'moment'
 
 export default {
-  name: "TaskListModel",
+  name: 'TaskListModel',
   components: {
-    JCron
+    JCron,
   },
   data() {
     return {
-      title: "操作",
+      title: '操作',
       buttonStyle: 'solid',
       visible: false,
       model: {},
@@ -69,79 +94,78 @@ export default {
       },
       cron: {
         label: '',
-        value: ''
+        value: '',
       },
       confirmLoading: false,
       form: this.$form.createForm(this),
-      validatorRules: {
-
-      },
+      validatorRules: {},
       url: {
-        add: "/sys/quartzJob/add",
-        edit: "/sys/quartzJob/edit",
+        add: '/sys/quartzJob/add',
+        edit: '/sys/quartzJob/edit',
       },
     }
   },
-  created() {
-  },
+  created() {},
   methods: {
     moment,
     add(record) {
-      let that = this;
-      that.form.resetFields();
-      this.model = Object.assign({}, record);
+      let that = this
+      that.form.resetFields()
+      this.model = Object.assign({}, record)
       console.log(this.model)
-      this.visible = true;
+      this.visible = true
     },
     edit(record) {
-      let that = this;
-      that.form.resetFields();
-      this.model = Object.assign({}, record);
+      let that = this
+      that.form.resetFields()
+      this.model = Object.assign({}, record)
       console.log(this.model)
-      this.visible = true;
-      this.model.startTime = this.model.startTime ? moment(this.model.startTime, 'YYYY/MM/DD HH:mm:ss') : null;
-      this.model.completionTime = this.model.completionTime ? moment(this.model.completionTime, 'YYYY/MM/DD HH:mm:ss') : null;
+      this.visible = true
+      this.model.startTime = this.model.startTime ? moment(this.model.startTime, 'YYYY/MM/DD HH:mm:ss') : null
+      this.model.completionTime = this.model.completionTime
+        ? moment(this.model.completionTime, 'YYYY/MM/DD HH:mm:ss')
+        : null
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(this.model, 'taskName', 'priority', 'status', 'completionTime', 'startTime'));
-      });
+        this.form.setFieldsValue(pick(this.model, 'taskName', 'priority', 'status', 'completionTime', 'startTime'))
+      })
     },
     close() {
-      this.$emit('close');
-      this.visible = false;
+      this.$emit('close')
+      this.visible = false
     },
     handleOk() {
-      const that = this;
+      const that = this
       // 触发表单验证
       this.form.validateFields((err, values) => {
         console.log('values', values)
         if (!err) {
-
-          that.confirmLoading = true;
-          let httpurl = '';
-          let method = '';
+          that.confirmLoading = true
+          let httpurl = ''
+          let method = ''
           if (!this.model.id) {
-            httpurl += this.url.add;
-            method = 'post';
+            httpurl += this.url.add
+            method = 'post'
           } else {
-            httpurl += this.url.edit;
-            method = 'put';
+            httpurl += this.url.edit
+            method = 'put'
           }
-          let formData = Object.assign(this.model, values);
+          let formData = Object.assign(this.model, values)
           //时间格式化
 
           console.log('提交参数', formData)
-          httpAction(httpurl, formData, method).then((res) => {
-            if (res.success) {
-              that.$message.success(res.message);
-              that.$emit('ok');
-            } else {
-              that.$message.warning(res.message);
-            }
-          }).finally(() => {
-            that.confirmLoading = false;
-            that.close();
-          })
-
+          httpAction(httpurl, formData, method)
+            .then((res) => {
+              if (res.success) {
+                that.$message.success(res.message)
+                that.$emit('ok')
+              } else {
+                that.$message.warning(res.message)
+              }
+            })
+            .finally(() => {
+              that.confirmLoading = false
+              that.close()
+            })
         }
       })
     },
@@ -166,8 +190,7 @@ export default {
     //     callback("请输入cron表达式!");
     //   }
     // },
-
-  }
+  },
 }
 </script>
 

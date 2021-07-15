@@ -8,9 +8,21 @@
         <div class="table-page-search-wrapper">
           <a-form layout="inline">
             <a-row :gutter="24">
-              <a-col :xl="5" :lg="7" :md="8" :sm="24">
+              <a-col :xl="5" :lg="5" :md="8" :sm="24">
                 <a-form-item label="合同编号">
                   <a-input placeholder="请输入合同编号"></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :xl="5" :lg="5" :md="8" :sm="24">
+                <a-form-item label="合同名称">
+                  <a-select
+                    allowClear
+                    placeholder="请选择合同名称"
+                  >
+                    <a-select-option v-for="d in ConNameSelectData" :key="d.value">
+                      {{ d.text }}
+                    </a-select-option>
+                  </a-select>
                 </a-form-item>
               </a-col>
              <a-col :xl="5" :lg="5" :md="6" :sm="24">
@@ -42,23 +54,10 @@
                   <j-date placeholder="请选择收租日期" class="query-group-cust"  v-model="paytime"></j-date>
                 </a-form-item>
               </a-col>
-    <!--          <a-col :xl="5" :lg="5" :md="6" :sm="24">-->
-    <!--            <a-form-item label="资产使用人">-->
-    <!--              <a-select-->
-    <!--                allowClear-->
-    <!--                placeholder="请选择资产使用人"-->
-    <!--              >-->
-    <!--                <a-select-option v-for="d in userSelectData" :key="d.value">-->
-    <!--                  {{ d.text }}-->
-    <!--                </a-select-option>-->
-    <!--              </a-select>-->
-    <!--            </a-form-item>-->
-    <!--          </a-col>-->
               <a-col :xl="6" :lg="7" :md="8" :sm="24">
                 <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
                   <a-button type="primary" icon="search">查询</a-button>
                   <a-button icon="reload" style="margin-left: 8px">重置</a-button>
-
                 </span>
               </a-col>
 
@@ -80,44 +79,44 @@
 
         </div>
 
-        <!-- 统计数值区域 -->
-        <div class="table-statistic " style="background: #ECECEC; padding: 15px">
-          <a-row :gutter="16">
-            <a-col :span="12">
-              <a-card>
-                <a-statistic
-                  title="收租总次数"
-                  :value="21"
-                  suffix="次"
-                  :value-style="{ color: '#3f8600' }"
-                  style="margin-right: 50px"
-                >
-                  <template #prefix>
-                    <a-icon type="fund" />
-                    <!--                <a-icon type="arrow-up" />-->
-                  </template>
-                </a-statistic>
-              </a-card>
-            </a-col>
-            <a-col :span="12">
-              <a-card>
-                <a-statistic
-                  title="收租收入总金额"
-                  :value="24"
-                  :precision="2"
-                  suffix="万"
-                  class="demo-class"
-                  :value-style="{ color: '#cf1322' }"
-                >
-                  <template #prefix>
-                    <a-icon type="dollar" />
-                    <!--                <a-icon type="arrow-down" />-->
-                  </template>
-                </a-statistic>
-              </a-card>
-            </a-col>
-          </a-row>
-        </div>
+<!--        &lt;!&ndash; 统计数值区域 &ndash;&gt;-->
+<!--        <div class="table-statistic " style="background: #ECECEC; padding: 15px">-->
+<!--          <a-row :gutter="16">-->
+<!--            <a-col :span="12">-->
+<!--              <a-card>-->
+<!--                <a-statistic-->
+<!--                  title="收租总次数"-->
+<!--                  :value="21"-->
+<!--                  suffix="次"-->
+<!--                  :value-style="{ color: '#3f8600' }"-->
+<!--                  style="margin-right: 50px"-->
+<!--                >-->
+<!--                  <template #prefix>-->
+<!--                    <a-icon type="fund" />-->
+<!--                    &lt;!&ndash;                <a-icon type="arrow-up" />&ndash;&gt;-->
+<!--                  </template>-->
+<!--                </a-statistic>-->
+<!--              </a-card>-->
+<!--            </a-col>-->
+<!--            <a-col :span="12">-->
+<!--              <a-card>-->
+<!--                <a-statistic-->
+<!--                  title="收租收入总金额"-->
+<!--                  :value="24"-->
+<!--                  :precision="2"-->
+<!--                  suffix="万"-->
+<!--                  class="demo-class"-->
+<!--                  :value-style="{ color: '#cf1322' }"-->
+<!--                >-->
+<!--                  <template #prefix>-->
+<!--                    <a-icon type="dollar" />-->
+<!--                    &lt;!&ndash;                <a-icon type="arrow-down" />&ndash;&gt;-->
+<!--                  </template>-->
+<!--                </a-statistic>-->
+<!--              </a-card>-->
+<!--            </a-col>-->
+<!--          </a-row>-->
+<!--        </div>-->
 
         <br/>
         <!-- table区域-begin -->
@@ -132,9 +131,9 @@
             :dataSource="dataSource"
             :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
             >
-            <span slot="rentRemind">
-               <a class="ant-dropdown-link" @click="textMessage()"  >发送提示短信</a>
-            </span>
+            <span slot="voucher">
+                 <a class="ant-dropdown-link"  >查看</a>
+              </span>
             <span slot="action" slot-scope="text, record">
               <a-dropdown>
                 <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
@@ -150,7 +149,7 @@
           </a-table>
         </div>
         <!-- 添加收租记录 -->
-        <Register  :modalVisible="visible" @handleCancel='handleCancel'></Register>
+<!--        <Register  :modalVisible="visible" @handleCancel='handleCancel'></Register>-->
       </a-card>
     </a-tab-pane>
 <!-- 缴租列表 -->
@@ -163,6 +162,18 @@
               <a-col :xl="5" :lg="7" :md="8" :sm="24">
                 <a-form-item label="合同编号">
                   <a-input placeholder="请输入合同编号"></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :xl="5" :lg="5" :md="8" :sm="24">
+                <a-form-item label="合同名称">
+                  <a-select
+                    allowClear
+                    placeholder="请选择合同名称"
+                  >
+                    <a-select-option v-for="d in ConNameSelectDatapay" :key="d.value">
+                      {{ d.text }}
+                    </a-select-option>
+                  </a-select>
                 </a-form-item>
               </a-col>
               <a-col :xl="5" :lg="5" :md="6" :sm="24">
@@ -220,44 +231,44 @@
 
         </div>
 
-        <!-- 统计数值区域 -->
-        <div class="table-statistic " style="background: #ECECEC; padding: 15px">
-          <a-row :gutter="16">
-            <a-col :span="12">
-              <a-card>
-                <a-statistic
-                  title="缴租总次数"
-                  :value="11"
-                  suffix="次"
-                  :value-style="{ color: '#3f8600' }"
-                  style="margin-right: 50px"
-                >
-                  <template #prefix>
-                    <a-icon type="fund" />
-                    <!--                <a-icon type="arrow-up" />-->
-                  </template>
-                </a-statistic>
-              </a-card>
-            </a-col>
-            <a-col :span="12">
-              <a-card>
-                <a-statistic
-                  title="缴租支出租总金额"
-                  :value="12"
-                  :precision="2"
-                  suffix="万"
-                  class="demo-class"
-                  :value-style="{ color: '#cf1322' }"
-                >
-                  <template #prefix>
-                    <a-icon type="dollar" />
-                    <!--                <a-icon type="arrow-down" />-->
-                  </template>
-                </a-statistic>
-              </a-card>
-            </a-col>
-          </a-row>
-        </div>
+<!--        &lt;!&ndash; 统计数值区域 &ndash;&gt;-->
+<!--        <div class="table-statistic " style="background: #ECECEC; padding: 15px">-->
+<!--          <a-row :gutter="16">-->
+<!--            <a-col :span="12">-->
+<!--              <a-card>-->
+<!--                <a-statistic-->
+<!--                  title="缴租总次数"-->
+<!--                  :value="11"-->
+<!--                  suffix="次"-->
+<!--                  :value-style="{ color: '#3f8600' }"-->
+<!--                  style="margin-right: 50px"-->
+<!--                >-->
+<!--                  <template #prefix>-->
+<!--                    <a-icon type="fund" />-->
+<!--                    &lt;!&ndash;                <a-icon type="arrow-up" />&ndash;&gt;-->
+<!--                  </template>-->
+<!--                </a-statistic>-->
+<!--              </a-card>-->
+<!--            </a-col>-->
+<!--            <a-col :span="12">-->
+<!--              <a-card>-->
+<!--                <a-statistic-->
+<!--                  title="缴租支出租总金额"-->
+<!--                  :value="12"-->
+<!--                  :precision="2"-->
+<!--                  suffix="万"-->
+<!--                  class="demo-class"-->
+<!--                  :value-style="{ color: '#cf1322' }"-->
+<!--                >-->
+<!--                  <template #prefix>-->
+<!--                    <a-icon type="dollar" />-->
+<!--                    &lt;!&ndash;                <a-icon type="arrow-down" />&ndash;&gt;-->
+<!--                  </template>-->
+<!--                </a-statistic>-->
+<!--              </a-card>-->
+<!--            </a-col>-->
+<!--          </a-row>-->
+<!--        </div>-->
 
         <br/>
         <!-- table区域-begin -->
@@ -268,13 +279,13 @@
             bordered
             rowKey="key"
             :scroll="{x:2500}"
-            :columns="columns"
+            :columns="columnspay"
             :dataSource="dataSourcepay"
             :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
           >
-            <span slot="rentRemind">
-               <a class="ant-dropdown-link" @click="textMessage()"  >发送提示短信</a>
-            </span>
+             <span slot="voucher">
+                 <a class="ant-dropdown-link"  >查看</a>
+              </span>
             <span slot="action" slot-scope="text, record">
               <a-dropdown>
                 <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
@@ -290,7 +301,7 @@
           </a-table>
         </div>
         <!-- 添加收租记录 -->
-        <Register  :modalVisible="visible" @handleCancel='handleCancel'></Register>
+<!--        <Register  :modalVisible="visible" @handleCancel='handleCancel'></Register>-->
       </a-card>
     </a-tab-pane>
   </a-tabs>
@@ -313,6 +324,36 @@ export default {
   data () {
       return {
         description: '收租列表',
+        //合同名称
+        ConNameSelectData:[
+          {
+            value : 1,
+            text : '烟草公司房屋和建筑物合同',
+          },
+          {
+            value : 2,
+            text : '方正有限公司房屋和建筑物合同',
+          },
+          {
+            value : 3,
+            text : '卷烟厂房屋和建筑物合同',
+          },
+        ],
+        //承租合同名称选择
+        ConNameSelectDatapay:[
+          {
+            value : 1,
+            text : '福州朝阳贸易有限公司房屋和建筑物合同',
+          },
+          {
+            value : 2,
+            text : '福州烟草加工厂房屋和建筑物合同',
+          },
+          {
+            value : 3,
+            text : '福州卷烟厂房屋和建筑物合同',
+          },
+        ],
         //承租方
         manuSelectData:[
         {
@@ -359,59 +400,56 @@ export default {
           {
             key:'1',
             contractNunmber: 'ZC0001',
+            contractName:'方正有限公司房屋和建筑物合同',
             assetUser: '方正有限公司',
-            assetOwner: '烟草公司',
             payDate: '2020-07-05',
             lentValue: '100000.00',
             worker:'王立',
-            voucher:'纸质发票',
-            remark : '暂无',
+            remark:'纸质发票',
           },
           {
             key:'2',
             contractNunmber: 'ZC0002',
+            contractName:'卷烟厂房屋和建筑物合同',
             assetUser: '卷烟厂',
-            assetOwner: '烟草公司',
-            payDate: '2020-08-05',
+            payDate: '2020-07-05',
             lentValue: '10000.00',
             worker:'王立',
-            voucher:'网络转账记录',
-            remark : '暂无',
+            remark:'网络转账记录',
           },
           {
             key:'3',
-            contractNunmber: 'ZC0003',
-            assetOwner: '烟草公司',
+            contractNunmber: 'ZC0002',
+            contractName:'卷烟厂房屋和建筑物合同',
+
             assetUser: '卷烟厂',
-            payDate: '2020-07-13',
+            payDate: '2019-07-05',
             lentValue: '30000.00',
             worker:'王立',
-            voucher:'网络转账记录',
-            remark : '暂无',
+            remark:'网络转账记录',
           }
           ],
         dataSourcepay: [
           {
             key:'1',
             contractNunmber: 'CC0001',
+            contractName:'福州朝阳贸易有限公司房屋和建筑物合同',
             assetOwner: '福州朝阳贸易有限公司',
-            assetUser: '烟草公司',
             payDate: '2020-07-05',
             lentValue: '100000.00',
             worker:'王立',
-            voucher:'纸质发票',
-            remark : '暂无',
+            remark:'纸质发票',
+
           },
           {
             key:'2',
             contractNunmber: 'CC0002',
+            contractName:'福州烟草加工厂房屋和建筑物合同',
             assetOwner: '福州烟草加工厂',
-            assetUser: '烟草公司',
             payDate: '2020-08-05',
             lentValue: '10000.00',
             worker:'王立',
-            voucher:'网络转账记录',
-            remark : '暂无',
+            remark:'网络转账记录',
           },
         ],
         // 表头
@@ -435,9 +473,11 @@ export default {
             dataIndex: 'contractNunmber',
           },
           {
-            title:'出租方',
+            title:'合同名称',
             align:"center",
-            dataIndex: 'assetOwner'
+            fixed: 'left',
+            width:220,
+            dataIndex: 'contractName',
           },
           {
             title:'承租方',
@@ -445,12 +485,12 @@ export default {
             dataIndex: 'assetUser'
           },
           {
-            title:'收缴租金日期',
+            title:'收租日期',
             align:"center",
             dataIndex: 'payDate'
           },
           {
-            title:'租金',
+            title:'收租金额',
             align:"center",
             dataIndex: 'lentValue'
           },
@@ -462,7 +502,73 @@ export default {
           {
             title:'收租凭证',
             align:"center",
-            dataIndex: 'voucher'
+            dataIndex: 'voucher',
+            scopedSlots: { customRender: 'voucher' },
+          },
+          {
+            title:'备注',
+            align:"center",
+            dataIndex: 'remark'
+          },
+          {
+            title: '操作',
+            dataIndex: 'action',
+            align:"center",
+            scopedSlots: { customRender: 'action' },
+          }
+        ],
+        // 缴租表头
+        columnspay: [
+          {
+            title: '#',
+            dataIndex: '',
+            key:'rowIndex',
+            fixed: 'left',
+            width:40,
+            align:"center",
+            customRender:function (t,r,index) {
+              return parseInt(index)+1;
+            }
+          },
+          {
+            title:'合同编号',
+            align:"center",
+            fixed: 'left',
+            width:130,
+            dataIndex: 'contractNunmber',
+          },
+          {
+            title:'合同名称',
+            align:"center",
+            fixed: 'left',
+            width:220,
+            dataIndex: 'contractName',
+          },
+          {
+            title:'出租方',
+            align:"center",
+            dataIndex: 'assetOwner'
+          },
+          {
+            title:'收租日期',
+            align:"center",
+            dataIndex: 'payDate'
+          },
+          {
+            title:'收租金额',
+            align:"center",
+            dataIndex: 'lentValue'
+          },
+          {
+            title:'承办人',
+            align:"center",
+            dataIndex: 'worker'
+          },
+          {
+            title:'收租凭证',
+            align:"center",
+            dataIndex: 'voucher',
+            scopedSlots: { customRender: 'voucher' },
           },
           {
             title:'备注',
@@ -490,7 +596,6 @@ export default {
       },
    },
     methods: {
-
       handleToggleSearch() {
       if(this.toggleSearchStatus) this.toggleSearchStatus=false;
       else this.toggleSearchStatus=true;
@@ -533,19 +638,6 @@ export default {
         this.visible = false;
       },
 
-      //收租提示
-      textMessage(){
-        let secondsToGo = 5;
-        const modal = this.$success({
-          title: '收租短信提醒已发送',
-          // content: `收租短信提醒已发送`,
-        });
-
-        setTimeout(() => {
-          clearInterval(interval);
-          modal.destroy();
-        }, secondsToGo * 1000);
-      },
     }
 
   }

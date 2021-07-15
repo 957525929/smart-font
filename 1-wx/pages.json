@@ -2,7 +2,7 @@
 	"pages": [
 		//pages数组中第一项表示应用启动页，写的时候注意分包，方便以后一端多用！！！
 		{
-			"path": "pages/index/index",
+			"path": "pages/index/tourist",
 			"style": {}
 		},
 		//以下为示例组件库
@@ -101,8 +101,17 @@
 		}, {
 			"path": "pages/plugin/verticalnav",
 			"style": {}
+		}, {
+			"path": "pages/person/message",
+			"style": {}
+		}, {
+			"path": "pages/home/index",
+			"style": {}
+		},{
+			"path": "pages/index/staff",
+			"style": {}
 		}
-    ],
+	],
 	"globalStyle": {
 		"mp-alipay": {
 			/* 支付宝小程序特有相关 */
@@ -117,79 +126,78 @@
 		"backgroundColorTop": "#E0E0E0",
 		"backgroundColorBottom": "#E0E0E0"
 	},
-	"subPackages":[{
-			"root": "pages/workplace",
-			"name": "workplace",
-			"pages": [{
-				"path": "index",
-				"style": {
-					"navigationBarTitleText": "工作台",
-					"app-plus": {
-						"titleNView": false,
-						"bounce": "none"
-					}
-				}
-			}, {
-				"path": "property",
-				"style": {
-					"navigationBarTitleText": "物业管理",
-					"app-plus": {
-						"titleColor": "#FFFFFF",
-						"backgroundColor": "#04009A",
-						"titleSize": "16px"
-					}
-				}
-			},{
-				"path": "car",
-				"style": {
-					"navigationBarTitleText": "车辆管理",
-					"app-plus": {
-						"titleColor": "#FFFFFF",
-						"backgroundColor": "#04009A",
-						"titleSize": "16px"
-					}
-				}
-			}, {
-				"path": "lock",
-				"style": {
-					"navigationBarTitleText": "锁管理",
-					"app-plus": {
-						"titleColor": "#FFFFFF",
-						"backgroundColor": "#04009A",
-						"titleSize": "16px"
-					}
-				}
-			},{
-				"path": "access",
-				"style": {
-					"navigationBarTitleText": "访问管理",
-					"app-plus": {
-						"titleColor": "#FFFFFF",
-						"backgroundColor": "#04009A",
-						"titleSize": "16px"
-					}
-				}
-			}, {
-				"path": "meeting",
-				"style": {
-					"navigationBarTitleText": "会议接待",
-					"app-plus": {
-						"titleColor": "#FFFFFF",
-						"backgroundColor": "#04009A",
-						"titleSize": "16px"
-					}
-				}
-			}]
-	}],
+	// "subPackages":[{
+	// 		"root": "pages/workplace",
+	// 		"name": "workplace",
+	// 		"pages": [{
+	// 			"path": "index",
+	// 			"style": {
+	// 				"navigationBarTitleText": "工作台",
+	// 				"app-plus": {
+	// 					"titleNView": false,
+	// 					"bounce": "none"
+	// 				}
+	// 			}
+	// 		}, {
+	// 			"path": "property",
+	// 			"style": {
+	// 				"navigationBarTitleText": "物业管理",
+	// 				"app-plus": {
+	// 					"titleColor": "#FFFFFF",
+	// 					"backgroundColor": "#04009A",
+	// 					"titleSize": "16px"
+	// 				}
+	// 			}
+	// 		},{
+	// 			"path": "car",
+	// 			"style": {
+	// 				"navigationBarTitleText": "车辆管理",
+	// 				"app-plus": {
+	// 					"titleColor": "#FFFFFF",
+	// 					"backgroundColor": "#04009A",
+	// 					"titleSize": "16px"
+	// 				}
+	// 			}
+	// 		}, {
+	// 			"path": "lock",
+	// 			"style": {
+	// 				"navigationBarTitleText": "锁管理",
+	// 				"app-plus": {
+	// 					"titleColor": "#FFFFFF",
+	// 					"backgroundColor": "#04009A",
+	// 					"titleSize": "16px"
+	// 				}
+	// 			}
+	// 		},{
+	// 			"path": "access",
+	// 			"style": {
+	// 				"navigationBarTitleText": "访问管理",
+	// 				"app-plus": {
+	// 					"titleColor": "#FFFFFF",
+	// 					"backgroundColor": "#04009A",
+	// 					"titleSize": "16px"
+	// 				}
+	// 			}
+	// 		}, {
+	// 			"path": "meeting",
+	// 			"style": {
+	// 				"navigationBarTitleText": "会议接待",
+	// 				"app-plus": {
+	// 					"titleColor": "#FFFFFF",
+	// 					"backgroundColor": "#04009A",
+	// 					"titleSize": "16px"
+	// 				}
+	// 			}
+	// 		}]
+	// }],
 	"usingComponts": true,
-		"condition": { //模式配置，仅开发期间生效
+	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [{
-				"name": "表单", //模式名称
-				"path": "pages/component/form", //启动页面
-				"query": "" //启动参数
-			}
-		]
+			"name": "首页", //模式名称
+			"path": "pages/home/index", //启动页面
+			"query": "" //启动参数
+		}]
 	}
 
 }

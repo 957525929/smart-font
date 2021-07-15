@@ -110,6 +110,7 @@
   import ProcurementModal from './modules/ProcurementModal'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
+  import { formatDate } from '@/utils/util'
 
   export default {
     name: "ProcurementList",
@@ -122,7 +123,11 @@
       return {
         description: '采购管理页面',
         // 查询条件
-        queryParam: {roleName:'',},
+        queryParam: {
+          roleName:'',
+          time_begin:formatDate(new Date().getTime()-7*24*3600*1000,"yyyy-MM-dd"),
+          time_end:formatDate(new Date().getTime(),"yyyy-MM-dd")
+        },
         visible:false,
         dataSource: [
           {
@@ -133,7 +138,20 @@
             applyNum: '3',
             unit:'台',
             status:1,
-            applyTime: '2021-07-07 09:48:59',
+            applyTime: formatDate(new Date().getTime(),"yyyy-MM-dd") + ' 09:48:59',
+            applyReason: '办公需要',
+            checkTime: '',
+            remark:''
+          },
+          {
+            id:4,
+            applyDepertment:'烟叶管理处',
+            applyName:'张军',
+            articleName: '马克笔',
+            applyNum: '2',
+            unit:'盒',
+            status:1,
+            applyTime:formatDate(new Date().getTime(),"yyyy-MM-dd") + ' 09:01:29',
             applyReason: '办公需要',
             checkTime: '',
             remark:''
@@ -146,9 +164,9 @@
             applyNum: '2',
             unit:'盒',
             status:2,
-            applyTime: '2021-05-12 09:48:59',
+            applyTime: formatDate(new Date().getTime()-1*24*3600*1000,"yyyy-MM-dd") + ' 9:48:50',
             applyReason: '会议需要',
-            checkTime: '2021-05-13 15:32:50',
+            checkTime: formatDate(new Date().getTime()-1*24*3600*1000,"yyyy-MM-dd") + ' 15:32:50',
             remark:''
           },
           {
@@ -159,9 +177,9 @@
             applyNum: '1',
             unit:'台',
             status:3,
-            applyTime: '2021-05-21 14:40:50',
+            applyTime: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-dd") + ' 10:40:50',
             applyReason: '业务需要',
-            checkTime: '2021-05-21 15:32:50',
+            checkTime: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-dd") + ' 15:32:50',
             remark:'已有库存，可到仓库领取'
           },
         ],
@@ -239,6 +257,9 @@
       importExcelUrl: function(){
         return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;
       }
+    },
+    mounted() {
+
     },
     methods: {
       handlePerssion: function(roleId){
