@@ -121,12 +121,12 @@ export default {
           }
         },
         {
-          title:'物料名称',
+          title:'食料名称',
           align:"center",
           dataIndex: 'materialName',
         },
         {
-          title:'物料类别',
+          title:'食料类别',
           align:"center",
           dataIndex: 'materialCategory',
         },

@@ -135,22 +135,22 @@
         <span slot="action" slot-scope="text, record">
           <router-link :to="{name:'material-warehousing-warehousingDetails', params:record }">查看详情</router-link>
 <!--          <router-link :to="{path:'/material/warehousing/warehousingDetails', query:record }">查看详情</router-link>-->
-          <a><a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style='margin-left: 10%;'>删除</a-popconfirm></a>
-<!--          <a-divider type="vertical" />-->
-<!--          <a-dropdown>-->
-<!--            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>-->
-<!--            <a-menu slot="overlay">-->
-<!--              <a-menu-item key="1" >编辑</a-menu-item>-->
-<!--              <a-menu-item key="2" >-->
-<!--                <a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)">删除</a-popconfirm>-->
-<!--              </a-menu-item>-->
-<!--            </a-menu>-->
-<!--          </a-dropdown>-->
+<!--          <a><a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style='margin-left: 10%;'>删除</a-popconfirm></a>-->
+          <a-divider type="vertical" />
+          <a-dropdown>
+            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
+            <a-menu slot="overlay">
+              <a-menu-item key="1" @click='purInEditOnClick(record)'>编辑</a-menu-item>
+              <a-menu-item key="2" >
+                <a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style='margin-left: 10%;'>删除</a-popconfirm>
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
         </span>
       </a-table>
     </div>
 
-    <PurInModal :modalVisible='modalVisible' @handleCancel='handleCancel'></PurInModal>
+    <PurInModal v-if='modalVisible' :modalVisible='modalVisible' @handleCancel='handleCancel' :basicInfo='basicInfo'></PurInModal>
 
 
   </a-card>
@@ -170,6 +170,7 @@ export default {
   },
   data () {
     return {
+      basicInfo:{},
       form1: this.$form.createForm(this),
       manuSelectData:[
         {
@@ -348,6 +349,11 @@ export default {
       console.log(date, dateString);
     },
     purInOnClick() {
+      this.basicInfo={};
+      this.modalVisible = true;
+    },
+    purInEditOnClick(record) {
+      this.basicInfo = record;
       this.modalVisible = true;
     },
     handleCancel() {

@@ -6,7 +6,7 @@
         <a-form layout="inline" :form="form1">
           <a-row :gutter="24">
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
-              <a-form-item label="物料类别">
+              <a-form-item label="食料类别">
                 <a-input placeholder="请输入" v-decorator="['purchaseOrderNumber']"></a-input>
               </a-form-item>
             </a-col>
@@ -60,8 +60,8 @@
 
       <a-spin :spinning="confirmLoading">
         <a-form-model ref="form"  v-bind="layout"  :model="model" :rules="validatorRules">
-          <a-form-model-item label="物料类别" required prop="type">
-            <a-input v-model="model.type" placeholder="请输入物料类别名称"/>
+          <a-form-model-item label="食料类别" required prop="type">
+            <a-input v-model="model.type" placeholder="请输入食料类别名称"/>
           </a-form-model-item>
           <a-form-model-item label="备注"  prop="ps">
             <a-textarea rows="5" v-model="model.ps" placeholder="请输入备注"/>
@@ -108,7 +108,7 @@ export default {
           }
         },
         {
-          title:'物料类别',
+          title:'食料类别',
           align:"center",
           dataIndex: 'type'
         },
@@ -137,7 +137,7 @@ export default {
       confirmLoading: false,
       validatorRules:{
         type: [
-          { required: true, message: '请输入物料类别名称!'},
+          { required: true, message: '请输入食料类别名称!'},
         ],
         ps: [
           { min: 0, max: 126, message: '长度不超过 126 个字符', trigger: 'blur' },
