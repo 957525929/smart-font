@@ -21,18 +21,6 @@
               </a-select>
             </a-form-item>
           </a-col>
-         <a-col :xl="5" :lg="5" :md="6" :sm="24">
-            <a-form-item label="资产所有方">
-              <a-select
-                allowClear
-                placeholder="请选择资产所有方"
-              >
-                <a-select-option v-for="d in manuSelectData" :key="d.value">
-                  {{ d.text }}
-                </a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
           <a-col :xl="5" :lg="5" :md="6" :sm="24">
             <a-form-item label="资产使用方">
               <a-select
@@ -57,13 +45,13 @@
               </a-select>
             </a-form-item>
           </a-col>
-          <a-col :xl="8" :lg="9" :md="10" :sm="24">
-            <a-form-item label="时间范围">
-              <j-date placeholder="请选择开始" class="query-group-cust"  v-model="time.Date_begin"></j-date>
-              <span class="query-group-split-cust"></span>
-              <j-date placeholder="请选择结束" class="query-group-cust"  v-model="time.Date_end"></j-date>
-            </a-form-item>
-          </a-col>
+<!--          <a-col :xl="8" :lg="9" :md="10" :sm="24">-->
+<!--            <a-form-item label="时间范围">-->
+<!--              <j-date placeholder="请选择开始" class="query-group-cust"  v-model="time.Date_begin"></j-date>-->
+<!--              <span class="query-group-split-cust"></span>-->
+<!--              <j-date placeholder="请选择结束" class="query-group-cust"  v-model="time.Date_end"></j-date>-->
+<!--            </a-form-item>-->
+<!--          </a-col>-->
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" icon="search">查询</a-button>
@@ -89,43 +77,43 @@
 
     </div>
     <!-- 统计数值区域 -->
-    <div class="table-statistic " style="background: #ECECEC; padding: 15px">
-      <a-row :gutter="16">
-        <a-col :span="12">
-          <a-card>
-            <a-statistic
-              title="资产流转次数"
-              :value="21"
-              suffix="次"
-              :value-style="{ color: '#3f8600' }"
-              style="margin-right: 50px"
-            >
-              <template #prefix>
-                <a-icon type="sync" />
-<!--                <a-icon type="arrow-up" />-->
-              </template>
-            </a-statistic>
-          </a-card>
-        </a-col>
-        <a-col :span="12">
-          <a-card>
-            <a-statistic
-              title="资产流转总额"
-              :value="24"
-              :precision="2"
-              suffix="万"
-              class="demo-class"
-              :value-style="{ color: '#cf1322' }"
-            >
-              <template #prefix>
-                <a-icon type="transaction" />
-<!--                <a-icon type="arrow-down" />-->
-              </template>
-            </a-statistic>
-          </a-card>
-        </a-col>
-      </a-row>
-    </div>
+<!--    <div class="table-statistic " style="background: #ECECEC; padding: 15px">-->
+<!--      <a-row :gutter="16">-->
+<!--        <a-col :span="12">-->
+<!--          <a-card>-->
+<!--            <a-statistic-->
+<!--              title="资产流转次数"-->
+<!--              :value="21"-->
+<!--              suffix="次"-->
+<!--              :value-style="{ color: '#3f8600' }"-->
+<!--              style="margin-right: 50px"-->
+<!--            >-->
+<!--              <template #prefix>-->
+<!--                <a-icon type="sync" />-->
+<!--&lt;!&ndash;                <a-icon type="arrow-up" />&ndash;&gt;-->
+<!--              </template>-->
+<!--            </a-statistic>-->
+<!--          </a-card>-->
+<!--        </a-col>-->
+<!--        <a-col :span="12">-->
+<!--          <a-card>-->
+<!--            <a-statistic-->
+<!--              title="资产流转总额"-->
+<!--              :value="24"-->
+<!--              :precision="2"-->
+<!--              suffix="万"-->
+<!--              class="demo-class"-->
+<!--              :value-style="{ color: '#cf1322' }"-->
+<!--            >-->
+<!--              <template #prefix>-->
+<!--                <a-icon type="transaction" />-->
+<!--&lt;!&ndash;                <a-icon type="arrow-down" />&ndash;&gt;-->
+<!--              </template>-->
+<!--            </a-statistic>-->
+<!--          </a-card>-->
+<!--        </a-col>-->
+<!--      </a-row>-->
+<!--    </div>-->
 
     <br/>
 
@@ -235,14 +223,6 @@ export default {
             value : 2,
             text : '使用中',
           },
-          {
-            value : 3,
-            text : '租出',
-          },
-          {
-            value : 4,
-            text : '租入',
-          },
         ],
         dataSource: [
         {
@@ -254,7 +234,7 @@ export default {
           assetOwner: '烟草公司',
           assetUser: '方正有限公司',
           recordDate: '2018-07-05',
-          assetStates:'租出',
+          assetStates:'使用中',
           remark : '无',
         },
         {
@@ -266,7 +246,7 @@ export default {
           assetOwner: '烟草公司',
           assetUser: '卷烟厂',
           recordDate: '2015-07-05',
-          assetStates:'租出',
+          assetStates:'使用中',
           remark : '无',
         },
           {
@@ -291,30 +271,6 @@ export default {
             assetUser: '烟草公司',
             recordDate: '2020-07-05',
             assetStates:'使用中',
-            remark : '无',
-          },
-          {
-            key:'5',
-            assetNunmber: 'ZCAT2021070504',
-            assetName: '四角办公大楼负一楼仓库',
-            assetType:'房屋和建筑物',
-            assetValue: '135000.00',
-            assetOwner: '福州朝阳贸易有限公司',
-            assetUser: '烟草公司',
-            recordDate: '2020-07-05',
-            assetStates:'租入',
-            remark : '无',
-          },
-          {
-            key:'6',
-            assetNunmber: 'ZCAT2021070505',
-            assetName: '卷烟厂污水处理设备',
-            assetType:'专用设备',
-            assetValue: '15000.00',
-            assetOwner: '福州烟草加工厂',
-            assetUser: '烟草公司',
-            recordDate: '2018-07-05',
-            assetStates:'租入',
             remark : '无',
           },
       ],
@@ -364,17 +320,9 @@ export default {
             dataIndex: 'assetUser'
           },
           {
-            title:'资产状态',
+            title:'资产当前状态',
             align:"center",
             dataIndex: 'assetStates'
-          },
-           {
-            title:'启用日期',
-            align:"center",
-            dataIndex: 'recordDate',
-            customRender:function (text) {
-              return !text?"":(text.length>10?text.substr(0,10):text)
-            }
           },
           {
             title:'历史流转记录',
