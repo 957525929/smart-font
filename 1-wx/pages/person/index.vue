@@ -19,10 +19,18 @@
 			</view>
 			<view class="cu-list menu sm-border card-menu margin-top">
 				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title">
-					<text class="text-grey">{{item.title}}</text>
+					<view class="action">
+						<view class="text-grey">{{item.title}}</view>
+						<view class="text-grey text-xs">{{item.label}}</view>
+					</view>
+					<view v-if="item.message" class="cu-tag round bg-red sm" @click='openMessage'>1</view>
+					<view v-if="item.edition" class=" text-grey">{{item.edition}}</view>
 				</view>
 			</view>
+
 		</view>
+
+
 	</view>
 </template>
 
@@ -33,21 +41,48 @@
 		url: 'info'
 	}, {
 		imgUrl: 'iconfont iconyijianfankui',
-		title: '关于我们',
+		title: '消息通知',
 		url: 'about',
+		message: '111'
 	}, {
 		imgUrl: 'iconfont iconset-copy-copy',
 		title: '系统设置',
 		url: 'sysSetting'
+	}, {
+		imgUrl: 'iconfont iconset-copy-copy',
+		title: '系统日志',
+		url: 'sysSetting'
+	}, {
+		imgUrl: 'iconfont iconset-copy-copy',
+		title: '清除缓存',
+		url: 'sysSetting',
+		label: '45.5Mb'
+	}, {
+		imgUrl: 'iconfont iconset-copy-copy',
+		title: '关于我们',
+		url: 'sysSetting'
+	}, {
+		imgUrl: 'iconfont iconset-copy-copy',
+		title: '版本更新',
+		url: 'sysSetting',
+		label: 'V2.0',
+		edition: "当前版本"
 	}]
 
 	export default {
 		data() {
 			return {
-				title: "你好，管理员",
+				title: "你好，林倩",
 				contentList: content,
 				colorIs: "#616161",
 			};
+		},
+		methods: {
+			openMessage() {
+				uni.navigateTo({
+					url: '/pages/person/message'
+				});
+			}
 		}
 	};
 </script>
@@ -69,12 +104,14 @@
 		height: 170rpx;
 		margin: 20px;
 	}
-.avat image{
-	width: 80px; 
-	height: 80px; 
-	background-color: #eeeeee;
-	border-radius: 50%;
-}
+
+	.avat image {
+		width: 80px;
+		height: 80px;
+		background-color: #eeeeee;
+		border-radius: 50%;
+	}
+
 	.fontContent {
 		flex: 1;
 	}

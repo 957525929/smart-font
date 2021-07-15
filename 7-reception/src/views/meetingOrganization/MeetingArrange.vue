@@ -66,7 +66,7 @@
         <a-table-column title="会议编号" data-index="id" align="left" width="150px" fixed="left"></a-table-column>
          <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
          <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>
-         <a-table-column title="会议预算" data-index="budget" align="left"></a-table-column>
+         <a-table-column title="会议预算（元）" data-index="budget" align="center"></a-table-column>
         <a-table-column title="会议时间" data-index="dateTime" align="center"></a-table-column>
         <a-table-column title="会议地点" data-index="address" align="center"></a-table-column>
         <a-table-column title="会议成员" data-index="members" align="center"></a-table-column>

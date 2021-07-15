@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgColor="cu-tag light bg-yellow">
+		<cu-custom bgColor="bg-yellow">
 			<block slot="content">访问预约单填写</block>
 		</cu-custom>
 		<view class="cu-bar bg-white ">
