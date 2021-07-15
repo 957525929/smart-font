@@ -90,11 +90,11 @@
           :dataSource="dataSource"
           :pagination="{total:this.dataSource.length, showTotal:(total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`}"
         >
-        <span slot="checkoutPeople" slot-scope="text, record">
-          <a-switch checked-children="是" un-checked-children="否" :default-checked="text == '是'" />
-        </span>
+<!--        <span slot="checkoutPeople" slot-scope="text, record">-->
+<!--          <a-switch checked-children="是" un-checked-children="否"  :checked='record.checkoutPeople'/>-->
+<!--        </span>-->
           <span slot="action" slot-scope="text, record">
-          <a @click='edit'>编辑</a>
+          <a @click='edit(record)'>编辑</a>
           <a><a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style='margin-left: 10%;'>删除</a-popconfirm></a>
         </span>
         </a-table>
@@ -115,23 +115,23 @@
 
       <a-spin :spinning="confirmLoading">
         <a-form-model ref="form"  v-bind="layout"  :model="model" :rules="validatorRules">
-          <a-form-model-item label="菜品名称" required prop="roleCode">
-            <a-input v-model="model.roleCode" placeholder="请输入菜品名称"/>
+          <a-form-model-item label="菜品名称" required prop="purchaseOrderNumber">
+            <a-input v-model="model.purchaseOrderNumber" placeholder="请输入菜品名称"/>
           </a-form-model-item>
-          <a-form-model-item label="菜品类别" required prop="roleName">
-            <a-select allowClear v-model="model.roleName" placeholder="请选择菜品类别">
+          <a-form-model-item label="菜品类别" required prop="headline">
+            <a-select allowClear v-model="model.headline" placeholder="请选择菜品类别">
               <a-select-option value="荤菜">荤菜</a-select-option>
               <a-select-option value="素菜">素菜</a-select-option>
             </a-select>
           </a-form-model-item>
-          <a-form-model-item label="菜品分类" required prop="roleName1">
-            <a-select allowClear v-model="model.roleName1" placeholder="请选择菜品分类">
+          <a-form-model-item label="菜品分类" required prop="purchasePeople">
+            <a-select allowClear v-model="model.purchasePeople" placeholder="请选择菜品分类">
               <a-select-option value="客家菜">客家菜</a-select-option>
               <a-select-option value="粤菜">粤菜</a-select-option>
             </a-select>
           </a-form-model-item>
-          <a-form-model-item label="辣度" required prop="description">
-            <a-select allowClear v-model="model.description" placeholder="请选择辣度">
+          <a-form-model-item label="辣度" required prop="purchaseDate">
+            <a-select allowClear v-model="model.purchaseDate" placeholder="请选择辣度">
               <a-select-option value="不辣">不辣</a-select-option>
               <a-select-option value="微辣">微辣</a-select-option>
               <a-select-option value="中辣">中辣</a-select-option>
@@ -141,8 +141,8 @@
           <a-form-model-item label="上传时间" prop="time">
             <a-date-picker  v-model="model.time" :default-value="todayTime" disabled />
           </a-form-model-item>
-          <a-form-model-item label="是否启用" prop="apply">
-            <a-switch v-model="model.apply" checked-children="是" un-checked-children="否"  />
+          <a-form-model-item label="是否启用" prop="checkoutPeople">
+            <a-switch v-model="model.checkoutPeople" :checked='model.checkoutPeople' checked-children="是" un-checked-children="否"  />
           </a-form-model-item>
           <a-form-model-item label="备注"  prop="ps">
             <a-textarea rows="5" v-model="model.ps" placeholder="请输入备注"/>
@@ -168,7 +168,6 @@ export default {
     return {
       todayTime:moment(new Date().toLocaleDateString(), 'YYYY-MM-DD'),
       form1: this.$form.createForm(this),
-      description: '采购入库',
       dataSource: [
         {
           id:'1',
@@ -178,7 +177,7 @@ export default {
           purchaseDate: '微辣',
           purchaseNum: '2021-05-01',
           totalMoney: '暂无',
-          checkoutPeople: '是',
+          checkoutPeople: true,
         },
       ],
       // 表头
@@ -217,12 +216,12 @@ export default {
           align:"center",
           dataIndex: 'purchaseNum'
         },
-        {
-          title:'是否启用',
-          align:"center",
-          dataIndex: 'checkoutPeople',
-          scopedSlots: { customRender: 'checkoutPeople'},
-        },
+        // {
+        //   title:'是否启用',
+        //   align:"center",
+        //   dataIndex: 'checkoutPeople',
+        //   scopedSlots: { customRender: 'checkoutPeople'},
+        // },
         {
           title:'备注',
           align:"center",
@@ -247,16 +246,16 @@ export default {
       },
       confirmLoading: false,
       validatorRules:{
-        roleCode: [
+        purchaseOrderNumber: [
           { required: true, message: '请输入菜品名称!'},
         ],
-        roleName: [
+        headline: [
           { required: true, message: '请选择菜品类别!' },
         ],
-        roleName1: [
+        purchasePeople: [
           { required: true, message: '请选择菜品分类!' },
         ],
-        description: [
+        purchaseDate: [
           { required: true, message: '请选择辣度!' },
         ],
         ps: [

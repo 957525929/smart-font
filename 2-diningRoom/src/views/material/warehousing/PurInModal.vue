@@ -142,7 +142,7 @@
 <!--      dataSource: [],-->
 <!--      columns: [-->
 <!--        {-->
-<!--          title: '物料名称',-->
+<!--          title: '食料名称',-->
 <!--          key: 'materialName',-->
 <!--          type: FormTypes.input,-->
 <!--          placeholder: '请输入${title}',-->
@@ -151,7 +151,7 @@
 <!--          ],-->
 <!--        },-->
 <!--        // {-->
-<!--        //   title: '物料类别',-->
+<!--        //   title: '食料类别',-->
 <!--        //   key: 'materialCategory',-->
 <!--        //   type: FormTypes.select,-->
 <!--        //   placeholder: '请选择${title}',-->
@@ -164,7 +164,7 @@
 <!--        //   ]-->
 <!--        // },-->
 <!--        {-->
-<!--          title: '物料类别',-->
+<!--          title: '食料类别',-->
 <!--          key: 'materialCategory',-->
 <!--          type: FormTypes.slot,-->
 <!--          placeholder: '请选择${title}',-->
@@ -266,7 +266,7 @@
 
 <template>
   <j-modal
-    :title="'采购入库 - 新增'"
+    :title="'采购入库'"
     :width="'1200px'"
     :visible="modalVisible"
     :maskClosable="false"
@@ -285,12 +285,12 @@
             <!--            </a-col>-->
             <a-col :span="6">
               <a-form-item label="采购名称">
-                <a-input allowClear v-decorator="['headline', { rules: [{ required: true, message: '请输入!' }] }]"></a-input>
+                <a-input allowClear v-decorator="['headline', { rules: [{ required: true, message: '请输入!' }], initialValue:this.basicInfo1.headline }]"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="6">
               <a-form-item label="采购人">
-                <a-select allowClear v-decorator="['purchasePeople', { rules: [{ required: true, message: '请选择!' }] }]">
+                <a-select allowClear v-decorator="['purchasePeople', { rules: [{ required: true, message: '请选择!' }], initialValue:this.basicInfo1.purchasePeople }]">
                   <a-select-option value="张三">张三</a-select-option>
                   <a-select-option value="李四">李四</a-select-option>
                 </a-select>
@@ -298,24 +298,24 @@
             </a-col>
             <a-col :span="6">
               <a-form-item label="采购日期">
-                <a-date-picker placeholder='' v-decorator="['purchaseDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 100%"></a-date-picker>
+                <a-date-picker placeholder='' v-decorator="['purchaseDate', { rules: [{ required: true, message: '请选择!' }], initialValue:this.basicInfo1.purchaseDate }]" style="width: 100%"></a-date-picker>
               </a-form-item>
             </a-col>
           </a-row>
           <a-row :gutter="16">
             <a-col :span="6">
               <a-form-item label="采购总数">
-                <a-input v-decorator="['purchaseNum', { rules: [{ required: true, message: '请输入!' }] }]"></a-input>
+                <a-input v-decorator="['purchaseNum', { rules: [{ required: true, message: '请输入!' }], initialValue:this.basicInfo1.purchaseNum }]"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="6">
               <a-form-item label="总金额">
-                <a-input v-decorator="['totalMoney', { rules: [{ required: true, message: '请输入!' }] }]"></a-input>
+                <a-input v-decorator="['totalMoney', { rules: [{ required: true, message: '请输入!' }], initialValue:this.basicInfo1.totalMoney }]"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="6">
               <a-form-item label="供应商">
-                <a-select allowClear v-decorator="['provider', { rules: [{ required: true, message: '请选择!' }] }]">
+                <a-select allowClear v-decorator="['provider', { rules: [{ required: true, message: '请选择!' }], initialValue:this.basicInfo1.provider }]">
                   <a-select-option value="程埔头菜市场">程埔头菜市场</a-select-option>
                   <a-select-option value="闽侯县菜市场">闽侯县菜市场</a-select-option>
                 </a-select>
@@ -337,12 +337,33 @@
     </a-tabs>
 
     <!-- 子表单区域 -->
-    <a-tabs default-active-key="1" >
+    <a-tabs default-active-key="1" v-if='!basicInfo1.id'>
       <a-tab-pane key="1" tab="采购明细">
         <j-editable-table
           ref="detailInfoForm"
           :columns="columns"
           :dataSource="dataSource"
+          :maxHeight="300"
+          :rowNumber="true"
+          :rowSelection="true"
+          :actionButton="true"
+        >
+          <template v-slot:materialName="props">
+            <a-cascader
+              :options="options"
+              :show-search='true'
+            />
+          </template>
+        </j-editable-table>
+      </a-tab-pane>
+    </a-tabs>
+
+    <a-tabs default-active-key="1" v-else>
+      <a-tab-pane key="1" tab="采购明细">
+        <j-editable-table
+          ref="detailInfoForm"
+          :columns="columns"
+          :dataSource="dataSource1"
           :maxHeight="300"
           :rowNumber="true"
           :rowSelection="true"
@@ -378,37 +399,116 @@ export default {
 
   props: {
     modalVisible: Boolean,
+    basicInfo: Object,
   },
+  mounted() {
+    this.basicInfo1=Object.assign({}, this.basicInfo);
+    if(this.basicInfo1.purchaseDate) this.basicInfo1.purchaseDate=moment(this.basicInfo1.purchaseDate, 'YYYY-MM-DD')
+    // console.log(this.$props.basicInfo)
+    // console.log(this.basicInfo)
+    console.log(this.basicInfo1)
+  },
+
   data() {
     return {
+      options: [
+        {
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          children: [
+            {
+              value: 'hangzhou',
+              label: 'Hangzhou',
+              children: [
+                {
+                  value: 'xihu',
+                  label: 'West Lake',
+                },
+                {
+                  value: 'xiasha',
+                  label: 'Xia Sha',
+                  disabled: true,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [
+            {
+              value: 'nanjing',
+              label: 'Nanjing',
+              children: [
+                {
+                  value: 'zhonghuamen',
+                  label: 'Zhong Hua men',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      basicInfo1: {  },
       isAdd: false,
       items11: ['jack', 'lucy'],
       form1: this.$form.createForm(this),
       basicInfoForm:{},
       detailsInfoForm:{},
       dataSource: [],
-      columns: [
+      dataSource1: [
         {
-          title: '物料名称',
-          key: 'materialName',
-          type: FormTypes.input,
-          placeholder: '请输入${title}',
-          validateRules: [
-            { required: true, message: '${title}不能为空' },
-          ],
+          key:1,
+          materialName:'鸡肉',
+          materialCategory:'肉类',
+          materialUnits:'kg',
+          materialPrice:'10.00',
+          materialNum:'10',
+          materialTotalValue:'100.00',
         },
         {
-          title: '物料类别',
-          key: 'materialCategory',
-          type: FormTypes.select,
+          id:'2',
+          materialName: '鸡肉',
+          materialCategory: '肉类',
+          materialUnits: 'kg',
+          materialPrice: '10.00',
+          materialNum: '10',
+          materialTotalValue: '100.00',
+        },
+      ],
+      columns: [
+        // {
+        //   title: '食料类别',
+        //   key: 'materialCategory',
+        //   type: FormTypes.select,
+        //   placeholder: '请选择${title}',
+        //   validateRules: [
+        //     { required: true, message: '${title}不能为空' },
+        //   ],
+        //   options: [
+        //     { title: '肉类', value: '肉类' },
+        //     { title: '青菜类', value: '青菜类' },
+        //   ]
+        // },
+        // {
+        //   title: '食料名称',
+        //   key: 'materialName',
+        //   type: FormTypes.input,
+        //   placeholder: '请输入${title}',
+        //   validateRules: [
+        //     { required: true, message: '${title}不能为空' },
+        //   ],
+        // },
+        {
+          title: '食料名称',
+          key: 'materialName',
+          type: FormTypes.slot,
           placeholder: '请选择${title}',
           validateRules: [
             { required: true, message: '${title}不能为空' },
           ],
-          options: [
-            { title: '肉类', value: '肉类' },
-            { title: '青菜类', value: '青菜类' },
-          ]
+          slotName: 'materialName',
         },
         {
           title: '单位',
