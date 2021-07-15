@@ -16,7 +16,7 @@ import { lockCount } from './data/lockCount.js'
 
 const columns = [
   { title: '锁编号', dataIndex: 'lockNum', key: 'lockNum' },
-  { title: '区域', dataIndex: 'area', key: 'area' },
+  { title: '位置', dataIndex: 'area', key: 'area' },
   { title: '房间', dataIndex: 'roomNum', key: 'roomNum' },
   { title: '指纹开锁', dataIndex: 'figerLock', key: 'figerLock' },
   { title: '密码开锁', dataIndex: 'numLock', key: 'numLock' },
@@ -26,6 +26,7 @@ const columns = [
 
 const innercolumns = [
   { title: '姓名', dataIndex: 'name', key: 'name' },
+  { title: '部门', dataIndex: 'dept', key: 'name' },
   { title: '指纹开锁', dataIndex: 'figerLock', key: 'figerLock' },
   { title: '密码开锁', dataIndex: 'numLock', key: 'numLock' },
   { title: '远程开锁', dataIndex: 'remoteLock', key: 'remoteLock' },

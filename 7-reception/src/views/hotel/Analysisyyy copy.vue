@@ -2,21 +2,9 @@
   <a-card :bordered="false">
     <div>
       <a-steps :current="current">
-        <!-- <a-step v-for="item in steps" :key="item.title" :title="item.title" /> -->
-        <a-step key='0' title='协议酒店'>
-          <div class="steps-content">{{ steps[current].content }}</div> 
-        </a-step>
-        <a-step key='1' title='就餐地点'>
-           <div class="steps-content">222222222</div>
-        </a-step>
-        <a-step key='2' title='会议地点'>
-           <div class="steps-content">3333</div>
-        </a-step>
-        <a-step key='3' title='通知设置'>
-           <div class="steps-content">444444</div>
-        </a-step>
+        <a-step v-for="item in steps" :key="item.title" :title="item.title" />
       </a-steps>
-      <!-- <div class="steps-content">{{ steps[current].content }}</div> -->
+      <div class="steps-content">{{ steps[current].content }}</div>
       <div class="steps-action">
         <a-button v-if="current < steps.length - 1" type="primary" @click="next">下一步</a-button>
         <a-button

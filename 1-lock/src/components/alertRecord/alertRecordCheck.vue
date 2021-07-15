@@ -1,28 +1,6 @@
 <template>
   <a-card>
     <!-- 上部 -->
-
-    <span class="lockNum">锁编号：</span>
-    <a-input style="width: 11%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
-
-    <a-divider type="vertical" />
-
-    <span>区域：</span>
-    <a-cascader
-      style="width: 19%"
-      :options="selectOptions"
-      change-on-select
-      @change="areaChange"
-      placeholder="请选择区域"
-    />
-
-    <a-divider type="vertical" />
-
-    <span>房间：</span>
-    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
-
-    <br /><br />
-
     <span>报警时间段：</span>
     <a-date-picker
       v-model="startValue"
@@ -31,7 +9,7 @@
       format="YYYY-MM-DD HH:mm:ss"
       placeholder="开始时间"
       @openChange="handleStartOpenChange"
-      style="width: 19.6%"
+      style="width: 18.5%"
     />
     <a-divider type="vertical" />
     <a-date-picker
@@ -42,12 +20,39 @@
       placeholder="结束时间"
       :open="endOpen"
       @openChange="handleEndOpenChange"
-      style="width: 19.6%"
+      style="width: 18%"
     />
 
     <br /><br />
 
+    <span>位置： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
+    <a-cascader
+      style="width: 22%"
+      :options="selectOptions"
+      change-on-select
+      @change="areaChange"
+      placeholder="请选择位置"
+    />
+
+    <a-divider type="vertical" />
+
+    <span>房间：</span>
+    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
+
+    <a-divider type="vertical" />
+
+    <template v-if="toggleSearchStatus">
+      <br /><br />
+      <span class="lockNum">锁编号： &nbsp; &nbsp; &nbsp; </span>
+      <a-input style="width: 11%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
+      <a-divider type="vertical" />
+    </template>
+
     <!-- 下部 -->
+    <a @click="handleToggleSearch">
+      {{ toggleSearchStatus ? '收起' : '展开' }}
+      <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
+    </a>
     <a-row type="flex" justify="end">
       <a-col>
         <a-button @click="check">查询</a-button>
@@ -69,6 +74,7 @@ export default {
       startValue: null,
       endValue: null,
       endOpen: false,
+      toggleSearchStatus: false,
     }
   },
   watch: {
@@ -122,6 +128,9 @@ export default {
           // console.log('Cancel')
         },
       })
+    },
+    handleToggleSearch() {
+      this.toggleSearchStatus = !this.toggleSearchStatus
     },
   },
 }
