@@ -1,81 +1,53 @@
 <template>
-  <a-card :bordered="false">
-    <div>
-      <a-steps :current="current">
-        <!-- <a-step v-for="item in steps" :key="item.title" :title="item.title" /> -->
-        <a-step key='0' title='协议酒店'>
-          <div class="steps-content">{{ steps[current].content }}</div> 
-        </a-step>
-        <a-step key='1' title='就餐地点'>
-           <div class="steps-content">222222222</div>
-        </a-step>
-        <a-step key='2' title='会议地点'>
-           <div class="steps-content">3333</div>
-        </a-step>
-        <a-step key='3' title='通知设置'>
-           <div class="steps-content">444444</div>
-        </a-step>
-      </a-steps>
-      <!-- <div class="steps-content">{{ steps[current].content }}</div> -->
-      <div class="steps-action">
-        <a-button v-if="current < steps.length - 1" type="primary" @click="next">下一步</a-button>
-        <a-button
-          v-if="current == steps.length - 1"
-          type="primary"
-          @click="$message.success('Processing complete!')"
-        >Done</a-button>
-        <a-button v-if="current > 0" style="margin-left: 8px" @click="prev">上一步</a-button>
-      </div>
-    </div>
-  </a-card>
+  <a-tree-select
+    v-model="value"
+    show-search
+    style="width: 200PX"
+    :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+    placeholder="请选择会议地点"
+    @change="onchange"
+  >
+    <a-tree-select-node key="random" value="福建烟草公司机关A区域1号楼" title="福建烟草公司机关A区域1号楼" :selectable="false">
+      <a-tree-select-node key="random1" value="福建烟草公司机关A区域1号楼会议室203" title="会议室203" />
+      <a-tree-select-node key="random2" value="福建烟草公司机关A区域1号楼会议室204" title="会议室204" />
+    </a-tree-select-node>
+    <a-tree-select-node key="random3" value="福建烟草公司机关A区域2号楼" title="福建烟草公司机关A区域2号楼" :selectable="false">
+      <a-tree-select-node key="random4" value="福建烟草公司机关A区域2号楼会议室203" title="会议室203" />
+      <a-tree-select-node key="random5" value="福建烟草公司机关A区域2号楼会议室204" title="会议室204" />
+    </a-tree-select-node>
+    <a-tree-select-node key="random6" value="福建烟草公司机关B区域1号楼" title="福建烟草公司机关B区域1号楼" :selectable="false">
+      <a-tree-select-node  key="random7" value="福建烟草公司机关B区域1号楼会议室205" title="会议室203" />
+      <a-tree-select-node  key="random8" value="福建烟草公司机关B区域1号楼会议室206" title="会议室204" />
+    </a-tree-select-node>
+  </a-tree-select>
+  <!--  -->
+  <!-- <a-tree-select
+    v-model="value"
+    show-search
+    style="width: 100%"
+    :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+    placeholder="Please select"
+    :show-checked-strategy="SHOW_PARENT"
+  >
+    <a-tree-select-node key="0-1" value="福建烟草公司机关A区域" title="福建烟草公司机关A区域">
+    </a-tree-select-node>
+    <a-tree-select-node key="0-2" value="福建烟草公司机关B区域" title="福建烟草公司机关B区域">
+    </a-tree-select-node>
+  </a-tree-select>-->
 </template>
+
 <script>
 export default {
   data() {
     return {
-      current: 0,
-      steps: [
-        {
-          title: '协议酒店',
-          content: 'First-content'
-        },
-        {
-          title: '就餐地点',
-          content: 'Second-content'
-        },
-        {
-          title: '会议地点',
-          content: 'Last-content'
-        },
-        {
-          title: '通知设置',
-          content: 'Last-content'
-        }
-      ]
+      treeExpandedKeys: [],
+      value: undefined
     }
   },
-  methods: {
-    next() {
-      this.current++
-    },
-    prev() {
-      this.current--
+  methods:{
+    onchange(){
+      console.log(this.value)
     }
   }
 }
 </script>
-<style scoped>
-.steps-content {
-  margin-top: 16px;
-  border: 1px dashed #e9e9e9;
-  border-radius: 6px;
-  background-color: #fafafa;
-  min-height: 200px;
-  text-align: center;
-  padding-top: 80px;
-}
-
-.steps-action {
-  margin-top: 24px;
-}
-</style>

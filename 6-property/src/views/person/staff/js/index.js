@@ -36,13 +36,13 @@ export const columns = [
         key: 'phone',
         width: 80,
     },
-    {
-        title: '所绑资产',
-        key: 'assets',
-        width: 80,
-        type: 'a-select',
-        dataIndex:'assets'
-    },
+    // {
+    //     title: '所绑资产',
+    //     key: 'assets',
+    //     width: 80,
+    //     type: 'a-select',
+    //     dataIndex:'assets'
+    // },
     {
         title: '入职时间',
         key: 'loginTime',
@@ -212,21 +212,16 @@ export const devDetail =[
         value:"",
         type:"a-select"
     },
-    {
-        title: '所属资产',
-        key: 'assets',
-        value:"",
-    },
-    {
-        key: 'institution',
-        title: '业主单位',
-        value:"",
-    },
-    {
-        title: '业主联系方式',
-        key: 'phone',        
-        value:"",
-    },
+    // {
+    //     key: 'institution',
+    //     title: '业主单位',
+    //     value:"",
+    // },
+    // {
+    //     title: '业主联系方式',
+    //     key: 'phone',        
+    //     value:"",
+    // },
     {
         title: '技术状况',
         key: 'techSituation',

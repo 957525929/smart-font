@@ -17,6 +17,7 @@
                 <a-select-option value="1">进行中</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
                 <a-select-option value="3">未完成</a-select-option>
+                <a-select-option value="4">延期中</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -100,12 +101,12 @@
           <a-tag v-if="status === '3'" color="red" @click="change(record)">
             <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
               <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
-                <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" />
+                <a-date-picker @change="getDateTime" style="width: 200px" />
               </a-form-item>
             </a-modal>
             未完成
           </a-tag>
-          <a-tag v-if="status === '5'" color="pink">延期中</a-tag>
+          <a-tag v-if="status === '4'" color="pink">延期中</a-tag>
           <!-- <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
               <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" />
@@ -307,7 +308,7 @@ export default {
     confirm() {
       // record.status = "1";
       console.log(this.rowIndex)
-      this.rowIndex.status = '5'
+      this.rowIndex.status = '4'
       this.$message.success('延期成功')
       console.log(this.rowIndex.deadline)
       this.rowIndex.deadline = this.timeOut

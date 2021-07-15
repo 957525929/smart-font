@@ -123,7 +123,7 @@
            dataIndex: 'limitPrice'
          },
           {
-            title: '当月剩余限额（元）',
+            title: '当月剩余额度（元）',
             align:"center",
             dataIndex: 'remainPrice'
           },

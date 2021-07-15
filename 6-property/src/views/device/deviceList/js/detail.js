@@ -24,17 +24,12 @@ export const basicInfo = [
         value:"",
         type:"a-select"
     },
-    {
-        title: '所属资产',
-        key: 'assets',
-        value:"",
-    },
-    {
-        title: '技术状况',
-        key: 'techSituation',
-        value:"",
-        type:"a-select"
-    },
+    // {
+    //     title: '技术状况',
+    //     key: 'techSituation',
+    //     value:"",
+    //     type:"a-select"
+    // },
     // {
     //     title: '维修员',
     //     key: 'fixStaff',
@@ -103,20 +98,20 @@ export const fixInfo = [{
     width: 100,
     type: 'a-range-picker',
 },
-{
-    dataIndex: 'institution',
-    key:'institution',
-    slots: { title: '业主单位' },
-    scopedSlots: { customRender: 'name' },
-    title: '业主单位',
-    width: 80,
-},
-{
-    title: '业主联系方式',
-    dataIndex: 'phone',
-    key:'phone',
-    width: 80,
-},
+// {
+//     dataIndex: 'institution',
+//     key:'institution',
+//     slots: { title: '业主单位' },
+//     scopedSlots: { customRender: 'name' },
+//     title: '业主单位',
+//     width: 80,
+// },
+// {
+//     title: '业主联系方式',
+//     dataIndex: 'phone',
+//     key:'phone',
+//     width: 80,
+// },
 {
     title: '维修员',
     key: 'fixStaff',
@@ -215,7 +210,7 @@ export const data = [
         devId: 1001,
         devName: "waterPipe_1001",
         devType: 2,
-        devStatus: 0,
+        devStatus: 4,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
@@ -251,7 +246,7 @@ export const data = [
         devId: 2001,
         devName: "wire_2001",
         devType: 1,
-        devStatus: 1,
+        devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
@@ -282,7 +277,7 @@ export const data = [
         devId: 3001,
         devName: "air_3001",
         devType: 1,
-        devStatus: 2,
+        devStatus: 6,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',

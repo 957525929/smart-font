@@ -14,7 +14,6 @@
       <a-form :form="form">
         <a-form-item label="申请部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select v-decorator.trim="[ 'applyDepertment', validatorRules.applyDepertment]" placeholder="请选择申请部门" :getPopupContainer= "(target) => target.parentNode" :disabled="disableSubmit">
-            <a-select-option value="">不限</a-select-option>
             <a-select-option value="1">卷烟销售管理处</a-select-option>
             <a-select-option value="2">物流管理处</a-select-option>
             <a-select-option value="3">烟叶管理处</a-select-option>
@@ -41,10 +40,10 @@
 
         <a-form-item label="办公用品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <office-category v-if="!disableSubmit"></office-category>
-          <a-select v-decorator.trim="[ 'articleName', validatorRules.articleName]" placeholder="请选择办公用品名称" :getPopupContainer= "(target) => target.parentNode" :disabled="disableSubmit">
+          <a-select v-decorator.trim="[ 'articleName', validatorRules.articleName]" placeholder="请选择办公用品名称" :getPopupContainer= "(target) => target.parentNode" :disabled="disableSubmit" @change="handleChange">
             <a-select-option :value="1">马克笔</a-select-option>
-            <a-select-option :value="2">A4纸</a-select-option>
-            <a-select-option :value="3">打印机</a-select-option>
+            <a-select-option :value="3">A4纸</a-select-option>
+            <a-select-option :value="2">打印机</a-select-option>
           </a-select>
         </a-form-item>
 
@@ -57,7 +56,7 @@
         </a-form-item>
 
         <a-form-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id">
-          <a-select v-decorator.trim="[ 'unit', validatorRules.unit]" placeholder="请选择计量单位" :getPopupContainer= "(target) => target.parentNode" :disabled="disableSubmit">
+          <a-select v-decorator.trim="[ 'unit', validatorRules.unit]" placeholder="请选择计量单位" :getPopupContainer= "(target) => target.parentNode" :disabled="true">
             <a-select-option :value="1">个</a-select-option>
             <a-select-option :value="2">盒</a-select-option>
             <a-select-option :value="3">箱</a-select-option>
@@ -232,7 +231,24 @@
             }
           });
         }
+      },
+    handleChange(value) {
+      switch (value) {
+        case 1:
+          this.model.unit='盒';
+          this.model.price='20';
+          break;
+        case 2:
+          this.model.unit='台';
+          this.model.price='1600';
+          break;
+        case 3:
+          this.model.unit='箱';
+          this.model.price='128';
+          break;
       }
+      this.form.setFieldsValue(pick(this.model, 'price','unit'))
+    }
 
     }
   }

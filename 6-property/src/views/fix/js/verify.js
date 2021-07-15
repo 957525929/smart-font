@@ -1,6 +1,5 @@
-// 待评价
-import { devType,devStatus} from "@/utils/dataDictionary.js";
-// 待维修
+import { devType } from "@/utils/dataDictionary.js";
+// 待审核
 export const columns=[
     {
         dataIndex: 'devId',
@@ -17,14 +16,6 @@ export const columns=[
         key: 'devName',
     },
     {
-        title: '维修类型',
-        dataIndex: 'devType',
-        width: 100,
-        key: 'devType',
-        type:'a-select',
-        valueEnum:devType
-    },
-    {
         title: '问题上报时间',
         key: 'deliveryTime',
         dataIndex: 'deliveryTime',
@@ -33,15 +24,10 @@ export const columns=[
         type: 'a-range-picker',
     },
     {
-        title: '所属资产',
-        key: 'assets',
-        dataIndex:'assets',
-        width: 80,
-        type: 'a-select',
-    },
-    {
         dataIndex: 'institution',
         key:'institution',
+        slots: { title: '设备编号' },
+        scopedSlots: { customRender: 'name' },
         title: '业主单位',
         width: 80,
     },
@@ -51,21 +37,21 @@ export const columns=[
         key:'phone',
         width: 80,
     },
-    {
-        title: '维修员',
-        key: 'fixStaff',
-        dataIndex: 'fixStaff',
-        scopedSlots: { customRender: 'tags' },
-        width: 80,
-    },
-    {
-        title: '预计完成时间',
-        key: 'fixedTime',
-        dataIndex: 'fixedTime',
-        scopedSlots: { customRender: 'tags' },
-        width: 80,
-        type: 'a-range-picker',
-    },
+    // {
+    //     title: '维修员',
+    //     key: 'fixStaff',
+    //     dataIndex: 'fixStaff',
+    //     scopedSlots: { customRender: 'tags' },
+    //     width: 80,
+    // },
+    // {
+    //     title: '维修完成时间',
+    //     key: 'fixedTime',
+    //     dataIndex: 'fixedTime',
+    //     scopedSlots: { customRender: 'tags' },
+    //     width: 80,
+    //     type: 'a-range-picker',
+    // },
     {
         title: '操作',
         dataIndex: 'action',
@@ -76,25 +62,63 @@ export const columns=[
 ]
 export const data=[
     {
-        key: '1',
-        devId: '4',
-        devName:"空调调控温度无反应",
-        taskStatus:4,
-        devType:0,
-        devStatus: 5,
+        key: 0,
+        devId: '1',
+        devName: "18楼停电",
+        devType: 1,
+        taskStatus:1,
+        devStatus: 0,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
-        fixStaff: '张英',
-        deliveryTime:"2021-06-19 17：55：55",
-        fixedTime: '2021-06-22 20：00：00',
+        fixStaff: '刘涛',
+        deliveryTime: '2021-06-22 17：55：55',
         action:[{
             tagName:"详情",
             com:"TableDrawer"
+        },{
+            tagName:"审核下发",
+            com:"TableModal"
+        },{
+            tagName:"忽略",
+            com:""
         }]
     }
 ]
+
 export const searchCon={}
+
+export const taskList = [
+    {
+        title: '维修类型',
+        key: 'devType',
+        value:"电网"
+    },
+    {
+        title: '执行人',
+        key: 'staffId',
+        value:"",
+        type:'a-select',
+        valueEnum:{0:{tableValue:"刘涛"}}
+    },
+    {
+        title: '预计完成时间',
+        value:"",
+        key: 'expectTime',
+        type:"a-date-picker"
+    },
+    {
+        title: '任务地点',
+        value:"",
+        key: 'taskPlace'
+    },
+    // {
+    //     title: '审核意见',
+    //     key: 'addition',
+    //     value:"通过"
+    // }
+]
+
 export const infoDetail =[
     {
         title: '问题编号',
@@ -106,25 +130,18 @@ export const infoDetail =[
         value:"",
         key: 'devName'
     },
-    {
-        title: '设备类型',
-        value:"",
-        key: 'devType',
-        type:"a-select",
-        valueEnum:devType
-    },
+    // {
+    //     title: '设备类型',
+    //     value:"",
+    //     key: 'devType',
+    //     type:"a-select"
+    // },
     // {
     //     title: '实际状态',
     //     key: 'devStatus',
     //     value:"",
-    //     type:"a-select",
-    //     valueEnum:devStatus
+    //     type:"a-select"
     // },
-    {
-        title: '所属资产',
-        key: 'assets',
-        value:"",
-    },
     {
         key: 'institution',
         title: '业主单位',

@@ -37,7 +37,7 @@
   import { mixin, mixinDevice } from '@/utils/mixin.js'
   import { triggerWindowResizeEvent } from '@/utils/util'
 
-  const indexKey = '/dashboard/analysis'
+  const indexKey = '/procurement/manage/procurementList'
 
   export default {
     name: 'TabLayout',
@@ -164,7 +164,7 @@
 
       // update-begin-author:sunjianlei date:20200120 for: 动态更改页面标题
       changeTitle(title) {
-        let projectTitle = "烟草公司"
+        let projectTitle = "烟草公司办公用品管理平台"
         // 首页特殊处理
         if (this.$route.path === indexKey) {
           document.title = projectTitle

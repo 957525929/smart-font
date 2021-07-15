@@ -13,13 +13,16 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
         <a-form-item label="部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-select v-decorator.trim="[ 'receiveDepertment', validatorRules.receiveDepertment]" placeholder="请选择领用部门" :getPopupContainer= "(target) => target.parentNode">
-            <a-select-option value="">不限</a-select-option>
+          <a-select v-decorator.trim="[ 'receiveDepertment', validatorRules.receiveDepertment]" placeholder="请选择领用部门" :getPopupContainer= "(target) => target.parentNode" @change="handleDepartmentChange" >
             <a-select-option value="1">卷烟销售管理处</a-select-option>
             <a-select-option value="2">物流管理处</a-select-option>
             <a-select-option value="3">烟叶管理处</a-select-option>
             <a-select-option value="4">人事处</a-select-option>
           </a-select>
+        </a-form-item>
+
+        <a-form-item v-if="show" label="提示" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <span style="color: green">当月剩余额度{{money}}元</span>
         </a-form-item>
 
         <a-form-item label="领用人" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -94,6 +97,8 @@
       return {
         title:"操作",
         visible: false,
+        show:false,
+        money:652,
         roleDisabled: false,
         model: {},
         labelCol: {
@@ -228,6 +233,23 @@
             break;
         }
         this.form.setFieldsValue(pick(this.model, 'price','unit'))
+      },
+      handleDepartmentChange(value) {
+        this.show = true;
+        switch (value) {
+          case '1':
+            this.money='652';
+            break;
+          case '2':
+            this.money='0';
+            break;
+          case '3':
+            this.money='720';
+            break;
+          case '4':
+            this.money='470';
+            break;
+        }
       },
 
     }
