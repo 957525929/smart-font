@@ -51,7 +51,7 @@
           请选择车辆：
           <a-select style="width: 200px" @change="onCarChange" v-model="selectedCar">
             <a-select-option v-for="d in vehicleList" :key="d.key">
-              {{ d.licenseNum+'（座位数：'+d.seatNum+'）' }}
+              {{ d.licenseNum + '（座位数：' + d.seatNum + '）' }}
             </a-select-option>
           </a-select>
         </div>
@@ -76,15 +76,22 @@ import mydetails from './details.vue'
 import newTask from './newTask.vue'
 import { dispatchList, driverList, vehicleList } from '@/mock/demoData.js'
 export default {
-  mounted(){
-    let alterList =driverList.map(item=>{
-      if(item.name=='张三'||item.name=='卢本伟'||item.name=='孙笑川'){
-        item.name+='*'
+  mounted() {
+    let alterList = []
+    for (let i = 0; i < driverList.length; ++i) {
+       //对象深度复制
+      let temp = {};
+      temp.key=driverList[i].key
+      temp.name=driverList[i].name
+      temp.phoneNum=driverList[i].phoneNum
+      temp.bindCar=driverList[i].bindCar
+      if (temp.name == '张三' || temp.name == '卢本伟' || temp.name == '孙笑川') {
+        temp.name += '*'
       }
-      return item
-    })
-    this.driverList=alterList
-    console.log(alterList);
+      alterList[i] = temp
+    }
+    this.driverList = alterList
+    // console.log(alterList);
   },
   data() {
     return {
@@ -102,8 +109,8 @@ export default {
         },
         pageSize: 10,
       },
-      selectedDriver:null,
-      selectedCar:null
+      selectedDriver: null,
+      selectedCar: null,
     }
   },
   components: {
@@ -131,9 +138,9 @@ export default {
     showNewTask() {
       this.newTaskVisible = true
     },
-    onCarChange(){
-      this.selectedDriver='张三*'
-    }
+    onCarChange() {
+      this.selectedDriver = '张三*'
+    },
   },
 }
 </script>

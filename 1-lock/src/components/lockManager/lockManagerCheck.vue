@@ -1,38 +1,17 @@
 <template>
   <a-card>
     <!-- 上部 -->
+    <span>锁状态：</span>
 
-    <span>锁编号：</span>
-    <a-input style="width: 11%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
-
-    <a-divider type="vertical" />
-
-    <span>楼号：</span>
-    <a-select style="width: 11%" placeholder="请选择楼号" @change="buildChange" allowClear>
-      <a-select-option value="1"> 1号楼 </a-select-option>
-      <a-select-option value="2"> 2号楼 </a-select-option>
-      <a-select-option value="3"> 3号楼 </a-select-option>
-      <a-select-option value="4"> 4号楼 </a-select-option>
+    <a-select style="width: 11%" default-value="1" @change="lockChange" allowClear>
+      <a-select-option value="1"> 低电量 </a-select-option>
+      <a-select-option value="2"> 关锁 </a-select-option>
+      <a-select-option value="3"> 开锁 </a-select-option>
     </a-select>
 
-    <a-divider type="vertical" />
+    <br /><br />
 
-    <span>房间：</span>
-    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
-
-    <a-divider type="vertical" />
-
-    <span>部门：</span>
-    <a-select style="width: 11%" placeholder="请选择部门" @change="deptChange" allowClear>
-      <a-select-option value="1"> 办公室 </a-select-option>
-      <a-select-option value="2"> 生产部 </a-select-option>
-      <a-select-option value="3"> 购销部 </a-select-option>
-      <a-select-option value="4"> 信息中心 </a-select-option>
-    </a-select>
-
-    <a-divider type="vertical" />
-
-    <span>工号：</span>
+    <span>工号： &nbsp;&nbsp; </span>
     <a-input style="width: 11%" placeholder="请输入工号" v-model="Num" allowClear></a-input>
 
     <a-divider type="vertical" />
@@ -42,7 +21,33 @@
 
     <br /><br />
 
+    <span>位置： &nbsp;&nbsp; </span>
+    <a-cascader
+      style="width: 22%"
+      :options="selectOptions"
+      change-on-select
+      @change="areaChange"
+      placeholder="请选择位置"
+    />
+
+    <a-divider type="vertical" />
+
+    <span>房间：</span>
+    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
+
+    <a-divider type="vertical" />
+
+    <template v-if="toggleSearchStatus">
+      <br /><br />
+      <span>锁编号：</span>
+      <a-input style="width: 11%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
+      <a-divider type="vertical" />
+    </template>
     <!-- 下部 -->
+    <a @click="handleToggleSearch">
+      {{ toggleSearchStatus ? '收起' : '展开' }}
+      <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
+    </a>
     <a-row type="flex" justify="end">
       <a-col>
         <a-button @click="check">查询</a-button>
@@ -53,27 +58,26 @@
   </a-card>
 </template>
 <script>
+import { areaData } from '../roomManager/data/area.js'
+
 export default {
   data() {
     return {
       lockNum: '',
-      name: '',
-      Num: '',
+      selectOptions: areaData,
       roomNum: '',
+      Num: '',
+      name: '',
+      toggleSearchStatus: false,
     }
   },
   methods: {
+    areaChange(value) {},
+    handleToggleSearch() {},
+
     //查询
     check() {
-      console.log('点击查询')
-      console.log(this.lockNum)
-    },
-    //获取单选框值
-    buildChange(value) {
-      console.log(value)
-    },
-    deptChange(value) {
-      console.log(value)
+      // console.log(this.lockNum)
     },
 
     // 导出点击功能
@@ -83,13 +87,18 @@ export default {
         okText: '确认',
         cancelText: '取消',
         onOk() {
-          console.log('OK')
+          // console.log('OK')
         },
         onCancel() {
-          console.log('Cancel')
+          // console.log('Cancel')
         },
-        class: 'test',
       })
+    },
+    handleToggleSearch() {
+      this.toggleSearchStatus = !this.toggleSearchStatus
+    },
+    lockChange(value) {
+      console.log(value)
     },
   },
 }

@@ -2,7 +2,13 @@
   <div>
     <a-form-model :model="form" :label-col="labelCol" :wrapper-col="wrapperCol">
       <a-form-model-item label="车辆品牌">
-        <a-input v-model="form.brand" />
+        <!-- <a-input v-model="form.brand" /> -->
+        <a-select v-model="form.brand" showSearch> 
+          <a-select-option key="1">奥迪</a-select-option>
+          <a-select-option key="2">大众</a-select-option>
+          <a-select-option key="3">丰田</a-select-option>
+          <a-select-option key="4">本田</a-select-option>
+        </a-select>
       </a-form-model-item>
       <a-form-model-item label="车牌号">
         <a-input v-model="form.licenseNum" />
@@ -55,7 +61,7 @@ export default {
         licenseNum: '',
         licenseType: undefined,
         seatNum: undefined,
-        brand: '',
+        brand: undefined,
         date1: undefined,
       },
     }

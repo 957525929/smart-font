@@ -10,10 +10,10 @@
             <a-form-item label="部门">
               <a-select v-model="queryParam.department" placeholder="请选择部门">
                 <a-select-option value="">不限</a-select-option>
-                <a-select-option value="1">营销部</a-select-option>
-                <a-select-option value="2">专卖部</a-select-option>
-                <a-select-option value="3">配送部</a-select-option>
-                <a-select-option value="4">后勤部</a-select-option>
+                <a-select-option value="1">卷烟销售管理处</a-select-option>
+                <a-select-option value="2">物流管理处</a-select-option>
+                <a-select-option value="3">烟叶管理处</a-select-option>
+                <a-select-option value="4">人事处</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -31,9 +31,9 @@
 
           <a-col :md="10" :sm="12">
             <a-form-item label="时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
-              <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择开始时间" ></j-date>
+              <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date>
               <span style="width: 10px;">~</span>
-              <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择结束时间"></j-date>
+              <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择结束时间"></j-date>
             </a-form-item>
           </a-col>
 
@@ -85,33 +85,13 @@
         @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
+           <a @click="handleDetail(record)">详情</a>
+           <a-divider type="vertical" />
           <a @click="handleEdit(record)">编辑</a>
-          <div class="div" v-if="record.status == 1">
-              <span style="margin:0 10px ">|</span>
-              <a-popconfirm
-                title="提交审批结果?"
-                ok-text="通过"
-                cancel-text="不通过"
-                @confirm="confirm"
-                @cancel="cancel"
-              >
-                  <a href="javascript:;" @click="handleCheck(record.id)">审批</a>
-              </a-popconfirm>
-          </div>
             <a-divider type="vertical" />
-          <a-dropdown>
-            <a class="ant-dropdown-link">
-              更多 <a-icon type="down" />
-            </a>
-            <a-menu slot="overlay">
-              <a-menu-item>
-                 <a @click="handleDetail(record)">详情</a>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+           <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
                   <a>删除</a>
                 </a-popconfirm>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
         </span>
         <template slot="applyStatus" slot-scope="status">
           <a-tag v-if="status == '1'" color="cyan">待审批</a-tag>
@@ -120,9 +100,6 @@
         </template>
       </a-table>
     </div>
-    <a-modal v-model="visible" title="审批不通过" @ok="handleOk">
-      <a-input placeholder="请填写审批不通过原因" />
-    </a-modal>
     <!-- table区域-end -->
     <!-- 表单区域 -->
     <procurement-modal ref="modalForm" @ok="modalFormOk"></procurement-modal>
@@ -133,6 +110,7 @@
   import ProcurementModal from './modules/ProcurementModal'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
+  import { formatDate } from '@/utils/util'
 
   export default {
     name: "ProcurementList",
@@ -145,43 +123,63 @@
       return {
         description: '采购管理页面',
         // 查询条件
-        queryParam: {roleName:'',},
+        queryParam: {
+          roleName:'',
+          time_begin:formatDate(new Date().getTime()-7*24*3600*1000,"yyyy-MM-dd"),
+          time_end:formatDate(new Date().getTime(),"yyyy-MM-dd")
+        },
         visible:false,
         dataSource: [
           {
             id:1,
-            applyDepertment:'后勤部',
+            applyDepertment:'人事处',
             applyName:'郝式平',
             articleName: '订书机',
             applyNum: '3',
             unit:'台',
             status:1,
-            applyTime: '2021-07-07 09:48:59',
+            applyTime: formatDate(new Date().getTime(),"yyyy-MM-dd") + ' 09:48:59',
             applyReason: '办公需要',
+            checkTime: '',
+            remark:''
+          },
+          {
+            id:4,
+            applyDepertment:'烟叶管理处',
+            applyName:'张军',
+            articleName: '马克笔',
+            applyNum: '2',
+            unit:'盒',
+            status:1,
+            applyTime:formatDate(new Date().getTime(),"yyyy-MM-dd") + ' 09:01:29',
+            applyReason: '办公需要',
+            checkTime: '',
             remark:''
           },
           {
             id:2,
-            applyDepertment:'营销部',
+            applyDepertment:'卷烟销售管理处',
             applyName:'张丰',
             articleName: '马克笔',
             applyNum: '2',
             unit:'盒',
             status:2,
-            applyTime: '2021-05-12 09:48:59',
+            applyTime: formatDate(new Date().getTime()-1*24*3600*1000,"yyyy-MM-dd") + ' 9:48:50',
             applyReason: '会议需要',
+            checkTime: formatDate(new Date().getTime()-1*24*3600*1000,"yyyy-MM-dd") + ' 15:32:50',
             remark:''
           },
           {
             id:3,
-            applyDepertment:'专卖部',
+            applyDepertment:'物流管理处',
             applyName:'林俐',
             articleName: '打印机',
             applyNum: '1',
             unit:'台',
             status:3,
-            applyTime: '2021-05-21 14:40:50',
+            applyTime: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-dd") + ' 10:40:50',
             applyReason: '业务需要',
+            checkTime: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-dd") + ' 15:32:50',
             remark:'已有库存，可到仓库领取'
           },
         ],
@@ -260,6 +258,9 @@
         return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;
       }
     },
+    mounted() {
+
+    },
     methods: {
       handlePerssion: function(roleId){
        // alert(roleId);
@@ -267,9 +268,6 @@
       },
       onChangeDate(date, dateString) {
         console.log(date, dateString);
-      },
-      handleCheck(id) {
-
       },
       confirm(e) {
         console.log(e);

@@ -2,27 +2,27 @@
   <a-card>
     <!-- 上部 -->
 
-    <span>楼号：</span>
-    <a-select style="width: 11%" placeholder="请选择楼号" @change="buildChange" allowClear>
-      <a-select-option value="1"> 1号楼 </a-select-option>
-      <a-select-option value="2"> 2号楼 </a-select-option>
-      <a-select-option value="3"> 3号楼 </a-select-option>
-      <a-select-option value="4"> 4号楼 </a-select-option>
-    </a-select>
+    <span>位置：</span>
+    <a-cascader
+      style="width: 23%"
+      :options="selectOptions"
+      change-on-select
+      @change="areaChange"
+      placeholder="请选择位置"
+    />
 
     <a-divider type="vertical" />
 
     <span>房间：</span>
-    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
+    <a-input style="width: 15%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
 
-    <a-divider type="vertical" />
+    <br /><br />
 
     <span>部门：</span>
     <a-select style="width: 11%" placeholder="请选择部门" @change="deptChange" allowClear>
-      <a-select-option value="1"> 办公室 </a-select-option>
-      <a-select-option value="2"> 生产部 </a-select-option>
-      <a-select-option value="3"> 购销部 </a-select-option>
-      <a-select-option value="4"> 信息中心 </a-select-option>
+      <a-select-option v-for="(item, index) in deptData" :key="index">
+        {{ item.deptName }}
+      </a-select-option>
     </a-select>
 
     <a-divider type="vertical" />
@@ -40,20 +40,26 @@
     <!-- 下部 -->
 
     <a-row type="flex" justify="end">
+      <a-upload>
+        <a-button>导入房间</a-button>
+      </a-upload>
+
       <a-col>
-        <a-button @click="add">添加房间</a-button>
+        <a-divider type="vertical" />
+        <a-button @click="roomAdd">添加房间</a-button>
 
         <!-- 添加房间功能 -->
-        <a-modal v-model="visible" title="添加房间" @ok="handleOk">
+        <a-modal v-model="roomVisible" title="添加房间" @ok="roomOk">
           <a-row type="flex" align="middle">
-            <a-col :span="4">楼号：</a-col>
-            <a-col :span="10">
-              <a-select style="width: 100%" @change="buildChange" placeholder="请选择楼号" allowClear>
-                <a-select-option value="1"> 1号楼 </a-select-option>
-                <a-select-option value="2"> 2号楼 </a-select-option>
-                <a-select-option value="3"> 3号楼 </a-select-option>
-                <a-select-option value="4"> 4号楼 </a-select-option>
-              </a-select>
+            <a-col :span="4">位置：</a-col>
+            <a-col :span="13">
+              <a-cascader
+                style="width: 100%"
+                :options="selectOptions"
+                change-on-select
+                @change="areaChange"
+                placeholder="请选择位置"
+              />
             </a-col>
           </a-row>
 
@@ -61,7 +67,7 @@
 
           <a-row type="flex" align="middle">
             <a-col :span="4">房间号：</a-col>
-            <a-col :span="10">
+            <a-col :span="13">
               <a-input style="width: 100%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
             </a-col>
           </a-row>
@@ -69,22 +75,8 @@
           <br />
 
           <a-row type="flex" align="middle">
-            <a-col :span="4">部门：</a-col>
-            <a-col :span="10">
-              <a-select style="width: 100%" placeholder="请选择部门" @change="deptChange" allowClear>
-                <a-select-option value="1"> 办公室 </a-select-option>
-                <a-select-option value="2"> 生产部 </a-select-option>
-                <a-select-option value="3"> 购销部 </a-select-option>
-                <a-select-option value="4"> 信息中心 </a-select-option>
-              </a-select>
-            </a-col>
-          </a-row>
-
-          <br />
-
-          <a-row type="flex" align="middle">
             <a-col :span="4">员工：</a-col>
-            <a-col :span="10">
+            <a-col :span="13">
               <a-select
                 mode="multiple"
                 placeholder="请选择员工"
@@ -92,7 +84,7 @@
                 style="width: 100%"
                 @change="peopleChange"
               >
-                <a-select-option v-for="item in filteredOptions" :key="item" :value="item">
+                <a-select-option v-for="item in filteredOptions" :key="item">
                   {{ item }}
                 </a-select-option>
               </a-select>
@@ -113,16 +105,24 @@
   </a-card>
 </template>
 <script>
+// import selectArea from '../check/selectArea.vue'
+import { areaData } from './data/area.js'
+import { deptData } from './data/dept.js'
+
 const OPTIONS = ['张三', '李四', '王五', '赵柳']
 
 export default {
+  components: {
+    // selectArea,
+  },
   data() {
     return {
-      lockNum: '',
-      name: '',
-      Num: '',
+      selectOptions: areaData,
       roomNum: '',
-      visible: false,
+      deptData: deptData,
+      Num: '',
+      name: '',
+      roomVisible: false,
       selectedItems: [],
     }
   },
@@ -132,48 +132,34 @@ export default {
       return OPTIONS.filter((o) => !this.selectedItems.includes(o))
     },
   },
+  mounted() {},
   methods: {
-    //查询
-    check() {
-      console.log('点击查询')
-      console.log(this.roomNum)
+    areaChange(value) {},
+    deptChange(value) {},
+    roomAdd() {
+      this.roomVisible = true
     },
-    //获取单选框值
-    buildChange(value) {
-      console.log(value)
+    roomOk() {
+      this.roomVisible = false
+      // console.log(this.selectedItems)
     },
-    deptChange(value) {
-      console.log(value)
-    },
-    //添加人员
-    add() {
-      console.log('add')
-      this.visible = true
-    },
-    handleOk() {
-      console.log('ok')
-      console.log(this.roomNum)
-      console.log(this.selectedItems)
-      this.visible = false
-    },
-    //选择员工
     peopleChange(selectedItems) {
       this.selectedItems = selectedItems
     },
-
-    // 导出点击功能
+    check() {
+      // console.log('点击查询')
+    },
     showConfirm() {
       this.$confirm({
         title: '是否导出当前表单？',
         okText: '确认',
         cancelText: '取消',
         onOk() {
-          console.log('OK')
+          // console.log('OK')
         },
         onCancel() {
-          console.log('Cancel')
+          // console.log('Cancel')
         },
-        class: 'test',
       })
     },
   },

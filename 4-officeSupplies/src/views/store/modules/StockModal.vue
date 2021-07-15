@@ -14,6 +14,7 @@
       <a-form :form="form">
 
         <a-form-item label="办公用品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <office-category v-if="!model.id"></office-category>
           <a-select v-decorator.trim="[ 'articleName', validatorRules.name]" placeholder="请选择办公用品名称" :getPopupContainer= "(target) => target.parentNode" :disabled="!!model.id">
             <a-select-option :value="1">马克笔</a-select-option>
             <a-select-option :value="2">打印机</a-select-option>
@@ -21,11 +22,11 @@
           </a-select>
         </a-form-item>
 
-        <a-form-item label="批次" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-select v-decorator.trim="[ 'batch', validatorRules.batch]" placeholder="请输入购入批次" :getPopupContainer= "(target) => target.parentNode" :disabled="!!model.id">
-            <a-select-option :value="1">20210514</a-select-option>
-            <a-select-option :value="2">20210320</a-select-option>
-          </a-select>
+        <a-form-item v-if="!!model.id"
+                     :labelCol="labelCol"
+                     :wrapperCol="wrapperCol"
+                     label="入库时间">
+          <j-date class="inputWitdh" v-decorator.trim="[ 'enterTime', validatorRules.enterTime]"  :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择入库时间" :disabled="!!model.id"></j-date>
         </a-form-item>
 
         <a-form-item
@@ -35,8 +36,8 @@
           <a-input-number class="inputWitdh"  placeholder="请输入数量"   v-decorator.trim="[ 'stockNum', validatorRules.stockNum]"  :min="1" :max="10000000" :decimalSeparator="0" />
         </a-form-item>
 
-        <a-form-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-select v-decorator.trim="[ 'unit', validatorRules.unit]" placeholder="请选择计量单位" :getPopupContainer= "(target) => target.parentNode">
+        <a-form-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol"  v-if="!!model.id">
+          <a-select v-decorator.trim="[ 'unit', validatorRules.unit]" placeholder="请选择计量单位" :getPopupContainer= "(target) => target.parentNode" :disabled="!!model.id">
             <a-select-option :value="1">个</a-select-option>
             <a-select-option :value="2">盒</a-select-option>
             <a-select-option :value="3">箱</a-select-option>
@@ -50,14 +51,16 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="单价(元)">
-          <a-input-number  class="inputWitdh" placeholder="请输入单价"   v-decorator.trim="['price', validatorRules.price]"  :min="1" :max="10000000"/>
+          <router-link v-if="!!model.id" to="/article/manage/articleList"><a-button  size="small" type="primary" icon="edit" class="link" /></router-link>
+          <a-input-number  class="inputWitdh" placeholder="请输入单价"   v-decorator.trim="['price', validatorRules.price]"  :min="1" :max="10000000" :disabled="!!model.id" />
         </a-form-item>
 
-        <a-form-item
+        <a-form-item  v-if="!!model.id"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="警示阀值">
-          <a-input-number class="inputWitdh"  placeholder="请输入警示阀值"   v-decorator.trim="[ 'threshold', validatorRules.threshold]"  :min="1" :max="10000000"/>
+          <router-link v-if="!!model.id" to="/article/manage/articleList"><a-button size="small" type="primary" icon="edit" class="link" /></router-link>
+          <a-input-number class="inputWitdh"  placeholder="请输入警示阀值"   v-decorator.trim="[ 'threshold', validatorRules.threshold]"  :min="1" :max="10000000" :disabled="!!model.id"/>
         </a-form-item>
 
       </a-form>
@@ -68,9 +71,15 @@
 <script>
   import pick from 'lodash.pick'
   import {addRole,editRole,duplicateCheck } from '@/api/api'
+  import JDate from '@/components/jeecg/JDate'
+  import OfficeCategory from '@/components/table/officeCategory'
 
   export default {
     name: "StockModal",
+    components: {
+      JDate,
+      OfficeCategory
+    },
     data () {
       return {
         title:"操作",
@@ -127,7 +136,7 @@
         this.visible = true;
 
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'id', 'articleName', 'batch','stockNum','unit', 'price', 'threshold'))
+          this.form.setFieldsValue(pick(this.model,'id', 'articleName', 'enterTime','stockNum','unit', 'price', 'threshold'))
         });
 
       },
@@ -193,5 +202,10 @@
 <style scoped>
 .inputWitdh {
   width: 100%;
+}
+.link {
+  position: absolute;
+  right: -30px;
+  top:1%;
 }
 </style>

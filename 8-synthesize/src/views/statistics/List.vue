@@ -2,7 +2,6 @@
   <a-card :bordered="false">
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
-
         <a-row :gutter="10">
           <a-col :md="6" :sm="9">
             <a-form-item label="文档类型">
@@ -17,18 +16,16 @@
 
           <a-col :sm="10">
             <a-form-item label="时间">
-              <a-date-picker class="w140" placeholder="请选择时间" />
+              <a-date-picker class="w150" format="YYYY-MM" :default-value="moment(current_start_date)" />
               ~
-              <a-date-picker class="w140" placeholder="请选择时间" />
+              <a-date-picker class="w150" format="YYYY-MM" :default-value="moment(current_stop_date)" />
             </a-form-item>
           </a-col>
 
           <a-col>
-            <a-button style="float:right;margin-right:10px" type="primary"> 查询
-            </a-button>
+            <a-button style="float: right; margin-right: 10px" type="primary"> 查询 </a-button>
           </a-col>
         </a-row>
-
       </a-form>
 
       <BarMultid :dataSource="dataSource" :fields="field" :height="420" />
@@ -37,54 +34,61 @@
 </template>
 
 <script>
-
 import BarMultid from '@/components/chart/BarMultid'
+import moment from 'moment'
+import { formatDate } from '@/utils/util'
+
 export default {
   name: 'ChartDemo',
   components: {
-    BarMultid
+    BarMultid,
   },
   data() {
     return {
-      field: [
-        "2017", "2018", "2019", "2020", "2021"
-      ],
+      moment,
+      current_start_date: formatDate(new Date().getTime() - 150 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
+      field: ['2021.02', '2021.03', '2021.04', '2021.05', '2021.06', '2021.07'],
       dataSource: [
         {
-          "type": "资产", // 列名
-          "2017": 310,
-          "2018": 332,
-          "2019": 321,
-          "2020": 334,
-          "2021": 390,
+          type: '资产', // 列名
+          2021.02: 10,
+          2021.03: 8,
+          2021.04: 5,
+          2021.05: 15,
+          2021.06: 12,
+          2021.07: 20,
         },
         {
-          "type": "会议纪要",
-          "2017": 220,
-          "2018": 182,
-          "2019": 131,
-          "2020": 214,
-          "2021": 290,
+          type: '会议纪要',
+          2021.02: 1,
+          2021.03: 6,
+          2021.04: 12,
+          2021.05: 11,
+          2021.06: 15,
+          2021.07: 12,
         },
         {
-          "type": "记录",
-          "2017": 120,
-          "2018": 232,
-          "2019": 201,
-          "2020": 114,
-          "2021": 190,
+          type: '记录',
+          2021.02: 9,
+          2021.03: 1,
+          2021.04: 5,
+          2021.05: 13,
+          2021.06: 21,
+          2021.07: 12,
         },
         {
-          "type": "报告",
-          "2017": 102,
-          "2018": 20,
-          "2019": 300,
-          "2020": 125,
-          "2021": 40,
-        }
-      ]
+          type: '报告',
+          2021.02: 15,
+          2021.03: 21,
+          2021.04: 3,
+          2021.05: 5,
+          2021.06: 25,
+          2021.07: 10,
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 <style lang="less" scoped>

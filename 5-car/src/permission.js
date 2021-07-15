@@ -9,7 +9,7 @@ import { generateIndexRouter } from "@/utils/util"
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/user/login', '/user/register', '/user/register-result','/user/alteration'] // no redirect whitelist
+const whiteList = ['/user/login', '/user/register', '/user/register-result','/user/alteration','/navPage'] // no redirect whitelist
 
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
@@ -18,6 +18,9 @@ router.beforeEach((to, from, next) => {
     /* has token */
     if (to.path === '/user/login') {
       next({ path: INDEX_MAIN_PAGE_PATH })
+      NProgress.done()
+    } else if (to.path === '/navPage') {
+      next({ path: '/navPage' })
       NProgress.done()
     } else {
       if (store.getters.permissionList.length === 0) {

@@ -1,0 +1,382 @@
+<template>
+  <!-- 酒店信息管理 -->
+  <a-card :bordered="false">
+    <!-- 搜索操作区域 -->
+    <div class="table-page-search-wrapper">
+      <a-row type="flex" align="middle">
+        <a-col>
+          <span>酒店名称或位置：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入酒店名称或位置" v-model="queryParam.word" width="50px"></a-input>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
+          <span>协议编号：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入协议编号" v-model="queryParam.id"></a-input>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
+          <a-button
+            :style="{ background: '#49a9ee', color: 'white'}"
+            icon="search"
+            @click="searchQuery"
+          >查询</a-button>
+          <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
+        </a-col>
+        <a-col :span="8"></a-col>
+        <a-col>
+          <a-button
+            @click="addHotel()"
+            icon="plus"
+            :style="{ color: 'white', background:'orange'}"
+          >新增酒店</a-button>
+          <a-button>
+            <a-icon type="download" />导出
+          </a-button>
+        </a-col>
+      </a-row>
+      <!-- <a-form layout="inline" @keyup.enter.native="searchQuery">
+        <a-row :gutter="24">
+          <a-col :xl="5" :lg="1" :md="1" :sm="24">
+            <a-form-item label="酒店名称或位置：">
+              <a-input placeholder="请输入酒店名称或位置" v-model="queryParam.IDName"></a-input>
+            </a-form-item>
+            <a-col >
+              <a-form-item label="协议编号：">
+                <a-input placeholder="请输入协议编号" v-model="queryParam.IDName"></a-input>
+              </a-form-item>
+            </a-col>
+          </a-col>
+          <a-col :xl="10" :lg="1" :md="12" :sm="24">
+            <a-button
+              :style="{ background: '#49a9ee', color: 'white'}"
+              icon="search"
+              @click="searchQuery"
+            >查询</a-button>
+            <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
+          </a-col>
+          <a-col>
+            <a-button
+              @click="addHotel()"
+              icon="plus"
+              :style="{ color: 'white', background:'orange'}"
+            >新增酒店</a-button>
+            <a-button>
+              <a-icon type="download" />导出
+            </a-button>
+          </a-col>
+        </a-row>
+      </a-form>-->
+    </div>
+    <!-- 搜索操作区域-END -->
+
+    <!-- table区域-begin -->
+    <div id="dataHotelTable">
+      <a-table :data-source="dataHotel" :pagination="false" rowKey="id">
+        <a-table-column title="酒店名称" data-index="hotel" align="left" fixed="left"></a-table-column>
+        <a-table-column title="协议编号" data-index="id" align="center"></a-table-column>
+        <a-table-column title="星级" data-index="level" align="center"></a-table-column>
+        <a-table-column title="联系人" data-index="dutyName" align="center"></a-table-column>
+        <a-table-column title="联系电话" data-index="dutyTel" align="center"></a-table-column>
+        <a-table-column title="位置" data-index="address" align="center"></a-table-column>
+        <!-- <a-table-column title="备注信息" data-index="remark" align="center"></a-table-column> -->
+        <a-table-column title="操作" align="center" fixed="right">
+          <template slot-scope="record">
+            <!-- <a-button :style="{ background: 'orange', color: 'white' }" @click="Modify(record)">修改</a-button> -->
+            <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
+            <a-divider type="vertical" />
+            <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+              <!-- <a-button :style="{ background: 'red', color: 'white' }">删除</a-button> -->
+              <a href="javascript:;" :style="{  color: 'red' }">删除</a>
+            </a-popconfirm>
+          </template>
+        </a-table-column>
+      </a-table>
+      <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
+    </div>
+
+    <!-- 新增 -->
+    <a-Modal v-model="visibleAdd" title="新增酒店" footer>
+      <a-form-model
+        ref="ruleForm"
+        :model="formAdd"
+        :rules="rules"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+      >
+        <a-form-model-item ref="hotel" label="酒店名称" prop="hotel" placeholder="请输入酒店名称">
+          <a-input v-model="formAdd.hotel"></a-input>
+        </a-form-model-item>
+        <a-form-model-item ref="id" label="协议编号" prop="id" placeholder="请输入协议编号">
+          <a-input v-model="formAdd.id"></a-input>
+        </a-form-model-item>
+        <a-form-model-item ref="level" label="星级" prop="level">
+          <a-select v-model="formAdd.level" @change="handleChange">
+            <a-select-option value="一">一</a-select-option>
+            <a-select-option value="二">二</a-select-option>
+            <a-select-option value="三">三</a-select-option>
+            <a-select-option value="四">四</a-select-option>
+            <a-select-option value="五">五</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item ref="dutyName" label="联系人" prop="dutyName" placeholder="请输入联系人">
+          <a-input v-model="formAdd.dutyName"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="联系电话" prop="dutyTel" placeholder="请输入联系电话">
+          <a-input v-model="formAdd.dutyTel"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="位置" prop="address" placeholder="请输入位置">
+          <a-input v-model="formAdd.address"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="备注信息">
+          <a-input v-model="formAdd.remark" type="textarea" />
+        </a-form-model-item>
+        <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
+          <a-button type="primary" @click="onSubmitAdd()">创建</a-button>
+          <a-button style="margin-left: 10px;" @click="resetFormAdd()">重置</a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </a-Modal>
+    <!--修改信息 -->
+    <a-Modal v-model="visibleModify" title="修改酒店信息" footer>
+      <a-form-model
+        :label-col="labelCol"
+        :model="formModify"
+        :wrapper-col="wrapperCol"
+        :rules="rules"
+      >
+        <a-form-model-item label="酒店名称" prop="hotel">
+          <a-input v-model="formModify.hotel"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="协议编号">
+          <a-input v-model="formModify.id" disabled></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="星级">
+          <a-select v-model="formModify.level" @change="handleChange">
+            <a-select-option value="一">一</a-select-option>
+            <a-select-option value="二">二</a-select-option>
+            <a-select-option value="三">三</a-select-option>
+            <a-select-option value="四">四</a-select-option>
+            <a-select-option value="五">五</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item ref="dutyName" label="联系人" prop="dutyName">
+          <a-input v-model="formModify.dutyName"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="联系电话" prop="dutyTel">
+          <a-input v-model="formModify.dutyTel"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="位置" prop="address">
+          <a-input v-model="formModify.address"></a-input>
+        </a-form-model-item>
+        <!-- <a-form-model-item label="备注信息">
+          <a-input v-model="formModify.remark" type="textarea" />
+        </a-form-model-item> -->
+        <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
+          <a-button type="primary" @click="onSubmitModify()">修改</a-button>
+          <a-button style="margin-left: 10px;" @click="CancelModify()">取消</a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </a-Modal>
+  </a-card>
+</template>
+
+<script>
+const dataHotel = [
+  {
+    id: 'N1201',
+    dutyName: '李霞',
+    dutyTel: '13759655332',
+    hotel: '华宜时尚酒店',
+    level: '五',
+    address: '北京东城区国瑞城西花市大街上23号',
+    remark: '折扣力度3折'
+  },
+  {
+    id: 'N1202',
+    dutyName: '王莉莉',
+    dutyTel: '13759655348',
+    hotel: '香格里拉酒店',
+    address: '云南迪庆藏族建塘镇池慈卡1号',
+    level: '四',
+    remark: '折扣力度2折'
+  },
+  {
+    id: 'N1203',
+    dutyName: '尤晓梅',
+    dutyTel: '13053955537',
+    hotel: '福州品悦酒店',
+    address: '福州东浦路59号',
+    level: '四',
+    remark: '折扣力度4折'
+  },
+  {
+    id: 'N1204',
+    dutyName: '黄丽娟',
+    dutyTel: '13659655381',
+    hotel: '世纪金源酒店',
+    address: '福州温泉公园路59号',
+    level: '四',
+    remark: '折扣力度3折'
+  }
+]
+
+export default {
+  data() {
+    return {
+      dataHotel,
+      queryParam: {
+        word: '',
+        id: ''
+      },
+
+      visibleAdd: false,
+      visibleModify: false,
+      labelCol: { span: 6 },
+      wrapperCol: { span: 18 },
+      formAdd: {
+        id: '',
+        hotel: '',
+        level: '三',
+        dutyName: '',
+        dutyTel: '',
+        address: '',
+        remark: ''
+      },
+      formModify: {},
+      rules: {
+        level: [
+          {
+            required: true,
+            message: '请选择星级',
+            trigger: 'blur'
+          }
+        ],
+        hotel: [
+          {
+            required: true,
+            message: '请输入酒店名称',
+            trigger: 'blur'
+          }
+        ],
+        id: [
+          {
+            required: true,
+            message: '请输入协议编号',
+            trigger: 'blur'
+          }
+        ],
+        dutyName: [
+          {
+            required: true,
+            message: '请输入联系人',
+            trigger: 'blur'
+          }
+        ],
+        dutyTel: [
+          {
+            required: true,
+            message: '请输入联系电话',
+            trigger: 'blur'
+          }
+        ],
+        address: [
+          {
+            required: true,
+            message: '请输入地点',
+            trigger: 'blur'
+          }
+        ]
+      }
+    }
+  },
+  methods: {
+    searchQuery() {
+      // let idKey = this.queryParam.idKey
+      // let newListData = []
+      // if (IDName) {
+      //   this.dataHotel.filter(item => {
+      //     if (item.id.includes(idKey) || item.address.includes(idKey)) {
+      //       newListData.push(item)
+      //     }
+      //   })
+      //   this.dataHotel = newListData
+      // }
+    },
+    searchReset() {
+      this.dataHotel = dataHotel
+      this.queryParam.IDName = ''
+    },
+    addHotel() {
+      this.visibleAdd = true
+    },
+    onSubmitAdd() {
+      this.$refs.ruleForm.validate(valid => {
+        if (valid) {
+          // let length = this.dataHotel.length;
+          // this.dataHotel[length] = this.formAdd;
+          this.dataHotel.push(this.formAdd)
+          this.$message.success('添加成功!')
+          this.formAdd = {}
+          this.visibleAdd = false
+          // this.$confirm({
+          //   title: "您是否确定新建此会议安排？",
+          //   content: <div style="color:red;"></div>,
+          //   onOk() {
+          //     //console.log(length);
+          //   },
+          //   onCancel() {
+          //     console.log("Cancel");
+          //   },
+          //   class: "test"
+          // });
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetFormAdd() {
+      this.$refs.ruleForm.resetFields()
+    },
+    onDelete(id) {
+      const dataHotel = [...this.dataHotel]
+      this.dataHotel = dataHotel.filter(item => item.id !== id)
+    },
+    Download() {
+      console.log('下载')
+    },
+    Modify(record) {
+      this.visibleModify = true
+      console.log(record)
+      this.formModify.id = record.id
+      this.formModify.hotel = record.hotel
+          this.formModify.level = record.level
+      this.formModify.dutyName = record.dutyName
+      this.formModify.dutyTel = record.dutyTel
+      this.formModify.address = record.address
+      // this.formModify.remark = record.remarks
+    },
+    onSubmitModify() {
+      this.visibleModify = false
+      // this.dataHotel.dutyName = this.formModify.dutyName;
+      // this.dataHotel.dutyTel = this.formModify.dutyTel;
+      // this.dataHotel.address = this.formModify.address;
+      // this.dataHotel.remark = this.formModify.remark;
+      this.$message.success('修改成功')
+    },
+    CancelModify() {
+      this.visibleModify = false
+    },
+    handleChange(){}
+  }
+}
+</script>
+<style >
+#dataHotelTable {
+  margin-top: 20px;
+}
+</style>

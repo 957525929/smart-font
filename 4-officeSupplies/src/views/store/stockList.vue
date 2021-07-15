@@ -11,13 +11,6 @@
               <a-input placeholder="请输入办公用品名称查询" v-model="queryParam.name"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="8">
-            <a-form-item label="单价" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
-              <a-input-number v-model="queryParam.min" :min="1" :max="10000000" :decimalSeparator="0" />
-                <span style="width: 10px;">~</span>
-              <a-input-number v-model="queryParam.max" :min="1" :max="10000000" :decimalSeparator="0" />
-            </a-form-item>
-          </a-col>
 
           <a-col :md="4" :sm="6">
             <a-form-item label="库存状态">
@@ -29,6 +22,25 @@
               </a-select>
             </a-form-item>
           </a-col>
+
+<!--          <a-col :md="6" :sm="8">
+            <a-form-item label="单价" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
+              <a-input-number v-model="queryParam.min" :min="1" :max="10000000" :decimalSeparator="0" />
+                <span style="width: 10px;">~</span>
+              <a-input-number v-model="queryParam.max" :min="1" :max="10000000" :decimalSeparator="0" />
+            </a-form-item>
+          </a-col>-->
+
+          <a-col :md="10" :sm="12">
+            <a-form-item label="时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
+              <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date>
+              <span style="width: 10px;">~</span>
+              <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择结束时间"></j-date>
+            </a-form-item>
+          </a-col>
+
+
+
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :md="6" :sm="24">
               <a-button type="primary" @click="searchQuery">查询</a-button>
@@ -79,19 +91,9 @@
         <span slot="action" slot-scope="text, record">
           <a @click="handleEdit(record)">编辑</a>
           <a-divider type="vertical" />
-
-          <a-dropdown>
-            <a class="ant-dropdown-link">
-              更多 <a-icon type="down" />
-            </a>
-            <a-menu slot="overlay">
-              <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
-                </a-popconfirm>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
+          <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+              <a>删除</a>
+          </a-popconfirm>
         </span>
         <template slot="stockStatus" slot-scope="status">
           <a-tag v-if="status == '1'" color="green">充裕</a-tag>
@@ -111,6 +113,7 @@
   import StockModal from './modules/StockModal'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
+  import {formatDate} from "@/utils/util";
 
   export default {
     name: "StocKList",
@@ -123,24 +126,27 @@
       return {
         description: '库存管理页面',
         // 查询条件
-        queryParam: {roleName:'',},
+        queryParam: {
+          roleName:'',
+          time_begin:formatDate(new Date().getTime()-30*24*3600*1000,"yyyy-MM-dd"),
+          time_end:formatDate(new Date().getTime(),"yyyy-MM-dd")
+        },
         dataSource: [
           {
             id:1,
             articleName: '马克笔',
-            batch: '20210514',
+            enterTime: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-dd") + '  14:36:45',
             stockNum: '20',
             price: '20',
             stockPrice: '400',
             threshold: '10',
             unit:'盒',
             status: '1'
-
           },
           {
             id:2,
             articleName: '打印机',
-            batch: '20210324',
+            enterTime: formatDate(new Date().getTime()-10*24*3600*1000,"yyyy-MM-dd") + '  09:31:45',
             stockNum: '2',
             price: '1600',
             stockPrice: '3200',
@@ -151,7 +157,7 @@
           {
             id:3,
             articleName: 'A4纸',
-            batch: '20210105',
+            enterTime:formatDate(new Date().getTime()-15*24*3600*1000,"yyyy-MM-dd") + '  16:26:15',
             stockNum: '0',
             price: '128',
             stockPrice: '0',
@@ -178,9 +184,9 @@
             dataIndex: 'articleName'
           },
           {
-            title: '批次',
+            title: '入库时间',
             align:"center",
-            dataIndex: 'batch'
+            dataIndex: 'enterTime'
           },
           {
             title: '库存数量',
