@@ -9,21 +9,21 @@
       <a-select-option value="3"> 开锁 </a-select-option>
     </a-select>
 
-    <br /><br />
+    <span style="font-weight: bold"> &nbsp; | &nbsp; </span>
 
     <span>工号： &nbsp;&nbsp; </span>
-    <a-input style="width: 11%" placeholder="请输入工号" v-model="Num" allowClear></a-input>
+    <a-input style="width: 10%" placeholder="请输入工号" v-model="Num" allowClear></a-input>
 
     <a-divider type="vertical" />
 
     <span>姓名：</span>
-    <a-input style="width: 11%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
+    <a-input style="width: 10%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
 
-    <br /><br />
+    <span style="font-weight: bold"> &nbsp; | &nbsp; </span>
 
-    <span>位置： &nbsp;&nbsp; </span>
+    <span>位置：</span>
     <a-cascader
-      style="width: 22%"
+      style="width: 23%"
       :options="selectOptions"
       change-on-select
       @change="areaChange"
@@ -33,7 +33,7 @@
     <a-divider type="vertical" />
 
     <span>房间：</span>
-    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
+    <a-input style="width: 12%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
 
     <a-divider type="vertical" />
 
@@ -48,6 +48,9 @@
       {{ toggleSearchStatus ? '收起' : '展开' }}
       <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
     </a>
+
+    <br /><br />
+
     <a-row type="flex" justify="end">
       <a-col>
         <a-button @click="check">查询</a-button>

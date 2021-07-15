@@ -14,12 +14,12 @@
     <a-divider type="vertical" />
 
     <span>房间：</span>
-    <a-input style="width: 15%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
+    <a-input style="width: 11%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
 
-    <br /><br />
+    <span style="font-weight: bold"> &nbsp; | &nbsp; </span>
 
     <span>部门：</span>
-    <a-select style="width: 11%" placeholder="请选择部门" @change="deptChange" allowClear>
+    <a-select style="width: 17%" placeholder="请选择部门" @change="deptChange" allowClear>
       <a-select-option v-for="(item, index) in deptData" :key="index">
         {{ item.deptName }}
       </a-select-option>
@@ -27,20 +27,25 @@
 
     <a-divider type="vertical" />
 
-    <span>工号：</span>
-    <a-input style="width: 11%" placeholder="请输入工号" v-model="Num" allowClear></a-input>
+    <span>姓名：</span>
+    <a-input style="width: 11%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
 
     <a-divider type="vertical" />
 
-    <span>姓名：</span>
-    <a-input style="width: 11%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
+    <span>工号：</span>
+    <a-input style="width: 11%" placeholder="请输入工号" v-model="Num" allowClear></a-input>
 
     <br /><br />
 
     <!-- 下部 -->
 
     <a-row type="flex" justify="end">
-      <a-upload>
+      <a-col>
+        <a-button @click="check">查询</a-button>
+        <a-divider type="vertical" />
+      </a-col>
+
+      <a-upload accept=".xlsx,.xls">
         <a-button>导入房间</a-button>
       </a-upload>
 
@@ -52,7 +57,7 @@
         <a-modal v-model="roomVisible" title="添加房间" @ok="roomOk">
           <a-row type="flex" align="middle">
             <a-col :span="4">位置：</a-col>
-            <a-col :span="13">
+            <a-col :span="14">
               <a-cascader
                 style="width: 100%"
                 :options="selectOptions"
@@ -67,7 +72,7 @@
 
           <a-row type="flex" align="middle">
             <a-col :span="4">房间号：</a-col>
-            <a-col :span="13">
+            <a-col :span="14">
               <a-input style="width: 100%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
             </a-col>
           </a-row>
@@ -76,7 +81,7 @@
 
           <a-row type="flex" align="middle">
             <a-col :span="4">员工：</a-col>
-            <a-col :span="13">
+            <a-col :span="14">
               <a-select
                 mode="multiple"
                 placeholder="请选择员工"
@@ -92,10 +97,6 @@
           </a-row>
         </a-modal>
         <!-- 添加房间功能结束 -->
-
-        <a-divider type="vertical" />
-
-        <a-button @click="check">查询</a-button>
 
         <a-divider type="vertical" />
 
@@ -165,3 +166,5 @@ export default {
   },
 }
 </script>
+<style>
+</style>

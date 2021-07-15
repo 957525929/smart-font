@@ -1,7 +1,7 @@
 export const roomData = [
   {
     key: 1,
-    area: '福建烟草公司机关.A区域.1号楼',
+    area: '福建烟草总公司机关.A区域.1号楼',
     roomNum: '101',
     lockNum: 'S0001',
     status: '开锁',
@@ -39,7 +39,7 @@ export const roomData = [
   },
   {
     key: 2,
-    area: '福建烟草公司机关.A区域.2号楼',
+    area: '福建烟草总公司机关.A区域.2号楼',
     roomNum: '202',
     lockNum: 'S0002',
     status: '关锁',
@@ -69,7 +69,7 @@ export const roomData = [
   },
   {
     key: 3,
-    area: '福建烟草公司机关.A区域.2号楼',
+    area: '福建烟草总公司机关.A区域.2号楼',
     roomNum: '303',
     lockNum: 'S0003',
     status: '低电量',
@@ -107,7 +107,7 @@ export const roomData = [
   },
   {
     key: 4,
-    area: '福建烟草公司机关.B区域.1号楼',
+    area: '福建烟草总公司机关.B区域.1号楼',
     roomNum: '404',
     lockNum: 'S0004',
     status: '低电量',
@@ -128,7 +128,7 @@ export const roomData = [
   },
   {
     key: 5,
-    area: '福建烟草公司机关.A区域.3号楼',
+    area: '福建烟草总公司机关.A区域.3号楼',
     roomNum: '503',
     lockNum: 'S0005',
     status: '关锁',

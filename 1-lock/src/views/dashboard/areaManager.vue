@@ -18,14 +18,14 @@
           <a-modal v-model="nextAddVisible" title="添加下级" @ok="nextAddOk">
             <a-row type="flex" align="middle">
               <a-col :span="4">名称：</a-col>
-              <a-col :span="10">
+              <a-col :span="14">
                 <a-input style="width: 100%" placeholder="请输入名称" v-model="nextName" allowClear></a-input>
               </a-col>
             </a-row>
             <br />
             <a-row type="flex" align="middle" v-if="rowRecord.value == 2 || rowRecord.value == 3">
               <a-col :span="4">上级名称：</a-col>
-              <a-col :span="10">
+              <a-col :span="14">
                 <a-input style="width: 100%" v-model="rowRecord.upName" allowClear></a-input>
               </a-col>
             </a-row>
@@ -37,7 +37,7 @@
           <a-modal v-model="editVisible" title="编辑" @ok="editOk">
             <a-row type="flex" align="middle">
               <a-col :span="4">名称：</a-col>
-              <a-col :span="10">
+              <a-col :span="14">
                 <a-input style="width: 100%" v-model="rowRecord.name" allowClear></a-input>
               </a-col>
             </a-row>
@@ -45,7 +45,7 @@
 
             <a-row type="flex" align="middle" v-if="rowRecord.value == 2 || rowRecord.value == 3">
               <a-col :span="4">上级名称：</a-col>
-              <a-col :span="10">
+              <a-col :span="14">
                 <a-input style="width: 100%" v-model="rowRecord.upName" allowClear></a-input>
               </a-col>
             </a-row>
@@ -118,7 +118,7 @@ export default {
     },
     nextAddOk() {
       this.nextAddVisible = false
-      console.log(this.rowRecord)
+
       if (this.nextName != '') {
         const newData = {
           key: this.count * 10,

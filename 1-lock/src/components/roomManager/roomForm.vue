@@ -6,14 +6,14 @@
         <a-modal v-model="roomVisible" title="编辑房间" @ok="roomOk">
           <a-row type="flex" align="middle">
             <a-col :span="4">位置：</a-col>
-            <a-col :span="10"> {{ rowRecord.area }} </a-col>
+            <a-col :span="12"> {{ rowRecord.area }} </a-col>
           </a-row>
 
           <br />
 
           <a-row type="flex" align="middle">
             <a-col :span="4">房间号：</a-col>
-            <a-col :span="10"> <a-input style="width: 100%" v-model="rowRecord.roomNum" allowClear></a-input> </a-col>
+            <a-col :span="12"> <a-input style="width: 100%" v-model="rowRecord.roomNum" allowClear></a-input> </a-col>
           </a-row>
 
           <br />
@@ -38,7 +38,7 @@
         <a-modal v-model="personVisible" title="人员变更" @ok="personOk">
           <a-row type="flex" align="middle">
             <a-col :span="4">位置：</a-col>
-            <a-col :span="10"> {{ rowRecord.area }} </a-col>
+            <a-col :span="12"> {{ rowRecord.area }} </a-col>
           </a-row>
 
           <br />

@@ -4,28 +4,28 @@
     <span>报警时间段：</span>
     <a-date-picker
       v-model="startValue"
+      :default-value="moment('2021-02-01')"
       :disabled-date="disabledStartDate"
       format="YYYY-MM-DD"
-      placeholder="开始时间"
       @openChange="handleStartOpenChange"
       style="width: 18.5%"
     />
     <a-divider type="vertical" />
     <a-date-picker
       v-model="endValue"
+      :default-value="moment('2021-07-01')"
       :disabled-date="disabledEndDate"
       format="YYYY-MM-DD"
-      placeholder="结束时间"
       :open="endOpen"
       @openChange="handleEndOpenChange"
       style="width: 18%"
     />
 
-    <br /><br />
+    <span style="font-weight: bold"> &nbsp; | &nbsp; </span>
 
-    <span>位置： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
+    <span>位置：</span>
     <a-cascader
-      style="width: 22%"
+      style="width: 23%"
       :options="selectOptions"
       change-on-select
       @change="areaChange"
@@ -51,6 +51,8 @@
       {{ toggleSearchStatus ? '收起' : '展开' }}
       <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
     </a>
+
+    <br /><br />
     <a-row type="flex" justify="end">
       <a-col>
         <a-button @click="check">查询</a-button>
@@ -62,6 +64,7 @@
 </template>
 <script>
 import { areaData } from '../roomManager/data/area'
+import moment from 'moment'
 
 export default {
   data() {
@@ -84,6 +87,7 @@ export default {
     },
   },
   methods: {
+    moment,
     areaChange(value) {},
 
     //日期选择

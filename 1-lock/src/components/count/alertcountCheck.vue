@@ -6,9 +6,9 @@
         <span>报警时间段：</span>
         <a-date-picker
           v-model="startValue"
+          :default-value="moment('2021-02-01')"
           :disabled-date="disabledStartDate"
           format="YYYY-MM-DD"
-          placeholder="开始时间"
           @openChange="handleStartOpenChange"
           style="width: 30%"
         />
@@ -17,7 +17,7 @@
           v-model="endValue"
           :disabled-date="disabledEndDate"
           format="YYYY-MM-DD"
-          placeholder="结束时间"
+          :default-value="moment('2021-07-01')"
           :open="endOpen"
           @openChange="handleEndOpenChange"
           style="width: 31%"
@@ -82,6 +82,7 @@
 <script>
 import { areaData } from '../roomManager/data/area'
 import Bar from '@/components/chart/Bar'
+import moment from 'moment'
 
 export default {
   components: {
@@ -111,6 +112,7 @@ export default {
     },
   },
   methods: {
+    moment,
     areaChange(value) {},
 
     //日期选择

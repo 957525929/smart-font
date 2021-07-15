@@ -23,9 +23,9 @@
       @openChange="handleEndOpenChange"
     />
 
-    <br /><br />
+    <span style="font-weight: bold"> &nbsp; | &nbsp; </span>
 
-    <span>开锁人部门：</span>
+    <span>开锁人所属部门：</span>
     <a-select style="width: 18%" placeholder="请选择部门" @change="deptChange" allowClear>
       <a-select-option v-for="(item, index) in deptData" :key="index">
         {{ item.deptName }}
@@ -34,7 +34,7 @@
 
     <a-divider type="vertical" />
 
-    <span>开锁人：</span>
+    <span>开锁人姓名：</span>
     <a-input style="width: 13.6%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
 
     <br /><br />

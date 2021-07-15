@@ -5,7 +5,7 @@
       <a-tree-select
         v-model="value"
         placeholder="请选择区域"
-        style="width: 20%"
+        style="width: 23%"
         :tree-data="treeData"
         tree-checkable
         :show-checked-strategy="SHOW_PARENT"
@@ -30,9 +30,24 @@
           <a-button @click="handleAdd" class="butt">新增</a-button>
           <a-modal v-model="addVisible" title="新增" @ok="addOk">
             <a-row type="flex" align="middle">
+              <a-col :span="4">类型：</a-col>
+              <a-col :span="13">
+                <a-select style="width: 100%" placeholder="请选择类型" @change="selectChange" allowClear>
+                  <a-select-option value="1"> 智能锁厂商 </a-select-option>
+                  <a-select-option value="2"> 后勤管理 </a-select-option>
+                </a-select>
+              </a-col>
+            </a-row>
+
+            <br />
+
+            <a-row type="flex" align="middle">
               <a-col :span="4">姓名：</a-col>
               <a-col :span="13">
-                <a-input style="width: 100%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
+                <a-select style="width: 100%" placeholder="请选择人员姓名" @change="nameChange" allowClear>
+                  <a-select-option value="1"> 郑叹 </a-select-option>
+                  <a-select-option value="2"> 王久 </a-select-option>
+                </a-select>
               </a-col>
             </a-row>
 
@@ -42,18 +57,6 @@
               <a-col :span="4">联系电话：</a-col>
               <a-col :span="13">
                 <a-input style="width: 100%" placeholder="请输入联系电话" v-model="phone" allowClear></a-input>
-              </a-col>
-            </a-row>
-
-            <br />
-
-            <a-row type="flex" align="middle">
-              <a-col :span="4">类型：</a-col>
-              <a-col :span="13">
-                <a-select style="width: 100%" placeholder="请选择类型" @change="selectChange" allowClear>
-                  <a-select-option value="1"> 智能锁厂商 </a-select-option>
-                  <a-select-option value="2"> 后勤管理 </a-select-option>
-                </a-select>
               </a-col>
             </a-row>
 
@@ -186,9 +189,8 @@ export default {
     addOk() {
       this.addVisible = false
     },
-    selectChange(value) {
-      console.log(value)
-    },
+    selectChange(value) {},
+    nameChange(value) {},
     areaChange(value) {},
     typeChange() {},
     check() {},
