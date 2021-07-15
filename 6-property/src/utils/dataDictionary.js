@@ -29,16 +29,16 @@ export const  protaskStatus= {
 }
 /*设备类型devType*/ 
 export const devType = {
-  0: { tableValue: '空调', searchValue: '空调', code: 0 },
-  1: { tableValue: '电网', searchValue: '管网', code: 1 },
-  2: { tableValue: '水网', searchValue: '水网', code: 2 },
+  0: { tableValue: '空调、通风系统', searchValue: '空调、通风系统', code: 0 },
+  1: { tableValue: '电器系统', searchValue: '电器系统', code: 1 },
+  2: { tableValue: '给排水系统', searchValue: '给排水系统', code: 2 },
 }
 /*设备状态devStatus*/
 export const devStatus = {
-  0: { tableValue: '规划中', searchValue: '规划中', code: 0 },
-  1: { tableValue: '在部署', searchValue: '在部署', code: 1 },
-  2: { tableValue: '待交货', searchValue: '待交货', code: 2 },
-  3: { tableValue: '未投产', searchValue: '未投产', code: 3 },
+  // 0: { tableValue: '规划中', searchValue: '规划中', code: 0 },
+  // 1: { tableValue: '在部署', searchValue: '在部署', code: 1 },
+  // 2: { tableValue: '待交货', searchValue: '待交货', code: 2 },
+  // 3: { tableValue: '未投产', searchValue: '未投产', code: 3 },
   4: { tableValue: '在用', searchValue: '在用', code: 4 },
   5: { tableValue: '在修', searchValue: '在修', code: 5 },
   6: { tableValue: '停用', searchValue: '停用', code: 6 },
@@ -60,4 +60,13 @@ export const staffStatus = {
   0: { tableValue: '请假', searchValue: '请假', code: 0 },
   1: { tableValue: '在职', searchValue: '在职', code: 1 },
   2: { tableValue: '待工', searchValue: '待工', code: 2 }
+}
+
+/*时间周期 period*/
+export const period = {
+  0: { tableValue: '今日', searchValue: '今日', code: 0 },
+  1: { tableValue: '本周', searchValue: '本周', code: 1 },
+  2: { tableValue: '本月', searchValue: '本月', code: 2 },
+  3: { tableValue: '本季度', searchValue: '本季度', code: 3 },
+  4: { tableValue: '自定义', searchValue: '自定义', code: 4 },
 }

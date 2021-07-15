@@ -1,3 +1,4 @@
+// 待核查
 import { devType,devStatus} from "@/utils/dataDictionary.js";
 // 待维修
 export const columns=[
@@ -30,13 +31,6 @@ export const columns=[
         scopedSlots: { customRender: 'tags' },
         width: 100,
         type: 'a-range-picker',
-    },
-    {
-        title: '所属资产',
-        key: 'assets',
-        dataIndex:'assets',
-        width: 80,
-        type: 'a-select',
     },
     {
         dataIndex: 'institution',
@@ -76,17 +70,17 @@ export const columns=[
 export const data=[
     {
         key: '1',
-        devId: '2',
-        devName:"18楼频繁断电停电",
-        devType:1,
-        taskStatus:2,
+        devId: '3',
+        devName:"卫生间停水",
+        taskStatus:3,
+        devType:2,
         devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
-        fixStaff: '刘涛',
-        deliveryTime:"2021-06-22 10:55:55",
-        fixedTime: '2021-06-22 20:00:00',
+        fixStaff: '王翔',
+        deliveryTime:"2021-06-20 17：55：55",
+        fixedTime: '2021-06-22 20：00：00',
         action:[{
             tagName:"详情",
             com:"TableDrawer"
@@ -119,11 +113,6 @@ export const infoDetail =[
     //     type:"a-select",
     //     valueEnum:devStatus
     // },
-    {
-        title: '所属资产',
-        key: 'assets',
-        value:"",
-    },
     {
         key: 'institution',
         title: '业主单位',

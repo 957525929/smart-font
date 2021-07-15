@@ -1,6 +1,6 @@
-// 待核查
+
+//"待评估"
 import { devType,devStatus} from "@/utils/dataDictionary.js";
-// 待维修
 export const columns=[
     {
         dataIndex: 'devId',
@@ -31,13 +31,6 @@ export const columns=[
         scopedSlots: { customRender: 'tags' },
         width: 100,
         type: 'a-range-picker',
-    },
-    {
-        title: '所属资产',
-        key: 'assets',
-        dataIndex:'assets',
-        width: 80,
-        type: 'a-select',
     },
     {
         dataIndex: 'institution',
@@ -77,16 +70,16 @@ export const columns=[
 export const data=[
     {
         key: '1',
-        devId: '3',
-        devName:"卫生间停水",
-        taskStatus:3,
-        devType:2,
+        devId: '1',
+        devName:"18楼停电",
+        taskStatus:5,
+        devType:1,
         devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
-        fixStaff: '王翔',
-        deliveryTime:"2021-06-20 17：55：55",
+        fixStaff: '刘涛',
+        deliveryTime:"2021-06-18 17：55：55",
         fixedTime: '2021-06-22 20：00：00',
         action:[{
             tagName:"详情",
@@ -121,11 +114,6 @@ export const infoDetail =[
     //     valueEnum:devStatus
     // },
     {
-        title: '所属资产',
-        key: 'assets',
-        value:"",
-    },
-    {
         key: 'institution',
         title: '业主单位',
         value:"",
@@ -144,7 +132,8 @@ export const infoDetail =[
     {
         title: '维修员',
         key: 'fixStaff',
-        value:""
+        value:"",
+        hideInDetail:true
     },
     {
         title: '上报时间',

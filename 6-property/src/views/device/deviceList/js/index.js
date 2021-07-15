@@ -31,17 +31,11 @@ export const devColumns = [
         type: 'a-select',
         valueEnum:devStatus ,
     },
-    {
-        title: '所属资产',
-        key: 'assets',
-        width: 80,
-        dataIndex:'assets'
-    },
-    {
-        dataIndex: 'institution',
-        title: '业主单位',
-        width: 80,
-    },
+    // {
+    //     dataIndex: 'institution',
+    //     title: '业主单位',
+    //     width: 80,
+    // },
     // {
     //     title: '业主联系方式',
     //     dataIndex: 'phone',
@@ -57,13 +51,13 @@ export const devColumns = [
     //     dataIndex: 'devPhone',
     //     width: 80,
     // },
-    {
-        title: '技术状况',
-        dataIndex: 'techSituation',
-        width: 80,
-        type: 'a-select',
-        valueEnum: techSituation,
-    },
+    // {
+    //     title: '技术状况',
+    //     dataIndex: 'techSituation',
+    //     width: 80,
+    //     type: 'a-select',
+    //     valueEnum: techSituation,
+    // },
     {
         title: '维修员',
         key: 'fixStaff',
@@ -94,7 +88,7 @@ export const data = [
         devId: 1001,
         devName: "waterPipe_1001",
         devType: 2,
-        devStatus: 0,
+        devStatus: 4,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
@@ -121,7 +115,7 @@ export const data = [
         devId: 2001,
         devName: "wire_2001",
         devType: 1,
-        devStatus: 1,
+        devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
@@ -147,7 +141,7 @@ export const data = [
         devId: 3001,
         devName: "air_3001",
         devType: 0,
-        devStatus: 2,
+        devStatus: 6,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
@@ -197,11 +191,6 @@ export const infoDetail = [
         type:"a-select",
         valueEnum:devStatus ,
     },
-    {
-        title: '所属资产',
-        key: 'assets',
-        value:"",
-    },
     // {
     //     key: 'institution',
     //     title: '业主单位',
@@ -212,13 +201,13 @@ export const infoDetail = [
     //     key: 'phone',        
     //     value:"",
     // },
-    {
-        title: '技术状况',
-        key: 'techSituation',
-        value:"",
-        type:"a-select" ,
-        valueEnum: techSituation,
-    },
+    // {
+    //     title: '技术状况',
+    //     key: 'techSituation',
+    //     value:"",
+    //     type:"a-select" ,
+    //     valueEnum: techSituation,
+    // },
     {
         title: '维修员',
         key: 'fixStaff',
