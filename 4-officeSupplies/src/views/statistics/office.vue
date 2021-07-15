@@ -179,6 +179,7 @@
 <script>
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
+  import {formatDate} from "@/utils/util"
 
   export default {
     name: "StocK",
@@ -190,7 +191,10 @@
       return {
         description: '办公用品统计页面',
         // 查询条件
-        queryParam: {roleName:'',},
+        queryParam: {
+          time_begin:formatDate(new Date().getTime()-30*24*3600*1000,"yyyy-MM-dd"),
+          time_end:formatDate(new Date().getTime(),"yyyy-MM-dd")
+        },
         total: {
           purchaseNumTotal: '4',
           purchaseAmountTotal:'55',

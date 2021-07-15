@@ -172,7 +172,7 @@ const user = {
                 "meta": {
                   "keepAlive": false,
                   "internalOrExternal": true,
-                  "icon": "shop",
+                  "icon": "read",
                   "title": "采购审批"
                 },
                 "name": "procurement-manage-uncheckProcurementList",

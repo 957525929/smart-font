@@ -100,6 +100,7 @@
   import ReceiveModal from './modules/ReceiveModal'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
+  import {formatDate} from "@/utils/util"
 
   export default {
     name: "ReceiveList",
@@ -112,7 +113,11 @@
       return {
         description: '领用管理页面',
         // 查询条件
-        queryParam: {roleName:'',},
+        queryParam: {
+          roleName:'',
+          time_begin:formatDate(new Date().getTime()-30*24*3600*1000,"yyyy-MM-dd"),
+          time_end:formatDate(new Date().getTime(),"yyyy-MM-dd")
+        },
         dataSource: [
           {
             id:1,
@@ -123,7 +128,7 @@
             price: '20',
             receivePrice: '40',
             unit:'盒',
-            receiveTime: '2021-06-01 09:48:59'
+            receiveTime: formatDate(new Date().getTime()-3*24*3600*1000,"yyyy-MM-dd") + ' 09:48:59'
           },
           {
             id:2,
@@ -134,7 +139,7 @@
             price: '1600',
             receivePrice: '1600',
             unit:'台',
-            receiveTime: '2021-05-23 15:10:11'
+            receiveTime: formatDate(new Date().getTime()-5*24*3600*1000,"yyyy-MM-dd") + ' 15:10:11'
           },
           {
             id:3,
@@ -145,7 +150,7 @@
             price: '128',
             receivePrice: '128',
             unit:'箱',
-            receiveTime: '2021-05-11 10:24:18'
+            receiveTime:  formatDate(new Date().getTime()-7*24*3600*1000,"yyyy-MM-dd") + ' 10:24:18'
           },
         ],
         // 表头

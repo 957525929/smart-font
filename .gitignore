@@ -21,3 +21,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+5-app/yarn.lock
