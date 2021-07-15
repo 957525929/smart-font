@@ -1,0 +1,50 @@
+export const lockdata = [{
+		name: '福建烟草公司机关',
+		area: 'A区域1号楼',
+		roomnum: '101',
+		time: '',
+		type: '未安装',
+	},
+	{
+		name: '福建烟草公司机关',
+		area: 'B区域3号楼',
+		roomnum: '305',
+		time: '',
+		type: '未安装',
+	},
+	{
+		name: '福建烟草公司机关',
+		area: 'A区域1号楼',
+		roomnum: '105',
+		time: '2021年6月21日 13:46',
+		type: '已安装',
+	},
+	{
+		name: '福建烟草公司机关',
+		area: 'A区域3号楼',
+		roomnum: '203',
+		time: '2021年6月18日 09:33',
+		type: '已安装',
+	},
+	{
+		name: '福建烟草公司机关',
+		area: 'B区域1号楼',
+		roomnum: '211',
+		time: '2021年6月10日 16:38',
+		type: '已安装',
+	},
+	{
+		name: '福建烟草公司机关',
+		area: 'B区域4号楼',
+		roomnum: '402',
+		time: '2021年6月9日 12:46',
+		type: '已安装',
+	},
+	{
+		name: '福建烟草公司机关',
+		area: 'A区域1号楼',
+		roomnum: '305',
+		time: '2021年6月9日 11:22',
+		type: '已安装',
+	}
+]
