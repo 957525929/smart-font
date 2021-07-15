@@ -7,7 +7,7 @@
 			</view>
 			
 			<view class="nav-list">
-				<navigator hover-class="none" :url="'/pages/workplace/' +item.route" class="nav-li" navigateTo :class="'bg-'+item.color"
+				<navigator hover-class="none" :url="'/pages/index/' +item.route" class="nav-li" navigateTo :class="'bg-'+item.color"
 				 :style="[{animation: 'show ' + ((index+1)*0.2+1) + 's 1'}]" v-for="(item,index) in elements" :key="index">
 					<view class="nav-title">{{item.title}}</view>
 					<view class="nav-name">{{item.route}}</view>
@@ -24,40 +24,19 @@
 		data() {
 			return {
 				elements: [{
-						title: '物业管理',
-						name: 'layout',
+						title: '游客',
+						name: 'tourist',
 						color: 'cyan',
-						cuIcon: 'repairfill',
-						route:'property'
+						cuIcon: 'people',
+						route:'tourist'
 					},
 					{
-						title: '车辆管理',
-						name: 'background',
+						title: '职员',
+						name: 'staff',
 						color: 'blue',
-						cuIcon: 'taxi',
-						route:'car'
+						cuIcon: 'servicefill',
+						route:'staff'
 					},
-					{
-						title: '锁管理',
-						name: 'text',
-						color: 'purple',
-						cuIcon: 'lock',
-						route:'lock'
-					},
-					{
-						title: '访问管理',
-						name: 'icon',
-						color: 'mauve',
-						cuIcon: 'newsfill',
-						route:'access'
-					},
-					{
-						title: '会议接待',
-						name: 'button',
-						color: 'pink',
-						cuIcon: 'calendar',
-						route:'meeting'
-					}
 				],
 			};
 		},
