@@ -61,34 +61,34 @@ export default {
   data() {
     return {
       moment,
-      field: ['2021.01', '2021.02', '2021.03', '2021.04', '2021.05', '2021.06'],
+      field: ['2021.02', '2021.03', '2021.04', '2021.05', '2021.06', '2021.07'],
       dataSource: [
         {
           type: '未完成', // 列名
-          2021.01: 8,
-          2021.02: 0,
+          2021.02: 8,
           2021.03: 1,
           2021.04: 4,
           2021.05: 5,
           2021.06: 2,
+          2021.07: 8,
         },
         {
           type: '进行中',
-          2021.01: 8,
           2021.02: 7,
           2021.03: 5,
           2021.04: 18,
           2021.05: 8,
           2021.06: 12,
+          2021.07: 8,
         },
         {
           type: '已完成',
-          2021.01: 12,
           2021.02: 10,
           2021.03: 8,
           2021.04: 10,
           2021.05: 5,
           2021.06: 2,
+          2021.07: 12,
         },
       ],
     }
@@ -124,7 +124,7 @@ export default {
       var nowDate = new Date()
       let date = {
         year: nowDate.getFullYear(),
-        month: nowDate.getMonth(),
+        month: nowDate.getMonth() - 4,
         date: nowDate.getDate(),
         hour: nowDate.getHours(),
         minutes: nowDate.getMinutes(),

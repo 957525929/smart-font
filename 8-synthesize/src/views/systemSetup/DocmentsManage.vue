@@ -15,13 +15,15 @@
             <a-col :sm="10">
               <a-form-item label="时间">
                 <a-date-picker
-                  format="YYYY-MM-DD HH:mm:ss"
-                  :default-value="moment(current_start_date, 'YYYY/MM/DD HH:mm:ss')"
+                  class="w140"
+                  format="YYYY-MM-DD"
+                  :default-value="moment(current_start_date, 'YYYY/MM/DD')"
                 />
                 ~
                 <a-date-picker
-                  format="YYYY-MM-DD HH:mm:ss"
-                  :default-value="moment(current_stop_date, 'YYYY/MM/DD HH:mm:ss')"
+                  class="w140"
+                  format="YYYY-MM-DD"
+                  :default-value="moment(current_stop_date, 'YYYY/MM/DD ')"
                 />
               </a-form-item>
             </a-col>

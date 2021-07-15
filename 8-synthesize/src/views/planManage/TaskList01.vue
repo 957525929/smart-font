@@ -64,18 +64,46 @@
           <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
           <a-tag v-if="status === '1'" color="green">进行中</a-tag>
           <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status === '3'" color="red" @click="showModal">
-            <!-- <a-popconfirm title="是否确认延长时间?" ok-text="确定" cancel-text="取消" @confirm="confirm(record)" @cancel="cancel">
-              未完成
-            </a-popconfirm> -->
-            未完成
-            <a-modal v-model="status_visible" width="350px" title="延长时间" @ok="confirm(record)">
-              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">
-                <a-date-picker placeholder="请选择延长时间" />
+          <a-tag v-if="status === '3'" color="red" @click="change(record)">
+            <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
+              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
+                <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" />
               </a-form-item>
             </a-modal>
+            未完成
           </a-tag>
-          <a-tag v-if="status === '4'" color="pink">延期中</a-tag>
+          <a-tag v-if="status === '5'" color="pink">延期中</a-tag>
+          <!-- <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
+            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
+              <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" format="YYYY-MM-DD" />
+            </a-form-item>
+          </a-modal> -->
+          <!-- <a-tag
+            :color="
+              record.status === '0'
+                ? 'orange'
+                : record.status === '1'
+                ? 'green'
+                : record.status === '2'
+                ? 'cyan'
+                : record.status === '3'
+                ? 'red'
+                : 'pink'
+            "
+            @click="change(record)"
+          >
+            {{
+              record.status === '0'
+                ? '未开始'
+                : record.status === '1'
+                ? '进行中'
+                : record.status === '2'
+                ? '已完成'
+                : record.status === '3'
+                ? '未完成'
+                : '延时中'
+            }}
+          </a-tag> -->
         </template>
       </a-table>
     </PageTemplate>
@@ -92,6 +120,7 @@ import TaskListModal from './modules/TaskListModal'
 import { columns, data } from './modules/js/TaskData01.js'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import JEllipsis from '@/components/jeecg/JEllipsis'
+import { formatDate } from '@/utils/util'
 const NEW_DEVLIST = Object.freeze({ columns, data })
 export default {
   name: 'TaksList01',
@@ -112,7 +141,7 @@ export default {
       rowSelection,
       data: NEW_DEVLIST.data,
       columns: NEW_DEVLIST.columns,
-      status_visible: false,
+      visible: false,
       url: {
         list: '/sys/quartzJob/list',
         delete: '/sys/quartzJob/delete',
@@ -144,10 +173,27 @@ export default {
       this.currentIndex = index
       this.data.splice(this.currentIndex, 1)
     },
-    confirm(record) {
-      record.status = '4'
+    change(index) {
+      if (index.status === '3') {
+        this.visible = true
+        this.rowIndex = index
+      }
+    },
+    confirm() {
+      // record.status = "1";
+      console.log(this.rowIndex)
+      this.rowIndex.status = '5'
       this.$message.success('延期成功')
-      this.status_visible = false
+      this.visible = false
+      console.log(this.rowIndex.deadline)
+      this.rowIndex.deadline = this.timeOut
+    },
+    getDateTime(value, dateString) {
+      console.log('Selected Time: ', value)
+      console.log('Formatted Selected Time: ', dateString)
+      this.timeOut = dateString
+      console.log('----------------------')
+      console.log(this.timeOut)
     },
     cancel(e) {},
   },
