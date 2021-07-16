@@ -20,12 +20,12 @@
 							房间号：{{item.roomnum}}
 						</view>
 					</span>
-					<span class="card-right">
+					<!-- <span class="card-right"> -->
 						<!-- 切换不同颜色 -->
-						<view :style="styleObject[cardType.id]">
+						<!-- <view :style="styleObject[cardType.id]">
 							{{item.type}}
 						</view>
-					</span>
+					</span> -->
 				</view>
 			</view>
 		</view>

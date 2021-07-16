@@ -7,7 +7,7 @@
 		<view class="cu-list menu sm-border">
 			<view class="cu-form-group">
 				<view class="title">位置：</view>
-				<view class="title flex-sub text-left">福建烟草总公司机关A区域1号楼</view>
+				<view class="flex-sub text-left">中国烟草总公司福建省公司机关A区域1号楼</view>
 			</view>
 			<view class="cu-form-group ">
 				<view class="title">房间：</view>

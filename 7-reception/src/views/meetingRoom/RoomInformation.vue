@@ -119,7 +119,7 @@
       return parseInt(index) + 1}}></a-table-column>
         <a-table-column title="区域" data-index="area" align="center" ></a-table-column>         
         <a-table-column title="房间号" data-index="room" align="center" ></a-table-column>
-        <a-table-column title="容纳人数（个）" data-index="number" align="center" ></a-table-column>
+        <a-table-column title="容纳人数" data-index="number" align="center" ></a-table-column>
         <a-table-column title="管理员" data-index="dutyName" align="center"></a-table-column>
         <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="基本条件" data-index="condition" align="center">

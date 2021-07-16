@@ -443,7 +443,7 @@ const user = {
             ////原始的参考、、、、、
             // {
             //   "redirect": null,
-            //   "path": "/dashboard/analysis",
+            //   "path": "/meetingOrganization/MeetingApply",
             //   "component": "dashboard/Analysis",
             //   "route": "1",
             //   "meta": {

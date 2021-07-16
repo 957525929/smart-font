@@ -9,7 +9,7 @@
         </a-col>
         <a-col>
             <a-select :style="{width:'150px'}"  @change="handleChange" placeholder="请选择预约方式">
-            <a-select-option value="公司">公司</a-select-option>
+            <a-select-option value="公司会议">公司会议</a-select-option>
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
         </a-col>
@@ -20,32 +20,7 @@
         <a-col>
           <a-input placeholder="请输入区域或房间号" v-model="queryParam.word"></a-input>
         </a-col>
-        <a-col :span="1"></a-col>
-               <a-col>
-          <span>时间范围：</span>
-        </a-col>
-        <a-col>
-           <a-icon type="calendar" :style="{fontSize:'20px',marginRight:'5px'}" />
-              <span>从&nbsp;</span>
-              <a-date-picker
-                @change="onChange"
-                placeholder="请选择开始"
-                :format="dateFormat"
-           
-              >
-                <a-icon slot="suffixIcon" type="none" />
-              </a-date-picker>
-              <span>&nbsp;到&nbsp;</span>
-              <a-date-picker
-                @change="onChange"
-                placeholder="请选择结束"
-                :format="dateFormat"
-              
-              >
-                <a-icon slot="suffixIcon" type="none" />
-              </a-date-picker>
-        </a-col>
-          <a-col :span="4"></a-col>
+          <a-col :span="1"></a-col>
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
@@ -182,7 +157,7 @@ const data = [
     numberA:"6-8",
     dutyName: '林诺汐',
     dutyTel: '152690314587',
-    type:"公司",
+    type:"公司会议",
     audit: '0'
   }
 ]
