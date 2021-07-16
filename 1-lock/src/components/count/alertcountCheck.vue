@@ -10,7 +10,7 @@
           :disabled-date="disabledStartDate"
           format="YYYY-MM-DD"
           @openChange="handleStartOpenChange"
-          style="width: 30%"
+          style="width: 36%"
         />
         <a-divider type="vertical" />
         <a-date-picker
@@ -20,14 +20,14 @@
           :default-value="moment('2021-07-01')"
           :open="endOpen"
           @openChange="handleEndOpenChange"
-          style="width: 31%"
+          style="width: 37%"
         />
 
         <br /><br />
 
         <span>位置： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
         <a-cascader
-          style="width: 36%"
+          style="width: 48%"
           :options="selectOptions"
           change-on-select
           @change="areaChange"
@@ -52,7 +52,7 @@
         <template v-if="toggleSearchStatus">
           <br /><br />
           <span class="lockNum">锁编号： &nbsp; &nbsp; &nbsp; </span>
-          <a-input style="width: 22%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
+          <a-input style="width: 22.5%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
           <a-divider type="vertical" />
         </template>
 

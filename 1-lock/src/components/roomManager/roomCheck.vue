@@ -4,7 +4,7 @@
 
     <span>位置：</span>
     <a-cascader
-      style="width: 23%"
+      style="width: 28%"
       :options="selectOptions"
       change-on-select
       @change="areaChange"
@@ -19,7 +19,7 @@
     <span style="font-weight: bold"> &nbsp; | &nbsp; </span>
 
     <span>部门：</span>
-    <a-select style="width: 17%" placeholder="请选择部门" @change="deptChange" allowClear>
+    <a-select style="width: 16%" placeholder="请选择部门" @change="deptChange" allowClear>
       <a-select-option v-for="(item, index) in deptData" :key="index">
         {{ item.deptName }}
       </a-select-option>
@@ -28,12 +28,12 @@
     <a-divider type="vertical" />
 
     <span>姓名：</span>
-    <a-input style="width: 11%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
+    <a-input style="width: 10%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
 
     <a-divider type="vertical" />
 
     <span>工号：</span>
-    <a-input style="width: 11%" placeholder="请输入工号" v-model="Num" allowClear></a-input>
+    <a-input style="width: 10%" placeholder="请输入工号" v-model="Num" allowClear></a-input>
 
     <br /><br />
 
@@ -57,7 +57,7 @@
         <a-modal v-model="roomVisible" title="添加房间" @ok="roomOk">
           <a-row type="flex" align="middle">
             <a-col :span="4">位置：</a-col>
-            <a-col :span="14">
+            <a-col :span="17">
               <a-cascader
                 style="width: 100%"
                 :options="selectOptions"
@@ -72,7 +72,7 @@
 
           <a-row type="flex" align="middle">
             <a-col :span="4">房间号：</a-col>
-            <a-col :span="14">
+            <a-col :span="17">
               <a-input style="width: 100%" placeholder="请输入房间号" v-model="roomNum" allowClear></a-input>
             </a-col>
           </a-row>
@@ -81,7 +81,7 @@
 
           <a-row type="flex" align="middle">
             <a-col :span="4">员工：</a-col>
-            <a-col :span="14">
+            <a-col :span="17">
               <a-select
                 mode="multiple"
                 placeholder="请选择员工"

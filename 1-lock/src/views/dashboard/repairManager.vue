@@ -5,7 +5,7 @@
       <a-tree-select
         v-model="value"
         placeholder="请选择区域"
-        style="width: 23%"
+        style="width: 27%"
         :tree-data="treeData"
         tree-checkable
         :show-checked-strategy="SHOW_PARENT"
@@ -31,7 +31,7 @@
           <a-modal v-model="addVisible" title="新增" @ok="addOk">
             <a-row type="flex" align="middle">
               <a-col :span="4">类型：</a-col>
-              <a-col :span="13">
+              <a-col :span="17">
                 <a-select style="width: 100%" placeholder="请选择类型" @change="selectChange" allowClear>
                   <a-select-option value="1"> 智能锁厂商 </a-select-option>
                   <a-select-option value="2"> 后勤管理 </a-select-option>
@@ -43,7 +43,7 @@
 
             <a-row type="flex" align="middle">
               <a-col :span="4">姓名：</a-col>
-              <a-col :span="13">
+              <a-col :span="17">
                 <a-select style="width: 100%" placeholder="请选择人员姓名" @change="nameChange" allowClear>
                   <a-select-option value="1"> 郑叹 </a-select-option>
                   <a-select-option value="2"> 王久 </a-select-option>
@@ -55,7 +55,7 @@
 
             <a-row type="flex" align="middle">
               <a-col :span="4">联系电话：</a-col>
-              <a-col :span="13">
+              <a-col :span="17">
                 <a-input style="width: 100%" placeholder="请输入联系电话" v-model="phone" allowClear></a-input>
               </a-col>
             </a-row>
@@ -64,7 +64,7 @@
 
             <a-row type="flex" align="middle">
               <a-col :span="4">负责区域：</a-col>
-              <a-col :span="13">
+              <a-col :span="17">
                 <a-tree-select
                   v-model="value"
                   placeholder="请选择区域"
@@ -95,21 +95,21 @@
           <a-modal v-model="visibleEdit" title="编辑" @ok="editOk">
             <a-row type="flex" align="middle">
               <a-col :span="4">姓名：</a-col>
-              <a-col :span="10">
+              <a-col :span="17">
                 <a-input style="width: 100%" placeholder="请输入姓名" v-model="rowRecord.name" allowClear></a-input>
               </a-col>
             </a-row>
             <br />
             <a-row type="flex" align="middle">
               <a-col :span="4">联系电话：</a-col>
-              <a-col :span="10">
+              <a-col :span="17">
                 <a-input style="width: 100%" placeholder="请输入电话" v-model="rowRecord.phone" allowClear></a-input>
               </a-col>
             </a-row>
             <br />
             <a-row type="flex" align="middle">
               <a-col :span="4">类型：</a-col>
-              <a-col :span="10">
+              <a-col :span="17">
                 <a-select
                   style="width: 100%"
                   placeholder="请选择类型"
@@ -125,7 +125,7 @@
             <br />
             <a-row type="flex" align="middle">
               <a-col :span="4">负责区域：</a-col>
-              <a-col :span="13">
+              <a-col :span="17">
                 <a-tree-select
                   v-model="valueEdit"
                   placeholder="请选择区域"
@@ -160,7 +160,7 @@ const columns = [
   { title: '姓名', dataIndex: 'name', key: 'name', width: '10%' },
   { title: '联系电话', dataIndex: 'phone', key: 'phone', width: '15%' },
   { title: '类型', dataIndex: 'type', key: 'type', width: '15%' },
-  { title: '负责区域', dataIndex: 'area', key: 'area', width: '20%' },
+  { title: '负责区域', dataIndex: 'area', key: 'area', width: '25%' },
   { title: '操作', dataIndex: 'action', scopedSlots: { customRender: 'action' } },
 ]
 

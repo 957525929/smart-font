@@ -8,7 +8,7 @@
       :disabled-date="disabledStartDate"
       format="YYYY-MM-DD"
       @openChange="handleStartOpenChange"
-      style="width: 18.5%"
+      style="width: 17%"
     />
     <a-divider type="vertical" />
     <a-date-picker
@@ -18,14 +18,14 @@
       format="YYYY-MM-DD"
       :open="endOpen"
       @openChange="handleEndOpenChange"
-      style="width: 18%"
+      style="width: 17%"
     />
 
     <span style="font-weight: bold"> &nbsp; | &nbsp; </span>
 
     <span>位置：</span>
     <a-cascader
-      style="width: 23%"
+      style="width: 29%"
       :options="selectOptions"
       change-on-select
       @change="areaChange"

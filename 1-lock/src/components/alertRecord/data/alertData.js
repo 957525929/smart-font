@@ -1,7 +1,7 @@
 export const alertData = [
     {
         key: 1,
-        area: '福建烟草总公司机关.A区域.1号楼',
+        area: '中国烟草总公司福建省公司机关.A区域.1号楼',
         roomNum: '101',
         lockNum: 'S0001',
         time: '2021-06-20 08:31:26',
@@ -11,7 +11,7 @@ export const alertData = [
     },
     {
         key: 2,
-        area: '福建烟草总公司机关.A区域.1号楼',
+        area: '中国烟草总公司福建省公司机关.A区域.1号楼',
         roomNum: '201',
         lockNum: 'S0001',
         time: '2021-03-21 20:25:12',
@@ -21,7 +21,7 @@ export const alertData = [
     },
     {
         key: '3',
-        area: '福建烟草总公司机关.B区域.1号楼',
+        area: '中国烟草总公司福建省公司机关.B区域.1号楼',
         roomNum: '405',
         lockNum: 'S0001',
         time: '2021-03-09 08:32:34',

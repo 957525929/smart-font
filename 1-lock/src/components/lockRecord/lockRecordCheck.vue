@@ -41,7 +41,7 @@
 
     <span>位置： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
     <a-cascader
-      style="width: 22%"
+      style="width: 29%"
       :options="selectOptions"
       change-on-select
       @change="areaChange"

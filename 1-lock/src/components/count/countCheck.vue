@@ -5,7 +5,7 @@
       <a-col :span="14">
         <span>开锁时间段：</span>
         <a-date-picker
-          style="width: 30%"
+          style="width: 36%"
           :default-value="moment('2021-02-01')"
           v-model="startValue"
           :disabled-date="disabledStartDate"
@@ -14,7 +14,7 @@
         />
         <a-divider type="vertical" />
         <a-date-picker
-          style="width: 31%"
+          style="width: 37%"
           v-model="endValue"
           :disabled-date="disabledEndDate"
           format="YYYY-MM-DD"
@@ -26,7 +26,7 @@
         <br /><br />
 
         <span>开锁人部门：</span>
-        <a-select style="width: 30%" placeholder="请选择部门" @change="deptChange" allowClear>
+        <a-select style="width: 36%" placeholder="请选择部门" @change="deptChange" allowClear>
           <a-select-option v-for="(item, index) in deptData" :key="index">
             {{ item.deptName }}
           </a-select-option>
@@ -35,13 +35,13 @@
         <a-divider type="vertical" />
 
         <span>开锁人：</span>
-        <a-input style="width: 23%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
+        <a-input style="width: 29%" placeholder="请输入姓名" v-model="name" allowClear></a-input>
 
         <br /><br />
 
         <span>位置： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
         <a-cascader
-          style="width: 36%"
+          style="width: 48%"
           :options="selectOptions"
           change-on-select
           @change="areaChange"
@@ -58,12 +58,12 @@
         <template v-if="toggleSearchStatus">
           <br /><br />
           <span>锁编号： &nbsp; &nbsp; &nbsp; </span>
-          <a-input style="width: 25.5%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
+          <a-input style="width: 31.5%" placeholder="请输入锁编号" v-model="lockNum" allowClear></a-input>
 
           <a-divider type="vertical" />
 
           <span>开锁方式：</span>
-          <a-select style="width: 26%" placeholder="请选择开锁方式" @change="openlockChange" allowClear>
+          <a-select style="width: 32%" placeholder="请选择开锁方式" @change="openlockChange" allowClear>
             <a-select-option value="1"> 指纹开锁</a-select-option>
             <a-select-option value="2"> 密码开锁</a-select-option>
             <a-select-option value="3"> 远程开锁</a-select-option>
