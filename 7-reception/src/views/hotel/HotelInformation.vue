@@ -119,7 +119,7 @@
         <a-form-model-item label="协议酒店名称" prop="hotel">
           <a-input v-model="formModify.hotel"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="协议编号">
+        <a-form-model-item label="协议编号" prop="id">
           <a-input v-model="formModify.id" disabled></a-input>
         </a-form-model-item>
         <a-form-model-item label="星级">

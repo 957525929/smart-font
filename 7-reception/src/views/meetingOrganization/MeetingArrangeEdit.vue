@@ -20,7 +20,7 @@
               style="width: 45%;"
               :format="dateFormat"
             ></a-date-picker>
-            <span>&nbsp;&nbsp;到&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
             <a-date-picker
               v-model="formHotel.dateEnd"
               placeholder="选择结束日期"
@@ -30,7 +30,7 @@
           </a-form-model-item>
 
           <a-form-model-item label="选择协议酒店" prop="hotel">
-            <a-select v-model="formHotel.hotel" placeholder="选择协议酒店">
+            <a-select v-model="formHotel.hotel" placeholder="请选择协议酒店">
               <a-select-option value="香格里拉酒店">香格里拉酒店</a-select-option>
               <a-select-option value="华宜时尚酒店">华宜时尚酒店</a-select-option>
               <a-select-option value="福州品悦酒店">福州品悦酒店</a-select-option>
@@ -78,7 +78,7 @@
               style="width: 45%;"
               :format="dateFormat"
             ></a-date-picker>
-            <span>&nbsp;&nbsp;到&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
             <a-date-picker
               v-model="formEat.dateEnd"
               placeholder="选择结束日期"
@@ -131,14 +131,14 @@
           :label-col="labelCol"
           :wrapper-col="wrapperCol"
         >
-          <a-form-model-item label="请选择日期" prop="dateStart">
+          <a-form-model-item label="日期" prop="dateStart">
             <a-date-picker
               v-model="formRoom.dateStart"
               placeholder="选择开始日期"
               style="width: 45%;"
               :format="dateFormat"
             ></a-date-picker>
-            <span>&nbsp;&nbsp;到&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
             <a-date-picker
               v-model="formRoom.dateEnd"
               placeholder="选择结束日期"
@@ -165,10 +165,11 @@
               v-model="formRoom.room"
               show-search
               prop="room"
-              style="width: 485px"
+              style="width: 460px"
               :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
               placeholder="请选择会议地点"
             >
+             
               <a-tree-select-node
                 key="random"
                 value="中国烟草总公司福建省公司机关A区域1号楼"

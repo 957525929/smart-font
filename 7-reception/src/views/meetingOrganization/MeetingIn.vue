@@ -26,23 +26,22 @@
         <a-col :span="1"></a-col>
         <a-col>时间范围：</a-col>
         <a-col>
-          <span>从&nbsp;</span>
           <a-date-picker
             @change="onChange"
             placeholder="请选择开始"
             :format="dateFormat"
             v-model="queryParam.dateOne"
           >
-            <a-icon slot="suffixIcon" type="none" />
+
           </a-date-picker>
-          <span>&nbsp;到&nbsp;</span>
+          <span>&nbsp;~&nbsp;</span>
           <a-date-picker
             @change="onChange"
             placeholder="请选择结束"
             :format="dateFormat"
             v-model="queryParam.dateTwo"
           >
-            <a-icon slot="suffixIcon" type="none" />
+
           </a-date-picker>
         </a-col>
         <a-col :span="1"></a-col>
@@ -121,7 +120,7 @@
     <!-- 查询区域-END -->
     <!-- table区域-begin -->
     <div id="dataMeeting">
-      <a-table :data-source="data" :scroll="{ y: 450 }" :pagination="false" rowKey="id">
+      <a-table :data-source="data"  :pagination="false" rowKey="id">
         <a-table-column title="会议编号" data-index="id" align="left" width="150px" fixed="left"></a-table-column>
         <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
         <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>

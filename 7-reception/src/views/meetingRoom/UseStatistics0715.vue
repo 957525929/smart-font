@@ -13,7 +13,21 @@
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
         </a-col>
-        <a-col :span="1"></a-col>      
+        <a-col :span="1"></a-col>
+        <a-col>
+          <span>按区域筛选：</span>
+        </a-col>
+        <a-col>
+          <a-cascader
+            style="width: 350px"
+            :options="selectOptions"
+            change-on-select
+            @change="areaChange"
+            :default-value="defaultT"
+            placeholder="请选择区域"
+          />
+        </a-col>
+        <a-col :span="1"></a-col>
         <a-col>
           <span>按日期筛选：</span>
         </a-col>
@@ -27,8 +41,16 @@
           ></a-date-picker>
           <!-- <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date> -->
         </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
+          <a-button
+            :style="{ background: '#49a9ee', color: 'white'}"
+            icon="search"
+            @click="searchQuery"
+          >查询</a-button>
+          <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
+        </a-col>
       </a-row>
-      <br>
       <a-row type="flex" align="middle">
 
         <a-col>
@@ -49,17 +71,12 @@
           <span>按房间号筛选：</span>
         </a-col>
         <a-col>
-       <a-input  placeholder="请输入房间号"></a-input>
+          <a-select :style="{width:'150px'}" @change="handleChange" default-value="公司会议">
+            <a-select-option value="公司会议">公司会议</a-select-option>
+            <a-select-option value="个人">个人</a-select-option>
+          </a-select>
         </a-col>
-        <a-col :span="2"></a-col>
-        <a-col>
-          <a-button
-            :style="{ background: '#49a9ee', color: 'white'}"
-            icon="search"
-            @click="searchQuery"
-          >查询</a-button>
-          <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
-        </a-col>
+        <a-col :span="1"></a-col>
       </a-row>
     </div>
 

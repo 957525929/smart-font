@@ -231,9 +231,9 @@ const treeData = [
     title: "物流管理处",
     key: "0-0",
     children: [
-      { title: "王小帅", key: "0-0-0-0" },
-      { title: "刘晓霞", key: "0-0-0-1" },
-      { title: "游小美", key: "0-0-0-2" }
+      { title: "王小帅", key: "0-0-0" },
+      { title: "刘晓霞", key: "0-0-1" },
+      { title: "游小美", key: "0-0-2" }
     ]
   },
   {
@@ -271,6 +271,15 @@ const treeData = [
       { title: "陈思成", key: "0-4-0-1" },
       { title: "刘雨菲", key: "0-4-0-2" }
     ]
+  },
+  {
+    title: "外来人员管理处",
+    key: "0-5",
+    children: [
+      { title: "吴燕燕", key: "0-4-0-0" },
+      { title: "陈思成", key: "0-4-0-1" },
+      { title: "刘雨菲", key: "0-4-0-2" }
+    ]
   }
 ];
 export default {
@@ -288,7 +297,7 @@ export default {
       //会议人员目录树
       treeDatas: [], //目录树信息汇总
       MembersAll: [], //所有待选参会人员汇总
-      expandedKeys: [],
+      expandedKeys: ['0-0','0-1'],
       autoExpandParent: true,
       checkedKeys: [],
       selectedKeys: [],

@@ -398,7 +398,7 @@ const user = {
                     "keepAlive": false,
                     "internalOrExternal": false,
                     "icon":"team",
-                    "title": "会议室管理人员"
+                    "title": "会议室管理员"
                   },
                   "name": "meetingRoom-duty",
                   "id": "1245154570166390786"

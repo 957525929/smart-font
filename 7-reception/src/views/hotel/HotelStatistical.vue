@@ -19,7 +19,8 @@
         </a-col>
         <a-col>
           <a-select
-            :style="{width:'200px'}"
+          mode="tags"
+            :style="{width:'300px'}"
             showSearch
             @change="handleChange"
             placeholder="请选择酒店名称"
@@ -35,14 +36,10 @@
           <span>按日期筛选：</span>
         </a-col>
         <a-col>
-          <a-icon type="calendar" :style="{ fontSize: '20px', marginRight: '5px' }" />
-          <span>从&nbsp;</span>
           <a-date-picker placeholder="请选择开始" :format="dateFormat" v-model="dateStart">
-            <a-icon slot="suffixIcon" type="suffixIcon" />
           </a-date-picker>
-          <span>&nbsp;到&nbsp;</span>
+          <span>&nbsp;~&nbsp;</span>
           <a-date-picker placeholder="请选择结束" :format="dateFormat" :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')">
-            <a-icon slot="suffixIcon" type="suffixIcon" />
           </a-date-picker>
         </a-col>
         <a-col :span="1"></a-col>

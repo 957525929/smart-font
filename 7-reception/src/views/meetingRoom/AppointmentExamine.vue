@@ -15,12 +15,25 @@
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
-          <span>区域或房间号：</span>
+          <span>区域：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入区域或房间号" v-model="queryParam.word"></a-input>
+              <a-cascader
+            style="width: 350px"
+            :options="selectOptions"
+            change-on-select
+            @change="areaChange"
+            placeholder="请选择区域"
+          />
         </a-col>
           <a-col :span="1"></a-col>
+           <a-col>
+          <span>房间号：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入房间号" ></a-input>
+        </a-col>
+         <a-col :span="1"></a-col>
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
@@ -29,48 +42,7 @@
           >查询</a-button>
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
         </a-col>
-        <a-col :span="8"></a-col>
       </a-row>
-      <!-- <a-form layout="inline" @keyup.enter.native="searchQuery">
-        <a-row :gutter="24">
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="名称或编号：">
-              <a-input placeholder="请输入名称或编号" v-model="queryParam.IDName"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="10" :lg="9" :md="10" :sm="24">
-            <a-form-item label="时间范围：">
-              <a-icon type="calendar" :style="{fontSize:'20px',marginRight:'5px'}" />
-              <span>从&nbsp;</span>
-              <a-date-picker
-                @change="onChange"
-                placeholder="请选择开始"
-                :format="dateFormat"
-                v-model="queryParam.dateOne"
-              >
-                <a-icon slot="suffixIcon" type="none" />
-              </a-date-picker>
-              <span>&nbsp;到&nbsp;</span>
-              <a-date-picker
-                @change="onChange"
-                placeholder="请选择结束"
-                :format="dateFormat"
-                v-model="queryParam.dateTwo"
-              >
-                <a-icon slot="suffixIcon" type="none" />
-              </a-date-picker>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-button
-              :style="{ background: '#49a9ee', color: 'white'}"
-              icon="search"
-              @click="searchQuery"
-            >查询</a-button>
-            <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
-          </a-col>
-        </a-row>
-      </a-form> -->
     </div>
     <!-- 查询区域-END -->
     <!-- table区域-begin -->
@@ -129,6 +101,7 @@
 
 <script>
 import moment from 'moment'
+import { areaData } from './data/area.js'
 const data = [
   {
     id:"A1202",
@@ -165,8 +138,9 @@ const data = [
 export default {
   data() {
     return {
+      
       data,
-     
+      selectOptions: areaData,
       visibleReason: false,
       labelCol: { span: 3 },
       wrapperCol: { span: 18 },
@@ -198,7 +172,9 @@ export default {
   },
   methods: {
     moment,
-
+    areaChange(value){
+      console.log(value)
+    },
     // onChange(date, dateString) {
     //   console.log(date, dateString)
     // },
@@ -247,7 +223,7 @@ export default {
     onChange(){},
     ignoreClick(id, index) {
       this.visibleReason = true
-        this.formReason.index = index
+      this.formReason.index = index
       this.formReason.id = id
     },
     sureClick(id, index) {
