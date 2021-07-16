@@ -13,7 +13,7 @@ const columns = [
   { title: '开锁时间', dataIndex: 'time', key: 'time' },
   { title: '开锁方式', dataIndex: 'methods', key: 'methods' },
   { title: '开锁人所属部门', dataIndex: 'peopleDept', key: 'peopleDept' },
-  { title: '开锁人', dataIndex: 'people', key: 'people' },
+  { title: '开锁人姓名', dataIndex: 'people', key: 'people' },
 ]
 
 export default {

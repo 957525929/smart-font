@@ -1,7 +1,7 @@
 export const areaData = [
     {
         value: '0',
-        label: '福建烟草公司机关',
+        label: '中国烟草总公司福建省公司机关',
         type: '0',
         children: [
             {

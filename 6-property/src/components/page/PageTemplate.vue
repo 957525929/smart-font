@@ -1,9 +1,8 @@
 <template>
     <a-row align="top">
         <a-col :span="24">
-            <SearchCard  v-on="$listeners" v-bind="$attrs" :columns="searchCols"></SearchCard>
-            <a-card style="width: 100%;margin-top:10px">
- 
+            <SearchCard v-on="$listeners" v-bind="$attrs" :columns="searchCols"></SearchCard>
+            <a-card style="width: 100%; margin-top: 10px">
                 <slot></slot>
             </a-card>
         </a-col>
@@ -15,32 +14,30 @@ import SearchCard from '../search/SearchCard.vue'
 export default {
     name: 'WrapperdList',
     props: {
-        columns:{
-            type:Array,
-            default:()=> []
+        columns: {
+            type: Array,
+            default: () => [],
         },
         formdata: {
-            type:Array,
-            default:()=> []
-        }
+            type: Array,
+            default: () => [],
+        },
     },
     components: { SearchCard },
-    mounted(){
-        this.searchCols = this.columns.filter(item=>{
+    mounted() {
+        this.searchCols = this.columns.filter((item) => {
             return !item.hideInSearch
         })
     },
     data() {
         return {
             expand: false,
-            searchCols:[]
+            searchCols: [],
         }
     },
     inheritAttrs: false,
     methods: {
-
-                    
-            // 
+        //
         // },
     },
 }
