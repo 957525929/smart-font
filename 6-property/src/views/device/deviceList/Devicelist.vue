@@ -1,8 +1,10 @@
 <template>
     <PageTemplate :columns="devColumns" :searchCon="searchCon">
-        <a-button type="primary" @click="showDevForm"><a-icon type="plus"></a-icon>设备登记</a-button>
+        <a-button type="primary" @click="showDevForm" icon="plus">设备登记</a-button>
+        <a-button type="primary" icon="import" style="marginLeft:10px">导入</a-button>  
         <TableModal title="设备登记" :infoDetail="loginInfo" ref="devModal"></TableModal>
         <a-table :columns="devColumns" :data-source="data">
+            
             <span slot="action" slot-scope="text, record">
                 <template v-for="(i, index) in record.action">
                     <a-popconfirm
