@@ -51,9 +51,9 @@
                 </a-col>
                 <a-col :xl="8" :lg="9" :md="10" :sm="24">
                   <a-form-item label="合同有效期">
-                    <j-date placeholder="请选择开始" class="query-group-cust"  v-model="time.Date_begin"></j-date>
+                    <j-date placeholder="2010-01-01" class="query-group-cust"  v-model="time.Date_begin"></j-date>
                     <span class="query-group-split-cust"></span>
-                    <j-date placeholder="请选择结束" class="query-group-cust"  v-model="time.Date_end"></j-date>
+                    <j-date placeholder="2030-01-01" class="query-group-cust"  v-model="time.Date_end"></j-date>
                   </a-form-item>
                 </a-col>
                 <a-col :xl="6" :lg="7" :md="8" :sm="24">

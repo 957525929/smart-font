@@ -150,8 +150,8 @@
       // 将首页添加到第一位
       addIndexToFirst() {
         this.pageList.splice(0, 0, {
-          //
-          name: '/asset_manage/asset',
+          // name: '/asset_manage/asset',
+          name: '/dashboard/analysis',
           path: indexKey,
           fullPath: indexKey,
           meta: {
