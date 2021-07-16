@@ -165,7 +165,7 @@
 
       // update-begin-author:sunjianlei date:20200120 for: 动态更改页面标题
       changeTitle(title) {
-        let projectTitle = "烟草公司"
+        let projectTitle = "资产管理系统"
         // 首页特殊处理
         if (this.$route.path === indexKey) {
           document.title = projectTitle
