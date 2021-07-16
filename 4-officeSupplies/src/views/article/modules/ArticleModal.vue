@@ -21,7 +21,7 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="警示阀值">
-          <a-input-number  class="inputWitdh" placeholder="请输入单价"   v-decorator.trim="['threshold', validatorRules.threshold]"  :min="1" :max="10000000"/>
+          <a-input-number  class="inputWitdh" placeholder="请输入警示阀值"   v-decorator.trim="['threshold', validatorRules.threshold]"  :min="1" :max="10000000"/>
         </a-form-item>
 
         <a-form-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -71,7 +71,7 @@
             ]},
           threshold:{
             rules: [
-              { required: true, message: '请输入购入警示阀值!'}
+              { required: true, message: '请输入警示阀值!'}
             ]},
           unit: {
             rules: [
