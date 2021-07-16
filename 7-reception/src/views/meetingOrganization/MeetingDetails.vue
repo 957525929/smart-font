@@ -13,17 +13,18 @@
             <a-descriptions-item label="负责人姓名">陈宏涛</a-descriptions-item>
             <a-descriptions-item label="负责人电话">152690314587</a-descriptions-item>
             <a-descriptions-item label="会议时间">2021年06月05日~2021年06月06日</a-descriptions-item>
-            <a-descriptions-item label="会议地点">会议室203</a-descriptions-item>
+            <a-descriptions-item label="会议地点">总公司机关</a-descriptions-item>
             <a-descriptions-item label="会议安排成员">陈宏涛；李小玲；林诺汐；陈熙雨</a-descriptions-item>
             <a-descriptions-item label="备注">安全管理</a-descriptions-item>
           </a-descriptions>
         </a-collapse-panel>
         <a-collapse-panel key="2" header="会议审核信息">
           <a-descriptions>
+             <a-descriptions-item label="审核意见">通过</a-descriptions-item>
+                <a-descriptions-item label="审核日期">2021年06月01日</a-descriptions-item> 
             <a-descriptions-item label="审核人">刘小小</a-descriptions-item>
             <a-descriptions-item label="审核人电话">1526631568</a-descriptions-item>
-            <a-descriptions-item label="审核日期">2021年01月08日</a-descriptions-item>
-            <a-descriptions-item label="审核意见">通过</a-descriptions-item>
+                  
           </a-descriptions>
         </a-collapse-panel>
         <a-collapse-panel key="3" header="会议安排信息">
@@ -31,14 +32,14 @@
             <a-collapse-panel key="5" header="协议酒店">
               <a-table :data-source="dataHotel" :pagination="false" rowKey="dateTime">
                 <a-table-column title="序号" data-index="id" align="center"></a-table-column>
-                <a-table-column title="时间" data-index="dateTime" align="center"></a-table-column>
+                <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
                 <a-table-column title="协议酒店" data-index="hotel" align="center"></a-table-column>
               </a-table>
             </a-collapse-panel>
             <a-collapse-panel key="6" header="就餐地点">
               <a-table :data-source="dataEat" :pagination="false" rowKey="dateTime">
                 <a-table-column title="序号" data-index="id" align="center"></a-table-column>
-                <a-table-column title="时间" data-index="dateTime" align="center"></a-table-column>
+                <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
                 <a-table-column title="餐别" data-index="type" align="center"></a-table-column>
                 <a-table-column title="就餐地点" data-index="way" align="center"></a-table-column>
               </a-table>
@@ -46,7 +47,7 @@
             <a-collapse-panel key="7" header="会议地点">
               <a-table :data-source="dataRoom" :pagination="false" rowKey="dateTime">
                 <a-table-column title="序号" data-index="id" align="center"></a-table-column>
-                <a-table-column title="时间" data-index="dateTime" align="center"></a-table-column>
+                <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
                 <a-table-column title="会议地点" data-index="room" align="center"></a-table-column>
               </a-table>
             </a-collapse-panel>
@@ -55,7 +56,7 @@
         <a-collapse-panel key="4" header="签到记录">
           <a-table :data-source="dataArrive" :pagination="false" rowKey="dateTime">
             <a-table-column title="序号" data-index="id" align="center"></a-table-column>
-            <a-table-column title="时间" data-index="dateTime" align="center"></a-table-column>
+            <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
             <a-table-column title="签到人员" data-index="Arrive" align="center"></a-table-column>
             <a-table-column title="未签到人员" data-index="noArrive" align="center"></a-table-column>
           </a-table>
@@ -136,7 +137,7 @@ const dataRoom = [
   {
     id: '1',
     dateTime: '2021年01月15日~2021年01月16日',
-    room: '会议室203'
+    room: '中国烟草总公司福建省公司机关A区域1号楼会议室203'
   }
 ]
 const dataNote = [

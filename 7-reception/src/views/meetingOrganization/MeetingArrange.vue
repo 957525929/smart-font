@@ -69,7 +69,7 @@
          <a-table-column title="会议预算（元）" data-index="budget" align="center"></a-table-column>
         <a-table-column title="会议时间" data-index="dateTime" align="center"></a-table-column>
         <a-table-column title="会议地点" data-index="address" align="center"></a-table-column>
-        <a-table-column title="会议成员" data-index="members" align="center"></a-table-column>
+        <a-table-column title="参会人数" data-index="number" align="center"></a-table-column>
         <a-table-column title="负责人姓名" data-index="dutyName" align="center"></a-table-column>
         <a-table-column title="负责人电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="操作" align="center">
@@ -146,6 +146,7 @@ const data = [
     dateTime: '2021年07月15日~2021年07月16日',
     address: '总公司机关',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
+    number:'4',
     dutyName: '林诺汐',
     dutyTel: '152690314587',
     audit: '已通过'
@@ -172,6 +173,7 @@ const data = [
     dateTime: '2021年07月16日~2021年07月17日',
     address: '总公司机关',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
+     number:'4',
     dutyName: '林诺汐',
     dutyTel: '152690314587',
     audit: '已通过'

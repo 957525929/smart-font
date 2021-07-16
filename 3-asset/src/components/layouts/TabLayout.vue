@@ -37,8 +37,8 @@
   import { mixin, mixinDevice } from '@/utils/mixin.js'
   import { triggerWindowResizeEvent } from '@/utils/util'
 
-  const indexKey = '/dashboard/analysis'
-
+  const indexKey = '/asset_manage/asset'
+//  const indexKey = '/dashboard/analysis'
   export default {
     name: 'TabLayout',
     components: {
@@ -150,7 +150,8 @@
       // 将首页添加到第一位
       addIndexToFirst() {
         this.pageList.splice(0, 0, {
-          name: 'dashboard-analysis',
+          //
+          name: '/asset_manage/asset',
           path: indexKey,
           fullPath: indexKey,
           meta: {

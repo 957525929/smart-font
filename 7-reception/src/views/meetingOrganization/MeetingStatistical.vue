@@ -55,7 +55,8 @@
       </a-table>
     </div>-->
     <br>
-    <bar v-bind:dataSource="dataSource" v-bind:title="title"></bar>
+    <bar v-bind:dataSource="dataNumber" v-bind:title="titleNumber" v-bind:height="heightNumber"></bar>
+     <bar v-bind:dataSource="dataBudget" v-bind:title="titleBudget" v-bind:height="heightBudget"></bar>
   </a-card>
 </template>
 <script>
@@ -96,7 +97,7 @@ export default {
         dateStart:undefined,
       dateFormat: 'YYYY年MM月DD日',
       dataSta,
-      dataSource: [
+      dataNumber: [
         {
           x: '年度总结',
           y: 10
@@ -126,7 +127,40 @@ export default {
           y: 5
         }
       ],
-      title:"会议次数"
+      titleNumber:"会议次数",
+      heightNumber:300,
+       dataBudget: [
+        {
+          x: '年度总结',
+          y: 20000
+        },
+        {
+          x: '项目会议',
+          y: 5000
+        },
+        {
+          x: '物流会议',
+          y:3000
+        },
+        {
+          x: '安全会议',
+          y: 9000
+        },
+        {
+          x: '管理会议',
+          y: 8500
+        },
+        {
+          x: '表彰会议',
+          y: 30000
+        },
+        {
+          x: '销售会议',
+          y: 5000
+        }
+      ],
+      titleBudget:"会议预算（元）",
+      heightBudget:300,
     }
   },
     created() {
