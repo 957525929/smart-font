@@ -23,7 +23,7 @@ export const columns=[
         valueEnum:taskStatus
     },
     {
-        title: '问题类型',
+        title: '问题描述',
         dataIndex: 'devName',
         width: 100,
         key: 'devName'
@@ -34,6 +34,12 @@ export const columns=[
         width: 100,
         key: 'devType',
         valueEnum:devType
+    },
+    {
+        title: '问题地点',
+        dataIndex: 'address',
+        width: 100,
+        key: 'address'
     },
     {
         title: '问题上报时间',
@@ -88,7 +94,7 @@ export const data=[
         taskStatus:1,
         devType: 1,
         devStatus:4,
-        assets: '烟草大厦',
+        address: '烟草大厦18楼',
         institution: '福建烟草公司',
         phone: '18232145698',
         fixStaff: '刘涛',
@@ -112,7 +118,7 @@ export const data=[
         devType: 1,
         devStatus: 5,
         deliveryTime:"2021-06-22 10：55：55",
-        assets: '烟草大厦',
+        address: '烟草大厦18楼',
         institution: '福建烟草公司',
         phone: '18232145698',
         techSituation: 0,
@@ -130,7 +136,7 @@ export const data=[
         taskStatus:3,
         devType: 2,
         devStatus: 6,
-        assets: '烟草大厦',
+        address: '烟草大厦3楼卫生间',
         institution: '福建烟草公司',
         phone: '18232145698',
         fixStaff: '王翔',
@@ -148,8 +154,8 @@ export const data=[
         devType: 0,
         devStatus: 7,
         deliveryTime:"2021-06-19 17：55：55",
-        assets: '烟草大厦',
-        institution: '福建烟草公司',
+        address: '烟草大厦6楼',
+        institution: '福建聚星园餐饮有限公司',
         phone: '18232145698',
         techSituation: 0,
         fixStaff: '刘涛',
@@ -165,7 +171,7 @@ export const data=[
         taskStatus:5,
         devStatus: 8,
         devType: 1,
-        assets: '烟草大厦',
+        address: '烟草大厦18楼',
         institution: '福建烟草公司',
         phone: '18232145698',
         fixStaff: '刘涛',

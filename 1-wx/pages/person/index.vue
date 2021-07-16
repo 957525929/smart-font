@@ -66,7 +66,7 @@
 		title: '版本更新',
 		url: 'sysSetting',
 		label: 'V2.0',
-		edition: "当前版本"
+		edition: "最新版本"
 	}]
 
 	export default {

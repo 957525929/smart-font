@@ -3,20 +3,7 @@
 		<cu-custom bgColor="bg-yellow">
 			<block slot="content">申请记录</block>
 		</cu-custom>
-		<!-- <cu-custom bgColor="cu-tag bg-yellow" :isBack="true">
-			<block slot="backText">返回</block>
-			<block slot="content">申请记录</block>
-		</cu-custom> -->
-		<!-- 
-		<scroll-view scroll-x class="bg-white nav">
-			<view class="flex text-center">
-				<view class="cu-item flex-sub" :class="index==TabCur?'text-orange cur':''" v-for="(item,index) in 3"
-					:key="index" @tap="tabSelect" :data-id="index">
-					Tab{{index}}
-				</view>
-			</view>
-		</scroll-view> -->
-		<appoient v-if="PageCur=='appoient'"></appoient>
+
 		<scroll-view scroll-x class="bg-white nav flex text-center">
 			<view class="cu-item" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
 				待审核

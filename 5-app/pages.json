@@ -1,0 +1,150 @@
+{
+	"pages": [
+		// {
+		// 	"path": "pages/index/index",
+		// 	"style": {
+		// 		"app-plus": {
+		// 			"titleNView": false //禁用原生导航栏
+		// 		}
+		// 	}
+		// },
+		{
+			"path": "pages/tabBar/homepage",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/tabBar/personal",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/application/index",
+			"style": {
+				"navigationBarTitleText": "用车申请",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/useCarRecord/index",
+			"style": {
+				"navigationBarTitleText": "用车记录",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/endTrip/index",
+			"style": {
+				"navigationBarTitleText": "收车登记",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/supplyRegister/index",
+			"style": {
+				"navigationBarTitleText": "加油登记",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/maintainRegister/index",
+			"style": {
+				"navigationBarTitleText": "保养登记",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/fixRecord/index",
+			"style": {
+				"navigationBarTitleText": "维修登记",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/statistics/carUsage/index",
+			"style": {
+				"navigationBarTitleText": "车辆使用统计",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/statistics/driverWorkload/index",
+			"style": {
+				"navigationBarTitleText": "司机工作量统计",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		},
+		"navigationStyle": "custom"
+	},
+	"tabBar": {
+		"color": "#616161",
+		"selectedColor": "#616161",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/tabBar/homepage",
+				"iconPath": "static/tabBar/home.png",
+				"selectedIconPath": "static/tabBar/home-selected.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/tabBar/personal",
+				"iconPath": "static/tabBar/personal.png",
+				"selectedIconPath": "static/tabBar/personal-selected.png",
+				"text": "我的"
+			}
+		]
+	}
+}

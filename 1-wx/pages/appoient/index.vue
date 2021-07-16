@@ -1,6 +1,7 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-yellow">
+		<cu-custom bgColor="bg-yellow":isBack="true">
+			<block slot="backText">返回</block>
 			<block slot="content">访问预约单填写</block>
 		</cu-custom>
 		<view class="cu-bar bg-white ">

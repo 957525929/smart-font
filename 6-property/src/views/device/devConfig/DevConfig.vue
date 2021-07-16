@@ -2,10 +2,16 @@
     <a-row :gutter="10">
         <a-col :md="7" :sm="24">
             <a-card :bordered="false">
+                <TableModal ref="groupModal" title="添加分组" :infoDetail="groupInfo"></TableModal>
                 <a-row>
-                    <a-button @click="handleAdd(1)" type="primary">添加部门</a-button>
-                    <a-button @click="handleAdd(2)" type="primary" style="margin-left: 10px">添加下级</a-button>
-                    <a-button type="primary" icon="download" @click="handleExportXls('部门信息')" style="margin-left: 10px">导出</a-button>
+                    <a-button @click="handleAdd(2)" type="primary" style="margin-left: 10px">添加分组</a-button>
+                    <a-button
+                        type="primary"
+                        icon="download"
+                        @click="handleExportXls('部门信息')"
+                        style="margin-left: 10px"
+                        >导出</a-button
+                    >
                     <a-upload
                         name="file"
                         :showUploadList="false"
@@ -16,20 +22,16 @@
                     >
                         <a-button type="primary" icon="import" style="margin-left: 10px">导入</a-button>
                     </a-upload>
-                    <a-button title="删除多条数据" @click="batchDel" type="default" style="margin-left: 10px">批量删除</a-button>
-                    <!--<a-button @click="refresh" type="default" icon="reload" :loading="loading">刷新</a-button>-->
+                    <a-button style="margin-left: 10px" @click="handleAdd">批量删除</a-button>
                 </a-row>
                 <div style="background: #fff; padding-left: 16px; height: 100%; margin-top: 5px">
-                    <a-input-search
-                        @search="onSearch"
-                        style="width: 100%; margin-top: 10px"
-                        placeholder="请输入分组名称"
-                    />
+                    <a-input-search style="width: 100%; margin-top: 10px" placeholder="请输入分组名称" />
                     <!-- 树-->
                     <template v-if="departTree.length > 0">
                         <!--组织机构-->
                         <a-tree
-                            showLine
+                            :checkable="checkable"
+                            @check="onCheck"
                             :selectedKeys="selectedKeys"
                             :checkStrictly="true"
                             @select="onSelect"
@@ -43,10 +45,48 @@
                 </div>
             </a-card>
         </a-col>
-
         <a-col :md="17" :sm="24">
             <a-card :bordered="false">
-                <PageTemplate ref="DeptRoleInfo" @clearSelectedDepartKeys="clearSelectedDepartKeys"></PageTemplate>
+                <TableModal
+                 title="添加分类"
+                  :infoDetail="devInfo"
+                   ref="devModal"
+                   />
+                <PageTemplate
+                    @clearSelectedDepartKeys="clearSelectedDepartKeys"
+                    :columns="devColumns"
+                    :searchCon="searchCon"
+                >
+                    <a-button @click="handleAdd(1)" type="primary" v-show="visible" style="marginBottom:10px" icon="plus">新增</a-button>
+                    
+                    <a-table :columns="devColumns" :data-source="data" v-show="visible">
+                        <span slot="action" slot-scope="text, record">
+                            <template v-for="(i, index) in record.action">
+                                <a-popconfirm
+                                    title="确认删除此零件?"
+                                    ok-text="是"
+                                    cancel-text="否"
+                                    @confirm="confirm"
+                                    @cancel="cancel"
+                                    v-if="i.com === 'TableDelete'"
+                                >
+                                    <a href="#" @click="showDelete">{{ i.tagName }}</a>
+                                </a-popconfirm>
+                                <template v-else>
+                                    <a href="#" @click.stop="handleOps(i.com, record.devId)">{{ i.tagName }}</a>
+                                    <component
+                                        :is="i.com"
+                                        :ref="i.com"
+                                        :key="index"
+                                        :title="i.tagName"
+                                        :infoDetail="infoDetail"
+                                    ></component>
+                                </template>
+                                <a-divider type="vertical" v-if="index !== record.action.length - 1" />
+                            </template>
+                        </span>
+                    </a-table>
+                </PageTemplate>
                 <!-- <dept-role-info/> -->
             </a-card>
         </a-col>
@@ -56,95 +96,81 @@
 <script>
 //   import {queryMyDepartTreeList, searchByKeywords} from '@/api/api'
 //   import {JeecgListMixin} from '@/mixins/JeecgListMixin'
-//   import DeptRoleInfo from './modules/DeptRoleInfo'
 import PageTemplate from '@/components/page/PageTemplate.vue'
-import { DepartTree } from './js/index.js'
-
+import TableModal from '@/components/tableOperation/modal/TableModal.vue'
+// js
+import { typeToComponent,DepartTree } from '@/utils/dataDictionary.js'
+import { groupInfo, devInfo, devColumns, data } from './js/index.js'
+const NEW_TOOLLIST = Object.freeze({ devColumns, data, groupInfo, typeToComponent, devInfo })
 export default {
     name: 'devConfig',
-    // mixins: [JeecgListMixin],
     components: {
-        //   DeptUserInfo,
         PageTemplate,
+        TableModal,
     },
     data() {
         return {
+            checkable:false,
             departTree: DepartTree,
             selectedKeys: [],
             autoExpandParent: true,
             iExpandedKeys: [],
-            // currentDeptId: '',
-
-            // loading: false,
-
-            // currFlowId: '',
-            // currFlowName: '',
-            // disable: true,
-            // treeData: [],
-            // visible: false,
-
-            // rightClickSelectedKey: '',
-            // hiding: true,
-            // model: {},
-            // dropTrigger: '',
-            // depart: {},
-            // disableSubmit: false,
-            // checkedKeys: [],
-
-            // autoIncr: 1,
-            // currSelected: {},
-            // form: this.$form.createForm(this),
-            // labelCol: {
-            //   xs: {span: 24},
-            //   sm: {span: 5}
-            // },
-            // wrapperCol: {
-            //   xs: {span: 24},
-            //   sm: {span: 16}
-            // },
-            // graphDatasource: {
-            //   nodes: [],
-            //   edges: []
-            // }
+            //table
+            searchCon: {},
+            data: [],
+            devColumns: NEW_TOOLLIST.devColumns,
+            groupInfo: NEW_TOOLLIST.groupInfo.filter((item) => !item.hideInLogin),
+            devInfo: NEW_TOOLLIST.devInfo.filter((item) => !item.hideInLogin),
+            visible: false,
+            checkedSelected:[]
         }
     },
     methods: {
-        onSearch(value) {
-            let that = this
-            // if (value) {
-            //     searchByKeywords({ keyWord: value, myDeptSearch: '1' }).then((res) => {
-            //         if (res.success) {
-            //             that.departTree = []
-            //             for (let i = 0; i < res.result.length; i++) {
-            //                 let temp = res.result[i]
-            //                 that.departTree.push(temp)
-            //             }
-            //         } else {
-            //             that.$message.warning(res.message)
-            //         }
-            //     })
-            // } else {
-            //     //   that.loadTree()
-            // }
+        getList() {
+            devColumns.forEach((item) => {
+                if (item.valueEnum) {
+                    this.data.map((res) => {
+                        res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
+                        return res
+                    })
+                }
+            })
+        },
+        handleAdd(num) {
+            this.checkable=true
+            if (num == 1) {
+                this.$refs.devModal.showModal()
+            } else if (num == 2) {
+                this.checkedSelected.length !== 1
+                    ? this.$message.warning('请选中唯一的上级部门！')
+                    : this.$refs.groupModal.showModal(this.selectedKeys);
+            }
         },
         onExpand(expandedKeys) {
             this.iExpandedKeys = expandedKeys
             this.autoExpandParent = false
         },
         onSelect(selectedKeys, e) {
-            if (this.selectedKeys[0] !== selectedKeys[0]) {
-                this.selectedKeys = [selectedKeys[0]]
-            }
+            this.currSelected = selectedKeys
             let record = e.node.dataRef
-            this.checkedKeys.push(record.id)
-            this.$refs.DeptRoleInfo.onClearSelected()
-            this.$refs.DeptRoleInfo.open(record)
+            this.visible = false
+            this.data = NEW_TOOLLIST.data.filter((item) => {
+                return item.devId == record.key
+            })
+            this.visible = true
+
+            // this.$refs.DeptRoleInfo.onClearSelected()
+            // this.$refs.DeptRoleInfo.open(record)
         },
         clearSelectedDepartKeys() {
             this.checkedKeys = []
             this.selectedKeys = []
             this.currentDeptId = ''
             this.$refs.DeptRoleInfo.currentDeptId = ''
+        },
+        onCheck(checkedKeys, info) {
+            this.checkedSelected = checkedKeys.checked
+            console.log('onCheck', checkedKeys, info)
         },
     },
     created() {

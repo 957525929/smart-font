@@ -27,7 +27,7 @@
           </a-col>
         </a-row>
       </a-form>
-
+      <h2>文档类型统计:</h2>
       <BarMultid :dataSource="dataSource" :fields="field" :height="420" />
     </div>
   </a-card>

@@ -1,10 +1,9 @@
 <template>
   <div class="logo">
-    <router-link :to="{name:'planManage'}">
-
+    <router-link :to="{ name: 'planManage' }">
       <!-- update-begin- author:sunjianlei --- date:20190814 --- for: logo颜色根据主题颜色变化 -->
-      <img v-if="navTheme === 'dark'" src="~@/assets/logo.png" alt="logo">
-      <img v-else src="~@/assets/logo.png" alt="logo">
+      <img v-if="navTheme === 'dark'" src="~@/assets/logo.png" alt="logo" />
+      <img v-else src="~@/assets/logo.png" alt="logo" />
       <!-- update-begin- author:sunjianlei --- date:20190814 --- for: logo颜色根据主题颜色变化 -->
 
       <h1 v-if="showTitle">{{ title }}</h1>
@@ -21,15 +20,15 @@ export default {
   props: {
     title: {
       type: String,
-      default: '烟草公司综合管理系统',
-      required: false
+      default: '综合管理系统',
+      required: false,
     },
     showTitle: {
       type: Boolean,
       default: true,
-      required: false
-    }
-  }
+      required: false,
+    },
+  },
 }
 </script>
 <style lang="less" scoped>

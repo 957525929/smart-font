@@ -16,8 +16,17 @@ Vue.component('scan',scan)
 import allow from './pages/allow/index.vue'
 Vue.component('allow',allow)
 
+import applyList from './pages/applyList/index.vue'
+Vue.component('applyList',applyList)
+
+import verify from './pages/verify/index.vue'
+Vue.component('verify',verify)
+
 import person from './pages/person/index.vue'
 Vue.component('person',person)
+
+import person1 from './pages/person/index01.vue'
+Vue.component('person1',person1)
 
 import basics from './pages/basics/home.vue'
 Vue.component('basics',basics)

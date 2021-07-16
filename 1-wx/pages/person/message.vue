@@ -2,17 +2,17 @@
 	<view class="app">
 		<cu-custom bgColor="cu-tag bg-yellow" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">申请记录</block>
+			<block slot="content">消息通知</block>
 		</cu-custom>
 		<view class="content">
-			<message></message>
+			<message1></message1>
 		</view>
 		<view class="bottom">
 			<view class="leftBottom">
 				<view class="text-white cuIcon-delete">
 				</view>
 				<view class='cuIcon-cu-image'>
-					<text class="text-white trash-fill">申请记录</text>
+					<text class="text-white trash-fill">一键清空</text>
 				</view>
 				<!-- 	<view class="text-orange"></view> -->
 			</view>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-	import message from '../../components/message/message.vue'
+	import message1 from '../../components/message/message1.vue'
 
 	export default {
 		data() {
@@ -37,7 +37,7 @@
 			}
 		},
 		components: {
-			message,
+			message1,
 		},
 		methods: {
 
