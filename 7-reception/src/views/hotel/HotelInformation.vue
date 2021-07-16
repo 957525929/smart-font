@@ -109,7 +109,7 @@
       </a-form-model>
     </a-Modal>
     <!--修改信息 -->
-    <a-Modal v-model="visibleModify" title="修改协议酒店名称信息" footer>
+    <a-Modal v-model="visibleModify" title="修改协议酒店信息" footer>
       <a-form-model
         :label-col="labelCol"
         :model="formModify"
