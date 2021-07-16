@@ -8,7 +8,7 @@
           <span>按预约类型筛选：</span>
         </a-col>
         <a-col>
-          <a-select :style="{width:'150px'}"  @change="handleChange" default-value="公司">
+          <a-select :style="{width:'150px'}"  @change="handleChange" default-value="公司会议">
             <a-select-option value="公司会议">公司会议</a-select-option>
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
@@ -45,7 +45,7 @@
             <a-icon slot="suffixIcon" type="suffixIcon" />
           </a-date-picker>
         </a-col>
-        <a-col :span="3"></a-col>
+        <a-col :span="1"></a-col>
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
