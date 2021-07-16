@@ -3,7 +3,7 @@
 		<view v-for="(item,index) in locklist" :key="index">
 			<!-- 判断传递过来的值显示对应状态 -->
 			<view v-if="item.type==cardType.type">
-				<view class="card" @click="detail(item,index)">
+				<view class="card" >
 					<span class="card-left">
 						<!-- 显示不同图片 -->
 						<image class="card-img" :src="imgSrc[cardType.id]" mode="scaleToFill"
@@ -11,21 +11,23 @@
 					</span>
 					<span class="card-center">
 						<view>
-							名称：{{item.name}}
+							<span class="title">名称：</span>
+							<span class="title flex-sub text-left">{{item.name}}</span>
 						</view>
 						<view>
-							位置：{{item.area}}
+							<span class="title">位置：</span>
+							<span class="title flex-sub text-left">{{item.area}}</span>
 						</view>
 						<view>
-							房间号：{{item.roomnum}}
+							<span class="title">房间号：</span>
+							<span class="title flex-sub text-left">{{item.roomnum}}</span>
+
+							<!-- 切换不同颜色 -->
+							<span class="itemtype" :style="styleObject[cardType.id]">
+								{{item.type}}
+							</span>
 						</view>
 					</span>
-					<!-- <span class="card-right"> -->
-						<!-- 切换不同颜色 -->
-						<!-- <view :style="styleObject[cardType.id]">
-							{{item.type}}
-						</view>
-					</span> -->
 				</view>
 			</view>
 		</view>
@@ -33,13 +35,15 @@
 </template>
 
 <script>
-	import { lockdata } from './data/lockdata.js'
-	
+	import {
+		lockdata
+	} from './data/lockdata.js'
+
 	export default {
 		data() {
 			return {
 				locklist: lockdata,
-				
+
 				// 图片
 				imgSrc: [
 					"../../static/lock/message.png",
@@ -48,11 +52,9 @@
 				// 颜色
 				styleObject: [{
 						color: '#f37b1d',
-						fontSize: '16px',
 					},
 					{
 						color: '#31bb50',
-						fontSize: '16px',
 					},
 				],
 
@@ -62,12 +64,7 @@
 		props: ["cardType"],
 
 		methods: {
-			detail(item,index){
-				console.log(item,index)
-				uni.navigateTo({
-				    url: '../../pages/lockinstall/detail'
-				});
-			}
+			
 		}
 	}
 </script>
@@ -89,9 +86,8 @@
 		margin-top: 1vh;
 	}
 
-	.card-right {
-		margin-left: 6vh;
-		margin-top: 1vh;
+	.itemtype {
+		float: right;
 	}
 
 	.card-type {

@@ -15,22 +15,22 @@ export const devColumns = [
         width: 80,
         key: 'devName'
     },
+
+    {
+        title: '实际状态',
+        key: 'devStatus',
+        dataIndex: 'devStatus',
+        width: 50,
+        type: 'a-select',
+        valueEnum:devStatus ,
+    },
     {
         title: '零件类型',
         dataIndex: 'devType',
         key: 'devType',
         width: 50,
-        valueEnum: devType,
-        type: 'a-select',
-    },
-    {
-        title: '实际状态',
-        key: 'devStatus',
-        dataIndex: 'devStatus',
-        scopedSlots: { customRender: 'devStatus' },
-        width: 50,
-        type: 'a-select',
-        valueEnum:devStatus ,
+        type:"a-cascader",
+        valueEnum:handleTreeToCascade(DepartTree)
     },
     // {
     //     dataIndex: 'institution',
@@ -88,7 +88,7 @@ export const data = [
         key: 0,
         devId: 1001,
         devName: "日丰给排水管_1001",
-        devType: 2,
+        devType: "日丰给排水管",
         devStatus: 4,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -114,8 +114,8 @@ export const data = [
     {
         key: 1,
         devId: 2001,
-        devName: "公牛电线_2001",
-        devType: 1,
+        devName: "电线_2001",
+        devType: "电线",
         devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -141,7 +141,7 @@ export const data = [
         key: 2,
         devId: 3001,
         devName: "格力巨型冷水机_3001",
-        devType: 0,
+        devType: "格力巨型冷水机",
         devStatus: 6,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -239,7 +239,7 @@ export const loginInfo = [{
     value:"",
     key: 'devType',
     type:"a-cascader",
-    valueEnum:DepartTree
+    valueEnum:handleTreeToCascade(DepartTree)
 },
 {
     title: '实际状态',

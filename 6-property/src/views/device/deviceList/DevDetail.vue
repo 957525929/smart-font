@@ -18,11 +18,11 @@
         <a-table style="margin-bottom: 24px" :columns="runInfo" :data-source="runData"> </a-table>
 
         <div class="title">零部件信息</div>
-        <a-table :columns="toolInfo" :data-source="data" class="components-table-demo-nested">
+        <a-table :columns="toolInfo" :data-source="toolData" class="components-table-demo-nested">
             <a-table
                 slot="expandedRowRender"
                 slot-scope="text"
-                :columns="innerColumns"
+                :columns="innerInfo"
                 :data-source="innerData"
                 :pagination="false"
             >
@@ -270,7 +270,7 @@ const tool = [
     {
         key: 0,
         devId: 1001,
-        devName: '日丰给排水管_1001',
+        devName: "给水管网_1001",
         devType: 2,
         devStatus: 4,
         assets: '烟草大厦',
@@ -279,29 +279,14 @@ const tool = [
         techSituation: 0,
         fixStaff: '张英',
         loginTime: '2021-06-22 17:55:55',
-        manufacturer: '日丰企业集团有限公司',
-        batch: 'M127894',
-        devPhone: '18259529231',
-        action: [
-            {
-                tagName: '详情',
-                url: 'device-DevDetail',
-                com: 'router-link',
-            },
-            {
-                tagName: '编辑',
-                com: 'TableModal',
-            },
-            {
-                tagName: '删除',
-                com: 'TableDelete',
-            },
-        ],
+        manufacturer:"日丰企业集团有限公司",
+        batch:"M127894",
+        devPhone:"18259529231"
     },
     {
         key: 1,
         devId: 2001,
-        devName: '公牛电线_2001',
+        devName: "供电线路_2001",
         devType: 1,
         devStatus: 5,
         assets: '烟草大厦',
@@ -310,29 +295,13 @@ const tool = [
         techSituation: 1,
         fixStaff: '刘涛',
         loginTime: '2021-06-21 10:55:55',
-        manufacturer: '国网福建省电力有限公司',
-        batch: 'N2169',
-        devPhone: '18259529299',
-        action: [
-            {
-                tagName: '详情',
-                url: 'device-DevDetail',
-                com: 'router-link',
-            },
-            {
-                tagName: '编辑',
-                com: 'TableModal',
-            },
-            {
-                tagName: '删除',
-                com: 'TableDelete',
-            },
-        ],
-    },
-    {
+        manufacturer:"国网福建省电力有限公司",
+        batch:"N2169",
+        devPhone:"18259529299"
+    }, {
         key: 2,
         devId: 3001,
-        devName: '格力巨型冷水机_3001',
+        devName: "冷水机组_3001",
         devType: 0,
         devStatus: 6,
         assets: '烟草大厦',
@@ -341,25 +310,10 @@ const tool = [
         techSituation: 2,
         fixStaff: '王翔',
         loginTime: '2021-06-29 08:55:55',
-        manufacturer: '珠海格力电器股份有限公司',
-        batch: 'A2421',
-        devPhone: '18259529290',
-        action: [
-            {
-                tagName: '详情',
-                url: 'device-DevDetail',
-                com: 'router-link',
-            },
-            {
-                tagName: '编辑',
-                com: 'TableModal',
-            },
-            {
-                tagName: '删除',
-                com: '',
-            },
-        ],
-    },
+        manufacturer:"珠海格力电器股份有限公司",
+        batch:"A2421",
+        devPhone:"18259529290"
+    }
 ]
 const inner = [
     {
@@ -435,7 +389,7 @@ export default {
             runData: NEW_DETAIL.run,
             toolInfo: NEW_DETAIL.toolInfo,
             toolData: tool,
-            innerColumns: NEW_DETAIL.innerColumns,
+            innerInfo: NEW_DETAIL.innerColumns,
             innerData: inner,
 
         }
@@ -491,14 +445,28 @@ export default {
              this.toolData = this.toolData.filter((item) => {
                 return item.devId == this.Id
             })
+            
             this.toolInfo.forEach((item) => {
-                if (item.valueEnum) {
+                if (item.valueEnum) {      
                     this.toolData.map((res) => {
                         res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
                         return res
                     })
                 }
-            })           
+            })
+            this.innerData = this.innerData.filter((item) => {
+                return item.devId == this.Id
+            })
+            
+            this.innerInfo.forEach((item) => {
+                if (item.valueEnum) {    
+                    this.innerData.map((res) => {
+                        res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
+                        return res
+                    })
+                }
+            }) 
+            
         },
         
     },

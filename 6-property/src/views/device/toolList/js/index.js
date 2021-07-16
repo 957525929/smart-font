@@ -16,14 +16,6 @@ export const devColumns = [
         key: 'devName'
     },
     {
-        title: '部件类型',
-        dataIndex: 'devType',
-        key: 'devType',
-        width: 50,
-        type:"a-cascader",
-        valueEnum:handleTreeToCascade(DepartTree)
-    },
-    {
         title: '实际状态',
         key: 'devStatus',
         dataIndex: 'devStatus',
@@ -32,6 +24,15 @@ export const devColumns = [
         type: 'a-select',
         valueEnum:devStatus ,
     },
+    {
+        title: '部件类型',
+        dataIndex: 'devType',
+        key: 'devType',
+        width: 50,
+        type:"a-cascader",
+        valueEnum:handleTreeToCascade(DepartTree)
+    },
+
     // {
     //     dataIndex: 'institution',
     //     title: '业主单位',
@@ -88,7 +89,7 @@ export const data = [
         key: 0,
         devId: 1001,
         devName: "给水管网_1001",
-        devType: 2,
+        devType: "给水管网",
         devStatus: 4,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -115,7 +116,7 @@ export const data = [
         key: 1,
         devId: 2001,
         devName: "供电线路_2001",
-        devType: 1,
+        devType: "供电线路",
         devStatus: 5,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -137,11 +138,12 @@ export const data = [
             tagName:"删除",
             com:"TableDelete"
         }]
-    }, {
+    },
+     {
         key: 2,
         devId: 3001,
         devName: "冷水机组_3001",
-        devType: 0,
+        devType: "冷水机组",
         devStatus: 6,
         assets: '烟草大厦',
         institution: '福建烟草公司',
@@ -182,8 +184,8 @@ export const infoDetail = [
         title: '部件类型',
         value:"",
         key: 'devType',
-        type:"a-select",
-        valueEnum: devType,
+        type:"a-cascader",
+        valueEnum:handleTreeToCascade(DepartTree)
     },
     {
         title: '实际状态',
@@ -239,7 +241,7 @@ export const loginInfo = [{
     value:"",
     key: 'devType',
     type:"a-cascader",
-    valueEnum:DepartTree
+    valueEnum:handleTreeToCascade(DepartTree)
 },
 {
     title: '实际状态',

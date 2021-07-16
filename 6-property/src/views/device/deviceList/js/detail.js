@@ -28,7 +28,8 @@ export const basicInfo = [{
     title: '实际状态',
     key: 'devStatus',
     value: "",
-    type: "a-select"
+    type: "a-select",
+    valueEnum:devStatus 
   },
   // {
   //     title: '技术状况',
@@ -224,12 +225,6 @@ export const runInfo = []
 
 export const toolInfo = [{
     dataIndex: 'devId',
-    slots: {
-      title: '部件编号'
-    },
-    scopedSlots: {
-      customRender: 'devId'
-    },
     title: '部件编号',
     width: 40,
     key: 'devId'
@@ -245,12 +240,16 @@ export const toolInfo = [{
     dataIndex: 'devType',
     key: 'devType',
     width: 50,
+    type: 'a-select',
+    valueEnum:devType ,
   },
   {
     title: '实际状态',
     key: 'devStatus',
     dataIndex: 'devStatus',
     width: 50,
+    type: 'a-select',
+    valueEnum:devStatus ,
   },
   {
     dataIndex: 'manufacturer',

@@ -510,14 +510,14 @@ export function handleTreeToCascade(params) {
   return params.map(item=>{
       if(item.children){
           return {
-              label:item.key,
-              value:item.title,
+              label:item.title,
+              value:item.key,
               children:handleTreeToCascade(item.children)
           }
       }else{
           return {
-              label:item.key,
-              value:item.title
+              label:item.title,
+              value:item.key
           }
       }
   })
