@@ -1,8 +1,16 @@
 {
 	"pages": [
+		{
+			"path": "pages/home/index",
+			"style": {}
+		},
 		//pages数组中第一项表示应用启动页，写的时候注意分包，方便以后一端多用！！！
 		{
 			"path": "pages/index/tourist",
+			"style": {}
+		},
+		{
+			"path": "pages/index/staff",
 			"style": {}
 		},
 		//以下为示例组件库
@@ -104,14 +112,17 @@
 		}, {
 			"path": "pages/person/message",
 			"style": {}
-		}, {
-			"path": "pages/home/index",
-			"style": {}
-		},{
-			"path": "pages/index/staff",
-			"style": {}
 		}
-	],
+	    ,{
+            "path" : "pages/search/search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"mp-alipay": {
 			/* 支付宝小程序特有相关 */

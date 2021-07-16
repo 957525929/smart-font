@@ -2,11 +2,14 @@
 	<view class="page">
 		<view class="cu-bar bg-orange solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-white"></text>智能锁安装配置
+				<text>智能锁安装</text>
 			</view>
-		</view>
-		<view class="search">
-			<uni-search-bar @confirm="search" @input="input" :radius="5"></uni-search-bar>
+			<view class="action">
+				<navigator class="action" url="../../components/lock/serach?type=0" hover-class="none">
+					<text class="cuIcon-search"></text>
+					<text class="text-df">搜索</text>
+				</navigator>
+			</view>
 		</view>
 		<scroll-view scroll-x class="bg-white nav">
 			<view class="flex text-center">
@@ -19,10 +22,14 @@
 			</view>
 		</scroll-view>
 		<view v-if="TabCur==0" class="itembox">
-			<lockCard :cardType="type[0]"></lockCard>
+			<navigator class="action" url="../../components/lock/detail?type=0" hover-class="none">
+				<lockCard :cardType="type[0]"></lockCard>
+			</navigator>
 		</view>
 		<view v-if="TabCur==1" class="itembox">
-			<lockCard :cardType="type[1]"></lockCard>
+			<navigator class="action" url="../../components/lock/detail?type=1" hover-class="none">
+				<lockCard :cardType="type[1]"></lockCard>
+			</navigator>
 		</view>
 	</view>
 </template>
@@ -56,7 +63,6 @@
 				this.TabCur = e.currentTarget.dataset.id;
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
 			},
-
 		}
 	}
 </script>
@@ -69,7 +75,5 @@
 	.itembox {
 		margin-top: 1.5vh;
 	}
-	.search{
-		background-color: white;
-	}
+
 </style>

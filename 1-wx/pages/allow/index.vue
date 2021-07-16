@@ -1,7 +1,7 @@
 <template>
 	<view class="app">
 		<cu-custom bgColor="bg-yellow">
-			<block slot="content">申请记录</block>
+			<block slot="content">访问许可码</block>
 		</cu-custom>
 		<view class="firstRow">
 			<view class="text">

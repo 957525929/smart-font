@@ -24,7 +24,7 @@
 		data() {
 			return {
 				elements: [{
-						title: '游客',
+						title: '访客',
 						name: 'tourist',
 						color: 'cyan',
 						cuIcon: 'people',
