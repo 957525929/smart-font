@@ -4,13 +4,11 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <img src="~@/assets/logo.png" class="logo" alt="logo">
-            <span class="title">烟草公司综合管理平台</span>
+            <img src="~@/assets/logo.png" class="logo" alt="logo" />
+            <span class="title">综合管理系统</span>
           </a>
         </div>
-        <div class="desc">
-
-        </div>
+        <div class="desc"></div>
       </div>
 
       <route-view></route-view>
@@ -19,11 +17,11 @@
 </template>
 
 <script>
-import RouteView from "@/components/layouts/RouteView"
+import RouteView from '@/components/layouts/RouteView'
 import { mixinDevice } from '@/utils/mixin.js'
 
 export default {
-  name: "UserLayout",
+  name: 'UserLayout',
   components: { RouteView },
   mixins: [mixinDevice],
   data() {
