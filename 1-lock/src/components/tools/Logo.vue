@@ -20,7 +20,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: '智能锁管理系统',
+      default: '安消管理系统',
       required: false,
     },
     showTitle: {

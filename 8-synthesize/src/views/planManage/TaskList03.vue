@@ -7,18 +7,7 @@
             <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
             <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
             <a-button type="dashed" icon="download" @click="handleExportXls(`${currentTaskName}`)">导出</a-button>
-            <a-dropdown v-if="selectedRowKeys.length > 0">
-              <a-menu slot="overlay">
-                <a-menu-item key="1"> <a-icon type="delete" />删除 </a-menu-item>
-                <a-menu-item key="2">
-                  <a-upload name="file" :multiple="true" :headers="headers"> <a-icon type="plus" /> 上传 </a-upload>
-                </a-menu-item>
-              </a-menu>
-              <a-button style="margin-left: 8px">
-                批量操作
-                <a-icon type="down" />
-              </a-button>
-            </a-dropdown>
+            <a-button v-if="selectedRowKeys.length > 0" style="margin-left: 8px"> 批量删除 </a-button>
           </a-col>
         </a-row>
       </div>
@@ -64,18 +53,7 @@
           <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
           <a-tag v-if="status === '1'" color="green">进行中</a-tag>
           <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status === '3'" color="red" @click="showModal">
-            <!-- <a-popconfirm title="是否确认延长时间?" ok-text="确定" cancel-text="取消" @confirm="confirm(record)" @cancel="cancel">
-              未完成
-            </a-popconfirm> -->
-            未完成
-            <a-modal v-model="status_visible" width="350px" title="延长时间" @ok="confirm(record)">
-              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">
-                <a-date-picker placeholder="请选择延长时间" />
-              </a-form-item>
-            </a-modal>
-          </a-tag>
-          <a-tag v-if="status === '4'" color="pink">延期中</a-tag>
+          <a-tag v-if="status === '3'" color="red"> 已超时 </a-tag>
         </template>
       </a-table>
     </PageTemplate>
