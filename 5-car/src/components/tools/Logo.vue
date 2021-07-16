@@ -21,7 +21,7 @@
     props: {
       title: {
         type: String,
-        default: '烟草公司车辆管理系统',
+        default: '车辆管理系统',
         required: false
       },
       showTitle: {
