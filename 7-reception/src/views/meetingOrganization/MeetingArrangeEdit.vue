@@ -52,6 +52,15 @@
           <a-table-column title="序号" data-index="index" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="协议酒店" data-index="hotel" align="center"></a-table-column>
+           <a-table-column title="操作" data-index="action" align="center">
+            <template slot-scope="record">
+              <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
+              <a-divider type="vertical" />
+              <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+                <a href="javascript:;" :style="{  color: 'red' }">删除</a>
+              </a-popconfirm>
+            </template>
+          </a-table-column>
         </a-table>
       </div>
       <div class="steps-content" slot="description" v-if="current == 1">
@@ -102,7 +111,16 @@
           <a-table-column title="序号" data-index="index" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="餐别" data-index="type" align="center"></a-table-column>
-          <a-table-column title="就餐方式" data-index="way" align="center"></a-table-column>
+          <a-table-column title="就餐地点" data-index="way" align="center"></a-table-column>
+           <a-table-column title="操作" data-index="action" align="center">
+            <template slot-scope="record">
+              <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
+              <a-divider type="vertical" />
+              <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+                <a href="javascript:;" :style="{  color: 'red' }">删除</a>
+              </a-popconfirm>
+            </template>
+          </a-table-column>
         </a-table>
       </div>
       <div class="steps-content" slot="description" v-if="current == 2">
@@ -153,30 +171,30 @@
             >
               <a-tree-select-node
                 key="random"
-                value="福建烟草公司机关A区域1号楼"
-                title="福建烟草公司机关A区域1号楼"
+                value="中国烟草总公司福建省公司机关A区域1号楼"
+                title="中国烟草总公司福建省公司机关A区域1号楼"
                 :selectable="false"
               >
-                <a-tree-select-node key="random1" value="福建烟草公司机关A区域1号楼会议室203" title="会议室203" />
-                <a-tree-select-node key="random2" value="福建烟草公司机关A区域1号楼会议室204" title="会议室204" />
+                <a-tree-select-node key="random1" value="中国烟草总公司福建省公司机关A区域1号楼会议室203" title="会议室203" />
+                <a-tree-select-node key="random2" value="中国烟草总公司福建省公司机关A区域1号楼会议室204" title="会议室204" />
               </a-tree-select-node>
               <a-tree-select-node
                 key="random3"
-                value="福建烟草公司机关A区域2号楼"
-                title="福建烟草公司机关A区域2号楼"
+                value="中国烟草总公司福建省公司机关A区域2号楼"
+                title="中国烟草总公司福建省公司机关A区域2号楼"
                 :selectable="false"
               >
-                <a-tree-select-node key="random4" value="福建烟草公司机关A区域2号楼会议室203" title="会议室203" />
-                <a-tree-select-node key="random5" value="福建烟草公司机关A区域2号楼会议室204" title="会议室204" />
+                <a-tree-select-node key="random4" value="中国烟草总公司福建省公司机关A区域2号楼会议室203" title="会议室203" />
+                <a-tree-select-node key="random5" value="中国烟草总公司福建省公司机关A区域2号楼会议室204" title="会议室204" />
               </a-tree-select-node>
               <a-tree-select-node
                 key="random6"
-                value="福建烟草公司机关B区域1号楼"
-                title="福建烟草公司机关B区域1号楼"
+                value="中国烟草总公司福建省公司机关B区域1号楼"
+                title="中国烟草总公司福建省公司机关B区域1号楼"
                 :selectable="false"
               >
-                <a-tree-select-node key="random7" value="福建烟草公司机关B区域1号楼会议室205" title="会议室203" />
-                <a-tree-select-node key="random8" value="福建烟草公司机关B区域1号楼会议室206" title="会议室204" />
+                <a-tree-select-node key="random7" value="中国烟草总公司福建省公司机关B区域1号楼会议室205" title="会议室203" />
+                <a-tree-select-node key="random8" value="中国烟草总公司福建省公司机关B区域1号楼会议室206" title="会议室204" />
               </a-tree-select-node>
             </a-tree-select>
           </a-form-model-item>
@@ -193,12 +211,21 @@
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="时段" data-index="range" align="center"></a-table-column>
           <a-table-column title="会议地点" data-index="room" align="center"></a-table-column>
+           <a-table-column title="操作" data-index="action" align="center">
+            <template slot-scope="record">
+              <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
+              <a-divider type="vertical" />
+              <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+                <a href="javascript:;" :style="{  color: 'red' }">删除</a>
+              </a-popconfirm>
+            </template>
+          </a-table-column>
         </a-table>
       </div>
       <div class="steps-content" slot="description" v-if="current == 3">
         <a-form-model :label-col="labelCol" :wrapper-col=" { span: 4 }">
           <a-form-model-item label="会议开始前（天）">
-            <a-input placeholder="请输入天数（如：1）"></a-input>
+            <a-input v-model="numDate"></a-input>
           </a-form-model-item>
           <a-form-model-item :wrapper-col="{ span: 3, offset: 4 }">
             <a-button type="primary" @click="onSubmitB">确定设置</a-button>
@@ -234,6 +261,7 @@ export default {
   data() {
     return {
       eatHotel: '',
+      numDate:'1',
       current: 0,
       steps: [
         {

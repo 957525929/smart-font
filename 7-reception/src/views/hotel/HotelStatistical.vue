@@ -9,7 +9,7 @@
         </a-col>
         <a-col>
           <a-select :style="{width:'150px'}"  @change="handleChange" default-value="公司">
-            <a-select-option value="公司">公司</a-select-option>
+            <a-select-option value="公司会议">公司会议</a-select-option>
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
         </a-col>
@@ -104,7 +104,7 @@
       </a-table>
     </div>-->
     <br>
-    <bar v-bind:dataSource="dataSource"  v-bind:title="title"></bar>
+    <bar v-bind:dataSource="dataSource"  v-bind:title="title" v-bind:height="height"></bar>
   </a-card>
 </template>
 <script>
@@ -145,6 +145,7 @@ export default {
       dateFormat: 'YYYY年MM月DD日',
       dataSta,
         dateStart:undefined,
+        height:300,
       dataSource: [
         {
           x: '华宜时尚酒店',

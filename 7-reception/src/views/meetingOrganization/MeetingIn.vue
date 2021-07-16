@@ -3,49 +3,66 @@
   <a-card :bordered="false">
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
-      <a-form layout="inline" @keyup.enter.native="searchQuery">
-        <!-- <a-row :gutter="24">
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="名称或编号：">
-              <a-input placeholder="请输入名称或编号" v-model="queryParam.IDName"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="10" :lg="9" :md="10" :sm="24">
-            <a-form-item label="时间范围：">
-              <a-icon type="calendar" :style="{fontSize:'20px',marginRight:'5px'}" />
-              <span>从&nbsp;</span>
-              <a-date-picker
-                @change="onChange"
-                placeholder="请选择开始"
-                :format="dateFormat"
-                v-model="queryParam.dateOne"
-              >
-                <a-icon slot="suffixIcon" type="none" />
-              </a-date-picker>
-              <span>&nbsp;到&nbsp;</span>
-              <a-date-picker
-                @change="onChange"
-                placeholder="请选择结束"
-                :format="dateFormat"
-                v-model="queryParam.dateTwo"
-              >
-                <a-icon slot="suffixIcon" type="none" />
-              </a-date-picker>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-button
-              :style="{ background: '#49a9ee', color: 'white'}"
-              icon="search"
-              @click="searchQuery"
-            >查询</a-button>
-            <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
-          </a-col>
-        </a-row>-->
+      <a-row type="flex" align="middle">
+        <a-col>
+          <span>会议状态：</span>
+        </a-col>
+        <a-col>
+          <a-select :style="{width:'200px'}" @change="handleChange" placeholder="请选择会议状态">
+            <a-select-option value="已完成">已完成</a-select-option>
+            <a-select-option value="待安排">待安排</a-select-option>
+            <a-select-option value="待审核">待审核</a-select-option>
+            <a-select-option value="进行中">进行中</a-select-option>
+            <a-select-option value="未通过">未通过</a-select-option>
+          </a-select>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
+          <span>名称或编号：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入名称或编号" v-model="queryParam.IDName"></a-input>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>时间范围：</a-col>
+        <a-col>
+          <span>从&nbsp;</span>
+          <a-date-picker
+            @change="onChange"
+            placeholder="请选择开始"
+            :format="dateFormat"
+            v-model="queryParam.dateOne"
+          >
+            <a-icon slot="suffixIcon" type="none" />
+          </a-date-picker>
+          <span>&nbsp;到&nbsp;</span>
+          <a-date-picker
+            @change="onChange"
+            placeholder="请选择结束"
+            :format="dateFormat"
+            v-model="queryParam.dateTwo"
+          >
+            <a-icon slot="suffixIcon" type="none" />
+          </a-date-picker>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
+          <a-button
+            :style="{ background: '#49a9ee', color: 'white'}"
+            icon="search"
+            @click="searchQuery"
+          >查询</a-button>
+          <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
+          <a-button style="margin-left: 8px">
+            <a-icon type="download" />导出
+          </a-button>
+        </a-col>
+      </a-row>
+      <!-- <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="会议状态">
-              <a-select  :style="{width:'200px'}" @change="handleChange" placeholder="请选择会议状态">
+              <a-select :style="{width:'200px'}" @change="handleChange" placeholder="请选择会议状态">
                 <a-select-option value="已完成">已完成</a-select-option>
                 <a-select-option value="待安排">待安排</a-select-option>
                 <a-select-option value="待审核">待审核</a-select-option>
@@ -79,7 +96,7 @@
                 placeholder="请选择结束"
                 :format="dateFormat"
                 v-model="queryParam.dateTwo"
-                 :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')"
+                :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')"
               >
                 <a-icon slot="suffixIcon" type="none" />
               </a-date-picker>
@@ -99,11 +116,11 @@
             </a-button>
           </a-col>
         </a-row>
-      </a-form>
+      </a-form>-->
     </div>
     <!-- 查询区域-END -->
     <!-- table区域-begin -->
-    <div>
+    <div id="dataMeeting">
       <a-table :data-source="data" :scroll="{ y: 450 }" :pagination="false" rowKey="id">
         <a-table-column title="会议编号" data-index="id" align="left" width="150px" fixed="left"></a-table-column>
         <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
@@ -150,29 +167,30 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from "moment";
 const data = [
-  // {
-  //   id: "A1202",
-  //   budget: "2000",
-  //   name: "零售项目开展会议",
-  //   theme: "项目会议",
-  //   dateTime: "2021年06月05日~2021年06月08日",
-  //   address: "会议室204",
-  //   members: "陈宏涛；李小玲；林诺汐；陈熙雨",
-  //   number: "4",
-  //   dutyName: "李小玲",
-  //   dutyTel: "152690314587",
-  //   state: "已完成",
-  //   detail: "1"
-  // },
+    {
+    id: "A1207",
+    budget: "5000",
+    name: "安全管理会议",
+    theme: "安全管理",
+    dateTime: "2021年08月03日~2021年08月05日",
+    address: "总公司机关",
+    members: "陈宏涛；李小玲；林诺汐；陈熙雨",
+    number: "4",
+    dutyName: "林诺汐",
+    dutyTel: "152690314587",
+    state: "待审核",
+    detail: "0"
+  },
+
   {
-    id: "A1203",
+    id: "A1206",
     budget: "2000",
     name: "物流管理会议",
     theme: "物流管理",
     dateTime: "2021年07月18日~2021年07月20日",
-    address: "会议室203",
+    address: "总公司机关",
     members: "陈宏涛；李小玲；林诺汐",
     number: "3",
     dutyName: "林诺汐",
@@ -180,27 +198,13 @@ const data = [
     state: "待安排",
     detail: "0"
   },
-  {
-    id: "A1206",
-    budget: "5000",
-    name: "物流管理会议",
-    theme: "物流管理",
-    dateTime: "2021年07月16日~2021年07月17日",
-    address: "会议室205",
-    members: "陈宏涛；李小玲；林诺汐；陈熙雨",
-    number: "4",
-    dutyName: "林诺汐",
-    dutyTel: "152690314587",
-    state: "进行中",
-    detail: "1"
-  },
-  {
+    {
     id: "A1204",
     budget: "3000",
     name: "安全管理会议",
     theme: "安全管理",
     dateTime: "2021年07月15日~2021年07月16日",
-    address: "会议室205",
+    address: "总公司机关",
     members: "陈宏涛；李小玲；林诺汐；陈熙雨",
     number: "4",
     dutyName: "林诺汐",
@@ -209,12 +213,41 @@ const data = [
     detail: "0"
   },
   {
+    id: "A1203",
+    budget: "5000",
+    name: "物流管理会议",
+    theme: "物流管理",
+    dateTime: "2021年07月16日~2021年07月17日",
+    address: "中国烟草总公司福建省公司机关A区域2号楼会议室204",
+    members: "陈宏涛；李小玲；林诺汐；陈熙雨",
+    number: "4",
+    dutyName: "林诺汐",
+    dutyTel: "152690314587",
+    state: "进行中",
+    detail: "1"
+  },
+
+    {
     id: "A1205",
+    budget: "2000",
+    name: "零售项目开展会议",
+    theme: "项目会议",
+    dateTime: "2021年06月05日~2021年06月08日",
+    address: "中国烟草总公司福建省公司机关B区域1号楼会议室205",
+    members: "陈宏涛；李小玲；林诺汐；陈熙雨",
+    number: "4",
+    dutyName: "李小玲",
+    dutyTel: "152690314587",
+    state: "已完成",
+    detail: "1"
+  },
+  {
+    id: "A1202",
     budget: "5000",
     name: "安全管理会议",
     theme: "安全管理",
     dateTime: "2021年05月20日~2021年05月21日",
-    address: "会议室205",
+    address: "总公司机关",
     members: "陈宏涛；李小玲；林诺汐；陈熙雨",
     number: "4",
     dutyName: "林诺汐",
@@ -229,28 +262,15 @@ const data = [
     name: "2020年年度总结",
     theme: "年度总结",
     dateTime: "2021年01月15日~2021年01月16日",
-    address: "会议室203",
+    address: "中国烟草总公司福建省公司机关A区域1号楼会议室203",
     members: "陈宏涛；李小玲；林诺汐；陈熙雨",
     number: "4",
     dutyName: "陈宏涛",
     dutyTel: "152690314587",
     state: "已完成",
     detail: "1"
-  }
-  // {
-  //   id: "A1207",
-  //   budget: "5000",
-  //   name: "安全管理会议",
-  //   theme: "安全管理",
-  //   dateTime: "2021年06月03日~2021年06月05日",
-  //   address: "会议室205",
-  //   members: "陈宏涛；李小玲；林诺汐；陈熙雨",
-  //   number: "4",
-  //   dutyName: "林诺汐",
-  //   dutyTel: "152690314587",
-  //   state: "待审核",
-  //   detail: "0"
-  // }
+  },
+
 ];
 const dataHotel = [
   {
@@ -296,8 +316,8 @@ const dataEat = [
 ];
 const dataRoom = [
   {
-    dateTime: "2021年01月15日~2021年01月16日",
-    room: "会议室203"
+    dateTime: "2021年06月05日~2021年06月06日",
+    room: "中国烟草总公司福建省公司机关A区域1号楼会议室203"
   }
 ];
 export default {
@@ -316,16 +336,10 @@ export default {
       dateFormat: "YYYY年MM月DD日"
     };
   },
-    created() {
-    let start = moment(new Date())
-      .subtract(1, 'months')
-      .format('YYYY-MM-DD')
-    this.queryParam.dateOne = this.moment(start, 'YYYY-MM-DD')
-  },
   methods: {
     moment,
     onChange() {},
-    handleChange(){},
+    handleChange() {},
     searchQuery() {
       // let IDName = this.queryParam.IDName;
       // let newListData = [];
@@ -368,16 +382,20 @@ export default {
       //   }
       // }
     },
-    handleChange(){},
     searchReset() {
       this.data = data;
       this.queryParam.IDName = "";
       this.queryParam.dateOne = undefined;
       this.queryParam.dateTwo = undefined;
     },
-        getCurrentData() {
-      return new Date().toLocaleDateString()
-    },
+    getCurrentData() {
+      return new Date().toLocaleDateString();
+    }
   }
 };
 </script>
+<style scoped>
+#dataMeeting {
+  margin-top: 20px;
+}
+</style>
