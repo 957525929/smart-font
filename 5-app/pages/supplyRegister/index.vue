@@ -22,7 +22,7 @@
 			</uni-forms>
 		</view>
 		<view class="imgPrt backColor">
-			拍照
+			票据图片
 			<uni-file-picker 
 			    v-model="imageValue" 
 			    fileMediatype="image" 
