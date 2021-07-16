@@ -4,22 +4,19 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" :form="form1">
         <a-row :gutter="24">
-          <a-col :xl="6" :lg="8" :md="9" :sm="24">
-            <a-form-item label="采购单号">
-              <a-input placeholder="请输入" v-decorator="['purchaseOrderNumber']"></a-input>
+<!--          <a-col :xl="6" :lg="8" :md="9" :sm="24">-->
+<!--            <a-form-item label="采购单号">-->
+<!--              <a-input placeholder="请输入" v-decorator="['purchaseOrderNumber']"></a-input>-->
+<!--            </a-form-item>-->
+<!--          </a-col>-->
+          <a-col :xl="6" :lg="8" :md="9" :sm="24" >
+            <a-form-item label="采购开始日期">
+              <j-date  v-decorator="['purchaseStartDate']" style='width: 100%'/>
             </a-form-item>
           </a-col>
-          <a-col :xl="6" :lg="5" :md="6" :sm="24">
-            <a-form-item label="供应商">
-              <a-select
-                allowClear
-                placeholder="请选择"
-                v-decorator="['provider']"
-              >
-                <a-select-option v-for="d in manuSelectData" :key="d.value">
-                  {{ d.text }}
-                </a-select-option>
-              </a-select>
+          <a-col :xl="6" :lg="8" :md="9" :sm="24">
+            <a-form-item label="采购结束日期">
+              <j-date  v-decorator="['purchaseEndDate']" style='width: 100%'/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="5" :md="6" :sm="24">
@@ -43,14 +40,17 @@
                 <a-input placeholder="请输入" v-decorator="['headline']"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :xl="6" :lg="8" :md="9" :sm="24" >
-              <a-form-item label="采购开始日期">
-                <j-date  v-decorator="['purchaseStartDate']" style='width: 100%'/>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="8" :md="9" :sm="24">
-              <a-form-item label="采购结束日期">
-                <j-date  v-decorator="['purchaseEndDate']" style='width: 100%'/>
+            <a-col :xl="6" :lg="5" :md="6" :sm="24">
+              <a-form-item label="供应商">
+                <a-select
+                  allowClear
+                  placeholder="请选择"
+                  v-decorator="['provider']"
+                >
+                  <a-select-option v-for="d in manuSelectData" :key="d.value">
+                    {{ d.text }}
+                  </a-select-option>
+                </a-select>
               </a-form-item>
             </a-col>
           </template>
@@ -285,7 +285,7 @@ export default {
           align:"center",
           dataIndex: 'checkState',
           customRender:function (text) {
-            return text==0?<a-badge color="blue" text="审核中" /> : text==1?<a-badge color="green" text="已通过" /> : <a-badge color="red" text="未通过" />
+            return text==0?<a-badge color="blue" text="待审核" /> : text==1?<a-badge color="green" text="已通过" /> : <a-badge color="red" text="未通过" />
           }
         },
         {

@@ -12,11 +12,11 @@
             </a-col>
 
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-            <a-col :md="6" :sm="24">
-              <a-button icon="search" @click='handleQueryOk'>查询</a-button>
-              <a-button icon="reload" style="margin-left: 8px" @click='handleReset'>重置</a-button>
-            </a-col>
-          </span>
+        <a-col :md="6" :sm="24">
+          <a-button icon="search" @click='handleQueryOk'>查询</a-button>
+          <a-button icon="reload" style="margin-left: 8px" @click='handleReset'>重置</a-button>
+        </a-col>
+      </span>
 
           </a-row>
         </a-form>
@@ -36,18 +36,19 @@
           :dataSource="dataSource"
           :pagination="{total:this.dataSource.length, showTotal:(total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`}"
         >
-        <span slot="isPurchasePeople" slot-scope="text, record">
-          <a-switch checked-children="是" un-checked-children="否" :default-checked="text == '是'" @change='switchPurchasePeople(record)'/>
-        </span>
+    <span slot="isPurchasePeople" slot-scope="text, record">
+      <a-switch checked-children="是" un-checked-children="否" :default-checked="text == '是'" @change='switchPurchasePeople(record)'/>
+    </span>
           <span slot="ischeckoutPeople" slot-scope="text, record">
-          <a-switch checked-children="是" un-checked-children="否" :default-checked="text == '是'" @change='switchcheckoutPeople(record)'/>
-        </span>
+      <a-switch checked-children="是" un-checked-children="否" :default-checked="text == '是'" @change='switchcheckoutPeople(record)'/>
+    </span>
           <span slot="action" slot-scope="text, record">
-          <a><a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style='margin-left: 10%;'>删除</a-popconfirm></a>
-        </span>
+      <a><a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style='margin-left: 10%;'>删除</a-popconfirm></a>
+    </span>
         </a-table>
       </div>
     </a-card>
+
     <a-modal
       :title="title"
       :width="600"
@@ -64,23 +65,22 @@
           <a-form-model-item label="人员名称" required prop="roleCode">
             <a-input v-model="model.roleCode" :disabled="roleDisabled"  placeholder="请输入人员名称"/>
           </a-form-model-item>
-          <a-form-model-item label="留样人员" >
+          <a-form-model-item label="采购人" >
             <a-switch v-model="model.roleName" checked-children="是" un-checked-children="否"  />
           </a-form-model-item>
+<!--          <a-form-model-item label="审核人" >-->
+<!--            <a-switch v-model="model.description" checked-children="是" un-checked-children="否"  />-->
+<!--          </a-form-model-item>-->
         </a-form-model>
       </a-spin>
     </a-modal>
   </div>
-
-
-
-
 </template>
 
 <script>
 
 export default {
-  name: "People",
+  name: "PurchPeople",
   components: {},
   data () {
     return {
@@ -89,12 +89,14 @@ export default {
         {
           id:'1',
           staffName: '张三',
-          isPurchasePeople: '否',
+          isPurchasePeople: '是',
+          ischeckoutPeople: '否',
         },
         {
           id:'2',
           staffName: '李四',
           isPurchasePeople: '是',
+          ischeckoutPeople: '是',
         },
       ],
       // 表头
@@ -114,7 +116,7 @@ export default {
           dataIndex: 'staffName',
         },
         {
-          title:'留样人员',
+          title:'采购人',
           align:"center",
           dataIndex: 'isPurchasePeople',
           filters: [
@@ -125,6 +127,18 @@ export default {
           onFilter: (value, record) => record.isPurchasePeople.indexOf(value) === 0,
           scopedSlots: { customRender: 'isPurchasePeople'},
         },
+        // {
+        //   title:'审核人',
+        //   align:"center",
+        //   dataIndex: 'ischeckoutPeople',
+        //   filters: [
+        //     { text: '是', value: '是' },
+        //     { text: '否', value: '否' },
+        //   ],
+        //   filterMultiple: false,
+        //   onFilter: (value, record) => record.ischeckoutPeople.indexOf(value) === 0,
+        //   scopedSlots: { customRender: 'ischeckoutPeople'},
+        // },
         {
           title: '操作',
           dataIndex: 'action',
@@ -152,11 +166,6 @@ export default {
       },
 
     }
-  },
-  computed: {
-    hasSelected() {
-      return this.selectedRowKeys.length > 0;
-    },
   },
   methods: {
     deletConfirm(e) {

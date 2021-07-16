@@ -87,8 +87,48 @@ export default {
       dataSource: [
         {
           id:'1',
+          type: '川菜',
+          ps: '它以麻辣、鱼香、家常、怪味、酸辣、椒麻、醋椒为主要特点',
+        },
+        {
+          id:'2',
+          type: '粤菜',
+          ps: '它以选料广泛，讲究鲜、嫩、爽、滑、浓为主要特点。它主要由广东菜、潮州菜和东江菜组成',
+        },
+        {
+          id:'3',
+          type: '鲁菜',
+          ps: '选料精细、刀法细腻，注重实惠，花色多样，善用葱姜',
+        },
+        {
+          id:'4',
+          type: '苏菜',
+          ps: '由淮阳菜、苏州菜、南京菜等组成。制作精细，因材施艺、四季有别，浓而不腻，味感清鲜，讲究造型',
+        },
+        {
+          id:'5',
+          type: '浙菜',
+          ps: '由杭州、宁波、绍兴三种地方风味发展而成。讲究刀工、制作精细、变化较多、富有乡土气息',
+        },
+        {
+          id:'6',
+          type: '闽菜',
+          ps: '以福州和厦门菜为主要代表，制作细巧、色调美观、调味清鲜',
+        },
+        {
+          id:'7',
+          type: '湘菜',
+          ps: '以熏、蒸、干炒为主，口味重于酸、辣， 辣味菜和烟熏腊肉是湘菜的独特风味',
+        },
+        {
+          id:'8',
           type: '客家菜',
-          ps: '暂无',
+          ps: '用料以肉类为主，水产品较少；突出主料，原汁原味，讲求酥软香浓；注重火功，以炖、烤、煲、酿见长，尤以砂锅菜闻名；造型古朴，乡土风貌明显',
+        },
+        {
+          id:'9',
+          type: '徽菜',
+          ps: '它以烹制山珍野味著称，擅长烧、炖、蒸，而少爆炒。其烹饪芡大、油重、色浓、朴素实惠',
         },
       ],
       // 表头
@@ -98,6 +138,7 @@ export default {
           dataIndex: '',
           key:'rowIndex',
           align:"center",
+          width:'10%',
           customRender:function (t,r,index) {
             return parseInt(index)+1;
           }
@@ -105,18 +146,21 @@ export default {
         {
           title:'菜品分类',
           align:"center",
-          dataIndex: 'type'
+          dataIndex: 'type',
+          width:'30%',
         },
         {
           title:'备注',
           align:"center",
-          dataIndex: 'ps'
+          dataIndex: 'ps',
+          width:'50%',
         },
         {
           title: '操作',
           dataIndex: 'action',
           align:"center",
           scopedSlots: { customRender: 'action'},
+          width:'10%',
         }
       ],
       toggleSearchStatus: false,

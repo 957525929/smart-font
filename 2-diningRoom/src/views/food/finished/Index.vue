@@ -113,6 +113,9 @@
               <a-select-option value="晚餐">晚餐</a-select-option>
             </a-select>
           </a-form-model-item>
+          <a-form-model-item label="批次" required prop="number">
+            <a-input-number v-model="model.number" placeholder="请输入批次" style='width: 30%' />
+          </a-form-model-item>
           <a-form-model-item label="留样时间" required prop="time">
             <a-date-picker  v-model="model.time" show-time placeholder="请选择留样时间"/>
           </a-form-model-item>
@@ -155,6 +158,7 @@ export default {
           purchaseOrderNumber: 'FZZT20210606',
           headline: '小鸡炖蘑菇',
           purchasePeople: '早餐',
+          number:1,
           purchaseDate: '2021-05-01 08:00:00',
           purchaseNum: '邝木木',
           totalMoney: '100',
@@ -186,6 +190,11 @@ export default {
           title:'餐别',
           align:"center",
           dataIndex: 'purchasePeople'
+        },
+        {
+          title:'批次',
+          align:"center",
+          dataIndex: 'number'
         },
         {
           title:'留样时间',
@@ -231,6 +240,9 @@ export default {
         ],
         type: [
           { required: true, message: '请选择餐别!'},
+        ],
+        number: [
+          { required: true, message: '请输入批次!'},
         ],
         time: [
           { required: true, message: '请选择留样时间!'},

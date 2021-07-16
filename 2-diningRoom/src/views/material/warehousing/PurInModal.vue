@@ -288,29 +288,17 @@
                 <a-input allowClear v-decorator="['headline', { rules: [{ required: true, message: '请输入!' }], initialValue:this.basicInfo1.headline }]"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :span="6">
-              <a-form-item label="采购人">
-                <a-select allowClear v-decorator="['purchasePeople', { rules: [{ required: true, message: '请选择!' }], initialValue:this.basicInfo1.purchasePeople }]">
-                  <a-select-option value="张三">张三</a-select-option>
-                  <a-select-option value="李四">李四</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
+<!--            <a-col :span="6">-->
+<!--              <a-form-item label="采购人">-->
+<!--                <a-select allowClear v-decorator="['purchasePeople', { rules: [{ required: true, message: '请选择!' }], initialValue:this.basicInfo1.purchasePeople }]">-->
+<!--                  <a-select-option value="张三">张三</a-select-option>-->
+<!--                  <a-select-option value="李四">李四</a-select-option>-->
+<!--                </a-select>-->
+<!--              </a-form-item>-->
+<!--            </a-col>-->
             <a-col :span="6">
               <a-form-item label="采购日期">
                 <a-date-picker placeholder='' v-decorator="['purchaseDate', { rules: [{ required: true, message: '请选择!' }], initialValue:this.basicInfo1.purchaseDate }]" style="width: 100%"></a-date-picker>
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row :gutter="16">
-            <a-col :span="6">
-              <a-form-item label="采购总数">
-                <a-input v-decorator="['purchaseNum', { rules: [{ required: true, message: '请输入!' }], initialValue:this.basicInfo1.purchaseNum }]"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="6">
-              <a-form-item label="总金额">
-                <a-input v-decorator="['totalMoney', { rules: [{ required: true, message: '请输入!' }], initialValue:this.basicInfo1.totalMoney }]"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="6">
@@ -321,6 +309,19 @@
                 </a-select>
               </a-form-item>
             </a-col>
+          </a-row>
+<!--          <a-row :gutter="16">-->
+<!--            <a-col :span="6">-->
+<!--              <a-form-item label="采购总数">-->
+<!--                <a-input v-decorator="['purchaseNum', { rules: [{ required: true, message: '请输入!' }], initialValue:this.basicInfo1.purchaseNum }]"></a-input>-->
+<!--              </a-form-item>-->
+<!--            </a-col>-->
+<!--            <a-col :span="6">-->
+<!--              <a-form-item label="总金额">-->
+<!--                <a-input v-decorator="['totalMoney', { rules: [{ required: true, message: '请输入!' }], initialValue:this.basicInfo1.totalMoney }]"></a-input>-->
+<!--              </a-form-item>-->
+<!--            </a-col>-->
+
             <!--            <a-col :span="5">-->
             <!--              <a-form-item label="审核人">-->
             <!--                <a-input v-decorator="['checkoutPeople', { rules: [{ required: true, message: '请输入!' }] }]"></a-input>-->
@@ -331,7 +332,7 @@
             <!--                <a-date-picker placeholder='' v-decorator="['checkoutDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 100%"></a-date-picker>-->
             <!--              </a-form-item>-->
             <!--            </a-col>-->
-          </a-row>
+<!--          </a-row>-->
         </a-form>
       </a-tab-pane>
     </a-tabs>
@@ -354,6 +355,8 @@
               :show-search='true'
               placeholder='请选择'
               style='width: 100%'
+              @change="onChangeCascader"
+              @popupVisibleChange='popupVisibleChange(props)'
             />
           </template>
         </j-editable-table>
@@ -371,11 +374,20 @@
           :rowSelection="true"
           :actionButton="true"
         >
+          <template v-slot:materialName="props">
+            <a-cascader
+              :default-value="props.text.split('/')"
+              :options="options"
+              :show-search='true'
+              placeholder='请选择'
+              style='width: 100%'
+              @change="onChangeCascader"
+              @popupVisibleChange='popupVisibleChange(props)'
+            />
+          </template>
         </j-editable-table>
       </a-tab-pane>
     </a-tabs>
-
-<!--    <a-cascader :options="options1" placeholder="Please select" @change="onChange1" />-->
 
     <!-- 底部按钮 -->
     <template slot="footer">
@@ -406,8 +418,11 @@ export default {
     basicInfo: Object,
   },
   mounted() {
+    let now = new Date()
     this.basicInfo1=Object.assign({}, this.basicInfo);
     if(this.basicInfo1.purchaseDate) this.basicInfo1.purchaseDate=moment(this.basicInfo1.purchaseDate, 'YYYY-MM-DD')
+    else this.basicInfo1.purchaseDate=moment(now.toLocaleDateString(), 'YYYY-MM-DD')
+    if(!this.basicInfo1.headline) this.basicInfo1.headline=now.getMonth()+1+'月'+now.getDate()+'日采购单'
     // console.log(this.$props.basicInfo)
     // console.log(this.basicInfo)
     console.log(this.basicInfo1)
@@ -415,40 +430,6 @@ export default {
 
   data() {
     return {
-      options1: [
-        {
-          value: 'zhejiang',
-          label: 'Zhejiang',
-          children: [
-            {
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [
-                {
-                  value: 'xihu',
-                  label: 'West Lake',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          value: 'jiangsu',
-          label: 'Jiangsu',
-          children: [
-            {
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [
-                {
-                  value: 'zhonghuamen',
-                  label: 'Zhong Hua Men',
-                },
-              ],
-            },
-          ],
-        },
-      ],
 
       options: [
         {
@@ -996,7 +977,7 @@ export default {
           ],
         },
       ],
-      basicInfo1: {  },
+      basicInfo1: {},
       isAdd: false,
       items11: ['jack', 'lucy'],
       form1: this.$form.createForm(this),
@@ -1006,7 +987,8 @@ export default {
       dataSource1: [
         {
           key:1,
-          materialName:'鸡肉',
+          // materialName:['粮油类', '原粮', '稻谷'],
+          materialName:['粮油类/原粮/稻谷'],
           materialCategory:'肉类',
           materialUnits:'kg',
           materialPrice:'10.00',
@@ -1015,7 +997,8 @@ export default {
         },
         {
           id:'2',
-          materialName: '鸡肉',
+          // materialName: ['粮油类', '原粮', '稻谷'],
+          materialName:['粮油类/原粮/稻谷'],
           materialCategory: '肉类',
           materialUnits: 'kg',
           materialPrice: '10.00',
@@ -1052,13 +1035,13 @@ export default {
           type: FormTypes.slot,
           // placeholder: '请选择${title}',
           validateRules: [
-            // { required: true, message: '${title}不能为空' },
+            { required: true, message: '${title}不能为空' },
           ],
           slotName: 'materialName',
           width:'25%',
         },
         {
-          title: '单位',
+          title: '计量单位',
           key: 'materialUnits',
           type: FormTypes.select,
           placeholder: '请选择${title}',
@@ -1066,12 +1049,14 @@ export default {
             { required: true, message: '${title}不能为空' },
           ],
           options: [
-            { title: 'kg', value: 'kg' },
-            { title: 'g', value: 'g' },
+            { title: '吨', value: '吨' },
+            { title: '公斤', value: '公斤' },
+            { title: '斤', value: '斤' },
+            { title: '克', value: '克' },
           ]
         },
         {
-          title: '单价',
+          title: '采购单价',
           key: 'materialPrice',
           type: FormTypes.inputNumber,
           placeholder: '请输入${title}',
@@ -1087,22 +1072,39 @@ export default {
           validateRules: [
             { required: true, message: '${title}不能为空' },
           ],
+          statistics: "true",
         },
         {
-          title: '总价',
+          title: '合计',
           key: 'materialTotalValue',
           type: FormTypes.inputNumber,
           placeholder: '请输入${title}',
           validateRules: [
             { required: true, message: '${title}不能为空' },
           ],
+          statistics: "true",
         },
       ],
+      tempCascaderValue:'',
     }
   },
   methods:{
-    onChange1(value,arr) {
-      console.log(value,arr);
+    onChangeCascader(value,selectedOptions){
+      if(value.length!=0) this.tempCascaderValue = value[0]+'/'+value[1]+'/'+value[2];
+      else this.tempCascaderValue='';
+      console.log(value)
+      console.log(this.tempCascaderValue)
+    },
+    popupVisibleChange(props){
+      console.log(props)
+      let temp = props.getValue()
+      temp.materialName = this.tempCascaderValue
+      this.$refs.detailInfoForm.setValues([{
+        rowKey: temp.id,
+        values:{
+          'materialName': this.tempCascaderValue
+        }
+      }])
     },
     handleCancel() {
       this.$emit('handleCancel',false)
