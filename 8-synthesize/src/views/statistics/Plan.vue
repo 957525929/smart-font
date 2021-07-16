@@ -36,7 +36,7 @@
           </a-col>
         </a-row>
       </a-form>
-
+      <h2>任务状态统计:</h2>
       <BarMultid :dataSource="dataSource" :fields="field" :height="420" />
     </div>
   </a-card>
