@@ -10,15 +10,28 @@
 <script>
   import moment from 'dayjs'
 
-  const sourceData = []
-  const beginDay = new Date().getTime()
-
-  for (let i = 0; i < 10; i++) {
-    sourceData.push({
-      x: moment(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format('YYYY-MM-DD'),
-      y: Math.round(Math.random() * 10)
-    })
-  }
+  const sourceData = [
+    {x:1,y:10},
+    {x:2,y:5},
+    {x:3,y:6},
+    {x:4,y:2},
+    {x:5,y:7},
+    {x:6,y:1},
+    {x:7,y:3},
+    {x:8,y:6},
+    {x:9,y:2},
+    {x:10,y:7},
+    {x:11,y:8},
+    {x:12,y:6},
+  ]
+  // const beginDay = new Date().getTime()
+  //
+  // for (let i = 0; i < 10; i++) {
+  //   sourceData.push({
+  //     x: moment(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format('YYYY-MM-DD'),
+  //     y: Math.round(Math.random() * 10)
+  //   })
+  // }
 
   const tooltip = [
     'x*y',

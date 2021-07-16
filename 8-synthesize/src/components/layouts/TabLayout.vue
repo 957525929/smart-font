@@ -1,14 +1,25 @@
 <template>
   <global-layout @dynamicRouterShow="dynamicRouterShow">
     <!-- update-begin- author:sunjianlei --- date:20191009 --- for: 提升右键菜单的层级 -->
-    <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" style="z-index: 9999;" @select="onMenuSelect" />
+    <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" style="z-index: 9999" @select="onMenuSelect" />
     <!-- update-end- author:sunjianlei --- date:20191009 --- for: 提升右键菜单的层级 -->
-    <a-tabs @contextmenu.native="e => onContextmenu(e)" v-if="multipage" :active-key="activePage" class="tab-layout-tabs" style="height:52px" :hide-add="true" type="editable-card" @change="changePage" @tabClick="tabCallBack" @edit="editPage">
+    <a-tabs
+      @contextmenu.native="(e) => onContextmenu(e)"
+      v-if="multipage"
+      :active-key="activePage"
+      class="tab-layout-tabs"
+      style="height: 52px"
+      :hide-add="true"
+      type="editable-card"
+      @change="changePage"
+      @tabClick="tabCallBack"
+      @edit="editPage"
+    >
       <a-tab-pane :id="page.fullPath" :key="page.fullPath" v-for="page in pageList">
         <span slot="tab" :pagekey="page.fullPath">{{ page.meta.title }}</span>
       </a-tab-pane>
     </a-tabs>
-    <div style="margin: 4px 4px 0;">
+    <div style="margin: 4px 4px 0">
       <transition name="page-toggle">
         <keep-alive v-if="multipage">
           <router-view v-if="reloadFlag" />
@@ -33,7 +44,7 @@ export default {
   name: 'TabLayout',
   components: {
     GlobalLayout,
-    Contextmenu
+    Contextmenu,
   },
   mixins: [mixin, mixinDevice],
   data() {
@@ -46,15 +57,15 @@ export default {
         { key: '4', icon: 'reload', text: '刷 新' },
         { key: '1', icon: 'arrow-left', text: '关闭左侧' },
         { key: '2', icon: 'arrow-right', text: '关闭右侧' },
-        { key: '3', icon: 'close', text: '关闭其它' }
+        { key: '3', icon: 'close', text: '关闭其它' },
       ],
-      reloadFlag: true
+      reloadFlag: true,
     }
   },
   /* update_begin author:wuxianquan date:20190828 for: 关闭当前tab页，供子页面调用 ->望菜单能配置外链，直接弹出新页面而不是嵌入iframe #428 */
   provide() {
     return {
-      closeCurrent: this.closeCurrent
+      closeCurrent: this.closeCurrent,
     }
   },
   /* update_end author:wuxianquan date:20190828 for: 关闭当前tab页，供子页面调用->望菜单能配置外链，直接弹出新页面而不是嵌入iframe #428 */
@@ -66,7 +77,7 @@ export default {
       } else {
         return this.$store.state.app.multipage
       }
-    }
+    },
   },
   created() {
     if (this.$route.path != indexKey) {
@@ -83,10 +94,9 @@ export default {
     this.linkList.push(this.$route.fullPath)
     this.activePage = this.$route.fullPath
   },
-  mounted() {
-  },
+  mounted() {},
   watch: {
-    '$route': function (newRoute) {
+    $route: function (newRoute) {
       //console.log("新的路由",newRoute)
       this.activePage = newRoute.fullPath
       if (!this.multipage) {
@@ -113,13 +123,13 @@ export default {
         this.pageList.splice(oldIndex, 1, Object.assign({}, newRoute, { meta: oldPositionRoute.meta }))
       }
     },
-    'activePage': function (key) {
+    activePage: function (key) {
       let index = this.linkList.lastIndexOf(key)
       let waitRouter = this.pageList[index]
-      this.$router.push(Object.assign({}, waitRouter));
+      this.$router.push(Object.assign({}, waitRouter))
       this.changeTitle(waitRouter.meta.title)
     },
-    'multipage': function (newVal) {
+    multipage: function (newVal) {
       if (this.reloadFlag) {
         if (!newVal) {
           this.linkList = [this.$route.fullPath]
@@ -145,8 +155,8 @@ export default {
         fullPath: indexKey,
         meta: {
           icon: 'dashboard',
-          title: '首页'
-        }
+          title: '首页',
+        },
       })
       this.linkList.splice(0, 0, indexKey)
     },
@@ -154,7 +164,7 @@ export default {
 
     // update-begin-author:sunjianlei date:20200120 for: 动态更改页面标题
     changeTitle(title) {
-      let projectTitle = "烟草公司"
+      let projectTitle = '综合管理系统'
       // 首页特殊处理
       if (this.$route.path === indexKey) {
         document.title = projectTitle
@@ -184,10 +194,10 @@ export default {
         this.$message.warning('这是最后一页，不能再关闭了啦')
         return
       }
-      console.log("this.pageList ", this.pageList);
-      this.pageList = this.pageList.filter(item => item.fullPath !== key)
+      console.log('this.pageList ', this.pageList)
+      this.pageList = this.pageList.filter((item) => item.fullPath !== key)
       let index = this.linkList.indexOf(key)
-      this.linkList = this.linkList.filter(item => item !== key)
+      this.linkList = this.linkList.filter((item) => item !== key)
       index = index >= this.linkList.length ? this.linkList.length - 1 : index
       this.activePage = this.linkList[index]
     },
@@ -204,7 +214,8 @@ export default {
         return null
       }
       let pageKey = target.getAttribute('pagekey')
-      pageKey = pageKey || (target.previousElementSibling ? target.previousElementSibling.getAttribute('pagekey') : null)
+      pageKey =
+        pageKey || (target.previousElementSibling ? target.previousElementSibling.getAttribute('pagekey') : null)
       return pageKey || (target.firstElementChild ? this.getPageKey(target.firstElementChild, ++depth) : null)
     },
     onMenuSelect(key, target) {
@@ -228,7 +239,7 @@ export default {
     },
     /* update_begin author:wuxianquan date:20190828 for: 关闭当前tab页，供子页面调用->望菜单能配置外链，直接弹出新页面而不是嵌入iframe #428 */
     closeCurrent() {
-      this.remove(this.activePage);
+      this.remove(this.activePage)
     },
     /* update_end author:wuxianquan date:20190828 for: 关闭当前tab页，供子页面调用->望菜单能配置外链，直接弹出新页面而不是嵌入iframe #428 */
     closeOthers(pageKey) {
@@ -286,15 +297,15 @@ export default {
     //update-begin-author:taoyan date:20191008 for:路由刷新
     routeReload() {
       this.reloadFlag = false
-      let ToggleMultipage = "ToggleMultipage"
+      let ToggleMultipage = 'ToggleMultipage'
       this.$store.dispatch(ToggleMultipage, false)
       this.$nextTick(() => {
         this.$store.dispatch(ToggleMultipage, true)
         this.reloadFlag = true
       })
-    }
+    },
     //update-end-author:taoyan date:20191008 for:路由刷新
-  }
+  },
 }
 </script>
 

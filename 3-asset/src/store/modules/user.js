@@ -127,43 +127,24 @@ const user = {
                     "keepAlive": false,
                     "internalOrExternal": false,
                     "icon": "home",
-                    "title": "首页"
+                    "title": "统计面板"
                     },
                   "name": "dashboard-analysis",
                   "id": "9502685863ab87f0ad1134142788a385"
               },
               {
-                  "redirect": null,
-                  "path": "/asset_manage",
-                  "component": "layouts/RouteView",
-                  "route": "1",
-                  "children": [
-                    {
-                      "path": "/asset_manage/asset", "component": "asset_manage/asset", "route": "1",
-                      "meta": {
-                        "keepAlive": false,
-                        "internalOrExternal": false,
-                        "title": "资产变化捕捉" },
-                      "name": "index",
-                      "id": "1244877762060517734"
-                    },
-                    {
-                      "path": "/asset_manage/AssetStatistic", "component": "asset_manage/AssetStatistic", "route": "1",
-                      "meta": {
-                        "keepAlive": false,
-                        "internalOrExternal": false,
-                        "title": "资产变化统计" },
-                      "name": "AssetStatistic",
-                      "id": "12448777620605173744"
-                    },
-                  ],
-                  "meta": {
-                    "keepAlive": false,
-                    "internalOrExternal": false,
-                    "icon": "hdd",
-                    "title": "资产变化" },
-                  "name": "asset_manage",
-                  "id": "1244876622988214274"
+                "redirect": null,
+                "path": "/asset_manage/asset",
+                "component": "asset_manage/asset",
+                "route": "1",
+                "meta": {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "icon": "hdd",
+                  "title": "资产变化捕捉"
+                  },
+                "name": "asset",
+                "id": "1244876622988214274"
               },
               {
                  "hidden":true,

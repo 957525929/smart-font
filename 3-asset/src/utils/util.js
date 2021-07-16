@@ -87,6 +87,7 @@ let indexRouter = [{
           //component: () => import('@/components/layouts/BasicLayout'),
           component: resolve => require(['@/components/layouts/TabLayout'], resolve),
           meta: { title: '首页' },
+       //   redirect: '/asset_manage/asset',
           redirect: '/dashboard/analysis',
           children: [
             ...generateChildRouters(data)

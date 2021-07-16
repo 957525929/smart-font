@@ -20,6 +20,7 @@
                           allowClear
                           placeholder="请选择承租方"
                           v-decorator="['assetOwner', { rules: [{ required: true}] }]"
+                          @change="handleChangeOwner"
                         >
                           <a-select-option v-for="d in userSelectData" :key="d.value">
                             {{ d.text }}
@@ -33,6 +34,7 @@
                           allowClear
                           placeholder="请选择资产类型"
                           v-decorator="['assetType', { rules: [{ required: true}] }]"
+                          @change="handleChangeType"
                         >
                           <a-select-option v-for="d in typeSelectData" :key="d.value">
                             {{ d.text }}
@@ -44,7 +46,7 @@
                   <a-row :gutter="16">
                     <a-col :span="5">
                       <a-form-item label="合同名称">
-                        <a-input allowClear v-decorator="['contractName', { rules: [{ required: true, message: '请输入!' }] }]"></a-input>
+                        <a-input v-decorator="['contractName', { rules: [{ required: true, message: '请输入!' }],initialValue:this.c }]"></a-input>
                       </a-form-item>
                     </a-col>
                     <a-col :span="11">
@@ -155,6 +157,7 @@
                         allowClear
                         placeholder="请选择出租方"
                         v-decorator="['assetOwner', { rules: [{ required: true}] }]"
+                        @change="handleChangeOwnerpay"
                       >
                         <a-select-option v-for="d in assetOwnerList" :key="d.value">
                           {{ d.text }}
@@ -168,6 +171,7 @@
                         allowClear
                         placeholder="请选择资产类型"
                         v-decorator="['assetType', { rules: [{ required: true}] }]"
+                        @change="handleChangeTypepay"
                       >
                         <a-select-option v-for="d in typeSelectData" :key="d.value">
                           {{ d.text }}
@@ -179,7 +183,7 @@
                 <a-row :gutter="16">
                   <a-col :span="5">
                     <a-form-item label="合同名称">
-                      <a-input allowClear v-decorator="['contractName', { rules: [{ required: true, message: '请输入!' }] }]"></a-input>
+                      <a-input allowClear v-decorator="['contractName', { rules: [{ required: true, message: '请输入!' }],initialValue:this.d}]"></a-input>
                     </a-form-item>
                   </a-col>
                   <a-col :span="11">
@@ -243,7 +247,7 @@
                       <a-upload
                         list-type="picture"
                         action="//jsonplaceholder.typicode.com/posts/"
-                        :preview-file="previewFile"
+                        :preview-file="previewFilepay"
                       >
                         <a-button> <a-icon type="upload" /> Upload </a-button>
                       </a-upload>
@@ -396,6 +400,15 @@ export default {
       headers: {
         authorization: 'authorization-text',
       },
+      //出租承租方
+      a:'',
+      a1:'',
+      //资产类型
+      b:'',
+      b1:'',
+      //合同名称
+      c:'',
+      d:'',
     }
   },
   methods:{
@@ -450,6 +463,26 @@ export default {
       })
     },
     //图片上传
+    previewFile(file) {
+      console.log('Your upload file:', file);
+      // Your process logic. Here we just mock to the same file
+      return fetch('https://next.json-generator.com/api/json/get/4ytyBoLK8', {
+        method: 'POST',
+        body: file,
+      })
+        .then(res => res.json())
+        .then(({ thumbnail }) => thumbnail);
+    },
+    previewFilepay(file) {
+      console.log('Your upload file:', file);
+      // Your process logic. Here we just mock to the same file
+      return fetch('https://next.json-generator.com/api/json/get/4ytyBoLK8', {
+        method: 'POST',
+        body: file,
+      })
+        .then(res => res.json())
+        .then(({ thumbnail }) => thumbnail);
+    },
     handleChange(info) {
       if (info.file.status !== 'uploading') {
         console.log(info.file, info.fileList);
@@ -460,9 +493,41 @@ export default {
         this.$message.error(`${info.file.name} file upload failed.`);
       }
     },
-
     onValueChange() {},
     onInEntryAdded() {},
+    //更改承租方
+    handleChangeOwner(value) {
+      console.log(value);
+      this.a=this.userSelectData[value-1].text;
+      console.log(this.a);
+      this.c=this.a+this.b+'合同';
+      console.log(this.c);
+    },
+    //更改资产类型
+    handleChangeType(value) {
+      console.log(value)
+      this.b=this.typeSelectData[value-1].text;
+      console.log(this.b);
+      this.c=this.a+this.b+'合同';
+      console.log(this.c);
+    },
+    //更改承租方
+    handleChangeOwnerpay(value) {
+      console.log(value);
+      this.a=this.userSelectData[value-1].text;
+      this.a1=this.assetOwnerList[value-1].text;
+      console.log(this.a);
+      this.d=this.a1+this.b+'合同';
+      console.log(this.c);
+    },
+    //更改资产类型
+    handleChangeTypepay(value) {
+      console.log(value)
+      this.b1=this.typeSelectData[value-1].text;
+      console.log(this.b);
+      this.d=this.a1+this.b1+'合同';
+      console.log(this.c);
+    },
   },
 
 }

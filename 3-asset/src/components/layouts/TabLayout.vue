@@ -37,8 +37,8 @@
   import { mixin, mixinDevice } from '@/utils/mixin.js'
   import { triggerWindowResizeEvent } from '@/utils/util'
 
-  const indexKey = '/dashboard/analysis'
-
+  const indexKey = '/asset_manage/asset'
+//  const indexKey = '/dashboard/analysis'
   export default {
     name: 'TabLayout',
     components: {
@@ -150,7 +150,8 @@
       // 将首页添加到第一位
       addIndexToFirst() {
         this.pageList.splice(0, 0, {
-          name: 'dashboard-analysis',
+          // name: '/asset_manage/asset',
+          name: '/dashboard/analysis',
           path: indexKey,
           fullPath: indexKey,
           meta: {
@@ -164,7 +165,7 @@
 
       // update-begin-author:sunjianlei date:20200120 for: 动态更改页面标题
       changeTitle(title) {
-        let projectTitle = "烟草公司"
+        let projectTitle = "资产管理系统"
         // 首页特殊处理
         if (this.$route.path === indexKey) {
           document.title = projectTitle

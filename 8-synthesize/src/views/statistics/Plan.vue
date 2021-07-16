@@ -18,8 +18,7 @@
                 <a-select-option value="0">未开始</a-select-option>
                 <a-select-option value="1">进行中</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
-                <a-select-option value="3">未完成</a-select-option>
-                <a-select-option value="4">延期中</a-select-option>
+                <a-select-option value="3">已超时</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -37,7 +36,7 @@
           </a-col>
         </a-row>
       </a-form>
-
+      <h2>任务状态统计:</h2>
       <BarMultid :dataSource="dataSource" :fields="field" :height="420" />
     </div>
   </a-card>
@@ -87,22 +86,13 @@ export default {
           2021.07: 12,
         },
         {
-          type: '未完成',
+          type: '已超时',
           2021.02: 12,
           2021.03: 7,
           2021.04: 5,
           2021.05: 12,
           2021.06: 17,
           2021.07: 2,
-        },
-        {
-          type: '延期中',
-          2021.02: 5,
-          2021.03: 8,
-          2021.04: 2,
-          2021.05: 5,
-          2021.06: 2,
-          2021.07: 1,
         },
       ],
     }

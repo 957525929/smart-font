@@ -2,11 +2,11 @@
   <div>
     <!-- 租金收缴配置 -->
     <a-tabs default-active-key="1">
-      <a-tab-pane key="1" tab="租金收缴消息通知配置">
+      <a-tab-pane key="1" tab="消息通知默认配置设置">
         <a-card :bordered="false">
           <!-- 主表单区域 -->
           <a-tabs default-active-key="1" >
-            <a-tab-pane key="1" tab="收租通知配置">
+            <a-tab-pane key="1" tab="收租通知默认配置">
               <a-form :form="form1">
                 <a-row :gutter="16">
                   <a-col :span="7">
@@ -38,7 +38,7 @@
                 <a-button key="submit" type="primary" @click='handleOk' >提交</a-button>
               </template>
             </a-tab-pane>
-            <a-tab-pane key="2" tab="缴租通知配置">
+            <a-tab-pane key="2" tab="缴租通知默认配置">
               <a-form :form="form2">
                 <a-row :gutter="16">
                   <a-col :span="7">

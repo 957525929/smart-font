@@ -21,7 +21,7 @@
     props: {
       title: {
         type: String,
-        default: '烟草公司办公用品管理系统',
+        default: '办公用品管理系统',
         required: false
       },
       showTitle: {

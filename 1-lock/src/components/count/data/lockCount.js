@@ -1,7 +1,7 @@
 export const lockCount = [
     {
         key: 1,
-        area: '福建烟草公司机关.A区域.1号楼',
+        area: '中国烟草总公司福建省公司机关.A区域.1号楼',
         roomNum: '101',
         lockNum: 'S0001',
         figerLock: '83',
@@ -38,7 +38,7 @@ export const lockCount = [
     },
     {
         key: 2,
-        area: '福建烟草公司机关.A区域.1号楼',
+        area: '中国烟草总公司福建省公司机关.A区域.1号楼',
         roomNum: '201',
         lockNum: 'S0001',
         figerLock: '77',
@@ -67,7 +67,7 @@ export const lockCount = [
     },
     {
         key: '3',
-        area: '福建烟草公司机关.B区域.1号楼',
+        area: '中国烟草总公司福建省公司机关.B区域.1号楼',
         roomNum: '405',
         lockNum: 'S0001',
         figerLock: '91',

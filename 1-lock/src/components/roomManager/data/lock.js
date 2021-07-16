@@ -4,7 +4,7 @@ export const lockData = [
 
 
         key: 3,
-        area: '福建烟草公司机关.A区域.2号楼',
+        area: '中国烟草总公司福建省公司机关.A区域.2号楼',
         roomNum: '303',
         lockNum: 'S0003',
         status: '低电量',
@@ -42,7 +42,7 @@ export const lockData = [
     },
     {
         key: 4,
-        area: '福建烟草公司机关.B区域.1号楼',
+        area: '中国烟草总公司福建省公司机关.B区域.1号楼',
         roomNum: '404',
         lockNum: 'S0004',
         status: '低电量',

@@ -5,15 +5,16 @@
       <!-- 会议申请信息 -->
       <table class="meetingInfo">
         <tbody>
-          <tr>
+          <tr id="trOne">
             <td colspan="2">
               <label for="meetingTheme" :style="{marginLeft:'20px'}">会议主题</label>
               <div class="bgc">
                 <a-select
                   id="meetingTheme"
-                  :default-value="meetingTheme"
+                  default-value="物流管理"
                   :style="{width:'80%'}"
                   @change="handleChange"
+                  showSearch
                 >
                   <a-select-option value="年度总结">年度总结</a-select-option>
                   <a-select-option value="项目会议">项目会议</a-select-option>
@@ -30,7 +31,7 @@
                   id="meetingName"
                   placeholder="请输入会议名称"
                   :style="{width:'80%'}"
-                  :value="meetingName"
+                  v-model="meetingName"
                 ></a-input>
               </div>
             </td>
@@ -43,7 +44,7 @@
                   id="responsibleName"
                   placeholder="请输入负责人姓名"
                   :style="{width:'80%'}"
-                  :value="responsibleName"
+                  v-model="responsibleName"
                 ></a-input>
               </div>
             </td>
@@ -54,7 +55,7 @@
                   id="responsibleTelphone"
                   placeholder="请输入负责电话"
                   :style="{width:'80%'}"
-                  :value="responsibleTelphone"
+                  v-model="responsibleTelphone"
                 ></a-input>
               </div>
             </td>
@@ -64,7 +65,12 @@
               <label :style="{marginLeft:'20px'}">会议时间</label>
               <div class="bgc">
                 <a-icon type="schedule" :style="{ fontSize: '24px', marginRight: '2px' }" />
-                <a-range-picker @change="timeChange" :style="{width:'75%', border:'none'}" />
+                <a-range-picker
+                  @change="timeChange"
+                  :style="{width:'75%', border:'none'}"
+                  :default-value="[moment('2021/07/22', dateFormat), moment('2021/07/25', dateFormat)]"
+                  :format="dateFormat"
+                />
               </div>
             </td>
             <td colspan="2">
@@ -74,7 +80,7 @@
                   id="meetingAddress"
                   placeholder="请输入会议地点"
                   :style="{width:'80%'}"
-                  :value="meetingAddress"
+                  v-model="meetingAddress"
                 ></a-input>
               </div>
             </td>
@@ -109,7 +115,7 @@
                   id="meetingBarget"
                   placeholder="请输入会议预算"
                   :style="{width:'30%'}"
-                  :value="meetingBarget"
+                  v-model="meetingBarget"
                 ></a-input>
               </div>
             </td>
@@ -145,11 +151,11 @@
           </tr>
           <tr>
             <td colspan="3">
-              <label for="meetingComments" :style="{marginLeft:'20px'}">备注</label>
+              <label :style="{marginLeft:'20px'}">备注</label>
               <div class="bgc">
                 <a-textarea
                   id="meetingComments"
-                  :value="meetingComments"
+                  v-model="meetingComments"
                   placeholder="请输入会议备注信息"
                   :auto-size="{ minRows: 3, maxRows: 5 }"
                 />
@@ -196,6 +202,7 @@
           @expand="onExpand"
           @select="onSelect"
         />
+        <!--  defaultExpandAll="true" -->
         <!-- <div class="departmentLists">
             <div class="departmentName">
               <a-checkbox @change="menbersInfoChange">运营A组 (1/5) </a-checkbox>
@@ -217,67 +224,67 @@
   </a-card>
 </template>
 <script>
-import Mock from 'mockjs'
+import moment from "moment";
+// import Mock from "mockjs";
 const treeData = [
   {
-    title: '物流管理处',
-    key: '0-0',
+    title: "物流管理处",
+    key: "0-0",
     children: [
-      { title: '王小帅', key: '0-0-0-0' },
-      { title: '刘晓霞', key: '0-0-0-1' },
-      { title: '游小美', key: '0-0-0-2' }
+      { title: "王小帅", key: "0-0-0-0" },
+      { title: "刘晓霞", key: "0-0-0-1" },
+      { title: "游小美", key: "0-0-0-2" }
     ]
   },
   {
-    title: '信息中心',
-    key: '0-1',
+    title: "信息中心",
+    key: "0-1",
     children: [
-      { title: '刘晓梅', key: '0-1-0-0' },
-      { title: '陈小媚', key: '0-1-0-1' },
-      { title: '刘小小', key: '0-1-0-2' }
+      { title: "刘晓梅", key: "0-1-0-0" },
+      { title: "陈小媚", key: "0-1-0-1" },
+      { title: "刘小小", key: "0-1-0-2" }
     ]
   },
   {
-    title: '烟叶管理处',
-    key: '0-2',
+    title: "烟叶管理处",
+    key: "0-2",
     children: [
-      { title: '吴芳菲', key: '0-2-0-0' },
-      { title: '李丽晶', key: '0-2-0-1' },
-      { title: '王亚亚', key: '0-2-0-2' }
+      { title: "吴芳菲", key: "0-2-0-0" },
+      { title: "李丽晶", key: "0-2-0-1" },
+      { title: "王亚亚", key: "0-2-0-2" }
     ]
   },
   {
-    title: '安全管理处',
-    key: '0-3',
+    title: "安全管理处",
+    key: "0-3",
     children: [
-      { title: '陈思思', key: '0-3-0-0' },
-      { title: '刘潇', key: '0-3-0-1' },
-      { title: '王菲', key: '0-3-0-2' }
+      { title: "陈思思", key: "0-3-0-0" },
+      { title: "刘潇", key: "0-3-0-1" },
+      { title: "王菲", key: "0-3-0-2" }
     ]
   },
   {
-    title: '卷烟销售管理处',
-    key: '0-4',
+    title: "卷烟销售管理处",
+    key: "0-4",
     children: [
-      { title: '吴燕燕', key: '0-4-0-0' },
-      { title: '陈思成', key: '0-4-0-1' },
-      { title: '刘雨菲', key: '0-4-0-2' }
+      { title: "吴燕燕", key: "0-4-0-0" },
+      { title: "陈思成", key: "0-4-0-1" },
+      { title: "刘雨菲", key: "0-4-0-2" }
     ]
   }
-]
+];
 export default {
   data() {
     return {
-      meetingTheme: '年度总结', //会议主题
-      meetingName: '2020年年度总结', //会议名称
-      responsibleName: '张三', //负责人姓名
-      responsibleTelphone: '188600111111', //负责人电话
-      dateFormat: 'YYYY年MM月DD日', //会议时间
-      meetingAddress: '总公司机关', //会议地点
+      //meetingTheme: "年度总结", //会议主题
+      meetingName: "第三季度物流管理会议", //会议名称
+      responsibleName: "张三", //负责人姓名
+      responsibleTelphone: "188600111111", //负责人电话
+      dateFormat: "YYYY年MM月DD日", //会议时间
+      meetingAddress: "总公司机关", //会议地点
       meetingBarget: 1000, //会议预算
       meetingJoinsMembers: [], //会议成员
-      meetingComments: '2020年年度总结', //备注
-
+      meetingComments: "", //备注
       //会议人员目录树
       treeDatas: [], //目录树信息汇总
       MembersAll: [], //所有待选参会人员汇总
@@ -286,17 +293,17 @@ export default {
       checkedKeys: [],
       selectedKeys: [],
       defaultFileList: []
-    }
+    };
   },
   watch: {
     checkedKeys(val) {
       this.meetingJoinsMembers = this.MembersAll.filter(item => {
-        return val.includes(item.key)
-      })
+        return val.includes(item.key);
+      });
     }
   },
   mounted() {
-    console.log(this.meetingJoinsMembers.length)
+    console.log(this.meetingJoinsMembers.length);
     // let datas = Mock.mock({
     // 'members|6': [{
     //     'id|+1': 11100,
@@ -320,20 +327,18 @@ export default {
     // console.log(departmentsLists)
     // this.treeDatas = departmentsLists.treeDatas;
 
-    this.treeDatas = treeData
+    this.treeDatas = treeData;
     //汇总所有人员名单
     this.meetingJoinsMembers = this.treeDatas.forEach(item => {
-      this.MembersAll = this.MembersAll.concat(item.children)
-    })
+      this.MembersAll = this.MembersAll.concat(item.children);
+    });
   },
   methods: {
-    handleChange(value) {
-      this.meetingTheme = value
-    },
+    moment,
     timeChange(date, dateString) {
-      console.log(date, dateString)
+      console.log(date, dateString);
     },
-    menbersInfoChange() {},
+    // menbersInfoChange() {},
     // handleClose(tag){
     //   var arr = this.checkedKeys;
     //   this.checkedKeys = [];
@@ -346,25 +351,25 @@ export default {
     // },
     //目录树选择变更
     onExpand(expandedKeys) {
-      this.expandedKeys = expandedKeys
-      this.autoExpandParent = false
+      this.expandedKeys = expandedKeys;
+      this.autoExpandParent = false;
     },
     onCheck(checkedKeys) {
-      console.log(checkedKeys)
-      this.checkedKeys = checkedKeys
-      console.log(this.checkedKeys)
+      console.log(checkedKeys);
+      this.checkedKeys = checkedKeys;
+      console.log(this.checkedKeys);
     },
-    onSelect(selectedKeys, info) {
-      this.selectedKeys = selectedKeys
+    onSelect(selectedKeys) {
+      this.selectedKeys = selectedKeys;
     },
-    submitApply(event) {
-      var apllyMeetingInfos = {}
+    submitApply() {
+      // var apllyMeetingInfos = {};
     },
     handleChange(value) {
-      this.meetingName = value
+      this.meetingName = value;
     }
   }
-}
+};
 </script>
 
 <style>
@@ -375,7 +380,7 @@ ul li {
 
 .clearfix {
   display: block;
-  content: '';
+  content: "";
   clear: both;
 }
 .fl {
@@ -392,15 +397,19 @@ ul li {
   font-size: 14px;
   font-weight: bold;
   border-collapse: separate;
-  margin-right: 20px;
+  /* margin-right: 20px; */
+  border: 2px solid #f0f2f5;
 }
 .nemberList {
   flex: 1;
   /* background-color: #f5f8fe; */
-  border-radius: 10px;
+  /* border-radius: 10px; */
   height: 600px;
   overflow: auto;
-  padding: 20px 0 0 20px;
+  /* padding: 20px 0 0 20px; */
+  /* border-top: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000; */
 }
 .meetingInfo tr td {
   margin-right: 10px;

@@ -2,63 +2,45 @@
   <div class="page-header-index-wide">
     <a-row :gutter="24">
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="总销售额" total="￥126,560">
+        <chart-card :loading="loading" title="总收租金额" total="￥226,560">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
           <div>
-            <trend flag="up" style="margin-right: 16px;">
-              <span slot="term">周同比</span>
-              12%
-            </trend>
-            <trend flag="down">
-              <span slot="term">日同比</span>
-              11%
-            </trend>
           </div>
-          <template slot="footer">日均销售额<span>￥ 234.56</span></template>
+          <template slot="footer">本月收租金额<span>￥ 1234.56</span></template>
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="订单量" :total="8846 | NumberFormat">
+        <chart-card :loading="loading" title="总收租次数" :total="846 | NumberFormat">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
           <div>
             <mini-area />
           </div>
-          <template slot="footer">日订单量<span> {{ '1234' | NumberFormat }}</span></template>
+          <template slot="footer">本月收租次数<span> {{ '34' | NumberFormat }}</span></template>
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="支付笔数" :total="6560 | NumberFormat">
+        <chart-card :loading="loading" title="总缴租金额" total="￥137,320">
+          <a-tooltip title="指标说明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <div>
+          </div>
+          <template slot="footer">本月缴租金额<span>￥ 534.56</span></template>
+        </chart-card>
+      </a-col>
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="总缴租次数" :total="660 | NumberFormat">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
           <div>
             <mini-bar :height="40" />
           </div>
-          <template slot="footer">转化率 <span>60%</span></template>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="运营活动效果" total="78%">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <mini-progress color="rgb(19, 194, 194)" :target="80" :percentage="78" :height="8" />
-          </div>
-          <template slot="footer">
-            <trend flag="down" style="margin-right: 16px;">
-              <span slot="term">同周比</span>
-              12%
-            </trend>
-            <trend flag="up">
-              <span slot="term">日环比</span>
-              80%
-            </trend>
-          </template>
+          <template slot="footer">本月缴租次数 <span>6</span></template>
         </chart-card>
       </a-col>
     </a-row>
@@ -75,23 +57,23 @@
             </div>
             <a-range-picker :style="{width: '256px'}" />
           </div>
-          <a-tab-pane loading="true" tab="销售额" key="1">
+          <a-tab-pane loading="true" tab="出租收入金额" key="1">
             <a-row>
               <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="销售额排行" :dataSource="barData"/>
+                <bar title="金额" :dataSource="barData"/>
               </a-col>
               <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list title="门店销售排行榜" :list="rankList"/>
+                <rank-list title="收租记录" :list="rankList"/>
               </a-col>
             </a-row>
           </a-tab-pane>
-          <a-tab-pane tab="销售趋势" key="2">
+          <a-tab-pane tab="缴租支出金额" key="2">
             <a-row>
               <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="销售额趋势" :dataSource="barData"/>
+                <bar title="金额" :dataSource="barData"/>
               </a-col>
               <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list title="门店销售排行榜" :list="rankList"/>
+                <rank-list title="缴租记录" :list="rankList"/>
               </a-col>
             </a-row>
           </a-tab-pane>
@@ -101,33 +83,12 @@
 
     <a-row>
       <a-col :span="24">
-        <a-card :loading="loading" :bordered="false" title="最近一周访问量统计" :style="{ marginTop: '24px' }">
-          <a-row>
-            <a-col :span="6">
-              <head-info title="今日IP" :content="loginfo.todayIp"></head-info>
-            </a-col>
-            <a-col :span="2">
-              <a-spin class='circle-cust'>
-                <a-icon slot="indicator" type="environment" style="font-size: 24px"  />
-              </a-spin>
-            </a-col>
-            <a-col :span="6">
-              <head-info title="今日访问" :content="loginfo.todayVisitCount"></head-info>
-            </a-col>
-            <a-col :span="2">
-              <a-spin class='circle-cust'>
-                <a-icon slot="indicator" type="team" style="font-size: 24px"  />
-              </a-spin>
-            </a-col>
-            <a-col :span="6">
-              <head-info title="总访问量" :content="loginfo.totalVisitCount"></head-info>
-            </a-col>
-            <a-col :span="2">
-              <a-spin class='circle-cust'>
-                <a-icon slot="indicator" type="rise" style="font-size: 24px"  />
-              </a-spin>
-            </a-col>
-          </a-row>
+        <a-card :loading="loading" :bordered="false" title="资产流转次数" :style="{ marginTop: '24px' }">
+<!--          <a-row>-->
+<!--            <a-col :span="6">-->
+<!--              <head-info title="今日IP" :content="loginfo.todayIp"></head-info>-->
+<!--            </a-col>-->
+<!--          </a-row>-->
           <line-chart-multid :fields="visitFields" :dataSource="visitInfo"></line-chart-multid>
         </a-card>
       </a-col>
@@ -150,18 +111,18 @@
   import Trend from '@/components/Trend'
   import { getLoginfo,getVisitInfo } from '@/api/api'
 
-  const rankList = []
-  for (let i = 0; i < 7; i++) {
-    rankList.push({
-      name: '白鹭岛 ' + (i+1) + ' 号店',
-      total: 1234.56 - i * 100
-    })
-  }
+  // const rankList = []
+  // for (let i = 0; i < 7; i++) {
+  //   rankList.push({
+  //     name: '方正有限公司 ' + ' 房屋与建筑物合同'+ (i+1),
+  //     total: 1234 - i * 100
+  //   })
+  // }
   const barData = []
   for (let i = 0; i < 12; i += 1) {
     barData.push({
       x: `${i + 1}月`,
-      y: Math.floor(Math.random() * 1000) + 200
+      y: Math.floor(Math.random() * 10000) + 200
     })
   }
   export default {
@@ -183,11 +144,25 @@
       return {
         loading: true,
         center: null,
-        rankList,
+        rankList:[
+          {"name":"2020-07-05 方正有限公司房屋与建筑物合同","total":50000},
+          {"name":"2020-07-05 福州朝阳贸易有限公司房屋与建筑物合同","total":12340},
+          {"name":"2019-07-05 方正有限公司房屋与建筑物合同","total":50000},
+          {"name":"2019-07-05 福州朝阳贸易有限公司房屋与建筑物合同","total":12340},
+          {"name":"2018-07-05 方正有限公司房屋与建筑物合同","total":50000},
+          {"name":"2018-07-05 福州烟草加工厂房屋与建筑物合同","total":34000},
+        ],
         barData,
         loginfo:{},
-        visitFields:['ip','visit'],
-        visitInfo:[],
+        visitFields:['次数'],
+        visitInfo:[
+          {"月":"2016","次数":8,"type":"2016"},
+          {"月":"2017","次数":6,"type":"2017"},
+          {"月":"2018","次数":3,"type":"2018"},
+          {"月":"2019","次数":7,"type":"2019"},
+          {"月":"2020","次数":4,"type":"2020"},
+          {"月":"2021","次数":6,"type":"2021"}
+        ],
         indicator: <a-icon type="loading" style="font-size: 24px" spin />
       }
     },
@@ -198,22 +173,22 @@
       this.initLogInfo();
     },
     methods: {
-      initLogInfo () {
-        getLoginfo(null).then((res)=>{
-          if(res.success){
-            Object.keys(res.result).forEach(key=>{
-              res.result[key] =res.result[key]+""
-            })
-            this.loginfo = res.result;
-          }
-        })
-        getVisitInfo().then(res=>{
-          if(res.success){
-             console.log("aaaaaa",res.result)
-             this.visitInfo = res.result;
-           }
-         })
-      },
+      // initLogInfo () {
+      //   getLoginfo(null).then((res)=>{
+      //     if(res.success){
+      //       Object.keys(res.result).forEach(key=>{
+      //         res.result[key] =res.result[key]+""
+      //       })
+      //       this.loginfo = res.result;
+      //     }
+      //   })
+      //   getVisitInfo().then(res=>{
+      //     if(res.success){
+      //        console.log("aaaaaa",res.result)
+      //        this.visitInfo = res.result;
+      //      }
+      //    })
+      // },
     }
   }
 </script>

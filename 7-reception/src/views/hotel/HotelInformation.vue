@@ -26,7 +26,7 @@
           >查询</a-button>
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
         </a-col>
-        <a-col :span="8"></a-col>
+        <a-col :span="5"></a-col>
         <a-col>
           <a-button
             @click="addHotel()"
@@ -38,45 +38,13 @@
           </a-button>
         </a-col>
       </a-row>
-      <!-- <a-form layout="inline" @keyup.enter.native="searchQuery">
-        <a-row :gutter="24">
-          <a-col :xl="5" :lg="1" :md="1" :sm="24">
-            <a-form-item label="酒店名称或位置：">
-              <a-input placeholder="请输入酒店名称或位置" v-model="queryParam.IDName"></a-input>
-            </a-form-item>
-            <a-col >
-              <a-form-item label="协议编号：">
-                <a-input placeholder="请输入协议编号" v-model="queryParam.IDName"></a-input>
-              </a-form-item>
-            </a-col>
-          </a-col>
-          <a-col :xl="10" :lg="1" :md="12" :sm="24">
-            <a-button
-              :style="{ background: '#49a9ee', color: 'white'}"
-              icon="search"
-              @click="searchQuery"
-            >查询</a-button>
-            <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
-          </a-col>
-          <a-col>
-            <a-button
-              @click="addHotel()"
-              icon="plus"
-              :style="{ color: 'white', background:'orange'}"
-            >新增酒店</a-button>
-            <a-button>
-              <a-icon type="download" />导出
-            </a-button>
-          </a-col>
-        </a-row>
-      </a-form>-->
     </div>
     <!-- 搜索操作区域-END -->
 
     <!-- table区域-begin -->
     <div id="dataHotelTable">
       <a-table :data-source="dataHotel" :pagination="false" rowKey="id">
-        <a-table-column title="酒店名称" data-index="hotel" align="left" fixed="left"></a-table-column>
+        <a-table-column title="协议酒店名称" data-index="hotel" align="left" fixed="left"></a-table-column>
         <a-table-column title="协议编号" data-index="id" align="center"></a-table-column>
         <a-table-column title="星级" data-index="level" align="center"></a-table-column>
         <a-table-column title="联系人" data-index="dutyName" align="center"></a-table-column>
@@ -107,7 +75,7 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item ref="hotel" label="酒店名称" prop="hotel" placeholder="请输入酒店名称">
+        <a-form-model-item ref="hotel" label="协议酒店名称" prop="hotel" placeholder="请输入协议酒店名称">
           <a-input v-model="formAdd.hotel"></a-input>
         </a-form-model-item>
         <a-form-model-item ref="id" label="协议编号" prop="id" placeholder="请输入协议编号">
@@ -141,14 +109,14 @@
       </a-form-model>
     </a-Modal>
     <!--修改信息 -->
-    <a-Modal v-model="visibleModify" title="修改酒店信息" footer>
+    <a-Modal v-model="visibleModify" title="修改协议酒店信息" footer>
       <a-form-model
         :label-col="labelCol"
         :model="formModify"
         :wrapper-col="wrapperCol"
         :rules="rules"
       >
-        <a-form-model-item label="酒店名称" prop="hotel">
+        <a-form-model-item label="协议酒店名称" prop="hotel">
           <a-input v-model="formModify.hotel"></a-input>
         </a-form-model-item>
         <a-form-model-item label="协议编号">
@@ -258,7 +226,7 @@ export default {
         hotel: [
           {
             required: true,
-            message: '请输入酒店名称',
+            message: '请输入协议酒店名称',
             trigger: 'blur'
           }
         ],
