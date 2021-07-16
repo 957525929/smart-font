@@ -1,14 +1,13 @@
 <template>
     <div class="">
+        <TableModal title="养护计划" :infoDetail="loginInfo" ref="planModal"></TableModal>
         <a-tabs default-active-key="1" :activeKey="current" @change="callback">
             <a-tab-pane v-for="item in proMenu" :tab="item.title" :key="item.key">
-                <TableModal title="养护计划" :infoDetail="loginInfo" ref="planModal"></TableModal>
                 <PageTemplate :columns="columns" :searchCon="searchCon" :formdata="data">
                     <a-button type="primary" @click="showProForm" icon="plus">新增养护计划</a-button>
                     <!-- <TableModal title="养护计划" :infoDetail="loginInfo" ref="planModal"></TableModal> -->
-                    <a-button type="primary" icon="import" style="marginleft: 10px">导入</a-button>
-                    <a-button type="primary" icon="export" style="marginleft: 10px">导出</a-button>
-                    
+                    <a-button type="primary" icon="import" style="marginLeft: 10px">导入</a-button>
+                    <a-button type="primary" icon="export" style="marginLeft: 10px">导出</a-button>
                     <a-table :columns="columns" :data-source="data">
                         <span slot="action" slot-scope="text, record">
                             <template v-for="(i, index) in record.action">
@@ -30,7 +29,7 @@ import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
 import TableModal from '@/components/tableOperation/modal/TableModal.vue'
 //js
 import { proMenu, loginInfo } from './js/index.js'
-const NEW_PROLIST = Object.freeze({ proMenu , loginInfo})
+const NEW_PROLIST = Object.freeze({ proMenu, loginInfo })
 
 export default {
     name: 'proList',
@@ -46,7 +45,6 @@ export default {
             searchCon: {},
             data: [],
             loginInfo: NEW_PROLIST.loginInfo.filter((item) => !item.hideInLogin),
-
         }
     },
     methods: {

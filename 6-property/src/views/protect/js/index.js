@@ -37,6 +37,12 @@ export const loginInfo = [{
     valueEnum:period
 },
 {
+    title: '请选择时间范围',
+    value:"",
+    key: 'range',
+    type:"a-range-picker"
+},
+{
     title: '任务类型',
     value:"",
     key: 'proType',
@@ -46,6 +52,10 @@ export const loginInfo = [{
 {
     title: '执行人',
     key: 'person',
+    value:""
+},{
+    title: '执行地点',
+    key: 'address',
     value:""
 },
 ]

@@ -32,10 +32,7 @@
                 <a-card :bordered="false" title="设备状况">
                     <div class="extra-wrapper" slot="extra">
                         <div class="extra-item">
-                            <a>今日</a>
-                            <a>本周</a>
-                            <a>本月</a>
-                            <a>本年</a>
+                            <a v-for="item in Object.values(period)">{{item.tableValue}}</a>
                         </div>
                         <a-range-picker :style="{ width: '256px' }" />
                     </div>
@@ -154,6 +151,7 @@ import RankList from '@/components/chart/RankList'
 import Pie from '@/components/chart/Pie'
 import ChartCard from '@/components/ChartCard'
 import AreaChartTy from '@/components/chart/AreaChartTy'
+import { period } from "@/utils/dataDictionary.js";
 // ====================================
 import ACol from 'ant-design-vue/es/grid/Col'
 import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
@@ -200,6 +198,7 @@ export default {
     },
     data() {
         return {
+            period,
             timeFix: timeFix(),
             avat: '@/assets/avat.jpg',
             rankList: [],

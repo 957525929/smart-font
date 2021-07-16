@@ -2,7 +2,6 @@
   <a-row :gutter="10">
     <a-col :md="12" :sm="24">
       <a-card :bordered="false">
-
         <!-- 按钮操作区域 -->
         <a-row style="margin-left: 14px">
           <a-button @click="handleAdd(1)" type="primary">添加部门</a-button>
@@ -28,7 +27,6 @@
               <a-dropdown :trigger="[this.dropTrigger]" @visibleChange="dropStatus">
                <span style="user-select: none">
             <a-tree
-              checkable
               multiple
               @select="onSelect"
               @check="onCheck"
