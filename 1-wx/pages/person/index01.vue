@@ -7,7 +7,7 @@
 		<!-- #endif -->
 		<view class="wrapper">
 			<view class="card">
-				<view class="contentList perMsg mainBackColor" @tap="$navTo.goTo('myInfo')">
+				<view class="contentList perMsg bg-yellow">
 					<view class="avat">
 						<image mode="aspectFit" src="/static/person/avater.png"></image>
 					</view>
@@ -72,7 +72,7 @@
 	export default {
 		data() {
 			return {
-				title: "你好，林倩",
+				title: "你好，管理员",
 				contentList: content,
 				colorIs: "#616161",
 			};
