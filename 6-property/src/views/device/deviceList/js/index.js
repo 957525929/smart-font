@@ -1,4 +1,5 @@
-import { devType ,devStatus,techSituation} from "@/utils/dataDictionary.js";
+import { devType ,devStatus,DepartTree} from "@/utils/dataDictionary.js";
+import { handleTreeToCascade } from "@/utils/util.js";
 export const devColumns = [
     {
         dataIndex: 'devId',
@@ -86,7 +87,7 @@ export const data = [
     {
         key: 0,
         devId: 1001,
-        devName: "waterPipe_1001",
+        devName: "给水设备_1001",
         devType: 2,
         devStatus: 4,
         assets: '烟草大厦',
@@ -113,7 +114,7 @@ export const data = [
     {
         key: 1,
         devId: 2001,
-        devName: "wire_2001",
+        devName: "供电设备_2001",
         devType: 1,
         devStatus: 5,
         assets: '烟草大厦',
@@ -136,12 +137,13 @@ export const data = [
             tagName:"删除",
             com:"TableDelete"
         }]
-    }, {
+    }, 
+    {
         key: 2,
         devId: 3001,
-        devName: "air_3001",
+        devName: "空调_3001",
         devType: 0,
-        devStatus: 6,
+        devStatus: 7,
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
@@ -237,8 +239,8 @@ export const loginInfo = [{
     title: '设备类型',
     value:"",
     key: 'devType',
-    type:"a-select",
-    valueEnum:devType
+    type:"a-cascader",
+    valueEnum:handleTreeToCascade(DepartTree)
 },
 {
     title: '实际状态',

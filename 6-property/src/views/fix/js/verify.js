@@ -68,7 +68,7 @@ export const data=[
         devType: 1,
         taskStatus:1,
         devStatus: 0,
-        assets: '烟草大厦',
+        address: '烟草大厦18楼',
         institution: '福建烟草公司',
         phone: '18232145698',
         fixStaff: '刘涛',

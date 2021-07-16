@@ -502,3 +502,24 @@ export function replaceAll(text, checker, replacer) {
   return text
 }
 
+/**
+ * 将ant控件Tree转为Cascade
+ * @param 需要转换的数组
+ */
+export function handleTreeToCascade(params) {
+  return params.map(item=>{
+      if(item.children){
+          return {
+              label:item.key,
+              value:item.title,
+              children:handleTreeToCascade(item.children)
+          }
+      }else{
+          return {
+              label:item.key,
+              value:item.title
+          }
+      }
+  })
+}
+
