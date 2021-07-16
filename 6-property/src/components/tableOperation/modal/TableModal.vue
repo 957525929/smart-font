@@ -26,7 +26,7 @@
                                     >{{ x.tableValue }}
                                 </a-select-option>
                             </a-select>
-                            <a-cascader v-else-if="item.type === 'a-cascader'" :options="item.valueEnum" placeholder="">
+                            <a-cascader v-else-if="item.type === 'a-cascader'" :options="item.valueEnum" placeholder="" change-on-select>
                             </a-cascader>
                             <component
                                 style="width: 100%"

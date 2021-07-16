@@ -14,7 +14,8 @@
                                 >{{ x.searchValue }}
                             </a-select-option>
                         </a-select>
-                        <component style="width: 100%" :is="item.type || 'a-input'" v-else v-decorator="[`${item.key}`]"></component>
+                        <a-cascader v-else-if="item.type === 'a-cascader'" :options="item.valueEnum" placeholder="" change-on-select v-decorator="[`${item.key}`]"/>
+                        <component style="width: 100%" :is="item.type || 'a-input'" v-decorator="[`${item.key}`]" v-else ></component>
                         <!-- :placeholder="ifshowPlace(item.type,item.title)" v-decorator="[`${item.key}`]"-->
                     </a-form-item>
                 </a-col>
