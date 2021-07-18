@@ -68,14 +68,10 @@
 		},
 		methods: {
 			cancle() {
-				uni.navigateTo({
-					url: '../../pages/index/index'
-				});
+					uni.navigateBack()
 			},
 			okconfirm() {
-				uni.navigateTo({
-					url: '../../pages/index/index'
-				});
+				uni.navigateBack()
 			},
 			showModal(e) {
 				this.modalName = e.currentTarget.dataset.target

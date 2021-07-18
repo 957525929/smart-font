@@ -81,5 +81,19 @@ export const lockdata = [{
 	roomnum: '211',
 	time: '2021年6月9日 11:22',
 	type: '已维修',
-}
+},
+{
+	name: '中国烟草总公司福建省公司机关',
+	area: 'A区域1号楼',
+	roomnum: '101',
+	time: '',
+	type: '低电量',
+},
+{
+	name: '中国烟草总公司福建省公司机关',
+	area: 'A区域1号楼',
+	roomnum: '202',
+	time: '',
+	type: '低电量',
+},
 ]
