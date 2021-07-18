@@ -11,7 +11,7 @@
         初始化
  ==================== */
 body {
-	background-color: #f1f1f1;
+	background-color: #F5F8FE;
 	font-size: 28upx;
 	color: #333333;
 	font-family: Helvetica Neue, Helvetica, sans-serif;
@@ -512,7 +512,7 @@ radio.white.checked .uni-radio-input {
 }
 
 .solid-bottom::after {
-	border-bottom: 1upx solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1upx solid rgba(242, 242, 242,0.1));
 }
 
 .solid-left::after {
@@ -908,6 +908,12 @@ button.cuIcon.lg {
 	width: 128upx;
 	height: 128upx;
 	font-size: 2.5em;
+}
+
+.cu-avatar.xxl {
+	width: 144upx;
+	height: 144upx;
+	font-size: 3em;
 }
 
 .cu-avatar .avatar-text {
@@ -2345,7 +2351,7 @@ button.cuIcon.lg {
 }
 
 .cu-form-group>text[class*="cuIcon-"] {
-	font-size: 36upx;
+	font-size: 45upx;
 	padding: 0;
 	box-sizing: border-box;
 }
@@ -3408,8 +3414,12 @@ scroll-view.cu-steps .cu-item {
 	color: #ffffff;
 }
 
+.bg-orange-shallow {
+	background-color: #FEA82F;
+	color: #ffffff;
+}
 .bg-orange {
-	background-color: #f37b1d;
+	background-color: #FF6701;
 	color: #ffffff;
 }
 
@@ -3424,7 +3434,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-green {
-	background-color: #39b54a;
+	background-color: #A6E4BE;
 	color: #ffffff;
 }
 
@@ -3434,12 +3444,12 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-blue {
-	background-color: #0081ff;
+	background-color: #B4D0F7;
 	color: #ffffff;
 }
 
 .bg-purple {
-	background-color: #6739b6;
+	background-color: #04009A;
 	color: #ffffff;
 }
 
@@ -3459,12 +3469,12 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-grey {
-	background-color: #8799a3;
+	background-color: #F5F8FE;
 	color: #ffffff;
 }
 
 .bg-gray {
-	background-color: #f0f0f0;
+	background-color: #7F7F7F;
 	color: #333333;
 }
 
@@ -3827,10 +3837,16 @@ scroll-view.cu-steps .cu-item {
 	color: #e54d42;
 }
 
+.text-orange-shallow,
+.line-orange-shallow,
+.lines-orange-shallow {
+	color: #FEA82F;
+}
+
 .text-orange,
 .line-orange,
 .lines-orange {
-	color: #f37b1d;
+	color: #FF6701;
 }
 
 .text-yellow,
@@ -3848,7 +3864,7 @@ scroll-view.cu-steps .cu-item {
 .text-green,
 .line-green,
 .lines-green {
-	color: #39b54a;
+	color: #A6E4BE;
 }
 
 .text-cyan,
@@ -3860,13 +3876,13 @@ scroll-view.cu-steps .cu-item {
 .text-blue,
 .line-blue,
 .lines-blue {
-	color: #0081ff;
+	color: #B4D0F7;
 }
 
 .text-purple,
 .line-purple,
 .lines-purple {
-	color: #6739b6;
+	color: #04009A;
 }
 
 .text-mauve,
@@ -3890,13 +3906,13 @@ scroll-view.cu-steps .cu-item {
 .text-grey,
 .line-grey,
 .lines-grey {
-	color: #8799a3;
+	color: #F5F8FE;
 }
 
 .text-gray,
 .line-gray,
 .lines-gray {
-	color: #aaaaaa;
+	color: #7F7F7F;
 }
 
 .text-black,

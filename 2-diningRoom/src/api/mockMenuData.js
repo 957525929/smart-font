@@ -203,7 +203,7 @@ export const mockMenuData = {
                 {
                   "keepAlive": false,
                   "internalOrExternal": false,
-                  "title": "食料类别管理"
+                  "title": "食料分类管理"
                 },
               "name": "material-warehousing-Category",
               "id": "21111"

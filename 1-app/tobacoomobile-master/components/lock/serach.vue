@@ -48,7 +48,7 @@
 			<view class="title">智能锁安装状态</view>
 			<picker @change="PickerChange1" :value="index1" :range="picker1">
 				<view class="picker">
-					{{index1>-1?picker1[index1]:'请选择智能安装锁状态'}}
+					{{picker1[index1]}}
 				</view>
 			</picker>
 		</view>
@@ -86,7 +86,7 @@
 				type: 0,
 				index: -1,
 				picker: ['101', '102', '103'],
-				index1: -1,
+				index1: 0,
 				index2: -1,
 				picker1: ['已安装', '未安装'],
 				picker2: ['已维修', '待维修'],
@@ -145,9 +145,7 @@
 				this.date1 = e.detail.value
 			},
 			cancle() {
-				uni.navigateTo({
-					url: '../../pages/index/index'
-				});
+				uni.navigateBack()
 			},
 			oksearch() {
 

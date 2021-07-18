@@ -4,102 +4,6 @@
 		{
 			"path": "pages/index/index",
 			"style": {}
-		},
-		{
-			"path": "pages/basics/layout",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/background",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/text",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/icon",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/button",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/design",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/tag",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/avatar",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/progress",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/shadow",
-			"style": {}
-		},
-		{
-			"path": "pages/basics/loading",
-			"style": {}
-		},
-		{
-			"path": "pages/component/bar",
-			"style": {}
-		},
-		{
-			"path": "pages/component/nav",
-			"style": {}
-		},
-		{
-			"path": "pages/component/list",
-			"style": {}
-		},
-		{
-			"path": "pages/component/card",
-			"style": {}
-		},
-		{
-			"path": "pages/component/form",
-			"style": {}
-		},
-		{
-			"path": "pages/component/timeline",
-			"style": {}
-		},
-		{
-			"path": "pages/component/chat",
-			"style": {}
-		},
-		{
-			"path": "pages/component/swiper",
-			"style": {}
-		},
-		{
-			"path": "pages/component/modal",
-			"style": {}
-		},
-		{
-			"path": "pages/component/steps",
-			"style": {}
-		}, {
-			"path": "pages/plugin/indexes",
-			"style": {}
-		}, {
-			"path": "pages/plugin/animation",
-			"style": {}
-		}, {
-			"path": "pages/plugin/drawer",
-			"style": {}
-		}, {
-			"path": "pages/plugin/verticalnav",
-			"style": {}
 		}
 	],
 	"globalStyle": {
@@ -108,20 +12,186 @@
 			"transparentTitle": "always",
 			"allowsBounceVertical": "NO"
 		},
-		"navigationBarBackgroundColor": "#0081ff",
-		"navigationBarTitleText": "ColorUi for UniApp",
+		"navigationBarBackgroundColor": "#04009A",
+		"navigationBarTitleText": "智慧烟草",
 		"navigationStyle": "custom",
-		"navigationBarTextStyle": "white"
+		"navigationBarTextStyle": "white",
+		"backgroundColor": "#f2eeef",
+		"backgroundColorTop": "#E0E0E0",
+		"backgroundColorBottom": "#E0E0E0"
 	},
-	"usingComponts": true,
-		"condition": { //模式配置，仅开发期间生效
-		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [{
-				"name": "表单", //模式名称
-				"path": "pages/component/form", //启动页面
-				"query": "" //启动参数
+	"subPackages": [{
+		"root": "pages/workplace",
+		"name": "workplace",
+		"pages": [{
+			"path": "index",
+			"style": {
+				"navigationBarTitleText": "工作台",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
 			}
-		]
+		}, {
+			"path": "fixReport/fixReport",
+			"style": {
+				"navigationBarTitleText": "故障上报",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		}, {
+			"path": "fixReport/fixReportList",
+			"style": {
+				"navigationBarTitleText": "故障上报记录",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		}, {
+			"path": "checkReport/checkReport",
+			"style": {
+				"navigationBarTitleText": "核查上报",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		}, {
+			"path": "fixTask/fixTask",
+			"style": {
+				"navigationBarTitleText": "维修任务",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		}, {
+			"path": "protectTask/protectTask",
+			"style": {
+				"navigationBarTitleText": "保养任务",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		}]
+	}, {
+		"root": "pages/person",
+		"name": "person",
+		"pages": [{
+				"path": "index",
+				"style": {
+					"navigationBarTitleText": "我的",
+					"app-plus": {
+						"titleNView": false,
+						"bounce": "none"
+					}
+				}
+			}, {
+				"path": "myInfo/myInfo",
+				"style": {
+					"navigationBarTitleText": "个人信息",
+					"app-plus": {
+						"titleNView": {
+							"titleColor": "#FFFFFF",
+							"backgroundColor": "#28A375",
+							"titleSize": "16px"
+						},
+						"bounce": "none"
+					}
+				}
+			}, {
+				"path": "help/help",
+				"style": {
+					"navigationBarTitleText": "帮助中心",
+					"app-plus": {
+						"titleNView": {
+							"titleColor": "#FFFFFF",
+							"backgroundColor": "#28A375",
+							"titleSize": "16px"
+						}
+					}
+				}
+			},
+			{
+				"path": "help/helpType",
+				"style": {
+					"navigationBarTitleText": "帮助中心",
+					"app-plus": {
+						"titleNView": {
+							"titleColor": "#FFFFFF",
+							"backgroundColor": "#28A375",
+							"titleSize": "16px"
+						},
+						"bounce": "none"
+					}
+				}
+			},
+			{
+				"path": "about/about",
+				"style": {
+					"navigationBarTitleText": "关于我们",
+					"app-plus": {
+						"titleNView": {
+							"titleColor": "#FFFFFF",
+							"backgroundColor": "#28A375",
+							"titleSize": "16px"
+						}
+					}
+				}
+			},
+			{
+				"path": "about/aboutDetail",
+				"style": {
+					"navigationBarTitleText": "关于我们",
+					"app-plus": {
+						"titleNView": {
+							"titleColor": "#FFFFFF",
+							"backgroundColor": "#28A375",
+							"titleSize": "16px"
+						}
+					}
+				}
+			},
+			{
+				"path": "about/contact",
+				"style": {
+					"navigationBarTitleText": "联系我们",
+					"app-plus": {
+						"titleNView": {
+							"titleColor": "#FFFFFF",
+							"backgroundColor": "#28A375",
+							"titleSize": "16px"
+						},
+						"bounce": "none"
+					}
+				}
+			},
+			{
+				"path": "sysSetting",
+				"style": {
+					"navigationBarTitleText": "系统设置",
+					"app-plus": {
+						"titleNView": {
+							"titleColor": "#FFFFFF",
+							"backgroundColor": "#28A375"
+						},
+						"bounce": "none"
+					}
+				}
+			}]
+	}],
+	"usingComponts": true,
+	"condition": { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": []
 	}
-
 }
