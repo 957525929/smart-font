@@ -61,18 +61,18 @@
 							}
 						]
 					},
-					{
-						title: '查询统计',
-						children: [{
-								title: '车辆使用',
-								icon: '../../static/homepage/sta1.png'
-							},
-							{
-								title: '司机工作量',
-								icon: '../../static/homepage/sta2.png'
-							}
-						]
-					}
+					// {
+					// 	title: '查询统计',
+					// 	children: [{
+					// 			title: '车辆使用',
+					// 			icon: '../../static/homepage/sta1.png'
+					// 		},
+					// 		{
+					// 			title: '司机工作量',
+					// 			icon: '../../static/homepage/sta2.png'
+					// 		}
+					// 	]
+					// }
 				]
 			}
 		},
