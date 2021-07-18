@@ -14,7 +14,7 @@
             change-on-select
             @change="areaChange"
             placeholder="请选择区域"
-          > </a-cascader>
+          ></a-cascader>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
@@ -51,9 +51,9 @@
     <div id="dataDutyTable">
       <a-table :data-source="dataDuty" :pagination="false" rowKey="index">
         <a-table-column title="序号" data-index="index" align="left" fixed="left"></a-table-column>
-        <a-table-column title="管理区域" data-index="area" align="center"></a-table-column>
         <a-table-column title="管理员" data-index="dutyName" align="center"></a-table-column>
         <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column>
+        <a-table-column title="管理区域" data-index="area" align="center"></a-table-column>
         <!-- <a-table-column title="备注信息" data-index="remark" align="center"></a-table-column> -->
         <a-table-column title="操作" align="center" fixed="right">
           <template slot-scope="record">
@@ -79,22 +79,22 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item ref="area" label="管理区域" prop="area">
-              <a-tree-select
-                v-model="formAdd.area"
-                placeholder="请选择区域"
-                style="width: 385px"
-                :tree-data="treeData"
-                tree-checkable
-                :show-checked-strategy="SHOW_PARENT"
-                search-placeholder="Please select"
-              />
-        </a-form-model-item>
-        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" >
+        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
           <a-input v-model="formAdd.dutyName" placeholder="请输入管理员"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="管理员电话" prop="dutyTel"  >
+        <a-form-model-item label="管理员电话" prop="dutyTel">
           <a-input v-model="formAdd.dutyTel" placeholder="请输入管理员电话"></a-input>
+        </a-form-model-item>
+        <a-form-model-item ref="area" label="管理区域" prop="area">
+          <a-tree-select
+            v-model="formAdd.area"
+            placeholder="请选择区域"
+            style="width: 385px"
+            :tree-data="treeData"
+            tree-checkable
+            :show-checked-strategy="SHOW_PARENT"
+            search-placeholder="Please select"
+          />
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitAdd()">创建</a-button>
@@ -115,7 +115,7 @@
         </a-form-model-item>
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
           <!-- <a-input v-model="formModify.dutyName"></a-input> -->
-         <a-select   show-search v-model="formModify.dutyName">
+          <a-select show-search v-model="formModify.dutyName">
             <a-select-option value="李霞">李霞</a-select-option>
             <a-select-option value="尤晓梅">尤晓梅</a-select-option>
             <a-select-option value="黄丽娟">黄丽娟</a-select-option>
@@ -146,25 +146,25 @@ const dataDuty = [
     index: 1,
     dutyName: '李霞',
     dutyTel: '13759655332',
-    area: '中国烟草总公司福建省公司机关.A区域.1号楼'
+    area: '中国烟草总公司福建省公司机关A区域1号楼'
   },
   {
     index: 2,
     dutyName: '王莉莉',
     dutyTel: '13759655348',
-    area: '中国烟草总公司福建省公司机关.A区域.2号楼'
+    area: '中国烟草总公司福建省公司机关A区域2号楼'
   },
   {
     index: 3,
     dutyName: '尤晓梅',
     dutyTel: '13053955537',
-    area: '中国烟草总公司福建省公司机关.B区域.1号楼'
+    area: '中国烟草总公司福建省公司机关B区域1号楼'
   },
   {
     index: 4,
     dutyName: '黄丽娟',
     dutyTel: '13659655381',
-    area: '中国烟草总公司福建省公司机关.B区域.2号楼'
+    area: '中国烟草总公司福建省公司机关B区域2号楼'
   }
 ]
 
@@ -174,7 +174,7 @@ export default {
       selectOptions: areaData,
       treeData: treeData,
       SHOW_PARENT,
-      
+
       dataDuty,
       queryParam: {
         dutyName: '',
@@ -187,7 +187,7 @@ export default {
       formAdd: {
         area: [],
         dutyName: '',
-        dutyTel: '',
+        dutyTel: ''
       },
       formModify: {},
       rules: {
@@ -218,7 +218,7 @@ export default {
   methods: {
     areaChange(value) {
       console.log(value)
-      this.formAdd.area=value
+      this.formAdd.area = value
     },
     searchQuery() {},
     searchReset() {

@@ -10,13 +10,20 @@
 					<uni-combox :candidates="cars" v-model="formData.licenseNum"></uni-combox>
 				</uni-forms-item>
 				<uni-forms-item label="进保日期" :label-width='labelWidth' name="jbDate">
-					<uni-combox :candidates="cars" v-model="formData.licenseNum"></uni-combox>
+					<picker mode="date" :value="date1">
+						<view style="margin-top: 15rpx;">{{date1}}</view>
+					</picker>
 				</uni-forms-item>
-				<uni-forms-item label="进保日期" :label-width='labelWidth' name="nextJbDate">
-					<uni-combox :candidates="cars" v-model="formData.licenseNum"></uni-combox>
+				<uni-forms-item label="下一保养日期" :label-width='labelWidth' name="nextJbDate">
+					<picker mode="date" :value="date2">
+						<view style="margin-top: 15rpx;">{{date2}}</view>
+					</picker>
 				</uni-forms-item>
 				<uni-forms-item label="保养类型" :label-width='labelWidth' name="maintainType">
 					<uni-data-picker popup-title="请选择保养类型" :localdata="maintainType"></uni-data-picker>
+				</uni-forms-item>
+				<uni-forms-item label="保养费用" name="amount" :label-width='labelWidth'>
+					<uni-easyinput :inputBorder="false" v-model="formData.amount"  />
 				</uni-forms-item>
 				<button type="primary" class="submitBtn" @click="submitForm">提交</button>
 			</uni-forms>
@@ -43,8 +50,13 @@
 			}
 		},
 		data() {
+			const currentDate = this.getDate({
+			            format: true
+			        })
 			return {
-				labelWidth: 85,
+				date1:'-',
+				date2:'-',
+				labelWidth: 95,
 				cars: [],
 				formData: {
 					licenseNum: undefined,
@@ -93,7 +105,22 @@
 				this.$refs.form.validate().then((res) => {
 					console.log('表单返回值：', res)
 				})
-			}
+			},
+			getDate(type) {
+			            const date = new Date();
+			            let year = date.getFullYear();
+			            let month = date.getMonth() + 1;
+			            let day = date.getDate();
+			
+			            if (type === 'start') {
+			                year = year - 60;
+			            } else if (type === 'end') {
+			                year = year + 2;
+			            }
+			            month = month > 9 ? month : '0' + month;
+			            day = day > 9 ? day : '0' + day;
+			            return `${year}-${month}-${day}`;
+			        }
 		}
 	}
 </script>

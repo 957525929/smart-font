@@ -22,6 +22,10 @@
 					<text class="text-grey">{{item.title}}</text>
 				</view>
 			</view>
+
+			<view class="padding flex flex-direction">
+				<button class="cu-btn bg-red margin-tb-sm lg" @tap="back">退出</button>
+			</view>
 		</view>
 	</view>
 </template>
@@ -48,6 +52,13 @@
 				contentList: content,
 				colorIs: "#616161",
 			};
+		},
+		methods:{
+			back(){
+				uni.navigateTo({
+					url: '../../pages/index/index'
+				});
+			}
 		}
 	};
 </script>
@@ -69,12 +80,14 @@
 		height: 170rpx;
 		margin: 20px;
 	}
-.avat image{
-	width: 80px; 
-	height: 80px; 
-	background-color: #eeeeee;
-	border-radius: 50%;
-}
+
+	.avat image {
+		width: 80px;
+		height: 80px;
+		background-color: #eeeeee;
+		border-radius: 50%;
+	}
+
 	.fontContent {
 		flex: 1;
 	}

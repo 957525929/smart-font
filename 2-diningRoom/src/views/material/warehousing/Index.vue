@@ -11,12 +11,12 @@
 <!--          </a-col>-->
           <a-col :xl="6" :lg="8" :md="9" :sm="24" >
             <a-form-item label="采购开始日期">
-              <j-date  v-decorator="['purchaseStartDate']" style='width: 100%'/>
+              <j-date  v-decorator="['purchaseStartDate', {initialValue:this.purchaseStartDate}]" style='width: 100%'/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="8" :md="9" :sm="24">
             <a-form-item label="采购结束日期">
-              <j-date  v-decorator="['purchaseEndDate']" style='width: 100%'/>
+              <j-date  v-decorator="['purchaseEndDate', {initialValue:this.purchaseEndDate}]" style='width: 100%'/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="5" :md="6" :sm="24">
@@ -170,6 +170,8 @@ export default {
   },
   data () {
     return {
+      purchaseStartDate:moment().subtract(3, 'months').format('YYYY-MM-DD'),
+      purchaseEndDate:moment().format('YYYY-MM-DD'),
       basicInfo:{},
       form1: this.$form.createForm(this),
       manuSelectData:[
@@ -206,10 +208,10 @@ export default {
       dataSource: [
         {
           id:'1',
-          purchaseOrderNumber: 'GZZT20210404001',
+          purchaseOrderNumber: 'GZZT20210704001',
           headline: '4月4号采购单1',
           purchasePeople: '张三',
-          purchaseDate: '2020-04-04',
+          purchaseDate: '2020-07-04',
           purchaseNum: '100',
           totalMoney: '1000.00',
           checkoutPeople: '-',
@@ -219,27 +221,27 @@ export default {
         },
         {
           id:'2',
-          purchaseOrderNumber: 'GZZT20210404002',
+          purchaseOrderNumber: 'GZZT20210704002',
           headline: '4月4号采购单2',
           purchasePeople: '李四',
-          purchaseDate: '2020-04-04',
+          purchaseDate: '2020-07-04',
           purchaseNum: '200',
           totalMoney: '2000.00',
           checkoutPeople: '张三',
-          checkoutDate: '2020-04-04',
+          checkoutDate: '2020-07-04',
           provider : '闽侯菜市场',
           checkState: 1,
         },
         {
           id:'3',
-          purchaseOrderNumber: 'GZZT20210404003',
+          purchaseOrderNumber: 'GZZT20210704003',
           headline: '4月4号采购单3',
           purchasePeople: '李五',
-          purchaseDate: '2020-04-04',
+          purchaseDate: '2020-07-04',
           purchaseNum: '200',
           totalMoney: '2000.00',
           checkoutPeople: '张三',
-          checkoutDate: '2020-04-04',
+          checkoutDate: '2020-07-04',
           provider : '闽侯菜市场',
           checkState: -1,
         },

@@ -21,8 +21,15 @@
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="菜品分类">
                 <a-select v-decorator="['category']" allowClear >
-                  <a-select-option value="客家菜">客家菜</a-select-option>
+                  <a-select-option value="川菜">川菜</a-select-option>
                   <a-select-option value="粤菜">粤菜</a-select-option>
+                  <a-select-option value="鲁菜">鲁菜</a-select-option>
+                  <a-select-option value="苏菜">苏菜</a-select-option>
+                  <a-select-option value="浙菜">浙菜</a-select-option>
+                  <a-select-option value="闽菜">闽菜</a-select-option>
+                  <a-select-option value="湘菜">湘菜</a-select-option>
+                  <a-select-option value="客家菜">客家菜</a-select-option>
+                  <a-select-option value="徽菜">徽菜</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
@@ -39,23 +46,23 @@
               </a-col>
               <a-col :xl="6" :lg="8" :md="9" :sm="24">
                 <a-form-item label="开始时间">
-                  <j-date  v-decorator="['startDate']" style='width: 100%'/>
+                  <j-date  v-decorator="['startDate',{initialValue:this.startDate}]" style='width: 100%'/>
                 </a-form-item>
               </a-col>
               <a-col :xl="6" :lg="8" :md="9" :sm="24">
                 <a-form-item label="结束时间">
-                  <j-date  v-decorator="['endDate']" style='width: 100%'/>
+                  <j-date  v-decorator="['endDate',{initialValue:this.endDate}]" style='width: 100%'/>
                 </a-form-item>
               </a-col>
-              <a-col :xl="6" :lg="8" :md="9" :sm="24">
-                <a-form-item label="是否启用">
-                  <a-select v-decorator="['isApply']" allowClear >
-                    <a-select-option value="全部">全部</a-select-option>
-                    <a-select-option value="是">是</a-select-option>
-                    <a-select-option value="否">否</a-select-option>
-                  </a-select>
-                </a-form-item>
-              </a-col>
+<!--              <a-col :xl="6" :lg="8" :md="9" :sm="24">-->
+<!--                <a-form-item label="是否启用">-->
+<!--                  <a-select v-decorator="['isApply']" allowClear >-->
+<!--                    <a-select-option value="全部">全部</a-select-option>-->
+<!--                    <a-select-option value="是">是</a-select-option>-->
+<!--                    <a-select-option value="否">否</a-select-option>-->
+<!--                  </a-select>-->
+<!--                </a-form-item>-->
+<!--              </a-col>-->
             </template>
 
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
@@ -141,9 +148,9 @@
           <a-form-model-item label="上传时间" prop="time">
             <a-date-picker  v-model="model.time" :default-value="todayTime" disabled />
           </a-form-model-item>
-          <a-form-model-item label="是否启用" prop="checkoutPeople">
-            <a-switch v-model="model.checkoutPeople" :checked='model.checkoutPeople' checked-children="是" un-checked-children="否"  />
-          </a-form-model-item>
+<!--          <a-form-model-item label="是否启用" prop="checkoutPeople">-->
+<!--            <a-switch v-model="model.checkoutPeople" :checked='model.checkoutPeople' checked-children="是" un-checked-children="否"  />-->
+<!--          </a-form-model-item>-->
           <a-form-model-item label="备注"  prop="ps">
             <a-textarea rows="5" v-model="model.ps" placeholder="请输入备注"/>
           </a-form-model-item>
@@ -167,6 +174,8 @@ export default {
   data () {
     return {
       todayTime:moment(new Date().toLocaleDateString(), 'YYYY-MM-DD'),
+      startDate:moment().subtract(3, 'months').format('YYYY-MM-DD'),
+      endDate:moment().format('YYYY-MM-DD'),
       form1: this.$form.createForm(this),
       dataSource: [
         {
@@ -175,7 +184,7 @@ export default {
           headline: '荤菜',
           purchasePeople: '客家菜',
           purchaseDate: '微辣',
-          purchaseNum: '2021-05-01',
+          purchaseNum: '2021-07-01',
           totalMoney: '暂无',
           checkoutPeople: true,
         },
@@ -234,7 +243,7 @@ export default {
           scopedSlots: { customRender: 'action'},
         }
       ],
-      toggleSearchStatus: false,
+      toggleSearchStatus: true,
       selectedRowKeys: [],
 
       title:"操作",

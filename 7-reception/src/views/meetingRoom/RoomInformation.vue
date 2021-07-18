@@ -212,34 +212,34 @@
             <a-select-option value="3">3：饮料、风扇、景观、多媒体</a-select-option>
           </a-select> -->
        <a-checkbox-group @change="onChange">
-    <a-row>
-      <a-col :span="8">
-        <a-checkbox value="茶饮">
-          茶饮
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="风扇">
-          风扇
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="空调">
-          空调
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="盆栽">
-          盆栽
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="多媒体">
-          多媒体
-        </a-checkbox>
-      </a-col>
-    </a-row>
-  </a-checkbox-group>
+        <a-row>
+          <a-col :span="8">
+            <a-checkbox value="茶水">
+              茶水
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="排气扇">
+              排气扇
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="空调">
+              空调
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="盆栽">
+              盆栽
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="多媒体">
+              多媒体
+            </a-checkbox>
+          </a-col>
+        </a-row>
+      </a-checkbox-group>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitAdd()">创建</a-button>
@@ -286,27 +286,27 @@
            <a-checkbox-group @change="onChange">
             <a-row>
               <a-col :span="8">
-                <a-checkbox value="A">
-                  茶饮
+                <a-checkbox value="茶水">
+                  茶水
                 </a-checkbox>
               </a-col>
               <a-col :span="8">
-                <a-checkbox value="B">
-                  风扇
+                <a-checkbox value="排气扇">
+                  排气扇
                 </a-checkbox>
               </a-col>
               <a-col :span="8">
-                <a-checkbox value="C">
+                <a-checkbox value="空调">
                   空调
                 </a-checkbox>
               </a-col>
               <a-col :span="8">
-                <a-checkbox value="D">
+                <a-checkbox value="盆栽">
                   盆栽
                 </a-checkbox>
               </a-col>
               <a-col :span="8">
-                <a-checkbox value="E">
+                <a-checkbox value="多媒体">
                   多媒体
                 </a-checkbox>
               </a-col>
@@ -327,39 +327,39 @@ import { areaData } from './data/area.js'
 const dataRoom = [
   {
     index: 1,
-    area:"中国烟草总公司福建省公司机关.A区域.1号楼",
+    area:"中国烟草总公司福建省公司机关A区域1号楼",
     number:"5-6",
     dutyName: "李霞",
     dutyTel: "13759655332",
     room: "会议室203",
-    condition: "茶饮、多媒体"
+    condition: "茶水、多媒体"
   },
   {
     index: 2,
-    area:"中国烟草总公司福建省公司机关.A区域.2号楼",
+    area:"中国烟草总公司福建省公司机关A区域2号楼",
     number:"6-8",
     dutyName: "王莉莉",
     dutyTel: "13759655348",
     room: "会议室204",
-    condition: "茶饮、电风扇、多媒体"
+    condition: "茶水、排气扇、多媒体"
   },
   {
   index: 3,
-    area:"中国烟草总公司福建省公司机关.B区域.1号楼",
+    area:"中国烟草总公司福建省公司机关B区域1号楼",
     number:"3-4",
     dutyName: "尤晓梅",
     dutyTel: "13053955537",
     room: "会议室205",
-    condition: "茶饮、电风扇、盆栽、多媒体"
+    condition: "茶水、排气扇、盆栽、多媒体"
   },
   {
    index: 4,
-    area:"中国烟草总公司福建省公司机关.B区域.2号楼",
+    area:"中国烟草总公司福建省公司机关B区域2号楼",
     number:"4-6",
     dutyName: "黄丽娟",
     dutyTel: "13659655381",
     room: "会议室206",
-    condition: "茶饮、盆栽、空调、多媒体"
+    condition: "茶水、盆栽、空调、多媒体"
   }
 ];
 const columns = [

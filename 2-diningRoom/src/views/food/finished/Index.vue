@@ -17,7 +17,7 @@
             </a-col>
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="餐别">
-                <a-select v-decorator="['type']" allowClear >
+                <a-select placeholder="请选择" v-decorator="['type']" allowClear >
                   <a-select-option value="早餐">早餐</a-select-option>
                   <a-select-option value="午餐">午餐</a-select-option>
                   <a-select-option value="晚餐">晚餐</a-select-option>
@@ -26,20 +26,25 @@
             </a-col>
             <template v-if="toggleSearchStatus">
               <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="批次">
+                  <a-input placeholder="请输入" v-decorator="['number']"  />
+                </a-form-item>
+              </a-col>
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
                 <a-form-item label="留样人员">
-                  <a-select v-decorator="['people']" allowClear >
+                  <a-select placeholder="请选择" v-decorator="['people']" allowClear >
                     <a-select-option value="邝木木">邝木木</a-select-option>
                   </a-select>
                 </a-form-item>
               </a-col>
               <a-col :xl="6" :lg="8" :md="9" :sm="24">
                 <a-form-item label="开始时间">
-                  <j-date  v-decorator="['startDate']" style='width: 100%'/>
+                  <j-date  v-decorator="['startDate',{initialValue:this.startDate}]" style='width: 100%'/>
                 </a-form-item>
               </a-col>
               <a-col :xl="6" :lg="8" :md="9" :sm="24">
                 <a-form-item label="结束时间">
-                  <j-date  v-decorator="['endDate']" style='width: 100%'/>
+                  <j-date  v-decorator="['endDate',{initialValue:this.endDate}]" style='width: 100%'/>
                 </a-form-item>
               </a-col>
             </template>
@@ -143,6 +148,7 @@
 <script>
 
 import JDate from '../../../components/jeecg/JDate'
+import moment from 'moment'
 export default {
   name: "Index",
   components: {
@@ -151,15 +157,17 @@ export default {
   data () {
     return {
       form1: this.$form.createForm(this),
+      startDate:moment().subtract(3, 'months').format('YYYY-MM-DD'),
+      endDate:moment().format('YYYY-MM-DD'),
       description: '采购入库',
       dataSource: [
         {
           id:'1',
-          purchaseOrderNumber: 'FZZT20210606',
+          purchaseOrderNumber: 'FZZT20210706',
           headline: '小鸡炖蘑菇',
           purchasePeople: '早餐',
           number:1,
-          purchaseDate: '2021-05-01 08:00:00',
+          purchaseDate: '2021-07-06 08:00:00',
           purchaseNum: '邝木木',
           totalMoney: '100',
           checkoutPeople: '需留样48小时',
@@ -223,7 +231,7 @@ export default {
         //   scopedSlots: { customRender: 'action'},
         // },
       ],
-      toggleSearchStatus: false,
+      toggleSearchStatus: true,
       selectedRowKeys: [],
 
       title:"操作",

@@ -21,7 +21,7 @@
 					<text class="cuIcon-repair"></text>
 				</navigator>
 				
-				<navigator hover-class="none" url="" class="nav-li bg-purple" navigateTo
+				<navigator hover-class="none" url="../index/safeindex" class="nav-li bg-purple" navigateTo
 				 :style="[{animation: 'show ' + (2*0.2+1) + 's 1'}]">
 					<view class="nav-title">门卫</view>
 					<view class="nav-name">guard</view>

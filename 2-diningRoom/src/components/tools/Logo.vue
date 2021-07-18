@@ -21,7 +21,7 @@
     props: {
       title: {
         type: String,
-        default: '烟草公司食堂管理系统',
+        default: '食堂管理系统',
         required: false
       },
       showTitle: {
