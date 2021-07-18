@@ -8,7 +8,7 @@
           <span>按预约类型筛选：</span>
         </a-col>
         <a-col>
-          <a-select :style="{width:'150px'}"  @change="handleChange" default-value="公司会议">
+          <a-select :style="{width:'150px'}" @change="handleChange" default-value="公司会议">
             <a-select-option value="公司会议">公司会议</a-select-option>
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
@@ -19,11 +19,12 @@
         </a-col>
         <a-col>
           <a-select
-          mode="tags"
+            mode="tags"
             :style="{width:'300px'}"
             showSearch
             @change="handleChange"
             placeholder="请选择酒店名称"
+            v-model="selectHotel"
           >
             <a-select-option value="华宜时尚酒店">华宜时尚酒店</a-select-option>
             <a-select-option value="香格里拉酒店">香格里拉酒店</a-select-option>
@@ -36,19 +37,21 @@
           <span>按日期筛选：</span>
         </a-col>
         <a-col>
-          <a-date-picker placeholder="请选择开始" :format="dateFormat" v-model="dateStart">
-          </a-date-picker>
+          <a-date-picker placeholder="请选择开始" :format="dateFormat" v-model="dateStart"></a-date-picker>
           <span>&nbsp;~&nbsp;</span>
-          <a-date-picker placeholder="请选择结束" :format="dateFormat" :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')">
-          </a-date-picker>
+          <a-date-picker
+            placeholder="请选择结束"
+            :format="dateFormat"
+            :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')"
+          ></a-date-picker>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
-          <a-button
+          <!-- <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
             icon="search"
             @click="searchQuery"
-          >查询</a-button>
+          >查询</a-button>-->
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
         </a-col>
       </a-row>
@@ -100,37 +103,29 @@
         <a-table-column title="会议预算" data-index="budget" align="center"></a-table-column>
       </a-table>
     </div>-->
-    <br>
-    <bar v-bind:dataSource="dataSource"  v-bind:title="title" v-bind:height="height"></bar>
+    <br />
+    <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>
   </a-card>
 </template>
 <script>
 import moment from 'moment'
 import Bar from '@/components/chart/Bar'
-const dataSta = [
+const dataSource = [
   {
-    theme: '项目会议',
-    number: '30',
-    membersNumber: '90',
-    budget: '12500'
+    x: '华宜时尚酒店',
+    y: 10
   },
   {
-    theme: '物流管理',
-    number: '4',
-    membersNumber: '12',
-    budget: '900'
+    x: '香格里拉酒店',
+    y: 3
   },
   {
-    theme: '安全管理',
-    number: '9',
-    membersNumber: '30',
-    budget: '18000'
+    x: '福州品悦酒店',
+    y: 3
   },
   {
-    theme: '年度总结',
-    number: '1',
-    membersNumber: '30',
-    budget: '21000'
+    x: '世纪金源酒店',
+    y: 7
   }
 ]
 export default {
@@ -140,31 +135,14 @@ export default {
   data() {
     return {
       dateFormat: 'YYYY年MM月DD日',
-      dataSta,
-        dateStart:undefined,
-        height:300,
-      dataSource: [
-        {
-          x: '华宜时尚酒店',
-          y: 10
-        },
-        {
-          x: '香格里拉酒店',
-          y: 3
-        },
-        {
-          x: '福州品悦酒店',
-          y: 3
-        },
-        {
-          x: '世纪金源酒店',
-          y: 7
-        },
-      ],
-      title:'酒店预约次数'
+      dateStart: undefined,
+      height: 300,
+      selectHotel: [],
+      dataSource,
+      title: '酒店预约次数'
     }
   },
-    created() {
+  created() {
     let start = moment(new Date())
       .subtract(1, 'months')
       .format('YYYY-MM-DD')
@@ -172,14 +150,30 @@ export default {
   },
   methods: {
     moment,
-    handleChange() {},
+    handleChange(value) {
+      if (value.length == 0) {
+        this.dataSource = dataSource
+      } else {
+        let hotelSelect = []
+        value.forEach(element => {
+          //console.log(element)
+          dataSource.filter(item => {
+            if (item.x.includes(element)) {
+              hotelSelect.push(item)
+            }
+          })
+        })
+        this.dataSource = hotelSelect
+      }
+    },
     searchQuery() {},
     searchReset() {
-      this.dataSta = dataSta
+      this.dataSource = dataSource
+      this.selectHotel = []
     },
-        getCurrentData() {
+    getCurrentData() {
       return new Date().toLocaleDateString()
-    },
+    }
   }
 }
 </script>

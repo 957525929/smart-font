@@ -26,7 +26,7 @@
           >查询</a-button>
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
         </a-col>
-        <a-col :span="5"></a-col>
+        <a-col :span="3"></a-col>
         <a-col>
           <a-button
             @click="addHotel()"
@@ -142,7 +142,7 @@
         </a-form-model-item>
         <!-- <a-form-model-item label="备注信息">
           <a-input v-model="formModify.remark" type="textarea" />
-        </a-form-model-item> -->
+        </a-form-model-item>-->
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitModify()">修改</a-button>
           <a-button style="margin-left: 10px;" @click="CancelModify()">取消</a-button>
@@ -322,7 +322,7 @@ export default {
       console.log(record)
       this.formModify.id = record.id
       this.formModify.hotel = record.hotel
-          this.formModify.level = record.level
+      this.formModify.level = record.level
       this.formModify.dutyName = record.dutyName
       this.formModify.dutyTel = record.dutyTel
       this.formModify.address = record.address
@@ -339,7 +339,7 @@ export default {
     CancelModify() {
       this.visibleModify = false
     },
-    handleChange(){}
+    handleChange() {}
   }
 }
 </script>

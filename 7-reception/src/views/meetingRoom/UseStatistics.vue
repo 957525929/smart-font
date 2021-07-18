@@ -13,7 +13,7 @@
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
         </a-col>
-        <a-col :span="1"></a-col>      
+        <a-col :span="1"></a-col>
         <a-col>
           <span>按日期筛选：</span>
         </a-col>
@@ -28,9 +28,8 @@
           <!-- <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date> -->
         </a-col>
       </a-row>
-      <br>
+      <br />
       <a-row type="flex" align="middle">
-
         <a-col>
           <span>按区域筛选：</span>
         </a-col>
@@ -44,12 +43,12 @@
             placeholder="请选择区域"
           />
         </a-col>
-        <a-col :span="1"></a-col>      
-         <a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
           <span>按房间号筛选：</span>
         </a-col>
         <a-col>
-       <a-input  placeholder="请输入房间号"></a-input>
+          <a-input placeholder="请输入房间号" v-model="searchValue"></a-input>
         </a-col>
         <a-col :span="2"></a-col>
         <a-col>
@@ -109,6 +108,32 @@ const dataSta = [
     budget: '21000'
   }
 ]
+const dataSource = [
+  {
+    x: '会议室203',
+    y: 10
+  },
+  {
+    x: '会议室204',
+    y: 3
+  },
+  {
+    x: '会议室205',
+    y: 3
+  },
+  {
+    x: '会议室207',
+    y: 8
+  },
+  {
+    x: '会议室208',
+    y: 17
+  },
+  {
+    x: '会议室209',
+    y: 10
+  }
+]
 export default {
   components: {
     Bar,
@@ -117,38 +142,14 @@ export default {
   data() {
     return {
       selectOptions: areaData,
-       defaultT:['0','01','011'],
+      defaultT: ['0', '01', '011'],
       dateFormat: 'YYYY年MM月DD日',
       dataSta,
       dateStart: undefined,
-      dataSource: [
-        {
-          x: '会议室203',
-          y: 10
-        },
-        {
-          x: '会议室204',
-          y: 3
-        },
-        {
-          x: '会议室205',
-          y: 3
-        },
-        {
-          x: '会议室207',
-          y: 8
-        },
-        {
-          x: '会议室208',
-          y: 17
-        },
-        {
-          x: '会议室209',
-          y: 10
-        }
-      ],
+      dataSource,
       title: '会议室预约次数',
-      height:300
+      height: 300,
+      searchValue: ''
     }
   },
   created() {
@@ -165,14 +166,22 @@ export default {
     handleChange() {},
     searchQuery() {
       // console.log(formatDate(new Date().getTime()-2*24*3600*1000,"YYYY年MM月DD日"))
-      console.log(
-        moment(new Date())
-          .subtract(1, 'months')
-          .format('YYYY-MM-DD')
-      )
+      // console.log(
+      //   moment(new Date())
+      //     .subtract(1, 'months')
+      //     .format('YYYY-MM-DD')
+      // )
+      let roomSelect = []
+      dataSource.filter(item => {
+        if (item.x.includes(this.searchValue)) {
+          roomSelect.push(item)
+        }
+      })
+      this.dataSource = roomSelect
     },
     searchReset() {
-      this.dataSta = dataSta
+      this.dataSource = dataSource
+      this.searchValue = ''
     },
     getCurrentData() {
       return new Date().toLocaleDateString()

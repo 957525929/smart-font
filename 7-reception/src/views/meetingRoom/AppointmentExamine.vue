@@ -3,12 +3,12 @@
   <a-card :bordered="false">
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
-       <a-row type="flex" align="middle">
+      <a-row type="flex" align="middle">
         <a-col>
           <span>预约类型：</span>
         </a-col>
         <a-col>
-            <a-select :style="{width:'150px'}"  @change="handleChange" placeholder="请选择预约方式">
+          <a-select :style="{width:'150px'}" @change="handleChange" placeholder="请选择预约方式">
             <a-select-option value="公司会议">公司会议</a-select-option>
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
@@ -18,7 +18,7 @@
           <span>区域：</span>
         </a-col>
         <a-col>
-              <a-cascader
+          <a-cascader
             style="width: 350px"
             :options="selectOptions"
             change-on-select
@@ -26,14 +26,14 @@
             placeholder="请选择区域"
           />
         </a-col>
-          <a-col :span="1"></a-col>
-           <a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
           <span>房间号：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入房间号" ></a-input>
+          <a-input placeholder="请输入房间号"></a-input>
         </a-col>
-         <a-col :span="1"></a-col>
+        <a-col :span="1"></a-col>
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
@@ -77,7 +77,7 @@
       </a-table>
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
-        <!-- 不通过填写原因 -->
+    <!-- 不通过填写原因 -->
     <a-modal
       v-model="visibleReason"
       title="不通过原因填写"
@@ -104,33 +104,33 @@ import moment from 'moment'
 import { areaData } from './data/area.js'
 const data = [
   {
-    id:"A1202",
+    id: 'A1202',
     index: '1',
     name: '零售项目开展会议',
     dateTime: '2021年07月18日~2021年07月20日',
-    address: '福建烟草公司机关A区域1号楼会议室203',
+    address: '中国烟草总公司福建省公司机关A区域1号楼会议室203',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     remark: '项目会议',
     number: '4',
-    numberA:"5-6",
+    numberA: '5-6',
     dutyName: '李小玲',
     dutyTel: '152690314587',
-    type:"个人",
+    type: '个人',
     audit: '0'
   },
   {
-    id:"A1203",
+    id: 'A1203',
     index: '2',
     name: '物流管理会议',
     dateTime: '2021年07月20日~2021年07月21日',
-    address: '福建烟草公司机关A区域2号楼会议室204',
+    address: '中国烟草总公司福建省公司机关A区域2号楼会议室204',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     remark: '物流管理',
     number: '4',
-    numberA:"6-8",
+    numberA: '6-8',
     dutyName: '林诺汐',
     dutyTel: '152690314587',
-    type:"公司会议",
+    type: '公司会议',
     audit: '0'
   }
 ]
@@ -138,7 +138,6 @@ const data = [
 export default {
   data() {
     return {
-      
       data,
       selectOptions: areaData,
       visibleReason: false,
@@ -148,7 +147,7 @@ export default {
         IDName: ''
       },
       dateFormat: 'YYYY年MM月DD日',
-       formReason: {
+      formReason: {
         reason: '',
         index: '',
         id: ''
@@ -164,7 +163,7 @@ export default {
       }
     }
   },
-    created() {
+  created() {
     let start = moment(new Date())
       .subtract(1, 'months')
       .format('YYYY-MM-DD')
@@ -172,13 +171,13 @@ export default {
   },
   methods: {
     moment,
-    areaChange(value){
+    areaChange(value) {
       console.log(value)
     },
     // onChange(date, dateString) {
     //   console.log(date, dateString)
     // },
-    handleChange(){},
+    handleChange() {},
     searchQuery() {
       // let IDName = this.queryParam.IDName
       // let newListData = []
@@ -220,7 +219,7 @@ export default {
       // this.queryParam.dateOne = undefined
       // this.queryParam.dateTwo = undefined
     },
-    onChange(){},
+    onChange() {},
     ignoreClick(id, index) {
       this.visibleReason = true
       this.formReason.index = index
@@ -228,10 +227,10 @@ export default {
     },
     sureClick(id, index) {
       this.data[index].audit = '已通过'
-            const data = [...this.data]
+      const data = [...this.data]
       this.data = data.filter(item => item.id !== id)
     },
-        handleCancelReason() {
+    handleCancelReason() {
       this.visibleReason = false
     },
     handleOkReason() {
