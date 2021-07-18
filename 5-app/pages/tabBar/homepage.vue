@@ -35,10 +35,10 @@
 								title: '用车申请',
 								icon: '../../static/homepage/car1.png'
 							},
-							{
-								title: '用车记录',
-								icon: '../../static/homepage/log.png'
-							},
+							// {
+							// 	title: '用车记录',
+							// 	icon: '../../static/homepage/log.png'
+							// },
 							{
 								title: '收车登记',
 								icon: '../../static/homepage/car2.png'
