@@ -22,7 +22,7 @@
 		sysSettingMenu,
 		storageMenu,
 		storageSize
-	} from "@/common/person/person.js"
+	} from "@/pages/person/common/person.js"
 	const NEW_SYSMENU = Object.freeze({
 		sysSettingMenu,
 		storageMenu,

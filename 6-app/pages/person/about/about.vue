@@ -1,7 +1,7 @@
 <template>
 	<view class="back">
 		<view class="about-head fontColorMain">
-			<image src="../../../../static/logo.jpg"></image>
+			<image src="/static/logo.jpg"></image>
 
 			<!-- #ifndef MP-WEIXIN -->
 			<text class="font34">工蜂垃圾投递</text>
@@ -22,7 +22,7 @@
 <script>
 	import {
 		aboutList
-	} from "@/common/person/person.js"
+	} from "@/pages/person/common/person.js"
 	const NEW_A_LIST = Object.freeze(aboutList)
 	export default {
 		onLoad() {

@@ -31,9 +31,9 @@
 </template>
 
 <script>
-	import help from '@/common/person/help.js';
-	import uniCollapse from '@/pages/component/person/components/person/help/uni-collapse.vue';
-	import uniCollapseItem from '@/pages/component/person/components/person/help/uni-collapse-item.vue';
+	import help from '@/pages/person/common/help.js';
+	import uniCollapse from '@/pages/person/components/uni-collapse.vue';
+	import uniCollapseItem from '@/pages/person/components/uni-collapse-item.vue';
 	const NEW_HELP = Object.freeze(help)
 	export default {
 		components: {

@@ -53,9 +53,19 @@
 				}
 			}
 		}, {
-			"path": "checkReport/checkReport",
+			"path": "checkTask/checkTask",
 			"style": {
-				"navigationBarTitleText": "核查上报",
+				"navigationBarTitleText": "核查列表",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		},{
+			"path": "checkTask/checkTaskDetail",
+			"style": {
+				"navigationBarTitleText": "核查表单",
 				"app-plus": {
 					"titleColor": "#FFFFFF",
 					"backgroundColor": "#04009A",
@@ -72,10 +82,30 @@
 					"titleSize": "16px"
 				}
 			}
-		}, {
+		},{
+			"path": "fixTask/fixTaskDetail",
+			"style": {
+				"navigationBarTitleText": "维修任务详情",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		},  {
 			"path": "protectTask/protectTask",
 			"style": {
 				"navigationBarTitleText": "保养任务",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		},  {
+			"path": "protectTask/protectTaskDetail",
+			"style": {
+				"navigationBarTitleText": "保养任务详情",
 				"app-plus": {
 					"titleColor": "#FFFFFF",
 					"backgroundColor": "#04009A",
@@ -100,25 +130,13 @@
 				"style": {
 					"navigationBarTitleText": "个人信息",
 					"app-plus": {
-						"titleNView": {
-							"titleColor": "#FFFFFF",
-							"backgroundColor": "#28A375",
-							"titleSize": "16px"
-						},
 						"bounce": "none"
 					}
 				}
 			}, {
 				"path": "help/help",
 				"style": {
-					"navigationBarTitleText": "帮助中心",
-					"app-plus": {
-						"titleNView": {
-							"titleColor": "#FFFFFF",
-							"backgroundColor": "#28A375",
-							"titleSize": "16px"
-						}
-					}
+					"navigationBarTitleText": "帮助中心"
 				}
 			},
 			{
@@ -126,11 +144,6 @@
 				"style": {
 					"navigationBarTitleText": "帮助中心",
 					"app-plus": {
-						"titleNView": {
-							"titleColor": "#FFFFFF",
-							"backgroundColor": "#28A375",
-							"titleSize": "16px"
-						},
 						"bounce": "none"
 					}
 				}
@@ -138,27 +151,13 @@
 			{
 				"path": "about/about",
 				"style": {
-					"navigationBarTitleText": "关于我们",
-					"app-plus": {
-						"titleNView": {
-							"titleColor": "#FFFFFF",
-							"backgroundColor": "#28A375",
-							"titleSize": "16px"
-						}
-					}
+					"navigationBarTitleText": "关于我们"
 				}
 			},
 			{
 				"path": "about/aboutDetail",
 				"style": {
-					"navigationBarTitleText": "关于我们",
-					"app-plus": {
-						"titleNView": {
-							"titleColor": "#FFFFFF",
-							"backgroundColor": "#28A375",
-							"titleSize": "16px"
-						}
-					}
+					"navigationBarTitleText": "关于我们"
 				}
 			},
 			{
@@ -166,11 +165,6 @@
 				"style": {
 					"navigationBarTitleText": "联系我们",
 					"app-plus": {
-						"titleNView": {
-							"titleColor": "#FFFFFF",
-							"backgroundColor": "#28A375",
-							"titleSize": "16px"
-						},
 						"bounce": "none"
 					}
 				}
@@ -180,18 +174,21 @@
 				"style": {
 					"navigationBarTitleText": "系统设置",
 					"app-plus": {
-						"titleNView": {
-							"titleColor": "#FFFFFF",
-							"backgroundColor": "#28A375"
-						},
 						"bounce": "none"
 					}
 				}
-			}]
+			}
+		]
 	}],
 	"usingComponts": true,
 	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": []
+	},
+	"preloadRule": {
+		"pages/index/index": {
+			"network": "all",
+			"packages": ["workplace","person"]
+		}
 	}
 }

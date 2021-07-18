@@ -1,10 +1,5 @@
 <template>
 	<view class="bg-grey">
-		<!-- #ifdef APP-PLUS -->
-		<!-- 状态栏占位 -->
-		<view class="top-wrapper bg-black margin-bottom">
-		</view>
-		<!-- #endif -->
 		<workplace v-if="PageCur=='workplace'"></workplace>
 		<person v-if="PageCur=='person'"></person>
 		<view class="cu-bar tabbar bg-white shadow foot">
@@ -26,7 +21,13 @@
 </template>
 
 <script>
+	import workplace from "@/pages/workplace/index.vue"
+	import person from "@/pages/person/index.vue"
 	export default {
+		components: {
+			workplace,
+			person
+		},
 		data() {
 			return {
 				PageCur: 'workplace'

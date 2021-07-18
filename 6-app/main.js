@@ -12,11 +12,11 @@ import * as MPRouter from '@/common/router/routeTo.js'
 Vue.prototype.$goPage = MPRouter.goPage
 Vue.prototype.$parseURL = MPRouter.parseURL
 //组件
-import workplace from './pages/workplace/index.vue'
-Vue.component('workplace', workplace)
+// import workplace from './pages/workplace/index.vue'
+// Vue.component('workplace', workplace)
 
-import person from './pages/person/index.vue'
-Vue.component('person', person)
+// import person from './pages/person/index.vue'
+// Vue.component('person', person)
 
 import cuCustom from './colorui/components/cu-custom.vue'
 Vue.component('cu-custom', cuCustom)

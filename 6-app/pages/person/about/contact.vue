@@ -14,7 +14,7 @@
 
 <script>
 	// import uniIcons from '../../../../components/public/uni-icons/uni-icons';
-	import {contact } from "../../../../common/person/person.js";
+	import {contact } from "@/pages/person/common/person.js";
 	const NEW_CONTACT = Object.freeze({contact})
 	import {
 		judgeNull
@@ -28,9 +28,9 @@
 		onLoad() {
 			let self = this;
 			this.contact.map(item => {
-				this.personApi['getContact']().then((res) => {
-					item.content = judgeNull(res) ? res : "暂无";
-				})
+				// this.personApi['getContact']().then((res) => {
+				// 	item.content = judgeNull(res) ? res : "暂无";
+				// })
 				return item
 			})
 		},

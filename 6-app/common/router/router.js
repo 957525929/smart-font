@@ -17,17 +17,29 @@ const router = [{
 		name: "workplace",
 		path: baseWorkplace+"/index",
 	}, {
-		name: "checkReport",
-		path: baseWorkplace+"/checkReport/checkReport",
-	}, {
+		name: "checkTask",
+		path: baseWorkplace+"/checkTask/checkTask",
+	},{
+		name: "checkTaskDetail",
+		path: baseWorkplace+"/checkTask/checkTaskDetail",
+	},  {
 		name: "fixReport",
 		path: baseWorkplace+"/fixReport/fixReport",
 	}, {
+		name: "fixReportList",
+		path: baseWorkplace+"/fixReport/fixReportList",
+	}, {
 		name: "fixTask",
 		path: baseWorkplace+"/fixTask/fixTask"
-	}, {
+	},{
+		name: "fixTaskDetail",
+		path: baseWorkplace+"/fixTask/fixTaskDetail"
+	},  {
 		name: "protectTask",
 		path: baseWorkplace+"/protectTask/protectTask"
+	},{
+		name: "protectTaskDetail",
+		path: baseWorkplace+"/protectTask/protectTaskDetail"
 	},
 	// 个人中心
 	{

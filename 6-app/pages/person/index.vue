@@ -29,7 +29,7 @@
 	const content = [{
 		imgUrl: 'form',
 		title: '个人资料',
-		url: 'info'
+		url: 'myInfo'
 	}, {
 		imgUrl: 'iconfont iconyijianfankui',
 		title: '关于我们',

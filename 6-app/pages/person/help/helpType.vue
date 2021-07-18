@@ -16,8 +16,8 @@
 </template>
 
 <script>
-	import uniCollapse from '@/pages/component/person/components/person/help/uni-collapse.vue';
-	import uniCollapseItem from '@/pages/component/person/components/person/help/uni-collapse-item.vue';
+	import uniCollapse from '@/pages/person/components/uni-collapse.vue';
+	import uniCollapseItem from '@/pages/person/components/uni-collapse-item.vue';
 	export default {
 		onLoad(option) {
 			let Id = JSON.parse(option.typeId)

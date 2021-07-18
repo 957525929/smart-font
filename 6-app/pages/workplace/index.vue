@@ -23,13 +23,13 @@
 						cuIcon: 'edit',
 						route:'fixReport'
 					},{
-						title: '核查上报',
+						title: '维养核查',
 						color: 'orange-shallow',
 						cuIcon: 'searchlist',
-						route:'checkReport'
+						route:'checkTask'
 					},
 					{
-						title: '评估上报',
+						title: '业务评估',
 						color: 'green',
 						cuIcon: 'medalfill',
 						route:'evaluationReport'

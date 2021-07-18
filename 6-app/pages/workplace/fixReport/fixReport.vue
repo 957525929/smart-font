@@ -1,5 +1,12 @@
 <template>
 	<view class="">
+		<cu-custom bgColor="bg-purple" :isBack="true">
+			<block slot="backText">返回</block>
+			<block slot="content">故障上报</block>
+			<view class="action" slot="right" @tap="$goPage('fixReportList')">
+				<text class="cuIcon-list"></text>
+			</view>
+		</cu-custom>
 		<form class="cu-list menu sm-border card-menu margin-top" @submit="formSubmit" @reset="formReset">
 			<view class="cu-form-group">
 				<view class="title">故障地点</view>

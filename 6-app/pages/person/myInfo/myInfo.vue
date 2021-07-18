@@ -12,32 +12,11 @@
 				<text class="fontColorGrey">{{item.content}}</text>
 			</listItem>
 		</view>
-		
 	</view>
-	<!-- #ifndef MP-WEIXIN -->
-	<component :is="loadItem" @changeFace="getFaceMsg" :btn_text="btn_text" :tips_text="tips_text" :image_url="image_url" v-else :class="loadItem==='face'?'faceDiv':'back fontColor secBack font30 fontColorGrey'"></component>
-
-	<!-- #endif -->
-	<!-- #ifdef MP-WEIXIN -->
-	<view class="back" v-else >
-		<infoAddress v-if="loadItem==='infoAddress'"></infoAddress>
-		<infoIDCard v-else-if="loadItem==='infoIDCard'"></infoIDCard>
-	</view>	
-	<!-- #endif -->
 </template>
 
 <script>
-	import edit from "@/pages/component/person/components/person/myinfo/edit.vue";
-	import Avatar from "@/components/person/Avatar.vue"
-	//xiangqing 
-	import infoAddress from '@/pages/component/person/components/person/myinfo/infoAddress.vue';
-	// #ifdef APP-PLUS
-	import face from '@/pages/component/person/components/person/face.vue';
-	// #endif
-	
-	import infoIDCard from '@/pages/component/person/components/person/myinfo/infoIDCard.vue'
-	
-	// import person from "@/common/person/myInfo.js";
+	import edit from "@/pages/person/components/edit.vue";
 	import { judgeNull } from '@/common/util.js'
 	// const NEW_PERINFO = Object.freeze(person)
 	const perValue = uni.getStorageSync("perInfo")
@@ -60,13 +39,7 @@
 			}
 		},
 		components: {
-			Avatar,
-			edit,
-				infoAddress,
-				// #ifdef APP-PLUS
-				face,
-				// #endif			    
-				infoIDCard
+			edit
 		},
 		watch: {
 			showPage(newValue, oldValue) {

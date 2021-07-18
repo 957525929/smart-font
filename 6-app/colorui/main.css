@@ -512,7 +512,7 @@ radio.white.checked .uni-radio-input {
 }
 
 .solid-bottom::after {
-	border-bottom: 1upx solid rgba(242, 242, 242,0.1));
+	border-bottom: 1upx solid rgba(231, 231, 231, 0.1));
 }
 
 .solid-left::after {
