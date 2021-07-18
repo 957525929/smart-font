@@ -350,13 +350,20 @@
           :actionButton="true"
         >
           <template v-slot:materialName="props">
+<!--            <a-cascader-->
+<!--              :options="options"-->
+<!--              :show-search='true'-->
+<!--              placeholder='请选择'-->
+<!--              style='width: 100%'-->
+<!--              @change="onChangeCascader"-->
+<!--              @popupVisibleChange='popupVisibleChange(props)'-->
+<!--            />-->
             <a-cascader
               :options="options"
               :show-search='true'
               placeholder='请选择'
               style='width: 100%'
-              @change="onChangeCascader"
-              @popupVisibleChange='popupVisibleChange(props)'
+              @change="onChangeCascader1($event, props)"
             />
           </template>
         </j-editable-table>
@@ -375,14 +382,22 @@
           :actionButton="true"
         >
           <template v-slot:materialName="props">
+<!--            <a-cascader-->
+<!--              :default-value="props.text.split('/')"-->
+<!--              :options="options"-->
+<!--              :show-search='true'-->
+<!--              placeholder='请选择'-->
+<!--              style='width: 100%'-->
+<!--              @change="onChangeCascader"-->
+<!--              @popupVisibleChange='popupVisibleChange(props)'-->
+<!--            />-->
             <a-cascader
               :default-value="props.text.split('/')"
               :options="options"
               :show-search='true'
               placeholder='请选择'
               style='width: 100%'
-              @change="onChangeCascader"
-              @popupVisibleChange='popupVisibleChange(props)'
+              @change="onChangeCascader1($event, props)"
             />
           </template>
         </j-editable-table>
@@ -764,6 +779,32 @@ export default {
                 },
               ],
             },
+            {
+              value: '禽蛋类',//蛋壳干净，无破损，有《检验检测中心检验报告》。
+              label: '禽蛋类',
+              children: [
+                {
+                  value: '鸡蛋',
+                  label: '鸡蛋',
+                },
+                {
+                  value: '鸭蛋',
+                  label: '鸭蛋',
+                },
+                {
+                  value: '鹅蛋',
+                  label: '鹅蛋',
+                },
+                {
+                  value: '鸽子蛋',
+                  label: '鸽子蛋',
+                },
+                {
+                  value: '鹌鹑蛋',
+                  label: '鹌鹑蛋',
+                },
+              ],
+            },
           ],
         },
         {
@@ -933,10 +974,6 @@ export default {
                   label: '挂面',
                 },
                 {
-                  value: '龙须面',
-                  label: '龙须面',
-                },
-                {
                   value: '米粉',
                   label: '米粉',
                 },
@@ -947,10 +984,6 @@ export default {
                 {
                   value: '豆奶',
                   label: '豆奶',
-                },
-                {
-                  value: '包子',
-                  label: '包子',
                 },
                 {
                   value: '面包',
@@ -971,6 +1004,546 @@ export default {
                 {
                   value: '花生酱',
                   label: '花生酱',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: '海鲜类',
+          label: '海鲜类',//无伤残、无畸形、无病害、新鲜无变质。
+          children: [
+            {
+              value: '鱼类',
+              label: '鱼类',
+              children: [
+                {
+                  value: '大黄鱼',
+                  label: '大黄鱼',
+                },
+                {
+                  value: '小嘴鱼',
+                  label: '小嘴鱼',
+                },
+                {
+                  value: '多宝鱼',
+                  label: '多宝鱼',
+                },
+                {
+                  value: '海黑鱼',
+                  label: '海黑鱼',
+                },
+                {
+                  value: '先生鱼',
+                  label: '先生鱼',
+                },
+                {
+                  value: '海鳝鱼',
+                  label: '海鳝鱼',
+                },
+                {
+                  value: '海鲶鱼',
+                  label: '海鲶鱼',
+                },
+                {
+                  value: '沙鱼',
+                  label: '沙鱼',
+                },
+                {
+                  value: '八爪鱼',
+                  label: '八爪鱼',
+                },
+                {
+                  value: '沙丁鱼',
+                  label: '沙丁鱼',
+                },
+                {
+                  value: '胖头鱼',
+                  label: '胖头鱼',
+                },
+                {
+                  value: '三文鱼',
+                  label: '三文鱼',
+                },
+                {
+                  value: '金枪鱼',
+                  label: '金枪鱼',
+                },
+              ],
+            },
+            {
+              value: '贝类',
+              label: '贝类',
+              children: [
+                {
+                  value: '柽子王',
+                  label: '柽子王',
+                },
+                {
+                  value: '大海螺',
+                  label: '大海螺',
+                },
+                {
+                  value: '小海鲜',
+                  label: '小海鲜',
+                },
+                {
+                  value: '蝴蝶贝',
+                  label: '蝴蝶贝',
+                },
+                {
+                  value: '海蛎壳',
+                  label: '海蛎壳',
+                },
+                {
+                  value: '象拔蚌',
+                  label: '象拔蚌',
+                },
+                {
+                  value: '花螺',
+                  label: '花螺',
+                },
+                {
+                  value: '北极贝',
+                  label: '北极贝',
+                },
+                {
+                  value: '龙眼贝',
+                  label: '龙眼贝',
+                },
+                {
+                  value: '麻蚬子',
+                  label: '麻蚬子',
+                },
+              ],
+            },
+            {
+              value: '虾类',
+              label: '虾类',
+              children: [
+                {
+                  value: '龙虾',
+                  label: '龙虾',
+                },
+                {
+                  value: '基围虾',
+                  label: '基围虾',
+                },
+                {
+                  value: '皮皮虾',
+                  label: '皮皮虾',
+                },
+                {
+                  value: '青虾',
+                  label: '青虾',
+                },
+                {
+                  value: '大海虾',
+                  label: '大海虾',
+                },
+                {
+                  value: '小河虾',
+                  label: '小河虾',
+                },
+                {
+                  value: '小红虾',
+                  label: '小红虾',
+                },
+              ],
+            },
+            {
+              value: '海藻类',
+              label: '海藻类',
+              children: [
+                {
+                  value: '发菜',
+                  label: '发菜',
+                },
+                {
+                  value: '紫菜',
+                  label: '紫菜',
+                },
+                {
+                  value: '海带',
+                  label: '海带',
+                },
+                {
+                  value: '海白菜',
+                  label: '海白菜',
+                },
+                {
+                  value: '裙带菜',
+                  label: '裙带菜',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: '水果类',
+          label: '水果类',//果形端正、大小均匀、色泽正常、无腐烂、无异味、干净清洁，无药物残留。
+          children: [
+            {
+              value: '瓜类',
+              label: '瓜类',
+              children: [
+                {
+                  value: '西瓜',
+                  label: '西瓜',
+                },
+                {
+                  value: '哈密瓜',
+                  label: '哈密瓜',
+                },
+                {
+                  value: '香瓜',
+                  label: '香瓜',
+                },
+                {
+                  value: '木瓜',
+                  label: '木瓜',
+                },
+              ],
+            },
+            {
+              value: '蕉类',
+              label: '蕉类',
+              children: [
+                {
+                  value: '香蕉',
+                  label: '香蕉',
+                },
+                {
+                  value: '芭蕉',
+                  label: '芭蕉',
+                },
+                {
+                  value: '大蕉',
+                  label: '大蕉',
+                },
+                {
+                  value: '红香蕉',
+                  label: '红香蕉',
+                },
+                {
+                  value: '皇帝蕉',
+                  label: '皇帝蕉',
+                },
+              ],
+            },
+            {
+              value: '桃类',
+              label: '桃类',
+              children: [
+                {
+                  value: '猕猴桃',
+                  label: '猕猴桃',
+                },
+                {
+                  value: '水蜜桃',
+                  label: '水蜜桃',
+                },
+                {
+                  value: '黄桃',
+                  label: '黄桃',
+                },
+                {
+                  value: '杨桃',
+                  label: '杨桃',
+                },
+                {
+                  value: '油桃',
+                  label: '油桃',
+                },
+              ],
+            },
+            {
+              value: '果类',
+              label: '果类',
+              children: [
+                {
+                  value: '苹果',
+                  label: '苹果',
+                },
+                {
+                  value: '无花果',
+                  label: '无花果',
+                },
+                {
+                  value: '芒果',
+                  label: '芒果',
+                },
+                {
+                  value: '蔷薇果',
+                  label: '蔷薇果',
+                },
+              ],
+            },
+            {
+              value: '葡萄类',
+              label: '葡萄类',
+              children: [
+                {
+                  value: '葡萄',
+                  label: '葡萄',
+                },
+                {
+                  value: '提子',
+                  label: '提子',
+                },
+                {
+                  value: '醋栗',
+                  label: '醋栗',
+                },
+              ],
+            },
+            {
+              value: '柑类',
+              label: '柑类',
+              children: [
+                {
+                  value: '橘子',
+                  label: '橘子',
+                },
+                {
+                  value: '柚子',
+                  label: '柚子',
+                },
+                {
+                  value: '橙子',
+                  label: '橙子',
+                },
+                {
+                  value: '砂甜桔',
+                  label: '砂甜桔',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: '面食类',
+          label: '面食类',//形态完整，美观，无霉点，无使用色素及非食用添加剂，口味适中。
+          children: [
+            {
+              value: '馒头',
+              label: '馒头',
+              children: [
+                {
+                  value: '牛奶馒头',
+                  label: '牛奶馒头',
+                },
+                {
+                  value: '戗面馒头',
+                  label: '戗面馒头',
+                },
+                {
+                  value: '白面馒头',
+                  label: '白面馒头',
+                },
+                {
+                  value: '杂粮馒头',
+                  label: '杂粮馒头',
+                },
+              ],
+            },
+            {
+              value: '花卷',
+              label: '花卷',
+              children: [
+                {
+                  value: '椒盐花卷',
+                  label: '椒盐花卷',
+                },
+                {
+                  value: '麻酱花卷',
+                  label: '麻酱花卷',
+                },
+                {
+                  value: '葱油花卷',
+                  label: '葱油花卷',
+                },
+              ],
+            },
+            {
+              value: '面条',
+              label: '面条',
+              children: [
+                {
+                  value: '刀削面',
+                  label: '刀削面',
+                },
+                {
+                  value: '焖面',
+                  label: '焖面',
+                },
+                {
+                  value: '油泼面',
+                  label: '油泼面',
+                },
+                {
+                  value: '饸饹',
+                  label: '饸饹',
+                },
+                {
+                  value: '剔尖',
+                  label: '剔尖',
+                },
+                {
+                  value: '炸酱面',
+                  label: '炸酱面',
+                },
+                {
+                  value: '龙须面',
+                  label: '龙须面',
+                },
+                {
+                  value: '清汤牛肉面',
+                  label: '清汤牛肉面',
+                },
+              ],
+            },
+            {
+              value: '饺子',
+              label: '饺子',
+              children: [
+                {
+                  value: '蒸饺',
+                  label: '蒸饺',
+                },
+                {
+                  value: '煎饺',
+                  label: '煎饺',
+                },
+                {
+                  value: '汤饺',
+                  label: '汤饺',
+                },
+                {
+                  value: '锅贴饺子',
+                  label: '锅贴饺子',
+                },
+                {
+                  value: '炸饺子',
+                  label: '炸饺子',
+                },
+                {
+                  value: '生饺子',
+                  label: '生饺子',
+                },
+              ],
+            },
+            {
+              value: '包子',
+              label: '包子',
+              children: [
+                {
+                  value: '灌汤包子',
+                  label: '灌汤包子',
+                },
+                {
+                  value: '蒸包子',
+                  label: '蒸包子',
+                },
+                {
+                  value: '烤包子',
+                  label: '烤包子',
+                },
+                {
+                  value: '叉烧包',
+                  label: '叉烧包',
+                },
+                {
+                  value: '糖三角',
+                  label: '糖三角',
+                },
+                {
+                  value: '水煎包',
+                  label: '水煎包',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: '酒水类',
+          label: '酒水类',//货真价实，无假货，无过期产品。
+          children: [
+            {
+              value: '蒸馏酒',
+              label: '蒸馏酒',
+              children: [
+                {
+                  value: '白酒',
+                  label: '白酒',
+                },
+                {
+                  value: '白兰地',
+                  label: '白兰地',
+                },
+                {
+                  value: '威士忌',
+                  label: '威士忌',
+                },
+                {
+                  value: '伏特加',
+                  label: '伏特加',
+                },
+                {
+                  value: '兰姆酒',
+                  label: '兰姆酒',
+                },
+                {
+                  value: '阿拉克酒',
+                  label: '阿拉克酒',
+                },
+              ],
+            },
+            {
+              value: '发酵酒',
+              label: '发酵酒',
+              children: [
+                {
+                  value: '黄酒',
+                  label: '黄酒',
+                },
+                {
+                  value: '啤酒',
+                  label: '啤酒',
+                },
+                {
+                  value: '葡萄酒',
+                  label: '葡萄酒',
+                },
+                {
+                  value: '果子酒',
+                  label: '果子酒',
+                },
+              ],
+            },
+            {
+              value: '配制酒',
+              label: '配制酒',
+              children: [
+                {
+                  value: '露酒',
+                  label: '露酒',
+                },
+                {
+                  value: '香槟酒',
+                  label: '香槟酒',
+                },
+                {
+                  value: '汽酒',
+                  label: '汽酒',
+                },
+                {
+                  value: '药酒',
+                  label: '药酒',
+                },
+                {
+                  value: '滋补酒',
+                  label: '滋补酒',
                 },
               ],
             },
@@ -1105,6 +1678,19 @@ export default {
           'materialName': this.tempCascaderValue
         }
       }])
+    },
+    onChangeCascader1(value, props) {
+      console.log(value)
+      console.log(props)
+      let { rowId, target } = props
+      target.setValues([
+        {
+          rowKey: rowId,
+          values: {
+            'materialName': value[0]+'/'+value[1]+'/'+value[2]
+          }
+        }
+      ])
     },
     handleCancel() {
       this.$emit('handleCancel',false)
