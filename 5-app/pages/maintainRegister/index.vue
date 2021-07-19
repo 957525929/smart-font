@@ -4,7 +4,7 @@
 			<block slot="backText" @tap="back">返回</block>
 			<block slot="content">保养登记</block>
 		</cu-custom>
-	<!-- 	<view class="formArea backColor">
+		<!-- 	<view class="formArea backColor">
 			<uni-forms :modelValue="formData" ref="form" border>
 				<uni-forms-item label="车辆" :label-width='labelWidth' name="licenseNum">
 					<uni-combox :candidates="cars" v-model="formData.licenseNum"></uni-combox>
@@ -120,14 +120,14 @@
 		},
 		data() {
 			const currentDate = this.getDate({
-			            format: true
-			        })
+				format: true
+			})
 			return {
-				maintainTypeIndex:-1,
-				date1:currentDate,
-				date2:currentDate,
+				maintainTypeIndex: -1,
+				date1: currentDate,
+				date2: currentDate,
 				cars: [],
-				maintainType:['日常例行保养','一级保养','二级保养','磨合期保养','季节性保养','美容护理'],
+				maintainType: ['日常例行保养', '一级保养', '二级保养', '磨合期保养', '季节性保养', '美容护理'],
 				imgList: [],
 			}
 		},
@@ -136,13 +136,13 @@
 				uni.navigateBack()
 			},
 			submitForm(form) {},
-			PickerChange(e){
+			PickerChange(e) {
 				this.maintainTypeIndex = e.detail.value
 			},
-			DateChange1(){
+			DateChange1(e) {
 				this.date1 = e.detail.value
 			},
-			DateChange2(){
+			DateChange2(e) {
 				this.date2 = e.detail.value
 			},
 			ChooseImage() {
@@ -160,20 +160,20 @@
 				});
 			},
 			getDate(type) {
-			            const date = new Date();
-			            let year = date.getFullYear();
-			            let month = date.getMonth() + 1;
-			            let day = date.getDate();
-			
-			            if (type === 'start') {
-			                year = year - 60;
-			            } else if (type === 'end') {
-			                year = year + 2;
-			            }
-			            month = month > 9 ? month : '0' + month;
-			            day = day > 9 ? day : '0' + day;
-			            return `${year}-${month}-${day}`;
-			        }
+				const date = new Date();
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1;
+				let day = date.getDate();
+
+				if (type === 'start') {
+					year = year - 60;
+				} else if (type === 'end') {
+					year = year + 2;
+				}
+				month = month > 9 ? month : '0' + month;
+				day = day > 9 ? day : '0' + day;
+				return `${year}-${month}-${day}`;
+			}
 		}
 	}
 </script>
@@ -183,15 +183,17 @@
 		padding-left: 25rpx;
 		padding-right: 25rpx;
 	}
-	.imgPrt{
+
+	.imgPrt {
 		margin-top: 20rpx;
-		padding:40rpx 0 80rpx 25rpx
+		padding: 40rpx 0 80rpx 25rpx
 	}
-	.submitBtn{
+
+	.submitBtn {
 		position: fixed;
 		width: 95%;
-		left:auto;
-		right:auto;
-		bottom:200rpx;
+		left: auto;
+		right: auto;
+		bottom: 200rpx;
 	}
 </style>

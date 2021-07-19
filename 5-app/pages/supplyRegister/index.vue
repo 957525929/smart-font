@@ -43,6 +43,14 @@
 				</picker>
 			</view>
 			<view class="cu-form-group">
+				<view class="title">加油时间</view>
+				<picker mode="date" :value="date" @change="DateChange">
+					<view class="picker">
+						{{date}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
 				<view class="title">加油站</view>
 				<input></input>
 			</view>
@@ -96,7 +104,11 @@
 			}
 		},
 		data() {
+			const currentDate = this.getDate({
+				format: true
+			})
 			return {
+				date: currentDate,
 				oilTypeIndex: -1,
 				cars: [],
 				oilTypes: ['85#汽油', '90#汽油', '92#汽油', '93#汽油', '95#汽油', '97#汽油', '98#汽油', '-50#柴油', '-35#柴油', '-20#柴油',
@@ -113,6 +125,9 @@
 			PickerChange(e) {
 				this.oilTypeIndex = e.detail.value
 			},
+			DateChange(e) {
+				this.date = e.detail.value
+			},
 			ChooseImage() {
 				uni.chooseImage({
 					count: 4, //默认9
@@ -126,7 +141,23 @@
 						}
 					}
 				});
+			},
+			getDate(type) {
+				const date = new Date();
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1;
+				let day = date.getDate();
+
+				if (type === 'start') {
+					year = year - 60;
+				} else if (type === 'end') {
+					year = year + 2;
+				}
+				month = month > 9 ? month : '0' + month;
+				day = day > 9 ? day : '0' + day;
+				return `${year}-${month}-${day}`;
 			}
+
 		}
 	}
 </script>
