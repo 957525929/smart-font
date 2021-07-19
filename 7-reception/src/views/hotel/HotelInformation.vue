@@ -75,11 +75,11 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item ref="hotel" label="协议酒店名称" prop="hotel" placeholder="请输入协议酒店名称">
-          <a-input v-model="formAdd.hotel"></a-input>
+        <a-form-model-item ref="hotel" label="协议酒店名称" prop="hotel" >
+          <a-input v-model="formAdd.hotel" placeholder="请输入协议酒店名称"></a-input>
         </a-form-model-item>
-        <a-form-model-item ref="id" label="协议编号" prop="id" placeholder="请输入协议编号">
-          <a-input v-model="formAdd.id"></a-input>
+        <a-form-model-item ref="id" label="协议编号" prop="id" >
+          <a-input v-model="formAdd.id" placeholder="请输入协议编号"></a-input>
         </a-form-model-item>
         <a-form-model-item ref="level" label="星级" prop="level">
           <a-select v-model="formAdd.level" @change="handleChange">
@@ -90,14 +90,14 @@
             <a-select-option value="五">五</a-select-option>
           </a-select>
         </a-form-model-item>
-        <a-form-model-item ref="dutyName" label="联系人" prop="dutyName" placeholder="请输入联系人">
-          <a-input v-model="formAdd.dutyName"></a-input>
+        <a-form-model-item ref="dutyName" label="联系人" prop="dutyName" >
+          <a-input v-model="formAdd.dutyName" placeholder="请输入联系人"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="联系电话" prop="dutyTel" placeholder="请输入联系电话">
-          <a-input v-model="formAdd.dutyTel"></a-input>
+        <a-form-model-item label="联系电话" prop="dutyTel" >
+          <a-input v-model="formAdd.dutyTel" placeholder="请输入联系电话"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="位置" prop="address" placeholder="请输入位置">
-          <a-input v-model="formAdd.address"></a-input>
+        <a-form-model-item label="位置" prop="address" >
+          <a-input v-model="formAdd.address" placeholder="请输入位置"></a-input>
         </a-form-model-item>
         <a-form-model-item label="备注信息">
           <a-input v-model="formAdd.remark" type="textarea" />

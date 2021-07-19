@@ -331,8 +331,8 @@ export default {
       formEat: {
         dateStart: undefined,
         dateEnd: undefined,
-        type: '',
-        way: ''
+        type:  undefined,
+        way:  undefined,
       },
       dataEat: [],
       rulesEat: {
