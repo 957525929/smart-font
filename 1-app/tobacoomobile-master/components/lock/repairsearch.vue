@@ -1,7 +1,16 @@
 <template>
 	<view>
+		
+		<view class="cu-form-group">
+			<view class="title">智能锁维修状态</view>
+			<picker @change="PickerChange1" :value="index1" :range="picker1">
+				<view class="picker">
+					{{picker1[index1]}}
+				</view>
+			</picker>
+		</view>
 
-		<view class="cu-bar bg-white">
+		<view class="cu-bar bg-white margin-top">
 			<view class="action">选择位置</view>
 		</view>
 		<view class="cu-form-group">
@@ -21,34 +30,38 @@
 			</picker>
 		</view>
 
-		<view class="cu-form-group  margin-top">
-			<view class="title">智能锁状态</view>
-			<picker @change="PickerChange1" :value="index1" :range="picker1">
+		<view class="cu-bar bg-white margin-top">
+			<view v-if="this.index1 == 1" class="action">选择已维修完成时间段</view>
+			<view v-if="this.index1 == 0" class="action">选择待维修上报时间段</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">请选择开始时间</view>
+			<picker mode="date" :value="date" start="2018-01-01" end="2023-01-01" @change="DateChange">
 				<view class="picker">
-					{{picker1[index1]}}
+					{{date}}
 				</view>
 			</picker>
 		</view>
 		<view class="cu-form-group">
+			<view class="title">请选择结束时间</view>
+			<picker mode="date" :value="date1" start="2018-01-01" end="2023-01-01" @change="DateChange1">
+				<view class="picker">
+					{{date1}}
+				</view>
+			</picker>
+		</view>
+		
+		<view v-if="type==3" class="cu-form-group  margin-top">
 			<view class="title">锁编号</view>
 			<input placeholder="请输入锁编号" name="input"></input>
 		</view>
-		
-		<view class="cu-form-group margin-top">
-			<view class="title">部门</view>
+		<view v-if="type==3" class="cu-form-group">
+			<view class="title">智能锁维修状态</view>
 			<picker @change="PickerChange2" :value="index2" :range="picker2">
 				<view class="picker">
-					{{index2>-1?picker2[index2]:'请选择部门'}}
+					{{index2>-1?picker2[index2]:'请选择智能锁维修状态'}}
 				</view>
 			</picker>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">工号</view>
-			<input placeholder="请输入工号" name="input"></input>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">姓名</view>
-			<input placeholder="请输入姓名" name="input"></input>
 		</view>
 
 	</view>
@@ -56,6 +69,17 @@
 
 <script>
 	export default {
+		created: function() {
+			let aData = new Date();
+			this.date =
+				aData.getFullYear() + "-" +
+				(aData.getMonth() + 1) + "-" +
+				(aData.getDate() - 3)
+			this.date1 =
+				aData.getFullYear() + "-" +
+				(aData.getMonth() + 1) + "-" +
+				(aData.getDate())
+		},
 		onLoad(option) {
 			this.type = option.type
 			console.log(this.type)
@@ -65,10 +89,8 @@
 				type: 0,
 				index: -1,
 				picker: ['101', '102', '103'],
-				index1: 1,
-				index2: -1,
-				picker1: ['不限', '低电量', '开锁', '关锁'],
-				picker2: ['烟叶管理处',  '安全管理处', '物流管理处', '信息中心'],
+				index1: 0,
+				picker1: ['待维修', '已维修'],
 				multiArray: [
 					['中国烟草总公司福建省公司机关'],
 					['A区域', 'B区域'],
@@ -99,6 +121,8 @@
 					]
 				],
 				multiIndex: [0, 0, 0],
+				date: '2021-06-25',
+				date1: '2021-06-27',
 			}
 		},
 		methods: {
@@ -107,14 +131,18 @@
 			},
 			PickerChange1(e) {
 				this.index1 = e.detail.value
-			},
-			PickerChange2(e) {
-				this.index1 = e.detail.value
+				this.$emit('func',this.index1)
 			},
 			MultiChange(e) {
 				this.multiIndex = e.detail.value
 			},
 			MultiColumnChange(e) {},
+			DateChange(e) {
+				this.date = e.detail.value
+			},
+			DateChange1(e) {
+				this.date1 = e.detail.value
+			},
 			cancle() {
 				uni.navigateBack()
 			},

@@ -1,31 +1,34 @@
 
 import {
     taskType,
-    proPeriod
+    proPeriod,
+    groupTree
   } from "@/utils/dataDictionary.js";
   import {
     data as facData
   } from "@/views/person/staff/js/index.js";
+  import { handleTreeToCascade } from "@/utils/util.js";
 // 全部
 export const proMenu = [
-    {
-    key:0,
-    title:"全部",
-    content:"all"
-},
+//     {
+//     key:0,
+//     title:"全部",
+//     content:"all"
+// },
 {
-    key:1,
+    key:0,
     title:"待保养",
     content:"protect"
 },{
-    key:2,
+    key:1,
     title:"待核查",
     content:"check"
 },{
-    key:3,
-    title:"待评估",
-    content:"evaluation"
-}]
+    key:2,
+    title:"已完成",
+    content:"done"
+}
+]
 export const loginInfo = [{
     title: '设备编号',
     key: 'devId',
@@ -46,6 +49,20 @@ export const loginInfo = [{
     type:"a-range-picker"
 },
 {
+    title: '养护组别',
+    value:"",
+    key: 'devGroupType',
+    type:"a-select",
+    valueEnum:[{tableValue:"空调管理组别1", code: 0 }]
+},
+{
+    title: '养护范围',
+    value:"",
+    key: 'devGroup',
+    type:"a-cascader",
+    valueEnum:handleTreeToCascade(groupTree)
+},
+{
     title: '任务类型',
     value:"",
     key: 'proType',
@@ -61,9 +78,10 @@ export const loginInfo = [{
         return {tableValue:item.devName}
       })}
     
-},{
-    title: '执行地点',
-    key: 'address',
-    value:""
-},
+}
+// ,{
+//     title: '执行地点',
+//     key: 'address',
+//     value:""
+// },
 ]

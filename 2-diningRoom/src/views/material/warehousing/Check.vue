@@ -4,19 +4,11 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" :form="form1">
         <a-row :gutter="24">
-<!--          <a-col :xl="6" :lg="8" :md="9" :sm="24">-->
-<!--            <a-form-item label="采购单号">-->
-<!--              <a-input placeholder="请输入" v-decorator="['purchaseOrderNumber']"></a-input>-->
-<!--            </a-form-item>-->
-<!--          </a-col>-->
-          <a-col :xl="6" :lg="8" :md="9" :sm="24" >
-            <a-form-item label="采购开始日期">
-              <j-date  v-decorator="['purchaseStartDate', {initialValue:this.purchaseStartDate}]" style='width: 100%'/>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="8" :md="9" :sm="24">
-            <a-form-item label="采购结束日期">
-              <j-date  v-decorator="['purchaseEndDate', {initialValue:this.purchaseEndDate}]" style='width: 100%'/>
+          <a-col :xl="8" :lg="8" :md="9" :sm="24">
+            <a-form-item label="采购日期">
+              <j-date  v-decorator="['purchaseStartDate', {initialValue:this.purchaseStartDate}]" style='width: 47%;'/>
+              <span class="query-group-split-cust"></span>
+              <j-date  v-decorator="['purchaseEndDate', {initialValue:this.purchaseEndDate}]" style='width: 47%;' />
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="5" :md="6" :sm="24">
@@ -70,10 +62,6 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-<!--      <a-button type="link" icon="plus" @click='purInOnClick'>新增</a-button>-->
-<!--      <a-button type="link" icon="download" :disabled="!hasSelected">导出</a-button>-->
-<!--      <i class="anticon anticon-info-circle ant-alert-icon"></i>已选择<a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项-->
-<!--      <a style="margin-left: 12px" @click="onClearSelected" v-if='hasSelected'>清空</a>-->
     </div>
 
     <!-- table区域-begin -->
@@ -149,7 +137,7 @@ export default {
   data () {
     return {
       form1: this.$form.createForm(this),
-      purchaseStartDate:moment().subtract(3, 'months').format('YYYY-MM-DD'),
+      purchaseStartDate:moment().subtract(1, 'months').format('YYYY-MM-DD'),
       purchaseEndDate:moment().format('YYYY-MM-DD'),
       manuSelectData:[
         {
@@ -186,11 +174,11 @@ export default {
         {
           id:'1',
           purchaseOrderNumber: 'GZZT20210704001',
-          headline: '4月4号采购单1',
+          headline: '7月4号采购单1',
           purchasePeople: '张三',
           purchaseDate: '2020-07-04',
           purchaseNum: '100',
-          totalMoney: '1000.00',
+          totalMoney: '200.00',
           checkoutPeople: '-',
           checkoutDate: '-',
           provider : '程埔头市场',

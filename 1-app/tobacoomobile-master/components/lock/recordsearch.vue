@@ -1,9 +1,5 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-orange" :isBack="true">
-			<block slot="backText">返回</block>
-			<block slot="content">搜索</block>
-		</cu-custom>
 
 		<view class="cu-form-group">
 			<view class="title">选择要搜索的记录</view>
@@ -17,7 +13,7 @@
 		<view v-if="this.index3 == 0">
 			<view>
 				<view class="cu-bar bg-white margin-top">
-					<view class="action">选择时间段</view>
+					<view class="action">选择开锁时间段</view>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">请选择开始时间</view>
@@ -91,7 +87,7 @@
 		<view v-if="this.index3 == 1">
 			<view>
 				<view class="cu-bar bg-white margin-top">
-					<view class="action">选择时间段</view>
+					<view class="action">选择报警时间段</view>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">请选择开始时间</view>
@@ -140,21 +136,22 @@
 			</view>
 		</view>
 		
-
-
-		<view class="margin grid col-2 text-center">
-			<view class="cu-item">
-				<button class="cu-btn bg-white lg button" @tap="cancle">取消</button>
-			</view>
-			<view class="cu-item">
-				<button class="cu-btn bg-orange lg button" @tap="oksearch">查询</button>
-			</view>
-		</view>
 	</view>
 </template>
 
 <script>
 	export default {
+		created: function() {
+			let aData = new Date();
+			this.date =
+				aData.getFullYear() + "-" +
+				(aData.getMonth() + 1) + "-" +
+				(aData.getDate() - 3)
+			this.date1 =
+				aData.getFullYear() + "-" +
+				(aData.getMonth() + 1) + "-" +
+				(aData.getDate())
+		},
 		onLoad(option) {
 			this.type = option.type
 			console.log(this.type)
@@ -216,6 +213,8 @@
 			},
 			PickerChange3(e) {
 				this.index3 = e.detail.value
+				console.log(this.index3)
+				this.$emit('func',this.index3)
 			},
 			MultiChange(e) {
 				this.multiIndex = e.detail.value
@@ -225,7 +224,7 @@
 				uni.navigateBack()
 			},
 			oksearch() {
-
+				uni.navigateBack()
 			},
 			DateChange(e) {
 				this.date = e.detail.value

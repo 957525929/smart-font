@@ -335,3 +335,30 @@ export const DepartTree = [{
   value: 'other',
 },
 ]
+// guanli分类树
+export const groupTree = [{
+  children: [{
+      key: '1-1',
+      title: '1-10层',
+      value: 'water-in'
+    },
+    {
+      key: '1-2',
+      title: '11-20层',
+      value: 'water-out',
+    },
+    {
+      key: '1-3',
+      title: '21-30层',
+      value: 'water-in',
+    },
+    {
+      key: '1-4',
+      title: '其他',
+      value: 'water-in',
+    },
+  ],
+  key: '1',
+  title: '烟草大厦',
+  value: 'water',
+}]

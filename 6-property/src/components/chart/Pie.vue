@@ -28,10 +28,9 @@
         type: Array,
         default: () => [
           { item: '待审核', count: 1 },
+          { item: '待派单', count: 1 },
           { item: '待维修', count: 1 },
           { item: '待核查', count: 1 },
-          { item: '待评价', count: 1 },
-          { item: '待评估', count: 1 }
         ]
       }
     },

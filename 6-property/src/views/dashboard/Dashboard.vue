@@ -41,20 +41,17 @@
                             <a-row>
                                 <a-col>
                                     <a-row>
-                                        <a-col :span="5">
+                                        <a-col :span="6">
                                             <head-info title="待审核" :content="1"></head-info>
                                         </a-col>
-                                        <a-col :span="4">
+                                        <a-col :span="6">
+                                            <head-info title="待派单" :content="1"></head-info>
+                                        </a-col>
+                                        <a-col :span="6">
                                             <head-info title="待维修" :content="1"></head-info>
                                         </a-col>
-                                        <a-col :span="4">
+                                        <a-col :span="6">
                                             <head-info title="待核查" :content="1"></head-info>
-                                        </a-col>
-                                        <a-col :span="4">
-                                            <head-info title="待评价" :content="1"></head-info>
-                                        </a-col>
-                                        <a-col :span="5">
-                                            <head-info title="待评估" :content="1"></head-info>
                                         </a-col>
                                     </a-row>
                                 </a-col>

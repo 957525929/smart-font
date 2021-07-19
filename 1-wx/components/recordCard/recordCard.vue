@@ -14,7 +14,7 @@
 							访问人：{{item.visit}}
 						</view>
 						<view>
-							被访问人：{{item.bevisit}}
+							访问部门：{{item.department}}
 						</view>
 						<view>
 							申请时间：{{item.time}}
@@ -38,49 +38,49 @@
 			return {
 				applylist: [{
 						visit: '魏佳楠',
-						bevisit: '倪友聪',
+						department: '信息中心',
 						time: '2020年1月21日 13:46',
 						type: '待审核',
 					},
 					{
 						visit: '魏佳楠',
-						bevisit: '倪友聪',
+						department: '机关服务中心',
 						time: '2020年1月21日 13:46',
 						type: '待审核',
 					},
 					{
 						visit: '魏佳楠',
-						bevisit: '倪友聪',
+						department: '财务管理处',
 						time: '2020年1月21日 13:46',
 						type: '待审核',
 					},
 					{
 						visit: '魏佳楠',
-						bevisit: '倪友聪',
+						department: '审计处',
 						time: '2020年1月21日 13:46',
 						type: '已通过',
 					},
 					{
 						visit: '魏佳楠',
-						bevisit: '倪友聪',
+						department: '科技处',
 						time: '2020年1月21日 13:46',
 						type: '已通过',
 					},
 					{
 						visit: '魏佳楠',
-						bevisit: '倪友聪',
+						department: '人事处',
 						time: '2020年1月21日 13:46',
 						type: '已通过',
 					},
 					{
 						visit: '魏佳楠',
-						bevisit: '倪友聪',
+						department: '安全管理处',
 						time: '2020年1月21日 13:46',
 						type: '已拒绝',
 					},
 					{
 						visit: '魏佳楠',
-						bevisit: '倪友聪',
+						department: '烟叶管理处',
 						time: '2020年1月21日 13:46',
 						type: '已拒绝',
 					},

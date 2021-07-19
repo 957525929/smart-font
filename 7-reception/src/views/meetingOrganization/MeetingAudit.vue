@@ -5,10 +5,17 @@
     <div class="table-page-search-wrapper">
       <a-row type="flex" align="middle">
         <a-col>
-          <span>名称或编号：</span>
+          <span>会议名称：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入会议名称或编号" v-model="queryParam.IDName"></a-input>
+          <a-input placeholder="请输入会议名称" v-model="queryParam.name"></a-input>
+        </a-col>
+          <a-col :span="1"></a-col>
+           <a-col>
+          <span>编号：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入会议编号" v-model="queryParam.id"></a-input>
         </a-col>
           <a-col :span="1"></a-col>
         <a-col>
@@ -205,7 +212,8 @@ export default {
       labelCol: { span: 3 },
       wrapperCol: { span: 18 },
       queryParam: {
-        IDName: '',
+        id:undefined,
+        name: undefined,
         dateOne: undefined,
         dateTwo: undefined
       },

@@ -18,7 +18,7 @@
                 <a-select-option value="0">未开始</a-select-option>
                 <a-select-option value="1">进行中</a-select-option>
                 <a-select-option value="2">已完成</a-select-option>
-                <a-select-option value="3">已超时</a-select-option>
+                <a-select-option value="3">已超期</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -86,7 +86,7 @@ export default {
           2021.07: 12,
         },
         {
-          type: '已超时',
+          type: '已超期',
           2021.02: 12,
           2021.03: 7,
           2021.04: 5,

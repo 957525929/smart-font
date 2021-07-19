@@ -18,10 +18,17 @@
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
-          <span>名称或编号：</span>
+          <span>会议名称：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入名称或编号" v-model="queryParam.IDName"></a-input>
+          <a-input placeholder="请输入会议名称" v-model="queryParam.name"></a-input>
+        </a-col>
+          <a-col :span="1"></a-col>
+           <a-col>
+          <span>编号：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入会议编号" v-model="queryParam.id"></a-input>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>会议时间范围：</a-col>
@@ -322,10 +329,11 @@ export default {
       dataEat,
       dataRoom,
       queryParam: {
-        IDName: '',
+        id: undefined,
+        name:  undefined,
         dateOne: undefined,
         dateTwo: undefined,
-        state: ''
+        state:  undefined,
       },
       dateFormat: 'YYYY年MM月DD日'
     }

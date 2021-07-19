@@ -1,17 +1,34 @@
 <template>
   <a-card :bordered="false">
     <a-row :gutter='24'>
-      <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+      <a-col :xl="6" :lg="12" :md="12" :sm="24" :xs="24">
+        <a-row>
+          <h1 style='font-weight: bold;'>请选择</h1>
+        </a-row>
+        <a-row style='margin-bottom: 10px;'>
+          <a-radio-group v-model="time" >
+            <a-radio-button value="week">本周</a-radio-button>
+            <a-radio-button value="month">本月</a-radio-button>
+            <a-radio-button value="year">本年</a-radio-button>
+          </a-radio-group>
+        </a-row>
+        <a-row>
+          <j-date v-model='startTime' @change='changeStartTime'/>
+          <span class="query-group-split-cust"/>
+          <j-date v-model='endTime'/>
+        </a-row>
+      </a-col>
+      <a-col :xl="6" :lg="12" :md="12" :sm="24" :xs="24">
         <div style='border:1px solid #c7b2b2'><a-statistic title="采购总次数" :value="118" style="margin:20px 50px"/></div>
       </a-col>
-      <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+      <a-col :xl="6" :lg="12" :md="12" :sm="24" :xs="24">
         <div style='border:1px solid #c7b2b2'><a-statistic title="采购总金额(CNY)" :value="826560.00" style="margin:20px 50px"/></div>
       </a-col>
-      <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+      <a-col :xl="6" :lg="12" :md="12" :sm="24" :xs="24">
         <div style='border:1px solid #c7b2b2'><a-statistic title="审核总次数" :value="110" style="margin:20px 50px"/></div>
       </a-col>
     </a-row>
-    <a-row>
+    <a-row style='margin-top: 20px;'>
       <a-col :span='6'  >
         <a-tabs default-active-key="1" size="large" >
           <a-tab-pane tab="审核统计" key="1">
@@ -21,7 +38,7 @@
       </a-col>
       <a-col :span='18'  >
         <a-tabs default-active-key="1" size="large" >
-          <a-tab-pane tab="食料分类" key="1">
+          <a-tab-pane tab="食料采购分类" key="1">
             <BarMultid title="数量" :dataSource="dataSource2" :fields='fields2'/>
           </a-tab-pane>
         </a-tabs>
@@ -35,17 +52,6 @@
           </a-col>
         </a-row>
       </a-tab-pane>
-      <a-radio-group v-model="time" slot="tabBarExtraContent">
-        <a-radio-button value="week">
-          本周
-        </a-radio-button>
-        <a-radio-button value="month">
-          本月
-        </a-radio-button>
-        <a-radio-button value="year">
-          本年
-        </a-radio-button>
-      </a-radio-group>
     </a-tabs>
   </a-card>
 </template>
@@ -59,6 +65,7 @@ import ChartCard from '@/components/ChartCard'
 import MiniProgress from '@/components/chart/MiniProgress'
 import BarMultid from '@/components/chart/BarMultid'
 import LineChartMultid from '@/components/chart/LineChartMultid'
+import JDate from '../../../components/jeecg/JDate'
 
 
 export default {
@@ -70,9 +77,23 @@ export default {
     MiniProgress,
     BarMultid,
     LineChartMultid,
+    JDate,
   },
+
+  watch: {
+    // 如果 `question` 发生改变，这个函数就会运行
+    time: function (newValue, oldValue) {
+      if(newValue != '') {
+        this.startTime=''
+        this.endTime=''
+      }
+    }
+  },
+
   data() {
     return {
+      startTime:'',
+      endTime:'',
       fields1:["待审核", "已通过", "未通过",],
       dataSource1: [
         {
@@ -230,6 +251,14 @@ export default {
       ],
       time:'year',
 
+    }
+  },
+
+  methods: {
+    changeStartTime(value) {
+      console.log(value)
+      console.log(this.startTime)
+      this.time=''
     }
   },
 }

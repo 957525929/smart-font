@@ -35,7 +35,7 @@
             <a-select-option value="0">进行中</a-select-option>
             <a-select-option value="1">未开始</a-select-option>
             <a-select-option value="2">已完成</a-select-option>
-            <a-select-option value="3">已超时</a-select-option>
+            <a-select-option value="3">已超期</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="时间">

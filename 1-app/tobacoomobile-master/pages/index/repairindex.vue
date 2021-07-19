@@ -7,7 +7,7 @@
 		<view class="cu-bar tabbar bg-white shadow foot">
 			<view class="action" @click="NavChange" data-cur="lockrepair">
 				<view class='cuIcon-cu-image'>
-					<text :class="PageCur=='lockrepair'?'text-orange cuIcon-paintfill':'text-gray cuIcon-paint'"></text>
+					<text :class="PageCur=='lockrepair'?'text-orange cuIcon-repairfill':'text-gray cuIcon-repair'"></text>
 				</view>
 				<view :class="PageCur=='lockrepair'?'text-orange':'text-gray'">维修</view>
 			</view>

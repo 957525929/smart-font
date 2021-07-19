@@ -1,11 +1,19 @@
 <template>
     <PageTemplate :columns="devColumns" :searchCon="searchCon">
         <a-button type="primary" @click="showDevForm" icon="plus">部件登记</a-button>
-        <a-button type="primary" icon="import" style="marginLeft:10px">导入</a-button>  
-                <a-button type="primary" icon="export" style="marginLeft:10px">导出</a-button>    
+        <a-button type="primary" icon="import" style="marginLeft: 10px">导入</a-button>
+        <a-button type="primary" icon="export" style="marginLeft: 10px">导出</a-button>
 
         <TableModal title="部件登记" :infoDetail="loginInfo" ref="devModal"></TableModal>
-        <a-table :columns="devColumns" :data-source="data"> 
+        <a-table
+            :columns="devColumns"
+            :data-source="data"
+            :pagination="{
+                size: 'small',
+                pageSize: 10,
+                showTotal: (total, range) => `第${range[0]}-${range[1]}条/总共${total}条`,
+            }"
+        >
             <span slot="action" slot-scope="text, record">
                 <template v-for="(i, index) in record.action">
                     <a-popconfirm
