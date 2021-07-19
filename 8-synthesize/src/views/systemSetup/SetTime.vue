@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false">
-    <h2>设置提醒时间</h2>
+    <h2>设置任务提醒时间</h2>
     <h1>优先级:</h1>
     <a-tabs>
       <a-tab-pane key="1" tab="高">

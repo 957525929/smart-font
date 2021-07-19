@@ -23,7 +23,7 @@
 						<view class="text-grey">{{item.title}}</view>
 						<view class="text-grey text-xs">{{item.label}}</view>
 					</view>
-					<view v-if="item.message" class="cu-tag round bg-red sm" @click='openMessage'>1</view>
+					<view v-if="item.message" class="cu-tag round bg-red sm" @click='openMessage'>3</view>
 					<view v-if="item.edition" class=" text-grey">{{item.edition}}</view>
 				</view>
 			</view>
@@ -80,7 +80,7 @@
 		methods: {
 			openMessage() {
 				uni.navigateTo({
-					url: '/pages/person/message'
+					url: '/pages/person/message1'
 				});
 			}
 		}

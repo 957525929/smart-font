@@ -30,7 +30,7 @@
       <a-Input v-model="form.time1" placeholder="请选择时间" />
     </a-form-item>
 
-    <a-form-item label="提醒方式                                    " prop="methods" :labelCol="labelCol" :wrapperCol="wrapperCol">
+    <a-form-item label="提醒方式" prop="methods" :labelCol="labelCol" :wrapperCol="wrapperCol">
       <a-select v-model="form.methods" placeholder="请选择提醒方式">
         <a-select-option value="0">系统</a-select-option>
         <a-select-option value="1">短信</a-select-option>
@@ -115,12 +115,10 @@ export default {
     confirm() {
       this.visible = false
       this.form.time = this.timeOut
-
     },
     confirm1() {
       this.visible1 = false
       this.form.time1 = this.timeOut1
-
     },
     handleCancel() {
       this.visible = false

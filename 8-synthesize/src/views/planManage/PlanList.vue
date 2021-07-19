@@ -69,7 +69,7 @@
             <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
             <a-tag v-if="status === '1'" color="green">进行中</a-tag>
             <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
-            <a-tag v-if="status === '3'" color="red"> 已超时 </a-tag>
+            <a-tag v-if="status === '3'" color="red"> 已超期 </a-tag>
             <!-- <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
               <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" />
