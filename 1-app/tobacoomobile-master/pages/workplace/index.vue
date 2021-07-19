@@ -7,11 +7,11 @@
 			</view>
 			
 			<view class="nav-list">
-				<navigator hover-class="none" url="../index/installindex" class="nav-li bg-cyan" navigateTo
+				<navigator v-for="(item,index) in list" hover-class="none" :url="item.router" :class="item.color" navigateTo
 				 :style="[{animation: 'show ' + (1*0.2+1) + 's 1'}]">
-					<view class="nav-title">智能锁安装</view>
-					<view class="nav-name">Install</view>
-					<text class="cuIcon-lock"></text>
+					<view class="nav-title">{{ item.title }}</view>
+					<view class="nav-name">{{ item.entitle }}</view>
+					<text :class="item.style"></text>
 				</navigator>
 				
 				<navigator hover-class="none" url="../index/repairindex" class="nav-li bg-blue" navigateTo
@@ -34,15 +34,20 @@
 </template>
 <script>
 	export default {
-		name: "basics",
 		data() {
 			return {
-				
+				list:[
+					{
+						title: '智能锁安装',
+						entitle: 'Install',
+						style: 'cuIcon-lock',
+						router: '../index/installindex',
+						color: 'nav-li bg-cyan',
+					}
+				]
 			};
 		},
-		onShow() {
-			console.log("success")
-		}
+		onShow() {}
 	}
 </script>
 

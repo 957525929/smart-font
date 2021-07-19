@@ -1,39 +1,52 @@
 <template>
-	<view class="bg-gradual-blue">
+	<view>
 		<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
-			<cu-custom bgColor="bg-gradual-blue" :isBack="true"><block slot="backText">返回</block>
-				<block slot="content">全屏抽屉</block>
-			</cu-custom>			
-			<view class='padding margin text-center'>
-				<view class='cu-btn bg-green lg block shadow radius margin-xl' @tap="showModal" data-target="viewModal">
-					打开抽屉
+
+			<view class="cu-bar bg-orange solid-bottom">
+				<view class="action">
+					<text class="cuIcon-title text-white"></text> 开锁和报警记录
+				</view>
+				<view class="action" @tap="showModal" data-target="viewModal">
+					
+						<text class="cuIcon-search" ></text>
+						<text class="text-df">搜索</text>
+
 				</view>
 			</view>
-			<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-				<view class="cu-item arrow" v-for="(item,index) in 20" :key="index">
-					<view class="content">
-						<text class="cuIcon-github text-grey"></text>
-						<text class="text-grey">{{index +1}}</text>
+
+			<scroll-view scroll-x class="bg-white nav">
+				<view class="flex text-center">
+					<view class="cu-item flex-sub" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
+						开锁记录
+					</view>
+					<view class="cu-item flex-sub" :class="1==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="1">
+						报警记录
 					</view>
 				</view>
+			</scroll-view>
+			<view v-if="TabCur==0" class="itembox">
+				<navigator class="action" url="../../components/lock/recorddetail" hover-class="none">
+					<recordCard></recordCard>
+				</navigator>
 			</view>
-			
-			<view class='padding margin text-center'>
-				<view class='cu-btn bg-green lg block shadow radius margin-xl' @tap="showModal" data-target="viewModal">
-					打开抽屉
-				</view>
+			<view v-if="TabCur==1" class="itembox">
+				<navigator class="action" url="../../components/lock/alertdetail" hover-class="none">
+					<alertRecord></alertRecord>
+				</navigator>
 			</view>
+
 		</scroll-view>
+
 		<view class="DrawerClose" :class="modalName=='viewModal'?'show':''" @tap="hideModal">
 			<text class="cuIcon-pullright"></text>
 		</view>
 		<scroll-view scroll-y class="DrawerWindow" :class="modalName=='viewModal'?'show':''">
-			<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-				<view class="cu-item arrow" v-for="(item,index) in 20" :key="index">
-					<view class="content">
-						<text class="cuIcon-github text-grey"></text>
-						<text class="text-grey">{{index +1}}</text>
-					</view>
+
+			<recordsearch></recordsearch>
+
+			<view class="padding margin text-center">
+				<view class="cu-btn bg-orange lg block shadow radius margin-xl" @tap="hideModal">
+					查询
 				</view>
 			</view>
 		</scroll-view>
@@ -41,11 +54,22 @@
 </template>
 
 <script>
+	import recordsearch from '../../components/lock/recordsearch'
+	import recordCard from '../../components/lock/recordcard'
+	import alertRecord from '../../components/lock/alertrecord'
+
 	export default {
 		data() {
 			return {
-				modalName:null
+				modalName: null,
+				scrollLeft: 0,
+				TabCur: 0,
 			};
+		},
+		components: {
+			recordsearch,
+			recordCard,
+			alertRecord
 		},
 		methods: {
 			showModal(e) {
@@ -57,7 +81,7 @@
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id;
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
-			}
+			},
 		},
 	}
 </script>
@@ -67,6 +91,11 @@
 		background-image: var(--gradualBlue);
 		width: 100vw;
 		overflow: hidden;
+	}
+
+	.status {
+		margin: 0.9vh;
+		border-radius: 1.8vh;
 	}
 
 	.DrawerPage {
