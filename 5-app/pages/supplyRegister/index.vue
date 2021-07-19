@@ -4,7 +4,7 @@
 			<block slot="backText" @tap="back">返回</block>
 			<block slot="content">加油登记</block>
 		</cu-custom>
-		<view class="formArea backColor">
+		<!-- <view class="formArea backColor">
 			<uni-forms :modelValue="formData" ref="form" border>
 				<uni-forms-item label="车辆" :label-width='labelWidth' name="licenseNum">
 					<uni-combox :candidates="cars" v-model="formData.licenseNum"></uni-combox>
@@ -28,7 +28,60 @@
 			    fileMediatype="image" 
 			    mode="grid" 
 			/>
-		</view>
+		</view> -->
+		<form>
+			<view class="cu-form-group">
+				<view class="title">车牌号</view>
+				<input></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">加油类型</view>
+				<picker @change="PickerChange" :value="oilTypeIndex" :range="oilTypes">
+					<view class="picker">
+						{{oilTypeIndex>-1?oilTypes[oilTypeIndex]:'请选择'}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">加油站</view>
+				<input></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">油料单价</view>
+				<input></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">金额</view>
+				<input></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">里程</view>
+				<input></input>
+			</view>
+			<view class="cu-bar bg-white margin-top">
+				<view class="action">
+					票据图片
+				</view>
+				<view class="action">
+					{{imgList.length}}/4
+				</view>
+			</view>
+			<view class="cu-form-group">
+				<view class="grid col-4 grid-square flex-sub">
+					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage"
+						:data-url="imgList[index]">
+						<image :src="imgList[index]" mode="aspectFill"></image>
+						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+							<text class='cuIcon-close'></text>
+						</view>
+					</view>
+					<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+						<text class='cuIcon-cameraadd'></text>
+					</view>
+				</view>
+			</view>
+			<button type="primary" class="margin-top" @click="submitForm">提交</button>
+		</form>
 	</view>
 </template>
 
@@ -44,83 +97,35 @@
 		},
 		data() {
 			return {
-				labelWidth: 85,
+				oilTypeIndex: -1,
 				cars: [],
-				formData: {
-					licenseNum: undefined,
-					oilType: undefined,
-					oilStation: '',
-					amount:undefined
-				},
-				imageValue:undefined,
-				oilTypes:[
-					{
-						value:'#85',
-						text:'85#汽油'
-					},
-					{
-						value:'#90',
-						text:'90#汽油'
-					},
-					{
-						value:'#92',
-						text:'92#汽油'
-					},
-					{
-						value:'#93',
-						text:'93#汽油'
-					},
-					{
-						value:'#95',
-						text:'95#汽油'
-					},
-					{
-						value:'#97',
-						text:'97#汽油'
-					},
-					{
-						value:'#98',
-						text:'98#汽油'
-					},
-					{
-						value:'-50#',
-						text:'-50#柴油'
-					},
-					{
-						value:'-35#',
-						text:'-35#柴油'
-					},
-					{
-						value:'-20#',
-						text:'-20#柴油'
-					},
-					{
-						value:'-10#',
-						text:'-10#柴油'
-					},
-					{
-						value:'0#',
-						text:'0#柴油'
-					},
-					{
-						value:'+5#',
-						text:'+5#柴油'
-					}
-				]
+				oilTypes: ['85#汽油', '90#汽油', '92#汽油', '93#汽油', '95#汽油', '97#汽油', '98#汽油', '-50#柴油', '-35#柴油', '-20#柴油',
+					'-10#柴油', '0#柴油', '+5#柴油'
+				],
+				imgList: [],
 			}
 		},
 		methods: {
 			back() {
-				// uni.switchTab({
-				// 	url: '/pages/tabBar/homepage'
-				// });
 				uni.navigateBack()
 			},
-			submitForm(form) {
-				// 手动提交表单
-				this.$refs.form.validate().then((res) => {
-					console.log('表单返回值：', res)
-				})
+			submitForm(form) {},
+			PickerChange(e) {
+				this.oilTypeIndex = e.detail.value
+			},
+			ChooseImage() {
+				uni.chooseImage({
+					count: 4, //默认9
+					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album'], //从相册选择
+					success: (res) => {
+						if (this.imgList.length != 0) {
+							this.imgList = this.imgList.concat(res.tempFilePaths)
+						} else {
+							this.imgList = res.tempFilePaths
+						}
+					}
+				});
 			}
 		}
 	}
@@ -131,15 +136,17 @@
 		padding-left: 25rpx;
 		padding-right: 25rpx;
 	}
-	.imgPrt{
+
+	.imgPrt {
 		margin-top: 20rpx;
-		padding:40rpx 0 80rpx 25rpx
+		padding: 40rpx 0 80rpx 25rpx
 	}
-	.submitBtn{
+
+	.submitBtn {
 		position: fixed;
 		width: 95%;
-		left:auto;
-		right:auto;
-		bottom:200rpx;
+		left: auto;
+		right: auto;
+		bottom: 200rpx;
 	}
 </style>
