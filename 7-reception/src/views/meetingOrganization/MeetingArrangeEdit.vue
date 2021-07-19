@@ -358,6 +358,7 @@ export default {
         dateEnd: undefined,
         range: undefined
       },
+      roomS:"",
       optionsRoom,
       dataRoom: [],
       rulesRoom: {
@@ -394,8 +395,8 @@ export default {
     },
     onChangeRoom(value) {
       console.log(value)
-      this.formRoom.room = value[0] + value[1] + value[2] + value[3]
-      console.log(room)
+       this.roomS = value[0] + value[1] + value[2] + value[3]
+      // console.log(this.formRoom.room)
     },
     onSubmitHotel() {
       console.log(this.formHotel.dateStart)
@@ -426,7 +427,7 @@ export default {
     },
     resetFormHotel() {
       this.$refs.ruleFormHotel.resetFields()
-      this.formHotel.dateEnd = undefined
+      this.formHotel.hotel = undefined
     },
     onSubmitEat() {
       this.$refs.ruleFormEat.validate(valid => {
@@ -456,7 +457,8 @@ export default {
     },
     resetFormEat() {
       this.$refs.ruleFormEat.resetFields()
-      this.formEat.dateEnd = undefined
+      this.formEat.type = undefined
+      this.formEat.way = undefined
     },
     onSubmitRoom() {
       this.$refs.ruleFormRoom.validate(valid => {
@@ -470,7 +472,7 @@ export default {
           console.log(dateTime)
           let a = {
             dateTime: dateTime,
-            room: this.formRoom.room,
+            room: this.roomS,
             range: this.formRoom.range
           }
           this.dataRoom.push(a)
@@ -486,7 +488,8 @@ export default {
     },
     resetFormRoom() {
       this.$refs.ruleFormRoom.resetFields()
-      this.formRoom.dateEnd = undefined
+      this.formRoom.room = undefined
+      this.formRoom.range = undefined
     },
     complete() {
       this.$message.success('提交成功!')
