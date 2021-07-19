@@ -74,14 +74,6 @@ export default {
         xs: { span: 24 },
         sm: { span: 8 },
       },
-      labelCol1: {
-        xs: { span: 24 },
-        sm: { span: 5 },
-      },
-      wrapperCol1: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-      },
     }
   },
   methods: {
