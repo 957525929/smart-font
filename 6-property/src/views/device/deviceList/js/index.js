@@ -1,4 +1,4 @@
-import { devType ,devStatus,DepartTree} from "@/utils/dataDictionary.js";
+import { devType ,devStatus,DepartTree,groupTree} from "@/utils/dataDictionary.js";
 import { handleTreeToCascade } from "@/utils/util.js";
 export const devColumns = [
     {
@@ -248,6 +248,20 @@ export const loginInfo = [{
     value:"",
     type:"a-select",
     valueEnum:devStatus
+},
+{
+    title: '设备组别',
+    key: 'devGroupType',
+    value:"",
+    type:"a-select",
+    valueEnum:[{tableValue:"空调管理组别1", code: 0 }]
+},
+{
+    title: '设备分类',
+    key: 'devGroup',
+    value:"",
+    type:"a-cascader",
+    valueEnum:handleTreeToCascade(groupTree)
 },
 // {
 //     key: 'manufacturer',
