@@ -1,23 +1,7 @@
 <template>
 	<view class="bg-gradual-blue">
 		<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
-			<cu-custom bgColor="bg-gradual-blue" :isBack="true"><block slot="backText">返回</block>
-				<block slot="content">全屏抽屉</block>
-			</cu-custom>			
-			<view class='padding margin text-center'>
-				<view class='cu-btn bg-green lg block shadow radius margin-xl' @tap="showModal" data-target="viewModal">
-					打开抽屉
-				</view>
-			</view>
-			<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-				<view class="cu-item arrow" v-for="(item,index) in 20" :key="index">
-					<view class="content">
-						<text class="cuIcon-github text-grey"></text>
-						<text class="text-grey">{{index +1}}</text>
-					</view>
-				</view>
-			</view>
-			
+		
 			<view class='padding margin text-center'>
 				<view class='cu-btn bg-green lg block shadow radius margin-xl' @tap="showModal" data-target="viewModal">
 					打开抽屉

@@ -215,9 +215,6 @@ export default {
     },
     searchReset() {
       this.data = data
-      // this.queryParam.IDName = ''
-      // this.queryParam.dateOne = undefined
-      // this.queryParam.dateTwo = undefined
     },
     onChange() {},
     ignoreClick(id, index) {
@@ -249,7 +246,7 @@ export default {
   }
 }
 </script>
-<style >
+<style scoped>
 #RoomAudit {
   margin-top: 20px;
 }

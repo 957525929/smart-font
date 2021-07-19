@@ -28,7 +28,7 @@
 </template>
 
 <script>
-	import message1 from '../../components/message/message1.vue'
+	import message1 from '../../components/message/message.vue'
 
 	export default {
 		data() {

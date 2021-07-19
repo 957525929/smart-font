@@ -5,6 +5,13 @@
     <div class="table-page-search-wrapper">
       <a-row type="flex" align="middle">
         <a-col>
+          <span>管理员：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入管理员" v-model="queryParam.dutyName"></a-input>
+        </a-col>
+        <a-col :span="1"></a-col>
+           <a-col>
           <span>区域：</span>
         </a-col>
         <a-col>
@@ -16,14 +23,7 @@
             placeholder="请选择区域"
           ></a-cascader>
         </a-col>
-        <a-col :span="1"></a-col>
-        <a-col>
-          <span>管理员：</span>
-        </a-col>
-        <a-col>
-          <a-input placeholder="请输入管理员" v-model="queryParam.dutyName"></a-input>
-        </a-col>
-        <a-col :span="1"></a-col>
+          <a-col :span="1"></a-col>
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
@@ -110,9 +110,7 @@
         :wrapper-col="wrapperCol"
         :rules="rules"
       >
-        <a-form-model-item label="管理区域" prop="area">
-          <a-input v-model="formModify.area" disabled></a-input>
-        </a-form-model-item>
+
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
           <!-- <a-input v-model="formModify.dutyName"></a-input> -->
           <a-select show-search v-model="formModify.dutyName">
@@ -123,6 +121,17 @@
         </a-form-model-item>
         <a-form-model-item label="管理员电话" prop="dutyTel">
           <a-input v-model="formModify.dutyTel"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="管理区域" prop="area">
+          <!-- <a-input v-model="formModify.area" disabled></a-input> -->
+          <a-tree-select
+            v-model="formModify.area"
+            placeholder="请选择区域"
+            style="width: 385px"
+            :tree-data="treeData"
+            tree-checkable
+            :show-checked-strategy="SHOW_PARENT"
+          />
         </a-form-model-item>
         <!-- <a-form-model-item label="备注信息">
           <a-input v-model="formModify.remark" type="textarea" />
@@ -174,7 +183,6 @@ export default {
       selectOptions: areaData,
       treeData: treeData,
       SHOW_PARENT,
-
       dataDuty,
       queryParam: {
         dutyName: '',
@@ -189,7 +197,9 @@ export default {
         dutyName: '',
         dutyTel: ''
       },
-      formModify: {},
+      formModify: {
+        area:[]
+      },
       rules: {
         area: [
           {
@@ -266,7 +276,14 @@ export default {
     Modify(record) {
       this.visibleModify = true
       console.log(record)
-      this.formModify.area = record.area
+      // this.formModify.area= this.treeData.filter(item=>{
+      //   console.log(this.treeData.title)
+      //     if(this.treeData.title==record.area){
+      //       console.log(item.key)
+      //      return item.key
+      //     }
+      // })
+       this.formModify.area = record.area
       this.formModify.dutyName = record.dutyName
       this.formModify.dutyTel = record.dutyTel
     },

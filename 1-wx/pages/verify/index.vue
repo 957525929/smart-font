@@ -1,6 +1,7 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-yellow">
+	<cu-custom bgColor="bg-yellow" :isBack="true">
+		<block slot="backText">返回</block>
 			<block slot="content">申请审批</block>
 		</cu-custom>
 		
@@ -52,7 +53,7 @@
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 备注</text>
+				<text class="text-black text-bold">· 拒绝原因</text>
 			</view>
 		</view>
 
@@ -69,7 +70,7 @@
 			</view>
 			<view class="rightBottom">
 				<view class='padding'>
-						<button class="cu-btn lg bg-white">同意</button>
+						<button class="cu-btn lg bg-white" @click="agree">同意</button>
 				</view>
 			</view>
 		</view>
@@ -90,7 +91,7 @@
 					date: '2021-07-04',
 					type: 'allow',
 					people:'倪友聪',
-					content:'11'
+					content:'被访问人不在'
 				},
 				modalName: null,
 				PageCur: 'appoient'
@@ -110,7 +111,7 @@
 			NavChange: function(e) {
 				console.log(e.currentTarget)
 				this.PageCur = e.currentTarget.dataset.cur
-			}
+			},	
 		}
 	}
 </script>

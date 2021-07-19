@@ -128,8 +128,6 @@
         <a-table-column title="区域" data-index="area" align="center" ></a-table-column>         
         <a-table-column title="房间号" data-index="room" align="center" ></a-table-column>
         <a-table-column title="容纳人数" data-index="number" align="center" ></a-table-column>
-        <a-table-column title="管理员" data-index="dutyName" align="center"></a-table-column>
-        <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="基本条件" data-index="condition" align="center">
           <!-- <template slot-scope="condition">
             <div v-if="condition=='0'">
@@ -149,6 +147,8 @@
             </div>
           </template> -->
         </a-table-column>
+       <a-table-column title="管理员" data-index="dutyName" align="center"></a-table-column>
+        <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="操作" align="center">
           <template slot-scope="record">
             <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
@@ -193,25 +193,14 @@
          <a-form-model-item ref="number" label="容纳人数" prop="number" >
           <a-input v-model="formAdd.number" placeholder="请输入房间容纳人数"></a-input>
         </a-form-model-item>
-        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" >
-          <!-- <a-input v-model="formAdd.dutyName" placeholder="请输入管理员"></a-input> -->
-           <a-select   showSearch v-model="formModify.dutyName" placeholder="请选择管理员">
-            <a-select-option value="李霞">李霞</a-select-option>
-            <a-select-option value="尤晓梅">尤晓梅</a-select-option>
-            <a-select-option value="黄丽娟">黄丽娟</a-select-option>
-          </a-select>
-        </a-form-model-item>
-        <a-form-model-item label="管理员电话" prop="dutyTel" >
-          <a-input v-model="formAdd.dutyTel" placeholder="请输入管理员电话"></a-input>
-        </a-form-model-item>
-        <a-form-model-item label="基本条件" prop="condition">
+        <a-form-model-item label="基本条件" ref="condition" prop="condition">
           <!-- <a-select v-model="formAdd.condition" placeholder="请选择条件">
             <a-select-option value="0">0：饮料、多媒体</a-select-option>
             <a-select-option value="1">1：饮料、风扇、多媒体</a-select-option>
             <a-select-option value="2">2：饮料、风扇、空调、多媒体</a-select-option>
             <a-select-option value="3">3：饮料、风扇、景观、多媒体</a-select-option>
           </a-select> -->
-       <a-checkbox-group @change="onChange">
+       <a-checkbox-group @change="onChangeCon" v-model="formAdd.condition">
         <a-row>
           <a-col :span="8">
             <a-checkbox value="茶水">
@@ -229,8 +218,8 @@
             </a-checkbox>
           </a-col>
           <a-col :span="8">
-            <a-checkbox value="盆栽">
-              盆栽
+            <a-checkbox value="绿化植物">
+              绿化植物
             </a-checkbox>
           </a-col>
           <a-col :span="8">
@@ -240,6 +229,17 @@
           </a-col>
         </a-row>
       </a-checkbox-group>
+        </a-form-model-item>
+                <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" >
+          <!-- <a-input v-model="formAdd.dutyName" placeholder="请输入管理员"></a-input> -->
+           <a-select   showSearch v-model="formModify.dutyName" placeholder="请选择管理员">
+            <a-select-option value="李霞">李霞</a-select-option>
+            <a-select-option value="尤晓梅">尤晓梅</a-select-option>
+            <a-select-option value="黄丽娟">黄丽娟</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item label="管理员电话" prop="dutyTel" >
+          <a-input v-model="formAdd.dutyTel" placeholder="请输入管理员电话"></a-input>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitAdd()">创建</a-button>
@@ -265,17 +265,6 @@
          <a-form-model-item label="容纳人数" prop="number">
           <a-input v-model="formModify.number" ></a-input>
         </a-form-model-item>
-        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
-          <!-- <a-input v-model="formModify.dutyName"></a-input> -->
-          <a-select   show-search v-model="formModify.dutyName">
-            <a-select-option value="李霞">李霞</a-select-option>
-            <a-select-option value="尤晓梅">尤晓梅</a-select-option>
-            <a-select-option value="黄丽娟">黄丽娟</a-select-option>
-          </a-select>
-        </a-form-model-item>
-        <a-form-model-item label="管理员电话" prop="dutyTel">
-          <a-input v-model="formModify.dutyTel"></a-input>
-        </a-form-model-item>
         <a-form-model-item label="基本条件" prop="condition">
           <!-- <a-select v-model="formModify.condition" placeholder="请选择条件">
             <a-select-option value="0">0：饮料、多媒体</a-select-option>
@@ -283,7 +272,7 @@
             <a-select-option value="2">2：饮料、风扇、空调、多媒体</a-select-option>
             <a-select-option value="3">3：饮料、风扇、景观、多媒体</a-select-option>
           </a-select> -->
-           <a-checkbox-group @change="onChange">
+           <a-checkbox-group @change="onChangeCon">
             <a-row>
               <a-col :span="8">
                 <a-checkbox value="茶水">
@@ -301,8 +290,8 @@
                 </a-checkbox>
               </a-col>
               <a-col :span="8">
-                <a-checkbox value="盆栽">
-                  盆栽
+                <a-checkbox value="绿化植物">
+                  绿化植物
                 </a-checkbox>
               </a-col>
               <a-col :span="8">
@@ -312,6 +301,17 @@
               </a-col>
             </a-row>
         </a-checkbox-group>
+        </a-form-model-item>
+        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
+          <!-- <a-input v-model="formModify.dutyName"></a-input> -->
+          <a-select   show-search v-model="formModify.dutyName">
+            <a-select-option value="李霞">李霞</a-select-option>
+            <a-select-option value="尤晓梅">尤晓梅</a-select-option>
+            <a-select-option value="黄丽娟">黄丽娟</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item label="管理员电话" prop="dutyTel">
+          <a-input v-model="formModify.dutyTel"></a-input>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitModify()">修改</a-button>
@@ -332,7 +332,7 @@ const dataRoom = [
     dutyName: "李霞",
     dutyTel: "13759655332",
     room: "会议室203",
-    condition: "茶水、多媒体"
+    condition:"茶水，多媒体"
   },
   {
     index: 2,
@@ -341,7 +341,7 @@ const dataRoom = [
     dutyName: "王莉莉",
     dutyTel: "13759655348",
     room: "会议室204",
-    condition: "茶水、排气扇、多媒体"
+    condition: "茶水，排气扇，多媒体"
   },
   {
   index: 3,
@@ -350,7 +350,7 @@ const dataRoom = [
     dutyName: "尤晓梅",
     dutyTel: "13053955537",
     room: "会议室205",
-    condition: "茶水、排气扇、盆栽、多媒体"
+    condition: "茶水，排气扇，绿化植物，多媒体"
   },
   {
    index: 4,
@@ -359,7 +359,7 @@ const dataRoom = [
     dutyName: "黄丽娟",
     dutyTel: "13659655381",
     room: "会议室206",
-    condition: "茶水、盆栽、空调、多媒体"
+    condition: "茶水，绿化植物，空调，多媒体"
   }
 ];
 const columns = [
@@ -431,7 +431,7 @@ export default {
       number: '',
         dutyName: '',
         dutyTel: '',
-        condition: '',
+        condition: [],
         remark: ''
       },
         radioStyle: {
@@ -441,6 +441,13 @@ export default {
       },
       formModify: {},
       rules: {
+        condition:[
+            {
+            required: true,
+            message: '请选择基本条件',
+            trigger: 'change'
+          }
+        ],
          area: [
           {
             required: true,
@@ -490,7 +497,10 @@ export default {
     areaChange(value){
       console.log(value)
     },
-    onChange(){},
+    onChangeCon(checkedValues){
+       console.log('checked = ', checkedValues);
+      console.log('value = ', this.value);
+    },
     searchQuery() {
     },
     searchReset() {

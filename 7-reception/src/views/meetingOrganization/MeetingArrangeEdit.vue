@@ -87,7 +87,7 @@
             ></a-date-picker>
           </a-form-model-item>
           <a-form-model-item label="餐别" prop="type">
-            <a-select v-model="formEat.type" placeholder="选择餐别">
+            <a-select v-model="formEat.type" placeholder="请选择餐别">
               <a-select-option value="早餐">早餐</a-select-option>
               <a-select-option value="午餐">午餐</a-select-option>
               <a-select-option value="晚餐">晚餐</a-select-option>
@@ -331,8 +331,8 @@ export default {
       formEat: {
         dateStart: undefined,
         dateEnd: undefined,
-        type: '',
-        way: ''
+        type:  undefined,
+        way:  undefined,
       },
       dataEat: [],
       rulesEat: {
@@ -409,6 +409,11 @@ export default {
           let endDate = this.formHotel.dateEnd.format('YYYY年MM月DD日')
           let dateTime = startDate + '~' + endDate
           console.log(dateTime)
+          // let dateA=dateTime.split('~')
+          // console.log(dateA)
+          //  console.log(dateA[0])
+          //  let b=this.moment(dateA[0], 'YYYY-MM-DD')
+          //  console.log(b)
           let a = {
             index: this.formHotel.index,
             dateTime: dateTime,
@@ -479,7 +484,6 @@ export default {
           this.$message.success('添加成功!')
           this.formRoom.room = undefined
           this.formRoom.range = undefined
-          this.formRoom.number = undefined
         } else {
           console.log('error submit!!')
           return false

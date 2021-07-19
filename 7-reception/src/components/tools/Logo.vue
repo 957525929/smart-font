@@ -21,7 +21,7 @@
     props: {
       title: {
         type: String,
-        default: '烟草公司会议接待管理系统',
+        default: '接待管理系统',
         required: false
       },
       showTitle: {

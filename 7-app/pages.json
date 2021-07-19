@@ -1,0 +1,249 @@
+{
+	"pages": [
+		//pages数组中第一项表示应用启动页，写的时候注意分包，方便以后一端多用！！！
+		{
+			"path": "pages/index/index",
+			"style": {}
+		},
+		{
+			"path": "pages/appointment/index",
+			"style":{
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+		},
+		{
+			"path": "pages/appointment/hotel",
+			"style":{
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+		},
+		{
+			"path": "pages/appointment/meeting",
+			"style":{
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+		}, 
+		{
+			"path": "pages/notice/index",
+			"style":{
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+				
+		},
+		{
+			"path": "pages/record/index",
+			"style":{
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+				
+		},
+		{
+			"path": "pages/record/timeline",
+			"style":{
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+				
+		},
+		//以下为示例组件库
+		{
+			"path": "pages/basics/layout",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/background",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/text",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/icon",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/button",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/design",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/tag",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/avatar",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/progress",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/shadow",
+			"style": {}
+		},
+		{
+			"path": "pages/basics/loading",
+			"style": {}
+		},
+		{
+			"path": "pages/component/bar",
+			"style": {}
+		},
+		{
+			"path": "pages/component/nav",
+			"style": {}
+		},
+		{
+			"path": "pages/component/list",
+			"style": {}
+		},
+		{
+			"path": "pages/component/card",
+			"style": {}
+		},
+		{
+			"path": "pages/component/form",
+			"style": {}
+		},
+		{
+			"path": "pages/component/timeline",
+			"style": {}
+		},
+		{
+			"path": "pages/component/chat",
+			"style": {}
+		},
+		{
+			"path": "pages/component/swiper",
+			"style": {}
+		},
+		{
+			"path": "pages/component/modal",
+			"style": {}
+		},
+		{
+			"path": "pages/component/steps",
+			"style": {}
+		}, {
+			"path": "pages/plugin/indexes",
+			"style": {}
+		}, {
+			"path": "pages/plugin/animation",
+			"style": {}
+		}, {
+			"path": "pages/plugin/drawer",
+			"style": {}
+		}, {
+			"path": "pages/plugin/verticalnav",
+			"style": {}
+		}
+	],
+	"globalStyle": {
+		"mp-alipay": {
+			/* 支付宝小程序特有相关 */
+			"transparentTitle": "always",
+			"allowsBounceVertical": "NO"
+		},
+		"navigationBarBackgroundColor": "#04009A",
+		"navigationBarTitleText": "智慧烟草",
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "white",
+		"backgroundColor": "#04009A",
+		"backgroundColorTop": "#E0E0E0",
+		"backgroundColorBottom": "#E0E0E0"
+		
+	},
+	// "tabBar": {
+	// 	"color": "#FEA82F",
+	// 	"selectedColor": "#7A7A7A",
+	// 	"borderStyle": "black",
+	// 	"backgroundColor": "#FEA82F",
+	// 	"list": [{
+	// 			"pagePath": "pages/appointment/index",
+	// 			"iconPath": "static/meeting/images/public/appointment.png",
+	// 			"selectedIconPath": "static/meeting/images/public/appointment.png",
+	// 			"text": "预约管理"
+	// 		},
+	// 		{
+	// 		//	"pagePath": "pages/tabBar/workbench",
+	// 			"iconPath": "static/meeting/images/public/record.png",
+	// 			"selectedIconPath": "static/meeting/images/public/record.png",
+	// 			"text": "会议记录"
+	// 		},
+	// 		{
+	// 		//	"pagePath": "pages/tabBar/statistics",
+	// 			"iconPath": "static/meeting/images/public/notice.png",
+	// 			"selectedIconPath": "static/meeting/images/public/notice.png",
+	// 			"text": "会议提醒"
+	// 		},
+	// 		{
+	// 		//	"pagePath": "pages/tabBar/person",
+	// 			"iconPath": "static/meeting/images/public/person.png",
+	// 			"selectedIconPath": "static/meeting/images/public/person.png",
+	// 			"text": "个人中心"
+	// 		}
+	// 	]
+	// },
+
+	// "subPackages":[{
+	// 		"root": "pages/appointment",
+	// 		"name": "appointment",
+	// 		"pages": [{
+	// 			"path": "index",
+	// 			"style": {
+	// 				"navigationBarTitleText": "预约管理",
+	// 				"app-plus": {
+	// 					"titleNView": false,
+	// 					"bounce": "none"
+	// 				}
+	// 			}
+	// 		}, {
+	// 			"path": "hotel",
+	// 			"style": {
+	// 				"navigationBarTitleText": "酒店预定",
+	// 				"app-plus": {
+	// 					"titleColor": "#FFFFFF",
+	// 					"backgroundColor": "#04009A",
+	// 					"titleSize": "16px"
+	// 				}
+	// 			}
+	// 		},{
+	// 			"path": "meeting",
+	// 			"style": {
+	// 				"navigationBarTitleText": "会议室预约",
+	// 				"app-plus": {
+	// 					"titleColor": "#FFFFFF",
+	// 					"backgroundColor": "#04009A",
+	// 					"titleSize": "16px"
+	// 				}
+	// 			}
+	// 		}]
+	// }],
+	"usingComponts": true,
+		"condition": { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [{
+				"name": "表单", //模式名称
+				"path": "pages/component/form", //启动页面
+				"query": "" //启动参数
+			}
+		]
+	}
+
+}
