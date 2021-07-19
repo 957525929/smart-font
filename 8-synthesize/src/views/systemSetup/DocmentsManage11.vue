@@ -28,7 +28,7 @@
         <a-row type="flex" justify="end">
           <a-col>
             <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
-            <a-button @click="add" type="dashed" icon="plus">添加</a-button>
+            <a-button @click="handleAdd" type="dashed" icon="plus">添加</a-button>
             <a-dropdown v-if="selectedRowKeys.length > 0">
               <a-menu slot="overlay">
                 <a-menu-item key="1">
@@ -53,7 +53,7 @@
         <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }">
           <!-- <a slot="docTypeList" slot-scope="text" @click="showDetails(text)">{{text}}</a> -->
 
-          <span slot="action" slot-scope="text, record, index">
+          <span slot="action" slot-scope="text, record">
             <a @click="handleEdit(record)">编辑</a>
             <a-divider type="vertical" />
 
@@ -64,21 +64,7 @@
         </a-table>
       </div>
       <!-- 表单区域 -->
-      <!-- <DocModal ref="modalForm" @ok="modalFormOk"></DocModal> -->
-
-      <a-modal :title="rowRecord.docType?'编辑':'新增'" :width="400" :visible="visible" :confirmLoading="confirmLoading" @ok="addOk" @cancel="handleCancel" okText="提交" cancelText="关闭">
-
-        <a-spin :spinning="confirmLoading">
-          <a-form :form="form">
-
-            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="文档类型" hasFeedback>
-              <a-input style="width:200px" v-model="rowRecord.docType" placeholder="请输入文档类型" />
-            </a-form-item>
-
-          </a-form>
-        </a-spin>
-      </a-modal>
-
+      <DocModal :visible="visible" :dataParent="data" :on-change-changeData="changeData" :modalForm="modalForm"></DocModal>
     </div>
   </a-card>
 </template>
@@ -87,7 +73,7 @@
 <script>
 //vue
 import PageTemplate from '@/components/page/PageTemplate.vue'
-// import DocModal from './modules/DocModal.vue'
+import DocModal from './modules/DocModal.vue'
 // js
 import { columns, data } from './js/DocType'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
@@ -101,7 +87,7 @@ export default {
   components: {
     PageTemplate,
     JEllipsis,
-    // DocModal,
+    DocModal,
   },
   data() {
     const rowSelection = {
@@ -111,69 +97,39 @@ export default {
       },
     }
     return {
+      modalForm: {},
       current_start_date: formatDate(new Date().getTime() - 30 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
       current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
       moment,
       rowSelection,
       data: NEW_DEVLIST.data,
       columns: NEW_DEVLIST.columns,
-      count: 1,
-      rowRecord: {},
-      url: {
-        list: '/sys/quartzJob/list',
-        delete: '/sys/quartzJob/delete',
-        deleteBatch: '/sys/quartzJob/deleteBatch',
-        pause: '/sys/quartzJob/pause',
-        resume: '/sys/quartzJob/resume',
-        exportXlsUrl: 'sys/quartzJob/exportXls',
-        importExcelUrl: 'sys/quartzJob/importExcel',
-      },
-      // title: "操作",
-      buttonStyle: 'solid',
-      visible: false,
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 5 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-      },
-      confirmLoading: false,
-      form: this.$form.createForm(this),
+      deleteModalVisible: false,
+      visible: false
+      // url: {
+      //   list: '/sys/quartzJob/list',
+      //   delete: '/sys/quartzJob/delete',
+      //   deleteBatch: '/sys/quartzJob/deleteBatch',
+      //   pause: '/sys/quartzJob/pause',
+      //   resume: '/sys/quartzJob/resume',
+      //   exportXlsUrl: 'sys/quartzJob/exportXls',
+      //   importExcelUrl: 'sys/quartzJob/importExcel',
+      // },
+
     }
   },
   methods: {
     deleteIndex(index) {
       this.currentIndex = index
       this.data.splice(this.currentIndex, 1)
+      // console.log(val)
     },
-
-    add() {
-      this.visible = true
+    changeData(val) {
+      console.log(1111)
+      this.data = val
     },
-    handleEdit(value) {
-      this.visible = true
-      this.rowRecord = value
-    },
-    addOk() {
-      this.visible = false
-      if (this.docType != '') {
-        const newData = {
-          key: this.count,
-          docType: this.rowRecord.docType,
-          createTime: formatDate(new Date().getTime(), 'yyyy-MM-dd hh:mm:ss'),
-          value: 1,
-        }
-        console.log(newData)
-        this.data = [...this.data, newData]
-        this.count = this.count + 1
-      }
-      this.rowRecord = {}
-    },
-    handleCancel() {
-      this.visible = false
-      this.rowRecord = {}
+    handleAdd() {
+      this.visible = true;
     }
   },
 }
