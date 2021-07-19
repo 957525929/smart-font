@@ -162,7 +162,7 @@ export const mockMenuData = {
           {
             "keepAlive": false,
             "internalOrExternal": false,
-            "icon": "setting",
+            "icon": "dot-chart",
             "title": "报表统计"
           },
         "name": "statistics-table",
