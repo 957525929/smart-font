@@ -150,7 +150,7 @@
             </td>
           </tr>
           <tr>
-            <a-button icon="plus" @click="addPeople">增加外来人员</a-button>
+            <a-button icon="plus" @click="addPeople">新增外来人员</a-button>
           </tr>
           <tr>
             <td colspan="3">
@@ -319,6 +319,7 @@ export default {
       meetingJoinsMembers: [], //会议成员
       meetingComments: '', //备注
       treeData,
+      i:0,
       //会议人员目录树
       treeDatas: [], //目录树信息汇总
       MembersAll: [], //所有待选参会人员汇总
@@ -433,13 +434,15 @@ export default {
     addPeople() {
       this.visibleAdd = true
     },
-    onSubmitAdd() {
+    onSubmitAdd() {   
       this.visibleAdd = false
       let name = this.formAdd.name
       let a = {
-        title: name
+        title: name,
+        key:this.i++
       }
       this.treeData[5].children.push(a)
+      this.MembersAll.push(a)
       // console.log(this.treeData[5]);
       this.$message.success('新增成功')
       this.formAdd.name = ''

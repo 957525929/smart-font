@@ -4,7 +4,7 @@
     <span>报警时间段：</span>
     <a-date-picker
       v-model="startValue"
-      :default-value="moment('2021-02-01')"
+      :default-value="moment(getstardate())"
       :disabled-date="disabledStartDate"
       format="YYYY-MM-DD"
       @openChange="handleStartOpenChange"
@@ -13,7 +13,7 @@
     <a-divider type="vertical" />
     <a-date-picker
       v-model="endValue"
-      :default-value="moment('2021-07-01')"
+      :default-value="moment(getenddate())"
       :disabled-date="disabledEndDate"
       format="YYYY-MM-DD"
       :open="endOpen"
@@ -65,6 +65,7 @@
 <script>
 import { areaData } from '../roomManager/data/area'
 import moment from 'moment'
+import { formatDate } from '@/utils/util'
 
 export default {
   data() {
@@ -76,6 +77,8 @@ export default {
       endValue: null,
       endOpen: false,
       toggleSearchStatus: false,
+      starDate: '',
+      endDate: '',
     }
   },
   watch: {
@@ -89,6 +92,15 @@ export default {
   methods: {
     moment,
     areaChange(value) {},
+
+    getstardate() {
+      this.starDate = formatDate(new Date().getTime() - 181 * 24 * 3600 * 1000, 'yyyy/MM/d')
+      return this.starDate
+    },
+    getenddate() {
+      this.endDate = formatDate(new Date().getTime() - 0 * 24 * 3600 * 1000, 'yyyy/MM/d')
+      return this.endDate
+    },
 
     //日期选择
     disabledStartDate(startValue) {

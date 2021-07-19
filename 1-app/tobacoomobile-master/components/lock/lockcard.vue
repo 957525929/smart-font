@@ -7,10 +7,10 @@
 					<span class="card-left">
 						<!-- 显示不同图片 -->
 						<image class="card-img" :src="imgSrc[cardType.id]" mode="scaleToFill"
-							style="width: 8.8vh; height: 8.8vh;"></image>
+							style="width: 5vh; height: 5vh;"></image>
 					</span>
 					<span class="card-center">
-						<view>
+						<view >
 							<span class="title">名称：</span>
 							<span class="title flex-sub text-left">{{item.name}}</span>
 						</view>
@@ -46,8 +46,8 @@
 
 				// 图片
 				imgSrc: [
-					"../../static/lock/message.png",
-					"../../static/lock/已通过.png",
+					"../../static/lock/锁.png",
+					"../../static/lock/lockfill.png",
 				],
 				// 颜色
 				styleObject: [{
@@ -79,7 +79,8 @@
 	}
 
 	.card-img {
-		margin: 0.8vh 2vh;
+		margin: 2.5vh 3vh;
+		
 	}
 
 	.card-center {

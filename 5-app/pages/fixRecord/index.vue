@@ -4,36 +4,63 @@
 			<block slot="backText" @tap="back">返回</block>
 			<block slot="content">维修登记</block>
 		</cu-custom>
-		<view class="formArea backColor">
-			<uni-forms :modelValue="formData" ref="form" border>
-				<uni-forms-item label="车辆" :label-width='labelWidth' name="licenseNum">
-					<uni-combox :candidates="cars" v-model="formData.licenseNum"></uni-combox>
-				</uni-forms-item>
-				<uni-forms-item label="报修时间" :label-width='labelWidth' name="jbDate">
-					<picker mode="date" :value="date1">
-						<view style="margin-top: 15rpx;">{{date1}}</view>
-					</picker>
-				</uni-forms-item>
-				<uni-forms-item label="报修人" name="charger" :label-width='labelWidth'>
-					<uni-easyinput :inputBorder="false" v-model="formData.charger"  />
-				</uni-forms-item>
-				<uni-forms-item label="维修费用" name="amount" :label-width='labelWidth'>
-					<uni-easyinput :inputBorder="false" v-model="formData.amount"  />
-				</uni-forms-item>
-				<uni-forms-item label="维修内容" name="content" :label-width='labelWidth'>
-					<uni-easyinput :inputBorder="false" v-model="formData.content"  />
-				</uni-forms-item>
-				<button type="primary" class="submitBtn" @click="submitForm">提交</button>
-			</uni-forms>
-		</view>
-		<view class="imgPrt backColor">
-			票据图片
-			<uni-file-picker 
-			    v-model="imageValue" 
-			    fileMediatype="image" 
-			    mode="grid" 
-			/>
-		</view>
+		<form>
+			<view class="cu-form-group">
+				<view class="title">车牌号</view>
+				<input></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">报修时间</view>
+				<picker mode="date" :value="date" @change="DateChange">
+					<view class="picker">
+						{{date}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">承修单位</view>
+				<input></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">维修费用</view>
+				<input></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">配件费</view>
+				<input></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">维修内容</view>
+				<input></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">更换主要部件</view>
+				<input></input>
+			</view>
+			<view class="cu-bar bg-white margin-top">
+				<view class="action">
+					票据图片
+				</view>
+				<view class="action">
+					{{imgList.length}}/4
+				</view>
+			</view>
+			<view class="cu-form-group">
+				<view class="grid col-4 grid-square flex-sub">
+					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage"
+						:data-url="imgList[index]">
+						<image :src="imgList[index]" mode="aspectFill"></image>
+						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+							<text class='cuIcon-close'></text>
+						</view>
+					</view>
+					<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+						<text class='cuIcon-cameraadd'></text>
+					</view>
+				</view>
+			</view>
+			<button type="primary" class="margin-top" @click="submitForm">提交</button>
+		</form>
 	</view>
 </template>
 
@@ -49,95 +76,54 @@
 		},
 		data() {
 			const currentDate = this.getDate({
-			            format: true
-			        })
+				format: true
+			})
 			return {
-				date1:currentDate,
-				date2:'-',
-				labelWidth: 95,
+				date: currentDate,
 				cars: [],
-				formData: {
-					licenseNum: undefined,
-					charger:undefined,
-					amount:undefined,
-					content:undefined,
-				},
-				imageValue:undefined,
-				maintainType:[
-					{
-						value:'日常例行保养',
-						text:'日常例行保养'
-					},
-					{
-						value:'一级保养',
-						text:'一级保养'
-					},
-					{
-						value:'二级保养',
-						text:'二级保养'
-					},
-					{
-						value:'磨合期保养',
-						text:'磨合期保养'
-					},
-					{
-						value:'季节性保养',
-						text:'季节性保养'
-					},
-					{
-						value:'美容护理',
-						text:'美容护理'
-					}
-				]
+				imgList: [],
 			}
 		},
 		methods: {
 			back() {
-				// uni.switchTab({
-				// 	url: '/pages/tabBar/homepage'
-				// });
 				uni.navigateBack()
 			},
-			submitForm(form) {
-				// 手动提交表单
-				this.$refs.form.validate().then((res) => {
-					console.log('表单返回值：', res)
-				})
+			submitForm(form) {},
+			DateChange(e) {
+				this.date = e.detail.value
+			},
+			ChooseImage() {
+				uni.chooseImage({
+					count: 4, //默认9
+					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album'], //从相册选择
+					success: (res) => {
+						if (this.imgList.length != 0) {
+							this.imgList = this.imgList.concat(res.tempFilePaths)
+						} else {
+							this.imgList = res.tempFilePaths
+						}
+					}
+				});
 			},
 			getDate(type) {
-			            const date = new Date();
-			            let year = date.getFullYear();
-			            let month = date.getMonth() + 1;
-			            let day = date.getDate();
-			
-			            if (type === 'start') {
-			                year = year - 60;
-			            } else if (type === 'end') {
-			                year = year + 2;
-			            }
-			            month = month > 9 ? month : '0' + month;
-			            day = day > 9 ? day : '0' + day;
-			            return `${year}-${month}-${day}`;
-			        }
+				const date = new Date();
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1;
+				let day = date.getDate();
+
+				if (type === 'start') {
+					year = year - 60;
+				} else if (type === 'end') {
+					year = year + 2;
+				}
+				month = month > 9 ? month : '0' + month;
+				day = day > 9 ? day : '0' + day;
+				return `${year}-${month}-${day}`;
+			}
 		}
 	}
 </script>
 
 <style scoped>
-	.formArea {
-		padding-left: 25rpx;
-		padding-right: 25rpx;
-	}
-	.imgPrt{
-		margin-top: 20rpx;
-		padding:40rpx 0 80rpx 25rpx
-	}
-	.submitBtn{
-		position: fixed;
-		width: 95%;
-		left:auto;
-		right:auto;
-		bottom:200rpx;
-	}
 </style>
-

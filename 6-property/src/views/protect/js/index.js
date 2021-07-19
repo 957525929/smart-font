@@ -3,6 +3,9 @@ import {
     taskType,
     proPeriod
   } from "@/utils/dataDictionary.js";
+  import {
+    data as facData
+  } from "@/views/person/staff/js/index.js";
 // 全部
 export const proMenu = [
     {
@@ -52,7 +55,12 @@ export const loginInfo = [{
 {
     title: '执行人',
     key: 'person',
-    value:""
+    value:"",
+    type:"a-select",
+    valueEnum:{...facData.map(item => {
+        return {tableValue:item.devName}
+      })}
+    
 },{
     title: '执行地点',
     key: 'address',
