@@ -1,10 +1,11 @@
 <template>
-  <div :style="{ padding: '0 0 32px 32px' }">
+<!--  <div :style="{ padding: '0 0 32px 32px' }">-->
+  <div>
     <h4 :style="{ marginBottom: '20px' }">{{ title }}</h4>
     <v-chart :force-fit="true" :height="height" :data="data" :scale="scale" :onClick="handleClick">
       <v-tooltip/>
       <v-axis/>
-      <v-legend/>
+<!--      <v-legend/>-->
       <v-line position="type*y" color="x"/>
       <v-point position="type*y" color="x" :size="4" :v-style="style" :shape="'circle'"/>
     </v-chart>

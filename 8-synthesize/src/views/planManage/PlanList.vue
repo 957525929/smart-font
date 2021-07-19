@@ -1,111 +1,97 @@
 <template>
-  <a-card :bordered="false">
-    <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
-      <a-form layout="inline" @keyup.enter.native="searchQuery">
-        <a-row :gutter="10">
-          <a-col :md="5" :sm="10">
-            <a-form-item label="计划名称">
-              <a-input style="width: 140px" placeholder="请输入计划名称"></a-input>
-            </a-form-item>
-          </a-col>
-
-          <a-col :md="5" :sm="9">
-            <a-form-item label="计划状态">
-              <a-select style="width: 145px" v-model="queryParam.status" placeholder="请选择计划状态">
-                <a-select-option value="0">未开始</a-select-option>
-                <a-select-option value="1">进行中</a-select-option>
-                <a-select-option value="2">已完成</a-select-option>
-                <a-select-option value="3">已超时</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-
-          <a-col :sm="10">
-            <a-form-item label="时间">
-              <a-date-picker style="width: 140px" placeholder="开始时间" />
-              ~
-              <a-date-picker style="width: 140px" placeholder="结束时间" />
-            </a-form-item>
+  <div>
+    <PageTemplate :columns="data.columns">
+      <div class="table-operator">
+        <a-row type="flex" justify="end">
+          <a-col>
+            <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+            <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+            <!-- <a-button type="dashed" icon="download" @click="handleExportXls(`${text}`)">导出</a-button> -->
+            <a-button type="dashed" icon="download" @click="handleExportXls(`${currentPlanName}`)">导出</a-button>
+            <a-button v-if="selectedRowKeys.length > 0" style="margin-left: 8px"> 批量删除 </a-button>
           </a-col>
         </a-row>
-      </a-form>
-    </div>
+      </div>
 
-    <div class="table-operator">
-      <a-row type="flex" justify="end">
-        <a-col>
-          <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
-          <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-          <!-- <a-button type="dashed" icon="download" @click="handleExportXls(`${text}`)">导出</a-button> -->
-          <a-button type="dashed" icon="download" @click="handleExportXls(`${currentPlanName}`)">导出</a-button>
-          <a-button v-if="selectedRowKeys.length > 0" style="margin-left: 8px"> 批量删除 </a-button>
-        </a-col>
-      </a-row>
-    </div>
-
-    <!-- table区域-begin -->
-    <div>
-      <a-table
-        ref="table"
-        size="middle"
-        :model="data"
-        bordered
-        :columns="data.columns"
-        :dataSource="data.dataSource"
-        :loading="loading"
-        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
-      >
-        <a slot="planNameList" slot-scope="text" @click="showDetails(text), handleExportXls3(`${currentItem}`)">{{
+      <!-- table区域-begin -->
+      <div>
+        <a-table ref="table" size="middle" :model="data" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }">
+          <a slot="planNameList" slot-scope="text" @click="showDetails(text), handleExportXls3(`${currentItem}`)">{{
           text
         }}</a>
 
-        <span slot="action" slot-scope="text, record, index">
-          <a @click="showDetails(record), gotoMenu(key)">详情</a>
+          <!-- <span slot="action" slot-scope="text, record, index">
+            <a @click="showDetails(record), gotoMenu(key)">详情</a> -->
           <!-- <a @click="showDetails(record)">详情</a> -->
 
-          <a-divider type="vertical" />
-          <a-dropdown>
-            <a class="ant-dropdown-link"
-              >更多
-              <a-icon type="down" />
-            </a>
-            <a-menu slot="overlay">
-              <a-menu-item><a @click="handleEdit(record)">编辑</a></a-menu-item>
-              <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => deleteIndex(index)">
-                  <a>删除</a>
-                </a-popconfirm>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
-        </span>
+          <!-- <a-divider type="vertical" />
+            <a-dropdown> -->
+          <!-- <a class="ant-dropdown-link">更多
+                <a-icon type="down" />
+              </a> -->
+          <!-- <a-menu slot="overlay">
+                <a-menu-item><a @click="handleEdit(record)">编辑</a></a-menu-item>
+                <a-menu-item> -->
+          <!-- <a-popconfirm title="确定删除吗?" @confirm="() => deleteIndex(index)">
+                    <a>删除</a>
+                  </a-popconfirm> -->
+          <!-- </a-menu-item>
+              </a-menu>
+            </a-dropdown>
+          </span> -->
+          <span slot="action" slot-scope="text, record">
+            <template v-for="(i, index) in record.action">
 
-        <!-- 状态渲染模板 -->
-        <template slot="customRenderStatus" slot-scope="status">
-          <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
-          <a-tag v-if="status === '1'" color="green">进行中</a-tag>
-          <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status === '3'" color="red"> 已超时 </a-tag>
-          <!-- <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
+              <template v-if="i.com === 'router-link'">
+                <router-link :key="i.tagName" :to="{ name: i.url }">{{ i.tagName }}</router-link>
+              </template>
+              <template v-else>
+                <a-dropdown :key="i.tagName">
+                  <a class="ant-dropdown-link">{{ i.tagName }}
+                    <a-icon type="down" />
+                  </a>
+                  <a-menu slot="overlay">
+                    <a-menu-item><a @click="handleEdit(record)">编辑</a></a-menu-item>
+                    <a-menu-item>
+                      <a-popconfirm title="确定删除吗?" @confirm="() => deleteIndex(index)">
+                        <a>删除</a>
+                      </a-popconfirm>
+                    </a-menu-item>
+                  </a-menu>
+                </a-dropdown>
+              </template>
+
+              <a-divider :key="i.tagName" type="vertical" v-if="index !== record.action.length - 1" />
+            </template>
+          </span>
+          <!-- 状态渲染模板 -->
+          <template slot="customRenderStatus" slot-scope="status">
+            <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
+            <a-tag v-if="status === '1'" color="green">进行中</a-tag>
+            <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
+            <a-tag v-if="status === '3'" color="red"> 已超时 </a-tag>
+            <!-- <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
               <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" />
             </a-form-item>
           </a-modal> -->
-        </template>
-      </a-table>
-    </div>
+          </template>
+        </a-table>
+      </div>
+    </PageTemplate>
     <!-- table区域-end -->
 
     <!-- 表单区域 -->
     <PlanListModal ref="modalForm" @ok="modalFormOk"> </PlanListModal>
-  </a-card>
+  </div>
 </template>
 
 <script>
 import PlanListModal from './modules/PlanListModal'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import JEllipsis from '@/components/jeecg/JEllipsis'
+import { status, importment } from "@/utils/dataDictionary.js";
+import PageTemplate from '@/components/page/PageTemplate.vue';
 
 export default {
   name: 'PlanList',
@@ -113,6 +99,7 @@ export default {
   components: {
     PlanListModal,
     JEllipsis,
+    PageTemplate
   },
   data() {
     const rowSelection = {
@@ -121,20 +108,20 @@ export default {
         console.log(this.currentPlanName)
       },
     }
-    const gotoMenu = (key) => {
-      if (key == 4) {
-        this.$router.replace({ path: '/planManage/tasklist' })
-      }
-      if (key == 3) {
-        this.$router.replace({ path: '/planManage/tasklist01' })
-      }
-      if (key == 2) {
-        this.$router.replace({ path: '/planManage/tasklist02' })
-      }
-      if (key == 1) {
-        this.$router.replace({ path: '/planManage/tasklist03' })
-      }
-    }
+    // const gotoMenu = (key) => {
+    //   if (key == 4) {
+    //     this.$router.replace({ path: '/planManage/tasklist' })
+    //   }
+    //   if (key == 3) {
+    //     this.$router.replace({ path: '/planManage/tasklist01' })
+    //   }
+    //   if (key == 2) {
+    //     this.$router.replace({ path: '/planManage/tasklist02' })
+    //   }
+    //   if (key == 1) {
+    //     this.$router.replace({ path: '/planManage/tasklist03' })
+    //   }
+    // }
     const data = {
       // 表头
       columns: [
@@ -153,13 +140,17 @@ export default {
           align: 'center',
           dataIndex: 'planName',
           width: 200,
+          unhidden: true,
           scopedSlots: { customRender: 'planNameList' },
         },
         {
-          title: '状态',
+          title: '计划状态',
           align: 'center',
           width: 100,
           dataIndex: 'status',
+          unhidden: true,
+          type: 'a-select',
+          valueEnum: status,
           scopedSlots: { customRender: 'customRenderStatus' },
         },
         {
@@ -203,6 +194,13 @@ export default {
           deadline: '2021-11-20',
           completionTime: '',
           content: '',
+          action: [{
+            tagName: "详情",
+            url: "planManage-TaskList03",
+            com: "router-link"
+          }, {
+            tagName: "更多",
+          }]
         },
         {
           key: '2',
@@ -213,6 +211,13 @@ export default {
           startTime: '2021-03-04 12:40:55',
           completionTime: '',
           content: '',
+          action: [{
+            tagName: "详情",
+            url: "planManage-TaskList02",
+            com: "router-link"
+          }, {
+            tagName: "更多",
+          }]
         },
         {
           key: '3',
@@ -223,6 +228,13 @@ export default {
           startTime: '2020-02-08 10:40:52',
           completionTime: '',
           content: '',
+          action: [{
+            tagName: "详情",
+            url: "planManage-TaskList01",
+            com: "router-link"
+          }, {
+            tagName: "更多",
+          }]
         },
         {
           key: '4',
@@ -234,13 +246,21 @@ export default {
           completionTime: '2020-12-19 16:10:20',
           content:
             '当工作到了一定的阶段，总结便是必不可少的。让我们从中发现优点，摒弃缺点，积累经验，推动未来工作的进展！',
+          action: [{
+            tagName: "详情",
+            url: "planManage-TaskList",
+            com: "router-link"
+          }, {
+            tagName: "更多",
+            // com: "TableModal
+          }]
         },
       ],
     }
 
     return {
       timeOut: '',
-      gotoMenu,
+      // gotoMenu,
       rowSelection,
       // description: '计划列表',
       // // 查询条件
@@ -305,6 +325,9 @@ export default {
       // console.log(e);
       // this.$message.error('Click on No');
       this.visible = false
+    },
+    showDelete() {
+      this.visible = true
     },
   },
 }

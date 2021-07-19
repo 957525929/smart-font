@@ -155,6 +155,50 @@ export const mockMenuData = {
       },
       {
         "redirect": null,
+        "path": "/statistics/table",
+        "component": "layouts/RouteView",
+        "route": "1",
+        "meta":
+          {
+            "keepAlive": false,
+            "internalOrExternal": false,
+            "icon": "dot-chart",
+            "title": "报表统计"
+          },
+        "name": "statistics-table",
+        "id": "11",
+        "children":
+          [
+            {
+              "path": "/statistics/material/materialIndex",
+              "component": "statistics/material/Index",
+              "route": "1",
+              "meta":
+                {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "title": "食料统计"
+                },
+              "name": "statistics-material-materialIndex",
+              "id": "111"
+            },
+            {
+              "path": "/statistics/food/foodIndex",
+              "component": "statistics/food/Index",
+              "route": "1",
+              "meta":
+                {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "title": "食品统计"
+                },
+              "name": "statistics-food-foodIndex",
+              "id": "112"
+            },
+          ],
+      },
+      {
+        "redirect": null,
         "path": "/system/mange",
         "component": "layouts/RouteView",
         "route": "1",

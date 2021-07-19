@@ -1,7 +1,7 @@
 
 import {
     taskType,
-    period
+    proPeriod
   } from "@/utils/dataDictionary.js";
 // 全部
 export const proMenu = [
@@ -34,7 +34,7 @@ export const loginInfo = [{
     value:"",
     key: 'devName',
     type:"a-select",
-    valueEnum:period
+    valueEnum:proPeriod
 },
 {
     title: '请选择时间范围',
