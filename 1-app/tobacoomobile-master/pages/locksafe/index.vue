@@ -5,7 +5,7 @@
 				<text class="cuIcon-title text-white"></text> 智能锁管理
 			</view>
 			<view class="action">
-				<navigator class="action" url="../../components/lock/serach?type=0" hover-class="none">
+				<navigator class="action" url="../../components/lock/safesearch" hover-class="none">
 					<text class="cuIcon-search"></text>
 					<text class="text-df">搜索</text>
 				</navigator>
@@ -21,7 +21,7 @@
 			</picker>
 		</view>
 		
-		<navigator class="action" url="../../components/lock/detail?type=1" hover-class="none">
+		<navigator class="action" url="../../components/lock/safedetail" hover-class="none">
 			<lockCard :cardType="type[0]"></lockCard>
 		</navigator>
 	</view>

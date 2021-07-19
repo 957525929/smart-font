@@ -10,7 +10,7 @@
 					<view class="title">房间：</view>
 					<view class="title flex-sub text-left">101</view>
 				</view>
-				<view v-if="type==3 || type==4" class="cu-form-group ">
+				<view v-if="type==3 || type==4 || type==5" class="cu-form-group ">
 					<view class="title">锁编号：</view>
 					<view class="title flex-sub text-left">S0001</view>
 				</view>
