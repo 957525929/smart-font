@@ -11,7 +11,7 @@
           <a-input placeholder="请输入管理员" v-model="queryParam.dutyName"></a-input>
         </a-col>
         <a-col :span="1"></a-col>
-           <a-col>
+        <a-col>
           <span>区域：</span>
         </a-col>
         <a-col>
@@ -23,7 +23,7 @@
             placeholder="请选择区域"
           ></a-cascader>
         </a-col>
-          <a-col :span="1"></a-col>
+        <a-col :span="1"></a-col>
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
@@ -38,7 +38,7 @@
             @click="addDuty()"
             icon="plus"
             :style="{ color: 'white', background:'orange'}"
-          >新增管理员</a-button>
+          >新增管理员</a-button>&nbsp;&nbsp;
           <a-button>
             <a-icon type="download" />导出
           </a-button>
@@ -80,7 +80,7 @@
         :wrapper-col="wrapperCol"
       >
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
-          <a-input v-model="formAdd.dutyName" placeholder="请输入管理员"></a-input>
+          <a-input v-model="formAdd.dutyName" placeholder="请输入管理员姓名"></a-input>
         </a-form-model-item>
         <a-form-model-item label="管理员电话" prop="dutyTel">
           <a-input v-model="formAdd.dutyTel" placeholder="请输入管理员电话"></a-input>
@@ -110,7 +110,6 @@
         :wrapper-col="wrapperCol"
         :rules="rules"
       >
-
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
           <!-- <a-input v-model="formModify.dutyName"></a-input> -->
           <a-select show-search v-model="formModify.dutyName">
@@ -198,7 +197,7 @@ export default {
         dutyTel: ''
       },
       formModify: {
-        area:[]
+        area: []
       },
       rules: {
         area: [
@@ -211,7 +210,7 @@ export default {
         dutyName: [
           {
             required: true,
-            message: '请输入管理员',
+            message: '请输入管理员姓名',
             trigger: 'blur'
           }
         ],
@@ -283,7 +282,7 @@ export default {
       //      return item.key
       //     }
       // })
-       this.formModify.area = record.area
+      this.formModify.area = record.area
       this.formModify.dutyName = record.dutyName
       this.formModify.dutyTel = record.dutyTel
     },
