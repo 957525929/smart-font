@@ -74,6 +74,15 @@ export const period = {
   4: { tableValue: '本年', searchValue: '本年', code: 4 },
   5: { tableValue: '自定义', searchValue: '自定义', code: 5},
 }
+/*养护周期 proPeriod*/
+export const proPeriod = {
+  0: { tableValue: '每日', searchValue: '今日', code: 0 },
+  1: { tableValue: '每周', searchValue: '本周', code: 1 },
+  2: { tableValue: '每月', searchValue: '本月', code: 2 },
+  3: { tableValue: '每季度', searchValue: '本季度', code: 3 },
+  4: { tableValue: '每年', searchValue: '本年', code: 4 },
+  5: { tableValue: '自定义', searchValue: '自定义', code: 5},
+}
 // 分类树
 export const DepartTree = [{
   children: [{
