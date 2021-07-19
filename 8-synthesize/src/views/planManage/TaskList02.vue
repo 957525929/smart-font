@@ -54,7 +54,7 @@
           <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
           <a-tag v-if="status === '1'" color="green">进行中</a-tag>
           <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status === '3'" color="red"> 已超时 </a-tag>
+          <a-tag v-if="status === '3'" color="red"> 已超期 </a-tag>
         </template>
       </a-table>
     </PageTemplate>

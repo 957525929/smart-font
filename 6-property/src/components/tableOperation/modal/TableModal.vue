@@ -26,8 +26,26 @@
                                     >{{ x.tableValue }}
                                 </a-select-option>
                             </a-select>
-                            <a-cascader v-else-if="item.type === 'a-cascader'" :options="item.valueEnum" placeholder="" change-on-select>
+                            <a-cascader
+                                v-else-if="item.type === 'a-cascader'"
+                                :options="item.valueEnum"
+                                placeholder=""
+                                change-on-select
+                            >
                             </a-cascader>
+                            <a-checkbox-group
+                                v-else-if="item.type === 'a-checkbox-group'"
+                                v-decorator="['checkbox-group']"
+                                style="width: 100%"
+                            >
+                                <a-row :gutter="24">
+                                    <a-col :span="24" v-for="x in item.valueEnum" :key="x.code">
+                                        <a-checkbox :value="x.tableValue">
+                                            <span>{{ x.tableValue }}</span>
+                                        </a-checkbox>
+                                    </a-col>
+                                </a-row>
+                            </a-checkbox-group>
                             <component
                                 style="width: 100%"
                                 :is="item.type || 'a-input'"

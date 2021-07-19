@@ -2,7 +2,15 @@
     <a-tabs default-active-key="1" :activeKey="current" @change="callback">
         <a-tab-pane v-for="item in fixMenu" :tab="item.title" :key="item.key">
             <PageTemplate :columns="columns" :searchCon="searchCon">
-                <a-table :columns="columns" :data-source="data">
+                <a-table
+                 :columns="columns"
+                 :data-source="data"
+                 :pagination="{
+                     size:'small',
+                    pageSize:10,
+                    showTotal:(total, range) => `第${range[0]}-${range[1]}条/总共${total}条`,
+                }"
+                >
                     <span slot="action" slot-scope="text, record">
                         <template v-for="(i, index) in record.action">
                             <a href="#" @click.stop="handleOps(i.com, record.devId, record.taskStatus)">{{

@@ -1,6 +1,6 @@
 <template>
     <a-row :gutter="10">
-        <a-col :md="7" :sm="24">
+        <a-col :md="24" :sm="24">
             <a-card :bordered="false">
                 <TableModal ref="groupModal" title="添加分组" :infoDetail="groupInfo"></TableModal>
                 <a-row>
@@ -48,7 +48,7 @@
                 </div>
             </a-card>
         </a-col>
-        <a-col :md="17" :sm="24">
+        <!-- <a-col :md="17" :sm="24">
             <a-card :bordered="false">
                 <TableModal
                  title="添加分类"
@@ -90,9 +90,8 @@
                         </span>
                     </a-table>
                 </PageTemplate>
-                <!-- <dept-role-info/> -->
             </a-card>
-        </a-col>
+        </a-col> -->
     </a-row>
 </template>
 

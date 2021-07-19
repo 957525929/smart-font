@@ -1,7 +1,16 @@
 <template>
     <div>
         <PageTemplate :columns="columns" :searchCon="searchCon">
-            <a-table :columns="columns" :data-source="data" style="marginTop:15px">
+            <a-table
+                :columns="columns"
+                :data-source="data"
+                style="margintop: 15px"
+                :pagination="{
+                    size:'small',
+                    pageSize: 10,
+                    showTotal: (total, range) => `第${range[0]}-${range[1]}条/总共${total}条`,
+                }"
+            >
             </a-table>
         </PageTemplate>
     </div>
@@ -15,11 +24,12 @@ import PageTemplate from '@/components/page/PageTemplate.vue'
 // js
 import { columns, data } from './js/index.js'
 // import { typeToComponent } from '@/utils/dataDictionary.js'
-const NEW_DEVLIST = Object.freeze({ columns, data})
+const NEW_DEVLIST = Object.freeze({ columns, data })
 export default {
     name: 'deviceList',
-    components: { PageTemplate, 
-    // TableDrawer, TableModal 
+    components: {
+        PageTemplate,
+        // TableDrawer, TableModal
     },
     created() {
         this.getList()
@@ -36,13 +46,13 @@ export default {
         }
     },
     methods: {
-        getList(){
-            this.columns.forEach(item=>{
-                if(item.valueEnum){
-                    this.data.map(res=>{
+        getList() {
+            this.columns.forEach((item) => {
+                if (item.valueEnum) {
+                    this.data.map((res) => {
                         res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
                         return res
-                    })                
+                    })
                 }
             })
         },
@@ -54,7 +64,7 @@ export default {
         //     // this.infoDetail = this.infoDetail.filter(item=>!item.hideInDetail)
         //     // //请求详情(无网络)
         //     // this.detailData = this.data.filter(item=>item.devId===id)[0]
-            
+
         //                 //处理数据
         //     let tempData = this.data.filter((item) => item.devId === id)[0]
         //     this.infoDetail = this.infoDetail.map((item) => {
