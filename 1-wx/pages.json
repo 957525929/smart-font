@@ -1,6 +1,5 @@
 {
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/home/index",
 			"style": {}
 		},
@@ -112,17 +111,21 @@
 		}, {
 			"path": "pages/person/message",
 			"style": {}
+		},
+		{
+			"path": "pages/person/message1",
+			"style": {}
+		}, {
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path": "pages/verify/index",
+			"style": {}
 		}
-	    ,{
-            "path" : "pages/search/search",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"mp-alipay": {
 			/* 支付宝小程序特有相关 */

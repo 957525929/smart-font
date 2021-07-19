@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<applyList v-if="PageCur=='applyList'"></applyList>
-		<verify v-if="PageCur=='verify'"></verify>
+		<!-- <verify v-if="PageCur=='verify'"></verify> -->
 		<person1 v-if="PageCur=='person1'"></person1>
 
 		<view class="cu-bar tabbar bg-white shadow foot">
@@ -13,12 +13,12 @@
 				<view :class="PageCur==''?'text-orange':'text-gray'">申请记录</view>
 			</view>
 
-			<view class="action" @click="NavChange" data-cur="verify">
+<!-- 			<view class="action" @click="NavChange" data-cur="verify">
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='verify'?'text-orange cuIcon-formfill':'text-gray cuIcon-formfill'"></text>
 				</view>
 				<view :class="PageCur=='verify'?'text-orange':'text-gray'">访问审核</view>
-			</view>
+			</view> -->
 			
 			<view class="action" @click="NavChange" data-cur="person1">
 				<view class='cuIcon-cu-image'>
