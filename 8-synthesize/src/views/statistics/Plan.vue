@@ -5,7 +5,7 @@
         <a-row :gutter="10">
           <a-col :md="6" :sm="9">
             <a-form-item label="类型">
-              <a-select class="w150" placeholder="请选择类型">
+              <a-select default-value="1" class="w150" placeholder="请选择类型">
                 <a-select-option value="0">计划</a-select-option>
                 <a-select-option value="1">任务</a-select-option>
               </a-select>
@@ -96,6 +96,11 @@ export default {
         },
       ],
     }
+  },
+  mounted() {
+    // this.searchCols = this.field.filter((item) => {
+    //   return item
+    // })
   },
 }
 </script>

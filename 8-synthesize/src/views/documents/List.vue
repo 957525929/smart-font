@@ -58,34 +58,18 @@
         <a-col>
           <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
           <a-button @click="handleAdd" type="dashed" icon="plus">新增</a-button>
-          <a-dropdown v-if="selectedRowKeys.length > 0">
-            <a-menu slot="overlay">
-              <a-menu-item key="1"> <a-icon type="delete" />删除 </a-menu-item>
-              <a-menu-item key="2">
-                <a-upload name="file" :multiple="true" :headers="headers"> <a-icon type="plus" /> 上传 </a-upload>
-              </a-menu-item>
-            </a-menu>
-            <a-button style="margin-left: 8px">
-              批量操作
-              <a-icon type="down" />
-            </a-button>
-          </a-dropdown>
+
+          <a-button v-if="selectedRowKeys.length > 0" style="margin-left: 8px">
+            批量删除
+          </a-button>
+
         </a-col>
       </a-row>
     </div>
 
     <!-- table区域-begin -->
     <div>
-      <a-table
-        ref="table"
-        size="middle"
-        bordered
-        rowKey="id"
-        :columns="columns"
-        :dataSource="data"
-        :loading="loading"
-        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
-      >
+      <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :loading="loading" :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }">
         <a slot="documentNameList" slot-scope="text" @click="showDetails(text), handleExportXls3(`${currentItem}`)">{{
           text
         }}</a>

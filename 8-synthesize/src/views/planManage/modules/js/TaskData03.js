@@ -1,3 +1,4 @@
+import { status, importment } from "@/utils/dataDictionary.js";
 export const data = [
     {
         key: '1',
@@ -42,6 +43,8 @@ export const columns = [
         width: 100,
         dataIndex: 'priority',
         unhidden: true,
+        type: 'a-select',
+        valueEnum: importment
     },
     {
         title: '任务状态',
@@ -50,6 +53,8 @@ export const columns = [
         dataIndex: 'status',
         scopedSlots: { customRender: 'customRenderStatus' },
         unhidden: true,
+        type: 'a-select',
+        valueEnum: status
     },
     {
         title: '创建时间',

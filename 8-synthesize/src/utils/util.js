@@ -1,6 +1,6 @@
 import * as api from '@/api/api'
 import { isURL } from '@/utils/validate'
-import onlineCommons from '@jeecg/antd-online-beta220'
+// import onlineCommons from '@jeecg/antd-online-beta220'
 
 export function timeFix() {
   const time = new Date()
