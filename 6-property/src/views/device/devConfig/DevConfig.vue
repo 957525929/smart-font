@@ -4,7 +4,8 @@
             <a-card :bordered="false">
                 <TableModal ref="groupModal" title="添加分组" :infoDetail="groupInfo"></TableModal>
                 <a-row>
-                    <a-button @click="handleAdd(2)" type="primary" style="margin-left: 10px">添加分组</a-button>
+                    <!-- <a-col :md="7" :sm="24"> -->
+                    <a-button @click="handleAdd(2)" type="primary" style="margin: 10px">添加分组</a-button>
                     <a-button
                         type="primary"
                         icon="download"
@@ -20,9 +21,11 @@
                         :action="importExcelUrl"
                         @change="handleImportExcel"
                     >
-                        <a-button type="primary" icon="import" style="margin-left: 10px">导入</a-button>
+                        <a-button type="primary" icon="import" style="margin: 10px">导入</a-button>
                     </a-upload>
-                    <a-button style="margin-left: 10px" @click="handleAdd">批量删除</a-button>
+                    <a-button style="margin: 10px" @click="handleAdd">批量删除</a-button>                        
+                    <!-- </a-col> -->
+
                 </a-row>
                 <div style="background: #fff; padding-left: 16px; height: 100%; margin-top: 5px">
                     <a-input-search style="width: 100%; margin-top: 10px" placeholder="请输入分组名称" />
@@ -125,6 +128,18 @@ export default {
             checkedSelected:[]
         }
     },
+    mounted() {
+        this.getList()
+    //    this.devInfo.forEach(item=>{
+    //        if(item.valueEnum){
+    //            this.data.map(res=>{
+    //                res[item.key] = item.valueEnum[res[item.key]].tableValue
+    //                return res
+    //            })
+    //        }
+    //    })
+
+    },
     methods: {
         getList() {
             devColumns.forEach((item) => {
@@ -174,6 +189,7 @@ export default {
         },
     },
     created() {
+
         //   this.currFlowId = this.$route.params.id
         //   this.currFlowName = this.$route.params.name
         // this.loadTree()

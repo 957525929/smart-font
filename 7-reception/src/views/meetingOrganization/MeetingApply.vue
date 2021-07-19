@@ -150,6 +150,9 @@
             </td>
           </tr>
           <tr>
+            <a-button icon="plus" @click="addPeople">增加外来人员</a-button>
+          </tr>
+          <tr>
             <td colspan="3">
               <label :style="{marginLeft:'20px'}">备注</label>
               <div class="bgc">
@@ -193,7 +196,7 @@
       <!-- 会议成员 -->
       <div class="nemberList">
         <a-tree
-          :tree-data="treeDatas"
+          :tree-data="treeData"
           v-model="checkedKeys"
           checkable
           :expanded-keys="expandedKeys"
@@ -221,89 +224,144 @@
         </div>-->
       </div>
     </div>
+    <!-- 新增外来人员 -->
+    <a-modal v-model="visibleAdd" title="新增外来人员" footer>
+      <a-form-model
+        ref="ruleForm"
+        :model="formAdd"
+        :rules="rules"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+      >
+        <a-form-model-item label="姓名" ref="name" prop="name">
+          <a-input v-model="formAdd.name" placeholder="请输入姓名"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="联系电话" ref="phone" prop="phone">
+          <a-input v-model="formAdd.phone" placeholder="请输入联系电话"></a-input>
+        </a-form-model-item>
+        <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
+          <a-button type="primary" @click="onSubmitAdd()">创建</a-button>
+          <a-button style="margin-left: 10px;" @click="cancleFormAdd()">取消</a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </a-modal>
   </a-card>
 </template>
 <script>
-import moment from "moment";
+import moment from 'moment'
 // import Mock from "mockjs";
 const treeData = [
   {
-    title: "物流管理处",
-    key: "0-0",
+    title: '物流管理处',
+    key: '0-0',
     children: [
-      { title: "王小帅", key: "0-0-0-0" },
-      { title: "刘晓霞", key: "0-0-0-1" },
-      { title: "游小美", key: "0-0-0-2" }
+      { title: '王小帅', key: '0-0-0' },
+      { title: '刘晓霞', key: '0-0-1' },
+      { title: '游小美', key: '0-0-2' }
     ]
   },
   {
-    title: "信息中心",
-    key: "0-1",
+    title: '信息中心',
+    key: '0-1',
     children: [
-      { title: "刘晓梅", key: "0-1-0-0" },
-      { title: "陈小媚", key: "0-1-0-1" },
-      { title: "刘小小", key: "0-1-0-2" }
+      { title: '刘晓梅', key: '0-1-0-0' },
+      { title: '陈小媚', key: '0-1-0-1' },
+      { title: '刘小小', key: '0-1-0-2' }
     ]
   },
   {
-    title: "烟叶管理处",
-    key: "0-2",
+    title: '烟叶管理处',
+    key: '0-2',
     children: [
-      { title: "吴芳菲", key: "0-2-0-0" },
-      { title: "李丽晶", key: "0-2-0-1" },
-      { title: "王亚亚", key: "0-2-0-2" }
+      { title: '吴芳菲', key: '0-2-0-0' },
+      { title: '李丽晶', key: '0-2-0-1' },
+      { title: '王亚亚', key: '0-2-0-2' }
     ]
   },
   {
-    title: "安全管理处",
-    key: "0-3",
+    title: '安全管理处',
+    key: '0-3',
     children: [
-      { title: "陈思思", key: "0-3-0-0" },
-      { title: "刘潇", key: "0-3-0-1" },
-      { title: "王菲", key: "0-3-0-2" }
+      { title: '陈思思', key: '0-3-0-0' },
+      { title: '刘潇', key: '0-3-0-1' },
+      { title: '王菲', key: '0-3-0-2' }
     ]
   },
   {
-    title: "卷烟销售管理处",
-    key: "0-4",
+    title: '卷烟销售管理处',
+    key: '0-4',
     children: [
-      { title: "吴燕燕", key: "0-4-0-0" },
-      { title: "陈思成", key: "0-4-0-1" },
-      { title: "刘雨菲", key: "0-4-0-2" }
+      { title: '吴燕燕', key: '0-4-0-0' },
+      { title: '陈思成', key: '0-4-0-1' },
+      { title: '刘雨菲', key: '0-4-0-2' }
+    ]
+  },
+  {
+    title: '外来人员管理处',
+    key: '0-5',
+    children: [
+      // { title: "吴燕燕", key: "0-4-0-0" },
+      // { title: "陈思成", key: "0-4-0-1" },
+      // { title: "刘雨菲", key: "0-4-0-2" }
     ]
   }
-];
+]
 export default {
   data() {
     return {
       //meetingTheme: "年度总结", //会议主题
-      meetingName: "第三季度物流管理会议", //会议名称
-      responsibleName: "张三", //负责人姓名
-      responsibleTelphone: "188600111111", //负责人电话
-      dateFormat: "YYYY年MM月DD日", //会议时间
-      meetingAddress: "总公司机关", //会议地点
+      meetingName: '第三季度物流管理会议', //会议名称
+      responsibleName: '张三', //负责人姓名
+      responsibleTelphone: '188600111111', //负责人电话
+      dateFormat: 'YYYY年MM月DD日', //会议时间
+      meetingAddress: '总公司机关', //会议地点
       meetingBarget: 1000, //会议预算
       meetingJoinsMembers: [], //会议成员
-      meetingComments: "", //备注
+      meetingComments: '', //备注
+      treeData,
       //会议人员目录树
       treeDatas: [], //目录树信息汇总
       MembersAll: [], //所有待选参会人员汇总
-      expandedKeys: [],
+      expandedKeys: ['0-0', '0-1', '0-2', '0-3'],
       autoExpandParent: true,
       checkedKeys: [],
       selectedKeys: [],
-      defaultFileList: []
-    };
+      defaultFileList: [],
+      visibleAdd: false,
+      labelCol: { span: 4 },
+      wrapperCol: { span: 15 },
+      formAdd: {
+        name: '',
+        phone: ''
+      },
+      rules: {
+        name: [
+          {
+            required: true,
+            message: '请输入姓名',
+            trigger: 'blur'
+          }
+        ],
+        phone: [
+          {
+            required: true,
+            message: '请输入联系电话',
+            trigger: 'blur'
+          }
+        ]
+      }
+    }
   },
   watch: {
     checkedKeys(val) {
       this.meetingJoinsMembers = this.MembersAll.filter(item => {
-        return val.includes(item.key);
-      });
+        // console.log(val.includes(item.key))
+        return val.includes(item.key)
+      })
     }
   },
   mounted() {
-    console.log(this.meetingJoinsMembers.length);
+    console.log(this.meetingJoinsMembers.length)
     // let datas = Mock.mock({
     // 'members|6': [{
     //     'id|+1': 11100,
@@ -327,16 +385,16 @@ export default {
     // console.log(departmentsLists)
     // this.treeDatas = departmentsLists.treeDatas;
 
-    this.treeDatas = treeData;
+    this.treeDatas = treeData
     //汇总所有人员名单
     this.meetingJoinsMembers = this.treeDatas.forEach(item => {
-      this.MembersAll = this.MembersAll.concat(item.children);
-    });
+      this.MembersAll = this.MembersAll.concat(item.children)
+    })
   },
   methods: {
     moment,
     timeChange(date, dateString) {
-      console.log(date, dateString);
+      console.log(date, dateString)
     },
     // menbersInfoChange() {},
     // handleClose(tag){
@@ -351,25 +409,47 @@ export default {
     // },
     //目录树选择变更
     onExpand(expandedKeys) {
-      this.expandedKeys = expandedKeys;
-      this.autoExpandParent = false;
+      this.expandedKeys = expandedKeys
+      this.autoExpandParent = false
     },
     onCheck(checkedKeys) {
-      console.log(checkedKeys);
-      this.checkedKeys = checkedKeys;
-      console.log(this.checkedKeys);
+      console.log(checkedKeys)
+      this.checkedKeys = checkedKeys
+      console.log(this.checkedKeys)
     },
     onSelect(selectedKeys) {
-      this.selectedKeys = selectedKeys;
+      this.selectedKeys = selectedKeys
     },
     submitApply() {
       // var apllyMeetingInfos = {};
     },
     handleChange(value) {
-      this.meetingName = value;
+      this.meetingName = value
+    },
+    onSelect(selectedKeys, info) {
+      console.log('onSelect', info)
+      this.selectedKeys = selectedKeys
+    },
+    addPeople() {
+      this.visibleAdd = true
+    },
+    onSubmitAdd() {
+      this.visibleAdd = false
+      let name = this.formAdd.name
+      let a = {
+        title: name
+      }
+      this.treeData[5].children.push(a)
+      // console.log(this.treeData[5]);
+      this.$message.success('新增成功')
+      this.formAdd.name = ''
+      this.formAdd.phone = ''
+    },
+    cancleFormAdd() {
+      this.visibleAdd = false
     }
   }
-};
+}
 </script>
 
 <style>
@@ -380,7 +460,7 @@ ul li {
 
 .clearfix {
   display: block;
-  content: "";
+  content: '';
   clear: both;
 }
 .fl {

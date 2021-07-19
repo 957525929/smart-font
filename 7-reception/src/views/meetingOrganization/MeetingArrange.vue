@@ -2,23 +2,42 @@
   <!-- 会议安排1 -->
   <a-card :bordered="false">
     <!-- 查询区域 -->
-    <!-- <div>
-      <a-form :form="form" layout="inline">
-        <a-form-item label="名称或编号：">
-          <a-input placeholder="请输入名称或编号" v-model="form.queryIDName"></a-input>
-        </a-form-item>
-        <a-form-item label="时间范围：" align="center">
-          <a-icon type="calendar" />
-          <span>从</span>
-          <a-range-picker @change="onChange" separator="到" :format="dateFormat" />
-        </a-form-item>
-        <a-form-item>
-          <a-button @click="searchQuery" icon="search" :style="{ color: 'blue' }"></a-button>
-        </a-form-item>
-      </a-form>
-    </div>-->
     <div class="table-page-search-wrapper">
-      <a-form layout="inline" @keyup.enter.native="searchQuery">
+      <a-row type="flex" align="middle">
+        <a-col>
+          <span>名称或编号：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入会议名称或编号" v-model="queryParam.IDName"></a-input>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>会议时间范围：</a-col>
+        <a-col>
+          <a-date-picker
+            @change="onChange"
+            placeholder="请选择开始"
+            :format="dateFormat"
+            v-model="queryParam.dateOne"
+          ></a-date-picker>
+          <span>&nbsp;~&nbsp;</span>
+          <a-date-picker
+            @change="onChange"
+            placeholder="请选择结束"
+            :format="dateFormat"
+            v-model="queryParam.dateTwo"
+          ></a-date-picker>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
+          <a-button
+            :style="{ background: '#49a9ee', color: 'white' }"
+            icon="search"
+            @click="searchQuery"
+          >查询</a-button>
+          <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
+        </a-col>
+      </a-row>
+      <!-- <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="名称或编号：">
@@ -57,16 +76,16 @@
             <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
           </a-col>
         </a-row>
-      </a-form>
+      </a-form>-->
     </div>
     <!-- 查询区域-END -->
     <!-- table区域-begin -->
-    <div>
-      <a-table :data-source="data"  :pagination="false" rowKey="id">
+    <div id="dataArrange">
+      <a-table :data-source="data" :pagination="false" rowKey="id">
         <a-table-column title="会议编号" data-index="id" align="left" width="150px" fixed="left"></a-table-column>
-         <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
-         <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>
-         <a-table-column title="会议预算（元）" data-index="budget" align="center"></a-table-column>
+        <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
+        <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>
+        <a-table-column title="会议预算（元）" data-index="budget" align="center"></a-table-column>
         <a-table-column title="会议时间" data-index="dateTime" align="center"></a-table-column>
         <a-table-column title="会议地点" data-index="address" align="center"></a-table-column>
         <a-table-column title="参会人数" data-index="number" align="center"></a-table-column>
@@ -139,14 +158,14 @@ const data = [
   {
     id: 'A1205',
     budget: '5000',
-     name: '安全管理会议',
-    theme:"安全管理",
-    dateStart:"2021-07-15",
-    dateEnd:"2021-07-16",
-    dateTime: '2021年07月15日~2021年07月16日',
+    name: '安全管理会议',
+    theme: '安全管理',
+    dateStart: '2021-07-25',
+    dateEnd: '2021-07-26',
+    dateTime: '2021年07月25日~2021年07月26日',
     address: '总公司机关',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    number:'4',
+    number: '4',
     dutyName: '林诺汐',
     dutyTel: '152690314587',
     audit: '已通过'
@@ -167,13 +186,13 @@ const data = [
     id: 'A1207',
     budget: '5000',
     name: '物流管理会议',
-    theme:"物流管理",
-    dateStart:"2021-07-16",
-    dateEnd:"2021-07-17",
-    dateTime: '2021年07月16日~2021年07月17日',
+    theme: '物流管理',
+    dateStart: '2021-07-26',
+    dateEnd: '2021-07-27',
+    dateTime: '2021年07月26日~2021年07月27日',
     address: '总公司机关',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-     number:'4',
+    number: '4',
     dutyName: '林诺汐',
     dutyTel: '152690314587',
     audit: '已通过'
@@ -198,46 +217,51 @@ export default {
       // console.log(dateString);
     },
     searchQuery() {
-      let IDName = this.queryParam.IDName
-      let newListData = []
-      let date1 = this.queryParam.dateOne
-      let date2 = this.queryParam.dateTwo
-      if (IDName && date1 && date2) {
-        let dateSearch = date1.format('YYYY年MM月DD日') + '~' + date2.format('YYYY年MM月DD日')
-        this.data.filter(item => {
-          if ((item.id.includes(IDName) || item.name.includes(IDName)) && item.dateTime.includes(dateSearch)) {
-            newListData.push(item)
-          }
-        })
-        this.data = newListData
-      } else {
-        if (IDName) {
-          this.data.filter(item => {
-            if (item.id.includes(IDName) || item.name.includes(IDName)) {
-              newListData.push(item)
-            }
-          })
-          this.data = newListData
-        }
-        if (date1 && date2) {
-          let dateSearch = date1.format('YYYY年MM月DD日') + '~' + date2.format('YYYY年MM月DD日')
-          //console.log(dateSearch);
-          this.data.filter(item => {
-            if (item.dateTime.includes(dateSearch)) {
-              console.log(111)
-              newListData.push(item)
-            }
-          })
-          this.data = newListData
-        }
-      }
+      // let IDName = this.queryParam.IDName
+      // let newListData = []
+      // let date1 = this.queryParam.dateOne
+      // let date2 = this.queryParam.dateTwo
+      // if (IDName && date1 && date2) {
+      //   let dateSearch = date1.format('YYYY年MM月DD日') + '~' + date2.format('YYYY年MM月DD日')
+      //   this.data.filter(item => {
+      //     if ((item.id.includes(IDName) || item.name.includes(IDName)) && item.dateTime.includes(dateSearch)) {
+      //       newListData.push(item)
+      //     }
+      //   })
+      //   this.data = newListData
+      // } else {
+      //   if (IDName) {
+      //     this.data.filter(item => {
+      //       if (item.id.includes(IDName) || item.name.includes(IDName)) {
+      //         newListData.push(item)
+      //       }
+      //     })
+      //     this.data = newListData
+      //   }
+      //   if (date1 && date2) {
+      //     let dateSearch = date1.format('YYYY年MM月DD日') + '~' + date2.format('YYYY年MM月DD日')
+      //     //console.log(dateSearch);
+      //     this.data.filter(item => {
+      //       if (item.dateTime.includes(dateSearch)) {
+      //         console.log(111)
+      //         newListData.push(item)
+      //       }
+      //     })
+      //     this.data = newListData
+      //   }
+      // }
     },
     searchReset() {
       this.data = data
       this.queryParam.IDName = ''
       this.queryParam.dateOne = undefined
       this.queryParam.dateTwo = undefined
-    },
+    }
   }
 }
 </script>
+<style scoped>
+#dataArrange {
+  margin-top: 20px;
+}
+</style>

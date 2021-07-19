@@ -4,9 +4,19 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" :form="form1">
         <a-row :gutter="24">
+<!--          <a-col :xl="6" :lg="8" :md="9" :sm="24">-->
+<!--            <a-form-item label="采购单号">-->
+<!--              <a-input placeholder="请输入" v-decorator="['purchaseOrderNumber']"></a-input>-->
+<!--            </a-form-item>-->
+<!--          </a-col>-->
+          <a-col :xl="6" :lg="8" :md="9" :sm="24" >
+            <a-form-item label="采购开始日期">
+              <j-date  v-decorator="['purchaseStartDate', {initialValue:this.purchaseStartDate}]" style='width: 100%'/>
+            </a-form-item>
+          </a-col>
           <a-col :xl="6" :lg="8" :md="9" :sm="24">
-            <a-form-item label="采购单号">
-              <a-input placeholder="请输入" v-decorator="['purchaseOrderNumber']"></a-input>
+            <a-form-item label="采购结束日期">
+              <j-date  v-decorator="['purchaseEndDate', {initialValue:this.purchaseEndDate}]" style='width: 100%'/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="5" :md="6" :sm="24">
@@ -22,19 +32,19 @@
               </a-select>
             </a-form-item>
           </a-col>
-          <a-col :xl="6" :lg="5" :md="6" :sm="24">
-            <a-form-item label="采购人">
-              <a-select
-                allowClear
-                placeholder="请选择"
-                v-decorator="['purchasePeople']"
-              >
-                <a-select-option v-for="d in purchasePeopleSelectData" :key="d.value">
-                  {{ d.text }}
-                </a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
+<!--          <a-col :xl="6" :lg="5" :md="6" :sm="24">-->
+<!--            <a-form-item label="采购人">-->
+<!--              <a-select-->
+<!--                allowClear-->
+<!--                placeholder="请选择"-->
+<!--                v-decorator="['purchasePeople']"-->
+<!--              >-->
+<!--                <a-select-option v-for="d in purchasePeopleSelectData" :key="d.value">-->
+<!--                  {{ d.text }}-->
+<!--                </a-select-option>-->
+<!--              </a-select>-->
+<!--            </a-form-item>-->
+<!--          </a-col>-->
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="采购名称">
@@ -46,48 +56,38 @@
 <!--                <a-range-picker @change="purchaseDateOnChange" v-decorator="['purchaseDate']"/>-->
 <!--              </a-form-item>-->
 <!--            </a-col>-->
-            <a-col :xl="6" :lg="8" :md="9" :sm="24" >
-              <a-form-item label="采购开始日期">
-                <j-date  v-decorator="['purchaseStartDate']" style='width: 100%'/>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="8" :md="9" :sm="24">
-              <a-form-item label="采购结束日期">
-                <j-date  v-decorator="['purchaseEndDate']" style='width: 100%'/>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="5" :md="6" :sm="24">
-              <a-form-item label="审核人">
-                <a-select
-                  allowClear
-                  placeholder="请选择"
-                  v-decorator="['checkoutPeople']"
-                >
-                  <a-select-option v-for="d in checkoutPeopleSelectData" :key="d.value">
-                    {{ d.text }}
-                  </a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
+<!--            <a-col :xl="6" :lg="5" :md="6" :sm="24">-->
+<!--              <a-form-item label="审核人">-->
+<!--                <a-select-->
+<!--                  allowClear-->
+<!--                  placeholder="请选择"-->
+<!--                  v-decorator="['checkoutPeople']"-->
+<!--                >-->
+<!--                  <a-select-option v-for="d in checkoutPeopleSelectData" :key="d.value">-->
+<!--                    {{ d.text }}-->
+<!--                  </a-select-option>-->
+<!--                </a-select>-->
+<!--              </a-form-item>-->
+<!--            </a-col>-->
 <!--            <a-col :xl="6" :lg="8" :md="9" :sm="24">-->
 <!--              <a-form-item label="审核日期">-->
 <!--                <a-range-picker @change="purchaseDateOnChange" v-decorator="['checkoutDate']"/>-->
 <!--              </a-form-item>-->
 <!--            </a-col>-->
-            <a-col :xl="6" :lg="8" :md="9" :sm="24" >
-              <a-form-item label="审核开始日期">
-                <j-date  v-decorator="['checkoutStartDate']" style='width: 100%'/>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="8" :md="9" :sm="24">
-              <a-form-item label="审核结束日期">
-                <j-date  v-decorator="['checkoutEndDate']" style='width: 100%'/>
-              </a-form-item>
-            </a-col>
+<!--            <a-col :xl="6" :lg="8" :md="9" :sm="24" >-->
+<!--              <a-form-item label="审核开始日期">-->
+<!--                <j-date  v-decorator="['checkoutStartDate']" style='width: 100%'/>-->
+<!--              </a-form-item>-->
+<!--            </a-col>-->
+<!--            <a-col :xl="6" :lg="8" :md="9" :sm="24">-->
+<!--              <a-form-item label="审核结束日期">-->
+<!--                <j-date  v-decorator="['checkoutEndDate']" style='width: 100%'/>-->
+<!--              </a-form-item>-->
+<!--            </a-col>-->
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="审核状态">
                 <a-select v-decorator="['checkoutState']" allowClear >
-                  <a-select-option value="审核中">审核中</a-select-option>
+                  <a-select-option value="待审核">待审核</a-select-option>
                   <a-select-option value="已通过">已通过</a-select-option>
                   <a-select-option value="未通过">未通过</a-select-option>
                 </a-select>
@@ -170,6 +170,8 @@ export default {
   },
   data () {
     return {
+      purchaseStartDate:moment().subtract(3, 'months').format('YYYY-MM-DD'),
+      purchaseEndDate:moment().format('YYYY-MM-DD'),
       basicInfo:{},
       form1: this.$form.createForm(this),
       manuSelectData:[
@@ -206,10 +208,10 @@ export default {
       dataSource: [
         {
           id:'1',
-          purchaseOrderNumber: 'GZZT20210404001',
+          purchaseOrderNumber: 'GZZT20210704001',
           headline: '4月4号采购单1',
           purchasePeople: '张三',
-          purchaseDate: '2020-04-04',
+          purchaseDate: '2020-07-04',
           purchaseNum: '100',
           totalMoney: '1000.00',
           checkoutPeople: '-',
@@ -219,27 +221,27 @@ export default {
         },
         {
           id:'2',
-          purchaseOrderNumber: 'GZZT20210404002',
+          purchaseOrderNumber: 'GZZT20210704002',
           headline: '4月4号采购单2',
           purchasePeople: '李四',
-          purchaseDate: '2020-04-04',
+          purchaseDate: '2020-07-04',
           purchaseNum: '200',
           totalMoney: '2000.00',
           checkoutPeople: '张三',
-          checkoutDate: '2020-04-04',
+          checkoutDate: '2020-07-04',
           provider : '闽侯菜市场',
           checkState: 1,
         },
         {
           id:'3',
-          purchaseOrderNumber: 'GZZT20210404003',
+          purchaseOrderNumber: 'GZZT20210704003',
           headline: '4月4号采购单3',
           purchasePeople: '李五',
-          purchaseDate: '2020-04-04',
+          purchaseDate: '2020-07-04',
           purchaseNum: '200',
           totalMoney: '2000.00',
           checkoutPeople: '张三',
-          checkoutDate: '2020-04-04',
+          checkoutDate: '2020-07-04',
           provider : '闽侯菜市场',
           checkState: -1,
         },
@@ -268,11 +270,11 @@ export default {
           //   return !text?"":(text.length>10?text.substr(0,10):text)
           // }
         },
-        {
-          title:'采购人',
-          align:"center",
-          dataIndex: 'purchasePeople'
-        },
+        // {
+        //   title:'采购人',
+        //   align:"center",
+        //   dataIndex: 'purchasePeople'
+        // },
         {
           title:'采购日期',
           align:"center",
@@ -284,7 +286,7 @@ export default {
           dataIndex: 'purchaseNum'
         },
         {
-          title:'总金额',
+          title:'采购总金额',
           align:"center",
           dataIndex: 'totalMoney'
         },
@@ -308,7 +310,7 @@ export default {
           align:"center",
           dataIndex: 'checkState',
           customRender:function (text) {
-            return text==0?<a-badge color="blue" text="审核中" /> : text==1?<a-badge color="green" text="已通过" /> : <a-badge color="red" text="未通过" />
+            return text==0?<a-badge color="blue" text="待审核" /> : text==1?<a-badge color="green" text="已通过" /> : <a-badge color="red" text="未通过" />
           }
         },
         {

@@ -1,5 +1,5 @@
 <template>
-  <!-- 酒店信息管理 -->
+  <!-- 会议室信息管理 -->
   <a-card :bordered="false">
     <!-- 搜索操作区域 -->
     <div class="table-page-search-wrapper">
@@ -8,14 +8,22 @@
           <span>区域：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入区域" v-model="queryParam.area" width="100px"></a-input>
+          <!-- <a-input placeholder="请输入区域" v-model="queryParam.area" width="100px"></a-input> -->
+              <a-cascader
+      style="width: 350px"
+      :options="selectOptions"
+      change-on-select
+      @change="areaChange"
+      placeholder="请选择区域"
+    />
+
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
           <span>房间号：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入房间号" v-model="queryParam.id"></a-input>
+          <a-input placeholder="请输入房间号" v-model="queryParam.room"></a-input>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
@@ -33,7 +41,7 @@
           >查询</a-button>
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
         </a-col>
-        <a-col :span="3"></a-col>
+        <a-col :span="1"></a-col>
         <a-col>
           <a-button
             @click="addRoom()"
@@ -123,7 +131,7 @@
         <a-table-column title="管理员" data-index="dutyName" align="center"></a-table-column>
         <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="基本条件" data-index="condition" align="center">
-          <template slot-scope="condition">
+          <!-- <template slot-scope="condition">
             <div v-if="condition=='0'">
               <img src="./0.png" alt width="180px" />
             </div>
@@ -139,7 +147,7 @@
             <div v-else>
               <span>无</span>
             </div>
-          </template>
+          </template> -->
         </a-table-column>
         <a-table-column title="操作" align="center">
           <template slot-scope="record">
@@ -155,7 +163,7 @@
     </div>
 
     <!-- 新增 -->
-        <a-Modal v-model="visibleAdd" title="新增会议室" footer>
+  <a-Modal v-model="visibleAdd" title="新增会议室" footer>
       <a-form-model
         ref="ruleForm"
         :model="formAdd"
@@ -163,25 +171,38 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-      <a-form-model-item ref="area" label="区域" prop="area" placeholder="请输入区域">
-           <a-select v-model="formModify.area"  showSearch>
-            <a-select-option value="福建烟草公司机关A区域1号楼">福建烟草公司机关A区域1号楼</a-select-option>
-            <a-select-option value="福建烟草公司机关A区域2号楼">福建烟草公司机关A区域2号楼</a-select-option>
-            <a-select-option value="福建烟草公司机关B区域1号楼">福建烟草公司机关B区域1号楼</a-select-option>
-            <a-select-option value="福建烟草公司机关B区域2号楼">福建烟草公司机关B区域2号楼</a-select-option>
-            </a-select>
+      <a-form-model-item ref="area" label="区域" prop="area" placeholder="请选择区域">
+           <!-- <a-select v-model="formModify.area"  showSearch>
+            <a-select-option value="中国烟草总公司福建省公司机关.A区域.1号楼">中国烟草总公司福建省公司机关.A区域.1号楼</a-select-option>
+            <a-select-option value="中国烟草总公司福建省公司机关.A区域.2号楼">中国烟草总公司福建省公司机关.A区域.2号楼</a-select-option>
+            <a-select-option value="中国烟草总公司福建省公司机关.B区域.1号楼">中国烟草总公司福建省公司机关.B区域.1号楼</a-select-option>
+            <a-select-option value="中国烟草总公司福建省公司机关.B区域.2号楼">中国烟草总公司福建省公司机关.B区域.2号楼</a-select-option>
+            </a-select> -->
+      <a-cascader
+      style="width: 350px"
+      :options="selectOptions"
+      v-model="formAdd.area"
+      change-on-select
+      @change="areaChange"
+      placeholder="请选择区域"
+    />
         </a-form-model-item>
-         <a-form-model-item ref="room" label="房间号" prop="room" placeholder="请输入房间号">
-          <a-input v-model="formAdd.room"></a-input>
+         <a-form-model-item ref="room" label="房间号" prop="room" >
+          <a-input v-model="formAdd.room" placeholder="请输入房间号"></a-input>
         </a-form-model-item>
-         <a-form-model-item ref="number" label="容纳人数（个）" prop="number" placeholder="请输入房间容纳人数（个）">
-          <a-input v-model="formAdd.number"></a-input>
+         <a-form-model-item ref="number" label="容纳人数" prop="number" >
+          <a-input v-model="formAdd.number" placeholder="请输入房间容纳人数"></a-input>
         </a-form-model-item>
-        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" placeholder="请输入负责人">
-          <a-input v-model="formAdd.dutyName"></a-input>
+        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" >
+          <!-- <a-input v-model="formAdd.dutyName" placeholder="请输入管理员"></a-input> -->
+           <a-select   showSearch v-model="formModify.dutyName" placeholder="请选择管理员">
+            <a-select-option value="李霞">李霞</a-select-option>
+            <a-select-option value="尤晓梅">尤晓梅</a-select-option>
+            <a-select-option value="黄丽娟">黄丽娟</a-select-option>
+          </a-select>
         </a-form-model-item>
-        <a-form-model-item label="管理员电话" prop="dutyTel" placeholder="请输入负责人电话">
-          <a-input v-model="formAdd.dutyTel"></a-input>
+        <a-form-model-item label="管理员电话" prop="dutyTel" >
+          <a-input v-model="formAdd.dutyTel" placeholder="请输入管理员电话"></a-input>
         </a-form-model-item>
         <a-form-model-item label="基本条件" prop="condition">
           <!-- <a-select v-model="formAdd.condition" placeholder="请选择条件">
@@ -191,34 +212,34 @@
             <a-select-option value="3">3：饮料、风扇、景观、多媒体</a-select-option>
           </a-select> -->
        <a-checkbox-group @change="onChange">
-    <a-row>
-      <a-col :span="8">
-        <a-checkbox value="A">
-          茶饮
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="B">
-          风扇
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="C">
-          空调
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="D">
-          盆栽
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="E">
-          多媒体
-        </a-checkbox>
-      </a-col>
-    </a-row>
-  </a-checkbox-group>
+        <a-row>
+          <a-col :span="8">
+            <a-checkbox value="茶水">
+              茶水
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="排气扇">
+              排气扇
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="空调">
+              空调
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="盆栽">
+              盆栽
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="多媒体">
+              多媒体
+            </a-checkbox>
+          </a-col>
+        </a-row>
+      </a-checkbox-group>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitAdd()">创建</a-button>
@@ -235,22 +256,22 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item label="区域" prop="area">
-            <a-select v-model="formModify.area" placeholder="请选择条件" showSearch>
-            <a-select-option value="福建烟草公司机关A区域1号楼">福建烟草公司机关A区域1号楼</a-select-option>
-            <a-select-option value="福建烟草公司机关A区域2号楼">福建烟草公司机关A区域2号楼</a-select-option>
-            <a-select-option value="福建烟草公司机关B区域1号楼">福建烟草公司机关B区域1号楼</a-select-option>
-            <a-select-option value="福建烟草公司机关B区域2号楼">福建烟草公司机关B区域2号楼</a-select-option>
-          </a-select>
+         <a-form-model-item label="区域" prop="area">
+          <a-input v-model="formModify.area"  disabled></a-input>
         </a-form-model-item>
         <a-form-model-item label="房间号" prop="room">
-          <a-input v-model="formModify.room" ></a-input>
+          <a-input v-model="formModify.room" disabled></a-input>
         </a-form-model-item>
-         <a-form-model-item label="容纳人数（个）" prop="number">
+         <a-form-model-item label="容纳人数" prop="number">
           <a-input v-model="formModify.number" ></a-input>
         </a-form-model-item>
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
-          <a-input v-model="formModify.dutyName"></a-input>
+          <!-- <a-input v-model="formModify.dutyName"></a-input> -->
+          <a-select   show-search v-model="formModify.dutyName">
+            <a-select-option value="李霞">李霞</a-select-option>
+            <a-select-option value="尤晓梅">尤晓梅</a-select-option>
+            <a-select-option value="黄丽娟">黄丽娟</a-select-option>
+          </a-select>
         </a-form-model-item>
         <a-form-model-item label="管理员电话" prop="dutyTel">
           <a-input v-model="formModify.dutyTel"></a-input>
@@ -262,35 +283,35 @@
             <a-select-option value="2">2：饮料、风扇、空调、多媒体</a-select-option>
             <a-select-option value="3">3：饮料、风扇、景观、多媒体</a-select-option>
           </a-select> -->
-  <a-checkbox-group @change="onChange">
-    <a-row>
-      <a-col :span="8">
-        <a-checkbox value="A">
-          茶饮
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="B">
-          风扇
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="C">
-          空调
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="D">
-          盆栽
-        </a-checkbox>
-      </a-col>
-      <a-col :span="8">
-        <a-checkbox value="E">
-          多媒体
-        </a-checkbox>
-      </a-col>
-    </a-row>
-  </a-checkbox-group>
+           <a-checkbox-group @change="onChange">
+            <a-row>
+              <a-col :span="8">
+                <a-checkbox value="茶水">
+                  茶水
+                </a-checkbox>
+              </a-col>
+              <a-col :span="8">
+                <a-checkbox value="排气扇">
+                  排气扇
+                </a-checkbox>
+              </a-col>
+              <a-col :span="8">
+                <a-checkbox value="空调">
+                  空调
+                </a-checkbox>
+              </a-col>
+              <a-col :span="8">
+                <a-checkbox value="盆栽">
+                  盆栽
+                </a-checkbox>
+              </a-col>
+              <a-col :span="8">
+                <a-checkbox value="多媒体">
+                  多媒体
+                </a-checkbox>
+              </a-col>
+            </a-row>
+        </a-checkbox-group>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitModify()">修改</a-button>
@@ -302,42 +323,43 @@
 </template>
 
 <script>
+import { areaData } from './data/area.js'
 const dataRoom = [
   {
     index: 1,
-    area:"福建烟草公司机关A区域1号楼",
+    area:"中国烟草总公司福建省公司机关A区域1号楼",
     number:"5-6",
     dutyName: "李霞",
     dutyTel: "13759655332",
     room: "会议室203",
-    condition: "0"
+    condition: "茶水、多媒体"
   },
   {
     index: 2,
-    area:"福建烟草公司机关A区域2号楼",
+    area:"中国烟草总公司福建省公司机关A区域2号楼",
     number:"6-8",
     dutyName: "王莉莉",
     dutyTel: "13759655348",
     room: "会议室204",
-    condition: "1"
+    condition: "茶水、排气扇、多媒体"
   },
   {
   index: 3,
-    area:"福建烟草公司机关B区域1号楼",
+    area:"中国烟草总公司福建省公司机关B区域1号楼",
     number:"3-4",
     dutyName: "尤晓梅",
     dutyTel: "13053955537",
     room: "会议室205",
-    condition: "2"
+    condition: "茶水、排气扇、盆栽、多媒体"
   },
   {
    index: 4,
-    area:"福建烟草公司机关B区域2号楼",
+    area:"中国烟草总公司福建省公司机关B区域2号楼",
     number:"4-6",
     dutyName: "黄丽娟",
     dutyTel: "13659655381",
     room: "会议室206",
-    condition: "2"
+    condition: "茶水、盆栽、空调、多媒体"
   }
 ];
 const columns = [
@@ -391,11 +413,12 @@ const columns = [
 export default {
   data() {
     return {
+      selectOptions: areaData,
       dataRoom,
       columns,
       queryParam: {
         dutyName: '',
-        id: '',
+        room: '',
         area:""
       },
       visibleAdd: false,
@@ -403,7 +426,7 @@ export default {
       labelCol: { span: 6 },
       wrapperCol: { span: 18 },
       formAdd: {
-      area: '',
+      area: [],
       room: '',
       number: '',
         dutyName: '',
@@ -417,13 +440,12 @@ export default {
         lineHeight: "30px"
       },
       formModify: {},
-
       rules: {
          area: [
           {
             required: true,
-            message: '请输入区域',
-            trigger: 'blur'
+            message: '请选择区域',
+            trigger: 'change'
           }
         ],
          room: [
@@ -443,14 +465,14 @@ export default {
         dutyName: [
           {
             required: true,
-            message: '请输入负责人',
+            message: '请输入管理员',
             trigger: 'blur'
           }
         ],
         dutyTel: [
           {
             required: true,
-            message: '请输入负责人电话',
+            message: '请输入管理员电话',
             trigger: 'blur'
           }
         ],
@@ -465,18 +487,11 @@ export default {
     }
   },
   methods: {
+    areaChange(value){
+      console.log(value)
+    },
     onChange(){},
     searchQuery() {
-      // let idKey = this.queryParam.idKey
-      // let newListData = []
-      // if (IDName) {
-      //   this.dataHotel.filter(item => {
-      //     if (item.id.includes(idKey) || item.address.includes(idKey)) {
-      //       newListData.push(item)
-      //     }
-      //   })
-      //   this.dataHotel = newListData
-      // }
     },
     searchReset() {
       this.dataRoom = dataRoom
@@ -494,17 +509,6 @@ export default {
           this.$message.success('添加成功!')
           this.formAdd = {}
           this.visibleAdd = false
-          // this.$confirm({
-          //   title: "您是否确定新建此会议安排？",
-          //   content: <div style="color:red;"></div>,
-          //   onOk() {
-          //     //console.log(length);
-          //   },
-          //   onCancel() {
-          //     console.log("Cancel");
-          //   },
-          //   class: "test"
-          // });
         } else {
           console.log('error submit!!')
           return false
@@ -526,8 +530,9 @@ export default {
       console.log(record)
       this.formModify.area = record.area
        this.formModify.room = record.room
-        this.formModify.number = record.number
+      this.formModify.number = record.number
       this.formModify.dutyName = record.dutyName
+      // console.log(this.formModify.dutyName)
       this.formModify.dutyTel = record.dutyTel
       this.formModify.condition = record.condition
     },
@@ -541,7 +546,8 @@ export default {
     },
     CancelModify() {
       this.visibleModify = false
-    }
+    },
+
   }
 }
 </script>

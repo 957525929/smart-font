@@ -1,8 +1,10 @@
 <template>
 	<view class="page">
+
+
 		<view class="cu-bar bg-orange solid-bottom">
 			<view class="action">
-				<text>智能锁安装</text>
+				<text class="cuIcon-title text-white"></text> 智能锁安装
 			</view>
 			<view class="action">
 				<navigator class="action" url="../../components/lock/serach?type=0" hover-class="none">
@@ -11,6 +13,7 @@
 				</navigator>
 			</view>
 		</view>
+
 		<scroll-view scroll-x class="bg-white nav">
 			<view class="flex text-center">
 				<view class="cu-item flex-sub" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
@@ -75,5 +78,4 @@
 	.itembox {
 		margin-top: 1.5vh;
 	}
-
 </style>

@@ -3,6 +3,7 @@ node_modules
 /dist
 .history
 /dist
+/unpackage
 
 # local env files
 .env.local

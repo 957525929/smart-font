@@ -15,12 +15,12 @@
           <div>{{ detailsData.headline }}</div>
         </div>
       </a-col>
-      <a-col :xl="5" :lg="8" :md="9" :sm="24">
-        <div class="detail-top">
-          <div>采购人：</div>
-          <div>{{ detailsData.purchasePeople }}</div>
-        </div>
-      </a-col>
+<!--      <a-col :xl="5" :lg="8" :md="9" :sm="24">-->
+<!--        <div class="detail-top">-->
+<!--          <div>采购人：</div>-->
+<!--          <div>{{ detailsData.purchasePeople }}</div>-->
+<!--        </div>-->
+<!--      </a-col>-->
       <a-col :xl="5" :lg="8" :md="9" :sm="24">
         <div class="detail-top">
           <div>采购日期：</div>
@@ -93,18 +93,18 @@ export default {
       dataSource: [
         {
           id:'1',
-          materialName: '油麦菜',
+          materialName: '蔬菜类 / 花叶类 / 油菜',
           materialCategory: '青菜类',
-          materialUnits: 'kg',
+          materialUnits: '公斤',
           materialPrice: '10.00',
           materialNum: '10',
           materialTotalValue: '100.00',
         },
         {
           id:'2',
-          materialName: '鸡肉',
+          materialName: '蔬菜类 / 花叶类 / 芹菜',
           materialCategory: '肉类',
-          materialUnits: 'kg',
+          materialUnits: '公斤',
           materialPrice: '10.00',
           materialNum: '10',
           materialTotalValue: '100.00',
@@ -125,18 +125,18 @@ export default {
           align:"center",
           dataIndex: 'materialName',
         },
+        // {
+        //   title:'食料类别',
+        //   align:"center",
+        //   dataIndex: 'materialCategory',
+        // },
         {
-          title:'食料类别',
-          align:"center",
-          dataIndex: 'materialCategory',
-        },
-        {
-          title:'单位',
+          title:'计量单位',
           align:"center",
           dataIndex: 'materialUnits'
         },
         {
-          title:'单价',
+          title:'采购单价',
           align:"center",
           dataIndex: 'materialPrice'
         },
@@ -146,7 +146,7 @@ export default {
           dataIndex: 'materialNum'
         },
         {
-          title:'总价',
+          title:'合计',
           align:"center",
           dataIndex: 'materialTotalValue'
         },

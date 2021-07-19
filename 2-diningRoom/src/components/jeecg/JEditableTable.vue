@@ -701,7 +701,7 @@
             <div v-if="dragSort" class="td td-ds" :style="style.tdLeftDs">
             </div>
             <div v-if="rowSelection" class="td td-cb" :style="style.tdLeft">
-              统计
+              总计
             </div>
             <div v-if="rowNumber" class="td td-num" :style="style.tdLeft">
               <span v-if="!rowSelection">统计</span>

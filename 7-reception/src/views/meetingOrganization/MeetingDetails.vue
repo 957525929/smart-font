@@ -5,7 +5,7 @@
       <a-button :style="{marginBottom:'10px'}">
         <a-icon type="download" />导出
       </a-button>
-      <a-collapse @change="changeActivekey">
+      <a-collapse @change="changeActivekey" v-model="activeKey">
         <a-collapse-panel key="1" header="会议申请信息" :disabled="false">
           <a-descriptions>
             <a-descriptions-item label="会议名称">安全管理会议</a-descriptions-item>
@@ -20,23 +20,22 @@
         </a-collapse-panel>
         <a-collapse-panel key="2" header="会议审核信息">
           <a-descriptions>
-             <a-descriptions-item label="审核意见">通过</a-descriptions-item>
-                <a-descriptions-item label="审核日期">2021年06月01日</a-descriptions-item> 
+            <a-descriptions-item label="审核意见">通过</a-descriptions-item>
+            <a-descriptions-item label="审核日期">2021年06月01日</a-descriptions-item>
             <a-descriptions-item label="审核人">刘小小</a-descriptions-item>
             <a-descriptions-item label="审核人电话">1526631568</a-descriptions-item>
-                  
           </a-descriptions>
         </a-collapse-panel>
         <a-collapse-panel key="3" header="会议安排信息">
-          <a-collapse default-active-key="4">
-            <a-collapse-panel key="5" header="协议酒店">
+          <a-collapse :default-active-key="an">
+            <a-collapse-panel key="6" header="协议酒店">
               <a-table :data-source="dataHotel" :pagination="false" rowKey="dateTime">
                 <a-table-column title="序号" data-index="id" align="center"></a-table-column>
                 <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
                 <a-table-column title="协议酒店" data-index="hotel" align="center"></a-table-column>
               </a-table>
             </a-collapse-panel>
-            <a-collapse-panel key="6" header="就餐地点">
+            <a-collapse-panel key="7" header="就餐地点">
               <a-table :data-source="dataEat" :pagination="false" rowKey="dateTime">
                 <a-table-column title="序号" data-index="id" align="center"></a-table-column>
                 <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
@@ -44,7 +43,7 @@
                 <a-table-column title="就餐地点" data-index="way" align="center"></a-table-column>
               </a-table>
             </a-collapse-panel>
-            <a-collapse-panel key="7" header="会议地点">
+            <a-collapse-panel key="8" header="会议地点">
               <a-table :data-source="dataRoom" :pagination="false" rowKey="dateTime">
                 <a-table-column title="序号" data-index="id" align="center"></a-table-column>
                 <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
@@ -136,7 +135,7 @@ const dataEat = [
 const dataRoom = [
   {
     id: '1',
-    dateTime: '2021年01月15日~2021年01月16日',
+    dateTime: '2021年06月15日~2021年06月16日',
     room: '中国烟草总公司福建省公司机关A区域1号楼会议室203'
   }
 ]
@@ -169,6 +168,8 @@ const dataArrive = [
 export default {
   data() {
     return {
+      activeKey: ['1', '2', '3', '4', '5'],
+      an: ['8', '6', '7'],
       dataHotel,
       dataEat,
       dataRoom,

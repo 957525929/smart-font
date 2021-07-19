@@ -35,10 +35,10 @@
 								title: '用车申请',
 								icon: '../../static/homepage/car1.png'
 							},
-							{
-								title: '用车记录',
-								icon: '../../static/homepage/log.png'
-							},
+							// {
+							// 	title: '用车记录',
+							// 	icon: '../../static/homepage/log.png'
+							// },
 							{
 								title: '收车登记',
 								icon: '../../static/homepage/car2.png'
@@ -61,18 +61,18 @@
 							}
 						]
 					},
-					{
-						title: '查询统计',
-						children: [{
-								title: '车辆使用',
-								icon: '../../static/homepage/sta1.png'
-							},
-							{
-								title: '司机工作量',
-								icon: '../../static/homepage/sta2.png'
-							}
-						]
-					}
+					// {
+					// 	title: '查询统计',
+					// 	children: [{
+					// 			title: '车辆使用',
+					// 			icon: '../../static/homepage/sta1.png'
+					// 		},
+					// 		{
+					// 			title: '司机工作量',
+					// 			icon: '../../static/homepage/sta2.png'
+					// 		}
+					// 	]
+					// }
 				]
 			}
 		},
