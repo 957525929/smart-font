@@ -1,6 +1,9 @@
 import {
   devStatus
 } from "@/utils/dataDictionary.js";
+import {
+  data as facData
+} from "@/views/person/devFactory/js/index.js";
 
 export const devColumns = [{
     dataIndex: 'devId',
@@ -114,14 +117,14 @@ export const devInfo = [{
     width: 40,
     key: 'devId',
     hideInLogin: true,
-    value:""
+    value: ""
   },
   {
     title: '零件名称',
     dataIndex: 'devName',
     width: 80,
     key: 'devName',
-    value:""
+    value: ""
   },
   {
     title: '零件状态',
@@ -130,20 +133,24 @@ export const devInfo = [{
     width: 50,
     type: 'a-select',
     valueEnum: devStatus,
-    value:""
+    value: ""
   },
   {
     title: '零件型号',
     key: 'devModel',
     dataIndex: 'devModel',
     width: 50,
-    value:""
+    value: ""
   },
   {
     dataIndex: 'manufacturer',
     title: '零件厂商单位',
     width: 80,
-    value:""
+    value: "",
+    type: 'a-select',
+    valueEnum: {...facData.map(item => {
+      return {tableValue:item.devName}
+    })}
   },
   {
     title: '登记时间',
@@ -151,7 +158,7 @@ export const devInfo = [{
     dataIndex: 'loginTime',
     width: 80,
     type: 'a-date-picker',
-    value:""
+    value: ""
   },
   {
     title: '操作',
@@ -161,6 +168,6 @@ export const devInfo = [{
     },
     width: 80,
     hideInSearch: true,
-    hideInLogin:true
+    hideInLogin: true
   }
 ]
