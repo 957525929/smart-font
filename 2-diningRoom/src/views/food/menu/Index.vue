@@ -11,14 +11,6 @@
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
-              <a-form-item label="菜品类别">
-                <a-select v-decorator="['type']" allowClear >
-                  <a-select-option value="荤菜">荤菜</a-select-option>
-                  <a-select-option value="素菜">素菜</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="菜品分类">
                 <a-select v-decorator="['category']" allowClear >
                   <a-select-option value="川菜">川菜</a-select-option>
@@ -33,48 +25,22 @@
                 </a-select>
               </a-form-item>
             </a-col>
-            <template v-if="toggleSearchStatus">
-              <a-col :xl="6" :lg="8" :md="9" :sm="24">
-                <a-form-item label="辣度">
-                  <a-select v-decorator="['degree']" allowClear >
-                    <a-select-option value="不辣">不辣</a-select-option>
-                    <a-select-option value="微辣">微辣</a-select-option>
-                    <a-select-option value="中辣">中辣</a-select-option>
-                    <a-select-option value="重辣">重辣</a-select-option>
-                  </a-select>
-                </a-form-item>
-              </a-col>
-              <a-col :xl="6" :lg="8" :md="9" :sm="24">
-                <a-form-item label="开始时间">
-                  <j-date  v-decorator="['startDate',{initialValue:this.startDate}]" style='width: 100%'/>
-                </a-form-item>
-              </a-col>
-              <a-col :xl="6" :lg="8" :md="9" :sm="24">
-                <a-form-item label="结束时间">
-                  <j-date  v-decorator="['endDate',{initialValue:this.endDate}]" style='width: 100%'/>
-                </a-form-item>
-              </a-col>
-<!--              <a-col :xl="6" :lg="8" :md="9" :sm="24">-->
-<!--                <a-form-item label="是否启用">-->
-<!--                  <a-select v-decorator="['isApply']" allowClear >-->
-<!--                    <a-select-option value="全部">全部</a-select-option>-->
-<!--                    <a-select-option value="是">是</a-select-option>-->
-<!--                    <a-select-option value="否">否</a-select-option>-->
-<!--                  </a-select>-->
-<!--                </a-form-item>-->
-<!--              </a-col>-->
-            </template>
-
-            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-            <a-col :md="6" :sm="24">
-              <a-button icon="search" @click='handleQueryOk'>查询</a-button>
-              <a-button icon="reload" style="margin-left: 8px" @click='handleReset'>重置</a-button>
-              <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
-                <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
-              </a>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="辣度">
+                <a-select v-decorator="['degree']" allowClear >
+                  <a-select-option value="不辣">不辣</a-select-option>
+                  <a-select-option value="微辣">微辣</a-select-option>
+                  <a-select-option value="中辣">中辣</a-select-option>
+                  <a-select-option value="重辣">重辣</a-select-option>
+                </a-select>
+              </a-form-item>
             </a-col>
-          </span>
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-col :md="6" :sm="24">
+                <a-button icon="search" @click='handleQueryOk'>查询</a-button>
+                <a-button icon="reload" style="margin-left: 8px" @click='handleReset'>重置</a-button>
+              </a-col>
+            </span>
 
           </a-row>
         </a-form>
@@ -97,9 +63,6 @@
           :dataSource="dataSource"
           :pagination="{total:this.dataSource.length, showTotal:(total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`}"
         >
-<!--        <span slot="checkoutPeople" slot-scope="text, record">-->
-<!--          <a-switch checked-children="是" un-checked-children="否"  :checked='record.checkoutPeople'/>-->
-<!--        </span>-->
           <span slot="action" slot-scope="text, record">
           <a @click='edit(record)'>编辑</a>
           <a><a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style='margin-left: 10%;'>删除</a-popconfirm></a>
@@ -125,12 +88,6 @@
           <a-form-model-item label="菜品名称" required prop="purchaseOrderNumber">
             <a-input v-model="model.purchaseOrderNumber" placeholder="请输入菜品名称"/>
           </a-form-model-item>
-          <a-form-model-item label="菜品类别" required prop="headline">
-            <a-select allowClear v-model="model.headline" placeholder="请选择菜品类别">
-              <a-select-option value="荤菜">荤菜</a-select-option>
-              <a-select-option value="素菜">素菜</a-select-option>
-            </a-select>
-          </a-form-model-item>
           <a-form-model-item label="菜品分类" required prop="purchasePeople">
             <a-select allowClear v-model="model.purchasePeople" placeholder="请选择菜品分类">
               <a-select-option value="客家菜">客家菜</a-select-option>
@@ -145,12 +102,6 @@
               <a-select-option value="重辣">重辣</a-select-option>
             </a-select>
           </a-form-model-item>
-          <a-form-model-item label="上传时间" prop="time">
-            <a-date-picker  v-model="model.time" :default-value="todayTime" disabled />
-          </a-form-model-item>
-<!--          <a-form-model-item label="是否启用" prop="checkoutPeople">-->
-<!--            <a-switch v-model="model.checkoutPeople" :checked='model.checkoutPeople' checked-children="是" un-checked-children="否"  />-->
-<!--          </a-form-model-item>-->
           <a-form-model-item label="备注"  prop="ps">
             <a-textarea rows="5" v-model="model.ps" placeholder="请输入备注"/>
           </a-form-model-item>
@@ -206,11 +157,6 @@ export default {
           dataIndex: 'purchaseOrderNumber',
         },
         {
-          title:'菜品类别',
-          align:"center",
-          dataIndex: 'headline',
-        },
-        {
           title:'菜品分类',
           align:"center",
           dataIndex: 'purchasePeople'
@@ -225,12 +171,6 @@ export default {
           align:"center",
           dataIndex: 'purchaseNum'
         },
-        // {
-        //   title:'是否启用',
-        //   align:"center",
-        //   dataIndex: 'checkoutPeople',
-        //   scopedSlots: { customRender: 'checkoutPeople'},
-        // },
         {
           title:'备注',
           align:"center",
@@ -243,7 +183,6 @@ export default {
           scopedSlots: { customRender: 'action'},
         }
       ],
-      toggleSearchStatus: true,
       selectedRowKeys: [],
 
       title:"操作",
@@ -257,9 +196,6 @@ export default {
       validatorRules:{
         purchaseOrderNumber: [
           { required: true, message: '请输入菜品名称!'},
-        ],
-        headline: [
-          { required: true, message: '请选择菜品类别!' },
         ],
         purchasePeople: [
           { required: true, message: '请选择菜品分类!' },
@@ -279,10 +215,6 @@ export default {
     },
   },
   methods: {
-    handleToggleSearch() {
-      if(this.toggleSearchStatus) this.toggleSearchStatus=false;
-      else this.toggleSearchStatus=true;
-    },
     deletConfirm(e) {
       console.log(e);
       this.$message.success('删除成功');
