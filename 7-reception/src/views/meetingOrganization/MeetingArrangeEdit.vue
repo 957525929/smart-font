@@ -409,6 +409,11 @@ export default {
           let endDate = this.formHotel.dateEnd.format('YYYY年MM月DD日')
           let dateTime = startDate + '~' + endDate
           console.log(dateTime)
+          // let dateA=dateTime.split('~')
+          // console.log(dateA)
+          //  console.log(dateA[0])
+          //  let b=this.moment(dateA[0], 'YYYY-MM-DD')
+          //  console.log(b)
           let a = {
             index: this.formHotel.index,
             dateTime: dateTime,

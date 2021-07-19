@@ -218,8 +218,8 @@
             </a-checkbox>
           </a-col>
           <a-col :span="8">
-            <a-checkbox value="盆栽">
-              盆栽
+            <a-checkbox value="绿化植物">
+              绿化植物
             </a-checkbox>
           </a-col>
           <a-col :span="8">
@@ -290,8 +290,8 @@
                 </a-checkbox>
               </a-col>
               <a-col :span="8">
-                <a-checkbox value="盆栽">
-                  盆栽
+                <a-checkbox value="绿化植物">
+                  绿化植物
                 </a-checkbox>
               </a-col>
               <a-col :span="8">
@@ -350,7 +350,7 @@ const dataRoom = [
     dutyName: "尤晓梅",
     dutyTel: "13053955537",
     room: "会议室205",
-    condition: "茶水，排气扇，盆栽，多媒体"
+    condition: "茶水，排气扇，绿化植物，多媒体"
   },
   {
    index: 4,
@@ -359,7 +359,7 @@ const dataRoom = [
     dutyName: "黄丽娟",
     dutyTel: "13659655381",
     room: "会议室206",
-    condition: "茶水，盆栽，空调，多媒体"
+    condition: "茶水，绿化植物，空调，多媒体"
   }
 ];
 const columns = [
