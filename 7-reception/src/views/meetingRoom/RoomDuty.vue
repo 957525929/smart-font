@@ -8,14 +8,20 @@
           <span>区域：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入区域" v-model="queryParam.area" width="50px"></a-input>
+          <a-cascader
+            style="width: 350px"
+            :options="selectOptions"
+            change-on-select
+            @change="areaChange"
+            placeholder="请选择区域"
+          ></a-cascader>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
-          <span>负责人：</span>
+          <span>管理员：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入负责人" v-model="queryParam.dutyName"></a-input>
+          <a-input placeholder="请输入管理员" v-model="queryParam.dutyName"></a-input>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
@@ -26,13 +32,13 @@
           >查询</a-button>
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
         </a-col>
-        <a-col :span="8"></a-col>
+        <a-col :span="2"></a-col>
         <a-col>
           <a-button
             @click="addDuty()"
             icon="plus"
             :style="{ color: 'white', background:'orange'}"
-          >新增负责人</a-button>
+          >新增管理员</a-button>
           <a-button>
             <a-icon type="download" />导出
           </a-button>
@@ -44,10 +50,10 @@
     <!-- table区域-begin -->
     <div id="dataDutyTable">
       <a-table :data-source="dataDuty" :pagination="false" rowKey="index">
-          <a-table-column title="序号" data-index="index" align="left" fixed="left"></a-table-column>
-        <a-table-column title="负责区域" data-index="area" align="center" ></a-table-column>
-        <a-table-column title="负责人" data-index="dutyName" align="center"></a-table-column>
-        <a-table-column title="负责人电话" data-index="dutyTel" align="center"></a-table-column>
+        <a-table-column title="序号" data-index="index" align="left" fixed="left"></a-table-column>
+        <a-table-column title="管理员" data-index="dutyName" align="center"></a-table-column>
+        <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column>
+        <a-table-column title="管理区域" data-index="area" align="center"></a-table-column>
         <!-- <a-table-column title="备注信息" data-index="remark" align="center"></a-table-column> -->
         <a-table-column title="操作" align="center" fixed="right">
           <template slot-scope="record">
@@ -65,7 +71,7 @@
     </div>
 
     <!-- 新增 -->
-    <a-Modal v-model="visibleAdd" title="新增会议室管理人员" footer>
+    <a-Modal v-model="visibleAdd" title="新增会议室管理员" footer>
       <a-form-model
         ref="ruleForm"
         :model="formAdd"
@@ -73,14 +79,22 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item ref="area" label="负责区域" prop="area" placeholder="请输入酒店名称">
-          <a-input v-model="formAdd.area"></a-input>
+        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
+          <a-input v-model="formAdd.dutyName" placeholder="请输入管理员"></a-input>
         </a-form-model-item>
-        <a-form-model-item ref="dutyName" label="负责人" prop="dutyName" placeholder="请输入联系人">
-          <a-input v-model="formAdd.dutyName"></a-input>
+        <a-form-model-item label="管理员电话" prop="dutyTel">
+          <a-input v-model="formAdd.dutyTel" placeholder="请输入管理员电话"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="负责人电话" prop="dutyTel" placeholder="请输入联系电话">
-          <a-input v-model="formAdd.dutyTel"></a-input>
+        <a-form-model-item ref="area" label="管理区域" prop="area">
+          <a-tree-select
+            v-model="formAdd.area"
+            placeholder="请选择区域"
+            style="width: 385px"
+            :tree-data="treeData"
+            tree-checkable
+            :show-checked-strategy="SHOW_PARENT"
+            search-placeholder="Please select"
+          />
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitAdd()">创建</a-button>
@@ -89,25 +103,30 @@
       </a-form-model>
     </a-Modal>
     <!--修改信息 -->
-    <a-Modal v-model="visibleModify" title="修改会议室管理人员" footer>
+    <a-Modal v-model="visibleModify" title="修改会议室管理员" footer>
       <a-form-model
         :label-col="labelCol"
         :model="formModify"
         :wrapper-col="wrapperCol"
         :rules="rules"
       >
-        <a-form-model-item label="负责区域" prop="area">
-          <a-input v-model="formModify.area"></a-input>
+        <a-form-model-item label="管理区域" prop="area">
+          <a-input v-model="formModify.area" disabled></a-input>
         </a-form-model-item>
-        <a-form-model-item ref="dutyName" label="负责人" prop="dutyName">
-          <a-input v-model="formModify.dutyName"></a-input>
+        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
+          <!-- <a-input v-model="formModify.dutyName"></a-input> -->
+          <a-select show-search v-model="formModify.dutyName">
+            <a-select-option value="李霞">李霞</a-select-option>
+            <a-select-option value="尤晓梅">尤晓梅</a-select-option>
+            <a-select-option value="黄丽娟">黄丽娟</a-select-option>
+          </a-select>
         </a-form-model-item>
-        <a-form-model-item label="负责人电话" prop="dutyTel">
+        <a-form-model-item label="管理员电话" prop="dutyTel">
           <a-input v-model="formModify.dutyTel"></a-input>
         </a-form-model-item>
         <!-- <a-form-model-item label="备注信息">
           <a-input v-model="formModify.remark" type="textarea" />
-        </a-form-model-item> -->
+        </a-form-model-item>-->
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitModify()">修改</a-button>
           <a-button style="margin-left: 10px;" @click="CancelModify()">取消</a-button>
@@ -118,50 +137,57 @@
 </template>
 
 <script>
+import { areaData } from './data/area.js'
+import { treeData } from './data/treeData.js'
+import { TreeSelect } from 'ant-design-vue'
+const SHOW_PARENT = TreeSelect.SHOW_PARENT
 const dataDuty = [
   {
     index: 1,
     dutyName: '李霞',
     dutyTel: '13759655332',
-    area: "福建烟草公司机关A区域1号楼",
+    area: '中国烟草总公司福建省公司机关A区域1号楼'
   },
   {
-     index: 2,
+    index: 2,
     dutyName: '王莉莉',
     dutyTel: '13759655348',
-    area: "福建烟草公司机关A区域2号楼",
+    area: '中国烟草总公司福建省公司机关A区域2号楼'
   },
   {
-      index: 3,
+    index: 3,
     dutyName: '尤晓梅',
     dutyTel: '13053955537',
-     area:"福建烟草公司机关B区域1号楼",
+    area: '中国烟草总公司福建省公司机关B区域1号楼'
   },
   {
-     index: 4,
+    index: 4,
     dutyName: '黄丽娟',
     dutyTel: '13659655381',
-    area: "福建烟草公司机关B区域2号楼",
+    area: '中国烟草总公司福建省公司机关B区域2号楼'
   }
 ]
 
 export default {
   data() {
     return {
+      selectOptions: areaData,
+      treeData: treeData,
+      SHOW_PARENT,
+
       dataDuty,
       queryParam: {
         dutyName: '',
         area: ''
       },
-
       visibleAdd: false,
       visibleModify: false,
-      labelCol: { span: 6 },
-      wrapperCol: { span: 18 },
+      labelCol: { span: 5 },
+      wrapperCol: { span: 19 },
       formAdd: {
-        area: '',
+        area: [],
         dutyName: '',
-        dutyTel: '',
+        dutyTel: ''
       },
       formModify: {},
       rules: {
@@ -175,23 +201,26 @@ export default {
         dutyName: [
           {
             required: true,
-            message: '请输入负责人',
+            message: '请输入管理员',
             trigger: 'blur'
           }
         ],
         dutyTel: [
           {
             required: true,
-            message: '请输入负责人电话',
+            message: '请输入管理员电话',
             trigger: 'blur'
           }
-        ],
+        ]
       }
     }
   },
   methods: {
-    searchQuery() {
+    areaChange(value) {
+      console.log(value)
+      this.formAdd.area = value
     },
+    searchQuery() {},
     searchReset() {
       this.dataDuty = dataDuty
     },
@@ -228,7 +257,7 @@ export default {
       this.$refs.ruleForm.resetFields()
     },
     onDelete(index) {
-      const dataDuty= [...this.dataDuty]
+      const dataDuty = [...this.dataDuty]
       this.dataDuty = dataDuty.filter(item => item.index !== index)
     },
     Download() {

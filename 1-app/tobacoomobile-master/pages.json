@@ -122,7 +122,15 @@
 		        "enablePullDownRefresh": false
 		    }
 		    
-		},
+		},{
+            "path" : "pages/lockcount/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },
 		{
 		    "path" : "pages/locksafe/index",
 		    "style" :                                                                                    
@@ -172,6 +180,25 @@
         }
         ,{
             "path" : "pages/index/repairindex",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/safeindex",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        
+        ,{
+            "path" : "pages/lockrecord/index",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

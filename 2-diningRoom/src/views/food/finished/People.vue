@@ -21,13 +21,10 @@
           </a-row>
         </a-form>
       </div>
-
       <!-- 操作按钮区域 -->
       <div class="table-operator">
         <a-button type="link" icon="plus" @click='add'>新增</a-button>
       </div>
-
-
       <!-- table区域-begin -->
       <div>
         <a-table
@@ -50,9 +47,7 @@
         </span>
         </a-table>
       </div>
-
     </a-card>
-
     <a-modal
       :title="title"
       :width="600"

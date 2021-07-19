@@ -20,7 +20,7 @@
               style="width: 45%;"
               :format="dateFormat"
             ></a-date-picker>
-            <span>&nbsp;&nbsp;到&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
             <a-date-picker
               v-model="formHotel.dateEnd"
               placeholder="选择结束日期"
@@ -30,7 +30,7 @@
           </a-form-model-item>
 
           <a-form-model-item label="选择协议酒店" prop="hotel">
-            <a-select v-model="formHotel.hotel" placeholder="选择协议酒店">
+            <a-select v-model="formHotel.hotel" placeholder="请选择协议酒店">
               <a-select-option value="香格里拉酒店">香格里拉酒店</a-select-option>
               <a-select-option value="华宜时尚酒店">华宜时尚酒店</a-select-option>
               <a-select-option value="福州品悦酒店">福州品悦酒店</a-select-option>
@@ -52,7 +52,7 @@
           <a-table-column title="序号" data-index="index" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="协议酒店" data-index="hotel" align="center"></a-table-column>
-           <a-table-column title="操作" data-index="action" align="center">
+          <a-table-column title="操作" data-index="action" align="center">
             <template slot-scope="record">
               <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
               <a-divider type="vertical" />
@@ -78,7 +78,7 @@
               style="width: 45%;"
               :format="dateFormat"
             ></a-date-picker>
-            <span>&nbsp;&nbsp;到&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
             <a-date-picker
               v-model="formEat.dateEnd"
               placeholder="选择结束日期"
@@ -107,12 +107,12 @@
           </a-form-model-item>
         </a-form-model>
         <!--  -->
-        <a-table :data-source="dataEat"  :pagination="false" rowKey="dateTime">
+        <a-table :data-source="dataEat" :pagination="false" rowKey="dateTime">
           <a-table-column title="序号" data-index="index" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="餐别" data-index="type" align="center"></a-table-column>
           <a-table-column title="就餐地点" data-index="way" align="center"></a-table-column>
-           <a-table-column title="操作" data-index="action" align="center">
+          <a-table-column title="操作" data-index="action" align="center">
             <template slot-scope="record">
               <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
               <a-divider type="vertical" />
@@ -131,14 +131,14 @@
           :label-col="labelCol"
           :wrapper-col="wrapperCol"
         >
-          <a-form-model-item label="请选择日期" prop="dateStart">
+          <a-form-model-item label="日期" prop="dateStart">
             <a-date-picker
               v-model="formRoom.dateStart"
               placeholder="选择开始日期"
               style="width: 45%;"
               :format="dateFormat"
             ></a-date-picker>
-            <span>&nbsp;&nbsp;到&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
             <a-date-picker
               v-model="formRoom.dateEnd"
               placeholder="选择结束日期"
@@ -147,7 +147,7 @@
             ></a-date-picker>
           </a-form-model-item>
           <a-form-model-item label="选择时段" prop="range">
-            <a-select v-model="formRoom.range" placeholder="选择时段">
+            <a-select v-model="formRoom.range" placeholder="请选择时段">
               <a-select-option value="上午">上午</a-select-option>
               <a-select-option value="下午">下午</a-select-option>
               <a-select-option value="晚上">晚上</a-select-option>
@@ -155,48 +155,13 @@
             </a-select>
           </a-form-model-item>
           <a-form-model-item label="选择会议地点" prop="room">
-            <!-- <a-select v-model="formRoom.room" placeholder="选择预约会议室">
-              <a-select-option value="会议室203">会议室203</a-select-option>
-              <a-select-option value="会议室204">会议室204</a-select-option>
-              <a-select-option value="会议室205">会议室205</a-select-option>
-              <a-select-option value="会议室206">会议室206</a-select-option>
-            </a-select>-->
-            <a-tree-select
+            <a-cascader
+              :options="optionsRoom"
+              placeholder="请选择会议室"
               v-model="formRoom.room"
-              show-search
-              prop="room"
-              style="width: 485px"
-              :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
-              placeholder="请选择会议地点"
-            >
-              <a-tree-select-node
-                key="random"
-                value="中国烟草总公司福建省公司机关A区域1号楼"
-                title="中国烟草总公司福建省公司机关A区域1号楼"
-                :selectable="false"
-              >
-                <a-tree-select-node key="random1" value="中国烟草总公司福建省公司机关A区域1号楼会议室203" title="会议室203" />
-                <a-tree-select-node key="random2" value="中国烟草总公司福建省公司机关A区域1号楼会议室204" title="会议室204" />
-              </a-tree-select-node>
-              <a-tree-select-node
-                key="random3"
-                value="中国烟草总公司福建省公司机关A区域2号楼"
-                title="中国烟草总公司福建省公司机关A区域2号楼"
-                :selectable="false"
-              >
-                <a-tree-select-node key="random4" value="中国烟草总公司福建省公司机关A区域2号楼会议室203" title="会议室203" />
-                <a-tree-select-node key="random5" value="中国烟草总公司福建省公司机关A区域2号楼会议室204" title="会议室204" />
-              </a-tree-select-node>
-              <a-tree-select-node
-                key="random6"
-                value="中国烟草总公司福建省公司机关B区域1号楼"
-                title="中国烟草总公司福建省公司机关B区域1号楼"
-                :selectable="false"
-              >
-                <a-tree-select-node key="random7" value="中国烟草总公司福建省公司机关B区域1号楼会议室205" title="会议室203" />
-                <a-tree-select-node key="random8" value="中国烟草总公司福建省公司机关B区域1号楼会议室206" title="会议室204" />
-              </a-tree-select-node>
-            </a-tree-select>
+              @change="onChangeRoom"
+              style="width: 460px"
+            />
           </a-form-model-item>
 
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
@@ -211,7 +176,7 @@
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="时段" data-index="range" align="center"></a-table-column>
           <a-table-column title="会议地点" data-index="room" align="center"></a-table-column>
-           <a-table-column title="操作" data-index="action" align="center">
+          <a-table-column title="操作" data-index="action" align="center">
             <template slot-scope="record">
               <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
               <a-divider type="vertical" />
@@ -257,11 +222,73 @@
 </template>
 <script>
 import moment from 'moment'
+let optionsRoom = [
+  {
+    value: '中国烟草总公司福建省公司机关',
+    label: '中国烟草总公司福建省公司机关',
+    children: [
+      {
+        value: 'A区域',
+        label: 'A区域',
+        children: [
+          {
+            value: '1号楼',
+            label: '1号楼',
+            children: [
+              {
+                value: '会议室203',
+                label: '会议室203'
+              },
+              {
+                value: '会议室204',
+                label: '会议室204'
+              }
+            ]
+          },
+          {
+            value: '2号楼',
+            label: '2号楼',
+            children: [
+              {
+                value: '会议室204',
+                label: '会议室204'
+              },
+              {
+                value: '会议室205',
+                label: '会议室205'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        value: 'B区域',
+        label: 'B区域',
+        children: [
+          {
+            value: '1号楼',
+            label: '1号楼',
+            children: [
+              {
+                value: '会议室204',
+                label: '会议室204'
+              },
+              {
+                value: '会议室205',
+                label: '会议室205'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
 export default {
   data() {
     return {
       eatHotel: '',
-      numDate:'1',
+      numDate: '1',
       current: 0,
       steps: [
         {
@@ -329,8 +356,9 @@ export default {
         room: undefined,
         dateStart: undefined,
         dateEnd: undefined,
-        use: undefined
+        range: undefined
       },
+      optionsRoom,
       dataRoom: [],
       rulesRoom: {
         room: [
@@ -363,6 +391,11 @@ export default {
     },
     prev() {
       this.current--
+    },
+    onChangeRoom(value) {
+      console.log(value)
+      this.formRoom.room = value[0] + value[1] + value[2] + value[3]
+      console.log(room)
     },
     onSubmitHotel() {
       console.log(this.formHotel.dateStart)
@@ -443,7 +476,7 @@ export default {
           this.dataRoom.push(a)
           this.$message.success('添加成功!')
           this.formRoom.room = undefined
-
+          this.formRoom.range = undefined
           this.formRoom.number = undefined
         } else {
           console.log('error submit!!')
@@ -465,7 +498,7 @@ export default {
         cancelText: '否'
       })
     },
-    onSubmitB(){}
+    onSubmitB() {}
   }
 }
 </script>

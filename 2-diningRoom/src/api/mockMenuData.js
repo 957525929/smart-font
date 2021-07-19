@@ -107,6 +107,68 @@ export const mockMenuData = {
               "name": "material-warehousing-warehousingDetails",
               "id": "3"
             },
+          ],
+      },
+      {
+        "redirect": null,
+        "path": "/food/menu",
+        "component": "layouts/RouteView",
+        "route": "1",
+        "meta":
+          {
+            "keepAlive": false,
+            "internalOrExternal": false,
+            "icon": "snippets",
+            "title": "食品管理"
+          },
+        "name": "food-menu",
+        "id": "6",
+        "children":
+          [
+            {
+              "path": "/food/menu/menuIndex",
+              "component": "food/menu/Index",
+              "route": "1",
+              "meta":
+                {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "title": "菜品管理"
+                },
+              "name": "food-menu-menuIndex",
+              "id": "7"
+            },
+            {
+              "path": "/food/finished/finishedIndex",
+              "component": "food/finished/Index",
+              "route": "1",
+              "meta":
+                {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "title": "成品留样"
+                },
+              "name": "food-finished-finishedIndex",
+              "id": "8"
+            },
+          ],
+      },
+      {
+        "redirect": null,
+        "path": "/system/mange",
+        "component": "layouts/RouteView",
+        "route": "1",
+        "meta":
+          {
+            "keepAlive": false,
+            "internalOrExternal": false,
+            "icon": "setting",
+            "title": "系统管理"
+          },
+        "name": "system-mange",
+        "id": "6",
+        "children":
+          [
             {
               "path": "/material/staff/staffIndex",
               "component": "material/staff/Index",
@@ -141,42 +203,10 @@ export const mockMenuData = {
                 {
                   "keepAlive": false,
                   "internalOrExternal": false,
-                  "title": "食料类别管理"
+                  "title": "食料分类管理"
                 },
               "name": "material-warehousing-Category",
               "id": "21111"
-            },
-          ],
-
-      },
-      {
-        "redirect": null,
-        "path": "/food/menu",
-        "component": "layouts/RouteView",
-        "route": "1",
-        "meta":
-          {
-            "keepAlive": false,
-            "internalOrExternal": false,
-            "icon": "snippets",
-            "title": "食品管理"
-          },
-        "name": "food-menu",
-        "id": "6",
-        "children":
-          [
-            {
-              "path": "/food/menu/menuIndex",
-              "component": "food/menu/Index",
-              "route": "1",
-              "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "菜品管理"
-                },
-              "name": "food-menu-menuIndex",
-              "id": "7"
             },
             {
               "path": "/food/menu/menuClassify",
@@ -191,34 +221,7 @@ export const mockMenuData = {
               "name": "food-menu-menuClassify",
               "id": "9"
             },
-            {
-              "path": "/food/finished/finishedIndex",
-              "component": "food/finished/Index",
-              "route": "1",
-              "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "成品留样"
-                },
-              "name": "food-finished-finishedIndex",
-              "id": "8"
-            },
-            {
-              "path": "/food/finished/finishedPeople",
-              "component": "food/finished/People",
-              "route": "1",
-              "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "留样人员管理"
-                },
-              "name": "food-finished-finishedPeople",
-              "id": "8"
-            },
           ],
-
       },
     ]
   },

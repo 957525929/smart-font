@@ -8,26 +8,9 @@
           <span>按预约类型筛选：</span>
         </a-col>
         <a-col>
-          <a-select :style="{width:'150px'}" @change="handleChange" default-value="公司">
-            <a-select-option value="公司">公司</a-select-option>
+          <a-select :style="{width:'150px'}" @change="handleChange" default-value="公司会议">
+            <a-select-option value="公司会议">公司会议</a-select-option>
             <a-select-option value="个人">个人</a-select-option>
-          </a-select>
-        </a-col>
-        <a-col :span="1"></a-col>
-        <a-col>
-          <span>按区域筛选：</span>
-        </a-col>
-        <a-col>
-          <a-select
-            :style="{width:'300px'}"
-            showSearch
-            @change="handleChange"
-            default-value="福建烟草公司机关A区域1号楼"
-          >
-            <a-select-option value="福建烟草公司机关A区域1号楼">福建烟草公司机关A区域1号楼</a-select-option>
-            <a-select-option value="福建烟草公司机关A区域2号楼">福建烟草公司机关A区域2号楼</a-select-option>
-            <a-select-option value="福建烟草公司机关B区域1号楼">福建烟草公司机关B区域1号楼</a-select-option>
-            <a-select-option value="福建烟草公司机关B区域2号楼">福建烟草公司机关B区域2号楼</a-select-option>
           </a-select>
         </a-col>
         <a-col :span="1"></a-col>
@@ -35,22 +18,39 @@
           <span>按日期筛选：</span>
         </a-col>
         <a-col>
-          <a-icon type="calendar" :style="{ fontSize: '20px', marginRight: '5px' }" />
-          <span>从&nbsp;</span>
-          <a-date-picker placeholder="请选择开始" v-model="dateStart"  :format="dateFormat">
-            <a-icon slot="suffixIcon" type="suffixIcon" />
-          </a-date-picker>
-          <span>&nbsp;到&nbsp;</span>
+          <a-date-picker placeholder="请选择开始" v-model="dateStart" :format="dateFormat"></a-date-picker>
+          <span>&nbsp;~&nbsp;</span>
           <a-date-picker
             placeholder="请选择结束"
-             :format="dateFormat"
+            :format="dateFormat"
             :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')"
-          >
-            <a-icon slot="suffixIcon" type="suffixIcon" />
-          </a-date-picker>
+          ></a-date-picker>
           <!-- <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date> -->
         </a-col>
+      </a-row>
+      <br />
+      <a-row type="flex" align="middle">
+        <a-col>
+          <span>按区域筛选：</span>
+        </a-col>
+        <a-col>
+          <a-cascader
+            style="width: 350px"
+            :options="selectOptions"
+            change-on-select
+            @change="areaChange"
+            :default-value="defaultT"
+            placeholder="请选择区域"
+          />
+        </a-col>
         <a-col :span="1"></a-col>
+        <a-col>
+          <span>按房间号筛选：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入房间号" v-model="searchValue"></a-input>
+        </a-col>
+        <a-col :span="2"></a-col>
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
@@ -73,7 +73,7 @@
       </a-table>
     </div>-->
     <br />
-    <bar v-bind:dataSource="dataSource" v-bind:title="title"></bar>
+    <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>
   </a-card>
 </template>
 <script>
@@ -81,6 +81,7 @@ import moment from 'moment'
 import Bar from '@/components/chart/Bar'
 import { formatDate } from '@/utils/util'
 import JDate from '@/components/jeecg/JDate'
+import { areaData } from './data/area.js'
 const dataSta = [
   {
     theme: '福建烟草公司机关A区域1号楼',
@@ -107,6 +108,32 @@ const dataSta = [
     budget: '21000'
   }
 ]
+const dataSource = [
+  {
+    x: '会议室203',
+    y: 10
+  },
+  {
+    x: '会议室204',
+    y: 3
+  },
+  {
+    x: '会议室205',
+    y: 3
+  },
+  {
+    x: '会议室207',
+    y: 8
+  },
+  {
+    x: '会议室208',
+    y: 17
+  },
+  {
+    x: '会议室209',
+    y: 10
+  }
+]
 export default {
   components: {
     Bar,
@@ -114,36 +141,15 @@ export default {
   },
   data() {
     return {
+      selectOptions: areaData,
+      defaultT: ['0', '01', '011'],
       dateFormat: 'YYYY年MM月DD日',
       dataSta,
-      dateStart:undefined,
-      dataSource: [
-        {
-          x: '会议室203',
-          y: 10
-        },
-        {
-          x: '会议室204',
-          y: 3
-        },
-        {
-          x: '会议室205',
-          y: 3
-        },
-        {
-          x: '会议室207',
-          y: 8
-        },
-        {
-          x: '会议室208',
-          y: 17
-        },
-        {
-          x: '会议室209',
-          y: 10
-        }
-      ],
-      title: '会议室预约次数'
+      dateStart: undefined,
+      dataSource,
+      title: '会议室预约次数',
+      height: 300,
+      searchValue: ''
     }
   },
   created() {
@@ -154,17 +160,28 @@ export default {
   },
   methods: {
     moment,
+    areaChange(value) {
+      console.log(value)
+    },
     handleChange() {},
     searchQuery() {
       // console.log(formatDate(new Date().getTime()-2*24*3600*1000,"YYYY年MM月DD日"))
-      console.log(
-        moment(new Date())
-          .subtract(1, 'months')
-          .format('YYYY-MM-DD')
-      )
+      // console.log(
+      //   moment(new Date())
+      //     .subtract(1, 'months')
+      //     .format('YYYY-MM-DD')
+      // )
+      let roomSelect = []
+      dataSource.filter(item => {
+        if (item.x.includes(this.searchValue)) {
+          roomSelect.push(item)
+        }
+      })
+      this.dataSource = roomSelect
     },
     searchReset() {
-      this.dataSta = dataSta
+      this.dataSource = dataSource
+      this.searchValue = ''
     },
     getCurrentData() {
       return new Date().toLocaleDateString()

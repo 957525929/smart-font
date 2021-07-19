@@ -7,7 +7,7 @@
 		<view class="cu-bar tabbar bg-white shadow foot">
 			<view class="action" @click="NavChange" data-cur="lockinstall">
 				<view class='cuIcon-cu-image'>
-					<text :class="PageCur=='lockinstall'?'text-orange cuIcon-paintfill':'text-gray cuIcon-paint'"></text>
+					<text :class="PageCur=='lockinstall'?'text-orange cuIcon-commandfill':'text-gray cuIcon-command'"></text>
 				</view>
 				<view :class="PageCur=='lockinstall'?'text-orange':'text-gray'">安装</view>
 			</view>

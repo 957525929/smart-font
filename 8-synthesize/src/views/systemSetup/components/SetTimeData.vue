@@ -11,6 +11,10 @@
       </a-select>
     </a-form-item>
 
+    <a-form-item label="提醒时间">
+      <a-Input v-model="form.time" placeholder="请选择时间" />
+    </a-form-item>
+
     <a-form-item label="结束前（天）">
       <a-Input v-model="form.deadlineTask" placeholder="请输入天数"></a-Input>
     </a-form-item>
@@ -20,6 +24,10 @@
         <a-select-option value="0" @click="show1">提醒一次</a-select-option>
         <a-select-option value="1" @click="show1">每天</a-select-option>
       </a-select>
+    </a-form-item>
+
+    <a-form-item label="提醒时间">
+      <a-Input v-model="form.time1" placeholder="请选择时间" />
     </a-form-item>
 
     <a-form-item
@@ -111,11 +119,11 @@ export default {
     },
     confirm() {
       this.visible = false
-      this.form.cycle = this.timeOut
+      this.form.time = this.timeOut
     },
     confirm1() {
       this.visible1 = false
-      this.form.cycle1 = this.timeOut1
+      this.form.time1 = this.timeOut1
     },
     handleCancel() {
       this.visible = false

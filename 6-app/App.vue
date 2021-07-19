@@ -28,69 +28,39 @@
 			})
 
 			Vue.prototype.ColorList = [{
-					title: '嫣红',
-					name: 'red',
-					color: '#e54d42'
+					title: '浅橙（按钮）',
+					name: 'orange-shallow',
+					color: '#FEA82F'
 				},
 				{
 					title: '桔橙',
 					name: 'orange',
-					color: '#f37b1d'
+					color: '#FF6701'
 				},
 				{
-					title: '明黄',
-					name: 'yellow',
-					color: '#fbbd08'
-				},
-				{
-					title: '橄榄',
-					name: 'olive',
-					color: '#8dc63f'
-				},
-				{
-					title: '森绿',
+					title: '浅绿',
 					name: 'green',
-					color: '#39b54a'
+					color: '#A6E4BE'
 				},
 				{
-					title: '天青',
-					name: 'cyan',
-					color: '#1cbbb4'
-				},
-				{
-					title: '海蓝',
+					title: '浅蓝',
 					name: 'blue',
-					color: '#0081ff'
+					color: '#B4D0F7'
 				},
 				{
 					title: '姹紫',
 					name: 'purple',
-					color: '#6739b6'
+					color: '#04009A'
 				},
 				{
-					title: '木槿',
-					name: 'mauve',
-					color: '#9c26b0'
-				},
-				{
-					title: '桃粉',
-					name: 'pink',
-					color: '#e03997'
-				},
-				{
-					title: '棕褐',
-					name: 'brown',
-					color: '#a5673f'
-				},
-				{
-					title: '玄灰',
+					title: '蓝灰（背景）',
 					name: 'grey',
-					color: '#8799a3'
+					color: '#F5F8FE'
 				},
 				{
-					title: '草灰',
+					title: '草灰（字体）',
 					name: 'gray',
-					color: '#aaaaaa'
+					color: '#7F7F7F'
 				},
 				{
 					title: '墨黑',
@@ -103,21 +73,14 @@
 					color: '#ffffff'
 				},
 			]
-
-		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
 		}
-
 	}
 </script>
 
 <style>
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
+	@import "colorui/common.css";
 
 	.nav-list {
 		display: flex;

@@ -1,10 +1,16 @@
 {
-    "name" : "6",
+    "name" : "物业管理应用",
     "appid" : "__UNI__B7AAA19",
     "description" : "",
-    "versionName" : "ColorUi for UniApp 2.1.4",
+    "versionName" : "1.0.0",
     "versionCode" : 214,
     "transformPx" : false,
+	"networkTimeout" : {
+	    "request" : 60000,
+	    "connectSocket" : 15000,
+	    "uploadFile" : 15000,
+	    "downloadFile" : 15000
+	},
     "app-plus" : {
         /* 5+App特有相关 */
         "modules" : {},
@@ -40,8 +46,23 @@
             },
             "ios" : {},
             /* ios打包配置 */
-            "sdkConfigs" : {}
-        }
+            "sdkConfigs" : {
+                "geolocation" : {
+                    "amap" : {
+                        "__platform__" : [ "ios", "android" ],
+                        "appkey_ios" : "",
+                        "appkey_android" : ""
+                    }
+                }
+            }
+        },
+        "splashscreen" : {
+            "waiting" : false
+        },
+		/* 开启分包加载 */
+		"optimization" : {
+		    "subPackages" : true
+		}
     },
     /* SDK配置 */
     "quickapp" : {},
@@ -52,10 +73,17 @@
         "setting" : {
             "urlCheck" : false,
             "es6" : true
-        }
+        },
+		"usingComponents" : true,
+		"optimization" : {
+		    "subPackages" : true
+		}
     },
     "h5" : {
-        "title" : "ColorUi for UniApp",
-        "domain" : "demo.color-ui.com"
+        "title" : "物业管理微应用",
+        "domain" : "demo.color-ui.com",
+        "sdkConfigs" : {
+            "maps" : {}
+        }
     }
 }
