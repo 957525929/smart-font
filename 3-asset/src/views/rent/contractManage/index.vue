@@ -51,9 +51,9 @@
                 </a-col>
                 <a-col :xl="8" :lg="9" :md="10" :sm="24">
                   <a-form-item label="合同有效期">
-                    <j-date placeholder="2010-01-01" class="query-group-cust"  v-model="time.Date_begin"></j-date>
+                    <j-date class="query-group-cust"  v-model="startDate"/>
                     <span class="query-group-split-cust"></span>
-                    <j-date placeholder="2030-01-01" class="query-group-cust"  v-model="time.Date_end"></j-date>
+                    <j-date class="query-group-cust"  v-model="endDate"/>
                   </a-form-item>
                 </a-col>
                 <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -114,28 +114,28 @@
             </a-table>
           </div>
           <!-- 租赁合同包含资产 -->
-          <a-modal
-            title="租赁合同包含资产"
-            width="70%"
-            :visible="detailvisible"
-            :confirm-loading="confirmLoading"
-            @ok="handleOk1"
-            @cancel="handleCancel1"
-          >
-            <div>
-              <a-table
-                ref="table"
-                size="middle"
-                bordered
-                rowKey="id"
-                :scroll="{x:2500}"
-                :columns="assetcolumn"
-                :dataSource="assetSource"
-                :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
-              >
-              </a-table>
-              </div>
-          </a-modal>
+<!--          <a-modal-->
+<!--            title="租赁合同包含资产"-->
+<!--            width="70%"-->
+<!--            :visible="detailvisible"-->
+<!--            :confirm-loading="confirmLoading"-->
+<!--            @ok="handleOk1"-->
+<!--            @cancel="handleCancel1"-->
+<!--          >-->
+<!--            <div>-->
+<!--              <a-table-->
+<!--                ref="table"-->
+<!--                size="middle"-->
+<!--                bordered-->
+<!--                rowKey="id"-->
+<!--                :scroll="{x:2500}"-->
+<!--                :columns="assetcolumn"-->
+<!--                :dataSource="assetSource"-->
+<!--                :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"-->
+<!--              >-->
+<!--              </a-table>-->
+<!--              </div>-->
+<!--          </a-modal>-->
           <!-- 添加租赁合同记录 -->
 <!--            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel'></EnrollLent>-->
           </a-card>
@@ -190,9 +190,9 @@
                   </a-col>
                   <a-col :xl="8" :lg="9" :md="10" :sm="24">
                     <a-form-item label="合同有效期">
-                      <j-date placeholder="请选择开始" class="query-group-cust"  v-model="time.Date_begin"></j-date>
+                      <j-date class="query-group-cust"  v-model="startDate"/>
                       <span class="query-group-split-cust"></span>
-                      <j-date placeholder="请选择结束" class="query-group-cust"  v-model="time.Date_end"></j-date>
+                      <j-date class="query-group-cust"  v-model="endDate"/>
                     </a-form-item>
                   </a-col>
                   <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -250,29 +250,29 @@
 
               </a-table>
             </div>
-            <!-- 租赁合同包含资产 -->
-            <a-modal
-              title="租赁合同包含资产"
-              width="70%"
-              :visible="detailvisiblepay"
-              :confirm-loading="confirmLoading"
-              @ok="handleOkpay"
-              @cancel="handleCancelpay"
-            >
-              <div>
-                <a-table
-                  ref="table"
-                  size="middle"
-                  bordered
-                  rowKey="id"
-                  :scroll="{x:2500}"
-                  :columns="assetcolumn"
-                  :dataSource="assetSourcepay"
-                  :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
-                >
-                </a-table>
-              </div>
-            </a-modal>
+<!--            &lt;!&ndash; 租赁合同包含资产 &ndash;&gt;-->
+<!--            <a-modal-->
+<!--              title="租赁合同包含资产"-->
+<!--              width="70%"-->
+<!--              :visible="detailvisiblepay"-->
+<!--              :confirm-loading="confirmLoading"-->
+<!--              @ok="handleOkpay"-->
+<!--              @cancel="handleCancelpay"-->
+<!--            >-->
+<!--              <div>-->
+<!--                <a-table-->
+<!--                  ref="table"-->
+<!--                  size="middle"-->
+<!--                  bordered-->
+<!--                  rowKey="id"-->
+<!--                  :scroll="{x:2500}"-->
+<!--                  :columns="assetcolumn"-->
+<!--                  :dataSource="assetSourcepay"-->
+<!--                  :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"-->
+<!--                >-->
+<!--                </a-table>-->
+<!--              </div>-->
+<!--            </a-modal>-->
 <!--            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel'></EnrollLent>-->
           </a-card>
       </a-tab-pane>
@@ -284,6 +284,7 @@
 import {setDataSource} from "@views/modules/online/cgform/util/TableUtils";
 import JDate from "@comp/jeecg/JDate";
 import EnrollLent from "./EnrollLent";
+import moment from "moment";
 export default {
   name: "rent",
   components: {
@@ -293,6 +294,8 @@ export default {
   data () {
       return {
         description: '资产变化表',
+        startDate:moment().subtract(12, 'years').format('YYYY-MM-DD'),
+        endDate:moment().format('YYYY-MM-DD'),
         //合同名称
         ConNameSelectData:[
           {
@@ -631,96 +634,96 @@ export default {
         detailvisible:false,  //包含资产详情
         detailvisiblepay:false,  //包含资产详情
         confirmLoading: false,
-        //资产列表表头
-        assetcolumn:[
-          {
-            title:'资产编号',
-            fixed:'left',
-            width:130,
-            align:"center",
-            dataIndex: 'assetNunmber',
-          },
-          {
-            title:'资产名称',
-            align:"center",
-            dataIndex: 'assetName'
-          },
-          {
-            title:'资产类型',
-            align:"center",
-            dataIndex: 'assetType'
-          },
-          {
-            title:'资产价值',
-            align:"center",
-            dataIndex: 'assetValue'
-          },
-          {
-            title:'资产所有方',
-            align:"center",
-            dataIndex: 'assetOwner'
-          },
-          {
-            title:'资产使用方',
-            align:"center",
-            dataIndex: 'assetUser'
-          },
-          {
-            title:'资产状态',
-            align:"center",
-            dataIndex: 'assetStates'
-          },
-        ],
-        //资产数据
-        assetSource:[
-          {
-            key:'1',
-            assetNunmber: 'ZCAT2021070501',
-            assetName: '烟草烘干机',
-            assetValue: '10000.00',
-            assetType:'专用设备',
-            assetOwner: '烟草公司',
-            assetUser: '卷烟厂',
-            assetStates:'租出',
-            remark : '无',
-          },
-          {
-            key:'2',
-            assetNunmber: 'ZCAT2021070502',
-            assetName: '联想M710S',
-            assetType:'专用设备',
-            assetValue: '5000.00',
-            assetOwner: '烟草公司',
-            assetUser: '卷烟厂',
-            assetStates:'租出',
-            remark : '无',
-          },
-        ],
-        //承租列表资产数据
-        assetSourcepay:[
-          {
-            key:'1',
-            assetNunmber: 'ZCAT2021070504',
-            assetName: '四角办公大楼负一楼仓库',
-            assetValue: '135000.00',
-            assetType:'房屋和建筑物',
-            assetOwner: '福州朝阳贸易有限公司',
-            assetUser: '烟草公司',
-            assetStates:'租入',
-            remark : '无',
-          },
-          {
-            key:'2',
-            assetNunmber: 'ZCAT2021070505',
-            assetName: '卷烟厂污水处理设备',
-            assetType:'专用设备',
-            assetValue: '15000.00',
-            assetOwner: '福州烟草加工厂',
-            assetUser: '烟草公司',
-            assetStates:'租入',
-            remark : '无',
-          },
-        ],
+        // //资产列表表头
+        // assetcolumn:[
+        //   {
+        //     title:'资产编号',
+        //     fixed:'left',
+        //     width:130,
+        //     align:"center",
+        //     dataIndex: 'assetNunmber',
+        //   },
+        //   {
+        //     title:'资产名称',
+        //     align:"center",
+        //     dataIndex: 'assetName'
+        //   },
+        //   {
+        //     title:'资产类型',
+        //     align:"center",
+        //     dataIndex: 'assetType'
+        //   },
+        //   {
+        //     title:'资产价值',
+        //     align:"center",
+        //     dataIndex: 'assetValue'
+        //   },
+        //   {
+        //     title:'资产所有方',
+        //     align:"center",
+        //     dataIndex: 'assetOwner'
+        //   },
+        //   {
+        //     title:'资产使用方',
+        //     align:"center",
+        //     dataIndex: 'assetUser'
+        //   },
+        //   {
+        //     title:'资产状态',
+        //     align:"center",
+        //     dataIndex: 'assetStates'
+        //   },
+        // ],
+        // //资产数据
+        // assetSource:[
+        //   {
+        //     key:'1',
+        //     assetNunmber: 'ZCAT2021070501',
+        //     assetName: '烟草烘干机',
+        //     assetValue: '10000.00',
+        //     assetType:'专用设备',
+        //     assetOwner: '烟草公司',
+        //     assetUser: '卷烟厂',
+        //     assetStates:'租出',
+        //     remark : '无',
+        //   },
+        //   {
+        //     key:'2',
+        //     assetNunmber: 'ZCAT2021070502',
+        //     assetName: '联想M710S',
+        //     assetType:'专用设备',
+        //     assetValue: '5000.00',
+        //     assetOwner: '烟草公司',
+        //     assetUser: '卷烟厂',
+        //     assetStates:'租出',
+        //     remark : '无',
+        //   },
+        // ],
+        // //承租列表资产数据
+        // assetSourcepay:[
+        //   {
+        //     key:'1',
+        //     assetNunmber: 'ZCAT2021070504',
+        //     assetName: '四角办公大楼负一楼仓库',
+        //     assetValue: '135000.00',
+        //     assetType:'房屋和建筑物',
+        //     assetOwner: '福州朝阳贸易有限公司',
+        //     assetUser: '烟草公司',
+        //     assetStates:'租入',
+        //     remark : '无',
+        //   },
+        //   {
+        //     key:'2',
+        //     assetNunmber: 'ZCAT2021070505',
+        //     assetName: '卷烟厂污水处理设备',
+        //     assetType:'专用设备',
+        //     assetValue: '15000.00',
+        //     assetOwner: '福州烟草加工厂',
+        //     assetUser: '烟草公司',
+        //     assetStates:'租入',
+        //     remark : '无',
+        //   },
+        // ],
         modalVisible:false,
       }
     },

@@ -51,9 +51,9 @@
               </a-col>
               <a-col :xl="8" :lg="9" :md="10" :sm="24">
                 <a-form-item label="收租日期范围">
-                  <j-date placeholder="2019-01-01" class="query-group-cust"  v-model="paytime.Date_begin"></j-date>
+                  <j-date class="query-group-cust"  v-model="startDate"/>
                   <span class="query-group-split-cust"></span>
-                  <j-date placeholder="2021-01-01" class="query-group-cust"  v-model="paytime.Date_end"></j-date>
+                  <j-date class="query-group-cust"  v-model="endDate"/>
                 </a-form-item>
               </a-col>
               <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -203,9 +203,13 @@
                 </a-form-item>
               </a-col>
               <a-col :xl="8" :lg="9" :md="10" :sm="24">
-                <a-form-item label="缴租日期">
-                  <j-date placeholder="请选择缴租日期" class="query-group-cust"  v-model="paytime"></j-date>
-                </a-form-item>
+<!--                <a-form-item label="缴租日期">-->
+<!--                  <j-date placeholder="请选择缴租日期" class="query-group-cust"  v-model="paytime"></j-date>-->
+<!--                </a-form-item>-->
+                <j-date class="query-group-cust"  v-model="startDate"></j-date>
+                <span class="query-group-split-cust"></span>
+
+                <j-date class="query-group-cust"  v-model="endDate"></j-date>
               </a-col>
               <a-col :xl="6" :lg="7" :md="8" :sm="24">
                 <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
@@ -314,11 +318,12 @@
 
 import JDate from "@comp/jeecg/JDate";
 import Register from "@views/rent/rentManage/Register";
+import moment from "moment";
 export default {
   name: "collect",
   components: {
     JDate,
-    Register
+    Register,
   },
   mounted(){
       console.log("1",this.dataSource)
@@ -326,6 +331,8 @@ export default {
   data () {
       return {
         description: '收租列表',
+        startDate:moment().subtract(3, 'years').format('YYYY-MM-DD'),
+        endDate:moment().format('YYYY-MM-DD'),
         //合同名称
         ConNameSelectData:[
           {

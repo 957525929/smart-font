@@ -51,7 +51,10 @@
                     </a-col>
                     <a-col :span="11">
                       <a-form-item label="合同有效期">
-                        <a-date-picker placeholder='' v-decorator="['recordDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>~<a-date-picker placeholder='' v-decorator="['endDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>
+<!--                        <a-date-picker  v-decorator="['startDate',{ rules: [{ required: true, message: '请选择!' }], initialValue:this.startDate }]" style="width: 45%"></a-date-picker>~<a-date-picker  v-decorator="['endDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>-->
+                        <j-date  v-decorator="['startDate',{ rules: [{ required: true, message: '请选择!' }],initialValue:this.startDate, }]" style='width: 45%;'/>
+                        <span class="query-group-split-cust"></span>
+                        <j-date  v-decorator="['endDate']" style='width: 45%;' />
                       </a-form-item>
                     </a-col>
                   </a-row>
@@ -78,7 +81,7 @@
                       <a-form-item label="付款周期">
                         <a-select
                           allowClear
-                          placeholder="请选择承办人"
+                          placeholder="请选择付款周期"
                         >
                           <a-select-option v-for="d in cycleSelectData" :key="d.value" >
                             {{ d.text }}
@@ -188,7 +191,10 @@
                   </a-col>
                   <a-col :span="11">
                     <a-form-item label="合同有效期">
-                      <a-date-picker placeholder='' v-decorator="['recordDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>~<a-date-picker placeholder='' v-decorator="['endDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>
+<!--                      <a-date-picker placeholder='' v-decorator="['startDate', {initialValue:startDate},{ rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>~<a-date-picker placeholder='' v-decorator="['endDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>-->
+                      <j-date  v-decorator="['startDate', { rules: [{ required: true, message: '请选择!' }],initialValue:this.startDate, }]" style='width: 45%;'/>
+                      <span class="query-group-split-cust"></span>
+                      <j-date  v-decorator="['endDate']" style='width: 45%;' />
                     </a-form-item>
                   </a-col>
                 </a-row>
@@ -282,11 +288,13 @@
 <script>
 import  JEditableTable from '@comp/jeecg/JEditableTable'
 import { FormTypes } from '@/utils/JEditableTableUtil'
+import JDate from "@comp/jeecg/JDate";
 import moment from 'moment'
 export default {
   name: "CreateContract",
   components: {
     JEditableTable,
+    JDate,
   },
 
   props: {
@@ -296,6 +304,7 @@ export default {
     return {
       form1: this.$form.createForm(this),
       form2: this.$form.createForm(this),
+      startDate:moment().format('YYYY-MM-DD'),
       //承办人
       workerSelectData:[
         {

@@ -155,7 +155,8 @@
         barData,
         loginfo:{},
         visitFields:['次数'],
-        visitInfo:[
+        visitInfo:
+          [
           {"月":"2016","次数":8,"type":"2016"},
           {"月":"2017","次数":6,"type":"2017"},
           {"月":"2018","次数":3,"type":"2018"},
@@ -170,7 +171,6 @@
       setTimeout(() => {
         this.loading = !this.loading
       }, 1000)
-      this.initLogInfo();
     },
     methods: {
       // initLogInfo () {
