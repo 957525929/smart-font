@@ -42,21 +42,21 @@
             <a-button style="margin-left: 10px;" @click="resetFormHotel">重置</a-button>
           </a-form-model-item>
         </a-form-model>
-        <!--  -->
+        <!-- 协议酒店表格 -->
         <a-table
           :data-source="dataHotel"
           :scroll="{ y: 450 }"
           :pagination="false"
-          rowKey="dateTime"
+          rowKey="hotelIndex"
         >
-          <a-table-column title="序号" data-index="index" align="center"></a-table-column>
+          <a-table-column title="序号" data-index="hotelIndex" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="协议酒店" data-index="hotel" align="center"></a-table-column>
-          <a-table-column title="操作" data-index="action" align="center">
+          <a-table-column title="操作" align="center">
             <template slot-scope="record">
-              <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
+              <a href="javascript:;" @click="hotelModify(record)" :style="{  color: 'blue' }">修改</a>
               <a-divider type="vertical" />
-              <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+              <a-popconfirm title="确定删除吗?" @confirm="() => hotelDelete(record.hotelIndex)">
                 <a href="javascript:;" :style="{  color: 'red' }">删除</a>
               </a-popconfirm>
             </template>
@@ -107,16 +107,16 @@
           </a-form-model-item>
         </a-form-model>
         <!--  -->
-        <a-table :data-source="dataEat" :pagination="false" rowKey="dateTime">
-          <a-table-column title="序号" data-index="index" align="center"></a-table-column>
+        <a-table :data-source="dataEat" :pagination="false" rowKey="eatIndex">
+          <a-table-column title="序号" data-index="eatIndex" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="餐别" data-index="type" align="center"></a-table-column>
           <a-table-column title="就餐地点" data-index="way" align="center"></a-table-column>
-          <a-table-column title="操作" data-index="action" align="center">
+          <a-table-column title="操作" align="center">
             <template slot-scope="record">
-              <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
+              <a href="javascript:;" @click="eatModify(record)" :style="{  color: 'blue' }">修改</a>
               <a-divider type="vertical" />
-              <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+              <a-popconfirm title="确定删除吗?" @confirm="() => eatDelete(record.eatIndex)">
                 <a href="javascript:;" :style="{  color: 'red' }">删除</a>
               </a-popconfirm>
             </template>
@@ -171,16 +171,21 @@
           </a-form-model-item>
         </a-form-model>
         <!--  -->
-        <a-table :data-source="dataRoom" :scroll="{ y: 450 }" :pagination="false" rowKey="dateTime">
-          <a-table-column title="序号" data-index="index" align="center"></a-table-column>
+        <a-table
+          :data-source="dataRoom"
+          :scroll="{ y: 450 }"
+          :pagination="false"
+          rowKey="roomIndex"
+        >
+          <a-table-column title="序号" data-index="roomIndex" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="时段" data-index="range" align="center"></a-table-column>
           <a-table-column title="会议地点" data-index="room" align="center"></a-table-column>
-          <a-table-column title="操作" data-index="action" align="center">
+          <a-table-column title="操作" align="center">
             <template slot-scope="record">
-              <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
+              <a href="javascript:;" @click="roomModify(record)" :style="{  color: 'blue' }">修改</a>
               <a-divider type="vertical" />
-              <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+              <a-popconfirm title="确定删除吗?" @confirm="() => roomDelete(record.roomIndex)">
                 <a href="javascript:;" :style="{  color: 'red' }">删除</a>
               </a-popconfirm>
             </template>
@@ -204,20 +209,135 @@
         <a-button v-if="current > 0" style="margin-left: 8px" @click="prev">上一步</a-button>
       </div>
     </div>
-    <!-- <a-modal
-      :visible="visibleNotice"
-      @ok="handleOkNotice"
-      @cancel="handleCancelNotice"
-      title="是否立刻预通知"
-      ok-text="确定"
-      cancel-text="取消"
-      content="null"
-    >
-      <template>
-        <a-button type="primary">是</a-button>
-        <a-button>否</a-button>
-      </template>
-    </a-modal>-->
+    <!-- 修改协议酒店 -->
+    <a-modal v-model="visibleHotel" title="修改协议酒店" footer>
+      <a-form-model
+        ref="ruleFormHotel"
+        :model="ModifyHotel"
+        :rules="rulesHotel"
+        :label-col="labelColModify"
+        :wrapper-col="wrapperColModify"
+      >
+        <a-form-model-item label="日期" prop="dateStart">
+          <a-date-picker
+            v-model="ModifyHotel.dateStart"
+            placeholder="选择开始日期"
+            style="width: 45%;"
+            :format="dateFormat"
+          ></a-date-picker>
+          <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
+          <a-date-picker
+            v-model="ModifyHotel.dateEnd"
+            placeholder="选择结束日期"
+            style="width: 45%;"
+            :format="dateFormat"
+          ></a-date-picker>
+        </a-form-model-item>
+        <a-form-model-item label="选择协议酒店" prop="hotel">
+          <a-select v-model="ModifyHotel.hotel" placeholder="请选择协议酒店">
+            <a-select-option value="香格里拉酒店">香格里拉酒店</a-select-option>
+            <a-select-option value="华宜时尚酒店">华宜时尚酒店</a-select-option>
+            <a-select-option value="福州品悦酒店">福州品悦酒店</a-select-option>
+            <a-select-option value="世纪金源酒店">世纪金源酒店</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item :wrapper-col="{ span: 17, offset:8 }">
+          <a-button type="primary" @click="SubmitModifyHotel()">修改</a-button>
+          <a-button style="margin-left: 10px;" @click="CancelModifyHotel()">取消</a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </a-modal>
+    <!-- 修改就餐地点 -->
+    <a-modal v-model="visibleEat" title="修改就餐地点" footer>
+      <a-form-model
+        ref="ruleFormEat"
+        :model="ModifyEat"
+        :rules="rulesEat"
+        :label-col="labelColModify"
+        :wrapper-col="wrapperColModify"
+      >
+        <a-form-model-item label="日期" prop="dateStart">
+          <a-date-picker
+            v-model="ModifyEat.dateStart"
+            placeholder="选择开始日期"
+            style="width: 45%;"
+            :format="dateFormat"
+          ></a-date-picker>
+          <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
+          <a-date-picker
+            v-model="ModifyEat.dateEnd"
+            placeholder="选择结束日期"
+            style="width: 45%;"
+            :format="dateFormat"
+          ></a-date-picker>
+        </a-form-model-item>
+        <a-form-model-item label="餐别" prop="type">
+          <a-select v-model="ModifyEat.type" placeholder="请选择餐别">
+            <a-select-option value="早餐">早餐</a-select-option>
+            <a-select-option value="午餐">午餐</a-select-option>
+            <a-select-option value="晚餐">晚餐</a-select-option>
+            <a-select-option value="三餐">三餐</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item label="就餐地点" prop="way">
+          <a-select v-model="ModifyEat.way" placeholder="选择就餐方式">
+            <a-select-option :value="eatHotel">{{eatHotel}}</a-select-option>
+            <a-select-option value="食堂">食堂</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item :wrapper-col="{ span: 17, offset:8 }">
+          <a-button type="primary" @click="SubmitModifyEat()">修改</a-button>
+          <a-button style="margin-left: 10px;" @click="CancelModifyEat()">取消</a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </a-modal>
+    <!-- 修改会议地点 -->
+    <a-modal v-model="visibleRoom" title="修改会议地点" footer width="600px">
+      <a-form-model
+        ref="ruleFormRoom"
+        :model="ModifyRoom"
+        :rules="rulesRoom"
+        :label-col="labelColModifyRoom"
+        :wrapper-col="wrapperColModifyRoom"
+      >
+        <a-form-model-item label="日期" prop="dateStart">
+          <a-date-picker
+            v-model="ModifyRoom.dateStart"
+            placeholder="选择开始日期"
+            style="width: 45%;"
+            :format="dateFormat"
+          ></a-date-picker>
+          <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
+          <a-date-picker
+            v-model="ModifyRoom.dateEnd"
+            placeholder="选择结束日期"
+            style="width: 45%;"
+            :format="dateFormat"
+          ></a-date-picker>
+        </a-form-model-item>
+        <a-form-model-item label="选择时段" prop="range">
+          <a-select v-model="ModifyRoom.range" placeholder="请选择时段">
+            <a-select-option value="上午">上午</a-select-option>
+            <a-select-option value="下午">下午</a-select-option>
+            <a-select-option value="晚上">晚上</a-select-option>
+            <a-select-option value="全天">全天</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item label="选择会议地点" prop="room">
+          <a-cascader
+            :options="optionsRoom"
+            placeholder="请选择会议室"
+            v-model="ModifyRoom.room"
+            @change="onChangeRoom"
+            style="width: 420px"
+          />
+        </a-form-model-item>
+        <a-form-model-item :wrapper-col="{ span: 17, offset:8 }">
+          <a-button type="primary" @click="SubmitModifyRoom()">修改</a-button>
+          <a-button style="margin-left: 10px;" @click="CancelModifyRoom()">取消</a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </a-modal>
   </a-card>
 </template>
 <script>
@@ -318,6 +438,7 @@ export default {
         dateEnd: undefined
       },
       dataHotel: [],
+      hotelIndex: 1,
       rulesHotel: {
         hotel: [
           {
@@ -328,13 +449,18 @@ export default {
         ],
         dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }]
       },
+      visibleHotel: false,
+      labelColModify: { span: 6 },
+      wrapperColModify: { span: 18 },
+      ModifyHotel: {},
       formEat: {
         dateStart: undefined,
         dateEnd: undefined,
-        type:  undefined,
-        way:  undefined,
+        type: undefined,
+        way: undefined
       },
       dataEat: [],
+      eatIndex: 1,
       rulesEat: {
         type: [
           {
@@ -352,15 +478,18 @@ export default {
         ],
         dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }]
       },
+      visibleEat: false,
+      ModifyEat: {},
       formRoom: {
         room: undefined,
         dateStart: undefined,
         dateEnd: undefined,
         range: undefined
       },
-      roomS:"",
+      roomS: '',
       optionsRoom,
       dataRoom: [],
+      roomIndex: 1,
       rulesRoom: {
         room: [
           {
@@ -371,7 +500,11 @@ export default {
         ],
         dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }],
         range: [{ required: true, message: '请选择日期', trigger: 'change' }]
-      }
+      },
+      visibleRoom: false,
+      ModifyRoom: {},
+      labelColModifyRoom: { span: 6 },
+      wrapperColModifyRoom: { span: 18 }
     }
   },
   created() {
@@ -395,7 +528,7 @@ export default {
     },
     onChangeRoom(value) {
       console.log(value)
-       this.roomS = value[0] + value[1] + value[2] + value[3]
+      this.roomS = value[0] + value[1] + value[2] + value[3]
       // console.log(this.formRoom.room)
     },
     onSubmitHotel() {
@@ -409,13 +542,8 @@ export default {
           let endDate = this.formHotel.dateEnd.format('YYYY年MM月DD日')
           let dateTime = startDate + '~' + endDate
           console.log(dateTime)
-          // let dateA=dateTime.split('~')
-          // console.log(dateA)
-          //  console.log(dateA[0])
-          //  let b=this.moment(dateA[0], 'YYYY-MM-DD')
-          //  console.log(b)
           let a = {
-            index: this.formHotel.index,
+            hotelIndex: this.hotelIndex++,
             dateTime: dateTime,
             hotel: this.formHotel.hotel
           }
@@ -446,6 +574,7 @@ export default {
           let dateTime = startDate + '~' + endDate
           console.log(dateTime)
           let a = {
+            eatIndex: this.eatIndex++,
             dateTime: dateTime,
             type: this.formEat.type,
             way: this.formEat.way
@@ -476,8 +605,10 @@ export default {
           let dateTime = startDate + '~' + endDate
           console.log(dateTime)
           let a = {
+            roomIndex: this.roomIndex++,
             dateTime: dateTime,
-            room: this.roomS,
+            // room: this.roomS,'
+            room: this.formRoom.room,
             range: this.formRoom.range
           }
           this.dataRoom.push(a)
@@ -505,7 +636,65 @@ export default {
         cancelText: '否'
       })
     },
-    onSubmitB() {}
+    onSubmitB() {},
+    // 修改
+    hotelModify(record) {
+      this.visibleHotel = true
+      console.log(1)
+      console.log(record)
+      this.ModifyHotel.hotel = record.hotel
+      let dateA = record.dateTime.split('~')
+      this.ModifyHotel.dateStart = this.moment(dateA[0], 'YYYY-MM-DD')
+      this.ModifyHotel.dateEnd = this.moment(dateA[1], 'YYYY-MM-DD')
+    },
+    SubmitModifyHotel() {
+      this.visibleHotel = false
+    },
+    CancelModifyHotel() {
+      this.visibleHotel = false
+    },
+    hotelDelete(hotelIndex) {
+      const dataHotel = [...this.dataHotel]
+      this.dataHotel = dataHotel.filter(item => item.hotelIndex !== hotelIndex)
+    },
+    eatModify(record) {
+      this.visibleEat = true
+      this.ModifyEat.type = record.type
+      this.ModifyEat.way = record.way
+      let dateA = record.dateTime.split('~')
+      this.ModifyEat.dateStart = this.moment(dateA[0], 'YYYY-MM-DD')
+      this.ModifyEat.dateEnd = this.moment(dateA[1], 'YYYY-MM-DD')
+    },
+    SubmitModifyEat() {
+      this.visibleEat = false
+    },
+    CancelModifyEat() {
+      this.visibleEat = false
+    },
+    eatDelete(eatIndex) {
+      const dataEat = [...this.dataEat]
+      this.dataEat = dataEat.filter(item => item.eatIndex !== eatIndex)
+    },
+    roomDelete(roomIndex) {
+      const dataRoom = [...this.dataRoom]
+      this.dataRoom = dataRoom.filter(item => item.roomIndex !== roomIndex)
+    },
+    roomModify(record) {
+      this.visibleRoom = true
+      console.log(111)
+      console.log(record)
+      this.ModifyRoom.range = record.range
+      let dateA = record.dateTime.split('~')
+      this.ModifyRoom.dateStart = this.moment(dateA[0], 'YYYY-MM-DD')
+      this.ModifyRoom.dateEnd = this.moment(dateA[1], 'YYYY-MM-DD')
+      this.ModifyRoom.room = record.room
+    },
+    SubmitModifyRoom() {
+      this.visibleRoom = false
+    },
+    CancelModifyRoom() {
+      this.visibleRoom = false
+    }
   }
 }
 </script>

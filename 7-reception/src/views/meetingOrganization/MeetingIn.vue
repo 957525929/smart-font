@@ -17,20 +17,7 @@
           </a-select>
         </a-col>
         <a-col :span="1"></a-col>
-        <a-col>
-          <span>会议名称：</span>
-        </a-col>
-        <a-col>
-          <a-input placeholder="请输入会议名称" v-model="queryParam.name"></a-input>
-        </a-col>
-          <a-col :span="1"></a-col>
-           <a-col>
-          <span>编号：</span>
-        </a-col>
-        <a-col>
-          <a-input placeholder="请输入会议编号" v-model="queryParam.id"></a-input>
-        </a-col>
-        <a-col :span="1"></a-col>
+
         <a-col>会议时间范围：</a-col>
         <a-col>
           <a-date-picker
@@ -38,6 +25,7 @@
             placeholder="请选择开始"
             :format="dateFormat"
             v-model="queryParam.dateOne"
+            :style="{width:'200px'}"
           ></a-date-picker>
           <span>&nbsp;~&nbsp;</span>
           <a-date-picker
@@ -45,9 +33,26 @@
             placeholder="请选择结束"
             :format="dateFormat"
             v-model="queryParam.dateTwo"
+            :style="{width:'200px'}"
           ></a-date-picker>
         </a-col>
+      </a-row>
+      <br />
+      <a-row type="flex" align="middle">
+        <a-col>
+          <span>会议名称：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入会议名称" :style="{width:'200px'}" v-model="queryParam.name"></a-input>
+        </a-col>
         <a-col :span="1"></a-col>
+        <a-col>
+          <span>编号：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入会议编号" v-model="queryParam.id"></a-input>
+        </a-col>
+        <a-col :span="5"></a-col>
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
@@ -330,10 +335,10 @@ export default {
       dataRoom,
       queryParam: {
         id: undefined,
-        name:  undefined,
+        name: undefined,
         dateOne: undefined,
         dateTwo: undefined,
-        state:  undefined,
+        state: undefined
       },
       dateFormat: 'YYYY年MM月DD日'
     }
