@@ -186,6 +186,7 @@ export default {
       console.log(value.length)
       if (value.length == 0) {
         this.dataNumber = dataNumber
+        this.dataBudget = dataBudget
       } else {
         // console.log(value[value.length - 1])
         // dataNumber.filter(item => {
