@@ -32,7 +32,7 @@
             <a-row type="flex" align="middle">
               <a-col :span="4">类型：</a-col>
               <a-col :span="17">
-                <a-select style="width: 100%" placeholder="请选择类型" @change="selectChange" allowClear>
+                <a-select style="width: 100%" default-value="1" @change="selectChange" allowClear>
                   <a-select-option value="1"> 智能锁厂商 </a-select-option>
                   <a-select-option value="2"> 后勤管理 </a-select-option>
                 </a-select>
@@ -44,10 +44,23 @@
             <a-row type="flex" align="middle">
               <a-col :span="4">姓名：</a-col>
               <a-col :span="17">
-                <a-select style="width: 100%" placeholder="请选择人员姓名" @change="nameChange" allowClear>
+                <a-select
+                  v-if="this.selectvalue == 2"
+                  style="width: 100%"
+                  placeholder="请选择人员姓名"
+                  @change="nameChange"
+                  allowClear
+                >
                   <a-select-option value="1"> 郑叹 </a-select-option>
                   <a-select-option value="2"> 王久 </a-select-option>
                 </a-select>
+                <a-input
+                  v-if="selectvalue == 1"
+                  style="width: 100%"
+                  placeholder="请输入姓名"
+                  v-model="name"
+                  allowClear
+                ></a-input>
               </a-col>
             </a-row>
 
@@ -180,6 +193,7 @@ export default {
       visibleEdit: false,
       rowRecord: '',
       valueEdit: [],
+      selectvalue: '1',
     }
   },
   methods: {
@@ -189,7 +203,9 @@ export default {
     addOk() {
       this.addVisible = false
     },
-    selectChange(value) {},
+    selectChange(value) {
+      this.selectvalue = value
+    },
     nameChange(value) {},
     areaChange(value) {},
     typeChange() {},

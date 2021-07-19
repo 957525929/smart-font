@@ -5,7 +5,7 @@
     <span>开锁时间段：</span>
     <a-date-picker
       style="width: 18.3%"
-      :default-value="moment('2021-07-07')"
+      :default-value="moment(getstardate())"
       v-model="startValue"
       :disabled-date="disabledStartDate"
       format="YYYY-MM-DD"
@@ -15,7 +15,7 @@
     <!-- :placeholder="endDate" -->
     <a-date-picker
       style="width: 18%"
-      :default-value="moment('2021-07-09')"
+      :default-value="moment(getenddate())"
       v-model="endValue"
       :disabled-date="disabledEndDate"
       format="YYYY-MM-DD"
@@ -90,7 +90,7 @@
 import { areaData } from '../roomManager/data/area'
 import { deptData } from '../roomManager/data/dept'
 import moment from 'moment'
-// import { formatDate } from '@/utils/util'
+import { formatDate } from '@/utils/util'
 
 export default {
   // mounted() {
@@ -110,6 +110,7 @@ export default {
       deptData: deptData,
       name: '',
       toggleSearchStatus: false,
+      endate: '2021-06-18',
     }
   },
   watch: {
@@ -123,6 +124,14 @@ export default {
   methods: {
     moment,
     //日期选择
+    getstardate() {
+      this.starDate = formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyy/MM/d')
+      return this.starDate
+    },
+    getenddate() {
+      this.endDate = formatDate(new Date().getTime() - 0 * 24 * 3600 * 1000, 'yyyy/MM/d')
+      return this.endDate
+    },
     disabledStartDate(startValue) {
       const endValue = this.endValue
       if (!startValue || !endValue) {

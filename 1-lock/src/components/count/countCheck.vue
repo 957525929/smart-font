@@ -6,7 +6,7 @@
         <span>开锁时间段：</span>
         <a-date-picker
           style="width: 36%"
-          :default-value="moment('2021-02-01')"
+          :default-value="moment(getstardate())"
           v-model="startValue"
           :disabled-date="disabledStartDate"
           format="YYYY-MM-DD"
@@ -18,7 +18,7 @@
           v-model="endValue"
           :disabled-date="disabledEndDate"
           format="YYYY-MM-DD"
-          :default-value="moment('2021-07-01')"
+          :default-value="moment(getenddate())"
           :open="endOpen"
           @openChange="handleEndOpenChange"
         />
@@ -100,6 +100,7 @@ import { areaData } from '../roomManager/data/area'
 import { deptData } from '../roomManager/data/dept'
 import Bar from '@/components/chart/Bar'
 import moment from 'moment'
+import { formatDate } from '@/utils/util'
 
 export default {
   components: {
@@ -121,6 +122,8 @@ export default {
         { x: '密码开锁', y: 101 },
         { x: '远程开锁', y: 6 },
       ],
+      starDate: '',
+      endDate: '',
     }
   },
   watch: {
@@ -133,6 +136,15 @@ export default {
   },
   methods: {
     moment,
+
+    getstardate() {
+      this.starDate = formatDate(new Date().getTime() - 181 * 24 * 3600 * 1000, 'yyyy/MM/d')
+      return this.starDate
+    },
+    getenddate() {
+      this.endDate = formatDate(new Date().getTime() - 0 * 24 * 3600 * 1000, 'yyyy/MM/d')
+      return this.endDate
+    },
     //日期选择
     disabledStartDate(startValue) {
       const endValue = this.endValue
