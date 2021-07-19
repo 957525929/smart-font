@@ -120,7 +120,7 @@ export default {
             iExpandedKeys: [],
             //table
             searchCon: {},
-            data: [],
+            data: NEW_TOOLLIST.data,
             devColumns: NEW_TOOLLIST.devColumns,
             groupInfo: NEW_TOOLLIST.groupInfo.filter((item) => !item.hideInLogin),
             devInfo: NEW_TOOLLIST.devInfo.filter((item) => !item.hideInLogin),
@@ -129,28 +129,16 @@ export default {
         }
     },
     mounted() {
-        this.getList()
-    //    this.devInfo.forEach(item=>{
-    //        if(item.valueEnum){
-    //            this.data.map(res=>{
-    //                res[item.key] = item.valueEnum[res[item.key]].tableValue
-    //                return res
-    //            })
-    //        }
-    //    })
-
+       this.devInfo.forEach(item=>{
+           if(item.valueEnum){
+               this.data.map(res=>{
+                   res[item.key] = item.valueEnum[res[item.key]].tableValue
+                   return res
+               })
+           }
+       })
     },
     methods: {
-        getList() {
-            devColumns.forEach((item) => {
-                if (item.valueEnum) {
-                    this.data.map((res) => {
-                        res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-                        return res
-                    })
-                }
-            })
-        },
         handleAdd(num) {
             this.checkable=true
             if (num == 1) {
@@ -169,7 +157,7 @@ export default {
             this.currSelected = selectedKeys
             let record = e.node.dataRef
             this.visible = false
-            this.data = NEW_TOOLLIST.data.filter((item) => {
+            this.data = this.data.filter((item) => {
                 return item.devId == record.key
             })
             this.visible = true
