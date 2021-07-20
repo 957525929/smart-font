@@ -1,23 +1,28 @@
 <template>
 	<view>
 		<view v-for="(item,index) in locklist" :key="index">
+			
 			<!-- 判断传递过来的值显示对应状态 -->
 			<view v-if="item.type==cardType.type">
 				<view class="card" >
 					<span class="card-left">
+						
 						<!-- 显示不同图片 -->
 						<image class="card-img" :src="imgSrc[cardType.id]" mode="scaleToFill"
 							style="width: 5vh; height: 5vh;"></image>
 					</span>
+					
 					<span class="card-center">
 						<view >
 							<span class="title">名称：</span>
 							<span class="title flex-sub text-left">{{item.name}}</span>
 						</view>
+						
 						<view>
 							<span class="title">位置：</span>
 							<span class="title flex-sub text-left">{{item.area}}</span>
 						</view>
+						
 						<view>
 							<span class="title">房间号：</span>
 							<span class="title flex-sub text-left">{{item.roomnum}}</span>
