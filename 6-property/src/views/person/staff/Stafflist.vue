@@ -2,7 +2,16 @@
     <PageTemplate :columns="columns" :searchCon="searchCon">
         <a-button type="primary" @click="showStaffForm"><a-icon type="plus"></a-icon>新增</a-button>
         <TableModal title="新增人员" :infoDetail="loginInfo" ref="devModal"></TableModal>
-        <a-table :columns="columns" :data-source="data" style="margintop: 15px">
+        <a-table
+            :columns="columns"
+            :data-source="data"
+            style="margintop: 15px"
+            :pagination="{
+                size:'small',
+                pageSize: 10,
+                showTotal: (total, range) => `第${range[0]}-${range[1]}条/总共${total}条`,
+            }"
+        >
             <a-rate slot="eva" slot-scope="text, record" disabled v-model="record.eva" />
             <span slot="action" slot-scope="text, record">
                 <template v-for="(i, index) in record.action">
@@ -92,7 +101,7 @@ export default {
             // }
 
             let tempValue = [...NEW_STAFFLIST.typeToComponent].filter(([key, value]) => key === type)
-                        //处理数据
+            //处理数据
             let tempData = this.data.filter((item) => item.devId === id)[0]
             this.infoDetail = this.infoDetail.map((item) => {
                 item.value = tempData[item.key]

@@ -5,10 +5,10 @@
     <div class="table-page-search-wrapper">
       <a-row type="flex" align="middle">
         <a-col>
-          <span>酒店名称或位置：</span>
+          <span>酒店名称：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入酒店名称或位置" v-model="queryParam.word" width="50px"></a-input>
+          <a-input placeholder="请输入酒店名称" v-model="queryParam.name"></a-input>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
@@ -19,6 +19,13 @@
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
+          <span>位置：</span>
+        </a-col>
+        <a-col>
+          <a-input placeholder="请输入位置" v-model="queryParam.address" style="width: 300px"></a-input>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
             icon="search"
@@ -26,13 +33,13 @@
           >查询</a-button>
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
         </a-col>
-        <a-col :span="3"></a-col>
+        <a-col :span="1"></a-col>
         <a-col>
           <a-button
             @click="addHotel()"
             icon="plus"
             :style="{ color: 'white', background:'orange'}"
-          >新增酒店</a-button>
+          >新增酒店</a-button>&nbsp;&nbsp;
           <a-button>
             <a-icon type="download" />导出
           </a-button>
@@ -75,10 +82,10 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item ref="hotel" label="协议酒店名称" prop="hotel" >
+        <a-form-model-item ref="hotel" label="协议酒店名称" prop="hotel">
           <a-input v-model="formAdd.hotel" placeholder="请输入协议酒店名称"></a-input>
         </a-form-model-item>
-        <a-form-model-item ref="id" label="协议编号" prop="id" >
+        <a-form-model-item ref="id" label="协议编号" prop="id">
           <a-input v-model="formAdd.id" placeholder="请输入协议编号"></a-input>
         </a-form-model-item>
         <a-form-model-item ref="level" label="星级" prop="level">
@@ -90,13 +97,13 @@
             <a-select-option value="五">五</a-select-option>
           </a-select>
         </a-form-model-item>
-        <a-form-model-item ref="dutyName" label="联系人" prop="dutyName" >
+        <a-form-model-item ref="dutyName" label="联系人" prop="dutyName">
           <a-input v-model="formAdd.dutyName" placeholder="请输入联系人"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="联系电话" prop="dutyTel" >
+        <a-form-model-item label="联系电话" prop="dutyTel">
           <a-input v-model="formAdd.dutyTel" placeholder="请输入联系电话"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="位置" prop="address" >
+        <a-form-model-item label="位置" prop="address">
           <a-input v-model="formAdd.address" placeholder="请输入位置"></a-input>
         </a-form-model-item>
         <a-form-model-item label="备注信息">
@@ -197,8 +204,9 @@ export default {
     return {
       dataHotel,
       queryParam: {
-        word: '',
-        id: ''
+        name: '',
+        id: '',
+        address: ''
       },
 
       visibleAdd: false,

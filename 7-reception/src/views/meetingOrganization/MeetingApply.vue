@@ -64,13 +64,20 @@
             <td colspan="2">
               <label :style="{marginLeft:'20px'}">会议时间</label>
               <div class="bgc">
-                <a-icon type="schedule" :style="{ fontSize: '24px', marginRight: '2px' }" />
-                <a-range-picker
+                <!-- <a-range-picker
                   @change="timeChange"
                   :style="{width:'75%', border:'none'}"
                   :default-value="[moment('2021/07/22', dateFormat), moment('2021/07/25', dateFormat)]"
                   :format="dateFormat"
-                />
+                /> -->
+            <a-date-picker placeholder="请选择开始"  :style="{width:'220px'}" :format="dateFormat"  :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')"></a-date-picker>
+          <span>&nbsp;~&nbsp;</span>
+          <a-date-picker
+            placeholder="请选择结束"
+            :format="dateFormat"         
+             v-model="dateEnd"
+             :style="{width:'220px'}"
+          ></a-date-picker>
               </div>
             </td>
             <td colspan="2">
@@ -309,6 +316,7 @@ const treeData = [
 export default {
   data() {
     return {
+      dateEnd: undefined,
       //meetingTheme: "年度总结", //会议主题
       meetingName: '第三季度物流管理会议', //会议名称
       responsibleName: '张三', //负责人姓名
@@ -352,6 +360,12 @@ export default {
         ]
       }
     }
+  },
+    created() {
+    let end = moment(new Date())
+      .subtract(-3, 'days')
+      .format('YYYY-MM-DD')
+    this.dateEnd = this.moment(end, 'YYYY-MM-DD')
   },
   watch: {
     checkedKeys(val) {
@@ -450,6 +464,9 @@ export default {
     },
     cancleFormAdd() {
       this.visibleAdd = false
+    },
+        getCurrentData() {
+      return new Date().toLocaleDateString()
     }
   }
 }

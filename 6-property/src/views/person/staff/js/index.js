@@ -50,14 +50,14 @@ export const columns = [
         width: 80,
         type: 'a-range-picker',
     },
-    {
-        title: '服务综合评价',
-        key: 'evaluation',
-        dataIndex: 'evaluation',
-        scopedSlots: { customRender: 'eva' },
-        width: 80,
-        hideInSearch:true
-    },
+    // {
+    //     title: '服务综合评价',
+    //     key: 'evaluation',
+    //     dataIndex: 'evaluation',
+    //     scopedSlots: { customRender: 'eva' },
+    //     width: 80,
+    //     hideInSearch:true
+    // },
     {
         title: '操作',
         key: 'action',
@@ -177,13 +177,6 @@ export const infoDetail =[
         key: 'loginTime',
         value:"",
         type:"a-range-picker",
-        hideInLogin:true,
-        hideInDetail:true
-    },
-    {
-        title: '评价',
-        key: 'evaluation',
-        value:"",
         hideInLogin:true,
         hideInDetail:true
     }

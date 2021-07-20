@@ -7,7 +7,7 @@
 		<view class="cu-bar tabbar bg-white shadow foot">
 			<view class="action" @click="NavChange" data-cur="workplace">
 				<view class='cuIcon-cu-image'>
-					<text :class="PageCur=='workplace'?'text-orange cuIcon-paintfill':'text-gray cuIcon-paint'"></text>
+					<text :class="PageCur=='workplace'?'text-orange cuIcon-circlefill':'text-gray cuIcon-circle'"></text>
 				</view>
 				<view :class="PageCur=='workplace'?'text-orange':'text-gray'">工作台</view>
 			</view>

@@ -39,6 +39,15 @@
 				
 		},
 		{
+			"path": "pages/notice/chat",
+			"style":{
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+				
+		},
+		{
 			"path": "pages/record/index",
 			"style":{
 				"app-plus":{

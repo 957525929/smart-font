@@ -15,12 +15,6 @@
           <div>{{ detailsData.headline }}</div>
         </div>
       </a-col>
-<!--      <a-col :xl="5" :lg="8" :md="9" :sm="24">-->
-<!--        <div class="detail-top">-->
-<!--          <div>采购人：</div>-->
-<!--          <div>{{ detailsData.purchasePeople }}</div>-->
-<!--        </div>-->
-<!--      </a-col>-->
       <a-col :xl="5" :lg="8" :md="9" :sm="24">
         <div class="detail-top">
           <div>采购日期：</div>
@@ -125,11 +119,6 @@ export default {
           align:"center",
           dataIndex: 'materialName',
         },
-        // {
-        //   title:'食料类别',
-        //   align:"center",
-        //   dataIndex: 'materialCategory',
-        // },
         {
           title:'计量单位',
           align:"center",
@@ -146,7 +135,7 @@ export default {
           dataIndex: 'materialNum'
         },
         {
-          title:'合计',
+          title:'合计(元)',
           align:"center",
           dataIndex: 'materialTotalValue'
         },
