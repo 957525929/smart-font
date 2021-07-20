@@ -108,7 +108,7 @@ export default {
         },
         confirm() {
             this.visible = false
-            this.$message.success('success')
+            this.$message.success('操作成功')
         },
         cancel() {
             this.visible = false

@@ -95,7 +95,7 @@ export const data = [{
   devId: '1',
   devName: "烟草大厦18楼频繁断电",
   taskType: 2,
-  taskStatus: 2,
+  taskStatus: 0,
   devStatus: 1,
   assets: '烟草大厦',
   institution: '福建烟草公司',

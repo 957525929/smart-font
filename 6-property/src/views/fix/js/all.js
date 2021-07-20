@@ -112,9 +112,30 @@ export const data=[
     },
     {
         key: 1,
+        devId: '4',
+        devName:"空调调控温度无反应",
+        taskStatus:2,
+        devType:0,
+        devStatus: 5,
+        address: '烟草大厦6楼',
+        institution: '福建聚星园餐饮有限公司',
+        phone: '18232145698',
+        // fixStaff: '张英',
+        deliveryTime:"2021-06-19 17：55：55",
+        fixedTime: '2021-06-22 20：00：00',
+        action:[{
+            tagName:"详情",
+            com:"TableDrawer"
+        },{
+            tagName:"派单",
+            com:"TableModal"
+        }]
+    },
+    {
+        key: 2,
         devId: '2',
         devName: "18楼频繁断电停电",
-        taskStatus:2,
+        taskStatus:3,
         devType: 1,
         devStatus: 5,
         deliveryTime:"2021-06-22 10：55：55",
@@ -130,10 +151,10 @@ export const data=[
         }]
     },
     {
-        key: 2,
+        key: 3,
         devId: '3',
         devName: "卫生间停水",
-        taskStatus:3,
+        taskStatus:4,
         devType: 2,
         devStatus: 6,
         address: '烟草大厦3楼卫生间',
@@ -146,25 +167,7 @@ export const data=[
             com:"TableDrawer"
         }]
     },
-    {
-        key: 3,
-        devId: '4',
-        devName: "空调调控温度无反应",
-        taskStatus:4,
-        devType: 0,
-        devStatus: 7,
-        deliveryTime:"2021-06-19 17：55：55",
-        address: '烟草大厦6楼',
-        institution: '福建聚星园餐饮有限公司',
-        phone: '18232145698',
-        techSituation: 0,
-        fixStaff: '刘涛',
-        fixedTime: "2021-06-22 20：00：00",
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        }]
-    },{
+  {
         key:4,
         devId: '5',
         devName: "18楼停电",

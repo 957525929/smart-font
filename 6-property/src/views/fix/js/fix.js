@@ -68,7 +68,7 @@ export const columns=[
 ]
 export const data=[
     {
-        key: '1',
+        key: '2',
         devId: '2',
         devName:"18楼频繁断电停电",
         devType:1,

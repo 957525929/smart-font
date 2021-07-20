@@ -15,8 +15,8 @@
                         <a-form-item
                             :label="item.title"
                             class="formItem"
-                            :labelCol="{ span: 5 }"
-                            :wrapperCol="{ span: 19 }"
+                            :labelCol="{ span: 6 }"
+                            :wrapperCol="{ span: 18 }"
                         >
                             <a-select v-if="item.type === 'a-select'" :default-value="`${item.value}`">
                                 <a-select-option

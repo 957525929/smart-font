@@ -21,7 +21,7 @@
 		data() {
 			return {
 				TabCur: 0,
-				menuList: ["待处理", "待评价", "已完成"],
+				menuList: ["待处理", "已完成"],
 				taskList:list.taskList
 			};
 		},

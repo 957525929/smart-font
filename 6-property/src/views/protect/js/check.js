@@ -87,7 +87,7 @@ export const data = [{
   devId: '2',
   devName: "空调漏水",
   taskType: 1,
-  taskStatus: 3,
+  taskStatus: 1,
   devStatus: 0,
   assets: '烟草大厦',
   institution: '福建烟草公司',
