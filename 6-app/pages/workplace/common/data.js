@@ -1,0 +1,57 @@
+const fixBasic = [{
+	key:"address",
+	label:"问题地点",
+	value:""
+},{
+	key:"devType",
+	label:"问题设备类型",
+	value:""
+},{
+	key:"owner",
+	label:"上报人",
+	value:""
+},{
+	key:"ownerPhone",
+	label:"上报人联系方式",
+	value:""
+},{
+	key:"complaintTime",
+	label:"问题上报时间",
+	value:""
+},{
+	key:"description",
+	label:"问题描述",
+	value:""
+}]
+const fixRun = []
+const fixForm= [{
+	key:"devName",
+	label:"故障设备",
+	value:""
+},{
+	key:"address",
+	label:"故障位置",
+	value:""
+},{
+	key:"reason",
+	label:"故障原因描述",
+	value:"",
+	type:"input"
+},{
+	key:"handle",
+	label:"处理方法及结果",
+	value:""
+},{
+	key:"ficDoneTime",
+	label:"维修结束时间",
+	value:""
+},{
+	key:"fixPics",
+	label:"维修图片上传",
+	value:""
+}]
+module.exports = {
+	fixBasic,
+	fixRun,
+	fixForm
+}

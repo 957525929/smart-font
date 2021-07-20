@@ -12,12 +12,17 @@
 	export default {
 		data() {
 			return {
-				taskList:list.taskList[0].filter(item=>item.type==1)
+				taskList:list.taskList[0].filter(item=>item.type==2)
 			};
 		},
 		methods: {
 			goTo(data){
-				this.$goPage({name:'fixTaskDetail',params:{taskId:data.taskId}})
+				this.$goPage({
+					name:'fixTaskDetail',
+					query:{
+						taskId:data,
+					},
+				})
 			}
 		}
 	}

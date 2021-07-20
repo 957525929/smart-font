@@ -29,10 +29,10 @@
 						route:'checkTask'
 					},
 					{
-						title: '业务评估',
+						title: '业务记录',
 						color: 'green',
 						cuIcon: 'medalfill',
-						route:'evaluationReport'
+						route:'taskRecord'
 					},
 					{
 						title: '维修任务',

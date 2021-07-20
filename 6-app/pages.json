@@ -73,6 +73,26 @@
 				}
 			}
 		}, {
+			"path": "taskRecord/taskRecord",
+			"style": {
+				"navigationBarTitleText": "业务记录",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		},{
+			"path": "taskRecord/taskRecordDetail",
+			"style": {
+				"navigationBarTitleText": "任务详情",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		}, {
 			"path": "fixTask/fixTask",
 			"style": {
 				"navigationBarTitleText": "维修任务",
