@@ -9,11 +9,11 @@
 			<view class="cu-list menu sm-border">
 				<view class="cu-form-group">
 					<view class="title">报警时间：</view>
-					<view class="flex-sub text-left">2021年7月16日 08:34:22</view>
+					<view class="flex-sub text-left">{{value}}</view>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">消除时间：</view>
-					<view class="flex-sub text-left">2021年7月16日 10:01:17</view>
+					<view class="flex-sub text-left">{{value1}}</view>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">报警方式：</view>
@@ -52,18 +52,34 @@
 	import peopleItem from '../../components/lock/peopledetail.vue'
 
 	export default {
+		created: function() {
+			var aData = new Date();
+			
+			this.value1 =
+				aData.getFullYear() + "年" +
+				(aData.getMonth() + 1) + "月" +
+				(aData.getDate()-1) + "日" + ' ' +
+				'08:35:22'
+		
+			this.value =
+				aData.getFullYear() + "年" +
+				(aData.getMonth() + 1) + "月" +
+				(aData.getDate()-2) + "日" + ' ' +
+				'09:27:46'
+		},
 		components: {
 			lockItem,
 			peopleItem,
 		},
 		onLoad(option) {
 			this.type = option.type
-			console.log(this.type)
 		},
 		data() {
 			return {
 				modalName: null,
 				type: 0,
+				value: '',
+				value1: '',
 			}
 		},
 		methods: {

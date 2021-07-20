@@ -29,7 +29,7 @@
 						</view>
 						<view>
 							<span class="title">报警时间：</span>
-							<span class="title flex-sub text-left">{{item.time}}</span>
+							<span class="title flex-sub text-left">{{item.day}}</span>
 						</view>
 					</span>
 				</view>
@@ -41,20 +41,33 @@
 <script>
 
 	export default {
+		created: function() {
+			let aData = new Date();		
+			this.value =
+				aData.getFullYear() + "年" +
+				(aData.getMonth() + 1) + "月" +
+				(aData.getDate()-1) + "日"
+				
+			for( let i = 0; i < this.locklist.length; i++){
+				this.locklist[i].day = this.value + ' ' + this.locklist[i].time
+			}
+		},
 		data() {
 			return {
 				locklist: [{
 						name: '中国烟草总公司福建省公司机关',
 						area: 'A区域1号楼',
 						roomnum: '101',
-						time: '2021年6月16日 08:34:22',
+						day: '2021年7月19日 08:34:22',
+						time: '08:34:22',
 						type: '低电量',
 					},
 					{
 						name: '中国烟草总公司福建省公司机关',
 						area: 'B区域3号楼',
 						roomnum: '305',
-						time: '2021年3月21日 16:30:16',
+						day: '2021年7月17日 16:30:16',
+						time: '16:30:16',
 						type: '密码错误多次',
 					},
 				],
