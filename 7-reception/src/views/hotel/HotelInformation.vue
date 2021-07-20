@@ -165,22 +165,13 @@ const dataHotel = [
     id: 'N1201',
     dutyName: '李霞',
     dutyTel: '13759655332',
-    hotel: '华宜时尚酒店',
+    hotel: '福州富力威斯汀酒店',
     level: '五',
-    address: '北京东城区国瑞城西花市大街上23号',
+    address: '福州江滨中大道366号',
     remark: '折扣力度3折'
   },
   {
     id: 'N1202',
-    dutyName: '王莉莉',
-    dutyTel: '13759655348',
-    hotel: '香格里拉酒店',
-    address: '云南迪庆藏族建塘镇池慈卡1号',
-    level: '四',
-    remark: '折扣力度2折'
-  },
-  {
-    id: 'N1203',
     dutyName: '尤晓梅',
     dutyTel: '13053955537',
     hotel: '福州品悦酒店',
@@ -189,10 +180,10 @@ const dataHotel = [
     remark: '折扣力度4折'
   },
   {
-    id: 'N1204',
+    id: 'N1203',
     dutyName: '黄丽娟',
     dutyTel: '13659655381',
-    hotel: '世纪金源酒店',
+    hotel: '福州世纪金源酒店',
     address: '福州温泉公园路59号',
     level: '四',
     remark: '折扣力度3折'

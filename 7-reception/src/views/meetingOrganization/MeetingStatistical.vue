@@ -47,19 +47,21 @@
         </a-col>
       </a-row>
     </div>
-    <!-- 查询区域-END -->
-    <!-- table区域-begin -->
-    <!-- <div style="margin-top: 20px">
-      <a-table :data-source="dataSta" s:pagination="false" rowKey="theme">
-        <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
-        <a-table-column title="会议次数" data-index="number" align="center"></a-table-column>
-        <a-table-column title="与会人数" data-index="membersNumber" align="center"></a-table-column>
-        <a-table-column title="会议预算" data-index="budget" align="center"></a-table-column>
-      </a-table>
-    </div>-->
-    <br />
+  <!-- 图 -->
+  <div>
+    <a-tabs default-active-key="1" @change="callback">
+      <a-tab-pane key="1" tab="会议次数">
+        <bar v-bind:dataSource="dataNumber"  v-bind:height="heightNumber"></bar>
+      </a-tab-pane>
+      <a-tab-pane key="2" tab="会议预算（元）" force-render>
+        <bar v-bind:dataSource="dataBudget"  v-bind:height="heightBudget"></bar>-->
+      </a-tab-pane>
+    </a-tabs>
+  </div>
+    
+    <!-- <br />
     <bar v-bind:dataSource="dataNumber" v-bind:title="titleNumber" v-bind:height="heightNumber"></bar>
-    <bar v-bind:dataSource="dataBudget" v-bind:title="titleBudget" v-bind:height="heightBudget"></bar>
+    <bar v-bind:dataSource="dataBudget" v-bind:title="titleBudget" v-bind:height="heightBudget"></bar>-->
   </a-card>
 </template>
 <script>
