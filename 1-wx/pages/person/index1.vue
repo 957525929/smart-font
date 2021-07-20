@@ -20,7 +20,7 @@
 
 			<view class="cu-list menu sm-border card-menu margin-top">
 
-				<view class="cu-item arrow content" v-for="item in contentList" @click="openMessage(item)">
+				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title" @click="openMessage(item)">
 					<view class="action">
 						<view class="text-grey">{{item.title}}</view>
 						<view class="text-grey text-xs">{{item.label}}</view>

@@ -4,20 +4,6 @@
 			<block slot="backText">返回</block>
 			<block slot="content">访问预约单填写</block>
 		</cu-custom>
-		<!-- 		<view class="cu-bar bg-white ">
-			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 预约人信息</text>
-			</view>
-		</view>
-
-		<view class="cu-form-group align-center bg-white">
-			<view class="title">姓名</view>
-			<input placeholder="请填写姓名" name="input"></input>
-		</view>
-		<view class="cu-form-group solid-bottom">
-			<view class="title">手机号</view>
-			<input placeholder="请填写手机号" name="input"></input>
-		</view> -->
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
@@ -111,7 +97,7 @@
 			return {
 				index: -1,
 				// picker1: ['张三', '李四', '王五'],
-				date: date,
+				date: '',
 				time: '',
 				time1: '',
 				modalName: null,
