@@ -24,6 +24,8 @@
 					<view @tap="colorChange">
 						{{item.type}}
 					</view>
+					<view v-if="item.red" class="cu-tag round bg-red sm"></view>
+					<view v-if="item.green" class="cu-tag round bg-green sm"></view>
 				</span>
 			</view>
 		</view>
@@ -39,15 +41,17 @@
 						name: '张三',
 						content: '项目会议',
 						time: '2020年1月21日 13:46',
-						type: "删除",
+						// type: "删除",
 						typeId: 0,
+						red:'1'
 					},
 					{
 						name: '李四',
 						content: '私人访问',
 						time: '2020年1月21日 13:46',
-						type: "删除",
+						// type: "删除",
 						typeId: 0,
+						green:'1'
 					},
 					{
 						name: '王五',
@@ -59,8 +63,9 @@
 						name: '赵六',
 						content: '项目会议改期',
 						time: '2020年1月21日 13:46',
-						type: "删除",
+						// type: "删除",
 						typeId: 2,
+						green:'1'
 					},
 
 				],

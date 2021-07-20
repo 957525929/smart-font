@@ -1,19 +1,19 @@
 <template>
 	<view>
-		<appoient v-if="PageCur=='appoient'"></appoient>
+		<!-- <appoient v-if="PageCur=='appoient'"></appoient> -->
 		<record v-if="PageCur=='record'"></record>
 		<scan v-if="PageCur=='scan'"></scan>
-		<allow v-if="PageCur=='allow'"></allow>
+		<!-- <allow v-if="PageCur=='allow'"></allow> -->
 		<person v-if="PageCur=='person'"></person>
 
 		<view class="cu-bar tabbar bg-white shadow foot">
 
-			<view class="action" @click="NavChange" data-cur="appoient">
+	<!-- 		<view class="action" @click="NavChange" data-cur="appoient">
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='appoient'?'text-orange cuIcon-calendar':'text-gray cuIcon-calendar'"></text>
 				</view>
 				<view :class="PageCur=='appoient'?'text-orange':'text-gray'">访问预约</view>
-			</view>
+			</view> -->
 
 			<view class="action" @click="NavChange" data-cur="record">
 				<view class='cuIcon-cu-image'>
@@ -29,13 +29,13 @@
 				<view :class="PageCur=='scan'?'text-orange':'text-gray'">扫码</view>
 			</view>
 
-			<view class="action" @click="NavChange" data-cur="allow">
+	<!-- 		<view class="action" @click="NavChange" data-cur="allow">
 				<view class='cuIcon-cu-images'>
 					<text
 						:class="PageCur=='allow'?'text-orange cuIcon-squarecheck':'text-gray cuIcon-squarecheck'"></text>
 				</view>
 				<view :class="PageCur=='allow'?'text-orange':'text-gray'">访问许可</view>
-			</view>
+			</view> -->
 
 			<view class="action" @click="NavChange" data-cur="person">
 				<view class='cuIcon-cu-image'>
@@ -53,7 +53,7 @@
 	export default {
 		data() {
 			return {
-				PageCur: 'appoient'
+				PageCur: 'scan'
 			}
 		},
 		methods: {

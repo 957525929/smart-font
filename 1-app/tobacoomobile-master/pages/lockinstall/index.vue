@@ -2,6 +2,7 @@
 	<view>
 		<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
 
+			<!-- 搜索栏 -->
 			<view class="cu-bar bg-orange solid-bottom">
 				<view class="action">
 					<text class="cuIcon-title text-white"></text> 智能锁安装
@@ -10,10 +11,10 @@
 
 					<text class="cuIcon-search"></text>
 					<text class="text-df">搜索</text>
-
 				</view>
 			</view>
 
+			<!-- 切换栏 -->
 			<scroll-view scroll-x class="bg-white nav">
 				<view class="flex text-center">
 					<view class="cu-item flex-sub" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
@@ -24,6 +25,8 @@
 					</view>
 				</view>
 			</scroll-view>
+
+			<!-- 内容部分 -->
 			<view v-if="TabCur==0" class="itembox">
 				<navigator class="action" url="../../components/lock/detail?type=0" hover-class="none">
 					<lockCard :cardType="type[0]"></lockCard>
@@ -36,11 +39,13 @@
 			</view>
 		</scroll-view>
 
+		<!-- 详细搜索部分 -->
 		<view class="DrawerClose" :class="modalName=='viewModal'?'show':''" @tap="hideModal">
 			<text class="cuIcon-pullright"></text>
 		</view>
 		<scroll-view scroll-y class="DrawerWindow" :class="modalName=='viewModal'?'show':''">
 
+			<!-- 搜索内容 -->
 			<serach @func="getIndex1"></serach>
 
 			<view class="padding margin text-center">
@@ -63,18 +68,22 @@
 				TabCur: 0,
 				scrollLeft: 0,
 				type: [{
-					id: 0,
-					type: "未安装"
-				}, {
-					id: 1,
-					type: "已安装"
-				}, ],
+						id: 0,
+						type: "未安装"
+					},
+					{
+						id: 1,
+						type: "已安装"
+					},
+				],
 			};
 		},
+		
 		components: {
 			serach,
 			lockCard,
 		},
+		
 		methods: {
 			showModal(e) {
 				this.modalName = e.currentTarget.dataset.target
@@ -86,9 +95,9 @@
 				this.TabCur = e.currentTarget.dataset.id;
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
 			},
+			// 获得子组件传递值
 			getIndex1(data) {
 				this.TabCur = data
-				console.log(this.TabCur)
 			}
 		},
 	}

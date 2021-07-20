@@ -8,24 +8,10 @@
 			
 			<view class="nav-list">
 				<navigator v-for="(item,index) in list" hover-class="none" :url="item.router" :class="item.color" navigateTo
-				 :style="[{animation: 'show ' + (1*0.2+1) + 's 1'}]">
+				 :style="[{animation: 'show ' + (index*0.2+1) + 's 1'}]">
 					<view class="nav-title">{{ item.title }}</view>
 					<view class="nav-name">{{ item.entitle }}</view>
 					<text :class="item.style"></text>
-				</navigator>
-				
-				<navigator hover-class="none" url="../index/repairindex" class="nav-li bg-blue" navigateTo
-				 :style="[{animation: 'show ' + (2*0.2+1) + 's 1'}]">
-					<view class="nav-title">智能锁维修</view>
-					<view class="nav-name">Repair</view>
-					<text class="cuIcon-repair"></text>
-				</navigator>
-				
-				<navigator hover-class="none" url="../index/safeindex" class="nav-li bg-purple" navigateTo
-				 :style="[{animation: 'show ' + (2*0.2+1) + 's 1'}]">
-					<view class="nav-title">门卫</view>
-					<view class="nav-name">guard</view>
-					<text class="cuIcon-profile"></text>
 				</navigator>
 			</view>
 			<view class="cu-tabbar-height"></view>
@@ -43,6 +29,20 @@
 						style: 'cuIcon-lock',
 						router: '../index/installindex',
 						color: 'nav-li bg-cyan',
+					},
+					{
+						title: '智能锁维修',
+						entitle: 'Repair',
+						style: 'cuIcon-repair',
+						router: '../index/repairindex',
+						color: 'nav-li bg-blue',
+					},
+					{
+						title: '门卫',
+						entitle: 'Guard',
+						style: 'cuIcon-profile',
+						router: '../index/safeindex',
+						color: 'nav-li bg-purple',
 					}
 				]
 			};

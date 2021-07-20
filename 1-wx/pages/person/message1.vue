@@ -20,7 +20,7 @@
 				<view class="text-white cuIcon-notice_forbid_fill">
 				</view>
 				<view class='cuIcon-cu-image'>
-					<text class="text-white trash-fill">消息免打扰</text>
+					<text class="text-white trash-fill">全部已读</text>
 				</view>
 			</view>
 		</view>

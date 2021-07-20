@@ -9,7 +9,7 @@
 			<view class="cu-list menu sm-border">
 				<view class="cu-form-group">
 					<view class="title">开锁时间：</view>
-					<view class="flex-sub text-left">2021年7月16日 08:34:22</view>
+					<view class="flex-sub text-left">{{value}}</view>
 				</view>
 				
 				<view class="cu-form-group margin-top">
@@ -49,6 +49,15 @@
 	import peopleItem from '../../components/lock/peopledetail.vue'
 
 	export default {
+		created: function() {
+			var aData = new Date();
+			
+			this.value =
+				aData.getFullYear() + "年" +
+				(aData.getMonth() + 1) + "月" +
+				(aData.getDate()-1) + "日" + ' ' +
+				'09:27:46'
+		},
 		components: {
 			lockItem,
 			peopleItem,
@@ -61,6 +70,7 @@
 			return {
 				modalName: null,
 				type: 0,
+				value: '',
 			}
 		},
 		methods: {
