@@ -12,7 +12,7 @@
 
 			<view class="inputWrapper">
 				<!-- <view class="title">申请状态</view> -->
-				<picker @change="PickerChange" :value="index" :range="picker">
+				<picker @change="PickerChange"  :value="index" :range="picker" v-model="status">
 					<view class="picker">
 						{{picker[index]}}
 					</view>
@@ -26,7 +26,7 @@
 				<input class="input" type="password" value="" placeholder="请输入密码" />
 			</view>
 			<view class="loginBtn">
-				<text class="btnValue" @click="openHome">登录</text>
+				<text class="btnValue" @click="open">登录</text>
 			</view>
 			<view class="bottom">
 				<view class="registerBtn">
@@ -47,6 +47,7 @@
 			return {
 				title: 'Hello',
 				index: 0,
+				status:'',
 				picker: ['访客', '职员'],
 			}
 		},
@@ -54,13 +55,23 @@
 
 		},
 		methods: {
-			openHome() {
-				uni.navigateTo({
-					url: '/pages/home/index'
-				});
+			open() {
+				if(this.status===0){
+					uni.navigateTo({
+						url: '/pages/index/tourist'
+					});
+				}else{
+					uni.navigateTo({
+						url: '/pages/index/staff'
+					});
+				}
+				
 			},
+		
 			PickerChange(e) {
 				this.index = e.detail.value
+				console.log(this.index)
+				this.status = this.index
 			},
 		},
 	}
