@@ -44,7 +44,18 @@
 		{
 			"path": "pages/useCarRecord/index",
 			"style": {
-				"navigationBarTitleText": "用车记录",
+				"navigationBarTitleText": "申请记录",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/useCarRecord/details",
+			"style": {
+				"navigationBarTitleText": "申请明细",
 				"enablePullDownRefresh": true, //开启下拉刷新
 				"app-plus": {
 					"titleNView": false,
@@ -185,6 +196,10 @@
 		},
 		{
 			"path": "pages/component/timeline",
+			"style": {}
+		},
+		{
+			"path": "pages/component/home",
 			"style": {}
 		},
 		{

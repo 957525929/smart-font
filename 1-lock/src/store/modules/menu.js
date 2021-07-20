@@ -64,6 +64,18 @@ export const menuMock = {
             "id": "1261213213500452866"
           },
           {
+            "path": "/dashboard/installmanager",
+            "component": "dashboard/installmanager",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "internalOrExternal": false,
+              "title": "智能锁安装"
+            },
+            "name": "dashboard-installmanager",
+            "id": "1261213213500452866"
+          },
+          {
             "path": "/dashboard/repairmanager",
             "component": "dashboard/repairManager",
             "route": "1",
@@ -194,42 +206,42 @@ export const menuMock = {
         "path": "/count",
         "component": "layouts/RouteView",
         "route": "1",
-        "children": [{
-          "path": "/count/lockcount",
-          "component": "count/lockCount",
-          "route": "1",
-          "meta": {
-            "keepAlive": false,
-            "internalOrExternal": false,
-            "title": "开锁统计"
+        "children": [
+          {
+            "path": "/count/installcount",
+            "component": "count/installcount",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "internalOrExternal": false,
+              "title": "安装统计"
+            },
+            "name": "count-installcount",
+            "id": "1261213213500452866"
+          }, {
+            "path": "/count/lockcount",
+            "component": "count/lockCount",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "internalOrExternal": false,
+              "title": "开锁统计"
+            },
+            "name": "count-lockCount",
+            "id": "1261213213500452866"
           },
-          "name": "count-lockCount",
-          "id": "1261213213500452866"
-        },
-        // {
-        //   "path": "/count/repaircount",
-        //   "component": "count/repairCount",
-        //   "route": "1",
-        //   "meta": {
-        //     "keepAlive": false,
-        //     "internalOrExternal": false,
-        //     "title": "维修统计"
-        //   },
-        //   "name": "count-repairCount",
-        //   "id": "1261213213500452866"
-        // },
-        {
-          "path": "/count/alertcount",
-          "component": "count/alertCount",
-          "route": "1",
-          "meta": {
-            "keepAlive": false,
-            "internalOrExternal": false,
-            "title": "报警统计"
-          },
-          "name": "count-alertCount",
-          "id": "1261213213500452866"
-        }],
+          {
+            "path": "/count/alertcount",
+            "component": "count/alertCount",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "internalOrExternal": false,
+              "title": "报警统计"
+            },
+            "name": "count-alertCount",
+            "id": "1261213213500452866"
+          }],
         "meta": {
           "keepAlive": false,
           "internalOrExternal": false,

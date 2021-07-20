@@ -5,7 +5,7 @@ import workplace from './pages/workplace/index.vue'
 Vue.component('workplace',workplace)
 
 
-import lockinstall from './pages/lockinstall/index.vue'
+import lockinstall from './pages/lockinstall/installindex.vue'
 Vue.component('lockinstall',lockinstall)
 import lockrepair from './pages/lockrepair/index.vue'
 Vue.component('lockrepair',lockrepair)
