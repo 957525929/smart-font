@@ -222,7 +222,14 @@ export default {
         address: '',
         remark: ''
       },
-      formModify: {},
+      formModify: {
+        hotel: '',
+        level: '',
+        dutyName: '',
+        dutyTel: '',
+        address: '',
+        remark: ''
+      },
       rules: {
         level: [
           {
