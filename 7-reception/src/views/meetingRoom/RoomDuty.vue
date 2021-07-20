@@ -67,6 +67,7 @@
           </template>
         </a-table-column>
       </a-table>
+      <br />
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
 
@@ -154,25 +155,25 @@ const dataDuty = [
     index: 1,
     dutyName: '李霞',
     dutyTel: '13759655332',
-    area: '中国烟草总公司福建省公司机关A区域1号楼'
+    area: '中国烟草总公司福建省公司机关.A区域.1号楼'
   },
   {
     index: 2,
     dutyName: '王莉莉',
     dutyTel: '13759655348',
-    area: '中国烟草总公司福建省公司机关A区域2号楼'
+    area: '中国烟草总公司福建省公司机关.A区域.2号楼'
   },
   {
     index: 3,
     dutyName: '尤晓梅',
     dutyTel: '13053955537',
-    area: '中国烟草总公司福建省公司机关B区域1号楼'
+    area: '中国烟草总公司福建省公司机关.B区域.1号楼'
   },
   {
     index: 4,
     dutyName: '黄丽娟',
     dutyTel: '13659655381',
-    area: '中国烟草总公司福建省公司机关B区域2号楼'
+    area: '中国烟草总公司福建省公司机关.B区域.2号楼'
   }
 ]
 

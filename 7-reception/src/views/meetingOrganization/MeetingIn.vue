@@ -110,6 +110,7 @@
           </router-link>
         </a-table-column>
       </a-table>
+      <br />
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
   </a-card>
@@ -118,13 +119,13 @@
 <script>
 import moment from 'moment'
 const data = [
-    {
+  {
     id: 'A1203',
     budget: '5000',
     name: '物流管理会议',
     theme: '物流管理',
     dateTime: '2021年07月16日~2021年07月27日',
-    address: '中国烟草总公司福建省公司机关A区域2号楼会议室204',
+    address: '中国烟草总公司福建省公司机关.A区域.2号楼.会议室204',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
     dutyName: '林诺汐',
@@ -132,7 +133,7 @@ const data = [
     state: '进行中',
     detail: '1'
   },
-  
+
   {
     id: 'A1206',
     budget: '2000',
@@ -177,14 +178,13 @@ const data = [
     detail: '0'
   },
 
-
   {
     id: 'A1205',
     budget: '2000',
     name: '零售项目开展会议',
     theme: '项目会议',
     dateTime: '2021年07月05日~2021年07月08日',
-    address: '中国烟草总公司福建省公司机关B区域1号楼会议室205',
+    address: '中国烟草总公司福建省公司机关.B区域.1号楼.会议室205',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
     dutyName: '李小玲',
@@ -206,7 +206,7 @@ const data = [
   //   state: '已完成',
   //   detail: '1'
   // },
-    {
+  {
     id: 'A1202',
     budget: '5000',
     name: '安全管理会议',
@@ -219,7 +219,7 @@ const data = [
     dutyTel: '152690314587',
     state: '未通过',
     detail: '0'
-  },
+  }
 ]
 const dataHotel = [
   {
@@ -266,7 +266,7 @@ const dataEat = [
 const dataRoom = [
   {
     dateTime: '2021年06月05日~2021年06月06日',
-    room: '中国烟草总公司福建省公司机关A区域1号楼会议室203'
+    room: '中国烟草总公司福建省公司机关.A区域.1号楼.会议室203'
   }
 ]
 export default {
@@ -286,7 +286,7 @@ export default {
       dateFormat: 'YYYY年MM月DD日'
     }
   },
-    created() {
+  created() {
     let start = moment(new Date())
       .subtract(1, 'months')
       .format('YYYY-MM-DD')

@@ -47,10 +47,11 @@
     <!-- 查询区域-END -->
     <!-- table区域-begin -->
     <div id="RoomAudit">
-      <a-table rowKey="index" :data-source="data" :pagination="false">
-        <a-table-column title="序号" data-index="index" align="left"></a-table-column>
+      <a-table rowKey="index" :data-source="data" :columns="columns" :pagination="false">
+        <!-- <a-table-column title="序号" data-index="index" align="left"></a-table-column>
         <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>
         <a-table-column title="会议时间" data-index="dateTime" align="center"></a-table-column>
+        <a-table-column title="时段" data-index="range" align="center"></a-table-column>
         <a-table-column title="会议地点" data-index="address" align="center"></a-table-column>
         <a-table-column title="参会人数" data-index="number" align="center"></a-table-column>
         <a-table-column title="会议室容纳人数" data-index="numberA" align="center"></a-table-column>
@@ -73,8 +74,22 @@
               >通过</a>
             </div>
           </template>
-        </a-table-column>
+        </a-table-column>-->
+        <span slot="operation" slot-scope="audit,record,index">
+          <a @click="ignoreClick(record.id,index)" :style="{  color: 'red' }">不通过</a>
+          <a-divider type="vertical" />
+          <a href="javascript:;" @click="sureClick(record.id,index)" :style="{  color: 'green' }">通过</a>
+        </span>
+        <a-table
+          slot="expandedRowRender"
+          slot-scope="record"
+          :columns="innerColumns"
+          :data-source="record.innerData"
+          :pagination="false"
+          size="small"
+        ></a-table>
       </a-table>
+      <br />
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
     <!-- 不通过填写原因 -->
@@ -107,8 +122,9 @@ const data = [
     id: 'A1202',
     index: '1',
     name: '零售项目开展会议',
-    dateTime: '2021年07月18日~2021年07月20日',
-    address: '中国烟草总公司福建省公司机关A区域1号楼会议室203',
+    dateTime: '2021年07月30日',
+    range: '上午',
+    address: '中国烟草总公司福建省公司机关.A区域.1号楼.会议室203',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     remark: '项目会议',
     number: '4',
@@ -116,14 +132,25 @@ const data = [
     dutyName: '李小玲',
     dutyTel: '152690314587',
     type: '个人',
-    audit: '0'
+    audit: '0',
+    innerData: [
+      {
+        key: 11,
+        dateTime: '2021年07月30日',
+        range: '上午',
+        address: '中国烟草总公司福建省公司机关.A区域.1号楼.会议室203',
+        numberA: '6-8',
+        condition: '茶水，多媒体'
+      }
+    ]
   },
   {
     id: 'A1203',
     index: '2',
     name: '物流管理会议',
-    dateTime: '2021年07月20日~2021年07月21日',
-    address: '中国烟草总公司福建省公司机关A区域2号楼会议室204',
+    dateTime: '2021年07月25日~2021年07月26日',
+    range: '',
+    address: '中国烟草总公司福建省公司机关',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     remark: '物流管理',
     number: '4',
@@ -131,14 +158,111 @@ const data = [
     dutyName: '林诺汐',
     dutyTel: '152690314587',
     type: '公司会议',
-    audit: '0'
+    audit: '0',
+    innerData: [
+      {
+        key: 21,
+        dateTime: '2021年07月25日',
+        range: '全天',
+        address: '中国烟草总公司福建省公司机关.B区域.1号楼.会议室203',
+        numberA: '6-8',
+        condition: '茶水，排气扇，绿化植物，多媒体'
+      },
+      {
+        key: 22,
+        dateTime: '2021年07月26日',
+        range: '上午',
+        address: '中国烟草总公司福建省公司机关.B区域.1号楼.会议室204',
+        numberA: '6-8',
+        condition: '茶水，排气扇，绿化植物，多媒体'
+      }
+    ]
   }
 ]
-
+const columns = [
+  {
+    title: '序号',
+    dataIndex: 'index',
+    align: 'left'
+  },
+  {
+    title: '会议名称',
+    dataIndex: 'name',
+    align: 'center'
+  },
+  {
+    title: '会议时间',
+    dataIndex: 'dateTime',
+    align: 'center'
+  },
+  {
+    title: '参会人数',
+    dataIndex: 'number',
+    align: 'center'
+  },
+  {
+    title: '预约负责人',
+    dataIndex: 'dutyName',
+    align: 'center'
+  },
+  {
+    title: '预约负责人电话',
+    dataIndex: 'dutyTel',
+    align: 'center'
+  },
+  {
+    title: '预约类型',
+    dataIndex: 'type',
+    align: 'center'
+  },
+  {
+    title: '操作',
+    align: 'center',
+    scopedSlots: { customRender: 'operation' }
+  }
+]
+const innerColumns = [
+  {
+    title: '会议时间',
+    dataIndex: 'dateTime',
+    key: 'dateTime',
+    align: 'center'
+    // width: '180px'
+  },
+  {
+    title: '时段',
+    dataIndex: 'range',
+    key: 'range',
+    align: 'center'
+    // width: '120px'
+  },
+  {
+    title: '会议地点',
+    dataIndex: 'address',
+    key: 'address',
+    align: 'center',
+    width: '350px'
+  },
+  {
+    title: '会议室容纳人数',
+    dataIndex: 'numberA',
+    key: 'numberA',
+    align: 'center'
+    // width: '200px'
+  },
+  {
+    title: '会议室基本条件',
+    dataIndex: 'condition',
+    key: 'condition',
+    align: 'center'
+  }
+]
 export default {
   data() {
     return {
       data,
+      columns,
+      innerColumns,
       selectOptions: areaData,
       visibleReason: false,
       labelCol: { span: 3 },

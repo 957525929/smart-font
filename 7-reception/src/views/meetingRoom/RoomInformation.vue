@@ -162,6 +162,7 @@
           </template>
         </a-table-column>
       </a-table>
+       <br />
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
 
@@ -390,7 +391,7 @@ import { areaData } from './data/area.js'
 const dataRoom = [
   {
     index: 1,
-    area:"中国烟草总公司福建省公司机关A区域1号楼",
+    area:"中国烟草总公司福建省公司机关.A区域.1号楼",
     number:"5-6",
     dutyName: "李霞",
     dutyTel: "13759655332",
@@ -399,7 +400,7 @@ const dataRoom = [
   },
   {
     index: 2,
-    area:"中国烟草总公司福建省公司机关A区域2号楼",
+    area:"中国烟草总公司福建省公司机关.A区域.2号楼",
     number:"6-8",
     dutyName: "王莉莉",
     dutyTel: "13759655348",
@@ -408,7 +409,7 @@ const dataRoom = [
   },
   {
   index: 3,
-    area:"中国烟草总公司福建省公司机关B区域1号楼",
+    area:"中国烟草总公司福建省公司机关.B区域.1号楼",
     number:"3-4",
     dutyName: "尤晓梅",
     dutyTel: "13053955537",
@@ -417,7 +418,7 @@ const dataRoom = [
   },
   {
    index: 4,
-    area:"中国烟草总公司福建省公司机关B区域2号楼",
+    area:"中国烟草总公司福建省公司机关.B区域.2号楼",
     number:"4-6",
     dutyName: "黄丽娟",
     dutyTel: "13659655381",

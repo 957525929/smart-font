@@ -2,6 +2,19 @@
   <!-- 会议安排 -->
   <a-card :bordered="false">
     <div>
+      <a-table :data-source="dataSelet" :pagination="false" rowKey="id">
+        <a-table-column title="会议编号" data-index="id" align="left" width="150px" fixed="left"></a-table-column>
+        <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
+        <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>
+        <a-table-column title="会议预算（元）" data-index="budget" align="center"></a-table-column>
+        <a-table-column title="会议时间" data-index="dateTime" align="center"></a-table-column>
+        <a-table-column title="参会人数" data-index="number" align="center"></a-table-column>
+        <a-table-column title="负责人姓名" data-index="dutyName" align="center"></a-table-column>
+        <a-table-column title="负责人电话" data-index="dutyTel" align="center"></a-table-column>
+      </a-table>
+    </div>
+    <br />
+    <div>
       <a-steps :current="current">
         <a-step v-for="item in steps" :key="item.title" :title="item.title" />
       </a-steps>
@@ -407,6 +420,18 @@ let optionsRoom = [
 export default {
   data() {
     return {
+      dataSelet: [
+        {
+          id: this.$route.query.record.id,
+          theme: this.$route.query.record.theme,
+          name: this.$route.query.record.name,
+          budget: this.$route.query.record.budget,
+          dateTime: this.$route.query.record.dateTime,
+          number: this.$route.query.record.number,
+          dutyName: this.$route.query.record.dutyName,
+          dutyTel: this.$route.query.record.dutyTel
+        }
+      ],
       eatHotel: '',
       numDate: '1',
       current: 0,
@@ -453,7 +478,7 @@ export default {
       labelColModify: { span: 6 },
       wrapperColModify: { span: 18 },
       ModifyHotel: {
-       hotel: undefined,
+        hotel: undefined,
         dateStart: undefined,
         dateEnd: undefined
       },
@@ -484,7 +509,7 @@ export default {
       },
       visibleEat: false,
       ModifyEat: {
-                dateStart: undefined,
+        dateStart: undefined,
         dateEnd: undefined,
         type: undefined,
         way: undefined
@@ -512,7 +537,7 @@ export default {
       },
       visibleRoom: false,
       ModifyRoom: {
-               room: undefined,
+        room: undefined,
         dateStart: undefined,
         dateEnd: undefined,
         range: undefined
@@ -522,6 +547,8 @@ export default {
     }
   },
   created() {
+    console.log(this.$route.query.record)
+
     let dateStart = this.$route.query.record.dateStart
     console.log(dateStart)
     let dateEnd = this.$route.query.record.dateEnd
