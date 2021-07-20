@@ -33,7 +33,7 @@ export const columns = [{
     type: 'a-range-picker',
   },
   {
-    title: '任务地点',
+    title: '任务地点/范围',
     key: 'assets',
     dataIndex: 'assets',
     width: 80,
@@ -128,7 +128,7 @@ export const infoDetail =[{
   value:""
 },
 {
-  title: '任务地点',
+  title: '任务地点/范围',
   key: 'assets',
   dataIndex: 'assets',
   width: 80,

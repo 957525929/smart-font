@@ -59,6 +59,7 @@ export const loginInfo = [{
     type: "a-select",
     valueEnum: [{
       tableValue: "空调管理组别1",
+      searchValue:  "空调管理组别1",
       code: 0
     }]
   },

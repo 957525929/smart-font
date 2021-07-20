@@ -97,6 +97,7 @@ export const data = [{
   taskType: 2,
   taskStatus: 0,
   devStatus: 1,
+  devGroupType:"0",
   assets: '烟草大厦',
   institution: '福建烟草公司',
   phone: '18232145698',
