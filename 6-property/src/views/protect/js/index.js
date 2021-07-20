@@ -75,7 +75,7 @@ export const loginInfo = [{
     key: 'devData',
     type: "a-select",
     valueEnum: {
-      ...devData.map(item => {
+      ...devData.filter(item => item.devType == 0).map(item => {
         return {
           tableValue: item.devName,
           searchValue: item.devName,
