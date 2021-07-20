@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-gradual-blue" :isBack="true">
 			<block slot="backText" @tap="back">返回</block>
 			<block slot="content">用车申请</block>
-			<block slot="right"><a>历史记录</a></block>
+			<block slot="right"><a style="margin-right: 20rpx;" @tap="goToHistory">历史记录</a></block>
 		</cu-custom>
 		<!-- 	<view class="formArea">
 			<uni-forms :modelValue="formData" ref="form" border>
@@ -104,7 +104,12 @@
 			}
 		},
 		methods: {
-			submitForm(form) {}
+			submitForm(form) {},
+			goToHistory(){
+				uni.navigateTo({
+					url:'/pages/useCarRecord/index'
+				})
+			}
 		}
 	}
 </script>
