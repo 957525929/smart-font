@@ -3,6 +3,7 @@
 		<cu-custom bgColor="bg-gradual-blue" :isBack="true">
 			<block slot="backText" @tap="back">返回</block>
 			<block slot="content">申请明细</block>
+			<block slot="right" v-if="status==0||status==2"><a style="margin-right: 20rpx;">撤销申请</a></block>
 		</cu-custom>
 		<view class="cu-bar bg-white solid-bottom" v-if="status==2">
 			<view class="action">
