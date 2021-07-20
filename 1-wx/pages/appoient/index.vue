@@ -50,7 +50,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">请选择开始时间</view>
-			<picker mode="time" :value="time" start="09:01" end="21:01" @change="TimeChange">
+			<picker mode="time" :value="time" start="09:01" end="18:01" @change="TimeChange">
 				<view class="picker">
 					{{time}}
 				</view>
@@ -58,7 +58,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">请选择结束时间</view>
-			<picker mode="time" :value="time1" start="09:01" end="21:01" @change="TimeChange">
+			<picker mode="time" :value="time1" start="09:01" end="18:01" @change="TimeChange1">
 				<view class="picker">
 					{{time1}}
 				</view>
@@ -110,7 +110,7 @@
 		data() {
 			return {
 				index: -1,
-				picker1: ['张三', '李四', '王五'],
+				// picker1: ['张三', '李四', '王五'],
 				date: date,
 				time: '',
 				time1: '',
@@ -123,15 +123,15 @@
 				this.index = e.detail.value
 				// console.log(index)
 			},
-			DateChange(e) {
-				this.date = e.detail.value
-			},
 			// textareaBInput(e) {
 			// 	this.textareaBValue = e.detail.value
 			// }
 			NavChange: function(e) {
 				console.log(e.currentTarget)
 				this.PageCur = e.currentTarget.dataset.cur
+			},
+			DateChange(e) {
+				this.date = e.detail.value
 			},
 			TimeChange(e) {
 				this.time = e.detail.value

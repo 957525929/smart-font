@@ -6,13 +6,13 @@
 			</view>
 		</view>
 
-
+		<view class="text text-white text-lg">预约访问系统</view>
 
 		<view class="form">
 
 			<view class="inputWrapper">
 				<!-- <view class="title">申请状态</view> -->
-				<picker @change="PickerChange"  :value="index" :range="picker" v-model="status">
+				<picker @change="PickerChange" :value="index" :range="picker" v-model="status">
 					<view class="picker">
 						{{picker[index]}}
 					</view>
@@ -47,7 +47,7 @@
 			return {
 				title: 'Hello',
 				index: 0,
-				status:'',
+				status: '',
 				picker: ['访客', '职员'],
 			}
 		},
@@ -56,18 +56,18 @@
 		},
 		methods: {
 			open() {
-				if(this.status===0){
+				if (this.status === 1) {
 					uni.navigateTo({
-						url: '/pages/index/tourist'
+						url: '/pages/home/staffHome'
 					});
-				}else{
+				} else {
 					uni.navigateTo({
-						url: '/pages/index/staff'
+						url: '/pages/home/touristHome',
 					});
 				}
-				
+
 			},
-		
+
 			PickerChange(e) {
 				this.index = e.detail.value
 				console.log(this.index)
@@ -92,15 +92,23 @@
 		align-items: flex-end;
 	}
 
+	.text {
+		padding: 0 100upx;
+		margin-top: 10px;
+		text-align: center
+	}
+
 	.avator {
-		width: 200upx;
-		height: 200upx;
+		width: 50%;
+		width: 180upx;
+		height: 180upx;
 		overflow: hidden;
 	}
 
 	.avator .img {
-		width: 100%
+		width: 100%;
 	}
+
 
 	.form {
 		padding: 0 100upx;
@@ -116,12 +124,14 @@
 		padding: 0 20px;
 		margin-top: 25px;
 	}
-	.inputWrapper .picker{
+
+	.inputWrapper .picker {
 		width: 100%;
 		height: 100%;
 		text-align: center;
 		font-size: 15px;
-		line-height:80upx;;
+		line-height: 80upx;
+		;
 	}
 
 	.inputWrapper .input {

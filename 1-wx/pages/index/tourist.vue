@@ -51,9 +51,15 @@
 
 <script>
 	export default {
+		onLoad(option){
+			this.PageCur=option.PageCur
+			console.log('-----------------')
+			console.log(this.PageCur)
+		},
 		data() {
 			return {
-				PageCur: 'scan'
+				PageCur: 'scan',
+				// PageCur: 'record'
 			}
 		},
 		methods: {
