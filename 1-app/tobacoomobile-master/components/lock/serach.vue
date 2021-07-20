@@ -1,11 +1,15 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-orange" :isBack="true">
-			<block slot="backText">返回</block>
-			<block slot="content">搜索</block>
-		</cu-custom>
+		<view class="cu-form-group">
+			<view class="title">智能锁安装状态</view>
+			<picker @change="PickerChange1" :value="index1" :range="picker1">
+				<view class="picker">
+					{{picker1[index1]}}
+				</view>
+			</picker>
+		</view>
 
-		<view class="cu-bar bg-white">
+		<view class="cu-bar bg-white margin-top">
 			<view class="action">选择位置</view>
 		</view>
 		<view class="cu-form-group">
@@ -16,6 +20,7 @@
 				</view>
 			</picker>
 		</view>
+		
 		<view class="cu-form-group">
 			<view class="title">房间号</view>
 			<picker @change="PickerChange" :value="index" :range="picker">
@@ -25,51 +30,25 @@
 			</picker>
 		</view>
 
-		<view class="cu-bar bg-white margin-top">
-			<view class="action">选择时间段</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">请选择开始时间</view>
-			<picker mode="date" :value="date" start="2018-01-01" end="2023-01-01" @change="DateChange">
-				<view class="picker">
-					{{date}}
-				</view>
-			</picker>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">请选择结束时间</view>
-			<picker mode="date" :value="date1" start="2018-01-01" end="2023-01-01" @change="DateChange1">
-				<view class="picker">
-					{{date1}}
-				</view>
-			</picker>
-		</view>
-		<view v-if="type==0" class="cu-form-group margin-top">
-			<view class="title">智能锁安装状态</view>
-			<picker @change="PickerChange1" :value="index1" :range="picker1">
-				<view class="picker">
-					{{picker1[index1]}}
-				</view>
-			</picker>
-		</view>
-		<view v-if="type==3" class="cu-form-group  margin-top">
-			<view class="title">锁编号</view>
-			<input placeholder="请输入锁编号" name="input"></input>
-		</view>
-		<view v-if="type==3" class="cu-form-group">
-			<view class="title">智能锁维修状态</view>
-			<picker @change="PickerChange2" :value="index2" :range="picker2">
-				<view class="picker">
-					{{index2>-1?picker2[index2]:'请选择智能锁维修状态'}}
-				</view>
-			</picker>
-		</view>
-		<view class="margin grid col-2 text-center">
-			<view class="cu-item">
-				<button class="cu-btn bg-white lg button" @tap="cancle">取消</button>
+		<view v-if="this.index1 == 1">
+			<view class="cu-bar bg-white margin-top">
+				<view class="action">选择安装的时间段</view>
 			</view>
-			<view class="cu-item">
-				<button class="cu-btn bg-orange lg button" @tap="oksearch">查询</button>
+			<view class="cu-form-group">
+				<view class="title">请选择开始时间</view>
+				<picker mode="date" :value="date" start="2018-01-01" end="2023-01-01" @change="DateChange">
+					<view class="picker">
+						{{date}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">请选择结束时间</view>
+				<picker mode="date" :value="date1" start="2018-01-01" end="2023-01-01" @change="DateChange1">
+					<view class="picker">
+						{{date1}}
+					</view>
+				</picker>
 			</view>
 		</view>
 	</view>
@@ -77,19 +56,30 @@
 
 <script>
 	export default {
-		onLoad(option) {
-			this.type = option.type
-			console.log(this.type)
+		onLoad(option) {},
+		
+		created: function() {
+			let aData = new Date();
+
+			this.date =
+				aData.getFullYear() + "-" +
+				(aData.getMonth() + 1) + "-" +
+				(aData.getDate() - 3)
+			this.date1 =
+				aData.getFullYear() + "-" +
+				(aData.getMonth() + 1) + "-" +
+				(aData.getDate())
 		},
+		
+		mounted() {},
+		
 		data() {
 			return {
-				type: 0,
+				date: '',
 				index: -1,
 				picker: ['101', '102', '103'],
 				index1: 0,
-				index2: -1,
-				picker1: ['已安装', '未安装'],
-				picker2: ['已维修', '待维修'],
+				picker1: ['未安装', '已安装'],
 				multiArray: [
 					['中国烟草总公司福建省公司机关'],
 					['A区域', 'B区域'],
@@ -120,42 +110,36 @@
 					]
 				],
 				multiIndex: [0, 0, 0],
-				date: '2021-06-25',
-				date1: '2021-06-27',
 			}
 		},
+		
 		methods: {
 			PickerChange(e) {
 				this.index = e.detail.value
 			},
+			
+			// 向父组件传值
 			PickerChange1(e) {
 				this.index1 = e.detail.value
+				this.$emit('func',this.index1)
 			},
-			PickerChange2(e) {
-				this.index1 = e.detail.value
-			},
+			
 			MultiChange(e) {
 				this.multiIndex = e.detail.value
 			},
+			
 			MultiColumnChange(e) {},
+			
 			DateChange(e) {
 				this.date = e.detail.value
 			},
+			
 			DateChange1(e) {
 				this.date1 = e.detail.value
-			},
-			cancle() {
-				uni.navigateBack()
-			},
-			oksearch() {
-
 			},
 		}
 	}
 </script>
 
 <style>
-	.button {
-		width: 20vh;
-	}
 </style>

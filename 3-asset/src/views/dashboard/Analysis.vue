@@ -2,7 +2,6 @@
 <template>
   <div>
     <index-chart></index-chart>
-    <bar :data-source="dataSource" :fields="fields" :height="1000"></bar>
   </div>
 </template>
 
@@ -13,11 +12,11 @@ export default {
   name: "Analysis",
   components: {
     IndexChart,
-    Bar,
+    // Bar,
   },
   data() {
     return {
-      dataSource:"",
+
     }
   },
   created() {

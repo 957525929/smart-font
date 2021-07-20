@@ -39,7 +39,7 @@
                 <a-row :gutter="16">
                   <a-col :span="7">
                     <a-form-item label="收租日期">
-                      <a-date-picker placeholder='' v-decorator="['payDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 100%"></a-date-picker>
+                      <j-date  v-decorator="['startDate',{ rules: [{ required: true, message: '请选择!' }],initialValue:this.startDate, }]" style='width: 100%;'/>
                     </a-form-item>
                   </a-col>
                   <a-col :span="7">
@@ -67,7 +67,6 @@
                       <a-upload
                         list-type="picture"
                         action="//jsonplaceholder.typicode.com/posts/"
-                        :preview-file="previewFile"
                       >
                         <a-button> <a-icon type="upload" /> 上传 </a-button>
                       </a-upload>
@@ -78,10 +77,11 @@
                   <a-col :span="7">
                     <a-form-item label="备注">
                       <a-select
+                        mode="tags"
                         allowClear
                         v-decorator="['beizhu', { rules: [{ required: false}] }]"
                       >
-                        <a-select-option v-for="d in beizhuSelectData" :key="d.value">
+                        <a-select-option v-for="d in beizhuSelectData" :key="d.text">
                           {{ d.text }}
                         </a-select-option>
                       </a-select>
@@ -138,7 +138,7 @@
                 <a-row :gutter="16">
                   <a-col :span="7">
                     <a-form-item label="缴租日期">
-                      <a-date-picker placeholder='' v-decorator="['payDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 100%"></a-date-picker>
+                      <j-date  v-decorator="['startDate',{ rules: [{ required: true, message: '请选择!' }],initialValue:this.startDate, }]" style='width: 100%;'/>
                     </a-form-item>
                   </a-col>
                   <a-col :span="7">
@@ -166,7 +166,7 @@
                       <a-upload
                         list-type="picture"
                         action="//jsonplaceholder.typicode.com/posts/"
-                        :preview-file="previewFile"
+
                       >
                         <a-button> <a-icon type="upload" /> 上传 </a-button>
                       </a-upload>
@@ -179,8 +179,9 @@
                       <a-select
                         allowClear
                         v-decorator="['beizhu', { rules: [{ required: false}] }]"
+                        mode="tags"
                       >
-                        <a-select-option v-for="d in beizhuSelectData" :key="d.value">
+                        <a-select-option v-for="d in beizhuSelectData" :key="d.text">
                           {{ d.text }}
                         </a-select-option>
                       </a-select>
@@ -207,18 +208,21 @@
 import  JEditableTable from '@comp/jeecg/JEditableTable'
 import { FormTypes } from '@/utils/JEditableTableUtil'
 import moment from 'moment'
+import JDate from "@comp/jeecg/JDate";
 export default {
   name: "CreateRegister",
   components: {
     JEditableTable,
+    JDate,
   },
-
   props: {
     modalVisible: Boolean,
   },
   data() {
     return {
       form1: this.$form.createForm(this),
+      form2: this.$form.createForm(this),
+      startDate:moment().format('YYYY-MM-DD'),
       //合同名称
       contractNameSelectData:[
         {
@@ -301,11 +305,11 @@ export default {
       //凭证类型
       beizhuSelectData:[
         {
-          value : 1,
+          index : 1,
           text : '纸质发票',
         },
         {
-          value : 2,
+          index : 2,
           text : '网络转账记录',
         },
       ],

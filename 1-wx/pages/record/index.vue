@@ -1,6 +1,7 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-yellow">
+		<cu-custom bgColor="bg-yellow" :isBack="true">
+			<block slot="backText">返回</block>
 			<block slot="content">申请记录</block>
 		</cu-custom>
 
@@ -23,11 +24,36 @@
 			<recordCard :cardType="type[0]" />
 		</block>
 		<block v-if="TabCur==1">
-			<recordCard :cardType="type[1]" />
+			<navigator class="action" url="../allow/index">
+				<recordCard :cardType="type[1]" />
+			</navigator>
 		</block>
 		<block v-if="TabCur==2">
-			<recordCard :cardType="type[2]" />
+			<navigator class="action" @tap="showModal" data-target="DialogModal1">
+				<recordCard :cardType="type[2]" />
+			</navigator>
 		</block>
+
+		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">拒绝原因</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					{{reason}}
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
+
+					</view>
+				</view>
+			</view>
+		</view>
 
 	</view>
 </template>
@@ -37,6 +63,8 @@
 	export default {
 		data() {
 			return {
+				modalName: null,
+				reason: '被访人出差',
 				TabCur: 0,
 				scrollLeft: 0,
 				type: [{
@@ -58,7 +86,13 @@
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id;
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
-			}
+			},
+			showModal(e) {
+				this.modalName = e.currentTarget.dataset.target
+			},
+			hideModal(e) {
+				this.modalName = null
+			},
 		}
 	}
 </script>

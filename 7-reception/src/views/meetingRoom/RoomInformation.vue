@@ -30,7 +30,7 @@
           <span>管理员：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入管理员" v-model="queryParam.dutyName"></a-input>
+          <a-input placeholder="请输入管理员姓名" v-model="queryParam.dutyName"></a-input>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
@@ -47,7 +47,7 @@
             @click="addRoom()"
             icon="plus"
             :style="{ color: 'white', background:'orange'}"
-          >新增会议室</a-button>
+          >新增会议室</a-button>&nbsp;&nbsp;
           <a-button>
             <a-icon type="download" />导出
           </a-button>
@@ -147,15 +147,18 @@
             </div>
           </template> -->
         </a-table-column>
-       <a-table-column title="管理员" data-index="dutyName" align="center"></a-table-column>
-        <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column>
+       <!-- <a-table-column title="管理员" data-index="dutyName" align="center"></a-table-column>
+        <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column> -->
         <a-table-column title="操作" align="center">
           <template slot-scope="record">
+           <a href="javascript:;" @click="detail(record)" :style="{  color: 'orange' }">查看详情</a>
+            <a-divider type="vertical" />
             <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
             <a-divider type="vertical" />
             <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.index)">
               <a href="javascript:;" :style="{  color: 'red' }">删除</a>
             </a-popconfirm>
+         
           </template>
         </a-table-column>
       </a-table>
@@ -246,9 +249,10 @@
           <a-button style="margin-left: 10px;" @click="resetFormAdd()">重置</a-button>
         </a-form-model-item>
       </a-form-model>
-    </a-Modal>
+  </a-Modal>
+
     <!--修改信息 -->
-       <a-Modal v-model="visibleModify" title="修改会议室信息" footer>
+     <a-Modal v-model="visibleModify" title="修改会议室信息" footer>
       <a-form-model
         ref="ruleForm"
         :model="formModify"
@@ -272,7 +276,7 @@
             <a-select-option value="2">2：饮料、风扇、空调、多媒体</a-select-option>
             <a-select-option value="3">3：饮料、风扇、景观、多媒体</a-select-option>
           </a-select> -->
-           <a-checkbox-group @change="onChangeCon">
+           <a-checkbox-group @change="onChangeCon" v-model="formModify.condition">
             <a-row>
               <a-col :span="8">
                 <a-checkbox value="茶水">
@@ -316,6 +320,65 @@
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitModify()">修改</a-button>
           <a-button style="margin-left: 10px;" @click="CancelModify()">取消</a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </a-Modal>
+    <!-- 会议室详情 -->
+    <a-Modal v-model="visibleDetail" title="会议室详情" footer>
+      <a-form-model
+        :model="formDetail"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+      >
+         <a-form-model-item label="区域" >
+          <a-input v-model="formDetail.area"  disabled></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="房间号" >
+          <a-input v-model="formDetail.room" disabled></a-input>
+        </a-form-model-item>
+         <a-form-model-item label="容纳人数">
+          <a-input v-model="formDetail.number" disabled></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="基本条件">
+           <a-checkbox-group @change="onChangeCon" v-model="formDetail.condition" disabled>
+            <a-row>
+              <a-col :span="8">
+                <a-checkbox value="茶水">
+                  茶水
+                </a-checkbox>
+              </a-col>
+              <a-col :span="8">
+                <a-checkbox value="排气扇">
+                  排气扇
+                </a-checkbox>
+              </a-col>
+              <a-col :span="8">
+                <a-checkbox value="空调">
+                  空调
+                </a-checkbox>
+              </a-col>
+              <a-col :span="8">
+                <a-checkbox value="绿化植物">
+                  绿化植物
+                </a-checkbox>
+              </a-col>
+              <a-col :span="8">
+                <a-checkbox value="多媒体">
+                  多媒体
+                </a-checkbox>
+              </a-col>
+            </a-row>
+        </a-checkbox-group>
+        </a-form-model-item>
+        <a-form-model-item ref="dutyName" label="管理员"  >
+          <a-select   show-search v-model="formDetail.dutyName" disabled>
+            <a-select-option value="李霞">李霞</a-select-option>
+            <a-select-option value="尤晓梅">尤晓梅</a-select-option>
+            <a-select-option value="黄丽娟">黄丽娟</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item label="管理员电话" >
+          <a-input v-model="formDetail.dutyTel" disabled></a-input>
         </a-form-model-item>
       </a-form-model>
     </a-Modal>
@@ -429,17 +492,22 @@ export default {
       area: [],
       room: '',
       number: '',
-        dutyName: '',
-        dutyTel: '',
-        condition: [],
-        remark: ''
+      dutyName: '',
+      dutyTel: '',
+      condition: [],
+      remark: ''
       },
         radioStyle: {
         display: "block",
         height: "30px",
         lineHeight: "30px"
       },
-      formModify: {},
+      formModify: {
+      number: '',
+      dutyName: '',
+      dutyTel: '',
+      condition: [],  
+      },      
       rules: {
         condition:[
             {
@@ -490,7 +558,9 @@ export default {
             trigger: 'blur'
           }
         ]
-      }
+      },
+      visibleDetail:false,
+      formDetail:{}
     }
   },
   methods: {
@@ -542,9 +612,9 @@ export default {
        this.formModify.room = record.room
       this.formModify.number = record.number
       this.formModify.dutyName = record.dutyName
-      // console.log(this.formModify.dutyName)
+       this.formModify.condition=record.condition.split('，')
       this.formModify.dutyTel = record.dutyTel
-      this.formModify.condition = record.condition
+      //this.formModify.condition = record.condition
     },
     onSubmitModify() {
       this.visibleModify = false
@@ -557,7 +627,16 @@ export default {
     CancelModify() {
       this.visibleModify = false
     },
-
+   detail(record){
+      this.visibleDetail = true
+      console.log(record)
+      this.formDetail.area = record.area
+       this.formDetail.room = record.room
+      this.formDetail.number = record.number
+      this.formDetail.dutyName = record.dutyName
+       this.formDetail.condition=record.condition.split('，')
+      this.formDetail.dutyTel = record.dutyTel
+  }
   }
 }
 </script>

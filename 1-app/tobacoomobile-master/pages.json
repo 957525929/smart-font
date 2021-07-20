@@ -269,6 +269,15 @@
             }
             
         }
+        ,{
+            "path" : "components/lock/repairsearch",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"mp-alipay": {

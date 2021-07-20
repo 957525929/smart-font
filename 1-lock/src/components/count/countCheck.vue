@@ -88,6 +88,7 @@
       </a-col>
       <a-col :span="7">
         <span>
+          <div class="bartitle">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 开锁次数统计：</div>
           <bar :dataSource="dataSource" :height="180" />
         </span>
       </a-col>

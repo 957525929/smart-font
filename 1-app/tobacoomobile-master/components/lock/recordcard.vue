@@ -29,7 +29,7 @@
 						</view>
 						<view>
 							<span class="title">开锁时间：</span>
-							<span class="title flex-sub text-left">{{item.time}}</span>
+							<span class="title flex-sub text-left">{{item.day}}</span>
 						</view>
 					</span>
 				</view>
@@ -41,31 +41,46 @@
 <script>
 
 	export default {
+		created: function() {
+			let aData = new Date();		
+			this.value =
+				aData.getFullYear() + "年" +
+				(aData.getMonth() + 1) + "月" +
+				(aData.getDate()-1) + "日"
+				
+			for( let i = 0; i < this.locklist.length; i++){
+				this.locklist[i].day = this.value + ' ' + this.locklist[i].time
+			}
+		},
 		data() {
 			return {
 				locklist: [{
 						name: '中国烟草总公司福建省公司机关',
 						area: 'A区域1号楼',
 						roomnum: '101',
-						time: '2021年7月16日 08:34:22',
+						day: '2021年7月16日 08:34:22',
+						time: '08:34:22',
 						type: '指纹开锁',
 					},
 					{
 						name: '中国烟草总公司福建省公司机关',
 						area: 'B区域3号楼',
 						roomnum: '305',
-						time: '2021年7月16日 08:30:16',
+						day: '2021年7月16日 08:30:16',
+						time: '08:30:16',
 						type: '密码开锁',
 					},
 					{
 						name: '中国烟草总公司福建省公司机关',
 						area: 'A区域1号楼',
 						roomnum: '105',
-						time: '2021年7月16日 08:25:03',
+						day: '2021年7月16日 08:25:03',
+						time: '08:25:03',
 						type: '指纹开锁',
 					},
 					
 				],
+				value: '',
 
 
 				// 图片

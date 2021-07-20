@@ -2,16 +2,16 @@
 	<view>
 		<lockrepair v-if="PageCur=='lockrepair'"></lockrepair>
 		<person v-if="PageCur=='person'"></person>
-		
-		
+
 		<view class="cu-bar tabbar bg-white shadow foot">
 			<view class="action" @click="NavChange" data-cur="lockrepair">
 				<view class='cuIcon-cu-image'>
-					<text :class="PageCur=='lockrepair'?'text-orange cuIcon-paintfill':'text-gray cuIcon-paint'"></text>
+					<text
+						:class="PageCur=='lockrepair'?'text-orange cuIcon-repairfill':'text-gray cuIcon-repair'"></text>
 				</view>
 				<view :class="PageCur=='lockrepair'?'text-orange':'text-gray'">维修</view>
 			</view>
-			
+
 			<view class="action" @click="NavChange" data-cur="person">
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='person'?'text-orange cuIcon-peoplefill':'text-gray cuIcon-people'"></text>
@@ -25,13 +25,14 @@
 <script>
 	export default {
 		data() {
-		return {
+			return {
 				PageCur: 'lockrepair'
 			}
 		},
+
 		methods: {
 			NavChange: function(e) {
-				console.log( e.currentTarget)
+				console.log(e.currentTarget)
 				this.PageCur = e.currentTarget.dataset.cur
 			}
 		}

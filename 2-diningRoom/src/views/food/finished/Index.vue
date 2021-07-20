@@ -7,7 +7,7 @@
           <a-row :gutter="24">
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="留样编号">
-                <a-input placeholder="请输入" v-decorator="['number']"></a-input>
+                <a-input placeholder="请输入" v-decorator="['sampleNumber']"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
@@ -37,14 +37,11 @@
                   </a-select>
                 </a-form-item>
               </a-col>
-              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-col :xl="8" :lg="8" :md="9" :sm="24">
                 <a-form-item label="开始时间">
-                  <j-date  v-decorator="['startDate',{initialValue:this.startDate}]" style='width: 100%'/>
-                </a-form-item>
-              </a-col>
-              <a-col :xl="6" :lg="8" :md="9" :sm="24">
-                <a-form-item label="结束时间">
-                  <j-date  v-decorator="['endDate',{initialValue:this.endDate}]" style='width: 100%'/>
+                  <j-date  v-decorator="['startDate', {initialValue:this.startDate}]" style='width: 47%;'/>
+                  <span class="query-group-split-cust"></span>
+                  <j-date  v-decorator="['endDate', {initialValue:this.endDate}]" style='width: 47%;' />
                 </a-form-item>
               </a-col>
             </template>
@@ -82,8 +79,6 @@
           :pagination="{total:this.dataSource.length, showTotal:(total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`}"
         >
         <span slot="action" slot-scope="text, record">
-<!--          <router-link :to="{name:'materialManagement-warehousing-warehousingDetails', params:record }">查看详情</router-link>-->
-          <!--          <a><a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style='margin-left: 10%;'>删除</a-popconfirm></a>-->
         </span>
         </a-table>
       </div>
@@ -103,9 +98,6 @@
 
       <a-spin :spinning="confirmLoading">
         <a-form-model ref="form"  v-bind="layout"  :model="model" :rules="validatorRules">
-<!--          <a-form-model-item label="留样编号" prop="code">-->
-<!--            <a-input v-model="model.code" placeholder="系统自动生成" disabled/>-->
-<!--          </a-form-model-item>-->
           <a-form-model-item label="菜品名称" required prop="name">
             <a-select allowClear v-model="model.name" placeholder="请选择菜品名称">
               <a-select-option value="小鸡炖蘑菇">小鸡炖蘑菇</a-select-option>
@@ -157,7 +149,7 @@ export default {
   data () {
     return {
       form1: this.$form.createForm(this),
-      startDate:moment().subtract(3, 'months').format('YYYY-MM-DD'),
+      startDate:moment().subtract(1, 'months').format('YYYY-MM-DD'),
       endDate:moment().format('YYYY-MM-DD'),
       description: '采购入库',
       dataSource: [
@@ -224,19 +216,15 @@ export default {
           align:"center",
           dataIndex: 'checkoutPeople'
         },
-        // {
-        //   title: '操作',
-        //   dataIndex: 'action',
-        //   align:"center",
-        //   scopedSlots: { customRender: 'action'},
-        // },
       ],
       toggleSearchStatus: true,
       selectedRowKeys: [],
 
       title:"操作",
       visible: false,
-      model: {},
+      model: {
+        time:moment()
+      },
       layout: {
         labelCol: { span: 3 },
         wrapperCol: { span: 14 },
@@ -293,12 +281,10 @@ export default {
     },
 
     add () {
-      this.edit({});
-    },
-    edit (record) {
-      console.log(record)
-      this.model = Object.assign({}, record);
-      console.log(this.model)
+      this.model={}
+      this.model={
+        time:moment()
+      }
       this.visible = true;
     },
     close () {

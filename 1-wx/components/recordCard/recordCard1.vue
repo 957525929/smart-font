@@ -11,10 +11,10 @@
 					</span>
 					<span class="card-center">
 						<view>
-							被访人：{{item.visit}}
+							访问人：{{item.visit}}
 						</view>
 						<view>
-							被访部门：{{item.department}}
+							访问部门：{{item.department}}
 						</view>
 						<view>
 							申请时间：{{item.time}}
@@ -25,9 +25,6 @@
 						<view :style="styleObject[cardType.id]">
 							{{item.type}}
 						</view>
-						<view class="text-gray text-sm" style="margin-top: 22px;">
-							{{item.cancel}}
-						</view>
 					</span>
 				</view>
 			</view>
@@ -37,54 +34,40 @@
 
 <script>
 	export default {
-		// created: function() {
-		
-		// 	let aData = new Date();
-		
-		// 	this.date =
-		// 		aData.getFullYear() + "年" +
-		// 		(aData.getMonth() + 1) + "月" +
-		// 		(aData.getDate()) + "日"  
-			
-		// },
 		data() {
 			return {
-				// date:'',
 				applylist: [{
-						visit: '张三',
+						visit: '魏佳楠',
 						department: '信息中心',
-						time:'2020年1月21日 13:46',
+						time: '2020年1月21日 13:46',
 						type: '待审核',
-						cancel:'撤回'
 					},
 					{
-						visit: '李四',
+						visit: '魏佳楠',
 						department: '机关服务中心',
 						time: '2020年1月21日 13:46',
 						type: '待审核',
-						cancel:'撤回'
 					},
 					{
-						visit: '王五',
+						visit: '魏佳楠',
 						department: '财务管理处',
 						time: '2020年1月21日 13:46',
 						type: '待审核',
-						cancel:'撤回'
 					},
 					{
-						visit: '张三',
+						visit: '魏佳楠',
 						department: '审计处',
 						time: '2020年1月21日 13:46',
 						type: '已通过',
 					},
 					{
-						visit: '李四',
+						visit: '魏佳楠',
 						department: '科技处',
 						time: '2020年1月21日 13:46',
 						type: '已通过',
 					},
 					{
-						visit: '王五',
+						visit: '魏佳楠',
 						department: '人事处',
 						time: '2020年1月21日 13:46',
 						type: '已通过',
@@ -96,7 +79,7 @@
 						type: '已拒绝',
 					},
 					{
-						visit: '赵六',
+						visit: '魏佳楠',
 						department: '烟叶管理处',
 						time: '2020年1月21日 13:46',
 						type: '已拒绝',

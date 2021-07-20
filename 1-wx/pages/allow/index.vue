@@ -1,11 +1,12 @@
 <template>
 	<view class="app">
-		<cu-custom bgColor="bg-yellow">
+		<cu-custom bgColor="bg-yellow" :isBack="true">
+			<block slot="backText">返回</block>
 			<block slot="content">访问许可码</block>
 		</cu-custom>
 		<view class="firstRow">
 			<view class="text">
-				访客姓名：{{person.name}}
+				被访人：{{person.name}}
 			</view>
 			<view class="refresh">
 				刷新 
@@ -14,7 +15,7 @@
 			</view>
 		</view>
 		<view class="secondRow">
-			访客电话：{{person.phone}}
+			被访部门：{{person.department}}
 		</view>
 		<view class="thirdRow">
 			<view class="thirdTitle">
@@ -43,8 +44,8 @@
 		data() {
 			return {
 				person: {
-					name: '林倩',
-					phone: '13675824231',
+					name: '张三',
+					department: '信息中心',
 					time: '2021年6月9日 8:23 至2021年6月9日 19:23',
 					type: 'allow'
 				},
