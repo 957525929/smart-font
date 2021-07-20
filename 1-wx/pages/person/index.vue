@@ -7,7 +7,7 @@
 		<!-- #endif -->
 		<view class="wrapper">
 			<view class="card">
-				<view class="contentList perMsg mainBackColor" @tap="$navTo.goTo('myInfo')">
+				<view class="contentList perMsg bg-orange" @tap="$navTo.goTo('myInfo')">
 					<view class="avat">
 						<image mode="aspectFit" src="/static/person/avater.png"></image>
 					</view>
@@ -17,6 +17,7 @@
 				</view>
 				<text class="listIcons secCode iconfont iconerweima-copy"></text>
 			</view>
+			
 			<view class="cu-list menu sm-border card-menu margin-top">
 				<view class="cu-item arrow content" v-for="item in contentList" @click="openMessage(item)">
 					<view class="action">
