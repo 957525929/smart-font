@@ -5,7 +5,7 @@
 			<block slot="content">用车申请</block>
 			<block slot="right"><a>历史记录</a></block>
 		</cu-custom>
-	<!-- 	<view class="formArea">
+		<!-- 	<view class="formArea">
 			<uni-forms :modelValue="formData" ref="form" border>
 				<uni-forms-item label="用车人/单位" :label-width='labelWidth' name="user">
 					<uni-easyinput :inputBorder="false" v-model="formData.user" placeholder="请输入姓名或单位名称" />
@@ -39,6 +39,14 @@
 			<view class="cu-form-group">
 				<view class="title">联系电话</view>
 				<input placeholder="13756372788" name="phone"></input>
+				<view class="cu-capsule radius">
+					<view class='cu-tag bg-blue '>
+						+86
+					</view>
+					<view class="cu-tag line-blue">
+						中国大陆
+					</view>
+				</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">乘客数</view>
@@ -96,18 +104,7 @@
 			}
 		},
 		methods: {
-			back() {
-				// uni.switchTab({
-				// 	url: '/pages/tabBar/homepage'
-				// });
-				uni.navigateBack()
-			},
-			submitForm(form) {
-				// 手动提交表单
-				this.$refs.form.validate().then((res) => {
-					console.log('表单返回值：', res)
-				})
-			}
+			submitForm(form) {}
 		}
 	}
 </script>
