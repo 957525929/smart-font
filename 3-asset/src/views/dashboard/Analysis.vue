@@ -12,7 +12,7 @@ export default {
   name: "Analysis",
   components: {
     IndexChart,
-    Bar,
+    // Bar,
   },
   data() {
     return {
