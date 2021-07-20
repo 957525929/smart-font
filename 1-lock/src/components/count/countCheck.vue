@@ -89,7 +89,8 @@
       <a-col :span="7">
         <span>
           <div class="bartitle">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 开锁次数统计：</div>
-          <bar :dataSource="dataSource" :height="180" />
+          <br />
+          <Pie :dataSource="dataSource" :height="180" />
         </span>
       </a-col>
       <a-col :span="3"></a-col>
@@ -99,13 +100,15 @@
 <script>
 import { areaData } from '../roomManager/data/area'
 import { deptData } from '../roomManager/data/dept'
-import Bar from '@/components/chart/Bar'
+// import Bar from '@/components/chart/Bar'
+import Pie from '@/components/chart/Pie'
 import moment from 'moment'
 import { formatDate } from '@/utils/util'
 
 export default {
   components: {
-    Bar,
+    // Bar,
+    Pie,
   },
   data() {
     return {
@@ -119,9 +122,9 @@ export default {
       name: '',
       toggleSearchStatus: false,
       dataSource: [
-        { x: '指纹开锁', y: 251 },
-        { x: '密码开锁', y: 101 },
-        { x: '远程开锁', y: 6 },
+        { item: '指纹开锁', count: 251 },
+        { item: '密码开锁', count: 101 },
+        { item: '远程开锁', count: 6 },
       ],
       starDate: '',
       endDate: '',
