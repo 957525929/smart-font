@@ -197,7 +197,9 @@ export default {
         dutyTel: ''
       },
       formModify: {
-        area: []
+        area: [],
+        dutyName: '',
+        dutyTel: ''
       },
       rules: {
         area: [
