@@ -24,6 +24,7 @@
 					</view>
 				</view>
 			</scroll-view>
+			
 			<view v-if="TabCur==0" class="itembox">
 				<navigator class="action" url="../../components/lock/detail?type=3" hover-class="none">
 					<lockCard :cardType="type[0]"></lockCard>

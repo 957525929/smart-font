@@ -18,12 +18,19 @@
 				<text class="listIcons secCode iconfont iconerweima-copy"></text>
 			</view>
 			<view class="cu-list menu sm-border card-menu margin-top">
-				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title">
+				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title" v-if="item.message"
+					@click='openMessage'>
+					<view class="action">
+						<view class="text-grey">{{item.title}}</view>
+					</view>
+					<view v-if="item.message" class="cu-tag round bg-red sm">4</view>
+				</view>
+				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title" v-if="!item.message">
 					<view class="action">
 						<view class="text-grey">{{item.title}}</view>
 						<view class="text-grey text-xs">{{item.label}}</view>
 					</view>
-					<view v-if="item.message" class="cu-tag round bg-red sm" @click='openMessage'>5</view>
+					<!-- <view v-if="item.message" class="cu-tag round bg-red sm">4</view> -->
 					<view v-if="item.edition" class=" text-grey">{{item.edition}}</view>
 				</view>
 			</view>

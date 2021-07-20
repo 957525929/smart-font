@@ -20,6 +20,7 @@
 				</view>
 			</picker>
 		</view>
+		
 		<view class="cu-form-group">
 			<view class="title">房间号</view>
 			<picker @change="PickerChange" :value="index" :range="picker">
@@ -56,6 +57,7 @@
 <script>
 	export default {
 		onLoad(option) {},
+		
 		created: function() {
 			let aData = new Date();
 
@@ -68,9 +70,9 @@
 				(aData.getMonth() + 1) + "-" +
 				(aData.getDate())
 		},
-		mounted() {
-
-		},
+		
+		mounted() {},
+		
 		data() {
 			return {
 				date: '',
@@ -110,21 +112,28 @@
 				multiIndex: [0, 0, 0],
 			}
 		},
+		
 		methods: {
 			PickerChange(e) {
 				this.index = e.detail.value
 			},
+			
+			// 向父组件传值
 			PickerChange1(e) {
 				this.index1 = e.detail.value
 				this.$emit('func',this.index1)
 			},
+			
 			MultiChange(e) {
 				this.multiIndex = e.detail.value
 			},
+			
 			MultiColumnChange(e) {},
+			
 			DateChange(e) {
 				this.date = e.detail.value
 			},
+			
 			DateChange1(e) {
 				this.date1 = e.detail.value
 			},

@@ -4,6 +4,7 @@
 			<block slot="backText">返回</block>
 			<block slot="content">详情</block>
 		</cu-custom>
+		
 		<!-- 人员信息 -->
 		<peopleItem :type="type" />
 		

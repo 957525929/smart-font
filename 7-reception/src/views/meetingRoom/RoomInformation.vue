@@ -492,17 +492,22 @@ export default {
       area: [],
       room: '',
       number: '',
-        dutyName: '',
-        dutyTel: '',
-        condition: [],
-        remark: ''
+      dutyName: '',
+      dutyTel: '',
+      condition: [],
+      remark: ''
       },
         radioStyle: {
         display: "block",
         height: "30px",
         lineHeight: "30px"
       },
-      formModify: {},      
+      formModify: {
+      number: '',
+      dutyName: '',
+      dutyTel: '',
+      condition: [],  
+      },      
       rules: {
         condition:[
             {

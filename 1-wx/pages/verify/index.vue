@@ -1,11 +1,11 @@
 <template>
 	<view>
-	<cu-custom bgColor="bg-yellow" :isBack="true">
-		<block slot="backText">返回</block>
+		<cu-custom bgColor="bg-yellow" :isBack="true">
+			<block slot="backText">返回</block>
 			<block slot="content">申请审批</block>
 		</cu-custom>
-		
-		
+
+
 		<view class="cu-bar bg-white ">
 			<view class='text-xl padding'>
 				<text class="text-black text-bold">· 预约人信息</text>
@@ -14,10 +14,10 @@
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">姓名</view>
-			<input name="input" >{{person.name}}</input>
+			<input name="input">{{person.name}}</input>
 		</view>
 		<view class="cu-form-group solid-bottom">
-			<view class="title" >手机号</view>
+			<view class="title">手机号</view>
 			<input name="input">{{person.phone}}</input>
 		</view>
 
@@ -30,10 +30,10 @@
 		<view class="cu-form-group">
 			<view class="title">姓名：</view>
 			<!-- <picker @change="PickerChange" :value="index" :range="picker"> -->
-				<view class="picker text-left">
-					{{person.people}}
-				</view>
-	<!-- 		</picker> -->
+			<view class="picker text-left">
+				{{person.people}}
+			</view>
+			<!-- 		</picker> -->
 		</view>
 
 		<view class="cu-bar bg-white margin-top">
@@ -53,47 +53,70 @@
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 拒绝原因</text>
+				<text class="text-black text-bold">· 备注</text>
 			</view>
 		</view>
 
 		<view class="cu-form-group">
-			<textarea maxlength="-1" >{{person.content}}</textarea>
+			<textarea maxlength="-1">{{person.content}}</textarea>
 		</view>
 
 		<view class="bottom padding">
 			<view class="leftBottom">
 				<view class='padding'>
-						<button class="cu-btn lg bg-red">拒绝</button>
+					<button class="cu-btn lg bg-red" @tap="showModal" data-target="DialogModal1">拒绝</button>
 				</view>
 				<!-- 	<view class="text-orange"></view> -->
 			</view>
 			<view class="rightBottom">
 				<view class='padding'>
-						<button class="cu-btn lg bg-white" @click="agree">同意</button>
+					<button class="cu-btn lg bg-white" @click="agree">同意</button>
 				</view>
 			</view>
 		</view>
+
+		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">拒绝原因</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					<view class="cu-form-group">
+						<view class="title">拒绝原因</view>
+						<input placeholder="请输入拒绝原因" name="input"></input>
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
+
+					</view>
+				</view>
+			</view>
+		</view>
+
 	</view>
 
-
-	</view>
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
+				modalName: null,
 				index: -1,
 				person: {
 					name: '魏佳楠',
 					phone: '13675824231',
 					date: '2021-07-04',
 					type: 'allow',
-					people:'倪友聪',
-					content:'被访问人不在'
+					people: '倪友聪',
+					content: '被访问人不在'
 				},
-				modalName: null,
 				PageCur: 'appoient'
 			}
 		},
@@ -111,7 +134,13 @@
 			NavChange: function(e) {
 				console.log(e.currentTarget)
 				this.PageCur = e.currentTarget.dataset.cur
-			},	
+			},
+			showModal(e) {
+				this.modalName = e.currentTarget.dataset.target
+			},
+			hideModal(e) {
+				this.modalName = null
+			}
 		}
 	}
 </script>
@@ -120,14 +149,14 @@
 	.bottom {
 		display: flex;
 	}
-	
+
 	.leftBottom {
 		width: 50%;
 		margin: auto;
 		text-align: center;
 		border-right: 1px solid #f5f8fe;
 	}
-	
+
 	.rightBottom {
 		width: 50%;
 		margin: auto;

@@ -452,7 +452,11 @@ export default {
       visibleHotel: false,
       labelColModify: { span: 6 },
       wrapperColModify: { span: 18 },
-      ModifyHotel: {},
+      ModifyHotel: {
+       hotel: undefined,
+        dateStart: undefined,
+        dateEnd: undefined
+      },
       formEat: {
         dateStart: undefined,
         dateEnd: undefined,
@@ -479,7 +483,12 @@ export default {
         dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }]
       },
       visibleEat: false,
-      ModifyEat: {},
+      ModifyEat: {
+                dateStart: undefined,
+        dateEnd: undefined,
+        type: undefined,
+        way: undefined
+      },
       formRoom: {
         room: undefined,
         dateStart: undefined,
@@ -502,7 +511,12 @@ export default {
         range: [{ required: true, message: '请选择日期', trigger: 'change' }]
       },
       visibleRoom: false,
-      ModifyRoom: {},
+      ModifyRoom: {
+               room: undefined,
+        dateStart: undefined,
+        dateEnd: undefined,
+        range: undefined
+      },
       labelColModifyRoom: { span: 6 },
       wrapperColModifyRoom: { span: 18 }
     }

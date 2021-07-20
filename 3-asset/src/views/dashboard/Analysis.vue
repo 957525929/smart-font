@@ -2,7 +2,6 @@
 <template>
   <div>
     <index-chart></index-chart>
-    <bar   :height="1000"></bar>
   </div>
 </template>
 
