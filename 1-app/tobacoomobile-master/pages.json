@@ -278,6 +278,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/lockinstall/installindex",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"mp-alipay": {

@@ -94,7 +94,7 @@ export default {
     areaChange(value) {},
 
     getstardate() {
-      this.starDate = formatDate(new Date().getTime() - 181 * 24 * 3600 * 1000, 'yyyy/MM/d')
+      this.starDate = formatDate(new Date().getTime() - 30 * 24 * 3600 * 1000, 'yyyy/MM/d')
       return this.starDate
     },
     getenddate() {

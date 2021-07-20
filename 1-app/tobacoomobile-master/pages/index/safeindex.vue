@@ -18,7 +18,7 @@
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='lockrecord'?'text-orange cuIcon-formfill':'text-gray cuIcon-form'"></text>
 				</view>
-				<view :class="PageCur=='lockrecord'?'text-orange':'text-gray'">记录</view>
+				<view :class="PageCur=='lockrecord'?'text-orange':'text-gray'">报警记录</view>
 			</view>
 			
 			<view class="action" @click="NavChange" data-cur="lockcount">

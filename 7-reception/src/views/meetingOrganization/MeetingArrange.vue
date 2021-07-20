@@ -18,7 +18,7 @@
           <a-input placeholder="请输入会议编号" v-model="queryParam.id"></a-input>
         </a-col>
         <a-col :span="1"></a-col>
-        <a-col>会议时间范围：</a-col>
+        <a-col>会议时间：</a-col>
         <a-col>
           <a-date-picker
             @change="onChange"

@@ -7,12 +7,23 @@
 			}
 
 		}, {
-			"path": "pages/home/index",
+			"path": "pages/home/touristHome",
+			"style": {}
+		}, {
+			"path": "pages/home/staffHome",
 			"style": {}
 		},
 		//pages数组中第一项表示应用启动页，写的时候注意分包，方便以后一端多用！！！
 		{
 			"path": "pages/index/tourist",
+			"style": {}
+		},
+		{
+			"path": "pages/scan/index",
+			"style": {}
+		},
+		{
+			"path": "pages/record/index",
 			"style": {}
 		},
 		{

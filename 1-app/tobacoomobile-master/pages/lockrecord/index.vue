@@ -4,7 +4,7 @@
 
 			<view class="cu-bar bg-orange solid-bottom">
 				<view class="action">
-					<text class="cuIcon-title text-white"></text> 开锁和报警记录
+					<text class="cuIcon-title text-white"></text> 报警记录
 				</view>
 				<view class="action" @tap="showModal" data-target="viewModal">
 					
@@ -14,7 +14,7 @@
 				</view>
 			</view>
 
-			<scroll-view scroll-x class="bg-white nav">
+			<!-- <scroll-view scroll-x class="bg-white nav">
 				<view class="flex text-center">
 					<view class="cu-item flex-sub" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
 						开锁记录
@@ -23,17 +23,17 @@
 						报警记录
 					</view>
 				</view>
-			</scroll-view>
-			<view v-if="TabCur==0" class="itembox">
+			</scroll-view> -->
+			<!-- <view v-if="TabCur==0" class="itembox">
 				<navigator class="action" url="../../components/lock/recorddetail" hover-class="none">
 					<recordCard></recordCard>
 				</navigator>
-			</view>
-			<view v-if="TabCur==1" class="itembox">
+			</view> -->
+			<!-- <view v-if="TabCur==1" class="itembox"> -->
 				<navigator class="action" url="../../components/lock/alertdetail" hover-class="none">
 					<alertRecord></alertRecord>
 				</navigator>
-			</view>
+			<!-- </view> -->
 
 		</scroll-view>
 

@@ -1,16 +1,16 @@
 <template>
 	<view>
 
-		<view class="cu-form-group">
+		<!-- <view class="cu-form-group">
 			<view class="title">选择要搜索的记录</view>
 			<picker @change="PickerChange3" :value="index3" :range="picker3">
 				<view class="picker">
 					{{picker3[index3]}}
 				</view>
 			</picker>
-		</view>
+		</view> -->
 
-		<view v-if="this.index3 == 0">
+		<!-- <view v-if="this.index3 == 0">
 			<view>
 				<view class="cu-bar bg-white margin-top">
 					<view class="action">选择开锁时间段</view>
@@ -81,10 +81,10 @@
 					</picker>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		
 		
-		<view v-if="this.index3 == 1">
+		<!-- <view v-if="this.index3 == 1"> -->
 			<view>
 				<view class="cu-bar bg-white margin-top">
 					<view class="action">选择报警时间段</view>
@@ -134,7 +134,7 @@
 					<input placeholder="请输入锁编号" name="input"></input>
 				</view>
 			</view>
-		</view>
+		<!-- </view> -->
 		
 	</view>
 </template>
