@@ -43,10 +43,30 @@
 		</view>
 
 		<view class="cu-form-group">
-			<view class="title">日期选择</view>
+			<view class="title">日期</view>
 			<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
 				<view class="picker">
-					{{person.date}}
+					{{date}}
+				</view>
+			</picker>
+		</view>
+
+		<view class="cu-bar bg-white">
+			<view class="action">访问时间段</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">开始时间</view>
+			<picker mode="time" :value="time" start="09:01" end="18:01" @change="TimeChange">
+				<view class="picker">
+					{{time}}
+				</view>
+			</picker>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">结束时间</view>
+			<picker mode="time" :value="time1" start="09:01" end="18:01" @change="TimeChange">
+				<view class="picker">
+					{{time1}}
 				</view>
 			</picker>
 		</view>
@@ -86,7 +106,7 @@
 				<view class="padding-xl">
 					<view class="cu-form-group">
 						<view class="title">拒绝原因</view>
-						<input placeholder="请输入拒绝原因" name="input"></input>
+						<input placeholder="请说明拒绝原因" name="input"></input>
 					</view>
 				</view>
 				<view class="cu-bar bg-white justify-end">
@@ -105,19 +125,39 @@
 
 <script>
 	export default {
+		created: function() {
+			let aTime = new Date();
+		
+			this.time =
+				aTime.getHours() + ":" +
+				aTime.getMinutes()
+			this.time1 =
+				(aTime.getHours() + 3) + ":" +
+				aTime.getMinutes()
+		
+			let aData = new Date();
+		
+			this.date =
+				aData.getFullYear() + "-" +
+				(aData.getMonth() + 1) + "-" +
+				(aData.getDate())
+		
+		},
 		data() {
 			return {
 				modalName: null,
 				index: -1,
+				time: '',
+				time1: '',
 				person: {
 					name: '魏佳楠',
 					phone: '13675824231',
-					date: '2021-07-04',
 					type: 'allow',
 					people: '倪友聪',
 					content: '被访问人不在'
 				},
-				PageCur: 'appoient'
+				PageCur: 'appoient',
+				date: '',
 			}
 		},
 		methods: {
@@ -126,7 +166,13 @@
 				// console.log(index)
 			},
 			DateChange(e) {
-				this.person.date = e.detail.value
+				this.date = e.detail.value
+			},
+			TimeChange(e) {
+				this.time = e.detail.value
+			},
+			TimeChange1(e) {
+				this.time1 = e.detail.value
 			},
 			// textareaBInput(e) {
 			// 	this.textareaBValue = e.detail.value

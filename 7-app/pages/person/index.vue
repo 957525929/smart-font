@@ -56,14 +56,16 @@
 		background-color: #eeeeee;
 	}
 
-	/* 信息卡片 */
+	/* 信息卡片 #1cbbb4*/
 	.wrapper {
 		display: flex;
 		flex-direction: column;
 		padding: 5px;
 		overflow: scroll;
 	}
-
+	.mainBackColor {
+	    background-color:  #1cbbb4;
+		}
 	.avat {
 		width: 170rpx;
 		height: 170rpx;

@@ -73,7 +73,8 @@
       <a-col :span="7">
         <span>
           <div class="bartitle">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 报警次数统计：</div>
-          <bar :dataSource="dataSource" :height="180" />
+          <br />
+          <Pie :dataSource="dataSource" :height="180" />
         </span>
       </a-col>
       <a-col :span="3"></a-col>
@@ -82,13 +83,15 @@
 </template>
 <script>
 import { areaData } from '../roomManager/data/area'
-import Bar from '@/components/chart/Bar'
+// import Bar from '@/components/chart/Bar'
 import moment from 'moment'
 import { formatDate } from '@/utils/util'
+import Pie from '@/components/chart/Pie'
 
 export default {
   components: {
-    Bar,
+    // Bar,
+    Pie,
   },
   data() {
     return {
@@ -100,8 +103,8 @@ export default {
       endOpen: false,
       toggleSearchStatus: false,
       dataSource: [
-        { x: '低电量报警', y: 6 },
-        { x: '密码错误多次', y: 6 },
+        { item: '低电量报警', count: 6 },
+        { item: '密码错误多次', count: 6 },
       ],
       starDate: '',
       endDate: '',

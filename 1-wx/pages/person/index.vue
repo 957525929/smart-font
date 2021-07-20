@@ -7,7 +7,7 @@
 		<!-- #endif -->
 		<view class="wrapper">
 			<view class="card">
-				<view class="contentList perMsg mainBackColor" @tap="$navTo.goTo('myInfo')">
+				<view class="contentList perMsg bg-orange" @tap="$navTo.goTo('myInfo')">
 					<view class="avat">
 						<image mode="aspectFit" src="/static/person/avater.png"></image>
 					</view>
@@ -17,20 +17,14 @@
 				</view>
 				<text class="listIcons secCode iconfont iconerweima-copy"></text>
 			</view>
+			
 			<view class="cu-list menu sm-border card-menu margin-top">
-				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title" v-if="item.message"
-					@click='openMessage'>
-					<view class="action">
-						<view class="text-grey">{{item.title}}</view>
-					</view>
-					<view v-if="item.message" class="cu-tag round bg-red sm">4</view>
-				</view>
-				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title" v-if="!item.message">
+				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title" @click="openMessage(item)">
 					<view class="action">
 						<view class="text-grey">{{item.title}}</view>
 						<view class="text-grey text-xs">{{item.label}}</view>
 					</view>
-					<!-- <view v-if="item.message" class="cu-tag round bg-red sm">4</view> -->
+					<view v-if="item.message" class="cu-tag round bg-red sm">5</view>
 					<view v-if="item.edition" class=" text-grey">{{item.edition}}</view>
 				</view>
 			</view>
@@ -85,10 +79,12 @@
 			};
 		},
 		methods: {
-			openMessage() {
-				uni.navigateTo({
-					url: '/pages/person/message'
-				});
+			openMessage(item) {
+				if (item.message) {
+					uni.navigateTo({
+						url: '/pages/person/message'
+					});
+				}
 			}
 		}
 	};

@@ -33,7 +33,7 @@ export const columns = [{
     type: 'a-range-picker',
   },
   {
-    title: '任务地点',
+    title: '任务地点/范围',
     key: 'assets',
     dataIndex: 'assets',
     width: 80,
@@ -87,7 +87,7 @@ export const data = [{
   devId: '2',
   devName: "空调漏水",
   taskType: 1,
-  taskStatus: 3,
+  taskStatus: 1,
   devStatus: 0,
   assets: '烟草大厦',
   institution: '福建烟草公司',
@@ -128,7 +128,7 @@ export const infoDetail =[{
   value:""
 },
 {
-  title: '任务地点',
+  title: '任务地点/范围',
   key: 'assets',
   dataIndex: 'assets',
   width: 80,

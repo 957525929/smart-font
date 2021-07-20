@@ -19,19 +19,13 @@
 			</view>
 
 			<view class="cu-list menu sm-border card-menu margin-top">
-				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title" v-if="item.message"
-					@click='openMessage'>
-					<view class="action">
-						<view class="text-grey">{{item.title}}</view>
-					</view>
-					<view v-if="item.message" class="cu-tag round bg-red sm">4</view>
-				</view>
-				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title" v-if="!item.message">
+
+				<view class="cu-item arrow content" v-for="item in contentList" :key="item.title" @click="openMessage(item)">
 					<view class="action">
 						<view class="text-grey">{{item.title}}</view>
 						<view class="text-grey text-xs">{{item.label}}</view>
 					</view>
-					<!-- <view v-if="item.message" class="cu-tag round bg-red sm">4</view> -->
+					<view v-if="item.message" class="cu-tag round bg-red sm">4</view>
 					<view v-if="item.edition" class=" text-grey">{{item.edition}}</view>
 				</view>
 			</view>
@@ -87,10 +81,12 @@
 			};
 		},
 		methods: {
-			openMessage() {
-				uni.navigateTo({
-					url: '/pages/person/message1'
-				});
+			openMessage(item) {
+				if (item.message) {
+					uni.navigateTo({
+						url: '/pages/person/message1'
+					});
+				}
 			}
 		}
 	};

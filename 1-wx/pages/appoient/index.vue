@@ -4,20 +4,6 @@
 			<block slot="backText">返回</block>
 			<block slot="content">访问预约单填写</block>
 		</cu-custom>
-		<!-- 		<view class="cu-bar bg-white ">
-			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 预约人信息</text>
-			</view>
-		</view>
-
-		<view class="cu-form-group align-center bg-white">
-			<view class="title">姓名</view>
-			<input placeholder="请填写姓名" name="input"></input>
-		</view>
-		<view class="cu-form-group solid-bottom">
-			<view class="title">手机号</view>
-			<input placeholder="请填写手机号" name="input"></input>
-		</view> -->
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
@@ -50,7 +36,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">请选择开始时间</view>
-			<picker mode="time" :value="time" start="09:01" end="21:01" @change="TimeChange">
+			<picker mode="time" :value="time" start="09:01" end="18:01" @change="TimeChange">
 				<view class="picker">
 					{{time}}
 				</view>
@@ -58,7 +44,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">请选择结束时间</view>
-			<picker mode="time" :value="time1" start="09:01" end="21:01" @change="TimeChange">
+			<picker mode="time" :value="time1" start="09:01" end="18:01" @change="TimeChange1">
 				<view class="picker">
 					{{time1}}
 				</view>
@@ -110,8 +96,8 @@
 		data() {
 			return {
 				index: -1,
-				picker1: ['张三', '李四', '王五'],
-				date: date,
+				// picker1: ['张三', '李四', '王五'],
+				date: '',
 				time: '',
 				time1: '',
 				modalName: null,
@@ -123,15 +109,15 @@
 				this.index = e.detail.value
 				// console.log(index)
 			},
-			DateChange(e) {
-				this.date = e.detail.value
-			},
 			// textareaBInput(e) {
 			// 	this.textareaBValue = e.detail.value
 			// }
 			NavChange: function(e) {
 				console.log(e.currentTarget)
 				this.PageCur = e.currentTarget.dataset.cur
+			},
+			DateChange(e) {
+				this.date = e.detail.value
 			},
 			TimeChange(e) {
 				this.time = e.detail.value

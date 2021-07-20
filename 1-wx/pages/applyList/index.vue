@@ -6,10 +6,17 @@
 				<block slot="content">申请记录</block>
 				<block slot="right">
 					<!-- <view class='padding margin text-center'> -->
-					<image @tap="showModal" data-target="viewModal" mode="aspectFit" src="../../static/筛选.png"
+					<!-- <image @tap="showModal" data-target="viewModal" mode="aspectFit" src="../../static/筛选.png"
 						style="width: 25px; height: 25px;margin-right: 10px; ">
-					</image>
+					</image> -->
+
 					<!-- </view> -->
+					<view class="action">
+						<view class='cuIcon-cu-image'>
+							<text class="cuIcon-searchlist" @tap="showModal" data-target="viewModal"></text>
+						</view>
+						<!-- <view >个人中心</view> -->
+					</view>
 				</block>
 			</cu-custom>
 			<scroll-view scroll-x class="bg-white nav flex text-center">
@@ -49,7 +56,7 @@
 
 			<search @send="getIndex1"></search>
 			<view class="padding margin text-center">
-				<view class="cu-btn bg-orange lg block shadow radius margin-xl" @tap="hideModal">
+				<view class="cu-btn bg-yellow lg block shadow radius margin-xl" @tap="hideModal">
 					查询
 				</view>
 			</view>
@@ -89,7 +96,7 @@
 				modalName: null,
 				TabCur: 0,
 				scrollLeft: 0,
-				reason:'被访人出差',
+				reason: '被访人出差',
 				type: [{
 					id: 0,
 					type: "待审核"

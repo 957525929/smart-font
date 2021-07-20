@@ -21,9 +21,9 @@ export default {
   mounted() {
     for (let i = 0; i < this.data.length; i++) {
       this.data[i].day =
-        formatDate(new Date().getTime() - i * 60 * 24 * 3600 * 1000, 'yyyy-MM-d') + ' ' + this.data[i].time
+        formatDate(new Date().getTime() - i * 12 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + this.data[i].time
       this.data[i].endTime =
-        formatDate(new Date().getTime() - i * 59 * 24 * 3600 * 1000, 'yyyy-MM-d') + ' ' + this.data[i].etime
+        formatDate(new Date().getTime() - i * 11 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + this.data[i].etime
     }
   },
   data() {

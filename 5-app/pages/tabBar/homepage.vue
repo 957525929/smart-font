@@ -83,7 +83,7 @@
 					uni.navigateTo({
 						url:'/pages/application/index'
 					}) 		
-				}else if(target=='用车记录'){
+				}else if(target=='申请记录'){
 					uni.navigateTo({
 						url:'/pages/useCarRecord/index'
 					}) 	

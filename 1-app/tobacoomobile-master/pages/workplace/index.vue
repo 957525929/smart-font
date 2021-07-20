@@ -38,7 +38,7 @@
 						color: 'nav-li bg-blue',
 					},
 					{
-						title: '门卫',
+						title: '智能锁管养',
 						entitle: 'Guard',
 						style: 'cuIcon-profile',
 						router: '../index/safeindex',

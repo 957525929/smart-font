@@ -25,6 +25,7 @@
 						<view :style="styleObject[cardType.id]">
 							{{item.type}}
 						</view>
+						
 					</span>
 				</view>
 			</view>

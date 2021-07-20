@@ -1,6 +1,7 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-yellow">
+		<cu-custom bgColor="bg-yellow" :isBack="true">
+			<block slot="backText">返回</block>
 			<block slot="content">扫码</block>
 		</cu-custom>
 		<view @tap="openAppoient">扫码界面</view>

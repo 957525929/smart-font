@@ -6,7 +6,12 @@
 			<input placeholder="请输入锁编号" name="input"></input>
 			<text class='cuIcon-favorfill text-red'></text>
 		</view>
-		<view v-if="type==3" class="cu-form-group margin-top">
+		<view v-if="type==3 || type==4 || type==5" class="cu-form-group margin-top">
+			<view class="title">锁编号：</view>
+			<input v-model="input" name="input"></input>
+			<text class='cuIcon-favorfill text-red'></text>
+		</view>
+		<view v-if="type==3" class="cu-form-group">
 			<view class="title">报修时间：</view>
 			<view class="flex-sub text-left">{{value1}}</view>
 		</view>
@@ -55,7 +60,7 @@
 			<view class="title">安装时间：</view>
 			<view class="flex-sub text-left">{{value}}</view>
 		</view>
-		<view v-if="type==4" class="cu-form-group margin-top">
+		<view v-if="type==4" class="cu-form-group">
 			<view class="title">维修时间：</view>
 			<view class="flex-sub text-left">{{value}}</view>
 		</view>
@@ -104,6 +109,7 @@
 				textareaBValue: '',
 				value: '',
 				value: '',
+				input: 'S0001',
 			}
 		},
 		
