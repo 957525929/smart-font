@@ -23,6 +23,7 @@
 					<!-- 切换不同颜色 -->
 					<view :style="styleObject[item.typeId]">
 						{{item.type}}
+						
 					</view>
 				</span>
 			</view>
@@ -41,6 +42,7 @@
 						time: '2020年1月21日 13:46',
 						type: '已通过',
 						typeId: 0,
+						red:'1'
 					},
 					{
 						name: '倪友聪',

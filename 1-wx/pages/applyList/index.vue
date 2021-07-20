@@ -1,113 +1,95 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-yellow" :isBack="true">
-			<block slot="backText">返回</block>
-			<block slot="content">申请记录</block>
-			<block slot="right">
-
-				<view>
-					<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
-
-						<view class='padding margin text-center'>
-							<image mode="aspectFit" src="../../static/筛选.png"
-								style="width: 25px; height: 25px;margin-right: 10px; " @tap="showModal"
-								data-target="viewModal"></image>
-						</view>
-					</scroll-view>
-
-					<view class="DrawerClose" :class="modalName=='viewModal'?'show':''" @tap="hideModal">
-						<text class="cuIcon-pullright"></text>
-					</view>
-					<scroll-view scroll-y class="DrawerWindow" :class="modalName=='viewModal'?'show':''">
-						<view class="cu-form-group margin-top">
-
-							<view class="title">预约时间</view>
-							<picker mode="time" :value="time" start="09:01" end="21:01" @change="TimeChange">
-								<view class="picker">
-									{{time}}
-								</view>
-							</picker>
-						</view>
-						<view class="cu-form-group">
-							<view class="title">日期</view>
-							<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
-								<view class="picker">
-									{{date}}
-								</view>
-							</picker>
-						</view>
-
-						<view class="cu-form-group">
-							<view class="title">被访问人</view>
-							<input name="input"></input>
-						</view>
-
-						<view class='padding-lg'>
-							<button class="cu-btn lg bg-yellow button-center">检索</button>
-						</view>
-					</scroll-view>
+		<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
+			<cu-custom bgColor="bg-yellow" :isBack="true">
+				<block slot="backText">返回</block>
+				<block slot="content">申请记录</block>
+				<block slot="right">
+					<!-- <view class='padding margin text-center'> -->
+					<image @tap="showModal" data-target="viewModal" mode="aspectFit" src="../../static/筛选.png"
+						style="width: 25px; height: 25px;margin-right: 10px; ">
+					</image>
+					<!-- </view> -->
+				</block>
+			</cu-custom>
+			<scroll-view scroll-x class="bg-white nav flex text-center">
+				<view class="cu-item" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
+					待审核
 				</view>
+
+				<view class="cu-item" :class="1==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="1">
+					已通过
+				</view>
+
+				<view class="cu-item" :class="2==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="2">
+					已拒绝
+				</view>
+			</scroll-view>
+
+
+			<block v-if="TabCur==0">
+				<navigator class="action" url="../verify/index">
+					<recordCard1 :cardType="type[0]" />
+				</navigator>
 			</block>
-		</cu-custom>
-		<scroll-view scroll-x class="bg-white nav flex text-center">
-			<view class="cu-item" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
-				待审核
-			</view>
+			<block v-if="TabCur==1">
+				<recordCard1 :cardType="type[1]" />
+			</block>
+			<block v-if="TabCur==2">
+				<navigator class="action" @tap="showModal" data-target="DialogModal1">
+					<recordCard1 :cardType="type[2]" />
+				</navigator>
+			</block>
+		</scroll-view>
 
-			<view class="cu-item" :class="1==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="1">
-				已通过
-			</view>
+		<view class="DrawerClose" :class="modalName=='viewModal'?'show':''" @tap="hideModal">
+			<text class="cuIcon-pullright"></text>
+		</view>
+		<scroll-view scroll-y class="DrawerWindow" :class="modalName=='viewModal'?'show':''">
 
-			<view class="cu-item" :class="2==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="2">
-				已拒绝
+			<search @send="getIndex1"></search>
+			<view class="padding margin text-center">
+				<view class="cu-btn bg-orange lg block shadow radius margin-xl" @tap="hideModal">
+					查询
+				</view>
 			</view>
 		</scroll-view>
 
-
-
-		<block v-if="TabCur==0">
-			<navigator class="action" url="../verify/index">
-				<recordCard :cardType="type[0]" />
-			</navigator>
-		</block>
-		<block v-if="TabCur==1">
-			<recordCard :cardType="type[1]" />
-		</block>
-		<block v-if="TabCur==2">
-			<navigator class="action" @tap="showModal">
-				<recordCard :cardType="type[2]" />
-			</navigator>
-		</block>
-
-
-		<view class="cu-modal" :class="modalName=='Modal'?'show':''">
+		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
-					<view class="content">Modal标题</view>
+					<view class="content">拒绝原因</view>
 					<view class="action" @tap="hideModal">
 						<text class="cuIcon-close text-red"></text>
 					</view>
 				</view>
 				<view class="padding-xl">
-					Modal 内容。
+					{{reason}}
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
+
+					</view>
 				</view>
 			</view>
 		</view>
 	</view>
-	</view>
-	</view>
 </template>
 
 <script>
-	import recordCard from "../../components/recordCard/recordCard.vue"
+	import recordCard1 from "../../components/recordCard/recordCard1.vue"
+	import search from "../../components/search/search.vue"
 	export default {
 		data() {
 			return {
-				time: '12:01',
-				date: '2018-12-25',
+				// time: '12:01',
+				// date: '2018-12-25',
 				modalName: null,
 				TabCur: 0,
 				scrollLeft: 0,
+				reason:'被访人出差',
 				type: [{
 					id: 0,
 					type: "待审核"
@@ -121,13 +103,10 @@
 			};
 		},
 		components: {
-			recordCard,
+			recordCard1,
+			search
 		},
 		methods: {
-			tabSelect(e) {
-				this.TabCur = e.currentTarget.dataset.id;
-				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
-			},
 			openSearch() {
 				uni.navigateTo({
 					url: '/pages/search/search'
@@ -143,23 +122,28 @@
 				this.TabCur = e.currentTarget.dataset.id;
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
 			},
+			getIndex1(data) {
+				this.TabCur = data
+				console.log(this.TabCur)
+			}
 		},
 	}
 </script>
 
 <style>
 	page {
-		/* background-image: var(--gradualBlue); */
-		/* width: 100vw; */
-		/* overflow: hidden; */
+		background-image: var(--gradualBlue);
+		width: 100vw;
+		overflow: hidden;
 	}
 
 	.DrawerPage {
-		/* position: fixed; */
-
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
 		left: 0vw;
-		/* background-color: #f1f1f1; */
-		/* transition: all 0.4s; */
+		background-color: #f1f1f1;
+		transition: all 0.4s;
 	}
 
 	.DrawerPage.show {
