@@ -7,12 +7,11 @@ export const typeToComponent = new Map([
 ])
 /*维修taskStatus*/
 export const taskStatus = {
-  0: { tableValue: '全部', searchValue: '全部', code: 0 },
-  1: { tableValue: '待审核', searchValue: '待审核', code: 1 },
+  0: { tableValue: '待审核', searchValue: '待审核', code: 0 },
+  1: { tableValue: '待派单', searchValue: '待派单', code: 1 },
   2: { tableValue: '待维修', searchValue: '待维修', code: 2 },
   3: { tableValue: '待核查', searchValue: '待核查', code: 3 },
-  4: { tableValue: '待评价', searchValue: '待评价', code: 4},
-  5: { tableValue: '待评估', searchValue: '待评估', code: 5 },
+  4: { tableValue: '已完成', searchValue: '已完成', code: 4},
 }
 /*保养任务类型devType*/ 
 export const taskType = {
@@ -25,10 +24,9 @@ export const taskType = {
 }
 /*保养任务状态devStatus*/ 
 export const  protaskStatus= {
-  0: { tableValue: '全部', searchValue: '全部', code: 0 },
-  1: { tableValue: '待保养', searchValue: '待保养', code: 1 },
-  2: { tableValue: '待核查', searchValue: '待核查', code: 2 },
-  3: { tableValue: '待评估', searchValue: '待评估', code: 3 }
+  0: { tableValue: '待保养', searchValue: '待保养', code: 0 },
+  1: { tableValue: '待核查', searchValue: '待核查', code: 1 },
+  2: { tableValue: '已完成', searchValue: '已完成', code: 2 }
 }
 /*设备类型devType*/ 
 export const devType = {
@@ -335,30 +333,44 @@ export const DepartTree = [{
   value: 'other',
 },
 ]
-// guanli分类树
+
 export const groupTree = [{
   children: [{
-      key: '1-1',
-      title: '1-10层',
+    children: [{
+      key: '1-1-1',
+      title: '1号楼',
       value: 'water-in'
     },
     {
-      key: '1-2',
-      title: '11-20层',
+      key: '1-1-2',
+      title: '2号楼',
       value: 'water-out',
-    },
-    {
-      key: '1-3',
-      title: '21-30层',
-      value: 'water-in',
-    },
-    {
-      key: '1-4',
-      title: '其他',
-      value: 'water-in',
-    },
-  ],
+    }],
+    key: '1-1',
+    title: 'A区域',
+    value: 'water',
+  },{
+    key: '1-2',
+    title: 'B区域',
+    value: 'water',
+    children:[
+      {
+        key: '1-2-1',
+        title: '1号楼',
+        value: 'water-in',
+      },
+      {
+        key: '1-2-2',
+        title: '2号楼',
+        value: 'water-in',
+      },
+      {
+        key: '1-2-3',
+        title: '3号楼',
+        value: 'water-in',
+      }]
+  }],
   key: '1',
-  title: '烟草大厦',
+  title: '中国烟草总公司福建省公司机关',
   value: 'water',
 }]

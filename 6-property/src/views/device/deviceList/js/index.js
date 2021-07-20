@@ -254,7 +254,7 @@ export const loginInfo = [{
     key: 'devGroupType',
     value:"",
     type:"a-select",
-    valueEnum:[{tableValue:"空调管理组别1", code: 0 }]
+    valueEnum:[{tableValue:"空调管理组别1", searchValue:"空调管理组别1",code: 0 }]
 },
 {
     title: '设备分类',

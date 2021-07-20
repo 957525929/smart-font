@@ -1,29 +1,42 @@
 <template>
     <a-tabs default-active-key="1" :activeKey="current" @change="callback">
         <a-tab-pane v-for="item in fixMenu" :tab="item.title" :key="item.key">
+            <TableModal title="处理反馈" :infoDetail="loginInfo" ref="feedbackModal"></TableModal>
             <PageTemplate :columns="columns" :searchCon="searchCon">
                 <a-table
-                 :columns="columns"
-                 :data-source="data"
-                 :pagination="{
-                     size:'small',
-                    pageSize:10,
-                    showTotal:(total, range) => `第${range[0]}-${range[1]}条/总共${total}条`,
-                }"
+                    :columns="columns"
+                    :data-source="data"
+                    :pagination="{
+                        size: 'small',
+                        pageSize: 10,
+                        showTotal: (total, range) => `第${range[0]}-${range[1]}条/总共${total}条`,
+                    }"
                 >
                     <span slot="action" slot-scope="text, record">
                         <template v-for="(i, index) in record.action">
-                            <a href="#" @click.stop="handleOps(i.com, record.devId, record.taskStatus)">{{
-                                i.tagName
-                            }}</a>
-                            <component
-                                :is="i.com"
-                                :ref="i.com"
-                                :key="index"
-                                :title="i.tagName"
-                                :infoDetail="infoDetail"
-                            ></component>
-                            <a-divider type="vertical" v-if="index !== record.action.length - 1" />
+                            <a-popconfirm
+                                title="确认通过并开始受理?"
+                                ok-text="是"
+                                cancel-text="否"
+                                @confirm="confirm"
+                                @cancel="cancel"
+                                v-if="i.com === 'TableDelete'"
+                            >
+                                <a href="#" @click="showDelete">{{ i.tagName }}</a>
+                            </a-popconfirm>
+                            <template v-else>
+                                <a href="#" @click.stop="handleOps(i.com, record.devId, record.taskStatus)">{{
+                                    i.tagName
+                                }}</a>
+                                <component
+                                    :is="i.com"
+                                    :ref="i.com"
+                                    :key="index"
+                                    :title="i.tagName"
+                                    :infoDetail="infoDetail"
+                                ></component>
+                            </template>
+                             <a-divider type="vertical" v-if="index !== record.action.length - 1" />
                         </template>
                     </span>
                 </a-table>
@@ -50,6 +63,7 @@ export default {
     data() {
         return {
             current: 0,
+            visible: false,
             fixMenu: NEW_FIXLIST.fixMenu,
             columns: [],
             searchCon: {},
@@ -65,11 +79,11 @@ export default {
         handleOps(type, id, taskType) {
             const menuData = this.fixMenu.filter((item) => item.title == taskType || item.key == taskType)[0]
             if (type === 'TableDrawer') {
-                if (this.current === 0) {
-                    let tempCol = require('./js/' + menuData.content + '.js')
-                    let result = Object.freeze(tempCol)
-                    this.infoDetail = result.infoDetail.filter((item) => !item.hideInDetail)
-                }
+                // if (this.current === 0) {
+                    // let tempCol = require('./js/' + menuData.content + '.js')
+                    // let result = Object.freeze(tempCol)
+                    // this.infoDetail = result.infoDetail.filter((item) => !item.hideInDetail)
+                // }
                 //请求详情(无网络)
                 let temp = this.data.filter((item) => item.devId == id)[0]
                 this.infoDetail = this.infoDetail.map((item) => {
@@ -77,11 +91,13 @@ export default {
                     return item
                 })
             } else {
-                if (taskType == '待审核' || taskType == 1) {
+                // if (taskType == '待审核' || taskType == 0) {
                     let tempModal = require('./js/' + menuData.content + '.js')
-                    // let result = Object.freeze(tempModal)
+                    // let result = Object.freeze(tempModal)taskList
                     this.infoDetail = tempModal.taskList.filter((item) => !item.hideInDetail)
-                }
+                // }else{
+
+                // }
             }
             let tempValue = [...NEW_FIXLIST.typeToComponent].filter(([key, value]) => key === type)
             this.$refs[type][0][tempValue[0][1]]()
@@ -109,6 +125,16 @@ export default {
         callback(key) {
             this.current = key
             this.loadMenu()
+        },
+        showDelete() {
+            this.visible = true
+        },
+        confirm() {
+            this.visible = false
+            this.$message.success('操作成功')
+        },
+        cancel() {
+            this.visible = false
         },
     },
 }

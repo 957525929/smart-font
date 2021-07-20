@@ -9,27 +9,26 @@ const taskList = {
 	}, {
 		taskId: 1,
 		type: 1,
-		titleLeft: "烟草大厦18楼",
+		titleLeft: "烟草大厦6楼",
 		titleRight: "查看",
-		content: "18楼频繁断电停电",
+		content: "空调调控温度无反应",
 		footerRight: "2021-06-22 10:55:55"
 	}, {
 		taskId: 2,
 		type: 2,
+		titleLeft: "烟草大厦18楼",
+		titleRight: "查看",
+		content: "18楼频繁断电停电",
+		footerRight: "2021-06-20 17:55:55"
+	},{
+		taskId: 0,
+		type: 3,
 		titleLeft: "烟草大厦3楼卫生间",
 		titleRight: "查看",
 		content: "卫生间停水",
-		footerRight: "2021-06-20 17:55:55"
-	}],
-	1: [{
-		taskId: 0,
-		type: 3,
-		titleLeft: "烟草大厦18楼",
-		titleRight: "查看",
-		content: "空调",
 		footerRight: "2021-06-22 17:55:55"
 	}],
-	2: [{
+	1: [{
 		taskId: 0,
 		type: 4,
 		titleLeft: "烟草大厦18楼",

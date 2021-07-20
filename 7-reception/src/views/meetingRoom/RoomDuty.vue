@@ -8,7 +8,7 @@
           <span>管理员：</span>
         </a-col>
         <a-col>
-          <a-input placeholder="请输入管理员" v-model="queryParam.dutyName"></a-input>
+          <a-input placeholder="请输入管理员姓名" v-model="queryParam.dutyName"></a-input>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>

@@ -53,12 +53,12 @@ export default {
     },
     methods: {
         show(type, id, taskType) {
-            if (this.current === 0) {
-                let menuData = NEW_PROLIST.proMenu.filter((item) => item.title == taskType)[0]
-                let tempCol = require('./js/' + menuData.content + '.js')
-                let result = Object.freeze(tempCol)
-                this.infoDetail = result.infoDetail.filter((item) => !item.hideInDetail)
-            }
+            // if (this.current === 0) {
+            //     let menuData = NEW_PROLIST.proMenu.filter((item) => item.title == taskType)[0]
+            //     let tempCol = require('./js/' + menuData.content + '.js')
+            //     let result = Object.freeze(tempCol)
+            //     this.infoDetail = result.infoDetail.filter((item) => !item.hideInDetail)
+            // }
             //请求详情(无网络)
             let temp = this.data.filter((item) => item.devId == id)[0]
             this.infoDetail = this.infoDetail.map((item) => {

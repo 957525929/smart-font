@@ -97,7 +97,7 @@ export const data = [{
   devId: '3',
   devName: "电路老化检查",
   taskType: 0,
-  taskStatus: 5,
+  taskStatus: 2,
   devStatus: 0,
   assets: '烟草大厦',
   institution: '福建烟草公司',
