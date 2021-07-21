@@ -25,18 +25,18 @@
 				<view class="title">维修费用</view>
 				<input></input>
 			</view>
-			<view class="cu-form-group">
+			<!-- <view class="cu-form-group">
 				<view class="title">配件费</view>
 				<input></input>
-			</view>
+			</view> -->
 			<view class="cu-form-group">
 				<view class="title">维修内容</view>
 				<input></input>
 			</view>
-			<view class="cu-form-group">
+			<!-- <view class="cu-form-group">
 				<view class="title">更换主要部件</view>
 				<input></input>
-			</view>
+			</view> -->
 			<view class="cu-bar bg-white margin-top">
 				<view class="action">
 					票据图片

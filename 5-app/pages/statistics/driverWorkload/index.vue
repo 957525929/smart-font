@@ -59,57 +59,57 @@
 		    <uni-tr>
 		        <uni-td align="center">闽A123401</uni-td>
 		        <uni-td align="center">2021-7-18</uni-td>
-				<uni-td align="center"><navigator url="">详情</navigator></uni-td>
+				<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		    </uni-tr>
 		  <uni-tr>
 		      <uni-td align="center">闽A123401</uni-td>
 		      <uni-td align="center">2021-7-17</uni-td>
-		  	<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+		  	<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		  </uni-tr>
 		    <uni-tr>
 		        <uni-td align="center">闽A123402</uni-td>
 		        <uni-td align="center">2021-7-17</uni-td>
-		    	<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+		    	<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		    </uni-tr>
 		   <uni-tr>
 		       <uni-td align="center">闽A123401</uni-td>
 		       <uni-td align="center">2021-7-16</uni-td>
-		   	<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+		   	<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		   </uni-tr>
 		<uni-tr>
 		    <uni-td align="center">闽A123402</uni-td>
 		    <uni-td align="center">2021-7-15</uni-td>
-			<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		</uni-tr>
 		<uni-tr>
 		    <uni-td align="center">闽A123401</uni-td>
 		    <uni-td align="center">2021-7-14</uni-td>
-			<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		</uni-tr>
 		<uni-tr>
 		    <uni-td align="center">闽A123401</uni-td>
 		    <uni-td align="center">2021-7-13</uni-td>
-			<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		</uni-tr>
 		<uni-tr>
 		    <uni-td align="center">闽A123401</uni-td>
 		    <uni-td align="center">2021-7-12</uni-td>
-			<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		</uni-tr>
 		<uni-tr>
 		    <uni-td align="center">闽A123401</uni-td>
 		    <uni-td align="center">2021-7-11</uni-td>
-			<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		</uni-tr>
 		<uni-tr>
 		    <uni-td align="center">闽A123401</uni-td>
 		    <uni-td align="center">2021-7-10</uni-td>
-			<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		</uni-tr>
 		<uni-tr>
 		    <uni-td align="center">闽A123403</uni-td>
 		    <uni-td align="center">2021-7-9</uni-td>
-			<uni-td align="center"><uni-link href="#" text="详情"></uni-link></uni-td>
+			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
 		</uni-tr>
 		</uni-table>
 	</view>
@@ -132,11 +132,10 @@
 			}
 		},
 		methods: {
-			back() {
-				// uni.switchTab({
-				// 	url: '/pages/tabBar/homepage'
-				// });
-				uni.navigateBack()
+			toDetails(){
+				uni.navigateTo({
+					url:'/pages/statistics/driverWorkload/details'
+				})
 			}
 		}
 	}
