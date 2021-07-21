@@ -10,8 +10,8 @@
 		</view>
 
 		<view class="cu-form-group">
-			<view class="title">访问人</view>
-			<input name="input">魏佳楠</input>
+			<view class="title">被访问人</view>
+			<input name="input">张三</input>
 		</view>
 
 		<view v-if="this.index1 == 1">

@@ -35,12 +35,14 @@
 
 
 			<block v-if="TabCur==0">
-				<navigator class="action" url="../verify/index">
+				<navigator class="action" @tap="goToAllow">
 					<recordCard1 :cardType="type[0]" />
 				</navigator>
 			</block>
 			<block v-if="TabCur==1">
-				<recordCard1 :cardType="type[1]" />
+				<navigator class="action" @tap="goToAgree">
+					<recordCard1 :cardType="type[1]" />
+				</navigator>
 			</block>
 			<block v-if="TabCur==2">
 				<navigator class="action" @tap="showModal" data-target="DialogModal1">
@@ -89,6 +91,13 @@
 	import recordCard1 from "../../components/recordCard/recordCard1.vue"
 	import search from "../../components/search/search.vue"
 	export default {
+		// props:{onLoad},
+		// onLoad(TabCurtest){
+		// 	// this.TabCur=option.TabCur
+		// 	// console.log('----------11-------')
+		// 	// console.log(this.TabCur)
+		// 	console.log(TabCurtest)
+		// },
 		data() {
 			return {
 				// time: '12:01',
@@ -118,6 +127,7 @@
 				uni.navigateTo({
 					url: '/pages/search/search'
 				});
+				// console.log(TabCurtest)
 			},
 			showModal(e) {
 				this.modalName = e.currentTarget.dataset.target
@@ -132,6 +142,17 @@
 			getIndex1(data) {
 				this.TabCur = data
 				console.log(this.TabCur)
+			},
+			goToAllow() {
+				uni.navigateTo({
+					url: "/pages/verify/index"
+				});
+			},
+			goToAgree() {
+				uni.navigateTo({
+					url: "/pages/verify/index1"
+				});
+				// console.log('1111')
 			}
 		},
 	}

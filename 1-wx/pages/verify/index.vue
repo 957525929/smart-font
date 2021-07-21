@@ -23,21 +23,6 @@
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 访问对象</text>
-			</view>
-		</view>
-
-		<view class="cu-form-group">
-			<view class="title">姓名：</view>
-			<!-- <picker @change="PickerChange" :value="index" :range="picker"> -->
-			<view class="picker text-left">
-				{{person.people}}
-			</view>
-			<!-- 		</picker> -->
-		</view>
-
-		<view class="cu-bar bg-white margin-top">
-			<view class='text-xl padding'>
 				<text class="text-black text-bold">· 预约时间</text>
 			</view>
 		</view>
@@ -77,8 +62,10 @@
 			</view>
 		</view>
 
-		<view class="cu-form-group">
-			<textarea maxlength="-1">{{person.content}}</textarea>
+		<view class="cu-form-group align-start">
+			<!-- <view class="title">被访人不在</view> -->
+			<textarea maxlength="-1"  v-model="content"
+					></textarea>
 		</view>
 
 		<view class="bottom padding">
@@ -90,7 +77,7 @@
 			</view>
 			<view class="rightBottom">
 				<view class='padding'>
-					<button class="cu-btn lg bg-white" @click="agree">同意</button>
+					<button class="cu-btn lg bg-white" @click="hideGoto">同意</button>
 				</view>
 			</view>
 		</view>
@@ -127,21 +114,21 @@
 	export default {
 		created: function() {
 			let aTime = new Date();
-		
+
 			this.time =
 				aTime.getHours() + ":" +
 				aTime.getMinutes()
 			this.time1 =
 				(aTime.getHours() + 3) + ":" +
 				aTime.getMinutes()
-		
+
 			let aData = new Date();
-		
+
 			this.date =
 				aData.getFullYear() + "-" +
 				(aData.getMonth() + 1) + "-" +
 				(aData.getDate())
-		
+
 		},
 		data() {
 			return {
@@ -158,6 +145,7 @@
 				},
 				PageCur: 'appoient',
 				date: '',
+				content: '被访问人不在'
 			}
 		},
 		methods: {
@@ -186,7 +174,16 @@
 			},
 			hideModal(e) {
 				this.modalName = null
-			}
+			},
+			hideGoto(e) {
+				this.modalName = null;
+				uni.navigateTo({
+					url: '/pages/index/staff?PageCur=applyList&TabCur=1'
+				});
+			},
+			textareaAInput(e) {
+				this.textareaAValue = e.detail.value
+			},
 		}
 	}
 </script>

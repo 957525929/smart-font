@@ -136,7 +136,7 @@
 	}
 
 	.card-right {
-		margin-left: 5px;
+		margin-left: 30px;
 		margin-top: 5px;
 	}
 

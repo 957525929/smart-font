@@ -2,23 +2,23 @@
 	<view>
 		<cu-custom bgColor="bg-yellow" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">访问预约单填写</block>
+			<block slot="content">详情</block>
 		</cu-custom>
 
-		<view class="cu-bar bg-white">
+
+		<view class="cu-bar bg-white ">
 			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 访问对象</text>
+				<text class="text-black text-bold">· 预约人信息</text>
 			</view>
 		</view>
 
-		<view class="cu-form-group">
+		<view class="cu-form-group align-center bg-white">
 			<view class="title">姓名</view>
-			<input placeholder="请输入访问对象" name="input"></input>
+			<input name="input">{{person.name}}</input>
 		</view>
-		
-		<view class="cu-form-group">
-			<view class="title">部门</view>
-			<input placeholder="请输入访问部门" name="input"></input>
+		<view class="cu-form-group solid-bottom">
+			<view class="title">手机号</view>
+			<input name="input">{{person.phone}}</input>
 		</view>
 
 		<view class="cu-bar bg-white margin-top">
@@ -28,7 +28,7 @@
 		</view>
 
 		<view class="cu-form-group">
-			<view class="title">日期选择</view>
+			<view class="title">日期</view>
 			<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
 				<view class="picker">
 					{{date}}
@@ -36,11 +36,11 @@
 			</picker>
 		</view>
 
-		<view class="cu-bar bg-white margin-top">
-			<view class="action">选择访问时间段</view>
+		<view class="cu-bar bg-white">
+			<view class="action">访问时间段</view>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">请选择开始时间</view>
+			<view class="title">开始时间</view>
 			<picker mode="time" :value="time" start="09:01" end="18:01" @change="TimeChange">
 				<view class="picker">
 					{{time}}
@@ -48,8 +48,8 @@
 			</picker>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">请选择结束时间</view>
-			<picker mode="time" :value="time1" start="09:01" end="18:01" @change="TimeChange1">
+			<view class="title">结束时间</view>
+			<picker mode="time" :value="time1" start="09:01" end="18:01" @change="TimeChange">
 				<view class="picker">
 					{{time1}}
 				</view>
@@ -62,20 +62,19 @@
 			</view>
 		</view>
 
-		<view class="cu-form-group">
-			<textarea maxlength="-1" placeholder="请填写备注"></textarea>
+		<view class="cu-form-group align-start">
+			<!-- <view class="title">被访人不在</view> -->
+			<textarea maxlength="-1" v-model="content"></textarea>
 		</view>
 
 		<view class="padding margin text-center">
-			<view class="cu-btn bg-orange lg block shadow radius margin-xl">
-				提交
+			<view class="cu-btn bg-yellow lg block shadow radius margin-xl" @tap="hideModal">
+				已通过
 			</view>
 		</view>
 
 	</view>
 
-
-	</view>
 </template>
 
 <script>
@@ -100,26 +99,26 @@
 		},
 		data() {
 			return {
+				modalName: null,
 				index: -1,
-				// picker1: ['张三', '李四', '王五'],
-				date: '',
 				time: '',
 				time1: '',
-				modalName: null,
-				PageCur: 'appoient'
+				person: {
+					name: '魏佳楠',
+					phone: '13675824231',
+					type: 'allow',
+					people: '倪友聪',
+					content: '被访问人不在'
+				},
+				PageCur: 'appoient',
+				date: '',
+				content: '被访问人不在'
 			}
 		},
 		methods: {
 			PickerChange(e) {
 				this.index = e.detail.value
 				// console.log(index)
-			},
-			// textareaBInput(e) {
-			// 	this.textareaBValue = e.detail.value
-			// }
-			NavChange: function(e) {
-				console.log(e.currentTarget)
-				this.PageCur = e.currentTarget.dataset.cur
 			},
 			DateChange(e) {
 				this.date = e.detail.value
@@ -130,9 +129,47 @@
 			TimeChange1(e) {
 				this.time1 = e.detail.value
 			},
+			// textareaBInput(e) {
+			// 	this.textareaBValue = e.detail.value
+			// }
+			NavChange: function(e) {
+				console.log(e.currentTarget)
+				this.PageCur = e.currentTarget.dataset.cur
+			},
+			showModal(e) {
+				this.modalName = e.currentTarget.dataset.target
+			},
+			hideModal(e) {
+				this.modalName = null
+			},
+			hideGoto(e) {
+				this.modalName = null;
+				uni.navigateTo({
+					url: '/pages/index/staff?PageCur=applyList&TabCur=1'
+				});
+			},
+			textareaAInput(e) {
+				this.textareaAValue = e.detail.value
+			},
 		}
 	}
 </script>
 
 <style>
+	.bottom {
+		display: flex;
+	}
+
+	.leftBottom {
+		width: 50%;
+		margin: auto;
+		text-align: center;
+		border-right: 1px solid #f5f8fe;
+	}
+
+	.rightBottom {
+		width: 50%;
+		margin: auto;
+		text-align: center;
+	}
 </style>

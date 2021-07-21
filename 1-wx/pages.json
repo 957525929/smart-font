@@ -143,6 +143,9 @@
 			"path": "pages/verify/index",
 			"style": {}
 		}, {
+			"path": "pages/verify/index1",
+			"style": {}
+		}, {
 			"path": "components/search/search",
 			"style": {
 				"navigationBarTitleText": "",
