@@ -8,7 +8,7 @@
           <span>按预约类型筛选：</span>
         </a-col>
         <a-col>
-          <a-select :style="{width:'150px'}" @change="handleChange" default-value="公司会议">
+          <a-select :style="{width:'150px'}" @change="handleChange" placeholder="请选择预约类型">
             <a-select-option value="公司会议">公司会议</a-select-option>
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
@@ -26,10 +26,9 @@
             placeholder="请选择酒店名称"
             v-model="selectHotel"
           >
-            <a-select-option value="华宜时尚酒店">华宜时尚酒店</a-select-option>
-            <a-select-option value="香格里拉酒店">香格里拉酒店</a-select-option>
+            <a-select-option value="福州富力威斯汀酒店">福州富力威斯汀酒店</a-select-option>
             <a-select-option value="福州品悦酒店">福州品悦酒店</a-select-option>
-            <a-select-option value="世纪金源酒店">世纪金源酒店</a-select-option>
+            <a-select-option value="福州世纪金源酒店">福州世纪金源酒店</a-select-option>
           </a-select>
         </a-col>
         <a-col :span="1"></a-col>
@@ -95,51 +94,103 @@
 
     <!-- 查询区域-END -->
     <!-- table区域-begin -->
-    <!-- <div style="margin-top: 20px">
-      <a-table :data-source="dataSta" :pagination="false" rowKey="theme">
-        <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
-        <a-table-column title="会议次数" data-index="number" align="center"></a-table-column>
-        <a-table-column title="与会人数" data-index="membersNumber" align="center"></a-table-column>
-        <a-table-column title="会议预算" data-index="budget" align="center"></a-table-column>
-      </a-table>
-    </div>-->
     <br />
-    <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>
+    <!-- <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar> -->
+    <!-- <pie title="饼图" v-bind:height="height" v-bind:dataSource="dataSourcePie"></pie> -->
+    <div class="table-page-search-wrapper">
+      <a-row type="flex" align="middle">
+        <a-col :span="10">
+          <pie title="饼图" v-bind:height="height" v-bind:dataSource="dataSourcePie"></pie>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col :span="12">
+          <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>
+        </a-col>
+      </a-row>
+    </div>
+    <a-table :data-source="dataHotel" :pagination="false" rowKey="index">
+       <a-table-column title="序号" data-index="index" align="center"></a-table-column>
+      <a-table-column title="协议酒店" data-index="hotel" align="center"></a-table-column>
+      <a-table-column title="预约类型" data-index="type" align="center"></a-table-column>
+      <a-table-column title="预约次数" data-index="number" align="center"></a-table-column>
+    </a-table>
   </a-card>
 </template>
 <script>
 import moment from 'moment'
 import Bar from '@/components/chart/Bar'
+import Pie from '@/components/chart/Pie'
 const dataSource = [
   {
-    x: '华宜时尚酒店',
-    y: 10
-  },
-  {
-    x: '香格里拉酒店',
-    y: 3
+    x: '福州富力威斯汀酒店',
+    y: 40
   },
   {
     x: '福州品悦酒店',
-    y: 3
+    y: 21
   },
   {
-    x: '世纪金源酒店',
-    y: 7
+    x: '福州世纪金源酒店',
+    y: 17
   }
+]
+const dataHotel = [
+  {
+    index:1,
+    hotel: '福州富力威斯汀酒店',
+    type: '公司会议',
+    number: 30
+  },
+    {
+    index:2,
+    hotel: '福州富力威斯汀酒店',
+    type: '个人',
+    number: 10
+  },
+  {
+    index:3,
+    hotel: '福州品悦酒店',
+    type: '公司会议',
+    number: 10
+  },
+    {
+    index:4,
+    hotel: '福州品悦酒店',
+    type: '个人',
+    number: 11
+  },
+    {
+    index:5,
+    hotel: '福州世纪金源酒店',
+    type: '公司会议',
+    number: 12
+  },
+    {
+    index:6,
+    hotel: '福州世纪金源酒店',
+    type: '个人',
+    number: 5
+  },
 ]
 export default {
   components: {
-    Bar
+    Bar,
+    Pie
   },
   data() {
     return {
       dateFormat: 'YYYY年MM月DD日',
       dateStart: undefined,
       height: 300,
+      dataHotel,
       selectHotel: [],
       dataSource,
-      title: '酒店预约次数'
+      title: '酒店预约次数',
+      dataSourcePie: [
+        { item: '福州富力威斯汀酒店', count: 40 },
+        { item: '福州品悦酒店', count: 21 },
+        { item: '福州世纪金源酒店', count: 17 }
+      ]
     }
   },
   created() {
@@ -151,20 +202,20 @@ export default {
   methods: {
     moment,
     handleChange(value) {
-      if (value.length == 0) {
-        this.dataSource = dataSource
-      } else {
-        let hotelSelect = []
-        value.forEach(element => {
-          //console.log(element)
-          dataSource.filter(item => {
-            if (item.x.includes(element)) {
-              hotelSelect.push(item)
-            }
-          })
-        })
-        this.dataSource = hotelSelect
-      }
+      // if (value.length == 0) {
+      //   this.dataSource = dataSource
+      // } else {
+      //   let hotelSelect = []
+      //   value.forEach(element => {
+      //     //console.log(element)
+      //     dataSource.filter(item => {
+      //       if (item.x.includes(element)) {
+      //         hotelSelect.push(item)
+      //       }
+      //     })
+      //   })
+      //   this.dataSource = hotelSelect
+      // }
     },
     searchQuery() {},
     searchReset() {

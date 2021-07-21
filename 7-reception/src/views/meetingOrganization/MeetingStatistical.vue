@@ -219,7 +219,8 @@ export default {
     },
     getCurrentData() {
       return new Date().toLocaleDateString()
-    }
+    },
+    callback(){}
   }
 }
 </script>

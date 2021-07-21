@@ -8,7 +8,7 @@
           <span>按预约类型筛选：</span>
         </a-col>
         <a-col>
-          <a-select :style="{width:'150px'}" @change="handleChange" default-value="公司会议">
+          <a-select :style="{width:'150px'}" @change="handleChange" placeholder="请选择预约类型">
             <a-select-option value="公司会议">公司会议</a-select-option>
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
@@ -31,7 +31,7 @@
       <br />
       <a-row type="flex" align="middle">
         <a-col>
-          <span>按区域筛选：</span>
+          <span>按位置筛选：</span>
         </a-col>
         <a-col>
           <a-cascader
@@ -40,7 +40,8 @@
             change-on-select
             @change="areaChange"
             :default-value="defaultT"
-            placeholder="请选择区域"
+            placeholder="请选择位置"
+             :display-render="displayRender"
           />
         </a-col>
         <a-col :span="1"></a-col>
@@ -160,6 +161,9 @@ export default {
   },
   methods: {
     moment,
+         displayRender({ labels }){
+      return  labels.join('.')
+    },
     areaChange(value) {
       console.log(value)
     },
