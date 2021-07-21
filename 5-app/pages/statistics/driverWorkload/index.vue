@@ -13,7 +13,7 @@
 			</view>
 		</view>
 		<view style="display: flex;">
-			<view class="myCard2 backColor">
+			<view class="myCard2 backColor" style="border-right:#e0e0e0 1rpx solid;">
 				<view class="mycard-label">
 					年份
 				</view>
@@ -128,7 +128,7 @@
 		data() {
 			return {
 				drivers:[],
-				driverSelected:''
+				driverSelected:'张三'
 			}
 		},
 		methods: {
@@ -154,7 +154,7 @@
 		justify-content: space-between;
 	}
 	.mycard-label{
-		width: 30%;
+		width: 90%;
 		/* border: solid; */
 		padding: 20rpx;
 	}
