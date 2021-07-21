@@ -17,7 +17,7 @@
 		},
 		methods: {
 			goTo(data){
-				this.$goPage({name:'checkTaskDetail',params:{taskId:data.taskId}})
+				this.$goPage({name:'protectTaskDetail',query:{taskId:data.taskId}})
 			}
 		}
 	}

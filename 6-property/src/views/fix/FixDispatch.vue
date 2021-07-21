@@ -11,26 +11,14 @@
         >
             <span slot="action" slot-scope="text, record">
                 <template v-for="(i, index) in record.action">
-                    <a-popconfirm
-                        title="确认通过并开始受理?"
-                        ok-text="是"
-                        cancel-text="否"
-                        @confirm="confirm"
-                        @cancel="cancel"
-                        v-if="i.com === 'TableDelete'"
-                    >
-                        <a href="#" @click="showDelete">{{ i.tagName }}</a>
-                    </a-popconfirm>
-                    <template v-else>
-                        <a href="#" @click.stop="handleOps(i.com, record.orderId)">{{ i.tagName }}</a>
-                        <component
-                            :is="i.com"
-                            :ref="i.com"
-                            :key="index"
-                            :title="i.tagName"
-                            :infoDetail="infoDetail"
-                        ></component>
-                    </template>
+                    <a href="#" @click.stop="handleOps(i.com, record.orderId)">{{ i.tagName }}</a>
+                    <component
+                        :is="i.com"
+                        :ref="i.com"
+                        :key="index"
+                        :title="i.tagName"
+                        :infoDetail="infoDetail"
+                    ></component>
                     <a-divider type="vertical" v-if="index !== record.action.length - 1" />
                 </template>
             </span>
@@ -43,12 +31,12 @@ import PageTemplate from '@/components/page/PageTemplate.vue'
 import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
 import TableModal from '@/components/tableOperation/modal/TableModal.vue'
 //js
-import { columns, data, taskList, infoDetail } from './js/all.js'
+import { columns, data, taskList, infoDetail } from './js/dispatch.js'
 import { typeToComponent } from '@/utils/dataDictionary.js'
 const NEW_FIXLIST = Object.freeze({ columns, data, taskList, infoDetail, typeToComponent })
 
 export default {
-    name: 'fixList',
+    name: 'fixverify',
     components: { PageTemplate, TableDrawer, TableModal },
     created() {
         this.loadData()
@@ -90,17 +78,7 @@ export default {
                     })
                 }
             })
-        },
-        showDelete() {
-            this.visible = true
-        },
-        confirm() {
-            this.visible = false
-            this.$message.success('操作成功')
-        },
-        cancel() {
-            this.visible = false
-        },
+        }
     },
 }
 </script>

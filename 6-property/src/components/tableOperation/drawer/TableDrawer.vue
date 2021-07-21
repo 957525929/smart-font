@@ -1,36 +1,23 @@
 <template>
     <a-drawer :title="title" :width="720" :visible="visible" :body-style="{ paddingBottom: '80px' }" @close="onClose">
         <a-descriptions bordered>
-            <!-- <view> -->
-            <a-descriptions-item
-                :label="item.title"
-                :span="3"
-                v-for="item in infoDetail"
-                :key="item.key"
-                >{{ item.value }}</a-descriptions-item
-            >
-            <!-- </view> -->
+            <a-descriptions-item :label="item.title" :span="3" v-for="item in data" :key="item.key">
+                <span>{{ item.value }} </span>
+            </a-descriptions-item>
         </a-descriptions>
-        <!-- <div
-            :style="{
-                position: 'absolute',
-                right: 0,
-                bottom: 0,
-                width: '100%',
-                borderTop: '1px solid #e9e9e9',
-                padding: '10px 16px',
-                background: '#fff',
-                textAlign: 'center',
-                zIndex: 1,
-            }"
-        >
-            <a-button type="primary" @click="onClose"> 编辑 </a-button>
-            <a-button :style="{ marginLight: '8px' }" @click="onClose"> 取消 </a-button>
-        </div> -->
+        <div v-for="i in imgs" :key="i.key">
+            <a-divider />
+
+            <h3>{{ i.title }}</h3>
+            <a-row :gutter="24">
+                <a-col v-for="item in i.value" :key="item">
+                    <img :src="item" />
+                </a-col>
+            </a-row>
+        </div>
     </a-drawer>
 </template>
  
-
 <script>
 export default {
     props: {
@@ -47,12 +34,13 @@ export default {
     },
     data() {
         return {
-            // infoDetailData: [],
             visible: false,
+            imgs: this.infoDetail.filter((item) => item.key.indexOf('imgs') !== -1),
+            data: this.infoDetail.filter((item) => item.key.indexOf('imgs') === -1),
         }
     },
     mounted() {
-        console.log(this.infoDetail);
+        console.log(this.infoDetail)
         // this.getDetail()
     },
     methods: {
@@ -61,10 +49,7 @@ export default {
         },
         onClose() {
             this.visible = false
-        },
-        // getDetail() {
-        //     this.infoDetailData = this.infoDetail
-        // },
+        }
     },
 }
 </script>

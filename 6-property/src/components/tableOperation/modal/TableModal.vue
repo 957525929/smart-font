@@ -74,9 +74,6 @@ export default {
             require: true,
         },
     },
-    mounted() {
-        console.log(this.infoDetail)
-    },
     data() {
         return {
             visible: false,
