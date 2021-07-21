@@ -20,31 +20,31 @@
 				</block>
 			</cu-custom>
 			<scroll-view scroll-x class="bg-white nav flex text-center">
-				<view class="cu-item" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
+				<view class="cu-item" :class="0==this.TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
 					待审核
 				</view>
 
-				<view class="cu-item" :class="1==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="1">
+				<view class="cu-item" :class="1==this.TabCur?'text-orange cur':''" @tap="tabSelect" data-id="1">
 					已通过
 				</view>
 
-				<view class="cu-item" :class="2==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="2">
+				<view class="cu-item" :class="2==this.TabCur?'text-orange cur':''" @tap="tabSelect" data-id="2">
 					已拒绝
 				</view>
 			</scroll-view>
 
 
-			<block v-if="TabCur==0">
+			<block v-if="this.TabCur==0">
 				<navigator class="action" @tap="goToAllow">
 					<recordCard1 :cardType="type[0]" />
 				</navigator>
 			</block>
-			<block v-if="TabCur==1">
+			<block v-if="this.TabCur==1">
 				<navigator class="action" @tap="goToAgree">
 					<recordCard1 :cardType="type[1]" />
 				</navigator>
 			</block>
-			<block v-if="TabCur==2">
+			<block v-if="this.TabCur==2">
 				<navigator class="action" @tap="showModal" data-target="DialogModal1">
 					<recordCard1 :cardType="type[2]" />
 				</navigator>
@@ -90,19 +90,22 @@
 	import recordCard1 from "../../components/recordCard/recordCard1.vue"
 	import search from "../../components/search/search.vue"
 	export default {
-		// props:{onLoad},
-		// onLoad(TabCurtest){
-		// 	// this.TabCur=option.TabCur
-		// 	// console.log('----------11-------')
-		// 	// console.log(this.TabCur)
-		// 	console.log(TabCurtest)
-		// },
+		props: {
+			TabCur: {
+			      type: String,
+			      default: () => []
+			    },
+		},
+
+		onLoad() {
+			this.TabCur = TabCur
+		},
 		data() {
 			return {
 				// time: '12:01',
 				// date: '2018-12-25',
 				modalName: null,
-				TabCur: 0,
+				TabCur:0,
 				scrollLeft: 0,
 				reason: '被访人出差',
 				type: [{
@@ -154,6 +157,7 @@
 				// console.log('1111')
 			}
 		},
+
 	}
 </script>
 

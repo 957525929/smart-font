@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<applyList v-if="PageCur=='applyList'" @onLoad="onLoad"></applyList>
+		<applyList v-if="PageCur=='applyList'" :TabCur="TabCur"></applyList>
 		<!-- <verify v-if="PageCur=='verify'"></verify> -->
 		<person1 v-if="PageCur=='person1'"></person1>
 
@@ -55,10 +55,15 @@
 	export default {
 		onLoad(option) {
 			this.PageCur = option.PageCur
-			this.TabCurtest = option.TabCur
-			console.log('-----------------')
+			console.log('-------111----------')
 			console.log(this.PageCur)
+			this.TabCur = option.TabCur
+			console.log('------22-----------')
 			console.log(this.TabCur)
+
+		},
+		onHide() {
+		
 		},
 		data() {
 			return {
