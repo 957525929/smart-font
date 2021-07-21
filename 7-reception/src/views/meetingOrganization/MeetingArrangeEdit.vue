@@ -51,7 +51,7 @@
           </a-form-model-item>
 
           <!-- 酒店详情 -->
-          <div v-show="flag">
+          <div v-show="flagHotel">
             <a-row type="flex" align="middle">
               <a-col :span="1"></a-col>
               <a-col>
@@ -66,7 +66,7 @@
                 <span>星级：{{hotelLevelInfor}}</span>
               </a-col>
             </a-row>
-            <br>
+            <br />
             <a-row type="flex" align="middle">
               <a-col :span="1"></a-col>
               <a-col>
@@ -77,10 +77,21 @@
                 <span>价格范围（元）：{{hotelPriceInfor}}</span>
               </a-col>
             </a-row>
-            <br>
+            <br />
             <a-row type="flex" align="middle">
-              <a-col :span="3"></a-col>
-              <a-button>通知酒店</a-button>
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>联系人：{{hotelNameInfor}}</span>
+              </a-col>
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>联系电话：{{hotelTelInfor}}</span>
+              </a-col>
+            </a-row>
+            <br />
+            <a-row type="flex" align="middle">
+              <a-col :span="1"></a-col>
+              <span>通知信息：本公司人员将于{{this.$route.query.record.dateTime}}入住{{hotelInfor}}，协议编号{{hotelIDInfor}}，入住人数{{this.$route.query.record.number}}，请确认！</span>
             </a-row>
           </div>
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
@@ -147,6 +158,7 @@
               <a-select-option value="食堂">食堂</a-select-option>
             </a-select>
           </a-form-model-item>
+
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
             <a-button type="primary" @click="onSubmitEat">创建</a-button>
             <a-button style="margin-left: 10px;" @click="resetFormEat">重置</a-button>
@@ -207,16 +219,36 @@
               v-model="formRoom.room"
               @change="onChangeRoom"
               style="width: 460px"
+              :display-render="displayRender"
             />
           </a-form-model-item>
-
+          <!-- 会议室详情信息 -->
+          <div v-show="flagRoom">
+            <a-row type="flex" align="middle">
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>会议室：{{roomInfor}}</span>
+              </a-col>
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>容纳人数：{{numberRoomInfor}}</span>
+              </a-col>
+            </a-row>
+            <br />
+            <a-row type="flex" align="middle">
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>基本条件：{{conditionRoomInfor}}</span>
+              </a-col>
+            </a-row>
+          </div>
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
             <a-button type="primary" @click="onSubmitRoom">创建</a-button>
             <a-button style="margin-left: 10px;" @click="resetFormRoom">重置</a-button>
             <!-- <a-button :style="{background:'red',color:'white',marginLeft:' 100px'}" >通知</a-button> -->
           </a-form-model-item>
         </a-form-model>
-        <!--  -->
+
         <a-table
           :data-source="dataRoom"
           :scroll="{ y: 450 }"
@@ -375,6 +407,7 @@
             v-model="ModifyRoom.room"
             @change="onChangeRoom"
             style="width: 420px"
+            :display-render="displayRender"
           />
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 17, offset:8 }">
@@ -550,10 +583,66 @@ let optionsRoom = [
     ]
   }
 ]
+const dataRoomIn = [
+  {
+    index: 1,
+    area: '中国烟草总公司福建省公司机关.A区域.1号楼',
+    number: '5-6',
+    dutyName: '李霞',
+    dutyTel: '13759655332',
+    room: '会议室203',
+    condition: '茶水，投影仪，白板，摄像机'
+  },
+  {
+    index: 1,
+    area: '中国烟草总公司福建省公司机关.A区域.1号楼',
+    number: '5-6',
+    dutyName: '李霞',
+    dutyTel: '13759655332',
+    room: '会议室204',
+    condition: '茶水，投影仪，白板，摄像机'
+  },
+  {
+    index: 2,
+    area: '中国烟草总公司福建省公司机关.A区域.2号楼',
+    number: '6-8',
+    dutyName: '王莉莉',
+    dutyTel: '13759655348',
+    room: '会议室204',
+    condition: '茶水，空调，投影仪，白板'
+  },
+  {
+    index: 2,
+    area: '中国烟草总公司福建省公司机关.A区域.2号楼',
+    number: '6-8',
+    dutyName: '王莉莉',
+    dutyTel: '13759655348',
+    room: '会议室205',
+    condition: '茶水，空调，投影仪，白板'
+  },
+  {
+    index: 3,
+    area: '中国烟草总公司福建省公司机关.B区域.1号楼',
+    number: '3-4',
+    dutyName: '尤晓梅',
+    dutyTel: '13053955537',
+    room: '会议室205',
+    condition: '茶水，投影仪，电脑'
+  },
+  {
+    index: 4,
+    area: '中国烟草总公司福建省公司机关.B区域.1号楼',
+    number: '4-6',
+    dutyName: '黄丽娟',
+    dutyTel: '13659655381',
+    room: '会议室205',
+    condition: '茶水，空调，投影仪，电脑，白板'
+  }
+]
 export default {
   data() {
     return {
-      flag: false,
+      flagHotel: false,
       dataSelect: [
         {
           id: this.$route.query.record.id,
@@ -571,6 +660,12 @@ export default {
       hotelLevelInfor: undefined,
       hotelAddressInfor: undefined,
       hotelPriceInfor: undefined,
+      hotelNameInfor: undefined,
+      hotelTelInfor: undefined,
+      flagRoom: false,
+      roomInfor: undefined,
+      numberRoomInfor: undefined,
+      conditionRoomInfor: undefined,
       eatHotel: '',
       numDate: '1',
       current: 0,
@@ -672,7 +767,7 @@ export default {
           }
         ],
         dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }],
-        range: [{ required: true, message: '请选择日期', trigger: 'change' }]
+        range: [{ required: true, message: '请选择时段', trigger: 'change' }]
       },
       visibleRoom: false,
       ModifyRoom: {
@@ -706,9 +801,21 @@ export default {
     prev() {
       this.current--
     },
+    displayRender({ labels }) {
+      return labels.join('.')
+    },
     onChangeRoom(value) {
       console.log(value)
-      this.roomS = value[0] + value[1] + value[2] + value[3]
+      this.roomS = value[0] + '.' + value[1] + '.' + value[2] + '.' + value[3]
+      let area = value[0] + '.' + value[1] + '.' + value[2]
+      this.flagRoom = true
+      this.roomInfor = this.roomS
+      dataRoomIn.filter(item => {
+        if (area == item.area && value[3] == item.room) {
+          this.numberRoomInfor = item.number
+          this.conditionRoomInfor = item.condition
+        }
+      })
       // console.log(this.formRoom.room)
     },
     onSubmitHotel() {
@@ -744,7 +851,7 @@ export default {
     },
     selectHotel(value) {
       console.log(value)
-      this.flag = true
+      this.flagHotel = true
       this.hotelInfor = value
       dataHotelIn.filter(item => {
         if (item.hotel == value) {
@@ -752,6 +859,8 @@ export default {
           this.hotelLevelInfor = item.level
           this.hotelAddressInfor = item.address
           this.hotelPriceInfor = item.price
+          this.hotelNameInfor = item.dutyName
+          this.hotelTelInfor = item.dutyTel
         }
       })
     },
