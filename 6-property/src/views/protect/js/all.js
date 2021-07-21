@@ -1,203 +1,238 @@
 import {
-  taskType,
-  protaskStatus
+    taskType,
+    protaskStatus,
+    proPeriod,
+    groupTree
 } from "@/utils/dataDictionary.js";
+import {
+    handleTreeToCascade
+} from "@/utils/util.js";
 export const columns = [{
-    dataIndex: 'devId',
-    slots: {
-      title: '任务编号'
-    },
-    scopedSlots: {
-      customRender: 'devId'
-    },
-    title: '设备编号',
+    dataIndex: 'taskId',
+    title: '任务编号',
+    width: 50,
+    key: 'taskId',
+    value: ""
+},
+{
+    dataIndex: 'taskName',
+    title: '任务名',
     width: 80,
-    key: 'devId'
-  },
-  {
+    key: 'taskName',
+    value: ""
+},
+{
     title: '任务状态',
-    key: 'taskStatus',
     dataIndex: 'taskStatus',
-    width: 80,
+    width: 60,
+    key: 'taskStatus',
     type: 'a-select',
-    valueEnum: protaskStatus
-  },
-  {
-    title: '任务描述',
-    dataIndex: 'devName',
-    width: 100,
-    key: 'devName',
-    hideInSearch: true
-  },
-  {
-    title: '任务下发时间',
-    key: 'fixedTime',
-    dataIndex: 'fixedTime',
-    scopedSlots: {
-      customRender: 'tags'
-    },
-    width: 100,
-    type: 'a-range-picker',
-  },
-  {
-    title: '任务地点',
-    key: 'assets',
-    dataIndex: 'assets',
-    width: 80,
-  },
-  {
+    valueEnum: protaskStatus,
+    value: ""
+},
+{
     dataIndex: 'taskType',
     key: 'taskType',
     title: '任务类型',
     width: 80,
     type: 'a-select',
-    valueEnum: taskType
-  },
-  {
+    valueEnum: taskType,
+    value: ""
+},
+{
+    dataIndex: 'taskPeriod',
+    title: '任务周期',
+    width: 40,
+    key: 'taskPeriod',
+    value: "",
+    type: 'a-select',
+    valueEnum: proPeriod
+},
+{
+    title: '任务下发时间',
+    key: 'dispatchTime',
+    dataIndex: 'dispatchTime',
+    width: 100,
+    type: 'a-range-picker',
+    value: ""
+},
+{
+    title: '区域',
+    dataIndex: 'address',
+    key: 'address',
+    width: 100,
+    value: "",
+    valueEnum: handleTreeToCascade(groupTree),
+    type: 'a-cascader',
+},
+{
     title: '保养员',
-    key: 'fixStaff',
-    dataIndex: 'fixStaff',
-    scopedSlots: {
-      customRender: 'tags'
-    },
-    width: 80,
-  },
-  {
+    key: 'proStaff',
+    dataIndex: 'proStaff',
+    width: 50,
+    value: ""
+},
+{
     title: '联系方式',
     dataIndex: 'phone',
     key: 'phone',
     width: 80,
-  },
-
-  {
+    value: "",
+    hideInSearch: true,
+},
+{
     title: '预计完成时间',
     key: 'expectTime',
     dataIndex: 'expectTime',
-    scopedSlots: {
-      customRender: 'tags'
-    },
     width: 80,
     type: 'a-range-picker',
-  },
-  {
+    value: ""
+},
+{
+    title: '任务描述',
+    dataIndex: 'description',
+    width: 100,
+    key: 'description',
+    value: "",
+    hideInSearch: true,
+    hideInTable: true
+},
+{
     title: '操作',
     dataIndex: 'action',
+    key: "action",
     scopedSlots: {
-      customRender: 'action'
+        customRender: 'action'
     },
     width: 80,
-    hideInSearch: true
-  },
+    hideInSearch: true,
+    hideInDetail: true
+}
 ]
 export const data = [{
     key: 0,
-    devId: '1',
-    devName: "烟草大厦18楼频繁断电",
-    taskType: 2,
+    taskId: '1',
+    taskName: "1号楼月度巡养计划",
+    taskType: 0,
     taskStatus: 0,
-    devStatus: 1,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
+    taskPeriod: 2,
+    dispatchTime: '2021-06-22 18：55：55',
+    address: "中国烟草总公司福建省公司机关-A区域-1号楼",
+    proStaff: '刘涛',
     phone: '18232145698',
-    fixStaff: '刘涛',
-    fixedTime: '2021-06-22 18：55：55',
-    expectTime: '2021-06-23 14：25：35',
+    expectTime: '2021-07-31 00：00：00',
+    description: "例行养护",
     action: [{
-      tagName: "详情",
-      com: "TableDrawer"
+        tagName: "详情",
+        com: "router-link",
+        url: "device-proDetail"
     }]
-  },
-  {
+},
+{
     key: 1,
-    devId: '2',
-    devName: "空调漏水",
+    taskId: '2',
+    taskName: "空调维修检查",
     taskType: 1,
     taskStatus: 1,
-    devStatus: 0,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
+    taskPeriod: 0,
+    ifnormal: 0,
+    proDesc: "一切正常",
+    proPics: ["/static/logo.png"],
+    proTime: "2021-07-22 10:55:11",
+    dispatchTime: '2021-07-21 10:55:11',
+    address: "中国烟草总公司福建省公司机关-A区域-1号楼",
+    proStaff: '张英',
     phone: '13332145698',
-    fixStaff: '张英',
-    fixedTime: '2021-06-24 10：55：11',
-    expectTime: '2021-06-24 14：25：12',
+    expectTime: '2021-07-31 00：00：00',
+    description: "维养检查",
     action: [{
-      tagName: "详情",
-      com: "TableDrawer"
+        tagName: "详情",
+        com: "router-link",
+        url: "device-proDetail"
+    },
+    {
+        tagName: "通过",
+        com: "TableDelete"
+    },
+    {
+        tagName: "不通过",
+        com: "TableDelete"
     }]
-  },
-  {
+},
+{
     key: 2,
-    devId: '3',
-    devName: "电路老化检查",
-    taskType: 0,
+    taskId: '3',
+    taskName: "电路老化检查",
+    taskType: 4,
     taskStatus: 2,
-    devStatus: 0,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
+    taskPeriod: 1,
+    dispatchTime: '2021-06-19 10:55:55',
+    address: "中国烟草总公司福建省公司机关-B区域-2号楼",
+    proStaff: '刘涛',
     phone: '18232145698',
-    fixStaff: '刘涛',
-    fixedTime: '2021-06-19 10：55：55',
-    expectTime: '2021-06-19 14：25：35',
+    expectTime: '2021-07-31 00：00：00',
+    description: "电路老化检查",
     action: [{
-      tagName: "详情",
-      com: "TableDrawer"
+        tagName: "详情",
+        com: "router-link",
+        url: "device-proDetail"
     }]
-  }
+}
 ]
 export const searchCon = {}
 export const infoDetail = [{
-  title: '设备编号',
-  width: 80,
-  key: 'devId',
-  value:""
+    title: '设备编号',
+    width: 80,
+    key: 'devId',
+    value: ""
 },
 {
-  title: '任务状态',
-  key: 'taskStatus',
-  dataIndex: 'taskStatus',
-  width: 80,
-  type: 'a-select',
-  valueEnum: protaskStatus,
-  value:""
+    title: '任务状态',
+    key: 'taskStatus',
+    dataIndex: 'taskStatus',
+    width: 80,
+    type: 'a-select',
+    valueEnum: protaskStatus,
+    value: ""
 },
 {
-  title: '任务描述',
-  key: 'devName',
-  value:""
+    title: '任务描述',
+    key: 'devName',
+    value: ""
 },
 {
-  title: '任务下发时间',
-  key: 'fixedTime',
-  type: 'a-range-picker',
-  value:""
+    title: '任务下发时间',
+    key: 'fixedTime',
+    type: 'a-range-picker',
+    value: ""
 },
 {
-  title: '任务地点',
-  key: 'assets',
-  value:""
+    title: '任务地点',
+    key: 'assets',
+    value: ""
 },
 {
-  key: 'taskType',
-  title: '任务类型',
-  type: 'a-select',
-  valueEnum: taskType,
-  value:""
+    key: 'taskType',
+    title: '任务类型',
+    type: 'a-select',
+    valueEnum: taskType,
+    value: ""
 },
 {
-  title: '保养员',
-  key: 'fixStaff',
-  value:""
+    title: '保养员',
+    key: 'fixStaff',
+    value: ""
 },
 {
-  title: '联系方式',
-  dataIndex: 'phone',
-  key: 'phone',
-  value:""
+    title: '联系方式',
+    dataIndex: 'phone',
+    key: 'phone',
+    value: ""
 },
 
 {
-  title: '预计完成时间',
-  key: 'expectTime',
-  type: 'a-range-picker',
+    title: '预计完成时间',
+    key: 'expectTime',
+    type: 'a-range-picker',
 }
 ]
