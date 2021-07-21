@@ -77,6 +77,11 @@
                 <span>价格范围（元）：{{hotelPriceInfor}}</span>
               </a-col>
             </a-row>
+            <br>
+            <a-row type="flex" align="middle">
+              <a-col :span="3"></a-col>
+              <a-button>通知酒店</a-button>
+            </a-row>
           </div>
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
             <a-button type="primary" @click="onSubmitHotel">创建</a-button>
