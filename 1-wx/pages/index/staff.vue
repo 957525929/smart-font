@@ -6,12 +6,13 @@
 
 		<staffHome v-if="PageCur=='staffHome'"></staffHome>
 
+		<trip v-if="PageCur=='trip'"></trip>
+
 		<view class="cu-bar tabbar bg-white shadow foot">
 
 			<view class="action" @click="NavChange" data-cur="staffHome">
 				<view class='cuIcon-cu-image'>
-					<text
-						:class="PageCur=='staffHome'?'text-orange cuIcon-home':'text-gray cuIcon-home'"></text>
+					<text :class="PageCur=='staffHome'?'text-orange cuIcon-home':'text-gray cuIcon-home'"></text>
 				</view>
 				<view :class="PageCur==''?'text-orange':'text-gray'">首页</view>
 			</view>
@@ -22,6 +23,13 @@
 						:class="PageCur=='applyList'?'text-orange cuIcon-calendar':'text-gray cuIcon-calendar'"></text>
 				</view>
 				<view :class="PageCur==''?'text-orange':'text-gray'">申请记录</view>
+			</view>
+
+			<view class="action" @click="NavChange" data-cur="trip">
+				<view class='cuIcon-cu-image'>
+					<text :class="PageCur=='trip'?'text-orange cuIcon-taxi':'text-gray cuIcon-taxi'"></text>
+				</view>
+				<view :class="PageCur==''?'text-orange':'text-gray'">预约行程</view>
 			</view>
 
 			<!-- 			<view class="action" @click="NavChange" data-cur="verify">

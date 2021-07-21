@@ -33,6 +33,14 @@
 						route: '/pages/index/staff?PageCur=applyList'
 					},
 					{
+						title: '预约行程',
+						name: 'trip',
+						color: 'blue',
+						cuIcon: 'taxi',
+						enName: 'Trip',
+						route: '/pages/index/staff?PageCur=trip'
+					},
+					{
 						title: '个人中心',
 						name: 'person1',
 						color: 'cyan',

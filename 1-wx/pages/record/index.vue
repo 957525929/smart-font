@@ -69,9 +69,7 @@
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action">
-						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
 						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
-
 					</view>
 				</view>
 			</view>

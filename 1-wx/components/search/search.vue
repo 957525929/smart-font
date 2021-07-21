@@ -95,15 +95,18 @@
 				this.$emit('send', this.index1)
 				// console.log(e.detail.value)
 			},
-			MultiChange(e) {
-				this.multiIndex = e.detail.value
-			},
-			MultiColumnChange(e) {},
+			// MultiChange(e) {
+			// 	this.multiIndex = e.detail.value
+			// },
+			// MultiColumnChange(e) {},
 			TimeChange(e) {
 				this.time = e.detail.value
 			},
 			TimeChange1(e) {
 				this.time1 = e.detail.value
+			},
+			DateChange(e) {
+				this.date = e.detail.value
 			},
 		}
 	}

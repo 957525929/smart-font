@@ -3,7 +3,7 @@
 		<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
 			<cu-custom bgColor="bg-yellow" :isBack="true">
 				<block slot="backText">返回</block>
-				<block slot="content">申请记录</block>
+				<block slot="content">预约行程</block>
 				<block slot="right">
 					<!-- <view class='padding margin text-center'> -->
 					<!-- <image @tap="showModal" data-target="viewModal" mode="aspectFit" src="../../static/筛选.png"
@@ -21,32 +21,32 @@
 			</cu-custom>
 			<scroll-view scroll-x class="bg-white nav flex text-center">
 				<view class="cu-item" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
-					待审核
+					今日
 				</view>
 
 				<view class="cu-item" :class="1==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="1">
-					已通过
+					明日
 				</view>
 
 				<view class="cu-item" :class="2==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="2">
-					已拒绝
+					后日
 				</view>
 			</scroll-view>
 
 
 			<block v-if="TabCur==0">
-				<navigator class="action" @tap="goToAllow">
-					<recordCard1 :cardType="type[0]" />
+				<navigator class="action" @tap="goToAgree">
+					<recordCard2 :cardType="type[0]" />
 				</navigator>
 			</block>
 			<block v-if="TabCur==1">
 				<navigator class="action" @tap="goToAgree">
-					<recordCard1 :cardType="type[1]" />
+					<recordCard2 :cardType="type[1]" />
 				</navigator>
 			</block>
 			<block v-if="TabCur==2">
-				<navigator class="action" @tap="showModal" data-target="DialogModal1">
-					<recordCard1 :cardType="type[2]" />
+				<navigator class="action" @tap="goToAgree">
+					<recordCard2 :cardType="type[2]" />
 				</navigator>
 			</block>
 		</scroll-view>
@@ -56,39 +56,19 @@
 		</view>
 		<scroll-view scroll-y class="DrawerWindow" :class="modalName=='viewModal'?'show':''">
 
-			<search @send="getIndex1"></search>
+			<search2 @send="getIndex1"></search2>
 			<view class="padding margin text-center">
 				<view class="cu-btn bg-yellow lg block shadow radius margin-xl" @tap="hideModal">
 					查询
 				</view>
 			</view>
 		</scroll-view>
-
-		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
-			<view class="cu-dialog">
-				<view class="cu-bar bg-white justify-end">
-					<view class="content">拒绝原因</view>
-					<view class="action" @tap="hideModal">
-						<text class="cuIcon-close text-red"></text>
-					</view>
-				</view>
-				<view class="padding-xl">
-					{{reason}}
-				</view>
-				<view class="cu-bar bg-white justify-end">
-					<view class="action">
-						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
-
-					</view>
-				</view>
-			</view>
-		</view>
 	</view>
 </template>
 
 <script>
-	import recordCard1 from "../../components/recordCard/recordCard1.vue"
-	import search from "../../components/search/search.vue"
+	import recordCard2 from "../../components/recordCard/recordCard2.vue"
+	import search2 from "../../components/search/search2.vue"
 	export default {
 		// props:{onLoad},
 		// onLoad(TabCurtest){
@@ -107,27 +87,27 @@
 				reason: '被访人出差',
 				type: [{
 					id: 0,
-					type: "待审核"
+					type: "今日"
 				}, {
 					id: 1,
-					type: "已通过"
+					type: "明日"
 				}, {
 					id: 2,
-					type: "已拒绝"
+					type: "后日"
 				}, ],
 			};
 		},
 		components: {
-			recordCard1,
-			search
+			recordCard2,
+			search2
 		},
 		methods: {
-			openSearch() {
-				uni.navigateTo({
-					url: '/pages/search/search'
-				});
-				// console.log(TabCurtest)
-			},
+			// openSearch() {
+			// 	uni.navigateTo({
+			// 		url: '/pages/search/search'
+			// 	});
+			// 	// console.log(TabCurtest)
+			// },
 			showModal(e) {
 				this.modalName = e.currentTarget.dataset.target
 			},
