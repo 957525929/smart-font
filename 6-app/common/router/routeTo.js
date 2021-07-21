@@ -29,7 +29,7 @@ function goPage(args) {
 		default:
 			throw new Error('参数必须是对象或者字符串')
 	}
-
+	
 	if (isObject(query)) {
 		queryStr = encodeURIComponent(JSON.stringify(query))
 	} else {

@@ -50,26 +50,42 @@
 
     <!-- table区域-begin -->
     <div id="dataHotelTable">
-      <a-table :data-source="dataHotel" :pagination="false" rowKey="id">
-        <a-table-column title="协议酒店名称" data-index="hotel" align="left" fixed="left"></a-table-column>
+      <a-table :data-source="dataHotel" :pagination="false" rowKey="id" :columns="columns">
+        <!-- <a-table-column title="协议酒店名称" data-index="hotel" align="left" fixed="left"></a-table-column>
         <a-table-column title="协议编号" data-index="id" align="center"></a-table-column>
         <a-table-column title="星级" data-index="level" align="center"></a-table-column>
         <a-table-column title="联系人" data-index="dutyName" align="center"></a-table-column>
         <a-table-column title="联系电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="位置" data-index="address" align="center"></a-table-column>
-        <!-- <a-table-column title="备注信息" data-index="remark" align="center"></a-table-column> -->
         <a-table-column title="操作" align="center" fixed="right">
           <template slot-scope="record">
-            <!-- <a-button :style="{ background: 'orange', color: 'white' }" @click="Modify(record)">修改</a-button> -->
             <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
             <a-divider type="vertical" />
             <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
-              <!-- <a-button :style="{ background: 'red', color: 'white' }">删除</a-button> -->
               <a href="javascript:;" :style="{  color: 'red' }">删除</a>
             </a-popconfirm>
           </template>
-        </a-table-column>
+        </a-table-column>-->
+        <span slot="operation" slot-scope="record">
+          <!-- <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a> -->
+          <a @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
+          <a-divider type="vertical" />
+          <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+            <!-- <a href="javascript:;" :style="{  color: 'red' }">删除</a> -->
+            <a :style="{  color: 'red' }">删除</a>
+          </a-popconfirm>
+        </span>
+        <a-table
+          slot="expandedRowRender"
+          slot-scope="record"
+          :columns="innerColumns"
+          :data-source="record.innerData"
+          :pagination="false"
+          size="small"
+          :style="{width: '700px'}"
+        ></a-table>
       </a-table>
+      <br />
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
 
@@ -165,50 +181,162 @@ const dataHotel = [
     id: 'N1201',
     dutyName: '李霞',
     dutyTel: '13759655332',
-    hotel: '华宜时尚酒店',
+    hotel: '福州富力威斯汀酒店',
     level: '五',
-    address: '北京东城区国瑞城西花市大街上23号',
-    remark: '折扣力度3折'
+    address: '福州江滨中大道366号',
+    remark: '折扣力度3折',
+    innerData: [
+      {
+        key: 21,
+        roomType: '普通单人间',
+        price: 135
+      },
+      {
+        key: 21,
+        roomType: '普通双人间',
+        price: 185
+      },
+      {
+        key: 22,
+        roomType: '豪华单人间',
+        price: 160
+      },
+
+      {
+        key: 22,
+        roomType: '豪华双人间',
+        price: 215
+      }
+    ]
   },
   {
     id: 'N1202',
-    dutyName: '王莉莉',
-    dutyTel: '13759655348',
-    hotel: '香格里拉酒店',
-    address: '云南迪庆藏族建塘镇池慈卡1号',
-    level: '四',
-    remark: '折扣力度2折'
-  },
-  {
-    id: 'N1203',
     dutyName: '尤晓梅',
     dutyTel: '13053955537',
     hotel: '福州品悦酒店',
     address: '福州东浦路59号',
     level: '四',
-    remark: '折扣力度4折'
+    remark: '折扣力度4折',
+    innerData: [
+      {
+        key: 21,
+        roomType: '普通单人间',
+        price: 120
+      },
+      {
+        key: 21,
+        roomType: '普通双人间',
+        price: 165
+      },
+      {
+        key: 22,
+        roomType: '豪华单人间',
+        price: 140
+      },
+
+      {
+        key: 22,
+        roomType: '豪华双人间',
+        price: 190
+      }
+    ]
   },
   {
-    id: 'N1204',
+    id: 'N1203',
     dutyName: '黄丽娟',
     dutyTel: '13659655381',
-    hotel: '世纪金源酒店',
+    hotel: '福州世纪金源酒店',
     address: '福州温泉公园路59号',
     level: '四',
-    remark: '折扣力度3折'
+    remark: '折扣力度3折',
+    innerData: [
+      {
+        key: 21,
+        roomType: '普通单人间',
+        price: 120
+      },
+      {
+        key: 21,
+        roomType: '普通双人间',
+        price: 150
+      },
+      {
+        key: 22,
+        roomType: '豪华单人间',
+        price: 140
+      },
+
+      {
+        key: 22,
+        roomType: '豪华双人间',
+        price: 180
+      }
+    ]
   }
 ]
-
+const columns = [
+  {
+    title: '协议酒店名称',
+    dataIndex: 'hotel',
+    align: 'left'
+  },
+  {
+    title: '协议编号',
+    dataIndex: 'id',
+    align: 'center'
+  },
+  {
+    title: '星级',
+    dataIndex: 'level',
+    align: 'center'
+  },
+  {
+    title: '联系人',
+    dataIndex: 'dutyName',
+    align: 'center'
+  },
+  {
+    title: '联系电话',
+    dataIndex: 'dutyTel',
+    align: 'center'
+  },
+  {
+    title: '位置',
+    dataIndex: 'address',
+    align: 'center'
+  },
+  {
+    title: '操作',
+    align: 'center',
+    scopedSlots: { customRender: 'operation' }
+  }
+]
+const innerColumns = [
+  {
+    title: '房型',
+    dataIndex: 'roomType',
+    key: 'roomType',
+    align: 'center',
+    width: '100px'
+  },
+  {
+    title: '价格',
+    dataIndex: 'price',
+    key: 'price',
+    align: 'center'
+  }
+]
 export default {
   data() {
     return {
       dataHotel,
+      columns,
+      innerColumns,
       queryParam: {
         name: '',
         id: '',
         address: ''
       },
-
       visibleAdd: false,
       visibleModify: false,
       labelCol: { span: 6 },

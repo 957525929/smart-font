@@ -28,6 +28,12 @@ const router = [{
 	}, {
 		name: "fixReportList",
 		path: baseWorkplace+"/fixReport/fixReportList",
+	},{
+		name: "taskRecord",
+		path: baseWorkplace+"/taskRecord/taskRecord"
+	},{
+		name: "taskRecordDetail",
+		path: baseWorkplace+"/taskRecord/taskRecordDetail"
 	}, {
 		name: "fixTask",
 		path: baseWorkplace+"/fixTask/fixTask"

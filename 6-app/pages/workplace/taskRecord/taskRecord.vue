@@ -1,6 +1,6 @@
 <template>
 	<view class="text-gray">
-		<cu-custom bgColor="bg-purple" :isBack="true"><block slot="backText">返回</block><block slot="content">养护任务</block></cu-custom>
+		<cu-custom bgColor="bg-purple" :isBack="true"><block slot="backText">返回</block><block slot="content">历史任务</block></cu-custom>
 		<view class="cu-card article">
 			<TaskCardItem :item="item" v-for="item in taskList" :key="item.taskId" @handleTopRight="goTo"></TaskCardItem>
 		</view>
@@ -12,16 +12,13 @@
 	export default {
 		data() {
 			return {
-				taskList:list.proTaskList[0]
+				taskList:list.taskList[1].filter(item=>item.type==4)
 			};
 		},
 		methods: {
 			goTo(data){
-				this.$goPage({name:'checkTaskDetail',params:{taskId:data.taskId}})
+				this.$goPage({name:'taskRecordDetail',params:{taskId:data.taskId}})
 			}
 		}
 	}
 </script>
-
-<style>
-</style>

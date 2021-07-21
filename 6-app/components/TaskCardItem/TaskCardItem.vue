@@ -9,8 +9,8 @@
 			</view>
 		</view>
 		<view class="margin-bottom margin-lr text-lg content">
-			<view class="cu-avatar lg radius margin-right" :class="item.type==2?'bg-blue ':'bg-green '" v-if="showImage">
-				<text class="avatar-text">{{item.type==2?"维修":"保养"}}</text>
+			<view class="cu-avatar lg radius margin-right" :class="item.taskType===0?'bg-blue ':'bg-green '" v-if="showImage">
+				<text class="avatar-text">{{item.taskType===0?"维修":"保养"}}</text>
 			</view>
 			<view class="desc text-cut ">
 				{{item.content}}

@@ -12,7 +12,7 @@
 	export default {
 		data() {
 			return {
-				taskList:list.taskList[0].filter(item=>item.type==2),
+				taskList:list.taskList[0].filter(item=>item.type==3),
 				proTaskList:list.proTaskList[1]
 			};
 		},
