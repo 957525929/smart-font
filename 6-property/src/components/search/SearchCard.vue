@@ -14,8 +14,26 @@
                                 >{{ x.searchValue }}
                             </a-select-option>
                         </a-select>
-                        <a-cascader v-else-if="item.type === 'a-cascader'" :options="item.valueEnum" placeholder="" change-on-select v-decorator="[`${item.key}`]"/>
-                        <component style="width: 100%" :is="item.type || 'a-input'" v-decorator="[`${item.key}`]" v-else ></component>
+                        <a-cascader
+                            v-else-if="item.type === 'a-cascader'"
+                            :options="item.valueEnum"
+                            placeholder=""
+                            change-on-select
+                            v-decorator="[`${item.key}`]"
+                        />
+                        <a-range-picker
+                            :ranges="{ '今日': [moment(), moment()], '本月': [moment().startOf('month'), moment().endOf('month')] , '本年': [moment().startOf('year'), moment().endOf('year')]}"
+                            v-else-if="item.type === 'a-range-picker'"
+                            v-decorator="[`${item.key}`]"
+                            :default-value="[moment().startOf('month'), moment().endOf('month')]"
+                        />
+                        <component
+                            style="width: 100%"
+                            :is="item.type || 'a-input'"
+                            v-decorator="[`${item.key}`]"
+                            v-else
+                        >
+                        </component>
                         <!-- :placeholder="ifshowPlace(item.type,item.title)" v-decorator="[`${item.key}`]"-->
                     </a-form-item>
                 </a-col>
@@ -32,7 +50,9 @@
         </a-form>
     </div>
 </template>
+
 <script>
+import moment from 'moment'
 export default {
     name: 'SearchCard',
     props: {
@@ -58,6 +78,7 @@ export default {
         },
     },
     methods: {
+        moment,
         ifshowPlace(type, title) {
             if (type === 'a-input') {
                 return `请输入${title}`

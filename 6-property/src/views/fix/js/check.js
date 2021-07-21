@@ -1,143 +1,192 @@
 // 待核查
-import { devType,devStatus} from "@/utils/dataDictionary.js";
+import {
+  devType,
+  devStatus
+} from "@/utils/dataDictionary.js";
 // 待维修
-export const columns=[
-    {
-        dataIndex: 'devId',
-        slots: { title: '问题编号' },
-        scopedSlots: { customRender: 'devId' },
-        title: '问题编号',
-        width: 80,
-        key: 'devId'
+export const columns = [{
+    dataIndex: 'orderId',
+    title: '工单编号',
+    width: 80,
+    key: 'orderId',
+    value: ""
+  },
+  {
+    title: '工单类型',
+    dataIndex: 'devType',
+    width: 100,
+    key: 'devType',
+    type: 'a-select',
+    valueEnum: devType,
+    value: ""
+  },
+  {
+    dataIndex: 'fixStaff',
+    key: 'fixStaff',
+    title: '维修员',
+    width: 50,
+    value: ""
+  },
+  {
+    title: '维修员联系方式',
+    dataIndex: 'fixPhone',
+    key: 'fixPhone',
+    width: 80,
+    value: "",
+    hideInSearch: true,
+  },
+  {
+    title: '预计完成时间',
+    key: 'expectTime',
+    dataIndex: 'expectTime',
+    width: 100,
+    type: 'a-range-picker',
+    value: ""
+  },
+  {
+    title: '维修地址',
+    dataIndex: 'address',
+    key: 'address',
+    width: 100,
+    value: "",
+    hideInSearch: true,
+  },
+  {
+    dataIndex: 'orderPerson',
+    key: 'orderPerson',
+    title: '上报人',
+    width: 80,
+    value: ""
+  },
+  {
+    title: '上报人联系方式',
+    dataIndex: 'phone',
+    key: 'phone',
+    width: 80,
+    value: "",
+    hideInSearch: true,
+    hideInTable: true,
+  },
+  {
+    title: '上报时间',
+    key: 'orderTime',
+    dataIndex: 'orderTime',
+    width: 100,
+    type: 'a-range-picker',
+    value: ""
+  }, 
+  {
+    title: '上报描述',
+    dataIndex: 'description',
+    width: 100,
+    key: 'description',
+    hideInSearch: true,
+    hideInTable: true,
+    value: ""
+  }, {
+    title: '上报图片',
+    dataIndex: 'imgs',
+    width: 100,
+    key: 'imgs',
+    hideInSearch: true,
+    hideInTable: true,
+    scopedSlots: {
+      customRender: 'imgs'
     },
-    {
-        title: '问题描述',
-        dataIndex: 'devName',
-        width: 100,
-        key: 'devName',
+    value: ""
+  }, {
+    title: '处理图片',
+    dataIndex: 'handleimgs',
+    width: 100,
+    key: 'handleimgs',
+    hideInSearch: true,
+    hideInTable: true,
+    scopedSlots: {
+      customRender: 'handleimgs'
     },
-    {
-        title: '维修类型',
-        dataIndex: 'devType',
-        width: 100,
-        key: 'devType',
-        type:'a-select',
-        valueEnum:devType
+    value: ""
+  },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    scopedSlots: {
+      customRender: 'action'
     },
-    {
-        title: '问题上报时间',
-        key: 'deliveryTime',
-        dataIndex: 'deliveryTime',
-        scopedSlots: { customRender: 'tags' },
-        width: 100,
-        type: 'a-range-picker',
-    },
-    {
-        dataIndex: 'institution',
-        key:'institution',
-        title: '业主单位',
-        width: 80,
-    },
-    {
-        title: '业主联系方式',
-        dataIndex: 'phone',
-        key:'phone',
-        width: 80,
-    },
-    {
-        title: '维修员',
-        key: 'fixStaff',
-        dataIndex: 'fixStaff',
-        scopedSlots: { customRender: 'tags' },
-        width: 80,
-    },
-    {
-        title: '预计完成时间',
-        key: 'fixedTime',
-        dataIndex: 'fixedTime',
-        scopedSlots: { customRender: 'tags' },
-        width: 80,
-        type: 'a-range-picker',
-    },
-    {
-        title: '操作',
-        dataIndex: 'action',
-        scopedSlots: { customRender: 'action' },
-        width: 80,
-        hideInSearch:true
-    },
+    width: 80,
+    hideInSearch: true,
+    hideInDetail: true
+  }
 ]
-export const data=[
-    {
-        key: '1',
-        devId: '3',
-        devName:"卫生间停水",
-        taskStatus:3,
-        devType:2,
-        devStatus: 5,
-        address: '烟草大厦3楼卫生间',
-        institution: '福建烟草公司',
-        phone: '18232145698',
-        fixStaff: '王翔',
-        deliveryTime:"2021-06-20 17：55：55",
-        fixedTime: '2021-06-22 20：00：00',
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        }]
-    }
-]
-export const searchCon={}
-export const infoDetail =[
-    {
-        title: '问题编号',
-        key: 'devId',
-        value:""
-    },
-    {
-        title: '问题描述',
-        value:"",
-        key: 'devName'
-    },
-    {
-        title: '设备类型',
-        value:"",
-        key: 'devType',
-        type:"a-select",
-        valueEnum:devType
-    },
-    // {
-    //     title: '实际状态',
-    //     key: 'devStatus',
-    //     value:"",
-    //     type:"a-select",
-    //     valueEnum:devStatus
-    // },
-    {
-        key: 'institution',
-        title: '业主单位',
-        value:"",
-    },
-    {
-        title: '业主联系方式',
-        key: 'phone',        
-        value:"",
-    },
-    // {
-    //     title: '技术状况',
-    //     key: 'techSituation',
-    //     value:"",
-    //     type:"a-select"
-    // },
-    {
-        title: '维修员',
-        key: 'fixStaff',
-        value:""
-    },
-    {
-        title: '上报时间',
-        key: 'deliveryTime',
-        value:"",
-        type:"a-range-picker"
-    }
+export const data = [{
+  key: 3,
+  taskStatus: 3,
+  orderId: '4',
+  devType: 2,
+  fixStaff: '王翔',
+  fixPhone: "18254621147",
+  expectTime: "2021-07-22 20:00: 00",
+  orderPerson: '小昭',
+  phone: '18232145694',
+  address: '烟草大厦3楼卫生间',
+  orderTime: '2021-07-20 17:55:55',
+  description: "卫生间停水",
+  imgs: ['/assets/logo.png'],
+  handleimgs:['/assets/logo.png'],
+  action: [{
+    tagName: "详情",
+    com: "TableDrawer"
+  }]
+}]
+export const searchCon = {}
+export const infoDetail = [{
+    title: '问题编号',
+    key: 'devId',
+    value: ""
+  },
+  {
+    title: '问题描述',
+    value: "",
+    key: 'devName'
+  },
+  {
+    title: '设备类型',
+    value: "",
+    key: 'devType',
+    type: "a-select",
+    valueEnum: devType
+  },
+  // {
+  //     title: '实际状态',
+  //     key: 'devStatus',
+  //     value:"",
+  //     type:"a-select",
+  //     valueEnum:devStatus
+  // },
+  {
+    key: 'institution',
+    title: '业主单位',
+    value: "",
+  },
+  {
+    title: '业主联系方式',
+    key: 'phone',
+    value: "",
+  },
+  // {
+  //     title: '技术状况',
+  //     key: 'techSituation',
+  //     value:"",
+  //     type:"a-select"
+  // },
+  {
+    title: '维修员',
+    key: 'fixStaff',
+    value: ""
+  },
+  {
+    title: '上报时间',
+    key: 'deliveryTime',
+    value: "",
+    type: "a-range-picker"
+  }
 ]

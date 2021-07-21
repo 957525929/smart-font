@@ -1,11 +1,11 @@
 <template>
-    <PageTemplate :columns="devColumns" :searchCon="searchCon">
+    <PageTemplate :columns="columns" :searchCon="searchCon">
         <a-button type="primary" @click="showDevForm" icon="plus">设备登记</a-button>
         <a-button type="primary" icon="import" style="marginLeft: 10px">导入</a-button>
         <a-button type="primary" icon="export" style="marginLeft: 10px">导出</a-button>
         <TableModal title="设备登记" :infoDetail="loginInfo" ref="devModal"></TableModal>
         <a-table
-            :columns="devColumns"
+            :columns="columns"
             :data-source="data"
             :pagination="{
                 size: 'small',
@@ -64,8 +64,8 @@ export default {
         return {
             searchCon: {},
             data: NEW_DEVLIST.data,
-            devColumns: NEW_DEVLIST.devColumns,
-            infoDetail: NEW_DEVLIST.infoDetail.filter((item) => !item.hideInDetail),
+            columns: NEW_DEVLIST.devColumns.filter((item) => !item.hideInTable),
+            infoDetail: NEW_DEVLIST.devColumns.filter((item) => !item.hideInDetail),
             loginInfo: NEW_DEVLIST.loginInfo.filter((item) => !item.hideInLogin),
             visible: false,
         }
@@ -75,7 +75,7 @@ export default {
             this.$router.push({ name: url, params: { id: id } })
         },
         getList() {
-            devColumns.forEach((item) => {
+            this.columns.forEach((item) => {
                 if (item.valueEnum) {
                     this.data.map((res) => {
                         res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
@@ -83,6 +83,7 @@ export default {
                     })
                 }
             })
+            console.log(this.data)
         },
         showDevForm() {
             this.$refs.devModal.showModal()
@@ -91,7 +92,7 @@ export default {
             let tempValue = [...NEW_DEVLIST.typeToComponent].filter(([key, value]) => key === type)[0]
             //处理数据
             let tempData = this.data.filter((item) => item.devId === id)[0]
-            this.infoDetail = this.infoDetail.map((item) => {
+            this.infoDetail.map((item) => {
                 item.value = tempData[item.key]
                 return item
             })

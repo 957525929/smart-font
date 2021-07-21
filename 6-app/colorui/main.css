@@ -2363,7 +2363,7 @@ button.cuIcon.lg {
 	line-height: 1.2em;
 	flex: 1;
 	font-size: 28upx;
-	padding: 0;
+	padding: 5upx;
 }
 
 .cu-form-group.align-start .title {

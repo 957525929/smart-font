@@ -134,6 +134,41 @@ const proTaskList = {
 	}]
 }
 
+const proAllBasicData = [{
+		taskType: 1,
+		key: 0,
+		taskId: 1,
+		taskState:0,
+		devType: "烟草大厦18楼频繁断电",
+		taskType: "一级保养",
+		type: 0,
+		titleLeft: '烟草大厦',
+		titleRight: "查看",
+		footerRight: '2021-06-23 14:25:35'
+	},{
+		taskType: 1,
+		key: 1,
+		taskId: 2,
+		taskState:1,
+		content: "空调漏水",
+		taskType: "设备点检",
+		type: 1,
+		titleLeft: '烟草大厦',
+		titleRight: "查看",
+		footerRight: '2021-06-24 14:25:12'
+	},{
+		taskType: 1,
+		key: 2,
+		taskId: 2,
+		taskState:2,
+		content: "电路老化检查",
+		taskType: "设备巡检",
+		type: 2,
+		titleLeft: '烟草大厦',
+		titleRight: "查看",
+		footerRight: '2021-06-19 14:25:35'
+	}]
+
 const devTypeTree = [{
 		children: [{
 				key: '1-1',
