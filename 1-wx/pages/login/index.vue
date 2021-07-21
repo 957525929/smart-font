@@ -58,11 +58,11 @@
 			open() {
 				if (this.status === 1) {
 					uni.navigateTo({
-						url: '/pages/home/staffHome'
+						url: '/pages/index/staff?PageCur=staffHome'
 					});
 				} else {
 					uni.navigateTo({
-						url: '/pages/home/touristHome',
+						url: '/pages/index/tourist?PageCur=touristHome',
 					});
 				}
 

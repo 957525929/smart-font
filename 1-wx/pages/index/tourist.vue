@@ -1,6 +1,7 @@
 <template>
 	<view>
 		<!-- <appoient v-if="PageCur=='appoient'"></appoient> -->
+		<touristHome v-if="PageCur=='touristHome'"></touristHome>
 		<record v-if="PageCur=='record'"></record>
 		<scan v-if="PageCur=='scan'"></scan>
 		<!-- <allow v-if="PageCur=='allow'"></allow> -->
@@ -14,6 +15,13 @@
 				</view>
 				<view :class="PageCur=='appoient'?'text-orange':'text-gray'">访问预约</view>
 			</view> -->
+			
+			<view class="action" @click="NavChange" data-cur="touristHome">
+				<view class='cuIcon-cu-image'>
+					<text :class="PageCur=='touristHome'?'text-orange cuIcon-home':'text-gray cuIcon-home'"></text>
+				</view>
+				<view :class="PageCur=='touristHome'?'text-orange':'text-gray'">首页</view>
+			</view>
 
 			<view class="action" @click="NavChange" data-cur="record">
 				<view class='cuIcon-cu-image'>

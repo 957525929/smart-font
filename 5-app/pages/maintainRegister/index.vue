@@ -57,14 +57,14 @@
 					</view>
 				</picker>
 			</view>
-			<view class="cu-form-group">
+			<!-- <view class="cu-form-group">
 				<view class="title">下一保养日期</view>
 				<picker mode="date" :value="date1" @change="DateChange2">
 					<view class="picker">
 						{{date2}}
 					</view>
 				</picker>
-			</view>
+			</view> -->
 			<view class="cu-form-group">
 				<view class="title">保养单位</view>
 				<input></input>
@@ -73,12 +73,12 @@
 				<view class="title">保养费用</view>
 				<input></input>
 			</view>
-			<view class="cu-form-group">
+			<!-- <view class="cu-form-group">
 				<view class="title">间隔里程</view>
 				<input></input>
-			</view>
+			</view> -->
 			<view class="cu-form-group">
-				<view class="title">更换主要部件</view>
+				<view class="title">备注</view>
 				<input></input>
 			</view>
 			<view class="cu-bar bg-white margin-top">

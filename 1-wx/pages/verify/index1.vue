@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-yellow" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">申请审批</block>
+			<block slot="content">详情</block>
 		</cu-custom>
 
 
@@ -37,11 +37,11 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">开始时间</view>
-				{{time}}
+			{{time}}
 		</view>
 		<view class="cu-form-group">
 			<view class="title">结束时间</view>
-				{{time1}}
+			{{time1}}
 		</view>
 
 		<view class="cu-bar bg-white margin-top">
@@ -55,48 +55,15 @@
 			{{content}}
 		</view>
 
-		<view class="bottom padding">
-			<view class="leftBottom">
-				<view class='padding'>
-					<button class="cu-btn lg bg-red" @tap="showModal" data-target="DialogModal1">拒绝</button>
-				</view>
-				<!-- 	<view class="text-orange"></view> -->
-			</view>
-			<view class="rightBottom">
-				<view class='padding'>
-					<button class="cu-btn lg bg-white" @click="hideGoto">同意</button>
-				</view>
-			</view>
-		</view>
-
-		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
-			<view class="cu-dialog">
-				<view class="cu-bar bg-white justify-end">
-					<view class="content">拒绝原因</view>
-					<view class="action" @tap="hideModal">
-						<text class="cuIcon-close text-red"></text>
-					</view>
-				</view>
-				<view class="padding-xl">
-					<view class="cu-form-group">
-						<view class="title">拒绝原因</view>
-						<input placeholder="请说明拒绝原因" name="input"></input>
-					</view>
-				</view>
-				<view class="cu-bar bg-white justify-end">
-					<view class="action">
-						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
-						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
-
-					</view>
-				</view>
+		<view class="padding margin text-center">
+			<view class="cu-btn bg-yellow lg block shadow radius margin-xl" @tap="hideModal">
+				已通过
 			</view>
 		</view>
 
 	</view>
 
 </template>
-
 <script>
 	export default {
 		created: function() {
@@ -128,6 +95,7 @@
 					phone: '13675824231',
 					type: 'allow',
 					people: '倪友聪',
+					content: '被访问人不在'
 				},
 				PageCur: 'appoient',
 				date: '',

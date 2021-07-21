@@ -129,6 +129,17 @@
 				}
 			}
 		},
+		{
+			"path": "pages/statistics/driverWorkload/details",
+			"style": {
+				"navigationBarTitleText": "司机工作量详情",
+				"enablePullDownRefresh": true, //开启下拉刷新
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
 		//以下为colorUI示例模板
 		{
 			"path": "pages/basics/layout",

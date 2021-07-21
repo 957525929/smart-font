@@ -9,8 +9,11 @@
 				<uni-forms-item label="车辆" :label-width='labelWidth' name="licenseNum">
 					<uni-combox :candidates="cars" v-model="formData.licenseNum"></uni-combox>
 				</uni-forms-item>
-				<uni-forms-item label="收车里程" :label-width='labelWidth' name="distance">
+				<uni-forms-item label="预估里程" :label-width='labelWidth' name="distance">
 					<uni-easyinput :inputBorder="false" v-model="formData.distance" />
+				</uni-forms-item>
+				<uni-forms-item label="实际里程" :label-width='labelWidth' name="trueDistance">
+					<uni-easyinput :inputBorder="false" v-model="formData.trueDistance" />
 				</uni-forms-item>
 				<uni-forms-item label="备注" :label-width='labelWidth' name="remark">
 					<uni-easyinput :inputBorder="false" v-model="formData.remark" type="textarea" />
@@ -44,8 +47,9 @@
 				labelWidth: 85,
 				cars: [],
 				formData: {
-					licenseNum: undefined,
-					distance: undefined,
+					licenseNum: '闽A123401',
+					distance: '7公里',
+					trueDistance:undefined,
 					remark: ''
 				},
 				imageValue:undefined

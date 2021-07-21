@@ -6,7 +6,7 @@
 				<view class="card">
 					<span>
 						<!-- 显示不同图片 -->
-						<image class="card-img" :src="imgSrc[cardType.id]" mode="scaleToFill"
+						<image class="card-img" :src="'../../static/已通过.png'" mode="scaleToFill"
 							style="width: 60px; height: 60px;"></image>
 					</span>
 					<span class="card-center">
@@ -17,15 +17,8 @@
 							电话号码：{{item.phone}}
 						</view>
 						<view>
-							申请时间：{{item.time}}
+							预约见面时间：{{item.time}}
 						</view>
-					</span>
-					<span class="card-right">
-						<!-- 切换不同颜色 -->
-						<view :style="styleObject[cardType.id]">
-							{{item.type}}
-						</view>
-						
 					</span>
 				</view>
 			</view>
@@ -35,62 +28,74 @@
 
 <script>
 	export default {
+
 		data() {
 			return {
+				date: '',
 				applylist: [{
 						visit: '魏佳楠',
 						phone: '18520176742',
-						time: '2020年1月21日 13:46',
-						type: '待审核',
+						type: '今日',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()) + "日" + ' 9:00~18.00'
 					},
 					{
 						visit: '魏佳楠',
 						phone: '18520176742',
-						time: '2020年1月21日 13:46',
-						type: '待审核',
+						type: '今日',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()) + "日" + ' 9:00~18.00'
 					},
 					{
 						visit: '魏佳楠',
 						phone: '18520176742',
-						time: '2020年1月21日 13:46',
-						type: '待审核',
+						type: '今日',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()) + "日" + ' 9:00~18.00'
 					},
 					{
 						visit: '魏佳楠',
 						phone: '18520176742',
-						time: '2020年1月21日 13:46',
-						type: '已通过',
+						type: '明日',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()+1) + "日" + ' 9:00~18.00'
 					},
 					{
 						visit: '魏佳楠',
 						phone: '18520176742',
-						time: '2020年1月21日 13:46',
-						type: '已通过',
+						type: '明日',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()+1) + "日" + ' 9:00~18.00'
 					},
 					{
 						visit: '魏佳楠',
 						phone: '18520176742',
-						time: '2020年1月21日 13:46',
-						type: '已通过',
+						type: '明日',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()+1) + "日" + ' 9:00~18.00'
 					},
 					{
 						visit: '魏佳楠',
 						phone: '18520176742',
-						time: '2020年1月21日 13:46',
-						type: '已拒绝',
+						type: '后日',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()+2) + "日" + ' 9:00~18.00'
 					},
 					{
 						visit: '魏佳楠',
 						phone: '18520176742',
-						time: '2020年1月21日 13:46',
-						type: '已拒绝',
+						type: '后日',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()+2) + "日" + ' 9:00~18.00'
 					},
-				],
-				// 图片
-				imgSrc: [
-					"../../static/待审核.png",
-					"../../static/已通过.png",
-					"../../static/已拒绝.png"
 				],
 				// 颜色
 				styleObject: [{

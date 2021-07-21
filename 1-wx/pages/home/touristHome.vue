@@ -1,6 +1,6 @@
 <template>
 	<view class="cu-card case">
-		<scroll-view scroll-y class="page">
+		<scroll-view scroll-y class="page bg-white">
 			<view class="banner">
 				<image src="/static/workplace/banner.png" mode="widthFix" class='response banner-back'></image>
 				<view class="banner-title">访问预约</view>
@@ -32,7 +32,7 @@
 						route:'/pages/index/tourist?PageCur=record'
 					},
 					{
-						title: '扫码',
+						title: '申请访问',
 						name: 'staff',
 						color: 'blue',
 						cuIcon: 'scan',
