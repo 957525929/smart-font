@@ -17,12 +17,80 @@
 				<view class="title">会议名称</view>
 				<input placeholder="项目周例会15" name="input"></input>
 			</view>
+			<view class="cu-form-group" style="margin-top: 10px;">
+				<!-- <view class="title">参会人数</view> -->
+				<text class="cuIcon-title text-orange "></text>参会人数
+				<input placeholder="10" name="input"  style="padding-left: 10px;"></input>
+			</view>
+			<view class="cu-form-group">
+				<!-- <view class="title">会议日期</view> -->
+				<text class="cuIcon-title text-orange "></text> 会议日期
+				<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+					<view class="picker">
+						{{date}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<!-- <view class="title">会议时间段</view> -->
+				<text class="cuIcon-title text-orange "></text> 会议时段
+				<picker mode="time" :value="time" start="08:01" end="21:01" @change="TimeChange">
+					<view class="picker">
+						{{time}}
+					</view>
+				</picker>
+				<picker mode="time" :value="timeend" start="09:01" end="22:01" @change="TimeChangeend">
+					<view class="picker">
+						{{timeend}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-bar bg-white margin-top" style="margin-top: 0;">
+				<view class="action">
+					<text ></text> 基本条件
+				</view>
+				<view class="action">
+					<button class="cu-btn bg-green shadow" @tap="showModal" data-target="ChooseModal">选择</button>
+				</view>
+			</view>
+			<!-- 
+			<checkbox-group class="block" @change="CheckboxChange">
+				<view class="cu-form-group margin-top">
+					<view class="title">会议室基本条件(checkbox)</view>
+					<checkbox :class="checkbox[0].checked?'checked':''" :checked="checkbox[0].checked?true:false" value="A"></checkbox>
+					<checkbox :class="checkbox[0].checked?'checked':''" :checked="checkbox[0].checked?true:false" value="A"></checkbox>
+					<checkbox :class="checkbox[0].checked?'checked':''" :checked="checkbox[0].checked?true:false" value="A"></checkbox>
+					<checkbox :class="checkbox[0].checked?'checked':''" :checked="checkbox[0].checked?true:false" value="A"></checkbox>
+				</view>
+				
+			</checkbox-group> -->
+	
+			<view class="cu-modal bottom-modal" :class="modalName=='ChooseModal'?'show':''" @tap="hideModal">
+				<view class="cu-dialog" @tap.stop="">
+					<view class="cu-bar bg-white">
+						<view class="action text-blue" @tap="hideModal">取消</view>
+						<view class="action text-green" @tap="hideModal">确定</view>
+					</view>
+					<view class="grid col-3 padding-sm">
+						<view v-for="(item,index) in checkbox" class="padding-xs" :key="index">
+							<button class="cu-btn orange lg block" :class="item.checked?'bg-orange':'line-orange'" @tap="ChooseCheckbox"
+							 :data-value="item.value"> {{item.name}}
+							</button>
+						</view>
+					</view>
+				</view>
+			</view>
 			<view class="cu-form-group">
 				<view class="title">会议地点</view>
-				<input placeholder="福州市烟草专卖局公司" name="input"></input>
-				<text class='cuIcon-locationfill text-orange'></text>
+				<picker mode="multiSelector" @change="MultiChange" @columnchange="MultiColumnChange" :value="multiIndex" :range="multiArray">
+					<view class="picker">
+						{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+					</view>
+				</picker>
+	
+				<!-- <text class='cuIcon-locationfill text-orange'></text> -->
 			</view>
-			<view class="cu-bar bg-white margin-top">
+			<!-- <view class="cu-bar bg-white margin-top">
 				<view class="action">
 					<text class="cuIcon-title text-orange "></text> 会议室选择
 				</view>
@@ -44,35 +112,10 @@
 						</view>
 					</radio-group>
 				</view>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">会议日期</view>
-				<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
-					<view class="picker">
-						{{date}}
-					</view>
-				</picker>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">会议时间</view>
-				<picker mode="time" :value="time" start="09:01" end="21:01" @change="TimeChange">
-					<view class="picker">
-						{{time}}
-					</view>
-				</picker>
-			</view>
+			</view> -->
 			<view class="cu-form-group">
 				<view class="title">备注</view>
 				<input placeholder="参与人:产品组所有人  内容:第一期XX项目周例会" name="input"></input>
-			</view>
-		
-			<view class="cu-form-group margin-top">
-				<view class="title">短信通知</view>
-				<switch @change="SwitchA" :class="switchA?'checked':''" :checked="switchA?true:false"></switch>
-			</view>
-			<view class="cu-form-group margin-top">
-				<view class="title">会前提醒</view>
-				<switch @change="SwitchB" :class="switchB?'checked':''" :checked="switchB?true:false"></switch>
 			</view>
 			<!-- #ifndef H5 || APP-PLUS || MP-ALIPAY -->
 			<view class="box">
@@ -89,7 +132,7 @@
 						</view>
 					</view>
 					<view class="padding-xl">
-						您已成功提交会议申请
+						您已成功提交会议室预约申请
 					</view>
 				</view>
 			</view>
@@ -103,17 +146,54 @@
 			return {
 				index: -1,
 				picker: [],
-				time: '12:01',
+				time: '08:00',
+				timeend:'09:00',
 				date: '2018-12-25',
 				switchA: false,
 				switchB: true,
 				modalName: null,
 				radio: 'radio1',
+				//条件选择
+				checkbox: [{
+					value: 0,
+					name: '茶水',
+					checked: false,				
+				}, {
+					value: 1,
+					name: '排气扇',
+					checked: true,
+				}, {
+					value: 2,
+					name: '空调',
+					checked: true,
+				}, {
+					value: 3,
+					name: '绿化植物',
+					checked: false,
+				}, {
+					value: 4,
+					name: '多媒体',
+					checked: false,
+				}, {
+					value: 5,
+					name: '白板',
+					checked: false,
+				}],
+				//会议室选择
+				multiIndex: [0, 0, 0],
+				multiArray: [
+					['中国烟草总公司福建省公司机关'],
+					['A区域', 'B区域'],
+					['1号楼', '2号楼','3号楼','4号楼','5号楼']
+				],
 			};
 		},
 		methods: {
 			TimeChange(e) {
 				this.time = e.detail.value
+			},
+			TimeChangeend(e) {
+				this.timeend = e.detail.value
 			},
 			DateChange(e) {
 				this.date = e.detail.value
@@ -133,6 +213,75 @@
 			RadioChange(e) {
 				this.radio = e.detail.value
 			},
+			//条件选择
+			ChooseCheckbox(e) {
+				console.log(e)
+				let items = this.checkbox;
+				let values = e.currentTarget.dataset.value;
+				for (let i = 0, lenI = items.length; i < lenI; ++i) {
+					if (items[i].value == values) 
+					{
+						console.log("当前选中",items[i].name)
+						items[i].checked = !items[i].checked;
+						break
+					}
+				}
+				
+			},
+			//会议室选择
+			MultiChange(e) {
+				this.multiIndex = e.detail.value
+			},
+			MultiColumnChange(e) {
+				let data = {
+					multiArray: this.multiArray,
+					multiIndex: this.multiIndex
+				};
+				data.multiIndex[e.detail.column] = e.detail.value;
+				switch (e.detail.column) {
+					case 0:
+						switch (data.multiIndex[0]) {
+							case 0:
+								data.multiArray[1] = ['A区域', 'B区域'];
+								data.multiArray[2] = ['1号楼', '2号楼','3号楼'];
+								break;
+						}
+						data.multiIndex[1] = 0;
+						data.multiIndex[2] = 0;
+						break;
+					case 1:
+						switch (data.multiIndex[0]) {
+							case 0:
+								switch (data.multiIndex[1]) {
+									case 0:
+										data.multiArray[2] = ['1号楼', '2号楼','3号楼'];
+										break;
+									case 1:
+										data.multiArray[2] = ['4号楼', '5号楼'];
+										break;
+								}
+								break;
+						}
+						data.multiIndex[2] = 0;
+						break;
+				}
+				this.multiArray = data.multiArray;
+				this.multiIndex = data.multiIndex;
+			},
+			// CheckboxChange(e) {
+			// 	var items = this.checkbox,
+			// 		values = e.detail.value;
+			// 	for (var i = 0, lenI = items.length; i < lenI; ++i) {
+			// 		items[i].checked = false;
+			// 		for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
+			// 			if (items[i].value == values[j]) {
+			// 				console.log("当前选中",items[i].name)
+			// 				items[i].checked = true;
+			// 				break
+			// 			}
+			// 		}
+			// 	}
+			// },
 		}
 	}
 </script>
@@ -147,6 +296,16 @@
 	
 	.box view.cu-bar {
 		margin-top: 20upx;
+	}
+	.cardItem {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		margin-top: 5px;
+		width: 300px;
+		flex-wrap: wrap;
+		color: #000000;
 	}
 </style>
 

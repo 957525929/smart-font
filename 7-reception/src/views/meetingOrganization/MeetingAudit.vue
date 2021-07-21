@@ -10,14 +10,14 @@
         <a-col>
           <a-input placeholder="请输入会议名称" v-model="queryParam.name"></a-input>
         </a-col>
-          <a-col :span="1"></a-col>
-           <a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
           <span>编号：</span>
         </a-col>
         <a-col>
           <a-input placeholder="请输入会议编号" v-model="queryParam.id"></a-input>
         </a-col>
-          <a-col :span="1"></a-col>
+        <a-col :span="1"></a-col>
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
@@ -88,6 +88,7 @@
           </template>
         </a-table-column>
       </a-table>
+      <br />
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
     <!-- 不通过填写原因 -->
@@ -212,7 +213,7 @@ export default {
       labelCol: { span: 3 },
       wrapperCol: { span: 18 },
       queryParam: {
-        id:undefined,
+        id: undefined,
         name: undefined,
         dateOne: undefined,
         dateTwo: undefined
@@ -312,7 +313,7 @@ export default {
 }
 </script>
 <style scoped>
-#dataAudit{
+#dataAudit {
   margin-top: 20px;
 }
 </style>

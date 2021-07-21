@@ -5,16 +5,30 @@
 			<block slot="content">访问预约单填写</block>
 		</cu-custom>
 
-		<view class="cu-bar bg-white margin-top">
+		<view class="cu-bar bg-white">
 			<view class='text-xl padding'>
 				<text class="text-black text-bold">· 访问对象</text>
 			</view>
 		</view>
 
-		<view class="cu-form-group margin-top">
-			<view class="title">姓名</view>
-			<input placeholder="请输入访问对象" name="input"></input>
+		<view class="cu-form-group">
+			<view class="title">部门</view>
+			<picker placeholder="请选择部门" @change="PickerChange" :value="index" :range="picker">
+				<view class="picker">
+					{{picker[index]}}
+				</view>
+			</picker>
 		</view>
+		
+		<view class="cu-form-group">
+			<view class="title">姓名</view>
+			<picker placeholder="请选择访问人" @change="PickerChange1" :value="index1" :range="picker1">
+				<view class="picker">
+					{{picker1[index1]}}
+				</view>
+			</picker>
+		</view>
+		
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
@@ -58,11 +72,11 @@
 		</view>
 
 		<view class="cu-form-group">
-			<textarea maxlength="-1" placeholder="请根据需求填写备注"></textarea>
+			<textarea maxlength="-1" placeholder="请填写备注"></textarea>
 		</view>
 
 		<view class="padding margin text-center">
-			<view class="cu-btn bg-orange lg block shadow radius margin-xl">
+			<view class="cu-btn bg-yellow lg block shadow radius margin-xl">
 				提交
 			</view>
 		</view>
@@ -95,18 +109,26 @@
 		},
 		data() {
 			return {
-				index: -1,
+				// index: -1,
 				// picker1: ['张三', '李四', '王五'],
 				date: '',
 				time: '',
 				time1: '',
 				modalName: null,
-				PageCur: 'appoient'
+				PageCur: 'appoient',
+				index: 0,
+				picker: ['财务管理处', '审计处', '科技处','人事处','烟叶管理处'],
+				index1: 0,
+				picker1: ['张三', '李四', '王五'],
 			}
 		},
 		methods: {
 			PickerChange(e) {
 				this.index = e.detail.value
+				// console.log(index)
+			},
+			PickerChange1(e) {
+				this.index1 = e.detail.value
 				// console.log(index)
 			},
 			// textareaBInput(e) {

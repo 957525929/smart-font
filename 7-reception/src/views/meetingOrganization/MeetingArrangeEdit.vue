@@ -2,6 +2,19 @@
   <!-- 会议安排 -->
   <a-card :bordered="false">
     <div>
+      <a-table :data-source="dataSelect" :pagination="false" rowKey="id">
+        <a-table-column title="会议编号" data-index="id" align="left" width="150px" fixed="left"></a-table-column>
+        <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
+        <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>
+        <a-table-column title="会议预算（元）" data-index="budget" align="center"></a-table-column>
+        <a-table-column title="会议时间" data-index="dateTime" align="center"></a-table-column>
+        <a-table-column title="参会人数" data-index="number" align="center"></a-table-column>
+        <a-table-column title="负责人姓名" data-index="dutyName" align="center"></a-table-column>
+        <a-table-column title="负责人电话" data-index="dutyTel" align="center"></a-table-column>
+      </a-table>
+    </div>
+    <br />
+    <div>
       <a-steps :current="current">
         <a-step v-for="item in steps" :key="item.title" :title="item.title" />
       </a-steps>
@@ -30,13 +43,46 @@
           </a-form-model-item>
 
           <a-form-model-item label="选择协议酒店" prop="hotel">
-            <a-select v-model="formHotel.hotel" placeholder="请选择协议酒店">
-              <a-select-option value="香格里拉酒店">香格里拉酒店</a-select-option>
-              <a-select-option value="华宜时尚酒店">华宜时尚酒店</a-select-option>
+            <a-select v-model="formHotel.hotel" placeholder="请选择协议酒店" @change="selectHotel">
+              <a-select-option value="福州富力威斯汀酒店">福州富力威斯汀酒店</a-select-option>
               <a-select-option value="福州品悦酒店">福州品悦酒店</a-select-option>
-              <a-select-option value="世纪金源酒店">世纪金源酒店</a-select-option>
+              <a-select-option value="福州世纪金源酒店">福州世纪金源酒店</a-select-option>
             </a-select>
           </a-form-model-item>
+
+          <!-- 酒店详情 -->
+          <div v-show="flag">
+            <a-row type="flex" align="middle">
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>酒店名称：{{hotelInfor}}</span>
+              </a-col>
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>协议编号：{{hotelIDInfor}}</span>
+              </a-col>
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>星级：{{hotelLevelInfor}}</span>
+              </a-col>
+            </a-row>
+            <br>
+            <a-row type="flex" align="middle">
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>位置：{{hotelAddressInfor}}</span>
+              </a-col>
+              <a-col :span="1"></a-col>
+              <a-col>
+                <span>价格范围（元）：{{hotelPriceInfor}}</span>
+              </a-col>
+            </a-row>
+            <br>
+            <a-row type="flex" align="middle">
+              <a-col :span="3"></a-col>
+              <a-button>通知酒店</a-button>
+            </a-row>
+          </div>
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
             <a-button type="primary" @click="onSubmitHotel">创建</a-button>
             <a-button style="margin-left: 10px;" @click="resetFormHotel">重置</a-button>
@@ -235,10 +281,9 @@
         </a-form-model-item>
         <a-form-model-item label="选择协议酒店" prop="hotel">
           <a-select v-model="ModifyHotel.hotel" placeholder="请选择协议酒店">
-            <a-select-option value="香格里拉酒店">香格里拉酒店</a-select-option>
-            <a-select-option value="华宜时尚酒店">华宜时尚酒店</a-select-option>
+            <a-select-option value="福州富力威斯汀酒店">福州富力威斯汀酒店</a-select-option>
             <a-select-option value="福州品悦酒店">福州品悦酒店</a-select-option>
-            <a-select-option value="世纪金源酒店">世纪金源酒店</a-select-option>
+            <a-select-option value="福州世纪金源酒店">福州世纪金源酒店</a-select-option>
           </a-select>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 17, offset:8 }">
@@ -342,6 +387,107 @@
 </template>
 <script>
 import moment from 'moment'
+const dataHotelIn = [
+  {
+    id: 'N1201',
+    dutyName: '李霞',
+    dutyTel: '13759655332',
+    hotel: '福州富力威斯汀酒店',
+    level: '五',
+    address: '福州江滨中大道366号',
+    price: '135~215',
+    remark: '折扣力度3折',
+    innerData: [
+      {
+        key: 21,
+        roomType: '普通单人间',
+        price: 135
+      },
+      {
+        key: 21,
+        roomType: '普通双人间',
+        price: 185
+      },
+      {
+        key: 22,
+        roomType: '豪华单人间',
+        price: 160
+      },
+
+      {
+        key: 22,
+        roomType: '豪华双人间',
+        price: 215
+      }
+    ]
+  },
+  {
+    id: 'N1202',
+    dutyName: '尤晓梅',
+    dutyTel: '13053955537',
+    hotel: '福州品悦酒店',
+    address: '福州东浦路59号',
+    level: '四',
+    remark: '折扣力度4折',
+    price: '120~190',
+    innerData: [
+      {
+        key: 21,
+        roomType: '普通单人间',
+        price: 120
+      },
+      {
+        key: 21,
+        roomType: '普通双人间',
+        price: 165
+      },
+      {
+        key: 22,
+        roomType: '豪华单人间',
+        price: 140
+      },
+
+      {
+        key: 22,
+        roomType: '豪华双人间',
+        price: 190
+      }
+    ]
+  },
+  {
+    id: 'N1203',
+    dutyName: '黄丽娟',
+    dutyTel: '13659655381',
+    hotel: '福州世纪金源酒店',
+    address: '福州温泉公园路59号',
+    price: '120~180',
+    level: '四',
+    remark: '折扣力度3折',
+    innerData: [
+      {
+        key: 21,
+        roomType: '普通单人间',
+        price: 120
+      },
+      {
+        key: 21,
+        roomType: '普通双人间',
+        price: 150
+      },
+      {
+        key: 22,
+        roomType: '豪华单人间',
+        price: 140
+      },
+
+      {
+        key: 22,
+        roomType: '豪华双人间',
+        price: 180
+      }
+    ]
+  }
+]
 let optionsRoom = [
   {
     value: '中国烟草总公司福建省公司机关',
@@ -407,6 +553,24 @@ let optionsRoom = [
 export default {
   data() {
     return {
+      flag: false,
+      dataSelect: [
+        {
+          id: this.$route.query.record.id,
+          theme: this.$route.query.record.theme,
+          name: this.$route.query.record.name,
+          budget: this.$route.query.record.budget,
+          dateTime: this.$route.query.record.dateTime,
+          number: this.$route.query.record.number,
+          dutyName: this.$route.query.record.dutyName,
+          dutyTel: this.$route.query.record.dutyTel
+        }
+      ],
+      hotelInfor: undefined,
+      hotelIDInfor: undefined,
+      hotelLevelInfor: undefined,
+      hotelAddressInfor: undefined,
+      hotelPriceInfor: undefined,
       eatHotel: '',
       numDate: '1',
       current: 0,
@@ -453,7 +617,7 @@ export default {
       labelColModify: { span: 6 },
       wrapperColModify: { span: 18 },
       ModifyHotel: {
-       hotel: undefined,
+        hotel: undefined,
         dateStart: undefined,
         dateEnd: undefined
       },
@@ -484,7 +648,7 @@ export default {
       },
       visibleEat: false,
       ModifyEat: {
-                dateStart: undefined,
+        dateStart: undefined,
         dateEnd: undefined,
         type: undefined,
         way: undefined
@@ -512,7 +676,7 @@ export default {
       },
       visibleRoom: false,
       ModifyRoom: {
-               room: undefined,
+        room: undefined,
         dateStart: undefined,
         dateEnd: undefined,
         range: undefined
@@ -522,6 +686,8 @@ export default {
     }
   },
   created() {
+    console.log(this.$route.query.record)
+
     let dateStart = this.$route.query.record.dateStart
     console.log(dateStart)
     let dateEnd = this.$route.query.record.dateEnd
@@ -575,6 +741,19 @@ export default {
     resetFormHotel() {
       this.$refs.ruleFormHotel.resetFields()
       this.formHotel.hotel = undefined
+    },
+    selectHotel(value) {
+      console.log(value)
+      this.flag = true
+      this.hotelInfor = value
+      dataHotelIn.filter(item => {
+        if (item.hotel == value) {
+          this.hotelIDInfor = item.id
+          this.hotelLevelInfor = item.level
+          this.hotelAddressInfor = item.address
+          this.hotelPriceInfor = item.price
+        }
+      })
     },
     onSubmitEat() {
       this.$refs.ruleFormEat.validate(valid => {
@@ -642,7 +821,7 @@ export default {
     },
     complete() {
       this.$message.success('提交成功!')
-      this.visibleNotice = true
+      //this.visibleNotice = true
       this.$confirm({
         title: '是否立刻预通知',
         content: '',

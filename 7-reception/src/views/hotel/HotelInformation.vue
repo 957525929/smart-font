@@ -50,29 +50,52 @@
 
     <!-- table区域-begin -->
     <div id="dataHotelTable">
-      <a-table :data-source="dataHotel" :pagination="false" rowKey="id">
-        <a-table-column title="协议酒店名称" data-index="hotel" align="left" fixed="left"></a-table-column>
+      <a-table :data-source="dataHotel" :pagination="false" rowKey="id" :columns="columns">
+        <!-- <a-table-column title="协议酒店名称" data-index="hotel" align="left" fixed="left"></a-table-column>
         <a-table-column title="协议编号" data-index="id" align="center"></a-table-column>
         <a-table-column title="星级" data-index="level" align="center"></a-table-column>
         <a-table-column title="联系人" data-index="dutyName" align="center"></a-table-column>
         <a-table-column title="联系电话" data-index="dutyTel" align="center"></a-table-column>
         <a-table-column title="位置" data-index="address" align="center"></a-table-column>
-        <!-- <a-table-column title="备注信息" data-index="remark" align="center"></a-table-column> -->
         <a-table-column title="操作" align="center" fixed="right">
           <template slot-scope="record">
-            <!-- <a-button :style="{ background: 'orange', color: 'white' }" @click="Modify(record)">修改</a-button> -->
             <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
             <a-divider type="vertical" />
             <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
-              <!-- <a-button :style="{ background: 'red', color: 'white' }">删除</a-button> -->
               <a href="javascript:;" :style="{  color: 'red' }">删除</a>
             </a-popconfirm>
           </template>
-        </a-table-column>
+        </a-table-column>-->
+         <a slot="price" slot-scope="text,record" @click="typePrice(record)">{{ text }}</a>
+        <span slot="operation" slot-scope="record">
+          <!-- <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a> -->
+          <a @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
+          <a-divider type="vertical" />
+          <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record.id)">
+            <!-- <a href="javascript:;" :style="{  color: 'red' }">删除</a> -->
+            <a :style="{  color: 'red' }">删除</a>
+          </a-popconfirm>
+        </span>
+        <!-- <a-table
+          slot="expandedRowRender"
+          slot-scope="record"
+          :columns="innerColumns"
+          :data-source="record.innerData"
+          :pagination="false"
+          size="small"
+          :style="{width: '700px'}"
+        ></a-table> -->
       </a-table>
+      <br />
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
-
+<!-- 协议酒店价格详情 -->
+<a-modal v-model="visiblePrice" :title="titleHotel" footer>
+    <a-table :data-source="dataPrice" :pagination="false" rowKey="name">
+        <a-table-column title="房型" data-index="roomType" align="center"></a-table-column>
+        <a-table-column title="价格" data-index="price" align="center"></a-table-column>
+      </a-table>
+</a-modal>
     <!-- 新增 -->
     <a-Modal v-model="visibleAdd" title="新增酒店" footer>
       <a-form-model
@@ -105,6 +128,11 @@
         </a-form-model-item>
         <a-form-model-item label="位置" prop="address">
           <a-input v-model="formAdd.address" placeholder="请输入位置"></a-input>
+        </a-form-model-item>
+          <a-form-model-item label="价格范围（元）" prop="priceMin">
+          <a-input v-model="formAdd.priceMin" placeholder="请输入价格最小值" :style="{width:'165px'}"></a-input>
+          <span>&nbsp;~&nbsp;</span>
+          <a-input v-model="formAdd.priceMax" placeholder="请输入价格最大值" :style="{width:'165px'}"></a-input>
         </a-form-model-item>
         <a-form-model-item label="备注信息">
           <a-input v-model="formAdd.remark" type="textarea" />
@@ -147,6 +175,11 @@
         <a-form-model-item label="位置" prop="address">
           <a-input v-model="formModify.address"></a-input>
         </a-form-model-item>
+        <a-form-model-item label="价格范围（元）" prop="priceMin">
+          <a-input v-model="formModify.priceMin" placeholder="请输入价格最小值" :style="{width:'165px'}"></a-input>
+          <span>&nbsp;~&nbsp;</span>
+          <a-input v-model="formModify.priceMax" placeholder="请输入价格最大值" :style="{width:'165px'}"></a-input>
+        </a-form-model-item>
         <!-- <a-form-model-item label="备注信息">
           <a-input v-model="formModify.remark" type="textarea" />
         </a-form-model-item>-->
@@ -168,7 +201,31 @@ const dataHotel = [
     hotel: '福州富力威斯汀酒店',
     level: '五',
     address: '福州江滨中大道366号',
-    remark: '折扣力度3折'
+    price:'135~215',
+    remark: '折扣力度3折',
+    innerData: [
+      {
+        key: 21,
+        roomType: '普通单人间',
+        price: 135
+      },
+      {
+        key: 21,
+        roomType: '普通双人间',
+        price: 185
+      },
+      {
+        key: 22,
+        roomType: '豪华单人间',
+        price: 160
+      },
+
+      {
+        key: 22,
+        roomType: '豪华双人间',
+        price: 215
+      }
+    ]
   },
   {
     id: 'N1202',
@@ -177,7 +234,31 @@ const dataHotel = [
     hotel: '福州品悦酒店',
     address: '福州东浦路59号',
     level: '四',
-    remark: '折扣力度4折'
+    remark: '折扣力度4折',
+     price:'120~190',
+    innerData: [
+      {
+        key: 21,
+        roomType: '普通单人间',
+        price: 120
+      },
+      {
+        key: 21,
+        roomType: '普通双人间',
+        price: 165
+      },
+      {
+        key: 22,
+        roomType: '豪华单人间',
+        price: 140
+      },
+
+      {
+        key: 22,
+        roomType: '豪华双人间',
+        price: 190
+      }
+    ]
   },
   {
     id: 'N1203',
@@ -185,21 +266,106 @@ const dataHotel = [
     dutyTel: '13659655381',
     hotel: '福州世纪金源酒店',
     address: '福州温泉公园路59号',
+    price:'120~180',
     level: '四',
-    remark: '折扣力度3折'
+    remark: '折扣力度3折',
+    innerData: [
+      {
+        key: 21,
+        roomType: '普通单人间',
+        price: 120
+      },
+      {
+        key: 21,
+        roomType: '普通双人间',
+        price: 150
+      },
+      {
+        key: 22,
+        roomType: '豪华单人间',
+        price: 140
+      },
+
+      {
+        key: 22,
+        roomType: '豪华双人间',
+        price: 180
+      }
+    ]
   }
 ]
-
+const columns = [
+  {
+     title: '协议酒店名称',
+    dataIndex: 'hotel',
+    align: 'left',
+  },
+  {
+    title: '协议编号',
+    dataIndex: 'id',
+    align: 'center'
+  },
+  {
+    title: '星级',
+    dataIndex: 'level',
+    align: 'center'
+  },
+  {
+    title: '联系人',
+    dataIndex: 'dutyName',
+    align: 'center'
+  },
+  {
+    title: '联系电话',
+    dataIndex: 'dutyTel',
+    align: 'center'
+  },
+  {
+    title: '位置',
+    dataIndex: 'address',
+    align: 'center'
+  },
+    {
+    title: '价格范围（元）',
+    dataIndex: 'price',
+    align: 'center',
+   scopedSlots: { customRender: 'price' },
+  },
+  {
+    title: '操作',
+    align: 'center',
+    scopedSlots: { customRender: 'operation' }
+  }
+]
+const innerColumns = [
+  {
+    title: '房型',
+    dataIndex: 'roomType',
+    key: 'roomType',
+    align: 'center',
+    width: '100px'
+  },
+  {
+    title: '价格',
+    dataIndex: 'price',
+    key: 'price',
+    align: 'center'
+  }
+]
 export default {
   data() {
     return {
       dataHotel,
+      columns,
+      innerColumns,
+      visiblePrice:false,
+      titleHotel:"",
+      dataPrice:[],
       queryParam: {
         name: '',
         id: '',
         address: ''
       },
-
       visibleAdd: false,
       visibleModify: false,
       labelCol: { span: 6 },
@@ -211,7 +377,9 @@ export default {
         dutyName: '',
         dutyTel: '',
         address: '',
-        remark: ''
+        remark: '',
+        priceMin:"",
+        priceMax:""
       },
       formModify: {
         hotel: '',
@@ -219,7 +387,9 @@ export default {
         dutyName: '',
         dutyTel: '',
         address: '',
-        remark: ''
+        remark: '',
+                priceMin:"",
+        priceMax:""
       },
       rules: {
         level: [
@@ -263,6 +433,13 @@ export default {
             message: '请输入地点',
             trigger: 'blur'
           }
+        ],
+         priceMin: [
+          {
+            required: true,
+            message: '请输入价格范围',
+            trigger: 'blur'
+          }
         ]
       }
     }
@@ -283,6 +460,11 @@ export default {
     searchReset() {
       this.dataHotel = dataHotel
       this.queryParam.IDName = ''
+    },
+    typePrice(record){
+     this.visiblePrice=true
+     this.titleHotel=record.hotel+"房型价格列表"
+     this.dataPrice=record.innerData
     },
     addHotel() {
       this.visibleAdd = true
@@ -332,6 +514,9 @@ export default {
       this.formModify.dutyName = record.dutyName
       this.formModify.dutyTel = record.dutyTel
       this.formModify.address = record.address
+      let price=record.price.split('~')
+      this.formModify.priceMin = price[0]
+      this.formModify.priceMax = price[1]
       // this.formModify.remark = record.remarks
     },
     onSubmitModify() {

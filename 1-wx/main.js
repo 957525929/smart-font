@@ -22,6 +22,15 @@ Vue.component('applyList',applyList)
 import verify from './pages/verify/index.vue'
 Vue.component('verify',verify)
 
+import staffHome from './pages/home/staffHome.vue'
+Vue.component('staffHome',staffHome)
+
+import touristHome from './pages/home/touristHome.vue'
+Vue.component('touristHome',touristHome)
+
+import trip from './pages/trip/index.vue'
+Vue.component('trip',trip)
+
 import person from './pages/person/index.vue'
 Vue.component('person',person)
 

@@ -25,10 +25,31 @@
 						<view :style="styleObject[cardType.id]">
 							{{item.type}}
 						</view>
-						<view class="text-gray text-sm" style="margin-top: 22px;">
+						<view class="text-red" style="margin-top: 17px;" @tap="showModal" data-target="DialogModal1">
 							{{item.cancel}}
 						</view>
 					</span>
+				</view>
+			</view>
+		</view>
+
+		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">撤回</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					是否确定撤回？
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
+
+					</view>
 				</view>
 			</view>
 		</view>
@@ -38,38 +59,39 @@
 <script>
 	export default {
 		// created: function() {
-		
+
 		// 	let aData = new Date();
-		
+
 		// 	this.date =
 		// 		aData.getFullYear() + "年" +
 		// 		(aData.getMonth() + 1) + "月" +
 		// 		(aData.getDate()) + "日"  
-			
+
 		// },
 		data() {
 			return {
 				// date:'',
+				modalName: null,
 				applylist: [{
 						visit: '张三',
 						department: '信息中心',
-						time:'2020年1月21日 13:46',
+						time: '2020年1月21日 13:46',
 						type: '待审核',
-						cancel:'撤回'
+						cancel: '撤回'
 					},
 					{
 						visit: '李四',
 						department: '机关服务中心',
 						time: '2020年1月21日 13:46',
 						type: '待审核',
-						cancel:'撤回'
+						cancel: '撤回'
 					},
 					{
 						visit: '王五',
 						department: '财务管理处',
 						time: '2020年1月21日 13:46',
 						type: '待审核',
-						cancel:'撤回'
+						cancel: '撤回'
 					},
 					{
 						visit: '张三',
@@ -129,7 +151,12 @@
 		props: ["cardType"],
 
 		methods: {
-
+			showModal(e) {
+				this.modalName = e.currentTarget.dataset.target
+			},
+			hideModal(e) {
+				this.modalName = null
+			},
 		}
 	}
 </script>
@@ -152,7 +179,7 @@
 	}
 
 	.card-right {
-		margin-left: 5px;
+		margin-left: 30px;
 		margin-top: 5px;
 	}
 

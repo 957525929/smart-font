@@ -8,10 +8,25 @@
 				</view>
 			</picker>
 		</view>
+		
+		<view class="cu-form-group">
+			<view class="title">被访部门</view>
+			<!-- <input name="input">张三</input> -->
+			<picker @change="PickerChange2" :value="index2" :range="picker2">
+				<view class="picker">
+					{{picker2[index2]}}
+				</view>
+			</picker>
+		</view>
 
 		<view class="cu-form-group">
-			<view class="title">访问人</view>
-			<input name="input">魏佳楠</input>
+			<view class="title">被访问人</view>
+			<!-- <input name="input">张三</input> -->
+			<picker @change="PickerChange" :value="index" :range="picker">
+				<view class="picker">
+					{{picker[index]}}
+				</view>
+			</picker>
 		</view>
 
 		<view v-if="this.index1 == 1">
@@ -79,10 +94,13 @@
 			return {
 				time: '',
 				time1: '',
-				index: -1,
+				index: 0,
 				// picker: ['101', '102', '103'],
 				index1: 0,
+				index2: 0,
+				picker: ['张三', '李四', '王五'],
 				picker1: ['待审核', '已通过', '已拒绝'],
+				picker2: ['财务管理处', '审计处', '科技处','人事处','烟叶管理处'],
 				date:''
 			}
 		},
@@ -95,10 +113,9 @@
 				this.$emit('send', this.index1)
 				// console.log(e.detail.value)
 			},
-			// MultiChange(e) {
-			// 	this.multiIndex = e.detail.value
-			// },
-			// MultiColumnChange(e) {},
+			PickerChange2(e) {
+				this.index2 = e.detail.value
+			},
 			TimeChange(e) {
 				this.time = e.detail.value
 			},

@@ -1,9 +1,9 @@
 <template>
 	<view>
-		<scroll-view scroll-y class="page">
+		<scroll-view scroll-y class="page bg-white">
 			<view class="banner">
 				<image src="/static/workplace/banner.png" mode="widthFix" class='response banner-back'></image>
-				<view class="banner-title">被访管理</view>
+				<view class="banner-title">预约管理</view>
 			</view>
 
 			<view class="nav-list">
@@ -31,6 +31,14 @@
 						cuIcon: 'calendar',
 						enName: 'ApplyList',
 						route: '/pages/index/staff?PageCur=applyList'
+					},
+					{
+						title: '预约行程',
+						name: 'trip',
+						color: 'blue',
+						cuIcon: 'taxi',
+						enName: 'Trip',
+						route: '/pages/index/staff?PageCur=trip'
 					},
 					{
 						title: '个人中心',

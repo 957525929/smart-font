@@ -5,7 +5,7 @@
     <div class="table-page-search-wrapper">
       <a-row type="flex" align="middle">
         <a-col>
-          <span>区域：</span>
+          <span>位置：</span>
         </a-col>
         <a-col>
           <!-- <a-input placeholder="请输入区域" v-model="queryParam.area" width="100px"></a-input> -->
@@ -14,7 +14,8 @@
       :options="selectOptions"
       change-on-select
       @change="areaChange"
-      placeholder="请选择区域"
+      placeholder="请选择位置"
+     :display-render="displayRender"
     />
 
         </a-col>
@@ -125,7 +126,7 @@
       <a-table :data-source="dataRoom"   :pagination="false" rowKey="index">
           <a-table-column title="序号" data-index="index" align="left" fixed="left" width="150px" scopedSlots:{ customRender: function(t, r, index) {
       return parseInt(index) + 1}}></a-table-column>
-        <a-table-column title="区域" data-index="area" align="center" ></a-table-column>         
+        <a-table-column title="位置" data-index="area" align="center" ></a-table-column>         
         <a-table-column title="房间号" data-index="room" align="center" ></a-table-column>
         <a-table-column title="容纳人数" data-index="number" align="center" ></a-table-column>
         <a-table-column title="基本条件" data-index="condition" align="center">
@@ -162,6 +163,7 @@
           </template>
         </a-table-column>
       </a-table>
+       <br />
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
 
@@ -174,7 +176,7 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-      <a-form-model-item ref="area" label="区域" prop="area" placeholder="请选择区域">
+      <a-form-model-item ref="area" label="位置" prop="area" placeholder="请选择位置">
            <!-- <a-select v-model="formModify.area"  showSearch>
             <a-select-option value="中国烟草总公司福建省公司机关.A区域.1号楼">中国烟草总公司福建省公司机关.A区域.1号楼</a-select-option>
             <a-select-option value="中国烟草总公司福建省公司机关.A区域.2号楼">中国烟草总公司福建省公司机关.A区域.2号楼</a-select-option>
@@ -187,7 +189,8 @@
       v-model="formAdd.area"
       change-on-select
       @change="areaChange"
-      placeholder="请选择区域"
+      placeholder="请选择位置"
+       :display-render="displayRender"
     />
         </a-form-model-item>
          <a-form-model-item ref="room" label="房间号" prop="room" >
@@ -211,8 +214,8 @@
             </a-checkbox>
           </a-col>
           <a-col :span="8">
-            <a-checkbox value="排气扇">
-              排气扇
+            <a-checkbox value="白板">
+              白板
             </a-checkbox>
           </a-col>
           <a-col :span="8">
@@ -221,13 +224,18 @@
             </a-checkbox>
           </a-col>
           <a-col :span="8">
-            <a-checkbox value="绿化植物">
-              绿化植物
+            <a-checkbox value="投影仪">
+              投影仪
             </a-checkbox>
           </a-col>
           <a-col :span="8">
-            <a-checkbox value="多媒体">
-              多媒体
+            <a-checkbox value="电脑">
+              电脑
+            </a-checkbox>
+          </a-col>
+              <a-col :span="8">
+            <a-checkbox value="摄像机">
+              摄像机
             </a-checkbox>
           </a-col>
         </a-row>
@@ -235,14 +243,14 @@
         </a-form-model-item>
                 <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" >
           <!-- <a-input v-model="formAdd.dutyName" placeholder="请输入管理员"></a-input> -->
-           <a-select   showSearch v-model="formModify.dutyName" placeholder="请选择管理员">
+           <a-select  showSearch  v-model="formAdd.dutyName" placeholder="请选择管理员" @change="addDutyName">
             <a-select-option value="李霞">李霞</a-select-option>
             <a-select-option value="尤晓梅">尤晓梅</a-select-option>
             <a-select-option value="黄丽娟">黄丽娟</a-select-option>
           </a-select>
         </a-form-model-item>
         <a-form-model-item label="管理员电话" prop="dutyTel" >
-          <a-input v-model="formAdd.dutyTel" placeholder="请输入管理员电话"></a-input>
+          <a-input v-model="formAdd.dutyTel" placeholder="请输入管理员电话" disabled></a-input>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitAdd()">创建</a-button>
@@ -260,7 +268,7 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-         <a-form-model-item label="区域" prop="area">
+         <a-form-model-item label="位置" prop="area">
           <a-input v-model="formModify.area"  disabled></a-input>
         </a-form-model-item>
         <a-form-model-item label="房间号" prop="room">
@@ -278,44 +286,49 @@
           </a-select> -->
            <a-checkbox-group @change="onChangeCon" v-model="formModify.condition">
             <a-row>
-              <a-col :span="8">
-                <a-checkbox value="茶水">
-                  茶水
-                </a-checkbox>
-              </a-col>
-              <a-col :span="8">
-                <a-checkbox value="排气扇">
-                  排气扇
-                </a-checkbox>
-              </a-col>
-              <a-col :span="8">
-                <a-checkbox value="空调">
-                  空调
-                </a-checkbox>
-              </a-col>
-              <a-col :span="8">
-                <a-checkbox value="绿化植物">
-                  绿化植物
-                </a-checkbox>
-              </a-col>
-              <a-col :span="8">
-                <a-checkbox value="多媒体">
-                  多媒体
-                </a-checkbox>
-              </a-col>
+             <a-col :span="8">
+            <a-checkbox value="茶水">
+              茶水
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="白板">
+              白板
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="空调">
+              空调
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="投影仪">
+              投影仪
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="电脑">
+              电脑
+            </a-checkbox>
+          </a-col>
+           <a-col :span="8">
+            <a-checkbox value="摄像机">
+              摄像机
+            </a-checkbox>
+          </a-col>
             </a-row>
         </a-checkbox-group>
         </a-form-model-item>
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
           <!-- <a-input v-model="formModify.dutyName"></a-input> -->
-          <a-select   show-search v-model="formModify.dutyName">
+          <a-select   show-search v-model="formModify.dutyName" @change="ModifyDutyName">
             <a-select-option value="李霞">李霞</a-select-option>
             <a-select-option value="尤晓梅">尤晓梅</a-select-option>
             <a-select-option value="黄丽娟">黄丽娟</a-select-option>
           </a-select>
         </a-form-model-item>
         <a-form-model-item label="管理员电话" prop="dutyTel">
-          <a-input v-model="formModify.dutyTel"></a-input>
+          <a-input v-model="formModify.dutyTel" disabled></a-input>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 6 }">
           <a-button type="primary" @click="onSubmitModify()">修改</a-button>
@@ -330,7 +343,7 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-         <a-form-model-item label="区域" >
+         <a-form-model-item label="位置" >
           <a-input v-model="formDetail.area"  disabled></a-input>
         </a-form-model-item>
         <a-form-model-item label="房间号" >
@@ -343,30 +356,30 @@
            <a-checkbox-group @change="onChangeCon" v-model="formDetail.condition" disabled>
             <a-row>
               <a-col :span="8">
-                <a-checkbox value="茶水">
-                  茶水
-                </a-checkbox>
-              </a-col>
-              <a-col :span="8">
-                <a-checkbox value="排气扇">
-                  排气扇
-                </a-checkbox>
-              </a-col>
-              <a-col :span="8">
-                <a-checkbox value="空调">
-                  空调
-                </a-checkbox>
-              </a-col>
-              <a-col :span="8">
-                <a-checkbox value="绿化植物">
-                  绿化植物
-                </a-checkbox>
-              </a-col>
-              <a-col :span="8">
-                <a-checkbox value="多媒体">
-                  多媒体
-                </a-checkbox>
-              </a-col>
+            <a-checkbox value="茶水">
+              茶水
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="白板">
+              白板
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="空调">
+              空调
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="投影仪">
+              投影仪
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="电脑">
+              电脑
+            </a-checkbox>
+          </a-col>
             </a-row>
         </a-checkbox-group>
         </a-form-model-item>
@@ -390,39 +403,39 @@ import { areaData } from './data/area.js'
 const dataRoom = [
   {
     index: 1,
-    area:"中国烟草总公司福建省公司机关A区域1号楼",
+    area:"中国烟草总公司福建省公司机关.A区域.1号楼",
     number:"5-6",
     dutyName: "李霞",
     dutyTel: "13759655332",
     room: "会议室203",
-    condition:"茶水，多媒体"
+    condition:"茶水，投影仪，白板，摄像机"
   },
   {
     index: 2,
-    area:"中国烟草总公司福建省公司机关A区域2号楼",
+    area:"中国烟草总公司福建省公司机关.A区域.2号楼",
     number:"6-8",
     dutyName: "王莉莉",
     dutyTel: "13759655348",
     room: "会议室204",
-    condition: "茶水，排气扇，多媒体"
+    condition: "茶水，空调，投影仪，白板"
   },
   {
   index: 3,
-    area:"中国烟草总公司福建省公司机关B区域1号楼",
+    area:"中国烟草总公司福建省公司机关.B区域.1号楼",
     number:"3-4",
     dutyName: "尤晓梅",
     dutyTel: "13053955537",
     room: "会议室205",
-    condition: "茶水，排气扇，绿化植物，多媒体"
+    condition: "茶水，投影仪，电脑"
   },
   {
    index: 4,
-    area:"中国烟草总公司福建省公司机关B区域2号楼",
+    area:"中国烟草总公司福建省公司机关.B区域.2号楼",
     number:"4-6",
     dutyName: "黄丽娟",
     dutyTel: "13659655381",
     room: "会议室206",
-    condition: "茶水，绿化植物，空调，多媒体"
+    condition: "茶水，空调，投影仪，电脑，白板"
   }
 ];
 const columns = [
@@ -438,7 +451,7 @@ const columns = [
     }
   },
   {
-    title: '区域',
+    title: '位置',
     align: 'center',
     dataIndex: 'area'
   },
@@ -490,10 +503,10 @@ export default {
       wrapperCol: { span: 18 },
       formAdd: {
       area: [],
-      room: '',
-      number: '',
-      dutyName: '',
-      dutyTel: '',
+      room: undefined,
+      number: undefined,
+      dutyName: undefined,
+      dutyTel: undefined,
       condition: [],
       remark: ''
       },
@@ -519,7 +532,7 @@ export default {
          area: [
           {
             required: true,
-            message: '请选择区域',
+            message: '请选择位置',
             trigger: 'change'
           }
         ],
@@ -564,6 +577,9 @@ export default {
     }
   },
   methods: {
+    displayRender({ labels }){
+      return  labels.join('.')
+    },
     areaChange(value){
       console.log(value)
     },
@@ -579,6 +595,17 @@ export default {
     },
     addRoom() {
       this.visibleAdd = true
+    },
+    addDutyName(value){
+    if(value=='李霞'){
+        this.formAdd.dutyTel='13759655332'
+      }
+       if(value=='尤晓梅'){
+         this.formAdd.dutyTel='13053955537'
+       }
+        if(value=='黄丽娟'){
+         this.formAdd.dutyTel='13659655381'
+       } 
     },
     onSubmitAdd() {
       this.$refs.ruleForm.validate(valid => {
@@ -615,6 +642,17 @@ export default {
        this.formModify.condition=record.condition.split('，')
       this.formModify.dutyTel = record.dutyTel
       //this.formModify.condition = record.condition
+    },
+        ModifyDutyName(value){
+        if(value=='李霞'){
+        this.formModify.dutyTel='13759655332'
+      }
+       if(value=='尤晓梅'){
+         this.formModify.dutyTel='13053955537'
+       }
+        if(value=='黄丽娟'){
+         this.formModify.dutyTel='13659655381'
+       } 
     },
     onSubmitModify() {
       this.visibleModify = false
