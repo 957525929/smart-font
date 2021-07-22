@@ -12,7 +12,6 @@
             <a-select-option value="已完成">已完成</a-select-option>
              <a-select-option value="待安排">待开始</a-select-option>
              <a-select-option value="进行中">进行中</a-select-option>
-            <a-select-option value="待安排">待安排</a-select-option>
             <a-select-option value="待审核">待审核</a-select-option>          
             <a-select-option value="未通过">未通过</a-select-option>
           </a-select>
@@ -91,9 +90,6 @@
               <div v-else-if="state == '待开始'">
               <span :style="{ color: 'green' }">待开始</span>
             </div>
-            <div v-else-if="state == '待安排'">
-              <span :style="{ color: 'blue' }">待安排</span>
-            </div>
             <div v-else-if="state == '已完成'">
               <span :style="{ color: 'green' }">已完成</span>
             </div>
@@ -122,7 +118,7 @@
     </div>
 
     <!-- 撤销原因 -->
-    <a-modal  v-model="visibleReason"   title="撤销会议室原因填写" @ok="handleOkReason">
+    <a-modal  v-model="visibleReason"   title="撤销会议室预约原因填写" @ok="handleOkReason">
         <a-row type="flex" align="middle">
          <a-col :span="4">
          <span>撤销原因：</span>
@@ -146,7 +142,7 @@ const data = [
     theme: '物流管理',
     dateTime: '2021年07月27日~2021年07月27日',
     range:'上午',
-    address: '总公司机关',
+    address: '中国烟草总公司福建省公司机关.B区域.2号楼.205会议室',
 
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
@@ -162,7 +158,7 @@ const data = [
     theme: '安全管理',
     dateTime: '2021年08月03日~2021年08月03日',
     range:'下午',
-    address: '总公司机关',
+    address: '中国烟草总公司福建省公司机关.B区域.1号楼.203会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
     dutyName: '李小玲',
@@ -171,30 +167,13 @@ const data = [
     detail: '0'
   },
   {
-    id: 'B1206',
-    budget: '2000',
-    name: '物流管理会议',
-    theme: '物流管理',
-    dateTime: '2021年07月30日~2021年07月30日',
-    range:'晚上',
-    address: '总公司机关',
-    members: '陈宏涛；李小玲；林诺汐',
-    number: '3',
-    dutyName: '李小玲',
-    dutyTel: '152690314587',
-    state: '待安排',
-    detail: '0'
-  },
-
-
-  {
     id: 'B1204',
     budget: '3000',
     name: '安全管理会议',
     theme: '安全管理',
     dateTime: '2021年07月26日~2021年07月26日',
     range:'下午',
-    address: '总公司机关',
+    address: '中国烟草总公司福建省公司机关.A区域.2号楼.204会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
     dutyName: '陈宏涛',
@@ -210,7 +189,7 @@ const data = [
     theme: '项目会议',
     dateTime: '2021年07月20日~2021年07月20日',
     range:'上午',
-    address: '总公司机关',
+    address: '中国烟草总公司福建省公司机关.A区域.1号楼.205会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
     dutyName: '陈宏涛',
@@ -225,7 +204,7 @@ const data = [
     theme: '安全管理',
     dateTime: '2021年07月21日~2021年07月21日',
     range:'全天',
-    address: '总公司机关',
+    address: '中国烟草总公司福建省公司机关.B区域.2号楼.204会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
     dutyName: '陈熙雨',
