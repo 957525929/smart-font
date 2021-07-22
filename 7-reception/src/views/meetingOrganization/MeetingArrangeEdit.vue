@@ -782,16 +782,13 @@ export default {
   },
   created() {
     console.log(this.$route.query.record)
-
-    let dateStart = this.$route.query.record.dateStart
-    console.log(dateStart)
-    let dateEnd = this.$route.query.record.dateEnd
-    this.formHotel.dateStart = this.moment(dateStart, 'YYYY-MM-DD')
-    this.formHotel.dateEnd = this.moment(dateEnd, 'YYYY-MM-DD')
-    this.formEat.dateStart = this.moment(dateStart, 'YYYY-MM-DD')
-    this.formEat.dateEnd = this.moment(dateEnd, 'YYYY-MM-DD')
-    this.formRoom.dateStart = this.moment(dateStart, 'YYYY-MM-DD')
-    this.formRoom.dateEnd = this.moment(dateEnd, 'YYYY-MM-DD')
+    let dateAr=this.$route.query.record.dateTime.split('~')
+    this.formHotel.dateStart = this.moment(dateAr[0], 'YYYY-MM-DD')
+    this.formHotel.dateEnd = this.moment(dateAr[1], 'YYYY-MM-DD')
+    this.formEat.dateStart = this.moment(dateAr[0], 'YYYY-MM-DD')
+    this.formEat.dateEnd = this.moment(dateAr[1], 'YYYY-MM-DD')
+    this.formRoom.dateStart = this.moment(dateAr[0], 'YYYY-MM-DD')
+    this.formRoom.dateEnd = this.moment(dateAr[1], 'YYYY-MM-DD')
   },
   methods: {
     moment,
