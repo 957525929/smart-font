@@ -15,7 +15,7 @@
         </a-col>
         <a-col :span="1"></a-col>
         <a-col>
-          <span>区域：</span>
+          <span>位置：</span>
         </a-col>
         <a-col>
           <a-cascader
@@ -23,7 +23,8 @@
             :options="selectOptions"
             change-on-select
             @change="areaChange"
-            placeholder="请选择区域"
+            placeholder="请选择位置"
+            :display-render="displayRender"
           />
         </a-col>
         <a-col :span="1"></a-col>
@@ -122,7 +123,7 @@ const data = [
     id: 'A1202',
     index: '1',
     name: '零售项目开展会议',
-    dateTime: '2021年07月30日',
+    dateTime: '2021年07月30日~2021年07月30日',
     range: '上午',
     address: '中国烟草总公司福建省公司机关.A区域.1号楼.会议室203',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
@@ -136,11 +137,11 @@ const data = [
     innerData: [
       {
         key: 11,
-        dateTime: '2021年07月30日',
+        dateTime: '2021年07月30日~2021年07月30日',
         range: '上午',
         address: '中国烟草总公司福建省公司机关.A区域.1号楼.会议室203',
         numberA: '6-8',
-        condition: '茶水，多媒体'
+        condition: '茶水，投影仪，电脑'
       }
     ]
   },
@@ -162,19 +163,19 @@ const data = [
     innerData: [
       {
         key: 21,
-        dateTime: '2021年07月25日',
+        dateTime: '2021年07月25日~2021年07月25日',
         range: '全天',
         address: '中国烟草总公司福建省公司机关.B区域.1号楼.会议室203',
         numberA: '6-8',
-        condition: '茶水，排气扇，绿化植物，多媒体'
+        condition: '茶水，投影仪，电脑，空调'
       },
       {
         key: 22,
-        dateTime: '2021年07月26日',
+        dateTime: '2021年07月26日~2021年07月26日',
         range: '上午',
         address: '中国烟草总公司福建省公司机关.B区域.1号楼.会议室204',
         numberA: '6-8',
-        condition: '茶水，排气扇，绿化植物，多媒体'
+        condition: '茶水，投影仪，电脑，空调'
       }
     ]
   }
@@ -295,6 +296,9 @@ export default {
   },
   methods: {
     moment,
+         displayRender({ labels }){
+      return  labels.join('.')
+    },
     areaChange(value) {
       console.log(value)
     },

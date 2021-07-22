@@ -2,7 +2,9 @@
 	<view>
 		<cu-custom bgColor="bg-orange" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">详情</block>
+			<block v-if="type==0" slot="content">安装</block>
+			<block v-if="type==3" slot="content">维修</block>
+			<block v-if="type==1 || type==4" slot="content">详情</block>
 		</cu-custom>
 		
 		<!-- 人员信息 -->

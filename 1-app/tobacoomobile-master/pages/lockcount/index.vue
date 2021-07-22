@@ -2,7 +2,7 @@
 	<view>
 		<view class="cu-bar bg-orange solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-white"></text> 开锁和报警统计
+				<text class="cuIcon-title text-white"></text> 安装和报警统计
 			</view>
 		</view>
 
@@ -18,8 +18,8 @@
 					报警统计
 				</view>
 			</view>
-		</scroll-view> 
-<!-- 		<view v-if="TabCur==0" class="itembox">
+		</scroll-view>
+		<!-- 		<view v-if="TabCur==0" class="itembox">
 			<view class="cu-form-group">
 				<view class="title">最近三个月开锁统计图表：</view>
 			</view>
@@ -62,8 +62,44 @@
 			</view>
 		</view> -->
 		<view v-if="TabCur==0" class="itembox">
-			123
+			<view class="cu-form-group">
+				<view class="title">最近一周安装统计图表：</view>
+			</view>
+			<view class="charts-box">
+				<qiun-data-charts type="pie" :chartData="chartData2" background="white" />
+			</view>
+			<view class="cu-form-group">
+				<view class="title">安装统计信息：</view>
+				<view class="title">中国烟草总公司福建省公司机关</view>
+			</view>
+			<view class="people">
+				<view class="cu-list grid col-3">
+					<view class="cu-item">
+						<text>位置</text>
+					</view>
+					<view class="cu-item">
+						<text>未安装</text>
+					</view>
+					<view class="cu-item">
+						<text>已安装</text>
+					</view>
+				</view>
+				<view class="cu-list grid col-3" v-for="(item,index) in alertdata" :key="index">
+					<view>
+						<text>{{item.area}}</text>
+					</view>
+					<view>
+						<text>{{item.uninstall}}</text>
+					</view>
+					<view>
+						<text>{{item.install}}</text>
+					</view>
+				</view>
+			</view>
 		</view>
+
+
+
 		<view v-if="TabCur==1" class="itembox">
 			<view class="cu-form-group">
 				<view class="title">最近一周报警统计图表：</view>
@@ -131,15 +167,27 @@
 						"低电量",
 						"密码错误多次",
 					],
-					series: [
-						{
-							"name": "报警次数",
-							"data": [
-								11,
-								8,
-							]
-						}
-					],
+					series: [{
+						"name": "报警次数",
+						"data": [
+							11,
+							8,
+						]
+					}],
+				},
+				chartData2: {
+					categories: [],
+					series: [{
+						"data": [{
+								"name": "未安装",
+								"value": 50
+							},
+							{
+								"name": "已安装",
+								"value": 30
+							},
+						]
+					}],
 				},
 				// recorddate:[
 				// 	{
@@ -161,21 +209,26 @@
 				// 		remotecount: 2,
 				// 	},
 				// ],
-				alertdata:[
-					{
+				alertdata: [{
 						area: 'A区域',
 						count: 3,
 						count1: 1,
+						install: 12,
+						uninstall: 16,
 					},
 					{
 						area: 'B区域',
 						count: 2,
 						count1: 2,
+						install: 8,
+						uninstall: 20,
 					},
 					{
 						area: 'C区域',
 						count: 6,
 						count1: 5,
+						install: 10,
+						uninstall: 24,
 					},
 				]
 			}
@@ -194,6 +247,7 @@
 		width: 100%;
 		height: 200px;
 	}
+
 	.people {
 		background-color: white;
 		padding-bottom: 2vh;

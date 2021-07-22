@@ -1,235 +1,233 @@
-import { devType ,taskStatus} from "@/utils/dataDictionary.js";
-import { columns as checkCol } from "./check.js";
-import { columns as evaCol } from "./done";
-import { columns as fixCol } from "./fix.js";
-import { columns as reviewCol } from "./review";
-import { columns as verifyCol } from "./verify";
+import {
+  devType,
+  taskStatus
+} from "@/utils/dataDictionary.js";
 
-export const columns=[
-    {
-        dataIndex: 'devId',
-        slots: { title: '问题编号' },
-        scopedSlots: { customRender: 'devId' },
-        title: '问题编号',
-        width: 80,
-        key: 'devId'
-    },
-    {
-        dataIndex: 'taskStatus',
-        title: '任务状态',
-        width: 80,
-        key: 'taskStatus',
-        type:"a-select",
-        valueEnum:taskStatus
-    },
-    {
-        title: '问题描述',
-        dataIndex: 'devName',
-        width: 100,
-        key: 'devName'
-    },
-    {
-        title: '问题类型',
-        dataIndex: 'devType',
-        width: 100,
-        key: 'devType',
-        valueEnum:devType
-    },
-    {
-        title: '问题地点',
-        dataIndex: 'address',
-        width: 100,
-        key: 'address'
-    },
-    {
-        title: '问题上报时间',
-        key: 'deliveryTime',
-        dataIndex: 'deliveryTime',
-        scopedSlots: { customRender: 'tags' },
-        width: 100,
-        type: 'a-range-picker',
-    },
-    {
-        dataIndex: 'institution',
-        key:'institution',
-        slots: { title: '业主单位' },
-        scopedSlots: { customRender: 'name' },
-        title: '业主单位',
-        width: 80,
-    },
-    {
-        title: '业主联系方式',
-        dataIndex: 'phone',
-        key:'phone',
-        width: 80,
-    },
-    // {
-    //     title: '维修员',
-    //     key: 'fixStaff',
-    //     dataIndex: 'fixStaff',
-    //     scopedSlots: { customRender: 'tags' },
-    //     width: 80,
-    // },
-    // {
-    //     title: '维修完成时间',
-    //     key: 'fixedTime',
-    //     dataIndex: 'fixedTime',
-    //     scopedSlots: { customRender: 'tags' },
-    //     width: 80,
-    //     type: 'a-range-picker',
-    // },
-    {
-        title: '操作',
-        dataIndex: 'action',
-        scopedSlots: { customRender: 'action' },
-        width: 80,
-        hideInSearch:true
-    },
-]
-export const data=[
-    {
-        key: 0,
-        devId: '1',
-        devName: "18楼停电",
-        taskStatus:1,
-        devType: 1,
-        devStatus:4,
-        address: '烟草大厦18楼',
-        institution: '福建烟草公司',
-        phone: '18232145698',
-        fixStaff: '刘涛',
-        deliveryTime: '2021-06-22 17：55：55',
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        },{
-            tagName:"审核下发",
-            com:"TableModal"
-        },{
-            tagName:"忽略",
-            com:""
-        }]
-    },
-    {
-        key: 1,
-        devId: '4',
-        devName:"空调调控温度无反应",
-        taskStatus:2,
-        devType:0,
-        devStatus: 5,
-        address: '烟草大厦6楼',
-        institution: '福建聚星园餐饮有限公司',
-        phone: '18232145698',
-        // fixStaff: '张英',
-        deliveryTime:"2021-06-19 17：55：55",
-        fixedTime: '2021-06-22 20：00：00',
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        },{
-            tagName:"派单",
-            com:"TableModal"
-        }]
-    },
-    {
-        key: 2,
-        devId: '2',
-        devName: "18楼频繁断电停电",
-        taskStatus:3,
-        devType: 1,
-        devStatus: 5,
-        deliveryTime:"2021-06-22 10：55：55",
-        address: '烟草大厦18楼',
-        institution: '福建烟草公司',
-        phone: '18232145698',
-        techSituation: 0,
-        fixStaff: '刘涛',
-        fixedTime: "2021-06-22 20：00：00",
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        }]
-    },
-    {
-        key: 3,
-        devId: '3',
-        devName: "卫生间停水",
-        taskStatus:4,
-        devType: 2,
-        devStatus: 6,
-        address: '烟草大厦3楼卫生间',
-        institution: '福建烟草公司',
-        phone: '18232145698',
-        fixStaff: '王翔',
-        deliveryTime: '2021-06-20 17：55：55',
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        }]
-    },
+export const columns = [{
+    dataIndex: 'orderId',
+    title: '工单编号',
+    width: 60,
+    key: 'orderId',
+    value: ""
+  },
   {
-        key:4,
-        devId: '5',
-        devName: "18楼停电",
-        taskStatus:5,
-        devStatus: 8,
-        devType: 1,
-        address: '烟草大厦18楼',
-        institution: '福建烟草公司',
-        phone: '18232145698',
-        fixStaff: '刘涛',
-        deliveryTime: '2021-06-18 17：55：55',
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        }]
-    }
+    title: '工单类型',
+    dataIndex: 'devType',
+    width: 60,
+    key: 'devType',
+    type: 'a-select',
+    valueEnum: devType,
+    value: ""
+  },
+  {
+    title: '工单状态',
+    dataIndex: 'taskStatus',
+    width: 60,
+    key: 'taskStatus',
+    type: 'a-select',
+    valueEnum: taskStatus,
+    value: ""
+  },
+  {
+    title: '上报时间',
+    key: 'orderTime',
+    dataIndex: 'orderTime',
+    width: 100,
+    type: 'a-range-picker',
+    value: ""
+  }, 
+  {
+    dataIndex: 'orderPerson',
+    key: 'orderPerson',
+    title: '上报人',
+    width: 60,
+    value: ""
+  },
+  {
+    title: '上报人联系方式',
+    dataIndex: 'phone',
+    key: 'phone',
+    width: 80,
+    value: "",
+    hideInSearch: true
+  },
+  {
+    title: '上报地址',
+    dataIndex: 'address',
+    key: 'address',
+    width: 80,
+    value: "",
+    hideInSearch: true
+  },
+
+  {
+    title: '上报描述',
+    dataIndex: 'description',
+    width: 100,
+    key: 'description',
+    hideInSearch: true,
+    hideInTable: true,
+    value: ""
+  }, {
+    title: '上报图片',
+    dataIndex: 'imgs',
+    width: 100,
+    key: 'imgs',
+    hideInSearch: true,
+    hideInTable: true,
+    scopedSlots: {
+      customRender: 'imgs'
+    },
+    value: ""
+  },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    scopedSlots: {
+      customRender: 'action'
+    },
+    width: 80,
+    hideInSearch: true,
+    hideInDetail: true
+  }
 ]
-export const searchCon={}
-export const infoDetail =[
-    {
-        title: '设备编号',
-        key: 'devId',
-        value:""
-    },
-    {
-        title: '设备名称',
-        value:"",
-        key: 'devName'
-    },
-    {
-        title: '设备类型',
-        value:"",
-        key: 'devType',
-        type:"a-select",
-        valueEnum:devType
-    },
-    {
-        key: 'institution',
-        title: '业主单位',
-        value:"",
-    },
-    {
-        title: '业主联系方式',
-        key: 'phone',        
-        value:"",
-    },
-    // {
-    //     title: '技术状况',
-    //     key: 'techSituation',
-    //     value:"",
-    //     type:"a-select"
-    // },
-    {
-        title: '维修员',
-        key: 'fixStaff',
-        value:"",
-    },
-    {
-        title: '登记时间',
-        key: 'fixedTime',
-        value:"",
-        type:"a-range-picker",
-        hideInDetail:true
-    }
+export const data = [{
+    key: 0,
+    taskStatus: 0,
+    orderId: '1',
+    devType: 1,
+    orderPerson: '赵敏',
+    phone: '18232145698',
+    address: '烟草大厦18楼',
+    orderTime: '2021-07-22 17:55:55',
+    description: "18楼停电",
+    imgs: ['assets/logo.png'],
+    action: [{
+      tagName: "详情",
+      com: "TableDrawer"
+    }]
+  },
+  {
+    key: 1,
+    taskStatus: 1,
+    orderId: '2',
+    devType: 0,
+    orderPerson: '周芷若',
+    phone: '18232145698',
+    address: '烟草大厦6楼',
+    orderTime: '2021-07-19 17:55:55',
+    description: "空调调控温度无反应",
+    imgs: ['assets/logo.png'],
+    action: [{
+      tagName: "详情",
+      com: "TableDrawer"
+    }]
+  },
+  {
+    key: 2,
+    taskStatus: 2,
+    orderId: '3',
+    devType: 1,
+    fixStaff: '刘涛',
+    fixPhone: "18232145698",
+    expectTime: "2021-07-22 10:55:55",
+    orderPerson: '赵敏',
+    phone: '18232145698',
+    address: '烟草大厦18楼',
+    orderTime: '2021-07-20 17:55:55',
+    description: "18楼频繁断电停电",
+    imgs: ['/assets/logo.png'],
+    handleimgs: ['/assets/logo.png'],
+    action: [{
+      tagName: "详情",
+      com: "TableDrawer"
+    }]
+  },
+  {
+    key: 3,
+    taskStatus: 3,
+    orderId: '4',
+    devType: 2,
+    fixStaff: '王翔',
+    fixPhone: "18254621147",
+    expectTime: "2021-07-22 20:00:00",
+    orderPerson: '阿蛛',
+    phone: '18232145694',
+    address: '烟草大厦3楼卫生间',
+    orderTime: '2021-07-20 17:55:55',
+    description: "卫生间停水",
+    imgs: ['/assets/logo.png'],
+    handleimgs: ['/assets/logo.png'],
+    action: [{
+      tagName: "详情",
+      com: "TableDrawer"
+    }]
+  },
+  {
+    key: 4,
+    taskStatus: 4,
+    orderId: '5',
+    devType: 1,
+    fixStaff: '刘涛',
+    fixPhone: "18232145698",
+    expectTime: "2021-07-23 17：55：55",
+    orderPerson: '小昭',
+    phone: '18232145694',
+    address: '烟草大厦18楼',
+    orderTime: '2021-07-18 17:55:55',
+    description: "18楼停电",
+    imgs: ['/assets/logo.png'],
+    handleimgs: ['/assets/logo.png'],
+    action: [{
+      tagName: "详情",
+      com: "TableDrawer"
+    }]
+  }
+]
+export const searchCon = {}
+export const infoDetail = [{
+    title: '设备编号',
+    key: 'devId',
+    value: ""
+  },
+  {
+    title: '设备名称',
+    value: "",
+    key: 'devName'
+  },
+  {
+    title: '设备类型',
+    value: "",
+    key: 'devType',
+    type: "a-select",
+    valueEnum: devType
+  },
+  {
+    key: 'institution',
+    title: '业主单位',
+    value: "",
+  },
+  {
+    title: '业主联系方式',
+    key: 'phone',
+    value: "",
+  },
+  // {
+  //     title: '技术状况',
+  //     key: 'techSituation',
+  //     value:"",
+  //     type:"a-select"
+  // },
+  {
+    title: '维修员',
+    key: 'fixStaff',
+    value: "",
+  },
+  {
+    title: '登记时间',
+    key: 'fixedTime',
+    value: "",
+    type: "a-range-picker",
+    hideInDetail: true
+  }
 ]

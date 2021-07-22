@@ -2,33 +2,33 @@
 	<view>
 		<form class="cu-list menu sm-border card-menu margin-top" @submit="formSubmit" @reset="formReset">
 			<view class="cu-form-group" v-for="item in dataSource" :key="item.key">
-				<view class="title">{{item.label}}</view>
-				<component :is="item.type" placeholder="请输入"></component>
-				<!-- <input  name="address"></input> -->
-				<text class='cuIcon-locationfill text-orange'></text>
+				<view class="title basis-sm">{{item.label}}</view>
+				<input placeholder="请输入" v-if="!item.type" class="flex-sub"></component>
+				<slot :name="item.key" v-else></slot>
 			</view>
-<!-- 			<view class="cu-bar bg-white margin-top">
+
+			<view class="cu-bar bg-white margin-top">
 				<view class="action">
 					图片上传
 				</view>
 				<view class="action">
-					{{fixImgList.length}}/4
+					{{picList.length}}/4
 				</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(item,index) in fixImgList" :key="index" @tap="ViewImage"
-						:data-url="fixImgList[index]">
-						<image :src="fixImgList[index]" mode="aspectFill"></image>
+					<view class="bg-img" v-for="(item,index) in picList" :key="index" @tap="ViewImage"
+						:data-url="picList[index]">
+						<image :src="picList[index]" mode="aspectFill"></image>
 						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
 							<text class='cuIcon-close'></text>
 						</view>
 					</view>
-					<view class="solids" @tap="ChooseImage" v-if="fixImgList.length<4">
+					<view class="solids" @tap="ChooseImage" v-if="picList.length<4">
 						<text class='cuIcon-cameraadd'></text>
 					</view>
 				</view>
-			</view> -->
+			</view>
 			<view class="cu-bar btn-group margin-top">
 				<button class="cu-btn bg-orange shadow-blur round" form-type="submit">提交</button>
 			</view>
@@ -39,15 +39,14 @@
 <script>
 	export default {
 		name: "form",
-		// computed: {
-		// 	...mapState(['fixImgList', 'textareaValue'])
-		// },
 		props: {
 			dataSource: {
 				type: Array
-			},
-			picList: {
-				type: Array
+			}
+		},
+		data() {
+			return {
+				picList: []
 			}
 		},
 		methods: {

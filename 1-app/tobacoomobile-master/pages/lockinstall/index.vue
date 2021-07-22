@@ -2,17 +2,16 @@
 	<view>
 		<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
 
-			<!-- 搜索栏 -->
-			<view class="cu-bar bg-orange solid-bottom">
-				<view class="action">
-					<text class="cuIcon-title text-white"></text> 智能锁安装
-				</view>
-				<view class="action" @tap="showModal" data-target="viewModal">
-
+			<cu-custom bgColor="bg-orange" :isBack="true">
+				<block slot="backText">返回</block>
+				<block slot="content">记录</block>
+				<view slot="right" class="action" @tap="showModal" data-target="viewModal">
 					<text class="cuIcon-search"></text>
 					<text class="text-df">搜索</text>
 				</view>
-			</view>
+			</cu-custom>
+			<!-- 搜索栏 -->
+			
 
 			<!-- 切换栏 -->
 			<scroll-view scroll-x class="bg-white nav">
@@ -78,12 +77,12 @@
 				],
 			};
 		},
-		
+
 		components: {
 			serach,
 			lockCard,
 		},
-		
+
 		methods: {
 			showModal(e) {
 				this.modalName = e.currentTarget.dataset.target

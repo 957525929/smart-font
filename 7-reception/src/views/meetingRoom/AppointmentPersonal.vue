@@ -1,5 +1,5 @@
 <template>
-  <!-- 会议总览 -->
+  <!-- 个人预约会议总览 -->
   <a-card :bordered="false">
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
@@ -12,13 +12,11 @@
             <a-select-option value="已完成">已完成</a-select-option>
              <a-select-option value="待安排">待开始</a-select-option>
              <a-select-option value="进行中">进行中</a-select-option>
-            <a-select-option value="待安排">待安排</a-select-option>
             <a-select-option value="待审核">待审核</a-select-option>          
             <a-select-option value="未通过">未通过</a-select-option>
           </a-select>
         </a-col>
         <a-col :span="1"></a-col>
-
         <a-col>会议时间：</a-col>
         <a-col>
           <a-date-picker
@@ -77,7 +75,8 @@
         <a-table-column title="负责人姓名" data-index="dutyName" align="center"></a-table-column>
         <!-- <a-table-column title="负责人电话" data-index="dutyTel" align="center"></a-table-column> -->
         <a-table-column title="会议时间" data-index="dateTime" align="center"></a-table-column>
-        <a-table-column title="会议地点" data-index="address" align="center"></a-table-column>
+        <a-table-column title="时段" data-index="range" align="center"></a-table-column>
+        <a-table-column title="会议地点" data-index="address" align="center" width="300px"></a-table-column>
         <a-table-column title="参会人数（人）" data-index="number" align="center"></a-table-column>
         <!-- <a-table-column title="会议状态" data-index="state" align="center"></a-table-column> -->
         <a-table-column title="会议状态" data-index="state" align="center">
@@ -91,9 +90,6 @@
               <div v-else-if="state == '待开始'">
               <span :style="{ color: 'green' }">待开始</span>
             </div>
-            <div v-else-if="state == '待安排'">
-              <span :style="{ color: 'blue' }">待安排</span>
-            </div>
             <div v-else-if="state == '已完成'">
               <span :style="{ color: 'green' }">已完成</span>
             </div>
@@ -102,20 +98,37 @@
             </div>
           </template>
         </a-table-column>
-        <a-table-column title="文档信息" data-index="detail" align="center">
-          <!-- <a-button :style="{ background: '#49a9ee', color: 'white' }" @click="infor()">查看详情</a-button> -->
-          <router-link
-            :to="{ path: '/meetingOrganization/MeetingDetails', query: { record }}"
-            slot-scope="text, record"
-            replace
+        <a-table-column title="操作"  align="center">
+         <span  slot-scope="text, record" >
+             <router-link
+            :to="{ path: '/meetingRoom/PersonalDetil', query: { record }}"
           >
-            <a-button :style="{ background: '#49a9ee', color: 'white' }">查看详情</a-button>
-          </router-link>
+            <a :style="{  color: 'blue' }">查看详情</a>
+          </router-link>         
+            <span v-if="record.state == '进行中'||record.state == '待开始'">
+              <a-divider type="vertical" />
+              <a  :style="{  color: 'orange' }" @click="cancleRoom(record)" >撤销</a>
+            </span>         
+        </span>
+
         </a-table-column>
       </a-table>
       <br />
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
+
+    <!-- 撤销原因 -->
+    <a-modal  v-model="visibleReason"   title="撤销会议室预约原因填写" @ok="handleOkReason">
+        <a-row type="flex" align="middle">
+         <a-col :span="4">
+         <span>撤销原因：</span>
+        </a-col>
+        <a-col :span="18">
+        <a-input v-model="reason" type="textarea" required/>
+        </a-col>
+        </a-row>
+     
+    </a-modal>
   </a-card>
 </template>
 
@@ -123,162 +136,89 @@
 import moment from 'moment'
 const data = [
   {
-    id: 'A1203',
+    id: 'B1203',
     budget: '5000',
     name: '物流管理会议',
     theme: '物流管理',
-    dateTime: '2021年07月20日~2021年07月27日',
-    address: '总公司机关',
+    dateTime: '2021年07月27日~2021年07月27日',
+    range:'上午',
+    address: '中国烟草总公司福建省公司机关.B区域.2号楼.205会议室',
+
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
-    dutyName: '林诺汐',
+    dutyName: '李小玲',
     dutyTel: '152690314587',
     state: '进行中',
     detail: '1'
   },
   {
-    id: 'A1207',
+    id: 'B1207',
     budget: '5000',
     name: '安全管理会议',
     theme: '安全管理',
-    dateTime: '2021年08月03日~2021年08月05日',
-    address: '总公司机关',
+    dateTime: '2021年08月03日~2021年08月03日',
+    range:'下午',
+    address: '中国烟草总公司福建省公司机关.B区域.1号楼.203会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
-    dutyName: '林诺汐',
+    dutyName: '李小玲',
     dutyTel: '152690314587',
     state: '待开始',
     detail: '0'
   },
   {
-    id: 'A1206',
-    budget: '2000',
-    name: '物流管理会议',
-    theme: '物流管理',
-    dateTime: '2021年07月28日~2021年07月30日',
-    address: '总公司机关',
-    members: '陈宏涛；李小玲；林诺汐',
-    number: '3',
-    dutyName: '林诺汐',
-    dutyTel: '152690314587',
-    state: '待安排',
-    detail: '0'
-  },
-
-
-  {
-    id: 'A1204',
+    id: 'B1204',
     budget: '3000',
     name: '安全管理会议',
     theme: '安全管理',
-    dateTime: '2021年07月25日~2021年07月26日',
-    address: '总公司机关',
+    dateTime: '2021年07月26日~2021年07月26日',
+    range:'下午',
+    address: '中国烟草总公司福建省公司机关.A区域.2号楼.204会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
-    dutyName: '林诺汐',
+    dutyName: '陈宏涛',
     dutyTel: '152690314587',
     state: '待审核',
     detail: '0'
   },
 
   {
-    id: 'A1205',
+    id: 'B1205',
     budget: '2000',
     name: '零售项目开展会议',
     theme: '项目会议',
-    dateTime: '2021年07月18日~2021年07月20日',
-    address: '总公司机关',
+    dateTime: '2021年07月20日~2021年07月20日',
+    range:'上午',
+    address: '中国烟草总公司福建省公司机关.A区域.1号楼.205会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
-    dutyName: '李小玲',
+    dutyName: '陈宏涛',
     dutyTel: '152690314587',
     state: '已完成',
     detail: '1'
   },
-  // {
-  //   id: 'A1201',
-  //   budget: '1000',
-  //   name: '2020年年度总结',
-  //   theme: '年度总结',
-  //   dateTime: '2021年01月15日~2021年01月16日',
-  //   address: '中国烟草总公司福建省公司机关A区域1号楼会议室203',
-  //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-  //   number: '4',
-  //   dutyName: '陈宏涛',
-  //   dutyTel: '152690314587',
-  //   state: '已完成',
-  //   detail: '1'
-  // },
   {
-    id: 'A1202',
+    id: 'B1202',
     budget: '5000',
     name: '安全管理会议',
     theme: '安全管理',
-    dateTime: '2021年07月21日~2021年07月23日',
-    address: '总公司机关',
+    dateTime: '2021年07月21日~2021年07月21日',
+    range:'全天',
+    address: '中国烟草总公司福建省公司机关.B区域.2号楼.204会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
-    dutyName: '林诺汐',
+    dutyName: '陈熙雨',
     dutyTel: '152690314587',
     state: '未通过',
     detail: '0'
-  }
-]
-const dataHotel = [
-  {
-    dateTime: '2021年06月05日~2021年06月06日',
-    hotel: '香格里拉酒店'
-  },
-  {
-    dateTime: '2021年06月06日~2021年06月07日',
-    hotel: '好利来酒店'
-  }
-]
-const dataEat = [
-  {
-    dateTime: '2021年06月05日~2021年06月05日',
-    type: '早餐',
-    way: '香格里拉酒店'
-  },
-  {
-    dateTime: '2021年06月05日~2021年06月05日',
-    type: '午餐',
-    way: '食堂'
-  },
-  {
-    dateTime: '2021年06月05日~2021年06月05日',
-    type: '晚餐',
-    way: '食堂'
-  },
-  {
-    dateTime: '2021年06月05日~2021年06月06日',
-    type: '早餐',
-    way: '香格里拉酒店'
-  },
-  {
-    dateTime: '2021年06月05日~2021年06月06日',
-    type: '午餐',
-    way: '食堂'
-  },
-  {
-    dateTime: '2021年06月05日~2021年06月06日',
-    type: '晚餐',
-    way: '食堂'
-  }
-]
-const dataRoom = [
-  {
-    dateTime: '2021年06月05日~2021年06月06日',
-    room: '中国烟草总公司福建省公司机关.A区域.1号楼.会议室203'
   }
 ]
 export default {
   data() {
     return {
       data,
-      dataHotel,
-      dataEat,
-      dataRoom,
+      visibleReason: false,
+      reason:'',
       queryParam: {
         id: undefined,
         name: undefined,
@@ -298,52 +238,15 @@ export default {
       .subtract(-15, 'days')
       .format('YYYY-MM-DD')
       this.queryParam.dateEnd= this.moment(end, 'YYYY-MM-DD')
+    let dateNow=moment(new Date().toLocaleDateString(), 'YYYY年MM月DD日')
+    // console.log(dateNow.format('YYYY年MM月DD日'))
+      this.data[0].dateTime=dateNow.format('YYYY年MM月DD日')+"~"+dateNow.format('YYYY年MM月DD日')
   },
   methods: {
     moment,
     onChange() {},
     handleChange() {},
     searchQuery() {
-      // let IDName = this.queryParam.IDName;
-      // let newListData = [];
-      // let date1 = this.queryParam.dateStart;
-      // let date2 = this.queryParam.dateEnd;
-      // if (IDName && date1 && date2) {
-      //   let dateSearch =
-      //     date1.format("YYYY年MM月DD日") + "~" + date2.format("YYYY年MM月DD日");
-      //   this.data.filter(item => {
-      //     if (
-      //       (item.id.includes(IDName) || item.name.includes(IDName)) &&
-      //       item.dateTime.includes(dateSearch)
-      //     ) {
-      //       newListData.push(item);
-      //     }
-      //   });
-      //   this.data = newListData;
-      // } else {
-      //   if (IDName) {
-      //     this.data.filter(item => {
-      //       if (item.id.includes(IDName) || item.name.includes(IDName)) {
-      //         newListData.push(item);
-      //       }
-      //     });
-      //     this.data = newListData;
-      //   }
-      //   if (date1 && date2) {
-      //     let dateSearch =
-      //       date1.format("YYYY年MM月DD日") +
-      //       "~" +
-      //       date2.format("YYYY年MM月DD日");
-      //     //console.log(dateSearch);
-      //     this.data.filter(item => {
-      //       if (item.dateTime.includes(dateSearch)) {
-      //         console.log(111);
-      //         newListData.push(item);
-      //       }
-      //     });
-      //     this.data = newListData;
-      //   }
-      // }
     },
     searchReset() {
       this.data = data
@@ -353,6 +256,12 @@ export default {
     },
     getCurrentData() {
       return new Date().toLocaleDateString()
+    },
+    cancleRoom(record){
+         this.visibleReason = true
+    },
+    handleOkReason(){
+        this.visibleReason = false
     }
   }
 }

@@ -184,20 +184,22 @@ function base64ToPath(base64) {
 
 }
 
-function dataURLtoFile(dataurl, filename) { 
-    if(!filename){
-        filename = new Date().getTime()
-    }
-    var arr = dataurl.split(','),
-        mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]),
-        n = bstr.length,
-        u8arr = new Uint8Array(n);
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    
-    return new File([u8arr], filename + '.' + mime.split('/')[1], { type: mime });
+function dataURLtoFile(dataurl, filename) {
+	if (!filename) {
+		filename = new Date().getTime()
+	}
+	var arr = dataurl.split(','),
+		mime = arr[0].match(/:(.*?);/)[1],
+		bstr = atob(arr[1]),
+		n = bstr.length,
+		u8arr = new Uint8Array(n);
+	while (n--) {
+		u8arr[n] = bstr.charCodeAt(n);
+	}
+
+	return new File([u8arr], filename + '.' + mime.split('/')[1], {
+		type: mime
+	});
 }
 
 // 年月YYYY-MM的拆分与合并
@@ -205,11 +207,11 @@ function getDate() {
 	const date = new Date();
 	let yearNum = date.getFullYear()
 	let month = date.getMonth() + 1;
-	month = month> 9 ? month: "0" + month;
-	return [yearNum + '-' +month,yearNum,month]
+	month = month > 9 ? month : "0" + month;
+	return [yearNum + '-' + month, yearNum, month]
 }
 
-function splitDate(val){
+function splitDate(val) {
 	val.match(/^(\d{4})-(\d{2})$/)
 	return val.match(/^(\d{4})-(\d{2})$/)
 }
@@ -228,31 +230,47 @@ const msg = (title, duration = 2000, mask = false, icon = 'none') => {
 }
 // 判空
 const judgeDataNull = (data) => {
-  return Boolean(data) === false ? false : true;
+	return Boolean(data) === false ? false : true;
 };
 
 //  值判空
 const judgeNull = (data) => {
-  if (!judgeDataNull(data)) {
-    console.log('返回空');
-    return false;
-  } else {
-    if (typeof data === 'object') {
-      let arr = Object.keys(data);
-      if (arr.length === 0) {
-        console.log('返回对象值为空或未定义');
-        return false;
-      }
-    } else if (typeof data === 'string') {
-		// .replace(/(^s*)|(s*$)/g, '')
-      if (data.length === 0) {
-        console.log('返回字符串值为空');
-        return false;
-      }
-    }
-    return true;
-  }
+	if (!judgeDataNull(data)) {
+		console.log('返回空');
+		return false;
+	} else {
+		if (typeof data === 'object') {
+			let arr = Object.keys(data);
+			if (arr.length === 0) {
+				console.log('返回对象值为空或未定义');
+				return false;
+			}
+		} else if (typeof data === 'string') {
+			// .replace(/(^s*)|(s*$)/g, '')
+			if (data.length === 0) {
+				console.log('返回字符串值为空');
+				return false;
+			}
+		}
+		return true;
+	}
 }
+
+const getNow = () => {
+	let date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+
+	let Y = date.getFullYear();
+	let M = autoChange(date.getMonth() + 1); //计算机的月份是从0开始滴，需要+1
+	let D = autoChange(date.getDate());
+
+	let h = autoChange(date.getHours()) + ":";
+	let m = autoChange(date.getMinutes()) + ":";
+	let s = autoChange(date.getSeconds());
+
+	return [[Y, M, D], [h, m, s]];
+}
+
+
 module.exports = {
 	formatTime,
 	formatStampTime,
@@ -262,5 +280,6 @@ module.exports = {
 	splitDate,
 	msg,
 	judgeDataNull,
-	judgeNull
+	judgeNull,
+	getNow
 }

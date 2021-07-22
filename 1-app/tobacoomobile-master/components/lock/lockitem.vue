@@ -47,10 +47,9 @@
 		</view>
 		<view v-if="type==0 || type==3" class="cu-form-group align-start">
 			<view class="title">备注：</view>
-			<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaBInput"
-				placeholder="请输入备注信息"></textarea>
+			<textarea :disabled="modalName!=null" @input="textareaBInput" placeholder="请输入备注信息"></textarea>
 		</view>
-		
+
 		<!-- 已安装 -->
 		<view v-if="type==1" class="cu-form-group margin-top">
 			<view class="title">锁编号：</view>
@@ -65,7 +64,7 @@
 			<view class="flex-sub text-left">{{value}}</view>
 		</view>
 		<view v-if="type==1" class="cu-bar bg-white">
-			<view  class="action">
+			<view class="action">
 				安装完成后现场图片
 			</view>
 			<view class="action">
@@ -73,7 +72,7 @@
 			</view>
 		</view>
 		<view v-if="type==4" class="cu-bar bg-white">
-			<view  class="action">
+			<view class="action">
 				维修完成后现场图片
 			</view>
 			<view class="action">
@@ -81,7 +80,7 @@
 			</view>
 		</view>
 		<view v-if="type==1 || type==4" class="cu-form-group">
-			
+
 			<view class="grid col-4 grid-square flex-sub">
 				<view class="bg-img" v-for="(item,index) in imgList1" :key="index" @tap="ViewImage"
 					:data-url="imgList1[index]">
@@ -104,7 +103,7 @@
 		data() {
 			return {
 				imgList: [],
-				imgList1: ['../../static/lock/lock2.jpg','../../static/lock/lock3.jpg'],
+				imgList1: ['../../static/lock/lock2.jpg', '../../static/lock/lock3.jpg'],
 				modalName: null,
 				textareaBValue: '',
 				value: '',
@@ -112,23 +111,23 @@
 				input: 'S0001',
 			}
 		},
-		
+
 		created: function() {
 			var aData = new Date();
-			
+
 			this.value1 =
 				aData.getFullYear() + "年" +
 				(aData.getMonth() + 1) + "月" +
-				(aData.getDate()-1) + "日" + ' ' +
+				(aData.getDate() - 1) + "日" + ' ' +
 				'08:35:22'
 
 			this.value =
 				aData.getFullYear() + "年" +
 				(aData.getMonth() + 1) + "月" +
-				(aData.getDate()-1) + "日" + ' ' +
+				(aData.getDate() - 1) + "日" + ' ' +
 				'16:27:46'
 		},
-		
+
 		methods: {
 			ChooseImage() {
 				uni.chooseImage({
@@ -150,7 +149,7 @@
 					current: e.currentTarget.dataset.url
 				});
 			},
-			
+
 			textareaBInput(e) {
 				this.textareaBValue = e.detail.value
 			}
