@@ -11,6 +11,7 @@
             @change="areaChange"
             :default-value="['0', '01']"
             placeholder="请选择位置"
+            :display-render="displayRender"
           />
 
           <br /><br /><br />
@@ -71,6 +72,9 @@ export default {
     Pie,
   },
   methods: {
+    displayRender({ labels }) {
+      return labels.join('.')
+    },
     areaChange(value) {},
     check() {
       // console.log(this.lockNum)

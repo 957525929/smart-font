@@ -29,6 +29,7 @@
       change-on-select
       @change="areaChange"
       placeholder="请选择位置"
+      :display-render="displayRender"
     />
 
     <a-divider type="vertical" />
@@ -74,6 +75,9 @@ export default {
     }
   },
   methods: {
+    displayRender({ labels }) {
+      return labels.join('.')
+    },
     areaChange(value) {},
     handleToggleSearch() {},
 
