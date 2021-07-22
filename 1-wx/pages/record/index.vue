@@ -37,7 +37,7 @@
 				</navigator>
 			</block>
 			<block v-if="TabCur==2">
-				<navigator class="action" @tap="showModal" data-target="DialogModal1">
+				<navigator class="action" @tap="goToDisAgree">
 					<recordCard :cardType="type[2]" />
 				</navigator>
 			</block>
@@ -56,7 +56,7 @@
 			</view>
 		</scroll-view>
 
-		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
+<!-- 		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
 					<view class="content">拒绝原因</view>
@@ -73,7 +73,7 @@
 					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 
 	</view>
 </template>
@@ -119,6 +119,12 @@
 				this.TabCur = data
 				console.log(this.TabCur)
 			},
+			goToDisAgree() {
+				uni.navigateTo({
+					url: "/pages/verify/index3"
+				});
+				// console.log('1111')
+			}
 		}
 	}
 </script>
