@@ -380,6 +380,11 @@
               电脑
             </a-checkbox>
           </a-col>
+          <a-col :span="8">
+            <a-checkbox value="摄像机">
+              摄像机
+            </a-checkbox>
+          </a-col>
             </a-row>
         </a-checkbox-group>
         </a-form-model-item>

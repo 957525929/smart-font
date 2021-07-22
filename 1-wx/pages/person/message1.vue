@@ -4,7 +4,7 @@
 			<block slot="backText">返回</block>
 			<block slot="content">消息通知</block>
 		</cu-custom>
-		<view class="content">
+		<view class="content" @tap="goToAgree">
 			<message1></message1>
 		</view>
 		<view class="bottom">
@@ -40,7 +40,11 @@
 			message1,
 		},
 		methods: {
-
+			goToAgree() {
+				uni.navigateTo({
+					url: "/pages/verify/index1"
+				});
+			}
 		}
 	}
 </script>

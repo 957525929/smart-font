@@ -1,186 +1,119 @@
 <template>
-	<view class="content">
-		<view class="avatorWrapper">
-			<view class="avator">
-				<image class="img" src="/static/logo.png" mode="widthFix"></image>
-			</view>
-		</view>
-
-		<view class="text text-white text-lg">预约访问系统</view>
-
-		<view class="form">
-
-			<view class="inputWrapper">
-				<!-- <view class="title">申请状态</view> -->
-				<picker @change="PickerChange" :value="index" :range="picker" v-model="status">
-					<view class="picker">
-						{{picker[index]}}
+	<view>
+		<scroll-view scroll-y class="page ">
+			<view class="banner">
+				<image src="/static/workplace/banner.png" mode="widthFix" class='response banner-back'></image>
+				<view class="banner-title">
+					<view>
+						预约访问系统
 					</view>
-				</picker>
+					<image class="img" src="/static/logo.png" mode="widthFix" style="width: 10vh"></image>
+				</view>
 			</view>
 
-			<view class="inputWrapper">
-				<input class="input" type="text" value="" placeholder="请输入用户名" />
-			</view>
-			<view class="inputWrapper">
-				<input class="input" type="password" value="" placeholder="请输入密码" />
-			</view>
-			<view class="loginBtn">
-				<text class="btnValue" @click="open">登录</text>
-			</view>
-			<view class="bottom">
-				<view class="registerBtn">
-					<text>注册</text>
+			<view class="content">
+				<view class="content-list">
+					<view class="list cu-form-group margin-top">
+						<view class="title">登录角色：</view>
+						<picker @change="PickerChange" :value="index" :range="picker">
+							<view class="picker">
+								{{picker[index]}}
+							</view>
+						</picker>
+					</view>
+					<view class="list cu-form-group margin-top">
+						<view class="title">用 &nbsp;户 &nbsp;名：</view>
+						<input placeholder="请输入用户名" name="name"></input>
+					</view>
+					<view class="list cu-form-group margin-top">
+						<view class="title">密&nbsp; &nbsp; &nbsp; &nbsp; 码：</view>
+						<input placeholder="请输入密码" name="password"></input>
+					</view>
+
+					<view class="padding flex flex-direction margin-top">
+						<button class="cu-btn bg-green lg" @tap="login">登录</button>
+					</view>
+					<view class="flex-sub text-center">
+						<view class="padding">
+							<text class="text-grey"> 注册 &nbsp; | &nbsp; 找回密码 </text>
+						</view>
+					</view>
 				</view>
-				<view class="forgotBtn">
-					<text>找回密码</text>
-				</view>
 			</view>
-		</view>
+
+			<view class="cu-tabbar-height"></view>
+		</scroll-view>
 	</view>
-
 </template>
-
 <script>
 	export default {
 		data() {
 			return {
-				title: 'Hello',
 				index: 0,
-				status: '',
 				picker: ['访客', '职员'],
-			}
+				name: '',
+				password: '',
+			};
 		},
-		onLoad() {
-
-		},
+		onShow() {},
 		methods: {
-			open() {
-				if (this.status === 1) {
-					uni.navigateTo({
-						url: '/pages/index/staff?PageCur=staffHome'
-					});
-				} else {
-					uni.navigateTo({
-						url: '/pages/index/tourist?PageCur=touristHome',
-					});
-				}
-
-			},
-
 			PickerChange(e) {
 				this.index = e.detail.value
-				console.log(this.index)
-				this.status = this.index
 			},
-		},
+			login() {
+				let router = [
+					'/pages/index/tourist?PageCur=touristHome',
+					'/pages/index/staff?PageCur=staffHome',	
+				]
+
+				uni.navigateTo({
+					url: router[this.index]
+				})
+			}
+		}
 	}
 </script>
 
-<style>
-	.content {
-		background: #377EB4;
-		width: 100vw;
+<style scoped>
+	.page {
 		height: 100vh;
 	}
 
-	.avatorWrapper {
-		height: 30vh;
-		width: 100vw;
+	.banner {
+		position: relative;
+	}
+
+	.banner-title {
+		width: 400rpx;
+		position: absolute;
+		top: 75%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-family: '黑体';
+		font-size: 65rpx;
+		background-image: -webkit-linear-gradient(90deg, rgb(77, 205, 240), rgb(116, 226, 230), rgb(218, 247, 246));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.img {
+		margin-top: 8vh;
+		left: 30%;
+	}
+
+	.content {
 		display: flex;
+		flex-direction: row;
 		justify-content: center;
-		align-items: flex-end;
 	}
 
-	.text {
-		padding: 0 100upx;
-		margin-top: 10px;
-		text-align: center
+	.content-list {
+		margin-top: 2vh;
+		width: 80%;
 	}
 
-	.avator {
-		width: 50%;
-		width: 180upx;
-		height: 180upx;
-		overflow: hidden;
-	}
-
-	.avator .img {
-		width: 100%;
-	}
-
-
-	.form {
-		padding: 0 100upx;
-		margin-top: 80px;
-	}
-
-	.inputWrapper {
-		width: 100%;
-		height: 80upx;
-		background: white;
-		border-radius: 20px;
-		box-sizing: border-box;
-		padding: 0 20px;
-		margin-top: 25px;
-	}
-
-	.inputWrapper .picker {
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		font-size: 15px;
-		line-height: 80upx;
-		;
-	}
-
-	.inputWrapper .input {
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		font-size: 15px;
-	}
-
-	.loginBtn {
-		width: 100%;
-		height: 80upx;
-		background: #77B307;
-		border-radius: 50upx;
-		margin-top: 50px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-	}
-
-	.loginBtn .btnValue {
-		color: white;
-	}
-
-	.bottom {
-		/* background-color: #fea82f; */
-		height: 10%;
-		display: inline;
-		margin: auto;
-		margin-top: 20px;
-		text-align: center;
-	}
-
-	.forgotBtn {
-		/* text-align: center; */
-		width: 50%;
-		margin: auto;
-		color: #EAF6F9;
-		font-size: 15px;
-		/* margin-top: 20px; */
-	}
-
-	.registerBtn {
-		/* text-align: center; */
-		width: 50%;
-		margin: auto;
-		color: #EAF6F9;
-		font-size: 15px;
-		margin-top: 20px;
+	.list {
+		border-radius: 1.5vh;
 	}
 </style>
+

@@ -28,6 +28,9 @@
 					<view v-if="item.edition" class=" text-grey">{{item.edition}}</view>
 				</view>
 			</view>
+			<view class="padding flex flex-direction">
+				<button class="cu-btn bg-red margin-tb-sm lg" @tap="back">退出</button>
+			</view>
 
 		</view>
 
@@ -85,6 +88,11 @@
 						url: '/pages/person/message'
 					});
 				}
+			},
+			back() {
+				uni.navigateTo({
+					url: "/pages/login/index"
+				});
 			}
 		}
 	};

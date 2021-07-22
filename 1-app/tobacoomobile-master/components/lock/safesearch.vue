@@ -8,7 +8,7 @@
 			<picker mode="multiSelector" @change="MultiChange" @columnchange="MultiColumnChange" :value="multiIndex"
 				:range="multiArray">
 				<view class="picker">
-					{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+					{{multiArray[0][multiIndex[0]]}}.{{multiArray[1][multiIndex[1]]}}.{{multiArray[2][multiIndex[2]]}}
 				</view>
 			</picker>
 		</view>
@@ -41,10 +41,6 @@
 					{{index2>-1?picker2[index2]:'请选择部门'}}
 				</view>
 			</picker>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">工号</view>
-			<input placeholder="请输入工号" name="input"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">姓名</view>

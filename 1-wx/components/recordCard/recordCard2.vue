@@ -27,74 +27,76 @@
 </template>
 
 <script>
+	import {
+		generatePhoneNum
+	} from '../../util/mathFunc.js'
 	export default {
-
 		data() {
 			return {
 				date: '',
 				applylist: [{
-						visit: '魏佳楠',
-						phone: '18520176742',
+						visit: '林泽宇',
+						phone: generatePhoneNum(),
 						type: '今日',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + ' 9:00~18.00'
+							(new Date().getDate()) + "日" + ' 09:00~12.00'
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
+						visit: '张国柱',
+						phone: generatePhoneNum(),
 						type: '今日',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + ' 9:00~18.00'
+							(new Date().getDate()) + "日" + ' 14:00~16.00'
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
+						visit: '王鹏翔',
+						phone: generatePhoneNum(),
 						type: '今日',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + ' 9:00~18.00'
+							(new Date().getDate()) + "日" + ' 16:00~18.00'
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
+						visit: '张全蛋',
+						phone: generatePhoneNum(),
 						type: '明日',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()+1) + "日" + ' 9:00~18.00'
+							(new Date().getDate() + 1) + "日" + ' 09:00~11.00'
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
+						visit: '林二狗',
+						phone: generatePhoneNum(),
 						type: '明日',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()+1) + "日" + ' 9:00~18.00'
+							(new Date().getDate() + 1) + "日" + ' 14:00~15.00'
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
+						visit: '王铁柱',
+						phone: generatePhoneNum(),
 						type: '明日',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()+1) + "日" + ' 9:00~18.00'
+							(new Date().getDate() + 1) + "日" + ' 15:00~18.00'
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
+						visit: '林淑芬',
+						phone: generatePhoneNum(),
 						type: '后日',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()+2) + "日" + ' 9:00~18.00'
+							(new Date().getDate() + 2) + "日" + ' 10:00~12.00'
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
+						visit: '李桂花',
+						phone: generatePhoneNum(),
 						type: '后日',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()+2) + "日" + ' 9:00~18.00'
+							(new Date().getDate() + 2) + "日" + ' 15:00~18.00'
 					},
 				],
 				// 颜色
@@ -118,7 +120,7 @@
 		props: ["cardType"],
 
 		methods: {
-
+			generatePhoneNum
 		}
 	}
 </script>

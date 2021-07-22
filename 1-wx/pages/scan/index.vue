@@ -4,7 +4,9 @@
 			<block slot="backText">返回</block>
 			<block slot="content">扫码</block>
 		</cu-custom>
-		<view @tap="openAppoient">扫码界面</view>
+		<view @tap="openAppoient">
+			<image src="../../static/scan.png" class="sacnImg"></image>
+		</view>
 	</view>
 </template>
 
@@ -49,5 +51,8 @@
 </script>
 
 <style>
-
+.sacnImg {
+	width: 100%;
+	height: 600px;
+}
 </style>

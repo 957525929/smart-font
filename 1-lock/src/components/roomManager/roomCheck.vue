@@ -9,6 +9,7 @@
       change-on-select
       @change="areaChange"
       placeholder="请选择位置"
+      :display-render="displayRender"
     />
 
     <a-divider type="vertical" />
@@ -64,6 +65,7 @@
                 change-on-select
                 @change="areaChange"
                 placeholder="请选择位置"
+                :display-render="displayRender"
               />
             </a-col>
           </a-row>
@@ -135,6 +137,9 @@ export default {
   },
   mounted() {},
   methods: {
+    displayRender({ labels }) {
+      return labels.join('.')
+    },
     areaChange(value) {},
     deptChange(value) {},
     roomAdd() {

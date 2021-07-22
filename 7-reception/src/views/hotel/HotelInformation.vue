@@ -93,7 +93,7 @@
 <a-modal v-model="visiblePrice" :title="titleHotel" footer>
     <a-table :data-source="dataPrice" :pagination="false" rowKey="name">
         <a-table-column title="房型" data-index="roomType" align="center"></a-table-column>
-        <a-table-column title="价格" data-index="price" align="center"></a-table-column>
+        <a-table-column title="价格（元）" data-index="price" align="center"></a-table-column>
       </a-table>
 </a-modal>
     <!-- 新增 -->
@@ -463,7 +463,7 @@ export default {
     },
     typePrice(record){
      this.visiblePrice=true
-     this.titleHotel=record.hotel+"房型价格列表"
+     this.titleHotel=record.hotel
      this.dataPrice=record.innerData
     },
     addHotel() {

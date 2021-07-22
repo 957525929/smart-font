@@ -44,9 +44,13 @@
 		data() {
 			return {
 				person: {
-					name: '张三',
-					department: '信息中心',
-					time: '2021年6月9日 8:23 至2021年6月9日 19:23',
+					name: '王莎莎',
+					department: '审计中心',
+					time: new Date().getFullYear() + "年" +
+							(new Date().getMonth()-1) + "月" +
+							(new Date().getDate()+6) + "日" +" "+"14:00"+ " "+"至"+" " +new Date().getFullYear() + "年" +
+							(new Date().getMonth()-1) + "月" +
+							(new Date().getDate()+6) + "日" +" "+"16:00",
 					type: 'allow'
 				},
 				value: '',

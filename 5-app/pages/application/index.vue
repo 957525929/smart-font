@@ -53,6 +53,14 @@
 				<input name="seatNum"></input>
 			</view>
 			<view class="cu-form-group">
+				<view class="title">用车时间</view>
+				<picker mode="date" :value="date" @change="DateChange">
+					<view class="picker">
+						{{date}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
 				<view class="title">用车事由</view>
 				<input name="reason"></input>
 			</view>
@@ -80,7 +88,11 @@
 <script>
 	export default {
 		data() {
+			const currentDate = this.getDate({
+				format: true
+			})
 			return {
+				date: currentDate,
 				labelWidth: 85,
 				formData: {
 					user: '姜轶枫',
@@ -105,10 +117,28 @@
 		},
 		methods: {
 			submitForm(form) {},
-			goToHistory(){
+			goToHistory() {
 				uni.navigateTo({
-					url:'/pages/useCarRecord/index'
+					url: '/pages/useCarRecord/index'
 				})
+			},
+			DateChange(e) {
+				this.date = e.detail.value
+			},
+			getDate(type) {
+				const date = new Date();
+				let year = date.getFullYear();
+				let month = date.getMonth() + 1;
+				let day = date.getDate();
+
+				if (type === 'start') {
+					year = year - 60;
+				} else if (type === 'end') {
+					year = year + 2;
+				}
+				month = month > 9 ? month : '0' + month;
+				day = day > 9 ? day : '0' + day;
+				return `${year}-${month}-${day}`;
 			}
 		}
 	}

@@ -94,6 +94,19 @@ export const mockMenuData = {
               "id": "2111"
             },
             {
+              "path": "/material/warehousing/warehousingQuery",
+              "component": "material/warehousing/Query",
+              "route": "1",
+              "meta":
+                {
+                  "keepAlive": false,
+                  "internalOrExternal": false,
+                  "title": "采购查询"
+                },
+              "name": "material-warehousing-warehousingQuery",
+              "id": "2111"
+            },
+            {
               "hidden": true,
               "path": "/material/warehousing/warehousingDetails",
               "component": "material/warehousing/Details",
