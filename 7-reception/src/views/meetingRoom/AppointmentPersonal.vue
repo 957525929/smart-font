@@ -24,6 +24,7 @@
             placeholder="请选择开始"
             :format="dateFormat"
             v-model="queryParam.dateStart"
+            :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')"
             :style="{width:'200px'}"
           ></a-date-picker>
           <span>&nbsp;~&nbsp;</span>
@@ -118,7 +119,7 @@
     </div>
 
     <!-- 撤销原因 -->
-    <a-modal  v-model="visibleReason"   title="撤销会议室预约原因填写" @ok="handleOkReason">
+    <a-modal  v-model="visibleReason"   title="撤销" @ok="handleOkReason">
         <a-row type="flex" align="middle">
          <a-col :span="4">
          <span>撤销原因：</span>
@@ -171,7 +172,7 @@ const data = [
     budget: '3000',
     name: '安全管理会议',
     theme: '安全管理',
-    dateTime: '2021年07月26日~2021年07月26日',
+    dateTime: '2021年08月01日~2021年08月01日',
     range:'下午',
     address: '中国烟草总公司福建省公司机关.A区域.2号楼.204会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
@@ -182,27 +183,27 @@ const data = [
     detail: '0'
   },
 
-  {
-    id: 'B1205',
-    budget: '2000',
-    name: '零售项目开展会议',
-    theme: '项目会议',
-    dateTime: '2021年07月20日~2021年07月20日',
-    range:'上午',
-    address: '中国烟草总公司福建省公司机关.A区域.1号楼.205会议室',
-    members: '陈宏涛；李小玲；林诺汐；陈熙雨',
-    number: '4',
-    dutyName: '陈宏涛',
-    dutyTel: '152690314587',
-    state: '已完成',
-    detail: '1'
-  },
+  // {
+  //   id: 'B1205',
+  //   budget: '2000',
+  //   name: '零售项目开展会议',
+  //   theme: '项目会议',
+  //   dateTime: '2021年07月20日~2021年07月20日',
+  //   range:'上午',
+  //   address: '中国烟草总公司福建省公司机关.A区域.1号楼.205会议室',
+  //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
+  //   number: '4',
+  //   dutyName: '陈宏涛',
+  //   dutyTel: '152690314587',
+  //   state: '已完成',
+  //   detail: '1'
+  // },
   {
     id: 'B1202',
     budget: '5000',
     name: '安全管理会议',
     theme: '安全管理',
-    dateTime: '2021年07月21日~2021年07月21日',
+    dateTime: '2021年07月30日~2021年07月30日',
     range:'全天',
     address: '中国烟草总公司福建省公司机关.B区域.2号楼.204会议室',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
@@ -230,14 +231,14 @@ export default {
     }
   },
   created() {
-    let start = moment(new Date())
-      .subtract(15, 'days')
-      .format('YYYY-MM-DD')
-    this.queryParam.dateStart = this.moment(start, 'YYYY-MM-DD')
+    // let start = moment(new Date())
+    //   .subtract(15, 'days')
+    //   .format('YYYY-MM-DD')
+    // this.queryParam.dateStart = this.moment(start, 'YYYY-MM-DD')
     let end=moment(new Date())
-      .subtract(-15, 'days')
+      .subtract(-1, 'months')
       .format('YYYY-MM-DD')
-      this.queryParam.dateEnd= this.moment(end, 'YYYY-MM-DD')
+    this.queryParam.dateEnd= this.moment(end, 'YYYY-MM-DD')
     let dateNow=moment(new Date().toLocaleDateString(), 'YYYY年MM月DD日')
     // console.log(dateNow.format('YYYY年MM月DD日'))
       this.data[0].dateTime=dateNow.format('YYYY年MM月DD日')+"~"+dateNow.format('YYYY年MM月DD日')
@@ -262,7 +263,10 @@ export default {
     },
     handleOkReason(){
         this.visibleReason = false
-    }
+    },
+       getCurrentData() {
+      return new Date().toLocaleDateString()
+    },
   }
 }
 </script>
