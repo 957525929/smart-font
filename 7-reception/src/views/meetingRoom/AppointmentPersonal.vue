@@ -127,8 +127,7 @@
         <a-col :span="18">
         <a-input v-model="reason" type="textarea" required/>
         </a-col>
-        </a-row>
-     
+        </a-row>     
     </a-modal>
   </a-card>
 </template>
@@ -143,7 +142,7 @@ const data = [
     theme: '物流管理',
     dateTime: '2021年07月27日~2021年07月27日',
     range:'上午',
-    address: '中国烟草总公司福建省公司机关.B区域.2号楼.205会议室',
+    address: '中国烟草总公司福建省公司机关.B区域.2号楼.会议室205',
 
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
@@ -159,7 +158,7 @@ const data = [
     theme: '安全管理',
     dateTime: '2021年08月03日~2021年08月03日',
     range:'下午',
-    address: '中国烟草总公司福建省公司机关.B区域.1号楼.203会议室',
+    address: '中国烟草总公司福建省公司机关.B区域.1号楼.会议室203',
     members: '陈宏涛；李小玲；林诺汐；陈熙雨',
     number: '4',
     dutyName: '李小玲',
