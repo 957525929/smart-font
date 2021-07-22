@@ -27,15 +27,6 @@ export const columns = [{
     key: 'taskName',
     value: ""
 },
-// {
-//   title: '任务状态',
-//   dataIndex: 'taskStatus',
-//   width: 60,
-//   key: 'taskStatus',
-//   type: 'a-select',
-//   valueEnum: protaskStatus,
-//   value: ""
-// },
 {
     dataIndex: 'taskType',
     key: 'taskType',
@@ -61,6 +52,16 @@ export const columns = [{
     width: 100,
     type: 'a-range-picker',
     value: ""
+},
+{
+    title: '区域Id',
+    dataIndex: 'areaKey',
+    key: 'areaKey',
+    width: 100,
+    value: "",
+    hideInTable:true,
+    hideInSearch:true,
+    hideInDetail:true
 },
 {
     title: '区域',
@@ -115,71 +116,6 @@ export const columns = [{
     hideInDetail: true
 }
 ]
-export const data = [{
-    key: 0,
-    taskId: '1',
-    taskName: "1号楼月度巡养计划",
-    taskType: 0,
-    taskStatus: 0,
-    taskPeriod: 2,
-    dispatchTime: '2021-06-22 18：55：55',
-    address: "中国烟草总公司福建省公司机关-A区域-1号楼",
-    proStaff: '刘涛',
-    phone: '18232145698',
-    expectTime: '2021-07-31 00：00：00',
-    description: "例行养护",
-    action: [{
-        tagName: "详情",
-        com: "router-link"
-    }]
-}]
-export const searchCon = {}
-export const infoDetail = [{
-    dataIndex: 'devId',
-    value: "",
-    title: '设备编号',
-    width: 80,
-    key: 'devId'
-},
-{
-    title: '任务描述',
-    dataIndex: 'devName',
-    value: "",
-    key: 'devName',
-    hideInSearch: true
-},
-{
-    title: '任务下发时间',
-    key: 'fixedTime',
-    value: "",
-    type: 'a-range-picker',
-},
-{
-    title: '任务地点',
-    key: 'assets',
-    value: "",
-},
-{
-    dataIndex: 'taskType',
-    key: 'taskType',
-    title: '任务类型',
-    value: "",
-    type: 'a-select',
-    valueEnum: taskType
-},
-{
-    title: '保养员',
-    key: 'fixStaff',
-    value: "",
-},
-{
-    title: '预计完成时间',
-    key: 'expectTime',
-    value: "",
-    type: 'a-range-picker',
-}
-]
-
 export const addplan = [{
     title: '设备编号',
     key: 'devId',
@@ -200,17 +136,6 @@ export const addplan = [{
     type: "a-range-picker"
 },
 {
-    title: '养护组别',
-    value: "",
-    key: 'devGroupType',
-    type: "a-select",
-    valueEnum: [{
-        tableValue: "空调管理组别1",
-        searchValue: "空调管理组别1",
-        code: 0
-    }]
-},
-{
     title: '养护范围',
     value: "",
     key: 'devGroup',
@@ -221,21 +146,13 @@ export const addplan = [{
     title: '养护设备',
     value: "全部",
     key: 'devData',
-    type: "a-select",
-    valueEnum: {
-        ...devData.filter(item => item.devType == 0).map(item => {
-            return {
-                tableValue: item.devName,
-                searchValue: item.devName,
-                code: item.key
-            }
-        }),
-        4: {
-            tableValue: "全部",
-            searchValue: "全部",
-            code: 4
-        },
-    }
+    type: "a-tree-select",
+    valueEnum: devData.filter(item => item.devType == 0).map(item=>{
+        return {
+            label:item.devName,
+            key:item.devId
+        }
+    })
 },
 {
     title: '任务类型',
@@ -261,3 +178,23 @@ export const addplan = [{
 
 }
 ]
+// export const data = [{
+//     key: 0,
+//     taskId: '1',
+//     taskName: "1号楼月度巡养计划",
+//     taskType: 0,
+//     taskStatus: 0,
+//     taskPeriod: 2,
+//     dispatchTime: '2021-06-22 18：55：55',
+//     areaKey:'1-1-1',
+//     address: "中国烟草总公司福建省公司机关-A区域-1号楼",
+//     proStaff: '刘涛',
+//     phone: '18232145698',
+//     expectTime: '2021-07-31 00：00：00',
+//     description: "例行养护",
+//     action: [{
+//         url: "device-proDetail",
+//         tagName: "详情",
+//         com: "router-link"
+//     }]
+// }]

@@ -33,6 +33,14 @@
                                 change-on-select
                             >
                             </a-cascader>
+                            <a-tree-select
+                                v-else-if="item.type === 'a-tree-select'"
+                                v-model="item.value"
+                                style="width: 100%"
+                                :tree-data="item.valueEnum"
+                                tree-checkable
+                                search-placeholder=""
+                            />
                             <a-checkbox-group
                                 v-else-if="item.type === 'a-checkbox-group'"
                                 v-decorator="['checkbox-group']"

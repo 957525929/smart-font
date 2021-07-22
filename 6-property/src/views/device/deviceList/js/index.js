@@ -31,6 +31,15 @@ export const devColumns = [{
     value: "",
   },
   {
+    title: '区域Id',
+    dataIndex: 'groupKey',
+    key: 'groupKey',
+    width: 100,
+    value: "",
+    hideInTable:true,
+    hideInSearch:true,
+  },
+  {
     title: '区域组别',
     dataIndex: 'groupDetail',
     key: 'groupDetail',
@@ -39,7 +48,6 @@ export const devColumns = [{
     type: 'a-cascader',
     value: "",
     hideInTable:true,
-    
   },
   {
     title: '区域组别',
@@ -93,6 +101,7 @@ export const data = [{
     devType: 2,
     devStatus: 4,
     areaGroup:"区域",
+    groupKey:"1-1-2",
     groupDetail:"中国烟草总公司福建省公司机关-A区域-2号楼",
     loginTime: '2021-06-22 17:55:55',
     manufacturer: "日丰企业集团有限公司",
@@ -117,6 +126,7 @@ export const data = [{
     devType: 1,
     devStatus: 5,
     areaGroup:"区域",
+    groupKey:"1-2-1",
     groupDetail:"中国烟草总公司福建省公司机关-B区域-1号楼",
     loginTime: '2021-06-21 10:55:55',
     manufacturer: "国网福建省电力有限公司",
@@ -141,6 +151,7 @@ export const data = [{
     devType: 0,
     devStatus: 7,
     areaGroup:"区域",
+    groupKey:"1-2-3",
     groupDetail:"中国烟草总公司福建省公司机关-B区域-3号楼",
     loginTime: '2021-06-19 08:55:55',
     manufacturer: "珠海格力电器股份有限公司",
@@ -164,6 +175,7 @@ export const data = [{
     devType: "给排水系统 - 给排水系统",
     devStatus: 6,
     areaGroup:"区域",
+    groupKey:"1-2-2",
     groupDetail:"中国烟草总公司福建省公司机关-B区域-2号楼",
     loginTime: '2021-06-12 17:55:55',
     manufacturer: "日丰企业集团有限公司",
@@ -188,6 +200,7 @@ export const data = [{
     devType: "电器系统 - 供电设备",
     devStatus: 8,
     areaGroup:"区域",
+    groupKey:"1-1-1",
     groupDetail:"中国烟草总公司福建省公司机关-A区域-1号楼",
     loginTime: '2021-06-11 10:55:55',
     manufacturer: "国网福建省电力有限公司",
@@ -212,6 +225,7 @@ export const data = [{
     devType: "空调、通风系统 - 空调设备",
     devStatus: 4,
     areaGroup:"区域",
+    groupKey:"1-2-3",
     groupDetail:"中国烟草总公司福建省公司机关-B区域-3号楼",
     loginTime: '2021-06-11 08:55:55',
     manufacturer: "珠海格力电器股份有限公司",
@@ -311,17 +325,6 @@ export const loginInfo = [{
     value: "",
     type: "a-select",
     valueEnum: devStatus
-  },
-  {
-    title: '设备组别',
-    key: 'devGroupType',
-    value: "",
-    type: "a-select",
-    valueEnum: [{
-      tableValue: "空调管理组别1",
-      searchValue: "空调管理组别1",
-      code: 0
-    }]
   },
   {
     title: '设备分类',

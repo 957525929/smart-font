@@ -34,7 +34,7 @@
 			<view class="cu-form-group">
 				<!-- <view class="title">会议时间段</view> -->
 				<text class="cuIcon-title text-orange "></text> 会议时段
-				<picker mode="time" :value="time" start="08:01" end="21:01" @change="TimeChange">
+				<!-- <picker mode="time" :value="time" start="08:01" end="21:01" @change="TimeChange">
 					<view class="picker">
 						{{time}}
 					</view>
@@ -42,6 +42,11 @@
 				<picker mode="time" :value="timeend" start="09:01" end="22:01" @change="TimeChangeend">
 					<view class="picker">
 						{{timeend}}
+					</view>
+				</picker> -->
+				<picker @change="PickerChange" :value="index" :range="time">
+					<view class="picker">
+						{{time[index]}}
 					</view>
 				</picker>
 			</view>
@@ -53,17 +58,6 @@
 					<button class="cu-btn bg-green shadow" @tap="showModal" data-target="ChooseModal">选择</button>
 				</view>
 			</view>
-			<!-- 
-			<checkbox-group class="block" @change="CheckboxChange">
-				<view class="cu-form-group margin-top">
-					<view class="title">会议室基本条件(checkbox)</view>
-					<checkbox :class="checkbox[0].checked?'checked':''" :checked="checkbox[0].checked?true:false" value="A"></checkbox>
-					<checkbox :class="checkbox[0].checked?'checked':''" :checked="checkbox[0].checked?true:false" value="A"></checkbox>
-					<checkbox :class="checkbox[0].checked?'checked':''" :checked="checkbox[0].checked?true:false" value="A"></checkbox>
-					<checkbox :class="checkbox[0].checked?'checked':''" :checked="checkbox[0].checked?true:false" value="A"></checkbox>
-				</view>
-				
-			</checkbox-group> -->
 	
 			<view class="cu-modal bottom-modal" :class="modalName=='ChooseModal'?'show':''" @tap="hideModal">
 				<view class="cu-dialog" @tap.stop="">
@@ -84,35 +78,13 @@
 				<view class="title">会议地点</view>
 				<picker mode="multiSelector" @change="MultiChange" @columnchange="MultiColumnChange" :value="multiIndex" :range="multiArray">
 					<view class="picker">
-						{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+						{{multiArray[0][multiIndex[0]]}}.{{multiArray[1][multiIndex[1]]}}.{{multiArray[2][multiIndex[2]]}}
 					</view>
 				</picker>
 	
 				<!-- <text class='cuIcon-locationfill text-orange'></text> -->
 			</view>
-			<!-- <view class="cu-bar bg-white margin-top">
-				<view class="action">
-					<text class="cuIcon-title text-orange "></text> 会议室选择
-				</view>
-				<view class="action">
-					<button class="cu-btn bg-green shadow" @tap="showModal" data-target="RadioModal">选择</button>
-				</view>
-			</view>
-			<view class="cu-modal" :class="modalName=='RadioModal'?'show':''" @tap="hideModal">
-				<view class="cu-dialog" @tap.stop="">
-					<radio-group class="block" @change="RadioChange">
-						<view class="cu-list menu text-left">
-							<view class="cu-item" v-for="(item,index) in 5" :key="index">
-								<label class="flex justify-between align-center flex-sub">
-									<view class="flex-sub">会议室20{{index +1}}</view>
-									<radio class="round" :class="radio=='radio' + index?'checked':''" :checked="radio=='radio' + index?true:false"
-									 :value="'radio' + index"></radio>
-								</label>
-							</view>
-						</view>
-					</radio-group>
-				</view>
-			</view> -->
+
 			<view class="cu-form-group">
 				<view class="title">备注</view>
 				<input placeholder="参与人:产品组所有人  内容:第一期XX项目周例会" name="input"></input>
@@ -144,11 +116,11 @@
 	export default {
 		data() {
 			return {
-				index: -1,
-				picker: [],
-				time: '08:00',
-				timeend:'09:00',
-				date: '2018-12-25',
+				// time: '08:00',
+				// timeend:'09:00',
+				date: '2021-07-25',
+				index: 0,
+				time: ['上午','下午','晚上','全天'],
 				switchA: false,
 				switchB: true,
 				modalName: null,
@@ -160,23 +132,23 @@
 					checked: false,				
 				}, {
 					value: 1,
-					name: '排气扇',
+					name: '投影仪',
 					checked: true,
 				}, {
 					value: 2,
-					name: '空调',
+					name: '白板',
 					checked: true,
 				}, {
 					value: 3,
-					name: '绿化植物',
+					name: '电脑',
 					checked: false,
 				}, {
 					value: 4,
-					name: '多媒体',
+					name: '空调',
 					checked: false,
 				}, {
 					value: 5,
-					name: '白板',
+					name: '摄像机',
 					checked: false,
 				}],
 				//会议室选择
@@ -186,14 +158,20 @@
 					['A区域', 'B区域'],
 					['1号楼', '2号楼','3号楼','4号楼','5号楼']
 				],
+				
 			};
 		},
 		methods: {
-			TimeChange(e) {
-				this.time = e.detail.value
-			},
-			TimeChangeend(e) {
-				this.timeend = e.detail.value
+			// TimeChange(e) {
+			// 	this.time = e.detail.value
+			// },
+			// TimeChangeend(e) {
+			// 	this.timeend = e.detail.value
+			// },
+			//时段选择
+			PickerChange(e) {
+				console.log(e.detail.value)
+				this.index = e.detail.value
 			},
 			DateChange(e) {
 				this.date = e.detail.value

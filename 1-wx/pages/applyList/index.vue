@@ -139,7 +139,6 @@
 				uni.navigateTo({
 					url: "/pages/verify/index2"
 				});
-				// console.log('1111')
 			}
 
 		}

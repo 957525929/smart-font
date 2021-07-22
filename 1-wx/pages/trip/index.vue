@@ -129,7 +129,7 @@
 			},
 			goToAgree() {
 				uni.navigateTo({
-					url: "/pages/verify/index1"
+					url: "/pages/verify/index4"
 				});
 				// console.log('1111')
 			}

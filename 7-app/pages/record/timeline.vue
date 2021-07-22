@@ -3,8 +3,15 @@
 		<cu-custom bgColor="bg-gradual-blue" :isBack="true" style="height: 5px;">
 			<block slot="backText">返回</block><block slot="content">时间轴</block>
 		</cu-custom>
+		<view class="cu-form-group">
+			<text >选择时间</text> 
+			<picker mode="date" :value="date" start="2010" end="2030"  fields='year' @change="DateChange">
+				<view class="picker">
+					{{date}}
+				</view>
+			</picker>
+		</view>
 		<view class="cu-timeline">
-			<view class="cu-time">2021</view>
 			<view class="cu-item text-blue">
 				<view class="content bg-gradual-blue">
 					<text>2021-06-07</text> 
@@ -59,8 +66,15 @@
 	export default {
 		data() {
 			return {
-
+				indexDate:0,
+				date: "2021",
 			};
+		},
+		methods:{
+			//下拉框
+			DateChange(e) {
+				this.date = e.detail.value
+			},
 		}
 	}
 </script>

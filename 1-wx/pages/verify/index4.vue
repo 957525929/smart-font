@@ -4,35 +4,22 @@
 			<block slot="backText">返回</block>
 			<block slot="content">详情</block>
 		</cu-custom>
+		
 
 		<view class="cu-bar bg-white ">
 			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 状态</text>
+				<text class="text-black text-bold">· 预约人信息</text>
 			</view>
-		</view>
-
-		<view class="cu-form-group align-center bg-white">
-			<view class="title">申请状态</view>
-			<view class="text-red">已拒绝</view>
-		</view>
-
-
-		<view class="cu-bar bg-white ">
-			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 访问对象</text>
-			</view>
-		</view>
-
-		<view class="cu-form-group ">
-			<view class="title">部门</view>
-			{{person.department}}
 		</view>
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">姓名</view>
 			<view>{{person.name}}</view>
 		</view>
-
+		<view class="cu-form-group solid-bottom">
+			<view class="title">手机号</view>
+			{{phone}}
+		</view>
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
@@ -59,7 +46,7 @@
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 拒绝原因</text>
+				<text class="text-black text-bold">· 备注</text>
 			</view>
 		</view>
 
@@ -71,7 +58,9 @@
 	</view>
 
 </template>
+
 <script>
+	import { generatePhoneNum } from '../../util/mathFunc.js'
 	export default {
 		created: function() {
 			let aData = new Date();
@@ -86,22 +75,22 @@
 			return {
 				modalName: null,
 				index: -1,
-				time: '14.00',
-				time1: '16.00',
+				time: '9.00',
+				time1: '12.00',
 				person: {
-					name: '林雨馨',
-					department: '安全管理处',
+					name: '王鹏翔',
 					type: 'allow',
-					people: '倪友聪',
 				},
 				PageCur: 'appoient',
 				date: new Date().getFullYear() + "-" +
-					(new Date().getMonth()) + "-" +
-					(new Date().getDate() - 20),
-				content: '被访问人不在'
+							(new Date().getMonth()) + "-" +
+							(new Date().getDate() - 10),
+				content: '私人会面',
+				phone: generatePhoneNum(),
 			}
 		},
 		methods: {
+			generatePhoneNum,
 			PickerChange(e) {
 				this.index = e.detail.value
 				// console.log(index)

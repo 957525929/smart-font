@@ -23,14 +23,7 @@
 		name: "basics",
 		data() {
 			return {
-				elements: [{
-						title: '申请记录',
-						name: 'tourist',
-						color: 'black',
-						cuIcon: 'formfill',
-						enName:'ApplyList',
-						route:'/pages/index/tourist?PageCur=record'
-					},
+				elements: [
 					{
 						title: '申请访问',
 						name: 'staff',
@@ -38,6 +31,13 @@
 						cuIcon: 'scan',
 						enName:'Scan',
 						route:'/pages/index/tourist?PageCur=scan'
+					},{
+						title: '申请记录',
+						name: 'tourist',
+						color: 'black',
+						cuIcon: 'formfill',
+						enName:'ApplyList',
+						route:'/pages/index/tourist?PageCur=record'
 					},
 					{
 						title: '个人中心',
