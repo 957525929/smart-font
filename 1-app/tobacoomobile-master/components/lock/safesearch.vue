@@ -43,10 +43,6 @@
 			</picker>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">工号</view>
-			<input placeholder="请输入工号" name="input"></input>
-		</view>
-		<view class="cu-form-group">
 			<view class="title">姓名</view>
 			<input placeholder="请输入姓名" name="input"></input>
 		</view>
