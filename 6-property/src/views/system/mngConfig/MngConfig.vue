@@ -7,7 +7,7 @@
                 <a-button @click="handleAdd(1)" type="primary" style="margin: 10px">新建组别</a-button>
                  <a-button @click="handleDelete" style="margin: 10px">删除组别</a-button>
                 <a-dropdown :trigger="[this.dropTrigger]" @visibleChange="dropStatus">
-                <a-card style="margin: 10px;width:calc(100%/3)" hoverable title="空调管理组别1">
+                <a-card style="margin: 10px;width:calc(100%/3)" hoverable title="区域">
                     <a slot="extra" href="#">空调、通风系统</a>
                     <a-row> 
                     <TableModal ref="groupModal" title="新增目录项" :infoDetail="devInfo"></TableModal>
@@ -75,11 +75,6 @@ export default {
     },
     data() {
         return {
-            // indeterminate:false,
-            groups:[{
-                name:"空调管理组别1",
-                type:"空调、通风系统"
-            }],
             deleteInfo:NEW_TOOLLIST.deleteInfo,
             checkable:false,
             group1Tree:NEW_TOOLLIST.groupTree,
