@@ -47,71 +47,16 @@
 				2次/日
 			</view>
 		</view>
-		<br />
-		<uni-table border stripe emptyText="暂无更多数据" >
-		    <!-- 表头行 -->
-		    <uni-tr>
-		        <uni-th align="center">车牌号</uni-th>
-				<uni-th align="center">用车时间</uni-th>
-				<uni-th align="center">操作</uni-th>
-		    </uni-tr>
-		    <!-- 表格数据行 -->
-		    <uni-tr>
-		        <uni-td align="center">闽A123401</uni-td>
-		        <uni-td align="center">2021-7-18</uni-td>
-				<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		    </uni-tr>
-		  <uni-tr>
-		      <uni-td align="center">闽A123401</uni-td>
-		      <uni-td align="center">2021-7-17</uni-td>
-		  	<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		  </uni-tr>
-		    <uni-tr>
-		        <uni-td align="center">闽A123402</uni-td>
-		        <uni-td align="center">2021-7-17</uni-td>
-		    	<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		    </uni-tr>
-		   <uni-tr>
-		       <uni-td align="center">闽A123401</uni-td>
-		       <uni-td align="center">2021-7-16</uni-td>
-		   	<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		   </uni-tr>
-		<uni-tr>
-		    <uni-td align="center">闽A123402</uni-td>
-		    <uni-td align="center">2021-7-15</uni-td>
-			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		</uni-tr>
-		<uni-tr>
-		    <uni-td align="center">闽A123401</uni-td>
-		    <uni-td align="center">2021-7-14</uni-td>
-			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		</uni-tr>
-		<uni-tr>
-		    <uni-td align="center">闽A123401</uni-td>
-		    <uni-td align="center">2021-7-13</uni-td>
-			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		</uni-tr>
-		<uni-tr>
-		    <uni-td align="center">闽A123401</uni-td>
-		    <uni-td align="center">2021-7-12</uni-td>
-			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		</uni-tr>
-		<uni-tr>
-		    <uni-td align="center">闽A123401</uni-td>
-		    <uni-td align="center">2021-7-11</uni-td>
-			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		</uni-tr>
-		<uni-tr>
-		    <uni-td align="center">闽A123401</uni-td>
-		    <uni-td align="center">2021-7-10</uni-td>
-			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		</uni-tr>
-		<uni-tr>
-		    <uni-td align="center">闽A123403</uni-td>
-		    <uni-td align="center">2021-7-9</uni-td>
-			<uni-td align="center"><a @tap="toDetails">详情</a></uni-td>
-		</uni-tr>
-		</uni-table>
+		<view class="backColor">
+			<view class="cu-list menu">
+				<view class="cu-item arrow" v-for="(item,index) in listData" :key="index" @tap="toDetails">
+					<view class="content">
+						<text class="cuIcon-circlefill text-green"></text>
+						<text>{{item.car+" "+"时间："+item.date}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -128,7 +73,49 @@
 		data() {
 			return {
 				drivers:[],
-				driverSelected:'张三'
+				driverSelected:'张三',
+				listData:[
+					{
+						car:'A123401',
+						date:'2021-7-18'
+					},
+					{
+						car:'A123401',
+						date:'2021-7-17'
+					},
+					{
+						car:'A123401',
+						date:'2021-7-17'
+					},
+					{
+						car:'A123402',
+						date:'2021-7-16'
+					},
+					{
+						car:'A123401',
+						date:'2021-7-15'
+					},
+					{
+						car:'A123401',
+						date:'2021-7-15'
+					},
+					{
+						car:'A123402',
+						date:'2021-7-15'
+					},
+					{
+						car:'A123402',
+						date:'2021-7-14'
+					},
+					{
+						car:'A123401',
+						date:'2021-7-14'
+					},
+					{
+						car:'A123402',
+						date:'2021-7-13'
+					},
+				]
 			}
 		},
 		methods: {

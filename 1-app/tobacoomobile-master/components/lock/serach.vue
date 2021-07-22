@@ -16,7 +16,7 @@
 			<picker mode="multiSelector" @change="MultiChange" @columnchange="MultiColumnChange" :value="multiIndex"
 				:range="multiArray">
 				<view class="picker">
-					{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+					{{multiArray[0][multiIndex[0]]}}.{{multiArray[1][multiIndex[1]]}}.{{multiArray[2][multiIndex[2]]}}
 				</view>
 			</picker>
 		</view>

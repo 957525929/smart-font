@@ -45,7 +45,7 @@
 				</navigator>
 			</block>
 			<block v-if="this.TabCur==2">
-				<navigator class="action" @tap="showModal" data-target="DialogModal1">
+				<navigator class="action" @tap="goToDisAgree">
 					<recordCard1 :cardType="type[2]" />
 				</navigator>
 			</block>
@@ -63,26 +63,6 @@
 				</view>
 			</view>
 		</scroll-view>
-
-		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
-			<view class="cu-dialog">
-				<view class="cu-bar bg-white justify-end">
-					<view class="content">拒绝原因</view>
-					<view class="action" @tap="hideModal">
-						<text class="cuIcon-close text-red"></text>
-					</view>
-				</view>
-				<view class="padding-xl">
-					{{reason}}
-				</view>
-				<view class="cu-bar bg-white justify-end">
-					<view class="action">
-						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
-
-					</view>
-				</view>
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -92,9 +72,9 @@
 	export default {
 		props: {
 			TabCur: {
-			      type: String,
-			      default: () => []
-			    },
+				type: String,
+				default: () => []
+			},
 		},
 
 		onLoad() {
@@ -105,7 +85,7 @@
 				// time: '12:01',
 				// date: '2018-12-25',
 				modalName: null,
-				TabCur:0,
+				TabCur: 0,
 				scrollLeft: 0,
 				reason: '被访人出差',
 				type: [{
@@ -154,10 +134,15 @@
 				uni.navigateTo({
 					url: "/pages/verify/index1"
 				});
+			},
+			goToDisAgree() {
+				uni.navigateTo({
+					url: "/pages/verify/index2"
+				});
 				// console.log('1111')
 			}
-		},
 
+		}
 	}
 </script>
 

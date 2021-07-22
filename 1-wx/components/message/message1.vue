@@ -38,40 +38,49 @@
 		data() {
 			return {
 				messagelist: [{
-						name: '张三',
+						name: '赵大华',
 						content: '项目会议',
-						time: '2020年1月21日 13:46',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth()+1) + "月" +
+							(new Date().getDate()-20) + "日"+" "+'12:46',
 						// type: "删除",
 						typeId: 0,
-						red:'1'
+						red: '1'
 					},
 					{
-						name: '李四',
+						name: '王鹏翔',
 						content: '私人访问',
-						time: '2020年1月21日 13:46',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate() - 10) + "日" + " " + '13:46',
 						// type: "删除",
 						typeId: 0,
-						green:'1'
+						green: '1'
 					},
 					{
-						name: '王五',
+						name: '赵二喜',
 						content: '项目会议',
 						type: "删除",
 						typeId: 1,
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate() - 7) + "日" + " " + '10:31',
 					},
 					{
-						name: '赵六',
+						name: '赵冰冰',
 						content: '项目会议改期',
-						time: '2020年1月21日 13:46',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()) + "日" + " " + '15:46',
 						// type: "删除",
 						typeId: 2,
-						green:'1'
+						green: '1'
 					},
 
 				],
 				// 颜色
 				styleObject: [{
-					color: '#ffffff',
+						color: '#ffffff',
 					},
 					{
 						backgroundColor: ' #E54D42',

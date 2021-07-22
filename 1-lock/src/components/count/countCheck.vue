@@ -46,6 +46,7 @@
           change-on-select
           @change="areaChange"
           placeholder="请选择位置"
+          :display-render="displayRender"
         />
 
         <a-divider type="vertical" />
@@ -140,6 +141,9 @@ export default {
   },
   methods: {
     moment,
+    displayRender({ labels }) {
+      return labels.join('.')
+    },
 
     getstardate() {
       this.starDate = formatDate(new Date().getTime() - 181 * 24 * 3600 * 1000, 'yyyy/MM/d')

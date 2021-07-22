@@ -14,7 +14,7 @@
 			<view class="content">
 				<view class="content-list">
 					<view class="list cu-form-group margin-top">
-						<view class="title">登录用户：</view>
+						<view class="title">登录角色：</view>
 						<picker @change="PickerChange" :value="index" :range="picker">
 							<view class="picker">
 								{{picker[index]}}
@@ -50,7 +50,7 @@
 		data() {
 			return {
 				index: 0,
-				picker: ['智能锁安装', '智能锁维修', '智能锁管养'],
+				picker: ['安装员', '维修员', '管养员'],
 				name: '',
 				password: '',
 			};

@@ -4,7 +4,7 @@
 			<!-- 判断传递过来的值显示对应状态 -->
 			<view v-if="item.type==cardType.type">
 				<view class="card">
-					<span>
+					<span class="picture">
 						<!-- 显示不同图片 -->
 						<image class="card-img" :src="imgSrc[cardType.id]" mode="scaleToFill"
 							style="width: 60px; height: 60px;"></image>
@@ -19,13 +19,19 @@
 						<view>
 							申请时间：{{item.time}}
 						</view>
+						<view v-if="cardType.id==1">
+							通过时间：{{item.agreeTime}}
+						</view>
+						<view v-if="cardType.id==2">
+							拒绝时间：{{item.disagreeTime}}
+						</view>
 					</span>
 					<span class="card-right">
 						<!-- 切换不同颜色 -->
 						<view :style="styleObject[cardType.id]">
 							{{item.type}}
 						</view>
-						
+
 					</span>
 				</view>
 			</view>
@@ -40,49 +46,80 @@
 				applylist: [{
 						visit: '魏佳楠',
 						phone: '18520176742',
-						time: '2020年1月21日 13:46',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()) + "日" + " " + '09:46',
 						type: '待审核',
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
-						time: '2020年1月21日 13:46',
+						visit: '郑思楠',
+						phone: '13920172542',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()) + "日" + " " + '13:51',
 						type: '待审核',
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
-						time: '2020年1月21日 13:46',
+						visit: '李伟恒',
+						phone: '14620167442',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()) + "日" + " " + '17:46',
 						type: '待审核',
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
-						time: '2020年1月21日 13:46',
+						visit: '林泽宇',
+						phone: '18754767212',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth()) + "月" +
+							(new Date().getDate() - 5) + "日" + " " + '15:24',
+						agreeTime: new Date().getFullYear() + "年" +
+							(new Date().getMonth()) + "月" +
+							(new Date().getDate() - 5) + "日" + " " + '16:24',
 						type: '已通过',
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
-						time: '2020年1月21日 13:46',
+						visit: '张国柱',
+						phone: '13557476742',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate() - 15) + "日" + " " + '4:26',
+						agreeTime: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate() - 15) + "日" + " " + '15:24',
 						type: '已通过',
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
-						time: '2020年1月21日 13:46',
+						visit: '王鹏翔',
+						phone: '18545176742',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()-1) + "日" + " " + '13:46',
+						agreeTime: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()) + "日" + " " + '14:15',
 						type: '已通过',
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
-						time: '2020年1月21日 13:46',
+						visit: '华强北',
+						phone: '13620176742',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth()) + "月" +
+							(new Date().getDate() - 10) + "日" + " " + '13:16',
+						disagreeTime: new Date().getFullYear() + "年" +
+							(new Date().getMonth()) + "月" +
+							(new Date().getDate() - 10) + "日" + " " + '16:59',
 						type: '已拒绝',
 					},
 					{
-						visit: '魏佳楠',
-						phone: '18520176742',
-						time: '2020年1月21日 13:46',
+						visit: '孙志远',
+						phone: '19720175742',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()-1) + "日" + " " + '14:46',
+						disagreeTime: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()-1) + "日" + " " + '17:31',
 						type: '已拒绝',
 					},
 				],
@@ -122,13 +159,18 @@
 	.card {
 		margin: 5px 10px 0px 10px;
 		background-color: white;
-		height: 70px;
+		height: 90px;
 		display: flex;
 		border-radius: 10px;
 	}
 
+	.picture {
+		line-height: 90px;
+	}
+
 	.card-img {
 		margin: 5px;
+
 	}
 
 	.card-center {
@@ -138,6 +180,7 @@
 	.card-right {
 		margin-left: 30px;
 		margin-top: 5px;
+
 	}
 
 	.card-type {

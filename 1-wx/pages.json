@@ -145,7 +145,13 @@
 		}, {
 			"path": "pages/verify/index1",
 			"style": {}
+		},  {
+			"path": "pages/verify/index2",
+			"style": {}
 		}, {
+			"path": "pages/verify/index3",
+			"style": {}
+		},{
 			"path": "components/search/search",
 			"style": {
 				"navigationBarTitleText": "",

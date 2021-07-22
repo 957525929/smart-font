@@ -13,7 +13,7 @@
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">申请状态</view>
-			<view>已通过</view>
+			<view>已拒绝</view>
 		</view>
 		
 
@@ -57,7 +57,7 @@
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 备注</text>
+				<text class="text-black text-bold">· 拒绝原因</text>
 			</view>
 		</view>
 
@@ -71,24 +71,32 @@
 </template>
 <script>
 	export default {
+		created: function() {
+			let aData = new Date();
+
+			// this.date =
+			// 	aData.getFullYear() + "-" +
+			// 	(aData.getMonth() + 1) + "-" +
+			// 	(aData.getDate())
+
+		},
 		data() {
 			return {
 				modalName: null,
 				index: -1,
-				time: '16.00',
-				time1: '18.00',
+				time: '9.00',
+				time1: '12.00',
 				person: {
-					name: '王鹏翔',
-					phone: '18545176742',
+					name: '华强北',
+					phone: '13620176742',
 					type: 'allow',
 					people: '倪友聪',
-					content: '被访问人不在'
 				},
 				PageCur: 'appoient',
 				date: new Date().getFullYear() + "-" +
-							(new Date().getMonth() + 1) + "-" +
-							(new Date().getDate()),
-				content: '私人会面'
+							(new Date().getMonth()) + "-" +
+							(new Date().getDate() - 20),
+				content: '被访问人不在'
 			}
 		},
 		methods: {

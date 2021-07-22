@@ -63,10 +63,11 @@
 					},
 					{
 						title: '查询统计',
-						children: [{
-								title: '车辆使用',
-								icon: '../../static/homepage/sta1.png'
-							},
+						children: [
+							// {
+							// 	title: '车辆使用',
+							// 	icon: '../../static/homepage/sta1.png'
+							// },
 							{
 								title: '司机工作量',
 								icon: '../../static/homepage/sta2.png'
@@ -76,41 +77,41 @@
 				]
 			}
 		},
-		methods:{
-			goto(target){
+		methods: {
+			goto(target) {
 				// console.log(target);
-				if(target=='用车申请'){
+				if (target == '用车申请') {
 					uni.navigateTo({
-						url:'/pages/application/index'
-					}) 		
-				}else if(target=='申请记录'){
+						url: '/pages/application/index'
+					})
+				} else if (target == '申请记录') {
 					uni.navigateTo({
-						url:'/pages/useCarRecord/index'
-					}) 	
-				}else if(target=='收车登记'){
+						url: '/pages/useCarRecord/index'
+					})
+				} else if (target == '收车登记') {
 					uni.navigateTo({
-						url:'/pages/endTrip/index'
-					}) 	
-				}else if(target=='加油登记'){
+						url: '/pages/endTrip/index'
+					})
+				} else if (target == '加油登记') {
 					uni.navigateTo({
-						url:'/pages/supplyRegister/index'
-					}) 	
-				}else if(target=='保养登记'){
+						url: '/pages/supplyRegister/index'
+					})
+				} else if (target == '保养登记') {
 					uni.navigateTo({
-						url:'/pages/maintainRegister/index'
-					}) 	
-				}else if(target=='维修登记'){
+						url: '/pages/maintainRegister/index'
+					})
+				} else if (target == '维修登记') {
 					uni.navigateTo({
-						url:'/pages/fixRecord/index'
-					}) 	
-				}else if(target=='车辆使用'){
+						url: '/pages/fixRecord/index'
+					})
+				} else if (target == '车辆使用') {
 					uni.navigateTo({
-						url:'/pages/statistics/carUsage/index'
-					}) 	
-				}else if(target=='司机工作量'){
+						url: '/pages/statistics/carUsage/index'
+					})
+				} else if (target == '司机工作量') {
 					uni.navigateTo({
-						url:'/pages/statistics/driverWorkload/index'
-					}) 	
+						url: '/pages/statistics/driverWorkload/index'
+					})
 				}
 			}
 		}
@@ -145,7 +146,7 @@
 	.home-menu-title {
 		margin-left: 20rpx;
 		font-size: 30rpx;
-		font-weight:700;
+		font-weight: 700;
 		margin-bottom: 20rpx;
 	}
 
