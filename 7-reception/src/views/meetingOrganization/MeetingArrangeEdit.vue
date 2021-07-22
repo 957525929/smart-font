@@ -55,13 +55,9 @@
             <a-row type="flex" align="middle">
               <a-col :span="1"></a-col>
               <a-col>
-                <span>酒店名称：{{hotelInfor}}</span>
-              </a-col>
-              <a-col :span="1"></a-col>
-              <a-col>
                 <span>协议编号：{{hotelIDInfor}}</span>
               </a-col>
-              <a-col :span="1"></a-col>
+              <a-col :span="2"></a-col>
               <a-col>
                 <span>星级：{{hotelLevelInfor}}</span>
               </a-col>
@@ -91,7 +87,12 @@
             <br />
             <a-row type="flex" align="middle">
               <a-col :span="1"></a-col>
-              <span>通知信息：本公司人员将于{{this.$route.query.record.dateTime}}入住{{hotelInfor}}，协议编号{{hotelIDInfor}}，入住人数{{this.$route.query.record.number}}，请确认！</span>
+              <a-col>
+                <span>通知消息：</span>
+              </a-col>
+              <a-col :span="7">
+                <a-input type="textarea" v-model="defaultInfor" :style="{height:'80px'}"/>
+              </a-col>
             </a-row>
           </div>
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
@@ -225,18 +226,14 @@
           <!-- 会议室详情信息 -->
           <div v-show="flagRoom">
             <a-row type="flex" align="middle">
-              <a-col :span="1"></a-col>
-              <a-col>
-                <span>会议室：{{roomInfor}}</span>
-              </a-col>
-              <a-col :span="1"></a-col>
+              <a-col :span="2"></a-col>
               <a-col>
                 <span>容纳人数：{{numberRoomInfor}}</span>
               </a-col>
             </a-row>
             <br />
             <a-row type="flex" align="middle">
-              <a-col :span="1"></a-col>
+              <a-col :span="2"></a-col>
               <a-col>
                 <span>基本条件：{{conditionRoomInfor}}</span>
               </a-col>
@@ -662,6 +659,7 @@ export default {
       hotelPriceInfor: undefined,
       hotelNameInfor: undefined,
       hotelTelInfor: undefined,
+      defaultInfor: undefined,
       flagRoom: false,
       roomInfor: undefined,
       numberRoomInfor: undefined,
@@ -782,7 +780,7 @@ export default {
   },
   created() {
     console.log(this.$route.query.record)
-    let dateAr=this.$route.query.record.dateTime.split('~')
+    let dateAr = this.$route.query.record.dateTime.split('~')
     this.formHotel.dateStart = this.moment(dateAr[0], 'YYYY-MM-DD')
     this.formHotel.dateEnd = this.moment(dateAr[1], 'YYYY-MM-DD')
     this.formEat.dateStart = this.moment(dateAr[0], 'YYYY-MM-DD')
@@ -845,6 +843,7 @@ export default {
     resetFormHotel() {
       this.$refs.ruleFormHotel.resetFields()
       this.formHotel.hotel = undefined
+      this.flagHotel=false
     },
     selectHotel(value) {
       console.log(value)
@@ -858,6 +857,18 @@ export default {
           this.hotelPriceInfor = item.price
           this.hotelNameInfor = item.dutyName
           this.hotelTelInfor = item.dutyTel
+          this.defaultInfor =
+            '本公司人员将于' +
+            this.formHotel.dateStart.format('YYYY年MM月DD日') +
+            '~' +
+            this.formHotel.dateEnd.format('YYYY年MM月DD日') +
+            '入住' +
+            value +
+            '，协议编号' +
+            this.hotelIDInfor +
+            '，入住人数' +
+            this.$route.query.record.number +
+            '，需双人间2间，请安排！'
         }
       })
     },
@@ -924,6 +935,7 @@ export default {
       this.$refs.ruleFormRoom.resetFields()
       this.formRoom.room = undefined
       this.formRoom.range = undefined
+       this.flagRoom=false
     },
     complete() {
       this.$message.success('提交成功!')
