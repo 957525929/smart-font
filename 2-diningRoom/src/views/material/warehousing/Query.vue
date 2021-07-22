@@ -11,19 +11,14 @@
               <j-date  v-decorator="['purchaseEndDate', {initialValue:this.purchaseEndDate}]" style='width: 47%;' />
             </a-form-item>
           </a-col>
-          <a-col :xl="6" :lg="5" :md="6" :sm="24">
-            <a-form-item label="采购人">
-              <a-select
-                allowClear
-                placeholder="请选择"
-                v-decorator="['purchasePeople']"
-              >
-                <a-select-option v-for="d in purchasePeopleSelectData" :key="d.value">
-                  {{ d.text }}
-                </a-select-option>
-              </a-select>
+          <a-col :xl="8" :lg="8" :md="9" :sm="24">
+            <a-form-item label="审核日期">
+              <j-date  v-decorator="['checkoutStartDate', ]" style='width: 47%;'/>
+              <span class="query-group-split-cust"></span>
+              <j-date  v-decorator="['checkoutEndDate', ]" style='width: 47%;' />
             </a-form-item>
           </a-col>
+
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="采购名称">
@@ -38,6 +33,32 @@
                   v-decorator="['provider']"
                 >
                   <a-select-option v-for="d in manuSelectData" :key="d.value">
+                    {{ d.text }}
+                  </a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="5" :md="6" :sm="24">
+              <a-form-item label="采购人">
+                <a-select
+                  allowClear
+                  placeholder="请选择"
+                  v-decorator="['purchasePeople']"
+                >
+                  <a-select-option v-for="d in purchasePeopleSelectData" :key="d.value">
+                    {{ d.text }}
+                  </a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="5" :md="6" :sm="24">
+              <a-form-item label="审核人">
+                <a-select
+                  allowClear
+                  placeholder="请选择"
+                  v-decorator="['checkoutPeople']"
+                >
+                  <a-select-option v-for="d in checkoutPeopleSelectData" :key="d.value">
                     {{ d.text }}
                   </a-select-option>
                 </a-select>
@@ -79,45 +100,10 @@
       >
         <span slot="action" slot-scope="text, record">
           <router-link :to="{name:'material-warehousing-warehousingDetails', params:record }">查看详情</router-link>
-          <a-divider type="vertical" />
-          <a-dropdown v-if='record.checkState == 1' disabled style=' color: rgba(0,0,0,0.5); cursor: no-drop; '>
-            <a class="ant-dropdown-link">审核 <a-icon type="down" /></a>
-            <a-menu slot="overlay">
-              <a-menu-item key="1" >通过</a-menu-item>
-              <a-menu-item key="2" >不通过</a-menu-item>
-            </a-menu>
-          </a-dropdown>
-          <a-dropdown v-else>
-            <a class="ant-dropdown-link">审核 <a-icon type="down" /></a>
-            <a-menu slot="overlay">
-              <a-menu-item key="1" @click='checkPass(record)'>通过</a-menu-item>
-              <a-menu-item key="2" @click='checkNoPass(record)'>不通过</a-menu-item>
-            </a-menu>
-          </a-dropdown>
         </span>
       </a-table>
     </div>
 
-
-    <a-modal
-      :title="'入库审核'"
-      :width="800"
-      :visible="checkModelVisible"
-      :confirmLoading="confirmLoading"
-      @ok="handleOk"
-      @cancel="handleCancel"
-      cancelText="关闭"
-      wrapClassName="ant-modal-cust-warp"
-      style="top:5%;height: 60%;overflow-y: hidden">
-
-      <a-spin :spinning="confirmLoading">
-        <a-form-model ref="form"  v-bind="layout"  :model="model" :rules="validatorRules">
-          <a-form-model-item label="不通过原因"  required prop="ps">
-            <a-textarea rows="5" v-model="model.ps" placeholder="请输入"/>
-          </a-form-model-item>
-        </a-form-model>
-      </a-spin>
-    </a-modal>
 
   </a-card>
 </template>
@@ -130,7 +116,7 @@ import JDate from '../../../components/jeecg/JDate'
 import { message } from 'ant-design-vue'
 
 export default {
-  name: "Check",
+  name: "Query",
   components: {
     PurInModal,
     JDate,
@@ -185,32 +171,32 @@ export default {
           provider : '程埔头市场',
           checkState: 0,
         },
-        // {
-        //   id:'2',
-        //   purchaseOrderNumber: 'GZZT20210404002',
-        //   headline: '4月4号采购单2',
-        //   purchasePeople: '李四',
-        //   purchaseDate: '2020-04-04',
-        //   purchaseNum: '200',
-        //   totalMoney: '2000.00',
-        //   checkoutPeople: '张三',
-        //   checkoutDate: '2020-04-04',
-        //   provider : '闽侯菜市场',
-        //   checkState: 1,
-        // },
-        // {
-        //   id:'3',
-        //   purchaseOrderNumber: 'GZZT20210404003',
-        //   headline: '4月4号采购单3',
-        //   purchasePeople: '李五',
-        //   purchaseDate: '2020-04-04',
-        //   purchaseNum: '200',
-        //   totalMoney: '2000.00',
-        //   checkoutPeople: '张三',
-        //   checkoutDate: '2020-04-04',
-        //   provider : '闽侯菜市场',
-        //   checkState: -1,
-        // },
+        {
+          id:'2',
+          purchaseOrderNumber: 'GZZT20210704002',
+          headline: '7月4号采购单2',
+          purchasePeople: '李四',
+          purchaseDate: '2020-07-04',
+          purchaseNum: '200',
+          totalMoney: '2000.00',
+          checkoutPeople: '张三',
+          checkoutDate: '2020-07-04',
+          provider : '闽侯菜市场',
+          checkState: 1,
+        },
+        {
+          id:'3',
+          purchaseOrderNumber: 'GZZT20210704003',
+          headline: '7月4号采购单3',
+          purchasePeople: '李五',
+          purchaseDate: '2020-07-04',
+          purchaseNum: '200',
+          totalMoney: '2000.00',
+          checkoutPeople: '张三',
+          checkoutDate: '2020-07-04',
+          provider : '闽侯菜市场',
+          checkState: -1,
+        },
       ],
       // 表头
       columns: [
@@ -232,9 +218,6 @@ export default {
           title:'采购名称',
           align:"center",
           dataIndex: 'headline',
-          // customRender:function (text) {
-          //   return !text?"":(text.length>10?text.substr(0,10):text)
-          // }
         },
         {
           title:'采购人',
@@ -260,6 +243,16 @@ export default {
           title:'总金额',
           align:"center",
           dataIndex: 'totalMoney'
+        },
+        {
+          title:'审核人',
+          align:"center",
+          dataIndex: 'checkoutPeople'
+        },
+        {
+          title:'审核日期',
+          align:"center",
+          dataIndex: 'checkoutDate'
         },
         {
           title:'审核状态',
@@ -323,51 +316,8 @@ export default {
         }
       })
     },
-    checkPass(){
-      message.success('审核通过')
-    },
-    checkNoPass(record){
-      this.model = Object.assign({}, record);
-      this.checkModelVisible = true;
-    },
-    close () {
-      // this.$emit('close');
-      this.checkModelVisible = false;
-    },
-    handleOk () {
-      const that = this;
-      // 触发表单验证
-      this.$refs.form.validate(valid => {
-        if (valid) {
-          that.confirmLoading = true;
-          let obj;
-          console.log(this.model)
-          if(!this.model.id){
-            // obj=addRole(this.model);
-          }else{
-            // obj=editRole(this.model);
-          }
-          // obj.then((res)=>{
-          //   if(res.success){
-          //     that.$message.success(res.message);
-          //     that.$emit('ok');
-          //   }else{
-          //     that.$message.warning(res.message);
-          //   }
-          // }).finally(() => {
-          //   that.confirmLoading = false;
-          //   that.close();
-          // })
-          that.confirmLoading = false;
-          that.close();
-        }else{
-          return false;
-        }
-      })
-    },
-    handleCancel () {
-      this.close()
-    },
+
+
   }
 
 }

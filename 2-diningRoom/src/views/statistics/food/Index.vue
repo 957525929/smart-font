@@ -12,17 +12,10 @@
       </a-col>
     </a-row>
     <a-row>
-<!--      <a-col :span='6'  >-->
-<!--        <a-tabs default-active-key="1" size="large" >-->
-<!--          <a-tab-pane tab="审核统计" key="1">-->
-<!--            <BarMultid title="次数" :dataSource="dataSource1" :fields='fields1'/>-->
-<!--          </a-tab-pane>-->
-<!--        </a-tabs>-->
-<!--      </a-col>-->
       <a-col :span='24'  >
         <a-tabs default-active-key="1" size="large" >
           <a-tab-pane tab="菜品类别" key="1">
-            <BarMultid title="数量" :dataSource="dataSource2" :fields='fields2'/>
+            <div id="chart1" style="width: 100%; height: 250px"></div>
           </a-tab-pane>
         </a-tabs>
       </a-col>
@@ -53,160 +46,63 @@
 
 
 <script>
-import Bar from '@/components/chart/Bar'
-import RankList from '@/components/chart/RankList'
-import ChartCard from '@/components/ChartCard'
-import MiniProgress from '@/components/chart/MiniProgress'
-import BarMultid from '@/components/chart/BarMultid'
 import LineChartMultid from '@/components/chart/LineChartMultid'
-
 
 export default {
   name: 'Index',
   components: {
-    Bar,
-    RankList,
-    ChartCard,
-    MiniProgress,
-    BarMultid,
     LineChartMultid,
   },
+
+  mounted() {
+    this.myChart1 = this.$echarts.init(document.getElementById("chart1"));
+    this.option1 = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        data: ["川菜", "粤菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "客家菜", "徽菜",],
+      },
+      yAxis: {
+        type: 'value',
+        name: '数量',
+        nameLocation :'end',
+        splitLine:{
+          show:true,
+          lineStyle:{
+            type:'dashed'
+          }
+        }
+      },
+      series: [{
+        data: [5, 6, 4, 3,  6, 10, 2, 8, 5, ],
+        type: 'bar',
+        barWidth: 20,
+        itemStyle:{
+          normal:{
+            color:function(params) {
+              var colorList=['#5ddfcf','#4ecb73','#fbd437','#eaa674','#435188','#8a7bd4','#e4195b','#9ebcf0','#36cbcb',]
+              return colorList[params.dataIndex]
+            }
+          }
+        }
+      }]
+    };
+    this.myChart1.setOption(this.option1);
+  },
+
   data() {
     return {
-      fields1:["待审核", "已通过", "未通过",],
-      dataSource1: [
-        {
-          "type": "待审核", // 列名
-          "待审核": 20,
-          "已通过": 0,
-          "未通过": 0,
-        },
-        {
-          "type": "已通过",
-          "待审核": 0,
-          "已通过": 15,
-          "未通过": 0,
-        },
-        {
-          "type": "未通过",
-          "待审核": 0,
-          "已通过": 0,
-          "未通过": 5,
-        }
-      ],
-      fields2:["川菜", "粤菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "客家菜", "徽菜",],
-      dataSource2: [
-        {
-          "type": "蔬菜类",
-          "蔬菜类": 20,
-          "肉食类": 0,
-          "粮油类": 0,
-          "海鲜类": 0,
-          "水果类": 0,
-          "面食类": 0,
-          "酒水类": 0,
-        },
-        {
-          "type": "川菜",
-          "川菜": 5,
-          "粤菜": 0,
-          "鲁菜": 0,
-          "苏菜": 0,
-          "浙菜": 0,
-          "闽菜": 0,
-          "湘菜": 0,
-          "客家菜": 0,
-          "徽菜": 0,
-        }, {
-          "type": "粤菜",
-          "川菜": 0,
-          "粤菜": 6,
-          "鲁菜": 0,
-          "苏菜": 0,
-          "浙菜": 0,
-          "闽菜": 0,
-          "湘菜": 0,
-          "客家菜": 0,
-          "徽菜": 0,
-        },{
-          "type": "鲁菜",
-          "川菜": 0,
-          "粤菜": 0,
-          "鲁菜": 4,
-          "苏菜": 0,
-          "浙菜": 0,
-          "闽菜": 0,
-          "湘菜": 0,
-          "客家菜": 0,
-          "徽菜": 0,
-        },{
-          "type": "苏菜",
-          "川菜": 0,
-          "粤菜": 0,
-          "鲁菜": 0,
-          "苏菜": 3,
-          "浙菜": 0,
-          "闽菜": 0,
-          "湘菜": 0,
-          "客家菜": 0,
-          "徽菜": 0,
-        },{
-          "type": "浙菜",
-          "川菜": 0,
-          "粤菜": 0,
-          "鲁菜": 0,
-          "苏菜": 0,
-          "浙菜": 6,
-          "闽菜": 0,
-          "湘菜": 0,
-          "客家菜": 0,
-          "徽菜": 0,
-        },{
-          "type": "闽菜",
-          "川菜": 0,
-          "粤菜": 0,
-          "鲁菜": 0,
-          "苏菜": 0,
-          "浙菜": 0,
-          "闽菜": 10,
-          "湘菜": 0,
-          "客家菜": 0,
-          "徽菜": 0,
-        },{
-          "type": "湘菜",
-          "川菜": 0,
-          "粤菜": 0,
-          "鲁菜": 0,
-          "苏菜": 0,
-          "浙菜": 0,
-          "闽菜": 0,
-          "湘菜": 2,
-          "客家菜": 0,
-          "徽菜": 0,
-        },{
-          "type": "客家菜",
-          "川菜": 0,
-          "粤菜": 0,
-          "鲁菜": 0,
-          "苏菜": 0,
-          "浙菜": 0,
-          "闽菜": 0,
-          "湘菜": 0,
-          "客家菜": 8,
-          "徽菜": 0,
-        },{
-          "type": "徽菜",
-          "川菜": 0,
-          "粤菜": 0,
-          "鲁菜": 0,
-          "苏菜": 0,
-          "浙菜": 0,
-          "闽菜": 0,
-          "湘菜": 0,
-          "客家菜": 0,
-          "徽菜": 5,
-        },
-      ],
       fields3:["采购次数", ],
       dataSource3: [
         {
@@ -259,7 +155,6 @@ export default {
         },
       ],
       time:'year',
-
     }
   },
 }

@@ -43,6 +43,9 @@ import JeecgComponents from '@/components/jeecg/index'
 import '@/assets/less/JAreaLinkage.less'
 import VueAreaLinkage from 'vue-area-linkage'
 
+import * as Echarts from 'echarts'
+Vue.prototype.$echarts = Echarts
+
 Vue.config.productionTip = false
 Vue.use(Storage, config.storageOptions)
 Vue.use(Antd)

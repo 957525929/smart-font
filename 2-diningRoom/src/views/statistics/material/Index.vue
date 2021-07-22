@@ -32,14 +32,14 @@
       <a-col :span='6'  >
         <a-tabs default-active-key="1" size="large" >
           <a-tab-pane tab="审核统计" key="1">
-            <BarMultid title="次数" :dataSource="dataSource1" :fields='fields1'/>
+            <div id="chart1" style="width: 100%; height: 250px"></div>
           </a-tab-pane>
         </a-tabs>
       </a-col>
       <a-col :span='18'  >
         <a-tabs default-active-key="1" size="large" >
           <a-tab-pane tab="食料采购分类" key="1">
-            <BarMultid title="数量" :dataSource="dataSource2" :fields='fields2'/>
+            <div id="chart2" style="width: 100%; height: 250px"></div>
           </a-tab-pane>
         </a-tabs>
       </a-col>
@@ -59,11 +59,6 @@
 
 
 <script>
-import Bar from '@/components/chart/Bar'
-import RankList from '@/components/chart/RankList'
-import ChartCard from '@/components/ChartCard'
-import MiniProgress from '@/components/chart/MiniProgress'
-import BarMultid from '@/components/chart/BarMultid'
 import LineChartMultid from '@/components/chart/LineChartMultid'
 import JDate from '../../../components/jeecg/JDate'
 
@@ -71,11 +66,6 @@ import JDate from '../../../components/jeecg/JDate'
 export default {
   name: 'Index',
   components: {
-    Bar,
-    RankList,
-    ChartCard,
-    MiniProgress,
-    BarMultid,
     LineChartMultid,
     JDate,
   },
@@ -90,114 +80,101 @@ export default {
     }
   },
 
+  mounted() {
+    this.myChart1 = this.$echarts.init(document.getElementById("chart1"));
+    this.option1 = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        data: ['待审核', '已通过', '未通过',],
+      },
+      yAxis: {
+        type: 'value',
+        name: '次数',
+        nameLocation :'end',
+        splitLine:{
+          show:true,
+          lineStyle:{
+            type:'dashed'
+          }
+        }
+      },
+      series: [{
+        data: [20, 18, 2,],
+        type: 'bar',
+        barWidth: 20,
+        itemStyle:{
+          normal:{
+            color:function(params) {
+              var colorList=['#5470c5','#90cb75','#f9c758',]
+              return colorList[params.dataIndex]
+            }
+          }
+        }
+      }]
+    };
+    this.myChart1.setOption(this.option1);
+    this.myChart2 = this.$echarts.init(document.getElementById("chart2"));
+    this.option2 = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        data: ['蔬菜类', '肉食类', '粮油类', '海鲜类', '水果类', '面食类', '酒水类'],
+      },
+      yAxis: {
+        type: 'value',
+        name: '数量',
+        nameLocation :'end',
+        splitLine:{
+          show:true,
+          lineStyle:{
+            type:'dashed'
+          }
+        }
+      },
+      series: [{
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar',
+        barWidth: 20,
+        itemStyle:{
+          normal:{
+            color:function(params) {
+              var colorList=['#9960b3','#fa8352','#3ba172','#3c3f41','#e66','#fac858','#91cc75',]
+              return colorList[params.dataIndex]
+            }
+          }
+        }
+      }]
+    };
+    this.myChart2.setOption(this.option2);
+  },
+
   data() {
     return {
       startTime:'',
       endTime:'',
-      fields1:["待审核", "已通过", "未通过",],
-      dataSource1: [
-        {
-          "type": "待审核", // 列名
-          "待审核": 20,
-          "已通过": 0,
-          "未通过": 0,
-        },
-        {
-          "type": "已通过",
-          "待审核": 0,
-          "已通过": 15,
-          "未通过": 0,
-        },
-        {
-          "type": "未通过",
-          "待审核": 0,
-          "已通过": 0,
-          "未通过": 5,
-        }
-      ],
-      fields2:["蔬菜类", "肉食类", "粮油类", "海鲜类", "水果类", "面食类", "酒水类",],
-      dataSource2: [
-        {
-          "type": "蔬菜类",
-          "蔬菜类": 20,
-          "肉食类": 0,
-          "粮油类": 0,
-          "海鲜类": 0,
-          "水果类": 0,
-          "面食类": 0,
-          "酒水类": 0,
-        },
-        {
-          "type": "肉食类",
-          "蔬菜类": 0,
-          "肉食类": 30,
-          "粮油类": 0,
-          "海鲜类": 0,
-          "水果类": 0,
-          "面食类": 0,
-          "酒水类": 0,
-        },
-        {
-          "type": "粮油类",
-          "蔬菜类": 0,
-          "肉食类": 0,
-          "粮油类": 5,
-          "海鲜类": 0,
-          "水果类": 0,
-          "面食类": 0,
-          "酒水类": 0,
-        },
-        {
-          "type": "蔬菜类",
-          "蔬菜类": 0,
-          "肉食类": 0,
-          "粮油类": 0,
-          "海鲜类": 0,
-          "水果类": 0,
-          "面食类": 0,
-          "酒水类": 0,
-        },
-        {
-          "type": "海鲜类",
-          "蔬菜类": 0,
-          "肉食类": 0,
-          "粮油类": 0,
-          "海鲜类": 17,
-          "水果类": 0,
-          "面食类": 0,
-          "酒水类": 0,
-        },
-        {
-          "type": "水果类",
-          "蔬菜类": 0,
-          "肉食类": 0,
-          "粮油类": 0,
-          "海鲜类": 0,
-          "水果类": 26,
-          "面食类": 0,
-          "酒水类": 0,
-        },
-        {
-          "type": "面食类",
-          "蔬菜类": 0,
-          "肉食类": 0,
-          "粮油类": 0,
-          "海鲜类": 0,
-          "水果类": 0,
-          "面食类": 11,
-          "酒水类": 0,
-        },
-        {
-          "type": "酒水类",
-          "蔬菜类": 0,
-          "肉食类": 0,
-          "粮油类": 0,
-          "海鲜类": 0,
-          "水果类": 0,
-          "面食类": 0,
-          "酒水类": 21,
-        },
-      ],
       fields3:["采购次数", ],
       dataSource3: [
         {
@@ -250,7 +227,8 @@ export default {
         },
       ],
       time:'year',
-
+      myChart: {},
+      option: {},
     }
   },
 
@@ -259,7 +237,7 @@ export default {
       console.log(value)
       console.log(this.startTime)
       this.time=''
-    }
+    },
   },
 }
 </script>
