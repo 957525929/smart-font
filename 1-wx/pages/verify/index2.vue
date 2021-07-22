@@ -13,7 +13,7 @@
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">申请状态</view>
-			<view>已拒绝</view>
+			<view class="text-red">已拒绝</view>
 		</view>
 		
 
@@ -70,6 +70,7 @@
 
 </template>
 <script>
+	import { generatePhoneNum } from '../../util/mathFunc.js'
 	export default {
 		created: function() {
 			let aData = new Date();
@@ -88,18 +89,19 @@
 				time1: '12.00',
 				person: {
 					name: '华强北',
-					phone: '13620176742',
+					phone: generatePhoneNum(),
 					type: 'allow',
 					people: '倪友聪',
 				},
 				PageCur: 'appoient',
 				date: new Date().getFullYear() + "-" +
 							(new Date().getMonth()) + "-" +
-							(new Date().getDate() - 20),
+							(new Date().getDate() - 10),
 				content: '被访问人不在'
 			}
 		},
 		methods: {
+			generatePhoneNum,
 			PickerChange(e) {
 				this.index = e.detail.value
 				// console.log(index)

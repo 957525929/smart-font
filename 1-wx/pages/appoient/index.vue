@@ -109,8 +109,6 @@
 		},
 		data() {
 			return {
-				// index: -1,
-				// picker1: ['张三', '李四', '王五'],
 				date: '',
 				time: '',
 				time1: '',

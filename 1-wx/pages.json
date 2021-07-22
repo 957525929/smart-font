@@ -151,6 +151,9 @@
 		}, {
 			"path": "pages/verify/index3",
 			"style": {}
+		}, {
+			"path": "pages/verify/index4",
+			"style": {}
 		},{
 			"path": "components/search/search",
 			"style": {

@@ -40,12 +40,15 @@
 </template>
 
 <script>
+	import {
+		generatePhoneNum
+	} from '../../util/mathFunc.js'
 	export default {
 		data() {
 			return {
 				applylist: [{
 						visit: '魏佳楠',
-						phone: '18520176742',
+						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '09:46',
@@ -53,7 +56,7 @@
 					},
 					{
 						visit: '郑思楠',
-						phone: '13920172542',
+						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '13:51',
@@ -61,7 +64,7 @@
 					},
 					{
 						visit: '李伟恒',
-						phone: '14620167442',
+						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '17:46',
@@ -69,7 +72,7 @@
 					},
 					{
 						visit: '林泽宇',
-						phone: '18754767212',
+						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() - 5) + "日" + " " + '15:24',
@@ -80,7 +83,7 @@
 					},
 					{
 						visit: '张国柱',
-						phone: '13557476742',
+						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() - 15) + "日" + " " + '4:26',
@@ -91,10 +94,10 @@
 					},
 					{
 						visit: '王鹏翔',
-						phone: '18545176742',
+						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()-1) + "日" + " " + '13:46',
+							(new Date().getDate() - 1) + "日" + " " + '13:46',
 						agreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '14:15',
@@ -102,7 +105,7 @@
 					},
 					{
 						visit: '华强北',
-						phone: '13620176742',
+						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() - 10) + "日" + " " + '13:16',
@@ -113,13 +116,13 @@
 					},
 					{
 						visit: '孙志远',
-						phone: '19720175742',
+						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()-1) + "日" + " " + '14:46',
+							(new Date().getDate() - 1) + "日" + " " + '14:46',
 						disagreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()-1) + "日" + " " + '17:31',
+							(new Date().getDate() - 1) + "日" + " " + '17:31',
 						type: '已拒绝',
 					},
 				],
@@ -150,7 +153,7 @@
 		props: ["cardType"],
 
 		methods: {
-
+			generatePhoneNum
 		}
 	}
 </script>
@@ -162,15 +165,11 @@
 		height: 90px;
 		display: flex;
 		border-radius: 10px;
-	}
-
-	.picture {
-		line-height: 90px;
+		align-items: center;
 	}
 
 	.card-img {
 		margin: 5px;
-
 	}
 
 	.card-center {

@@ -64,16 +64,6 @@
 
 <script>
 	export default {
-		// created: function() {
-
-		// 	let aData = new Date();
-
-		// 	this.date =
-		// 		aData.getFullYear() + "年" +
-		// 		(aData.getMonth() + 1) + "月" +
-		// 		(aData.getDate()) + "日"  
-
-		// },
 		data() {
 			return {
 				// date:'',
@@ -205,6 +195,7 @@
 		height: 90px;
 		display: flex;
 		border-radius: 10px;
+		align-items: center;
 	}
 
 	.card-img {

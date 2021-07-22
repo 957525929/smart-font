@@ -13,7 +13,7 @@
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">申请状态</view>
-			<view>已通过</view>
+			<view class="text-green">已通过</view>
 		</view>
 		
 
@@ -70,6 +70,7 @@
 
 </template>
 <script>
+	import { generatePhoneNum } from '../../util/mathFunc.js'
 	export default {
 		data() {
 			return {
@@ -79,7 +80,7 @@
 				time1: '18.00',
 				person: {
 					name: '王鹏翔',
-					phone: '18545176742',
+					phone: generatePhoneNum(),
 					type: 'allow',
 					people: '倪友聪',
 					content: '被访问人不在'
@@ -92,6 +93,7 @@
 			}
 		},
 		methods: {
+			generatePhoneNum,
 			PickerChange(e) {
 				this.index = e.detail.value
 				// console.log(index)

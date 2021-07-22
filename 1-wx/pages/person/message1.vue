@@ -44,7 +44,6 @@
 				uni.navigateTo({
 					url: "/pages/verify/index1"
 				});
-				// console.log('1111')
 			}
 		}
 	}

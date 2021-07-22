@@ -98,17 +98,9 @@
 </template>
 
 <script>
+import { generatePhoneNum } from '../../util/mathFunc.js'
 	export default {
 		created: function() {
-			// let aTime = new Date();
-
-			// this.time =
-			// 	aTime.getHours() + ":" +
-			// 	aTime.getMinutes()
-			// this.time1 =
-			// 	(aTime.getHours() + 3) + ":" +
-			// 	aTime.getMinutes()
-
 			let aData = new Date();
 
 			this.date =
@@ -125,7 +117,7 @@
 				time1: '18.00',
 				person: {
 					name: '魏佳楠',
-					phone: '13675824231',
+					phone: generatePhoneNum(),
 					type: 'allow',
 					people: '倪友聪',
 				},
@@ -135,6 +127,7 @@
 			}
 		},
 		methods: {
+			generatePhoneNum,
 			PickerChange(e) {
 				this.index = e.detail.value
 				// console.log(index)
@@ -142,15 +135,6 @@
 			DateChange(e) {
 				this.date = e.detail.value
 			},
-			// TimeChange(e) {
-			// 	this.time = e.detail.value
-			// },
-			// TimeChange1(e) {
-			// 	this.time1 = e.detail.value
-			// },
-			// textareaBInput(e) {
-			// 	this.textareaBValue = e.detail.value
-			// }
 			NavChange: function(e) {
 				console.log(e.currentTarget)
 				this.PageCur = e.currentTarget.dataset.cur
