@@ -1,68 +1,31 @@
 <template>
-  <div class="">
-    <TableModal
-      title="养护计划"
-      :infoDetail="addplan"
-      ref="planModal"
-    ></TableModal>
-    <PageTemplate
-      :columns="columns"
-      :searchCon="searchCon"
-      :formdata="data"
-    >
-      <a-button
-        type="primary"
-        @click="showProForm"
-        icon="plus"
-      >新增养护计划</a-button>
-      <a-button
-        type="primary"
-        icon="import"
-        style="marginleft: 10px"
-      >导入</a-button>
-      <a-button
-        type="primary"
-        icon="export"
-        style="marginleft: 10px"
-      >导出</a-button>
-      <a-table
-        :columns="columns"
-        :data-source="data"
-        :pagination="{
+    <div class="">
+        <TableModal title="养护计划" :infoDetail="addplan" ref="planModal"></TableModal>
+        <PageTemplate :columns="columns" :searchCon="searchCon" :formdata="data">
+            <a-button type="primary" @click="showProForm" icon="plus">新增养护计划</a-button>
+            <a-button type="primary" icon="import" style="marginLeft: 10px">导入</a-button>
+            <a-button type="primary" icon="export" style="marginLeft: 10px">导出</a-button>
+            <a-table
+                :columns="columns"
+                :data-source="data"
+                :pagination="{
                     size: 'small',
                     pageSize: 10,
                     showTotal: (total, range) => `第${range[0]}-${range[1]}条/总共${total}条`,
                 }"
-      >
-        <span
-          slot="action"
-          slot-scope="text, record"
-        >
-          <template v-for="(i, index) in record.action">
-            <template v-if="i.com === 'router-link'">
-              <router-link :to="{ name: i.url, params: { id: record.taskId } }">{{
+            >
+                <span slot="action" slot-scope="text, record">
+                    <template v-for="(i, index) in record.action">
+                        <template v-if="i.com === 'router-link'">
+                            <router-link :to="{ name: i.url, params: { id: record.taskId } }">{{
                                 i.tagName
                             }}</router-link>
-            </template>
-            <template v-else>
-              <component
-                :is="i.com"
-                :ref="i.com"
-                :key="index"
-                :title="i.tagName"
-                :infoDetail="infoDetail"
-              ></component>
-              <a @click.stop="show(item.key, record.devId)">{{ i.tagName }}</a>
-              <a-divider
-                type="vertical"
-                v-if="index !== record.action.length - 1"
-              />
-            </template>
-          </template>
-        </span>
-      </a-table>
-    </PageTemplate>
-  </div>
+                        </template>
+                    </template>
+                </span>
+            </a-table>
+        </PageTemplate>
+    </div>
 </template>
 
 <script>
@@ -70,55 +33,46 @@ import PageTemplate from '@/components/page/PageTemplate.vue'
 import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
 import TableModal from '@/components/tableOperation/modal/TableModal.vue'
 //js
-import { columns, data, addplan } from './js/protect.js'
+import { data } from './js/all.js'
+import { columns,  addplan } from './js/protect.js'
+import {  handleTableData} from "@/utils/util.js";
 const NEW_PROLIST = Object.freeze({ columns, data, addplan })
 
 export default {
-  name: 'proList',
-  components: { PageTemplate, TableDrawer, TableModal },
-  created() {
-    this.loadData()
-  },
-  data() {
-    return {
-      visible: false,
-      columns: NEW_PROLIST.columns.filter((item) => {
-        return !item.hideInTable
-      }),
-      searchCon: {},
-      data: NEW_PROLIST.data,
-      infoDetail: NEW_PROLIST.columns.filter((item) => {
-        return !item.hideInDetail
-      }),
-      addplan: NEW_PROLIST.addplan.filter((item) => {
-        return !item.hideInModal
-      }),
-    }
-  },
-  methods: {
-    show(type, id) {
-      let temp = this.data.filter((item) => item.taskId == id)[0]
-      this.infoDetail.map((item) => {
-        item.value = temp[item.key]
-        return item
-      })
-      this.$refs[type][0].showDrawer()
+    name: 'proList',
+    components: { PageTemplate, TableDrawer, TableModal },
+    created() {
+        this.loadData()
     },
-    loadData() {
-      // 请求数据
-      this.columns.forEach((item) => {
-        if (item.valueEnum) {
-          this.data.map((res) => {
-            res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-            return res
-          })
+    data() {
+        return {
+            visible: false,
+            columns: NEW_PROLIST.columns.filter((item) => {
+                return !item.hideInTable
+            }),
+            searchCon: {},
+            data: NEW_PROLIST.data.filter(item=>item.taskStatus==0),
+            infoDetail: NEW_PROLIST.columns.filter((item) => {
+                return !item.hideInDetail
+            }),
+            addplan: NEW_PROLIST.addplan.filter((item) => {
+                return !item.hideInModal
+            }),
         }
-      })
     },
-    showProForm() {
-      this.$refs.planModal.showModal()
+    methods: {
+        loadData() {
+            // 请求数据
+            this.data.map(item=>{
+                let temp = handleTableData( this.columns, item)
+                this.columns = temp[0]
+                return  temp[1]
+            })
+        },
+        showProForm() {
+            this.$refs.planModal.showModal()
+        },
     },
-  },
 }
 </script>
 <style scoped>

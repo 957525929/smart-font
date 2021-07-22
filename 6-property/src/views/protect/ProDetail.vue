@@ -1,371 +1,137 @@
 <template>
-  <!-- <page-layout title="设备详情"> -->
-  <a-card :bordered="false">
-    <a-descriptions title="基本信息">
-      <a-descriptions-item
-        :label="item.title"
-        v-for="item in basicInfo"
-        :key="item.key"
-      >{{
+    <!-- <page-layout title="设备详情"> -->
+    <a-card :bordered="false">
+        <a-descriptions title="基本信息">
+            <a-descriptions-item :label="item.title" v-for="item in basicInfo" :key="item.key">{{
                 item.value
             }}</a-descriptions-item>
-    </a-descriptions>
-    <a-divider style="margin-bottom: 32px" />
+        </a-descriptions>
+        <a-divider style="margin-bottom: 32px" />
 
-    <div class="title">保养记录</div>
-    <a-table
-      style="margin-bottom: 24px"
-      :columns="proInfo"
-      :data-source="proData"
-    > </a-table>
+        <div class="title">保养记录</div>
+        <a-table :columns="proRecord" :data-source="proData">
+            <span slot="ifRun" slot-scope="text"
+                ><a-badge :status="text == 0 ? 'success' : 'error'" />{{ text == 0 ? '是' : '否' }}</span
+            >
+            <span slot="ifnormal" slot-scope="text">
+                <a-badge :status="text == 0 ? 'success' : 'error'" />{{ text == 0 ? '是' : '否' }}</span
+            >
+            <span slot="action" slot-scope="text, record">
+                <template v-for="(i, index) in record.action">
+                    <a-popconfirm
+                        title="确认通过核查?"
+                        ok-text="是"
+                        cancel-text="否"
+                        v-if="i.com === 'TableDelete'"
+                    >
+                        <a href="#">{{ i.tagName }}</a>
+                    </a-popconfirm>
+                    <template v-else>
+                        <component
+                            :is="i.com"
+                            :ref="i.com"
+                            :key="index"
+                            :title="i.tagName"
+                            :infoDetail="infoDetail"
+                        ></component>
+                        <a @click="show(i.com, record.recordId)">{{ i.tagName }}</a>
+                    </template>
 
-    <div class="title">保养设备详情</div>
-    <a-table
-      :columns="toolInfo"
-      :data-source="toolData"
-      class="components-table-demo-nested"
-    >
-      <!-- <a-table
-        slot="expandedRowRender"
-        slot-scope="text"
-        :columns="innerInfo"
-        :data-source="innerData"
-        :pagination="false"
-      >
-      </a-table> -->
-    </a-table>
-  </a-card>
-  <!-- </page-layout> -->
+                    <a-divider type="vertical" v-if="index !== record.action.length - 1" />
+                </template>
+            </span>
+        </a-table>
+
+        <div class="title">区域设备详情</div>
+        <a-table :columns="toolInfo" :data-source="toolData" class="components-table-demo-nested">
+            <span slot="action" slot-scope="text, record">
+                <template v-for="(i, index) in record.action.filter((item) => item.tagName === '详情')">
+                    <template v-if="i.com === 'router-link'">
+                        <router-link :to="{ name: i.url, params: { id: record.devId } }">{{ i.tagName }}</router-link>
+                    </template>
+                    <a-divider type="vertical" v-if="index !== record.action.length - 1" />
+                </template>
+            </span>
+        </a-table>
+    </a-card>
+    <!-- </page-layout> -->
 </template>
 
 <script>
+import PageTemplate from '@/components/page/PageTemplate.vue'
+import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
+import TableModal from '@/components/tableOperation/modal/TableModal.vue'
 //js
 import { data } from './js/all.js'
-import { basicInfo, proInfo, toolInfo, innerColumns } from './js/detail.js'
-import PageLayout from '@/components/page/PageLayout'
-import STable from '@/components/table/'
-const NEW_DETAIL = Object.freeze({ basicInfo, proInfo, toolInfo, innerColumns })
-const basic = [
-  {
-    id: 1001,
-    key: 0,
-    devId: 1001,
-    devName: '给水设备_1001',
-    devType: 2,
-    devStatus: 4,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 0,
-    fixStaff: '张英',
-    loginTime: '2021-06-22 17：55：55',
-    manufacturer: '日丰企业集团有限公司',
-    batch: 'M127894',
-  },
-  {
-    id: 2001,
-    key: 1,
-    devId: 2001,
-    devName: '供电设备_2001',
-    devType: 1,
-    devStatus: 5,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 1,
-    fixStaff: '刘涛',
-    loginTime: '2021-06-21 10：55：55',
-    manufacturer: '国网福建省电力有限公司',
-    batch: 'N2169',
-  },
-  {
-    id: 3001,
-    key: 2,
-    devId: 3001,
-    devName: '空调_3001',
-    devType: 0,
-    devStatus: 7,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 2,
-    fixStaff: '王翔',
-    loginTime: '2021-06-29 08：55：55',
-    manufacturer: '珠海格力电器股份有限公司',
-    batch: 'A2421',
-  },
-]
-const pro = [
-  {
-    id: 2001,
-    key: 0,
-    devId: 1,
-    devName: '烟草大厦18楼频繁断电',
-    taskType: 2,
-    taskStatus: 1,
-    devStatus: 1,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    fixStaff: '刘涛',
-    fixedTime: '2021-06-22 18：55：55',
-    expectTime: '2021-06-23 14：25：35',
-    action: [
-      {
-        tagName: '详情',
-        com: 'TableDrawer',
-      },
-    ],
-  },
-  {
-    id: 3001,
-    key: 1,
-    devId: 2,
-    devName: '空调漏水',
-    taskType: 1,
-    taskStatus: 2,
-    devStatus: 0,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '13332145698',
-    fixStaff: '张英',
-    fixedTime: '2021-06-24 10：55：11',
-    expectTime: '2021-06-24 14：25：12',
-    action: [
-      {
-        tagName: '详情',
-        com: 'TableDrawer',
-      },
-    ],
-  },
-  {
-    id: 2001,
-    key: 2,
-    devId: 3,
-    devName: '电路老化检查',
-    taskType: 0,
-    taskStatus: 3,
-    devStatus: 0,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    fixStaff: '刘涛',
-    fixedTime: '2021-06-19 10：55：55',
-    expectTime: '2021-06-19 14：25：35',
-    action: [
-      {
-        tagName: '详情',
-        com: 'TableDrawer',
-      },
-    ],
-  },
-]
-const tool = [
-  {
-    key: 0,
-    devId: 1001,
-    devName: '给水管网_1001',
-    devType: 2,
-    devStatus: 4,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 0,
-    fixStaff: '张英',
-    loginTime: '2021-06-22 17:55:55',
-    manufacturer: '日丰企业集团有限公司',
-    batch: 'M127894',
-    devPhone: '18259529231',
-  },
-  {
-    key: 1,
-    devId: 2001,
-    devName: '供电线路_2001',
-    devType: 1,
-    devStatus: 5,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 1,
-    fixStaff: '刘涛',
-    loginTime: '2021-06-21 10:55:55',
-    manufacturer: '国网福建省电力有限公司',
-    batch: 'N2169',
-    devPhone: '18259529299',
-  },
-  {
-    key: 2,
-    devId: 3001,
-    devName: '冷水机组_3001',
-    devType: 0,
-    devStatus: 6,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 2,
-    fixStaff: '王翔',
-    loginTime: '2021-06-29 08:55:55',
-    manufacturer: '珠海格力电器股份有限公司',
-    batch: 'A2421',
-    devPhone: '18259529290',
-  },
-]
-const inner = [
-  {
-    key: 0,
-    devId: 1001,
-    devName: '日丰给排水管_1001',
-    devType: 2,
-    devStatus: 4,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 0,
-    fixStaff: '张英',
-    loginTime: '2021-06-22 17:55:55',
-    manufacturer: '日丰企业集团有限公司',
-    batch: 'M127894',
-    devPhone: '18259529231',
-  },
-  {
-    key: 1,
-    devId: 2001,
-    devName: '公牛电线_2001',
-    devType: 1,
-    devStatus: 5,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 1,
-    fixStaff: '刘涛',
-    loginTime: '2021-06-21 10:55:55',
-    manufacturer: '国网福建省电力有限公司',
-    batch: 'N2169',
-    devPhone: '18259529299',
-  },
-  {
-    key: 2,
-    devId: 3001,
-    devName: '格力巨型冷水机_3001',
-    devType: 0,
-    devStatus: 6,
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 2,
-    fixStaff: '王翔',
-    loginTime: '2021-06-29 08:55:55',
-    manufacturer: '珠海格力电器股份有限公司',
-    batch: 'A2421',
-    devPhone: '18259529290',
-  },
-]
+import { basicInfo } from './js/detail.js'
+import { proRecord } from './js/index.js'
+import { data as devData, devColumns } from '@/views/device/deviceList/js/index.js'
+import { handleTableData } from '@/utils/util.js'
+const NEW_DETAIL = Object.freeze({ basicInfo, proRecord, devData, devColumns })
 export default {
-  // onLoad(params){console.log(params,this.$route.params.id);},
-  components: {
-    PageLayout,
-    STable,
-  },
-  mounted() {
-    this.getBasic()
-    this.getFix()
-    this.getPro()
-    this.getTool()
-  },
-  data() {
-    return {
-      basicInfo: NEW_DETAIL.basicInfo,
-      basicData: {},
-      proInfo: NEW_DETAIL.proInfo,
-      proData: pro,
-      toolInfo: NEW_DETAIL.toolInfo,
-      toolData: tool,
-      innerInfo: NEW_DETAIL.innerColumns,
-      innerData: inner,
-    }
-  },
-  computed: {
-    Id() {
-      return this.$route.params.id
+    components: { PageTemplate, TableDrawer, TableModal },
+    mounted() {
+        this.getData()
     },
-  },
-  methods: {
-    getBasic() {
-      this.basicData = data.filter((item) => {
-        return item.taskId === this.Id
-      })[0]
-      this.basicInfo.map((item) => {
-        if (item.valueEnum) {
-          this.basicData[item.key] = item.valueEnum[this.basicData[item.key]].tableValue
-        } else {
-          item.value = this.basicData[item.key]
+    data() {
+        return {
+            basicInfo: NEW_DETAIL.basicInfo.filter((item) => {
+                return !item.hideInDetail
+            }),
+            basicData: {},
+            proRecord: NEW_DETAIL.proRecord.filter((item) => {
+                return !item.hideInTable
+            }),
+            proData: {},
+            infoDetail: NEW_DETAIL.proRecord.filter((item) => {
+                return !item.hideInDetail
+            }),
+            toolInfo: NEW_DETAIL.devColumns.filter((item) => !item.hideInTable),
+            toolData: NEW_DETAIL.devData,
         }
-        return item
-      })
     },
-    getFix() {
-      this.fixData = fix.filter((item) => {
-        console.log(item)
-        return item.id == this.Id
-      })
-      console.log(this.fixData)
-      this.fixInfo.forEach((item) => {
-        if (item.valueEnum) {
-          this.fixData.map((res) => {
-            res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-            return res
-          })
-        }
-      })
+    computed: {
+        Id() {
+            return this.$route.params.id
+        },
     },
-    getPro() {
-      this.proData = this.proData.filter((item) => {
-        return item.id == this.Id
-      })
-      this.proInfo.forEach((item) => {
-        if (item.valueEnum) {
-          this.proData.map((res) => {
-            res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-            return res
-          })
-        }
-      })
-    },
-    getTool() {
-      this.toolData = this.toolData.filter((item) => {
-        return item.devId == this.Id
-      })
+    methods: {
+        getData() {
 
-      this.toolInfo.forEach((item) => {
-        if (item.valueEnum) {
-          this.toolData.map((res) => {
-            res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-            return res
-          })
-        }
-      })
-      this.innerData = this.innerData.filter((item) => {
-        return item.devId == this.Id
-      })
-
-      this.innerInfo.forEach((item) => {
-        if (item.valueEnum) {
-          this.innerData.map((res) => {
-            res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-            return res
-          })
-        }
-      })
+            this.basicData = data.filter((item) => {
+                return item.taskId === this.Id
+            })[0]
+            this.proData = this.basicData.records
+            this.toolData = this.toolData.filter((item) => {
+                return item.groupKey == this.basicData.areaKey
+            })
+            let menu = new Map([
+                ['basicInfo', 'basicData'],
+                ['proRecord', 'proData'],
+                ['toolInfo', 'toolData'],
+            ])
+            Array.from(menu).forEach(([key, value]) => {
+                this[key] = handleTableData(this[key], this[value])[0]
+                this[value] = handleTableData(this[key], this[value])[1]
+            })
+            
+        },
+        show(type, id) {
+            let temp = this.proData.filter((item) => {
+                return item.recordId === id
+            })[0]
+            this.infoDetail = handleTableData(this.infoDetail, temp)[0]
+            this.$refs[type][0].showDrawer()
+        },
     },
-  },
 }
 </script>
 
 <style lang="less" scoped>
 .title {
-  color: rgba(0, 0, 0, 0.85);
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 16px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 16px;
 }
 </style>

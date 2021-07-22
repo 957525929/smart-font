@@ -71,9 +71,6 @@ export default {
         }
     },
     methods: {
-        goto(url, id) {
-            this.$router.push({ name: url, params: { id: id } })
-        },
         getList() {
             this.columns.forEach((item) => {
                 if (item.valueEnum) {

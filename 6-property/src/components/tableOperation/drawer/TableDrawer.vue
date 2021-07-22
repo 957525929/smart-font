@@ -39,10 +39,6 @@ export default {
             data: this.infoDetail.filter((item) => item.key.indexOf('imgs') === -1),
         }
     },
-    mounted() {
-        console.log(this.infoDetail)
-        // this.getDetail()
-    },
     methods: {
         showDrawer() {
             this.visible = true

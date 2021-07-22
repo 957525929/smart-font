@@ -522,4 +522,20 @@ export function handleTreeToCascade(params) {
       }
   })
 }
+/**
+ * 处理表格数据
+ */
+ export function handleTableData(list, data) {
+  list.map((item) => {
+    console.log(item,data)
+      if (item.valueEnum&&item.valueEnum.length!==0) {
+         data[item.key] = item.valueEnum[data[item.key]].tableValue
+         item.value = item.valueEnum[data[item.key]].tableValue
+      } else {
+          item.value = data[item.key]
+      }
+      return item
+  })
+  return [list,data]
+}
 

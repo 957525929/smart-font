@@ -7,7 +7,7 @@
       <a-button
         type="primary"
         @click="checkAll"
-      >一键核查</a-button>
+      >一键通过核查</a-button>
       <div
         class="ant-alert ant-alert-info"
         style="margin: 16px 0"

@@ -12,6 +12,102 @@ import {
 import {
     handleTreeToCascade
 } from "@/utils/util.js";
+
+export const proRecord = [{
+    dataIndex: 'recordId',
+    title: '保养记录编号',
+    width: 40,
+    key: 'recordId',
+    value: "",
+    hideInSearch: true
+  },{
+    dataIndex: 'ifRun',
+    title: '任务是否按期执行',
+    width: 40,
+    key: 'ifRun',
+    type: 'a-select',
+    scopedSlots: {
+        customRender: 'ifRun'
+      },
+    valueEnum: {
+      0: {
+        tableValue: "是",
+        searchValue: "是",
+        code: 'success'
+      },
+      1: {
+        tableValue: "否",
+        searchValue: "否",
+        code:'error'
+      }
+    },
+    value: ""
+  },
+  {
+    dataIndex: 'ifnormal',
+    title: '设备是否正常',
+    width: 40,
+    key: 'ifnormal',
+    type: 'a-select',
+    scopedSlots: {
+        customRender: 'ifnormal'
+      },
+    valueEnum: {
+      0: {
+        tableValue: "是",
+        searchValue: "是",
+        code: 'success'
+      },
+      1: {
+        tableValue: "否",
+        searchValue: "否",
+        code: 'error'
+      }
+    },
+    value: ""
+  },
+  {
+    dataIndex: 'proDesc',
+    title: '保养描述',
+    width: 80,
+    key: 'proDesc',
+    value: "",
+    hideInSearch: true
+  },
+  {
+    dataIndex: 'proimgs',
+    title: '保养图片',
+    width: 80,
+    key: 'proimgs',
+    value: "",
+    hideInTable: true,
+    hideInSearch: true,
+    scopedSlots: {
+      customRender: 'proimgs'
+    }
+  },
+  {
+    dataIndex: 'proTime',
+    title: '保养时间',
+    width: 80,
+    key: 'proTime',
+    type: "a-range-picker",
+    value: ""
+  },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    key: "action",
+    scopedSlots: {
+      customRender: 'action'
+    },
+    width: 80,
+    hideInSearch: true,
+    hideInDetail: true
+  }
+]
+
+//-------------------------------以下废弃---------------------------------------------
 // 全部
 export const proMenu = [
     {
@@ -46,17 +142,6 @@ export const loginInfo = [{
     value: "",
     key: 'range',
     type: "a-range-picker"
-},
-{
-    title: '养护组别',
-    value: "",
-    key: 'devGroupType',
-    type: "a-select",
-    valueEnum: [{
-        tableValue: "空调管理组别1",
-        searchValue: "空调管理组别1",
-        code: 0
-    }]
 },
 {
     title: '养护范围',

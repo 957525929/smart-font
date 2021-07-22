@@ -334,12 +334,12 @@ export const menuMock = {
                     "id": "944abf0a8fc22fe1f1154a389a574154"
                 }, {
                     "path": "/system/mngConfig",
-                    "component": "system/mngConfig/MngConfig",
+                    "component": "system/mngConfig/AreaManager",
                     "route": "1",
                     "meta": {
                         "keepAlive": false,
                         "internalOrExternal": false,
-                        "title": "管理分组配置",
+                        "title": "区域配置",
                         "icon": "control"
                     },
                     "name": "device-mngConfig",
