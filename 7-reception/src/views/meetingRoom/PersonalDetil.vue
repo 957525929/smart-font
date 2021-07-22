@@ -62,6 +62,7 @@
           <a-table :data-source="dataArrive" :pagination="false" rowKey="dateTime">
             <a-table-column title="序号" data-index="id" align="center"></a-table-column>
             <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
+             <a-table-column title="时段" data-index="range" align="center"></a-table-column>
             <a-table-column title="签到人员" data-index="Arrive" align="center"></a-table-column>
             <a-table-column title="未签到人员" data-index="noArrive" align="center"></a-table-column>
           </a-table>
@@ -167,7 +168,8 @@ const dataNote = [
 const dataArrive = [
   {
     id: '1',
-    dateTime: '2021年07月20日~2021年07月20日上午',
+    dateTime: '2021年07月20日~2021年07月20日',
+    range:'上午',
     Arrive: '陈宏涛；李小玲；林诺汐',
     noArrive: '陈熙雨'
   },
@@ -179,7 +181,7 @@ export default {
     // dateTime: this.$route.query.record.dateTime,
     // },
       activeKey: ['1', '2', '3', '4', '5'],
-      an: ['8', '6', '7'],
+      //an: ['8', '6', '7'],
       dataHotel,
       dataEat,
       dataRoom,
