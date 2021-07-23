@@ -12,15 +12,15 @@
 			</view>
 			<view class="cu-list menu-avatar">
 				<view class="cu-item" @click="modalVisable = true">
-					<view class="cu-avatar round lg" style="background-image:url(../../static/notice/面性信息信息短信消息.png);">
+					<view class="cu-avatar radius  lg" style="background-image:url(../../static/notice/面性信息信息短信消息.png);">
 					</view>
 					<view class="content">
 						<!-- <navigator  :url="'/pages/notice/' +'chat'"  > -->
-						<view class="text-cut">来自 系统 的公告</view>
+						<view class="text-cut">【会议室预约通知】</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
-								<text class="cuIcon-infofill text-red  margin-right-xs"></text>
-								您于2021-07-20上午9：00有一个会议，地点位于XXX
+								<!-- <text class="cuIcon-infofill text-red  margin-right-xs"></text> -->
+								您于2021-07-20上午预约的会议，已预约成功。
 							</view>
 						</view>
 						<!-- </navigator> -->
@@ -31,21 +31,23 @@
 						<view class="cu-tag round bg-red sm">1</view>
 					</view>
 				</view>
-				<view class="cu-item">
-					<view class="cu-avatar round lg" style="background-image:url(../../static/notice/面性信息信息短信消息.png)">
+				<view class="cu-item"  @click="modalVisable1 = true">
+					<view class="cu-avatar radius lg" style="background-image:url(../../static/notice/面性通知消息铃铛.png)">
 						<!-- <view class="cu-tag badge">99+</view> -->
 					</view>
 					<view class="content">
-						<view class="text-cut">来自 系统 的公告</view>
+						<view class="text-cut">【会议室预约通知】</view>
 						<!-- <view class="cu-tag round bg-orange sm">重要会议</view> -->
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
-								您于2021-07-19上午9：00有一个会议，地点位于XXX
+								<text class="cuIcon-infofill text-red  margin-right-xs"></text>
+								您于2021-07-19上午预约的会议，已被撤销。
 							</view>
 						</view>
 					</view>
 					<view class="action">
-						<view class="text-grey text-xs">22:20</view>
+						<view class="text-grey text-xs">23:00</view>
+						<view class="cu-tag round bg-red sm">1</view>
 						<!-- <view class="cuIcon-notice_forbid_fill text-gray"></view> -->
 					</view>
 				</view>
@@ -54,10 +56,12 @@
 					</view>
 					<view class="content">
 						<view class="text-cut">
-							<view class="text-cut">来自 系统 的公告</view>
+							<view class="text-cut">【会议室预约通知】</view>
 						</view>
 						<view class="text-gray text-sm flex">
-							<view class="text-cut">您于2021-07-18上午9：00有一个会议，地点位于XXX</view>
+							<view class="text-cut">
+								您于2021-07-19上午预约的会议，已预约成功。
+							</view>
 						</view>
 					</view>
 					<view class="action">
@@ -69,10 +73,11 @@
 					<view class="cu-avatar radius lg" style="background-image:url(../../static/notice/面性信息信息短信消息.png);">
 					</view>
 					<view class="content">
-						<view class="text-cut">来自 系统 的公告</view>
+						<view class="text-cut">【会议室预约通知】</view>
 						<!-- <view class="cu-tag round bg-orange sm">会议未参加...</view> -->
 						<view class="text-gray text-sm flex">
-							<view class="text-cut"> 您于2021-07-17上午9：00有一个会议，地点位于XXX
+							<view class="text-cut"> 
+								您于2021-07-18上午预约的会议，已预约成功。
 							</view>
 						</view>
 					</view>
@@ -87,13 +92,13 @@
 					</view>
 					<view class="content">
 						<view>
-							<view class="text-cut">来自 系统 的公告</view>
+							<view class="text-cut">【会议室预约通知】</view>
 							<!-- <view class="cu-tag round bg-orange sm">重要会议</view> -->
 						</view>
 						<view class="text-gray text-sm flex">
-							<view class="text-cut">来自 系统 的公告<text
-									class="cuIcon-locationfill text-orange margin-right-xs"></text>
-								您于2021-07-17上午9：00有一个会议，地点位于XXX
+							<view class="text-cut">
+								<!-- <text class="cuIcon-locationfill text-orange margin-right-xs"></text> -->
+								您于2021-07-17上午预约的会议，已预约成功。
 							</view>
 						</view>
 					</view>
@@ -107,14 +112,30 @@
 		<view class="cu-modal" :class="modalVisable==true?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
-					<view class="content">详情</view>
+					<view class="content">【会议室预约通知】</view>
 					<view class="action" @tap="modalVisable = false">
 						<text class="cuIcon-close text-red"></text>
 					</view>
 				</view>
-				<view class="padding-xs">日期：2021-07-20</view>
+				<view class="padding-xl">您于2021-07-20上午预约的会议，已预约成功。</view>
+				<!-- <view class="padding-xs">日期：2021-07-20</view>
 				<view class="padding-xs">时间：上午9：00 </view>
-				<view class="padding-xs">地点：XXX</view>
+				<view class="padding-xs">地点：XXX</view> -->
+			</view>
+		</view>
+		
+		<view class="cu-modal" :class="modalVisable1==true?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">【会议室预约通知】</view>
+					<view class="action" @tap="modalVisable1 = false">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">您于2021-07-19上午预约的会议，已被撤销。具体原因：XXX</view>
+				<!-- <view class="padding-xs">日期：2021-07-20</view>
+				<view class="padding-xs">时间：上午9：00 </view>
+				<view class="padding-xs">地点：XXX</view> -->
 			</view>
 		</view>
 		
@@ -128,6 +149,7 @@
 			return {
 				modalName: null,
 				modalVisable: false,
+				modalVisable1: false,
 			};
 		},
 		methods: {

@@ -68,6 +68,7 @@
           :rowNumber="true"
           :rowSelection="true"
           :actionButton="true"
+          @valueChange='valueChangeEditable'
         >
           <template v-slot:materialName="props">
             <a-cascader
@@ -145,11 +146,13 @@ export default {
     // console.log(this.$props.basicInfo)
     // console.log(this.basicInfo)
     console.log(this.basicInfo1)
+    console.log(this.$refs.detailInfoForm)
   },
+
+  watch: {},
 
   data() {
     return {
-
       options: [
         {
           value: '蔬菜类',
@@ -1300,6 +1303,7 @@ export default {
           validateRules: [
             { required: true, message: '${title}不能为空' },
           ],
+          defaultValue: '斤',
           options: [
             { title: '吨', value: '吨' },
             { title: '公斤', value: '公斤' },
@@ -1324,6 +1328,7 @@ export default {
           validateRules: [
             { required: true, message: '${title}不能为空' },
           ],
+          defaultValue: 1,
           statistics: "true",
         },
         {
@@ -1341,6 +1346,18 @@ export default {
     }
   },
   methods:{
+    valueChangeEditable(value) {
+      // console.log(value.row)
+      value.target.setValues([
+        {
+          rowKey: value.row.id,
+          values: {
+            'materialTotalValue': parseFloat(value.row.materialPrice)* parseFloat(value.row.materialNum)
+          }
+        }
+      ])
+      value.target.recalcAllStatisticsColumns()
+    },
     onChangeCascader1(value, props) {
       console.log(value)
       console.log(props)

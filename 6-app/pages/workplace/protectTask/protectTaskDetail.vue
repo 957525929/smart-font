@@ -12,7 +12,8 @@
 				</view>
 			</view>
 		</scroll-view>
-		<component :is="comType" :dataSource="data" :picList="img">
+
+		<component :is="comType" :dataSource="sourceData" :picList="img" :item="item" v-for="item in sourceData" :key="item.devId">
 			<textarea slot="reason" placeholder="请输入" class="bg-grey radius margin"></textarea>
 			<textarea slot="handle" placeholder="请输入" class="bg-grey radius margin"></textarea>
 			<picker mode="time" :value="time" :start="time" @change="TimeChange"
@@ -33,14 +34,16 @@
 
 <script>
 	import list from "@/common/public.js"
-	import data from '@/pages/workplace/common/data.js';
+	import data from '@/pages/workplace/protectTask/js/index.js';
 	import {
-		getNow
+		getNow,
+		handleEnumData
 	} from "@/common/util.js"
 	//vue
 	import DescriptionDetail from "@/components/DescriptionDetail/DescriptionDetail.vue"
 	import FormDetail from "@/components/FormDetail/FormDetail.vue"
-	const NEW_FIXDETAIL = Object.freeze({
+	const self = this
+	const NEW_PRODETAIL = Object.freeze({
 		...list,
 		...data
 	})
@@ -51,7 +54,7 @@
 			this.date = getNow()[0].join("-")
 			this.time = getNow()[1].join(":")
 			//拿数据
-			this.getData('taskAllBasicData', 'fixBasic')
+			this.getData('proAllBasicData', 'proBasic')
 		},
 		components: {
 			DescriptionDetail,
@@ -64,23 +67,23 @@
 		},
 		data() {
 			return {
-				img: NEW_FIXDETAIL.img,
+				img: NEW_PRODETAIL.img,
 				TabCur: 0,
 				taskId: "",
-				data: [],
+				sourceData: [],
 				menuList: [{
 					label: "proAllBasicData",
 					value: "基本信息",
 					dataIndex: "proBasic",
 					comType: "DescriptionDetail"
 				},{
-					label: "proAllBasicData",
-					value: "设备详情",
+					label: "devData",
+					value: "养护设备",
 					dataIndex: "proDev",
-					comType: "DescriptionDetail"
+					comType: "TaskCardItem"
 				},{
-					label: "proAllBasicData",
-					value: "计划详情",
+					label: "proAllPlanData",
+					value: "养护记录",
 					dataIndex: "proPlan",
 					comType: "DescriptionDetail"
 				},  {
@@ -100,16 +103,21 @@
 				this.getData(this.menuList[this.TabCur].label, this.menuList[this.TabCur].dataIndex)
 			},
 			getData(name, dataIndex) {
-				this.data = []
-				if (name !== "fixForm") {
-
-					let tempData = NEW_FIXDETAIL[name].filter(item => item.taskId === this.taskId)[0]
-					this.data = NEW_FIXDETAIL[dataIndex].map(item => {
-						item.value = tempData[item.key]
+				this.sourceData = []
+				if (name !== "proForm") {
+					let tempData = NEW_PRODETAIL[name].filter(item =>{
+						return item.taskId == this.taskId
+					})[0]
+					this.sourceData = NEW_PRODETAIL[dataIndex].filter(i=>!i.hideInDetail).map(item => {
+						if (item.valueEnum&&item.valueEnum.length!==0) {
+						    item.value = handleEnumData(item.valueEnum,tempData[item.key])
+						}else{
+							item.value = tempData[item.key]
+						}
 						return item
 					})
 				} else {
-					this.data = NEW_FIXDETAIL[dataIndex]
+					this.sourceData = NEW_PRODETAIL[dataIndex]
 				}
 			},
 			TimeChange(e) {

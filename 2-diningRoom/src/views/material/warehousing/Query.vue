@@ -114,6 +114,7 @@ import PurInModal from './PurInModal'
 import moment from 'moment'
 import JDate from '../../../components/jeecg/JDate'
 import { message } from 'ant-design-vue'
+import { formatDate } from '../../../utils/util'
 
 export default {
   name: "Query",
@@ -124,7 +125,7 @@ export default {
   data () {
     return {
       form1: this.$form.createForm(this),
-      purchaseStartDate:moment().subtract(1, 'months').format('YYYY-MM-DD'),
+      purchaseStartDate:moment().subtract(1, 'weeks').format('YYYY-MM-DD'),
       purchaseEndDate:moment().format('YYYY-MM-DD'),
       manuSelectData:[
         {
@@ -160,10 +161,10 @@ export default {
       dataSource: [
         {
           id:'1',
-          purchaseOrderNumber: 'GZZT20210704001',
-          headline: '7月4号采购单1',
+          purchaseOrderNumber: 'GZZT'+formatDate(new Date().getTime()-2*24*3600*1000,"yyyyMMd")+'001',
+          headline: formatDate(new Date().getTime()-2*24*3600*1000,"M月d日")+'采购单1',
           purchasePeople: '张三',
-          purchaseDate: '2020-07-04',
+          purchaseDate: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-d"),
           purchaseNum: '100',
           totalMoney: '200.00',
           checkoutPeople: '-',
@@ -173,27 +174,27 @@ export default {
         },
         {
           id:'2',
-          purchaseOrderNumber: 'GZZT20210704002',
-          headline: '7月4号采购单2',
+          purchaseOrderNumber: 'GZZT'+formatDate(new Date().getTime()-2*24*3600*1000,"yyyyMMd")+'002',
+          headline: formatDate(new Date().getTime()-2*24*3600*1000,"M月d日")+'采购单2',
           purchasePeople: '李四',
-          purchaseDate: '2020-07-04',
+          purchaseDate: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-d"),
           purchaseNum: '200',
           totalMoney: '2000.00',
           checkoutPeople: '张三',
-          checkoutDate: '2020-07-04',
+          checkoutDate: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-d"),
           provider : '闽侯菜市场',
           checkState: 1,
         },
         {
           id:'3',
-          purchaseOrderNumber: 'GZZT20210704003',
-          headline: '7月4号采购单3',
+          purchaseOrderNumber: 'GZZT'+formatDate(new Date().getTime()-2*24*3600*1000,"yyyyMMd")+'003',
+          headline: formatDate(new Date().getTime()-2*24*3600*1000,"M月d日")+'采购单3',
           purchasePeople: '李五',
-          purchaseDate: '2020-07-04',
+          purchaseDate: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-d"),
           purchaseNum: '200',
           totalMoney: '2000.00',
           checkoutPeople: '张三',
-          checkoutDate: '2020-07-04',
+          checkoutDate: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-d"),
           provider : '闽侯菜市场',
           checkState: -1,
         },

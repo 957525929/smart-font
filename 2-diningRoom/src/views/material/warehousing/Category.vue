@@ -146,9 +146,9 @@
 <!--              </template>-->
 
               <span slot="action" slot-scope="text, record">
-                 <a @click='edit(record)'>编辑</a>
-                 <a v-if='record.children' style='margin-left: 5%' @click='add()'>添加下级</a>
-                 <a style='margin-left: 5%' @click="deleteRecord(record)">删除</a>
+                <a v-if='record.children'  @click='add()'>添加下级</a>
+                <a v-if='!record.children||!(record.children.length>0&&record.children[0].children)' style='margin-left: 5%' @click='edit(record)' >编辑</a>
+                <a v-if='!record.children||!(record.children.length>0&&record.children[0].children)' style='margin-left: 5%' @click="deleteRecord(record)">删除</a>
                </span>
             </a-table>
           </a-col>
