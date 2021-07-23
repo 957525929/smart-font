@@ -1,66 +1,75 @@
 <template>
   <div class="page-header-index-wide">
+    <a-card :bordered="false">
     <a-row :gutter="24">
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="总收租金额" total="￥226,560">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
+      <div class="salesCard">
+      <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
+        <div class="extra-wrapper" slot="tabBarExtraContent">
+          <a-range-picker :style="{width: '256px'}"
+                          :mode="['month', 'month']"
+                          format="YYYY-MM"
+                          :value="monthvalue"
+                          @panelChange="handlePanelChange1"
+          />
+        </div>
+        <a-tab-pane loading="true"  tab="租赁统计"  key="1" style="color:white">
           <div>
+            <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '10px' }">
+              <chart-card :loading="loading" title="收租金额" total="￥126,560元">
+<!--                <a-tooltip title="指标说明" slot="action">-->
+<!--                  <a-icon type="info-circle-o" />-->
+<!--                </a-tooltip>-->
+              </chart-card>
+            </a-col>
+            <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '10px' }">
+              <chart-card :loading="loading" title="收租次数" :total="'44次'">
+<!--                <a-tooltip title="指标说明" slot="action">-->
+<!--                  <a-icon type="info-circle-o" />-->
+<!--                </a-tooltip>-->
+                <!--          <div>-->
+                <!--            <mini-area />-->
+                <!--          </div>-->
+                <!--          <template slot="footer">本月收租次数<span> {{ '34' | NumberFormat }}</span></template>-->
+              </chart-card>
+            </a-col>
+            <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '10px' }">
+              <chart-card :loading="loading" title="缴租金额" total="￥77,320元">
+<!--                <a-tooltip title="指标说明" slot="action">-->
+<!--                  <a-icon type="info-circle-o" />-->
+<!--                </a-tooltip>-->
+                <div>
+                </div>
+              </chart-card>
+            </a-col>
+            <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '10px' }">
+              <chart-card :loading="loading" title="缴租次数" :total="'36次'">
+<!--                <a-tooltip title="指标说明" slot="action">-->
+<!--                  <a-icon type="info-circle-o" />-->
+<!--                </a-tooltip>-->
+              </chart-card>
+            </a-col>
           </div>
-          <template slot="footer">本月收租金额<span>￥ 1234.56</span></template>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="总收租次数" :total="846 | NumberFormat">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <mini-area />
-          </div>
-          <template slot="footer">本月收租次数<span> {{ '34' | NumberFormat }}</span></template>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="总缴租金额" total="￥137,320">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-          </div>
-          <template slot="footer">本月缴租金额<span>￥ 534.56</span></template>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="总缴租次数" :total="660 | NumberFormat">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <mini-bar :height="40" />
-          </div>
-          <template slot="footer">本月缴租次数 <span>6</span></template>
-        </chart-card>
-      </a-col>
-    </a-row>
+        </a-tab-pane>
 
+      </a-tabs>
+      </div>
+
+    </a-row>
     <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
       <div class="salesCard">
-        <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
-          <div class="extra-wrapper" slot="tabBarExtraContent">
-            <div class="extra-item">
-              <a>今日</a>
-              <a>本周</a>
-              <a>本月</a>
-              <a>本年</a>
-            </div>
-            <a-range-picker :style="{width: '256px'}" />
-          </div>
+        <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px',marginTop:'0'}">
+<!--          <div class="extra-wrapper" slot="tabBarExtraContent">-->
+<!--            <a-range-picker :style="{width: '256px'}"-->
+<!--                            :mode="['month', 'month']"-->
+<!--                            format="YYYY-MM"-->
+<!--                            :value="monthvalue"-->
+<!--                            @panelChange="handlePanelChange1"-->
+<!--            />-->
+<!--          </div>-->
           <a-tab-pane loading="true" tab="出租收入金额" key="1">
             <a-row>
               <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="金额" :dataSource="barData"/>
+                <bar title="金额（万元）" :dataSource="barData"/>
               </a-col>
               <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
                 <rank-list title="收租记录" :list="rankList"/>
@@ -70,7 +79,7 @@
           <a-tab-pane tab="缴租支出金额" key="2">
             <a-row>
               <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="金额" :dataSource="barData"/>
+                <bar title="金额（万元）" :dataSource="barData"/>
               </a-col>
               <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
                 <rank-list title="缴租记录" :list="rankList"/>
@@ -80,16 +89,29 @@
         </a-tabs>
       </div>
     </a-card>
-
+    </a-card>
+      </br>
     <a-row>
       <a-col :span="24">
-        <a-card :loading="loading" :bordered="false" title="资产流转次数" :style="{ marginTop: '24px' }">
-<!--          <a-row>-->
-<!--            <a-col :span="6">-->
-<!--              <head-info title="今日IP" :content="loginfo.todayIp"></head-info>-->
-<!--            </a-col>-->
-<!--          </a-row>-->
-          <line-chart-multid :fields="visitFields" :dataSource="visitInfo"></line-chart-multid>
+        <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
+          <div class="salesCard">
+            <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
+              <div class="extra-wrapper" slot="tabBarExtraContent">
+                <a-range-picker :style="{width: '256px'}"
+                                :mode="['month', 'month']"
+                                format="YYYY-MM"
+                                :value="monthvalue1"
+                                @panelChange="handlePanelChange2"
+                />
+              </div>
+              <a-tab-pane loading="true" tab="资产流转次数统计" key="1">
+                <a-card :loading="loading" :bordered="false">
+                  <line-chart-multid :fields="visitFields" :dataSource="visitInfo" ></line-chart-multid>
+                </a-card>
+              </a-tab-pane>
+
+            </a-tabs>
+          </div>
         </a-card>
       </a-col>
     </a-row>
@@ -109,22 +131,14 @@
   import HeadInfo from '@/components/tools/HeadInfo.vue'
 
   import Trend from '@/components/Trend'
-  import { getLoginfo,getVisitInfo } from '@/api/api'
-
-  // const rankList = []
-  // for (let i = 0; i < 7; i++) {
-  //   rankList.push({
-  //     name: '方正有限公司 ' + ' 房屋与建筑物合同'+ (i+1),
-  //     total: 1234 - i * 100
+  import moment from "moment";
+  const barData = []
+  // for (let i = 0; i < 12; i += 1) {
+  //   barData.push({
+  //     x: `${i + 1}月`,
+  //     y: Math.floor(Math.random() * 10000) + 200
   //   })
   // }
-  const barData = []
-  for (let i = 0; i < 12; i += 1) {
-    barData.push({
-      x: `${i + 1}月`,
-      y: Math.floor(Math.random() * 10000) + 200
-    })
-  }
   export default {
     name: "IndexChart",
     components: {
@@ -152,19 +166,65 @@
           {"name":"2018-07-05 方正有限公司房屋与建筑物合同","total":50000},
           {"name":"2018-07-05 福州烟草加工厂房屋与建筑物合同","total":34000},
         ],
-        barData,
+        barData:[
+          {"x":"方正有限公司","y":2,},
+          {"x":"卷烟厂","y":8,},
+          {"x":"福州朝阳贸易有限公司","y":9,},
+          {"x":"福州烟草加工厂","y":5,},
+          {"x":"福州康和有限公司","y":12,},
+          {"x":"福州国贸有限公司","y":8,},
+          {"x":"云南烟草集团","y":9,},
+          {"x":"一汽大众","y":5,},
+          {"x":"云烟代理有限公司","y":5,},
+        ],
         loginfo:{},
-        visitFields:['次数'],
+        visitFields:['房屋和建筑物','一般办公设备','专用设备','运输设备','其他资产'],
         visitInfo:
           [
-          {"月":"2016","次数":8,"type":"2016"},
-          {"月":"2017","次数":6,"type":"2017"},
-          {"月":"2018","次数":3,"type":"2018"},
-          {"月":"2019","次数":7,"type":"2019"},
-          {"月":"2020","次数":4,"type":"2020"},
-          {"月":"2021","次数":6,"type":"2021"}
+            {
+              "月":"2021-01",
+              "房屋和建筑物":1,"一般办公设备":3,"专用设备":4,"运输设备":5,"其他资产":6,
+              "type":"2021-01"
+            },
+            {
+              "月":"2021-02",
+              "房屋和建筑物":2,"一般办公设备":5,"专用设备":1,"运输设备":2,"其他资产":3,
+              "type":"2021-02"
+            },
+            {
+              "月":"2021-03",
+              "房屋和建筑物":3,"一般办公设备":6,"专用设备":1,"运输设备":2,"其他资产":1,
+              "type":"2021-03"
+            },
+            {
+              "月":"2021-04",
+              "房屋和建筑物":4,"一般办公设备":5,"专用设备":1,"运输设备":2,"其他资产":3,
+              "type":"2021-04"
+            },
+            {
+              "月":"2021-05",
+              "房屋和建筑物":3,"一般办公设备":5,"专用设备":4,"运输设备":5,"其他资产":6,
+              "type":"2021-05"
+            },
+            {
+              "月":"2021-06",
+              "房屋和建筑物":6,"一般办公设备":5,"专用设备":1,"运输设备":2,"其他资产":3,
+              "type":"2021-06"
+            },
+            {
+              "月":"2021-07",
+              "房屋和建筑物":3,"一般办公设备":7,"专用设备":1,"运输设备":2,"其他资产":1,
+              "type":"2021-07"
+            },
+            {
+              "月":"2021-08",
+              "房屋和建筑物":9,"一般办公设备":5,"专用设备":1,"运输设备":2,"其他资产":3,
+              "type":"2021-08"
+            },
         ],
-        indicator: <a-icon type="loading" style="font-size: 24px" spin />
+
+        monthvalue: [moment('2021-06','YYYY-MM'), moment('2021-08','YYYY-MM')],
+        monthvalue1: [moment('2021-01','YYYY-MM'), moment('2021-08','YYYY-MM')],
       }
     },
     created() {
@@ -173,22 +233,14 @@
       }, 1000)
     },
     methods: {
-      // initLogInfo () {
-      //   getLoginfo(null).then((res)=>{
-      //     if(res.success){
-      //       Object.keys(res.result).forEach(key=>{
-      //         res.result[key] =res.result[key]+""
-      //       })
-      //       this.loginfo = res.result;
-      //     }
-      //   })
-      //   getVisitInfo().then(res=>{
-      //     if(res.success){
-      //        console.log("aaaaaa",res.result)
-      //        this.visitInfo = res.result;
-      //      }
-      //    })
-      // },
+     //日期选择
+      moment,
+      handlePanelChange1(value, mode) {
+        this.monthvalue = value;
+      },
+      handlePanelChange2(value, mode) {
+        this.monthvalue1 = value;
+      },
     }
   }
 </script>

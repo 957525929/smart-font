@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ padding: '0 0 32px 32px' }">
+  <div :style="{ padding: '0 0 0px 0px' }">
     <h4 :style="{ marginBottom: '20px' }">{{ title }}</h4>
     <v-chart :forceFit="true" :height="height" :data="dataSource" :scale="scale" :padding="padding">
       <v-tooltip/>
@@ -29,11 +29,11 @@
       },
       height: {
         type: Number,
-        default: 254
+        default: 270
       }
     },
     data() {
-      return { padding: ['auto', 'auto', '40', '50'] }
+      return { padding: ['auto', 'auto', 'auto', 'auto'] }
     },
     computed: {
       scale() {
