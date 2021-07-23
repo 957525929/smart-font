@@ -4,6 +4,16 @@
     <!-- 搜索操作区域 -->
     <div class="table-page-search-wrapper">
       <a-row type="flex" align="middle">
+               <a-col>
+          <span>状态：</span>
+        </a-col>
+        <a-col>
+         <a-select placeholder="请选择会议室状态"  style="width: 200px">
+            <a-select-option value="空闲">空闲</a-select-option>
+            <a-select-option value="已预约">已预约</a-select-option>
+          </a-select>
+        </a-col>
+        <a-col :span="1"></a-col>
         <a-col>
           <span>位置：</span>
         </a-col>
@@ -27,13 +37,13 @@
           <a-input placeholder="请输入房间号" v-model="queryParam.room"></a-input>
         </a-col>
         <a-col :span="1"></a-col>
-        <a-col>
+        <!-- <a-col>
           <span>管理员：</span>
         </a-col>
         <a-col>
           <a-input placeholder="请输入管理员姓名" v-model="queryParam.dutyName"></a-input>
         </a-col>
-        <a-col :span="1"></a-col>
+        <a-col :span="1"></a-col> -->
         <a-col>
           <a-button
             :style="{ background: '#49a9ee', color: 'white'}"
@@ -128,6 +138,20 @@
       return parseInt(index) + 1}}></a-table-column>
         <a-table-column title="位置" data-index="area" align="center" ></a-table-column>         
         <a-table-column title="房间号" data-index="room" align="center" ></a-table-column>
+          <a-table-column title="状态" data-index="state" align="center" >
+            <template slot-scope="state">              
+              <span v-if="state=='空闲'">
+                  <a-tag color="green">
+                  空闲
+              </a-tag>
+              </span>
+              <span v-else>
+                 <a-tag color="red">
+                  已预约
+                </a-tag>
+              </span>
+            </template>
+         </a-table-column>
         <a-table-column title="容纳人数" data-index="number" align="center" ></a-table-column>
         <a-table-column title="基本条件" data-index="condition" align="center">
           <!-- <template slot-scope="condition">
@@ -177,12 +201,6 @@
         :wrapper-col="wrapperCol"
       >
       <a-form-model-item ref="area" label="位置" prop="area" placeholder="请选择位置">
-           <!-- <a-select v-model="formModify.area"  showSearch>
-            <a-select-option value="中国烟草总公司福建省公司机关.A区域.1号楼">中国烟草总公司福建省公司机关.A区域.1号楼</a-select-option>
-            <a-select-option value="中国烟草总公司福建省公司机关.A区域.2号楼">中国烟草总公司福建省公司机关.A区域.2号楼</a-select-option>
-            <a-select-option value="中国烟草总公司福建省公司机关.B区域.1号楼">中国烟草总公司福建省公司机关.B区域.1号楼</a-select-option>
-            <a-select-option value="中国烟草总公司福建省公司机关.B区域.2号楼">中国烟草总公司福建省公司机关.B区域.2号楼</a-select-option>
-            </a-select> -->
       <a-cascader
       style="width: 350px"
       :options="selectOptions"
@@ -200,12 +218,6 @@
           <a-input v-model="formAdd.number" placeholder="请输入房间容纳人数"></a-input>
         </a-form-model-item>
         <a-form-model-item label="基本条件" ref="condition" prop="condition">
-          <!-- <a-select v-model="formAdd.condition" placeholder="请选择条件">
-            <a-select-option value="0">0：饮料、多媒体</a-select-option>
-            <a-select-option value="1">1：饮料、风扇、多媒体</a-select-option>
-            <a-select-option value="2">2：饮料、风扇、空调、多媒体</a-select-option>
-            <a-select-option value="3">3：饮料、风扇、景观、多媒体</a-select-option>
-          </a-select> -->
        <a-checkbox-group @change="onChangeCon" v-model="formAdd.condition">
         <a-row>
           <a-col :span="8">
@@ -273,6 +285,16 @@
         </a-form-model-item>
         <a-form-model-item label="房间号" prop="room">
           <a-input v-model="formModify.room" disabled></a-input>
+        </a-form-model-item>
+           <a-form-model-item label="状态">
+           <a-radio-group v-model="formModify.state" >
+      <a-radio value="空闲">
+        空闲
+      </a-radio>
+      <a-radio value="已预约">
+        已预约
+      </a-radio>
+    </a-radio-group>
         </a-form-model-item>
          <a-form-model-item label="容纳人数" prop="number">
           <a-input v-model="formModify.number" ></a-input>
@@ -413,6 +435,7 @@ const dataRoom = [
     dutyName: "李霞",
     dutyTel: "13759655332",
     room: "会议室203",
+     state:"空闲",
     condition:"茶水，投影仪，白板，摄像机"
   },
   {
@@ -422,6 +445,7 @@ const dataRoom = [
     dutyName: "王莉莉",
     dutyTel: "13759655348",
     room: "会议室204",
+     state:"空闲",
     condition: "茶水，空调，投影仪，白板"
   },
   {
@@ -431,6 +455,7 @@ const dataRoom = [
     dutyName: "尤晓梅",
     dutyTel: "13053955537",
     room: "会议室205",
+     state:"已预约",
     condition: "茶水，投影仪，电脑"
   },
   {
@@ -440,6 +465,7 @@ const dataRoom = [
     dutyName: "黄丽娟",
     dutyTel: "13659655381",
     room: "会议室206",
+     state:"空闲",
     condition: "茶水，空调，投影仪，电脑，白板"
   }
 ];
@@ -525,6 +551,7 @@ export default {
       dutyName: '',
       dutyTel: '',
       condition: [],  
+      state: '',
       },      
       rules: {
         condition:[
@@ -646,6 +673,7 @@ export default {
       this.formModify.dutyName = record.dutyName
        this.formModify.condition=record.condition.split('，')
       this.formModify.dutyTel = record.dutyTel
+        this.formModify.state=record.state
       //this.formModify.condition = record.condition
     },
         ModifyDutyName(value){
