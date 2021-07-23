@@ -23,7 +23,7 @@
       </a-col>
       <a-col :xl="4" :lg="8" :md="9" :sm="24">
         <div class="detail-top">
-          <div>总金额：</div>
+          <div>总金额(元)：</div>
           <div>{{ detailsData.totalMoney }}</div>
         </div>
       </a-col>
@@ -125,7 +125,7 @@ export default {
           dataIndex: 'materialUnits'
         },
         {
-          title:'采购单价',
+          title:'采购单价(元)',
           align:"center",
           dataIndex: 'materialPrice'
         },

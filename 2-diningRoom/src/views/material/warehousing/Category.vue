@@ -72,31 +72,28 @@
     <a-card :bordered="false">
       <div>
         <a-row>
-          <a-col :span='4'>
-<!--            <a-button >添加分类</a-button>-->
-<!--            <a-button style='margin-left: 10%'>删除分类</a-button>-->
-            <a-input-search style="margin-bottom: 8px; margin-top: 8px; width: 70%" placeholder="Search" @change="onChange" />
-            <a-tree
+<!--          <a-col :span='4'>-->
+<!--            <a-input-search style="margin-bottom: 8px; margin-top: 8px; width: 70%" placeholder="Search" @change="onChange" />-->
+<!--            <a-tree-->
 
-              :show-line="true"
-              :expanded-keys="expandedKeys"
-              :auto-expand-parent="autoExpandParent"
-              :tree-data="gData"
-              @expand="onExpand"
-              @select="onSelect"
-            >
-              <template slot="title" slot-scope="{ title }">
-        <span v-if="title.indexOf(searchValue) > -1">
-          {{ title.substr(0, title.indexOf(searchValue)) }}
-          <span style="color: #f50">{{ searchValue }}</span>
-          {{ title.substr(title.indexOf(searchValue) + searchValue.length) }}
-        </span>
-                <span v-else>{{ title }}</span>
-              </template>
-            </a-tree>
-          </a-col>
-          <a-col :span='20'>
-<!--            <div class="table-operator"><a-button type="primary" icon="plus">新增</a-button></div>-->
+<!--              :show-line="true"-->
+<!--              :expanded-keys="expandedKeys"-->
+<!--              :auto-expand-parent="autoExpandParent"-->
+<!--              :tree-data="gData"-->
+<!--              @expand="onExpand"-->
+<!--              @select="onSelect"-->
+<!--            >-->
+<!--              <template slot="title" slot-scope="{ title }">-->
+<!--                <span v-if="title.indexOf(searchValue) > -1">-->
+<!--                  {{ title.substr(0, title.indexOf(searchValue)) }}-->
+<!--                  <span style="color: #f50">{{ searchValue }}</span>-->
+<!--                  {{ title.substr(title.indexOf(searchValue) + searchValue.length) }}-->
+<!--                </span>-->
+<!--                <span v-else>{{ title }}</span>-->
+<!--              </template>-->
+<!--            </a-tree>-->
+<!--          </a-col>-->
+          <a-col :span='24'>
             <a-table
               :dataSource="dataSource1"
               :columns="columns1"

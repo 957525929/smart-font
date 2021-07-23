@@ -232,7 +232,7 @@ export default {
           dataIndex: 'purchaseNum'
         },
         {
-          title:'总金额',
+          title:'总金额(元)',
           align:"center",
           dataIndex: 'totalMoney'
         },
