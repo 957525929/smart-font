@@ -58,7 +58,13 @@
 					<button class="cu-btn bg-green shadow" @tap="showModal" data-target="ChooseModal">选择</button>
 				</view>
 			</view>
-	
+			<view class="bg-white margin-top" style="margin-top: 0;">
+				<view style="margin-left: 3%;">
+					<view v-for="item in checkbox" v-if="item.checked" class="cu-tag round bg-blue light">{{item.name}}</view>
+				</view>
+			</view>
+			
+			
 			<view class="cu-modal bottom-modal" :class="modalName=='ChooseModal'?'show':''" @tap="hideModal">
 				<view class="cu-dialog" @tap.stop="">
 					<view class="cu-bar bg-white">
