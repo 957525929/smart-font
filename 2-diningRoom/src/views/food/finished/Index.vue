@@ -38,7 +38,7 @@
                 </a-form-item>
               </a-col>
               <a-col :xl="8" :lg="8" :md="9" :sm="24">
-                <a-form-item label="开始时间">
+                <a-form-item label="留样时间">
                   <j-date  v-decorator="['startDate', {initialValue:this.startDate}]" style='width: 47%;'/>
                   <span class="query-group-split-cust"></span>
                   <j-date  v-decorator="['endDate', {initialValue:this.endDate}]" style='width: 47%;' />
@@ -141,6 +141,7 @@
 
 import JDate from '../../../components/jeecg/JDate'
 import moment from 'moment'
+import { formatDate } from '../../../utils/util'
 export default {
   name: "Index",
   components: {
@@ -149,17 +150,17 @@ export default {
   data () {
     return {
       form1: this.$form.createForm(this),
-      startDate:moment().subtract(1, 'months').format('YYYY-MM-DD'),
+      startDate:moment().subtract(1, 'weeks').format('YYYY-MM-DD'),
       endDate:moment().format('YYYY-MM-DD'),
       description: '采购入库',
       dataSource: [
         {
           id:'1',
-          purchaseOrderNumber: 'FZZT20210706',
+          purchaseOrderNumber: 'FZZT'+formatDate(new Date().getTime()-2*24*3600*1000,"yyyyMMd"),
           headline: '小鸡炖蘑菇',
           purchasePeople: '早餐',
           number:1,
-          purchaseDate: '2021-07-06 08:00:00',
+          purchaseDate: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-d")+' 08:00:00',
           purchaseNum: '邝木木',
           totalMoney: '100',
           checkoutPeople: '需留样48小时',
