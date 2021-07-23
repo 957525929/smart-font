@@ -5,7 +5,7 @@
 		</cu-custom>
 		<view class="cu-form-group">
 			<text >选择时间</text> 
-			<picker mode="date" :value="date" start="2010" end="2030"  fields='year' @change="DateChange">
+			<picker mode="date" :value="date" start="2010-01" end="2030-01"  fields='month' @change="DateChange">
 				<view class="picker">
 					{{date}}
 				</view>
@@ -67,7 +67,7 @@
 		data() {
 			return {
 				indexDate:0,
-				date: "2021",
+				date: "2021-06",
 			};
 		},
 		methods:{
