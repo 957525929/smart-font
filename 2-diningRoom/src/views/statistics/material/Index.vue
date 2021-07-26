@@ -3,20 +3,20 @@
     <a-row :gutter='24'>
       <a-col :xl="6" :lg="12" :md="12" :sm="24" :xs="24">
         <a-row>
-          <h1 style='font-weight: bold;'>请选择</h1>
+          <h1 style='font-weight: bold; text-align: center;'>请选择</h1>
         </a-row>
-        <a-row style='margin-bottom: 10px;'>
+        <a-row style='margin-bottom: 10px; margin-top: 10px; text-align: center;'>
           <a-radio-group v-model="time" >
             <a-radio-button value="week">本周</a-radio-button>
             <a-radio-button value="month">本月</a-radio-button>
             <a-radio-button value="year">本年</a-radio-button>
           </a-radio-group>
         </a-row>
-        <a-row>
-          <j-date v-model='startTime' @change='changeStartTime'/>
-          <span class="query-group-split-cust"/>
-          <j-date v-model='endTime'/>
-        </a-row>
+<!--        <a-row>-->
+<!--          <j-date v-model='startTime' @change='changeStartTime'/>-->
+<!--          <span class="query-group-split-cust"/>-->
+<!--          <j-date v-model='endTime'/>-->
+<!--        </a-row>-->
       </a-col>
       <a-col :xl="6" :lg="12" :md="12" :sm="24" :xs="24">
         <div style='border:1px solid #c7b2b2'><a-statistic title="采购总次数" :value="118" style="margin:20px 50px"/></div>

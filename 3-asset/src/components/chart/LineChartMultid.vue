@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ padding: '0 0 32px 32px' }">
+  <div :style="{ padding: '0 0 0px 0px' }">
     <h4 :style="{ marginBottom: '20px' }">{{ title }}</h4>
     <v-chart :force-fit="true" :height="height" :data="data" :scale="scale" :onClick="handleClick">
       <v-tooltip/>

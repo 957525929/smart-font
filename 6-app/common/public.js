@@ -42,61 +42,61 @@ const taskList = {
 		footerRight: "2021-06-22 17:55:55"
 	}]
 }
-const img = ["/static/logo.png","/static/tabbar/plugin.png"]
+const img = ["/static/logo.png", "/static/tabbar/plugin.png"]
 const taskAllBasicData = [{
-		taskType: 0,
-		taskId: 0,
-		taskState: 0,
-		devType:0,
-		address: "烟草大厦18楼",
-		description: "18楼停电，请尽快修复",
-		complaintTime: "2021-06-22 17:55:55",
-		devType:2,
-		owner:"乔峰",
-		ownerPhone:"18259529231",
-		img:["/static/logo.png","/static/tabbar/plugin.png"]
-	}, {
-		taskType: 0,
-		taskId: 1,
-		taskState: 1,
-		address: "烟草大厦6楼",
-		description: "空调调控温度无反应",
-		complaintTime: "2021-06-22 10:55:55",
-		owner:"乔峰",
-		ownerPhone:"18259529231",
-		devType:3,
-		img:["/static/logo.png"]
-	}, {
-		taskType: 0,
-		taskId: 2,
-		taskState: 2,
-		address: "烟草大厦18楼",
-		description: "18楼频繁断电停电",
-		complaintTime: "2021-06-20 17:55:55",
-		owner:"乔峰",
-		ownerPhone:"18259529231",
-		devType:2,
-	}, {
-		taskType: 0,
-		taskId: 0,
-		taskState: 3,
-		address: "烟草大厦3楼卫生间",
-		description: "卫生间停水",
-		complaintTime: "2021-06-22 17:55:55",
-		owner:"乔峰",
-		ownerPhone:"18259529231",
-		devType:1,
-	},{
-		taskType: 0,
-		taskId: 0,
-		taskState: 4,
-		address: "烟草大厦18楼",
-		description: "18楼停电",
-		complaintTime: "2021-06-22 17:55:55",
-		owner:"乔峰",
-		ownerPhone:"18259529231",
-		devType:2,
-	}]
+	taskType: 0,
+	taskId: 0,
+	taskState: 0,
+	devType: 0,
+	address: "烟草大厦18楼",
+	description: "18楼停电，请尽快修复",
+	complaintTime: "2021-06-22 17:55:55",
+	devType: 2,
+	owner: "乔峰",
+	ownerPhone: "18259529231",
+	img: ["/static/logo.png", "/static/tabbar/plugin.png"]
+}, {
+	taskType: 0,
+	taskId: 1,
+	taskState: 1,
+	address: "烟草大厦6楼",
+	description: "空调调控温度无反应",
+	complaintTime: "2021-06-22 10:55:55",
+	owner: "乔峰",
+	ownerPhone: "18259529231",
+	devType: 3,
+	img: ["/static/logo.png"]
+}, {
+	taskType: 0,
+	taskId: 2,
+	taskState: 2,
+	address: "烟草大厦18楼",
+	description: "18楼频繁断电停电",
+	complaintTime: "2021-06-20 17:55:55",
+	owner: "乔峰",
+	ownerPhone: "18259529231",
+	devType: 2,
+}, {
+	taskType: 0,
+	taskId: 0,
+	taskState: 3,
+	address: "烟草大厦3楼卫生间",
+	description: "卫生间停水",
+	complaintTime: "2021-06-22 17:55:55",
+	owner: "乔峰",
+	ownerPhone: "18259529231",
+	devType: 1,
+}, {
+	taskType: 0,
+	taskId: 0,
+	taskState: 4,
+	address: "烟草大厦18楼",
+	description: "18楼停电",
+	complaintTime: "2021-06-22 17:55:55",
+	owner: "乔峰",
+	ownerPhone: "18259529231",
+	devType: 2,
+}]
 
 const proTaskList = {
 	0: [{
@@ -133,41 +133,129 @@ const proTaskList = {
 		footerRight: '2021-06-19 14:25:35'
 	}]
 }
-
+//详情数据
 const proAllBasicData = [{
-		taskType: 1,
 		key: 0,
-		taskId: 1,
-		taskState:0,
-		devType: "烟草大厦18楼频繁断电",
-		taskType: "一级保养",
-		type: 0,
-		titleLeft: '烟草大厦',
-		titleRight: "查看",
-		footerRight: '2021-06-23 14:25:35'
-	},{
-		taskType: 1,
+		taskId: '1',
+		taskName: "1号楼月度巡养计划",
+		taskType: 0,
+		taskStatus: 0,
+		taskPeriod: 2,
+		dispatchTime: '2021-06-22 18：55：55',
+		areaKey: '1-1-1',
+		address: "中国烟草总公司福建省公司机关-A区域-1号楼",
+		proStaff: '刘涛',
+		phone: '18232145698',
+		admin: "管理员",
+		adminPhone: "2321475",
+		expectTime: '2021-07-31 00：00：00',
+		description: "例行养护"
+	},
+	{
 		key: 1,
-		taskId: 2,
-		taskState:1,
-		content: "空调漏水",
-		taskType: "设备点检",
-		type: 1,
-		titleLeft: '烟草大厦',
-		titleRight: "查看",
-		footerRight: '2021-06-24 14:25:12'
-	},{
+		taskId: '2',
+		taskName: "空调维修检查",
 		taskType: 1,
+		taskStatus: 1,
+		taskPeriod: 0,
+		dispatchTime: '2021-07-21 10:55:11',
+		areaKey: '1-2-3',
+		address: "中国烟草总公司福建省公司机关-B区域-3号楼",
+		proStaff: '张英',
+		phone: '13332145698',
+		admin: "管理员",
+		adminPhone: "2321475",
+		expectTime: '2021-07-31 00：00：00',
+		description: "维养检查"
+	},
+	{
 		key: 2,
-		taskId: 2,
-		taskState:2,
-		content: "电路老化检查",
-		taskType: "设备巡检",
-		type: 2,
-		titleLeft: '烟草大厦',
-		titleRight: "查看",
-		footerRight: '2021-06-19 14:25:35'
-	}]
+		taskId: '3',
+		taskName: "电路老化检查",
+		taskType: 4,
+		taskStatus: 2,
+		taskPeriod: 1,
+		dispatchTime: '2021-06-19 10:55:55',
+		areaKey: '1-2-2',
+		address: "中国烟草总公司福建省公司机关-B区域-2号楼",
+		proStaff: '刘涛',
+		phone: '18232145698',
+		admin: "管理员",
+		adminPhone: "2321475",
+		expectTime: '2021-07-31 00：00：00',
+		description: "电路老化检查"
+	}
+]
+
+//=============================================device=============
+const devData = [{
+		key: 0,
+		devId: 1001,
+		devName: "给水设备_1001",
+		devType: 2,
+		devStatus: 4,
+		loginTime: '2021-06-22 17:55:55',
+		manufacturer: "日丰企业集团有限公司",
+		batch: "M127894",
+	},
+	{
+		key: 1,
+		devId: 2001,
+		devName: "供电设备_2001",
+		devType: 1,
+		devStatus: 5,
+		loginTime: '2021-06-21 10:55:55',
+		manufacturer: "国网福建省电力有限公司",
+		batch: "N2169"
+	},
+	{
+		key: 2,
+		devId: 3001,
+		devName: "空调_3001",
+		devType: 0,
+		devStatus: 7,
+		loginTime: '2021-06-19 08:55:55',
+		manufacturer: "珠海格力电器股份有限公司",
+		batch: "A2421"
+	}, {
+		key: 3,
+		devId: 4001,
+		devName: "给水管网_4001",
+		devType: "给排水系统 - 给排水系统",
+		devStatus: 6,
+		loginTime: '2021-06-12 17:55:55',
+		manufacturer: "日丰企业集团有限公司",
+		batch: "M127894"
+	},
+	{
+		key: 4,
+		devId: 5001,
+		devName: "供电线路_5001",
+		devType: "电器系统 - 供电设备",
+		devStatus: 8,
+		loginTime: '2021-06-11 10:55:55',
+		manufacturer: "国网福建省电力有限公司",
+		batch: "N2169"
+	},
+	{
+		key: 5,
+		devId: 6001,
+		devName: "冷水机组_6001",
+		devType: "空调、通风系统 - 空调设备",
+		devStatus: 4,
+		loginTime: '2021-06-11 08:55:55',
+		manufacturer: "珠海格力电器股份有限公司",
+		batch: "A2421"
+	}
+].map(item => {
+	return {
+		taskId: 0,
+		titleLeft: item.devName,
+		titleRight: item.devId,
+		content: item.devType,
+		footerRight: item.manufacturer
+	}
+})
 
 const devTypeTree = [{
 		children: [{
@@ -421,6 +509,49 @@ const devTypeTree = [{
 	},
 ]
 
+const proAllDevData = []
+const proAllPlanData = [{
+	taskId: 2,
+	recordId: 4,
+	ifRun: 0,
+	ifnormal: 0,
+	proDesc: "一切正常",
+	proimgs: ["/assets/logo.png"],
+	proTime: "2021-07-22 10:55:11",
+}, {
+	taskId: 3,
+	recordId: 0,
+	ifRun: 0,
+	ifnormal: 0,
+	proDesc: "一切正常",
+	proimgs: ["/assets/logo.png"],
+	proTime: "2021-06-24 10:55:11",
+}, {
+	taskId: 3,
+	recordId: 1,
+	ifRun: 0,
+	ifnormal: 0,
+	proDesc: "一切正常",
+	proimgs: ["/assets/logo.png"],
+	proTime: "2021-07-01 10:55:11",
+}, {
+	taskId: 3,
+	recordId: 2,
+	ifRun: 1,
+	ifnormal: 1,
+	proDesc: "-",
+	proimgs: [],
+	proTime: "-",
+
+}, {
+	taskId: 3,
+	recordId: 3,
+	ifRun: 0,
+	ifnormal: 0,
+	proDesc: "一切正常",
+	proimgs: ["/assets/logo.png"],
+	proTime: "2021-07-19 10:55:11",
+}]
 const groupTree = [{
 	children: [{
 		children: [{
@@ -462,9 +593,100 @@ const groupTree = [{
 	title: '中国烟草总公司福建省公司机关',
 	value: 'water',
 }]
+/*保养任务类型proTaskType*/
+const proTaskType = {
+	0: {
+		tableValue: '设备巡检',
+		searchValue: '巡检',
+		code: 0
+	},
+	1: {
+		tableValue: '设备点检',
+		searchValue: '点检',
+		code: 1
+	},
+	2: {
+		tableValue: '维修中保养',
+		searchValue: '维修中保养',
+		code: 2
+	},
+	3: {
+		tableValue: '日常维护',
+		searchValue: '日常维护',
+		code: 3
+	},
+	4: {
+		tableValue: '一级保养',
+		searchValue: '一级保养',
+		code: 4
+	},
+	5: {
+		tableValue: '二级保养',
+		searchValue: '二级保养',
+		code: 5
+	},
+}
+/*保养任务状态protaskStatus*/
+const protaskStatus = {
+	0: {
+		tableValue: '待保养',
+		searchValue: '待保养',
+		code: 0
+	},
+	1: {
+		tableValue: '待核查',
+		searchValue: '待核查',
+		code: 1
+	},
+	2: {
+		tableValue: '已完成',
+		searchValue: '已完成',
+		code: 2
+	}
+}
+/*养护周期 proPeriod*/
+const proPeriod = {
+	0: {
+		tableValue: '每日',
+		searchValue: '每日',
+		code: 0
+	},
+	1: {
+		tableValue: '每周',
+		searchValue: '每周',
+		code: 1
+	},
+	2: {
+		tableValue: '每月',
+		searchValue: '每月',
+		code: 2
+	},
+	3: {
+		tableValue: '每季度',
+		searchValue: '每季度',
+		code: 3
+	},
+	4: {
+		tableValue: '每年',
+		searchValue: '每年',
+		code: 4
+	},
+	5: {
+		tableValue: '自定义',
+		searchValue: '自定义',
+		code: 5
+	},
+}
 module.exports = {
 	taskList,
 	proTaskList,
 	taskAllBasicData,
-	img
+	proAllBasicData,
+	proAllDevData,
+	proAllPlanData,
+	img,
+	devData,
+	protaskStatus,
+	proTaskType,
+	proPeriod
 }

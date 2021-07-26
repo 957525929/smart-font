@@ -48,9 +48,11 @@
 					<text  style="margin-left: 30px;">电话：{{details[index].phone}}</text>
 				</div>
 			</view>
-			<view class="cu-form-group margin-top">
+	
+			<view class="cu-form-group align-start">
 				<view class="title">备注</view>
-				<input placeholder="两间双人间,入住人:刘嘉林,李查,林夕,郑华" name="input"></input>
+				<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaBInput" placeholder="两间双人间
+入住人:刘嘉林,李查,林夕,郑华"  name="input"></textarea>
 			</view>
 			<view class="box">
 				<view class="cu-bar btn-group">

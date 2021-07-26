@@ -28,12 +28,16 @@
                         allowClear
                         placeholder="请选择合同名称"
                         v-decorator="['contractName', { rules: [{ required: true}] }]"
+                        @change="nameChange"
                       >
                         <a-select-option v-for="d in contractNameSelectData" :key="d.value">
                           {{ d.text }}
                         </a-select-option>
                       </a-select>
                     </a-form-item>
+                  </a-col>
+                  <a-col :span="2">
+                    <div style="margin-top:45px;color:#2eabff">下载电子合同</div>
                   </a-col>
                 </a-row>
                 <a-row :gutter="16">
@@ -44,7 +48,9 @@
                   </a-col>
                   <a-col :span="7">
                     <a-form-item label="收租金额">
-                      <a-input v-decorator="['lentValue', { rules: [{ required: true, message: '请输入!' }] }]"></a-input>
+                      <a-input
+
+                               v-decorator="['lentValue', { rules: [{ required: true, message: '请输入!' }] }]"></a-input>
                     </a-form-item>
                   </a-col>
                 </a-row>
@@ -127,12 +133,16 @@
                         allowClear
                         placeholder="请选择合同名称"
                         v-decorator="['contractNamepay', { rules: [{ required: true}] }]"
+                        @change="nameChangepay"
                       >
                         <a-select-option v-for="d in contractNameSelectDatapay" :key="d.value">
                           {{ d.text }}
                         </a-select-option>
                       </a-select>
                     </a-form-item>
+                  </a-col>
+                  <a-col :span="2">
+                    <div style="margin-top:45px;color:#2eabff">下载电子合同</div>
                   </a-col>
                 </a-row>
                 <a-row :gutter="16">
@@ -222,21 +232,19 @@ export default {
     return {
       form1: this.$form.createForm(this),
       form2: this.$form.createForm(this),
+
       startDate:moment().format('YYYY-MM-DD'),
       //合同名称
       contractNameSelectData:[
         {
           value : 1,
-          text : '烟草公司房屋和建筑物合同',
-        },
-        {
-          value : 2,
           text : '方正有限公司房屋和建筑物合同',
         },
         {
-          value : 3,
+          value : 2,
           text : '卷烟厂房屋和建筑物合同',
         },
+
       ],
       //承租合同
       contractNameSelectDatapay:[
@@ -248,10 +256,7 @@ export default {
           value : 2,
           text : '福州烟草加工厂房屋和建筑物合同',
         },
-        {
-          value : 3,
-          text : '福州卷烟厂房屋和建筑物合同',
-        },
+
       ],
       //承办人
       workerSelectData:[
@@ -261,7 +266,7 @@ export default {
         },
         {
           value : 2,
-          text : '王一',
+          text : '王立',
         },
         {
           value : 3,
@@ -383,7 +388,45 @@ export default {
         this.$message.error(`${info.file.name} file upload failed.`);
       }
     },
-
+    //合同名称修改
+    nameChange(info) {
+      if(info==1)
+      {
+        this.form1.setFieldsValue({
+          lentValue: 100000,
+          worker:'王立',
+        })
+      }
+      else if(info==2)
+        this.form1.setFieldsValue({
+          lentValue: 1000,
+          worker:'王立'
+        })
+      // else if(info==3)
+      //   this.form1.setFieldsValue({
+      //     lentValue: 3000,
+      //     worker:'王立'
+      //   })
+    },
+    nameChangepay(info) {
+      if(info==1)
+      {
+        this.form2.setFieldsValue({
+          lentValue: 300000,
+          worker:'王立',
+        })
+      }
+      else if(info==2)
+        this.form2.setFieldsValue({
+          lentValue: 10000,
+          worker:'王立'
+        })
+      // else if(info==3)
+      //   this.form2.setFieldsValue({
+      //     lentValue: 3000,
+      //     worker:'王立'
+      //   })
+    },
     onValueChange() {},
     onInEntryAdded() {},
   },

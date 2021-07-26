@@ -257,7 +257,7 @@ const judgeNull = (data) => {
 }
 
 const getNow = () => {
-	let date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+	let date = new Date(); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
 
 	let Y = date.getFullYear();
 	let M = autoChange(date.getMonth() + 1); //计算机的月份是从0开始滴，需要+1
@@ -270,7 +270,12 @@ const getNow = () => {
 	return [[Y, M, D], [h, m, s]];
 }
 
-
+/**
+ * 处理枚举类型数据
+ */
+const handleEnumData =(list, data) =>{
+  return list[data].tableValue
+}
 module.exports = {
 	formatTime,
 	formatStampTime,
@@ -281,5 +286,6 @@ module.exports = {
 	msg,
 	judgeDataNull,
 	judgeNull,
-	getNow
+	getNow,
+	handleEnumData
 }

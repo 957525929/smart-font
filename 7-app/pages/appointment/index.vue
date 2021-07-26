@@ -16,7 +16,7 @@
 		<scroll-view scroll-y class="page">
 					<view class="banner">
 						<image src="/static/workplace/banner.png" mode="widthFix" class='response banner-back'></image>
-						<view class="banner-title">接待APP</view>
+						<view class="banner-title">接待应用</view>
 					</view>
 					
 					<view class="nav-list">
