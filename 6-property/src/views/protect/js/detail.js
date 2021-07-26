@@ -59,7 +59,7 @@ export const basicInfo = [{
     value: ""
 },
 {
-    title: '区域',
+    title: '养护范围',
     dataIndex: 'address',
     key: 'address',
     width: 100,
@@ -73,9 +73,9 @@ export const basicInfo = [{
     key: 'areaKey',
     width: 100,
     value: "",
-    hideInTable:true,
-    hideInSearch:true,
-    hideInDetail:true
+    hideInTable: true,
+    hideInSearch: true,
+    hideInDetail: true
 },
 {
     title: '保养员',
@@ -111,7 +111,7 @@ export const basicInfo = [{
 }
 ]
 //=================================================
-export const proInfo =[{
+export const proInfo = [{
     dataIndex: 'taskId',
     title: '任务编号',
     width: 50,
@@ -124,7 +124,7 @@ export const proInfo =[{
     width: 80,
     key: 'taskName',
     value: ""
-},{
+}, {
     dataIndex: 'proTime',
     title: '保养时间',
     width: 50,
@@ -307,7 +307,7 @@ export const data = [{
     devId: 1001,
     devName: "waterPipe_1001",
     devType: 2,
-    devStatus: 4,
+    devStatus: "在用",
     assets: '烟草大厦',
     institution: '福建烟草公司',
     phone: '18232145698',
@@ -343,7 +343,7 @@ export const data = [{
     devId: 2001,
     devName: "wire_2001",
     devType: 1,
-    devStatus: 5,
+    devStatus: '在修',
     assets: '烟草大厦',
     institution: '福建烟草公司',
     phone: '18232145698',
@@ -374,7 +374,7 @@ export const data = [{
     devId: 3001,
     devName: "air_3001",
     devType: 1,
-    devStatus: 6,
+    devStatus: '停用',
     assets: '烟草大厦',
     institution: '福建烟草公司',
     phone: '18232145698',

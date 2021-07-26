@@ -1,6 +1,6 @@
 import {
-  devType,
-  taskStatus
+    devType,
+    taskStatus
 } from "@/utils/dataDictionary.js";
 
 export const columns = [{
@@ -9,8 +9,8 @@ export const columns = [{
     width: 60,
     key: 'orderId',
     value: ""
-  },
-  {
+},
+{
     title: '工单类型',
     dataIndex: 'devType',
     width: 60,
@@ -18,8 +18,8 @@ export const columns = [{
     type: 'a-select',
     valueEnum: devType,
     value: ""
-  },
-  {
+},
+{
     title: '工单状态',
     dataIndex: 'taskStatus',
     width: 60,
@@ -27,40 +27,40 @@ export const columns = [{
     type: 'a-select',
     valueEnum: taskStatus,
     value: ""
-  },
-  {
+},
+{
     title: '上报时间',
     key: 'orderTime',
     dataIndex: 'orderTime',
     width: 100,
     type: 'a-range-picker',
     value: ""
-  }, 
-  {
+},
+{
     dataIndex: 'orderPerson',
     key: 'orderPerson',
     title: '上报人',
     width: 60,
     value: ""
-  },
-  {
+},
+{
     title: '上报人联系方式',
     dataIndex: 'phone',
     key: 'phone',
     width: 80,
     value: "",
     hideInSearch: true
-  },
-  {
+},
+{
     title: '上报地址',
     dataIndex: 'address',
     key: 'address',
     width: 80,
     value: "",
     hideInSearch: true
-  },
+},
 
-  {
+{
     title: '上报描述',
     dataIndex: 'description',
     width: 100,
@@ -68,7 +68,7 @@ export const columns = [{
     hideInSearch: true,
     hideInTable: true,
     value: ""
-  }, {
+}, {
     title: '上报图片',
     dataIndex: 'imgs',
     width: 100,
@@ -76,20 +76,20 @@ export const columns = [{
     hideInSearch: true,
     hideInTable: true,
     scopedSlots: {
-      customRender: 'imgs'
+        customRender: 'imgs'
     },
     value: ""
-  },
-  {
+},
+{
     title: '操作',
     dataIndex: 'action',
     scopedSlots: {
-      customRender: 'action'
+        customRender: 'action'
     },
     width: 80,
     hideInSearch: true,
     hideInDetail: true
-  }
+}
 ]
 export const data = [{
     key: 0,
@@ -103,11 +103,11 @@ export const data = [{
     description: "18楼停电",
     imgs: ['assets/logo.png'],
     action: [{
-      tagName: "详情",
-      com: "TableDrawer"
+        tagName: "详情",
+        com: "TableDrawer"
     }]
-  },
-  {
+},
+{
     key: 1,
     taskStatus: 1,
     orderId: '2',
@@ -119,11 +119,11 @@ export const data = [{
     description: "空调调控温度无反应",
     imgs: ['assets/logo.png'],
     action: [{
-      tagName: "详情",
-      com: "TableDrawer"
+        tagName: "详情",
+        com: "TableDrawer"
     }]
-  },
-  {
+},
+{
     key: 2,
     taskStatus: 2,
     orderId: '3',
@@ -139,17 +139,18 @@ export const data = [{
     imgs: ['/assets/logo.png'],
     handleimgs: ['/assets/logo.png'],
     action: [{
-      tagName: "详情",
-      com: "TableDrawer"
+        tagName: "详情",
+        com: "TableDrawer"
     }]
-  },
-  {
+},
+{
     key: 3,
     taskStatus: 3,
     orderId: '4',
     devType: 2,
     fixStaff: '王翔',
     fixPhone: "18254621147",
+    fixAddition: "已维修",
     expectTime: "2021-07-22 20:00:00",
     orderPerson: '阿蛛',
     phone: '18232145694',
@@ -159,11 +160,11 @@ export const data = [{
     imgs: ['/assets/logo.png'],
     handleimgs: ['/assets/logo.png'],
     action: [{
-      tagName: "详情",
-      com: "TableDrawer"
+        tagName: "详情",
+        com: "TableDrawer"
     }]
-  },
-  {
+},
+{
     key: 4,
     taskStatus: 4,
     orderId: '5',
@@ -179,55 +180,55 @@ export const data = [{
     imgs: ['/assets/logo.png'],
     handleimgs: ['/assets/logo.png'],
     action: [{
-      tagName: "详情",
-      com: "TableDrawer"
+        tagName: "详情",
+        com: "TableDrawer"
     }]
-  }
+}
 ]
 export const searchCon = {}
 export const infoDetail = [{
     title: '设备编号',
     key: 'devId',
     value: ""
-  },
-  {
+},
+{
     title: '设备名称',
     value: "",
     key: 'devName'
-  },
-  {
+},
+{
     title: '设备类型',
     value: "",
     key: 'devType',
     type: "a-select",
     valueEnum: devType
-  },
-  {
+},
+{
     key: 'institution',
     title: '业主单位',
     value: "",
-  },
-  {
+},
+{
     title: '业主联系方式',
     key: 'phone',
     value: "",
-  },
-  // {
-  //     title: '技术状况',
-  //     key: 'techSituation',
-  //     value:"",
-  //     type:"a-select"
-  // },
-  {
+},
+// {
+//     title: '技术状况',
+//     key: 'techSituation',
+//     value:"",
+//     type:"a-select"
+// },
+{
     title: '维修员',
     key: 'fixStaff',
     value: "",
-  },
-  {
+},
+{
     title: '登记时间',
     key: 'fixedTime',
     value: "",
     type: "a-range-picker",
     hideInDetail: true
-  }
+}
 ]

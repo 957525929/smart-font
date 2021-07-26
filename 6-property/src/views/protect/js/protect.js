@@ -59,12 +59,12 @@ export const columns = [{
     key: 'areaKey',
     width: 100,
     value: "",
-    hideInTable:true,
-    hideInSearch:true,
-    hideInDetail:true
+    hideInTable: true,
+    hideInSearch: true,
+    hideInDetail: true
 },
 {
-    title: '区域',
+    title: '养护范围',
     dataIndex: 'address',
     key: 'address',
     width: 100,
@@ -147,10 +147,10 @@ export const addplan = [{
     value: "全部",
     key: 'devData',
     type: "a-tree-select",
-    valueEnum: devData.filter(item => item.devType == 0).map(item=>{
+    valueEnum: devData.filter(item => item.devType == 0).map(item => {
         return {
-            label:item.devName,
-            key:item.devId
+            label: item.devName,
+            key: item.devId
         }
     })
 },

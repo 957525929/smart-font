@@ -1,6 +1,7 @@
 import {
 	proPeriod,
 	proTaskType,
+	devTypeTree
 } from "@/common/public.js"
 //保养
 const proBasic = [{
@@ -77,6 +78,7 @@ const proDev = [{
 		title: '设备类型',
 		key: 'devType',
 		value: "",
+		valueEnum:devTypeTree
 	},
 	{
 		key: 'manufacturer',
