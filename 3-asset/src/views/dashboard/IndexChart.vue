@@ -69,7 +69,7 @@
           <a-tab-pane loading="true" tab="出租收入金额" key="1">
             <a-row>
               <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="金额（万元）" :dataSource="barData"/>
+                <bar title="金额（万元）" :dataSource="barData" yaxisText="出租收入金额（万元）"/>
               </a-col>
               <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
                 <rank-list title="收租记录" :list="rankList"/>
@@ -79,7 +79,7 @@
           <a-tab-pane tab="缴租支出金额" key="2">
             <a-row>
               <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="金额（万元）" :dataSource="barData"/>
+                <bar title="金额（万元）" :dataSource="barData" yaxisText="缴租支出金额（万元）"/>
               </a-col>
               <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
                 <rank-list title="缴租记录" :list="rankList"/>
@@ -90,7 +90,7 @@
       </div>
     </a-card>
     </a-card>
-      </br>
+      <br/>
     <a-row>
       <a-col :span="24">
         <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
