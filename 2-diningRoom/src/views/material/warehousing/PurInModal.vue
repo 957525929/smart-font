@@ -1312,7 +1312,7 @@ export default {
           ]
         },
         {
-          title: '采购单价',
+          title: '采购单价(元)',
           key: 'materialPrice',
           type: FormTypes.inputNumber,
           placeholder: '请输入${title}',

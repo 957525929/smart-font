@@ -433,7 +433,6 @@ export default {
             key:'3',
             contractNunmber: 'ZC0002',
             contractName:'卷烟厂房屋和建筑物合同',
-
             assetUser: '卷烟厂',
             payDate: '2019-07-05',
             lentValue: '30000.00',
@@ -448,7 +447,7 @@ export default {
             contractName:'福州朝阳贸易有限公司房屋和建筑物合同',
             assetOwner: '福州朝阳贸易有限公司',
             payDate: '2020-07-05',
-            lentValue: '100000.00',
+            lentValue: '300000.00',
             worker:'王立',
             remark:'纸质发票',
 

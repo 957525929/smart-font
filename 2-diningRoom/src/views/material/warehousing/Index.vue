@@ -209,7 +209,7 @@ export default {
           dataIndex: 'purchaseNum'
         },
         {
-          title:'采购总金额',
+          title:'采购总金额(元)',
           align:"center",
           dataIndex: 'totalMoney'
         },

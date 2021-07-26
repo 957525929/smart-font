@@ -117,7 +117,7 @@
 						<text class="cuIcon-close text-red"></text>
 					</view>
 				</view>
-				<view class="padding-xl">您于2021-07-20上午预约的会议，已预约成功。</view>
+				<view class="padding-xl" style="text-align:left;">您于2021-07-20上午预约的会议，已预约成功。</view>
 				<!-- <view class="padding-xs">日期：2021-07-20</view>
 				<view class="padding-xs">时间：上午9：00 </view>
 				<view class="padding-xs">地点：XXX</view> -->
@@ -132,10 +132,7 @@
 						<text class="cuIcon-close text-red"></text>
 					</view>
 				</view>
-				<view class="padding-xl">您于2021-07-19上午预约的会议，已被撤销。具体原因：XXX</view>
-				<!-- <view class="padding-xs">日期：2021-07-20</view>
-				<view class="padding-xs">时间：上午9：00 </view>
-				<view class="padding-xs">地点：XXX</view> -->
+				<view class="padding-xl"  style="text-align:left;">您于2021-07-19上午预约的会议，已被撤销。具体原因：XXX</view>
 			</view>
 		</view>
 		
