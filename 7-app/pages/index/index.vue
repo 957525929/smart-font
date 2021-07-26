@@ -16,7 +16,7 @@
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='record'?'text-orange cuIcon-newshotfill':'text-gray cuIcon-newshot'"></text>
 				</view>
-				<view :class="PageCur=='record'?'text-orange':'text-gray'">会议记录</view>
+				<view :class="PageCur=='record'?'text-orange':'text-gray'">预约记录</view>
 				
 			</view>
 			<view class="action" @click="NavChange" data-cur="notice">

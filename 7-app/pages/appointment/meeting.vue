@@ -90,12 +90,11 @@
 	
 				<!-- <text class='cuIcon-locationfill text-orange'></text> -->
 			</view>
-
-			<view class="cu-form-group">
+			<view class="cu-form-group align-start">
 				<view class="title">备注</view>
-				<input placeholder="参与人:产品组所有人  内容:第一期XX项目周例会" name="input"></input>
+				<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaBInput" placeholder="参与人:产品组所有人
+内容:第一期XX项目周例会"  name="input"></textarea>
 			</view>
-			<!-- #ifndef H5 || APP-PLUS || MP-ALIPAY -->
 			<view class="box">
 				<view class="cu-bar btn-group">
 					<button class="cu-btn bg-orange shadow-blur round lg" @tap="showModal" data-target="Modal">提交</button>
@@ -160,9 +159,9 @@
 				//会议室选择
 				multiIndex: [0, 0, 0],
 				multiArray: [
-					['中国烟草总公司福建省公司机关'],
 					['A区域', 'B区域'],
-					['1号楼', '2号楼','3号楼','4号楼','5号楼']
+					['1号楼', '2号楼','3号楼'],
+					['1-105','1-205','1-305','1-405'],
 				],
 				
 			};
@@ -226,8 +225,12 @@
 					case 0:
 						switch (data.multiIndex[0]) {
 							case 0:
-								data.multiArray[1] = ['A区域', 'B区域'];
-								data.multiArray[2] = ['1号楼', '2号楼','3号楼'];
+								data.multiArray[1] = ['1号楼', '2号楼','3号楼'];
+								data.multiArray[2] = ['1-105','1-205','1-305','1-405'];
+								break;
+							case 1:
+								data.multiArray[1] = ['4号楼', '5号楼'];
+								data.multiArray[2] = ['4-106','4-206','4-306','4-406'];
 								break;
 						}
 						data.multiIndex[1] = 0;
@@ -238,11 +241,33 @@
 							case 0:
 								switch (data.multiIndex[1]) {
 									case 0:
-										data.multiArray[2] = ['1号楼', '2号楼','3号楼'];
+										data.multiArray[2] = ['1-105','1-205','1-305','1-405'];
 										break;
 									case 1:
-										data.multiArray[2] = ['4号楼', '5号楼'];
+										data.multiArray[2] = ['2-301','2-302','2-303','2-304'];
 										break;
+									case 2:
+										data.multiArray[2] = ['3-101','3-102','3-103','3-104'];
+										break;
+									// case 3:
+									// 	data.multiArray[2] = ['4-205','4-206'];
+									// 	break;
+									// case 4:
+									// 	data.multiArray[2] = ['5-101','5-102','5-103'];
+									// 	break;
+								}
+								break;
+							case 1:
+								switch (data.multiIndex[1]) {
+									case 0:
+										data.multiArray[2] = ['4-106','4-206','4-306','4-406'];
+										break;
+									case 1:
+										data.multiArray[2] = ['5-303', '5-304'];
+										break;
+									// case 2:
+									// 	data.multiArray[2] = ['8-205', '8-206', '8-207'];
+									// 	break;
 								}
 								break;
 						}
