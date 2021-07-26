@@ -30,7 +30,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-item text-blue">
+			<view class="cu-item text-blue" @click="modalVisable1 = true">
 				<view class="cu-list menu-avatar radius" >
 					<view class="cu-item bg-gradual-blue">
 						<view class="content" style="left: 8px;">
@@ -45,7 +45,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-item text-blue">
+			<view class="cu-item text-blue" @click="modalVisable2 = true">
 				<view class="cu-list menu-avatar radius" >
 					<view class="cu-item bg-gradual-blue">
 						<view class="content" style="left: 8px;">
@@ -60,7 +60,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-item text-blue">
+			<view class="cu-item text-blue" @click="modalVisable3 = true">
 				<view class="cu-list menu-avatar radius" >
 					<view class="cu-item bg-gradual-blue">
 						<view class="content" style="left: 8px;">
@@ -75,7 +75,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-item text-blue">
+			<view class="cu-item text-blue" @click="modalVisable4 = true">
 				<view class="cu-list menu-avatar radius" >
 					<view class="cu-item bg-gradual-blue">
 						<view class="content" style="left: 8px;">
@@ -91,24 +91,113 @@
 				</view>
 			</view>
 			<view class="cu-modal" :class="modalVisable==true?'show':''">
-				<view class="cu-dialog" style="height: 25%;">
+				<view class="cu-dialog" style="height: 30%;">
 					<view class="cu-bar bg-white justify-end">
 						<view class="content">预约详情</view>
 						<view class="action" @tap="modalVisable = false">
 							<text class="cuIcon-close text-red"></text>
 						</view>
 					</view>
-					<view class="padding-xl" style="padding: 0px;height: 25%;">
-						<view class="cu-form-group align-start">
-							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height: 80px;text-align:left;"
+					<view class="padding-xl" style="padding: 0px;height:100%;">
+						<view class="cu-form-group align-start"  style="height:55%;">
+							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
 							placeholder="会议名称：项目周例会议
-											预约时间：2021-07-25 上午 
-											预约会议室:烟草公司.A区域.1号楼.1-205 会议室">
+											预约时间：2021-06-07 上午 
+											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
+											参会人数:10人"
+							>
 							</textarea>
 							</br>
-		
 						</view>
-						<button  v-if="tag==true" class="bg-blue cu-btn round" style="margin-top: 5px;"  @tap="showModal" data-target="Modal">撤销会议</button>
+						<button  v-if="tag==true" class="bg-blue cu-btn round" style="margin-top: 10px;"  @tap="showModal" data-target="Modal">撤销会议</button>
+					</view>
+				</view>
+			</view>
+			<view class="cu-modal" :class="modalVisable1==true?'show':''">
+				<view class="cu-dialog" style="height: 30%;">
+					<view class="cu-bar bg-white justify-end">
+						<view class="content">预约详情</view>
+						<view class="action" @tap="modalVisable1 = false">
+							<text class="cuIcon-close text-red"></text>
+						</view>
+					</view>
+					<view class="padding-xl" style="padding: 0px;height:100%;">
+						<view class="cu-form-group align-start"  style="height:55%;">
+							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
+							placeholder="会议名称：项目周例会议
+											预约时间：2021-06-06 上午 
+											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
+											参会人数:10人"
+							>
+							</textarea>
+							</br>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="cu-modal" :class="modalVisable2==true?'show':''">
+				<view class="cu-dialog" style="height: 30%;">
+					<view class="cu-bar bg-white justify-end">
+						<view class="content">预约详情</view>
+						<view class="action" @tap="modalVisable2 = false">
+							<text class="cuIcon-close text-red"></text>
+						</view>
+					</view>
+					<view class="padding-xl" style="padding: 0px;height:100%;">
+						<view class="cu-form-group align-start"  style="height:55%;">
+							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
+							placeholder="会议名称：项目周例会议
+											预约时间：2021-06-05 上午 
+											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
+											参会人数:10人"
+							>
+							</textarea>
+							</br>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="cu-modal" :class="modalVisable3==true?'show':''">
+				<view class="cu-dialog" style="height: 30%;">
+					<view class="cu-bar bg-white justify-end">
+						<view class="content">预约详情</view>
+						<view class="action" @tap="modalVisable3 = false">
+							<text class="cuIcon-close text-red"></text>
+						</view>
+					</view>
+					<view class="padding-xl" style="padding: 0px;height:100%;">
+						<view class="cu-form-group align-start"  style="height:55%;">
+							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
+							placeholder="会议名称：项目周例会议
+											预约时间：2021-06-04 上午 
+											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
+											参会人数:10人"
+							>
+							</textarea>
+							</br>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="cu-modal" :class="modalVisable4==true?'show':''">
+				<view class="cu-dialog" style="height: 30%;">
+					<view class="cu-bar bg-white justify-end">
+						<view class="content">预约详情</view>
+						<view class="action" @tap="modalVisable4 = false">
+							<text class="cuIcon-close text-red"></text>
+						</view>
+					</view>
+					<view class="padding-xl" style="padding: 0px;height:100%;">
+						<view class="cu-form-group align-start"  style="height:55%;">
+							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
+							placeholder="会议名称：项目周例会议
+											预约时间：2021-06-03 上午 
+											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
+											参会人数:10人"
+							>
+							</textarea>
+							</br>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -137,6 +226,10 @@
 				indexDate:0,
 				date: "2021-06",
 				modalVisable: false,
+				modalVisable1: false,
+				modalVisable2: false,
+				modalVisable3: false,
+				modalVisable4: false,
 				size: false,
 				tag:true
 			};
