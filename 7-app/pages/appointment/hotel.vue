@@ -4,55 +4,63 @@
 				<block slot="backText">返回</block>
 				<block slot="content">酒店预订</block>
 		</cu-custom>
-		<form>
+		<form :model="hoteldata">
 			<view class="cu-form-group margin-top">
 				<view class="title">预约人姓名</view>
-				<input placeholder="王安" name="input"></input>
+				<input  v-model="hoteldata.reservations" name="input"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">预约人电话</view>
-				<input placeholder="15877875112" name="input"></input>
+				<input v-model="hoteldata.reserphone"  name="input"></input>
 			</view>
 			<view class="cu-form-group margin-top">
 				<view class="title">预约时间</view>
 				<picker mode="date" :value="date" start="2021-07-19" end="2025-09-01" @change="DateChange">
 					<view class="picker">
-						{{date}}
+						{{hoteldata.starttime}}
 					</view>
 				</picker>
 				至
 				<picker mode="date" :value="date" start="2021-07-19" end="2025-09-01" @change="DateChange1">
 					<view class="picker">
-						{{date1}}
+						{{hoteldata.endtime}}
 					</view>
 				</picker>
 				<!-- <text >共{{}}天</text> -->
 			</view>
 			<view class="cu-form-group margin-top">
 				<view class="title">酒店预定</view>
-				<picker @change="PickerChange" :value="index" :range="hotels">
+				<picker @change="PickerChange" :value="index" :range="hotels" >
 					<view class="picker">
 						{{hotels[index]}}
 					</view>
 				</picker>
 			</view>
 			<view class="cu-form-text">
-				<view class="title">酒店详情</view>
-				<div style="margin-left: 80px; margin-bottom: 10px;">
-					<text >地址：{{details[index].address}}</text>
-					</br>
-					<text >星级：{{details[index].star}}</text>     
-					<text style="margin-left: 30px;">价格：{{details[index].price}}元</text>
-					</br>
-					<text >联系人：{{details[index].linkpoeple}}</text>     
-					<text  style="margin-left: 30px;">电话：{{details[index].phone}}</text>
-				</div>
+				<view class="title"  style="font-size: 15px;">酒店详情</view>
+				<view class="padding-xl m-view" style="margin-left: 80px; padding: 0;">
+					<view class="m-bottom">
+						地址：{{details[index].address}}
+					</view>
+					<view class="m-bottom">
+						星级：{{details[index].star}}
+					</view>
+					<view class="m-bottom">
+						价格：{{details[index].price}}
+					</view>
+					<view class="m-bottom">
+						联系人：{{details[index].linkpoeple}}
+					</view>
+					<view class="m-bottom">
+						电话：{{details[index].phone}}
+					</view>
+				</view>
+
 			</view>
 	
 			<view class="cu-form-group align-start">
 				<view class="title">备注</view>
-				<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaBInput" placeholder="两间双人间
-入住人:刘嘉林,李查,林夕,郑华"  name="input"></textarea>
+				<textarea maxlength="-1" v-model="hoteldata.remark"   name="input"></textarea>
 			</view>
 			<view class="box">
 				<view class="cu-bar btn-group">
@@ -94,7 +102,20 @@
 					{address:'福州东浦路59号	',price:'120~190',star:'四星级',linkpoeple:'尤晓梅',phone:'13053955537'},
 					{address:'福州温泉公园路59号',price:'120~180',star:'四星级',linkpoeple:'黄丽娟',phone:'13659655381'},
 				],
-				
+				hoteldata:
+					{	
+						reservations:"王安",
+						reserphone:"15877875112",
+						starttime:"2021-07-19",
+						endtime:"2021-07-20",
+						name: '',
+						hotel:"",
+						address:'',
+						linkman:'',
+						telephone:'',
+						remark: " 两间双人间   入住人:刘嘉林,李查,林夕,郑华",
+					},
+					
 			};
 		},
 		methods: {
@@ -103,10 +124,11 @@
 			},
 			DateChange(e) {
 				console.log(e)
-				this.date = e.detail.value
+				this.hoteldata.starttime = e.detail.value
 			},
 			DateChange1(e) {
-				this.date1 = e.detail.value
+				this.hoteldata.endtime = e.detail.value
+				
 			},
 			SwitchA(e) {
 				this.switchA = e.detail.value
@@ -119,11 +141,13 @@
 			},
 			hideModal(e) {
 				this.modalName = null
+				console.log(this.hoteldata);
 			},
 			//酒店选择
 			PickerChange(e) {
 				console.log(e.detail.value)
-				this.index = e.detail.value
+				this.index = e.detail.value;
+				this.hoteldata.hotel=this.hotels[this.index];
 				
 			},
 		}

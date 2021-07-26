@@ -7,46 +7,33 @@
 		<form>
 			<view class="cu-form-group margin-top">
 				<view class="title">预约人姓名</view>
-				<input placeholder="王安" name="input"></input>
+				<input v-model="meetingdata.reservations" name="input"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">预约人电话</view>
-				<input placeholder="15877875112" name="input"></input>
+				<input v-model="meetingdata.phone" name="input"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">会议名称</view>
-				<input placeholder="项目周例会15" name="input"></input>
+				<input v-model="meetingdata.name" name="input"></input>
 			</view>
 			<view class="cu-form-group" style="margin-top: 10px;">
-				<!-- <view class="title">参会人数</view> -->
-				<text class="cuIcon-title text-orange "></text>参会人数
-				<input placeholder="10" name="input"  style="padding-left: 10px;"></input>
+				<text class="cuIcon-title text-orange" ></text>参会人数
+				<input  v-model="meetingdata.peoples"  name="input"  style="padding-left: 10px;"></input>
 			</view>
 			<view class="cu-form-group">
-				<!-- <view class="title">会议日期</view> -->
 				<text class="cuIcon-title text-orange "></text> 会议日期
-				<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+				<picker mode="date" :value="date" start="2015-09-01" end="2030-09-01" @change="DateChange">
 					<view class="picker">
-						{{date}}
+						{{meetingdata.time}}
 					</view>
 				</picker>
 			</view>
 			<view class="cu-form-group">
-				<!-- <view class="title">会议时间段</view> -->
 				<text class="cuIcon-title text-orange "></text> 会议时段
-				<!-- <picker mode="time" :value="time" start="08:01" end="21:01" @change="TimeChange">
-					<view class="picker">
-						{{time}}
-					</view>
-				</picker>
-				<picker mode="time" :value="timeend" start="09:01" end="22:01" @change="TimeChangeend">
-					<view class="picker">
-						{{timeend}}
-					</view>
-				</picker> -->
 				<picker @change="PickerChange" :value="index" :range="time">
 					<view class="picker">
-						{{time[index]}}
+						{{meetingdata.period}}
 					</view>
 				</picker>
 			</view>
@@ -60,11 +47,9 @@
 			</view>
 			<view class="bg-white margin-top" style="margin-top: 0;">
 				<view style="margin-left: 3%;">
-					<view v-for="item in checkbox" v-if="item.checked" class="cu-tag round bg-blue light">{{item.name}}</view>
+					<view v-for="item in checkbox" v-if="item.checked" class="cu-tag round bg-blue light" style="font-size: 14.5px;">{{item.name}}</view>
 				</view>
 			</view>
-			
-			
 			<view class="cu-modal bottom-modal" :class="modalName=='ChooseModal'?'show':''" @tap="hideModal">
 				<view class="cu-dialog" @tap.stop="">
 					<view class="cu-bar bg-white">
@@ -83,7 +68,7 @@
 			<view class="cu-form-group">
 				<view class="title">会议地点</view>
 				<picker mode="multiSelector" @change="MultiChange" @columnchange="MultiColumnChange" :value="multiIndex" :range="multiArray">
-					<view class="picker">
+					<view class="picker" style="font-size: 15px;">
 						{{multiArray[0][multiIndex[0]]}}.{{multiArray[1][multiIndex[1]]}}.{{multiArray[2][multiIndex[2]]}}
 					</view>
 				</picker>
@@ -92,8 +77,7 @@
 			</view>
 			<view class="cu-form-group align-start">
 				<view class="title">备注</view>
-				<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaBInput" placeholder="参与人:产品组所有人
-内容:第一期XX项目周例会"  name="input"></textarea>
+				<textarea maxlength="-1" name="input" v-model="meetingdata.remark" ></textarea>
 			</view>
 			<view class="box">
 				<view class="cu-bar btn-group">
@@ -163,23 +147,27 @@
 					['1号楼', '2号楼','3号楼'],
 					['1-105','1-205','1-305','1-405'],
 				],
-				
+				meetingdata:{
+					reservations:"王安",
+					phone:"15877875112",
+					name:"项目周例会",
+					peoples:"10人",
+					time:"2021-07-25",
+					period:"上午",
+					condition:["白板","投影仪"],
+					room:"A区域.1号楼.1-105",
+					remark:"参与人:产品组所有人     内容:第一期XX项目周例会",
+				},
 			};
 		},
 		methods: {
-			// TimeChange(e) {
-			// 	this.time = e.detail.value
-			// },
-			// TimeChangeend(e) {
-			// 	this.timeend = e.detail.value
-			// },
 			//时段选择
 			PickerChange(e) {
-				console.log(e.detail.value)
 				this.index = e.detail.value
+				this.meetingdata.period=this.time[this.index]
 			},
 			DateChange(e) {
-				this.date = e.detail.value
+				this.meetingdata.time = e.detail.value
 			},
 			SwitchA(e) {
 				this.switchA = e.detail.value
@@ -189,6 +177,7 @@
 			},
 			showModal(e) {
 				this.modalName = e.currentTarget.dataset.target
+				console.log(this.meetingdata)
 			},
 			hideModal(e) {
 				this.modalName = null
@@ -277,28 +266,18 @@
 				this.multiArray = data.multiArray;
 				this.multiIndex = data.multiIndex;
 			},
-			// CheckboxChange(e) {
-			// 	var items = this.checkbox,
-			// 		values = e.detail.value;
-			// 	for (var i = 0, lenI = items.length; i < lenI; ++i) {
-			// 		items[i].checked = false;
-			// 		for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-			// 			if (items[i].value == values[j]) {
-			// 				console.log("当前选中",items[i].name)
-			// 				items[i].checked = true;
-			// 				break
-			// 			}
-			// 		}
-			// 	}
-			// },
 		}
 	}
 </script>
 
 <style>
+	.cu-form-group {
+		font-size: 15px;
+	}
 	.cu-form-group .title {
 		min-width: calc(4em + 15px);
 	}
+	
 	.box {
 		margin: 20upx 0;
 	}

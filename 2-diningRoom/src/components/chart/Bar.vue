@@ -21,7 +21,7 @@
       },
       yaxisText: {
         type: String,
-        default: 'y'
+        default: '金额'
       },
       title: {
         type: String,
@@ -38,7 +38,7 @@
     computed: {
       scale() {
         return [{
-          dataKey: 'y',
+          dataKey: '金额',
           alias: this.yaxisText
         }]
       }
