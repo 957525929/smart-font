@@ -4,8 +4,8 @@
 			<block slot="backText">返回</block>
 			<block slot="content">消息通知</block>
 		</cu-custom>
-		<view class="content" @tap="goToAgree">
-			<message1></message1>
+		<view class="content" @tap="showModal" data-target="Modal">
+			<message1  @send="getDetail"></message1>
 		</view>
 		<view class="bottom">
 			<view class="leftBottom">
@@ -24,6 +24,20 @@
 				</view>
 			</view>
 		</view>
+
+		<view class="cu-modal" :class="modalName=='Modal'?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">来自{{this.getDetailData.name}}反馈的通知</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					{{this.getDetailData.contentData}}
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -33,17 +47,25 @@
 	export default {
 		data() {
 			return {
-
+				modalName: null,
+				getDetailData:""
 			}
 		},
 		components: {
 			message1,
 		},
 		methods: {
-			goToAgree() {
-				uni.navigateTo({
-					url: "/pages/verify/index1"
-				});
+			showModal(e) {
+				this.modalName = e.currentTarget.dataset.target
+			},
+			hideModal(e) {
+				this.modalName = null
+			},
+			getDetail(value) {
+				// console.log("1111111111111111111111")
+				// console.log(value)
+				this.getDetailData = value
+				// console.log(this.getDetailData)
 			}
 		}
 	}
@@ -61,10 +83,10 @@
 		width: 100%;
 	}
 
-	* {
+/* 	* {
 		margin: 0;
 		padding: 0;
-	}
+	} */
 
 	.content {
 		padding: 5px;

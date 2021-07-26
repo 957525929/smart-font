@@ -5,6 +5,19 @@
 			<block slot="content">申请审批</block>
 		</cu-custom>
 
+		<view v-if="this.onjs.agreeTime||this.onjs.disagreeTime">
+			<view class="cu-bar bg-white ">
+				<view class='text-xl padding'>
+					<text class="text-black text-bold">· 状态</text>
+				</view>
+			</view>
+
+			<view class="cu-form-group align-center bg-white">
+				<view class="title">申请状态</view>
+				<view v-if="this.onjs.agreeTime" class="text-green">已通过</view>
+				<view v-if="this.onjs.disagreeTime" class="text-red">已拒绝</view>
+			</view>
+		</view>
 
 		<view class="cu-bar bg-white ">
 			<view class='text-xl padding'>
@@ -14,11 +27,11 @@
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">姓名</view>
-			<view>{{person.name}}</view>
+			<view>{{this.onjs.visit}}</view>
 		</view>
 		<view class="cu-form-group solid-bottom">
 			<view class="title">手机号</view>
-			{{person.phone}}
+			{{this.onjs.phone}}
 		</view>
 
 		<view class="cu-bar bg-white margin-top">
@@ -29,7 +42,7 @@
 
 		<view class="cu-form-group">
 			<view class="title">日期</view>
-			{{date}}
+			{{this.date}}
 		</view>
 
 		<view class="cu-bar bg-white">
@@ -37,25 +50,40 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">开始时间</view>
-				{{time}}
+			{{this.onjs.startTime}}
 		</view>
 		<view class="cu-form-group">
 			<view class="title">结束时间</view>
-				{{time1}}
+			{{this.onjs.endTime}}
 		</view>
 
-		<view class="cu-bar bg-white margin-top">
-			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 备注</text>
+		<view v-if="!this.onjs.disagreeTime">
+			<view class="cu-bar bg-white margin-top">
+				<view class='text-xl padding'>
+					<text class="text-black text-bold">· 备注</text>
+				</view>
+			</view>
+
+			<view class="cu-form-group align-start ">
+				<!-- <view class="title">被访人不在</view> -->
+				{{content}}
 			</view>
 		</view>
 
-		<view class="cu-form-group align-start ">
-			<!-- <view class="title">被访人不在</view> -->
-			{{content}}
+		<view v-if="this.onjs.disagreeTime" >
+			<view class="cu-bar bg-white margin-top">
+				<view class='text-xl padding'>
+					<text class="text-black text-bold">· 拒绝原因</text>
+				</view>
+			</view>
+
+			<view class="cu-form-group align-start ">
+				<!-- <view class="title">被访人不在</view> -->
+				{{discontent}}
+			</view>
 		</view>
 
-		<view class="bottom padding">
+		<view class="bottom padding" v-if="!this.onjs.agreeTime&&!this.onjs.disagreeTime">
 			<view class="leftBottom">
 				<view class='padding'>
 					<button class="cu-btn lg bg-red" @tap="showModal" data-target="DialogModal1">拒绝</button>
@@ -64,7 +92,7 @@
 			</view>
 			<view class="rightBottom">
 				<view class='padding'>
-					<button class="cu-btn lg bg-white" @click="hideGoto">同意</button>
+					<button class="cu-btn lg bg-white" @click="agreeGoto">同意</button>
 				</view>
 			</view>
 		</view>
@@ -86,7 +114,7 @@
 				<view class="cu-bar bg-white justify-end">
 					<view class="action">
 						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
-						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
+						<button class="cu-btn bg-green margin-left" @tap="disagreeGoto">确定</button>
 
 					</view>
 				</view>
@@ -98,32 +126,26 @@
 </template>
 
 <script>
-import { generatePhoneNum } from '../../util/mathFunc.js'
+	import {
+		generatePhoneNum
+	} from '../../util/mathFunc.js'
 	export default {
-		created: function() {
-			let aData = new Date();
-
-			this.date =
-				aData.getFullYear() + "-" +
-				(aData.getMonth() + 1) + "-" +
-				(aData.getDate())
-
+		onLoad(op) {
+			if (op) {
+				this.onjs = JSON.parse(op.onjs)
+				console.log(this.onjs.time)
+				this.date = this.onjs.time.slice(0, 10);
+				console.log(this.date)
+			}
 		},
 		data() {
 			return {
 				modalName: null,
 				index: -1,
-				time: '9.00',
-				time1: '18.00',
-				person: {
-					name: '魏佳楠',
-					phone: generatePhoneNum(),
-					type: 'allow',
-					people: '倪友聪',
-				},
 				PageCur: 'appoient',
 				date: '',
-				content: '私人会面'
+				content: '私人会面',
+				discontent: "被访问人不在"
 			}
 		},
 		methods: {
@@ -145,10 +167,16 @@ import { generatePhoneNum } from '../../util/mathFunc.js'
 			hideModal(e) {
 				this.modalName = null
 			},
-			hideGoto(e) {
+			agreeGoto(e) {
 				this.modalName = null;
 				uni.navigateTo({
 					url: '/pages/index/staff?PageCur=applyList&TabCur=1'
+				});
+			},
+			disagreeGoto(e){
+				this.modalName = null;
+				uni.navigateTo({
+					url: '/pages/index/staff?PageCur=applyList&TabCur=2'
 				});
 			},
 			textareaAInput(e) {

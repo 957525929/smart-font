@@ -36,17 +36,17 @@
 
 			<block v-if="this.TabCur==0">
 				<navigator class="action" @tap="goToAllow">
-					<recordCard1 :cardType="type[0]" />
+					<recordCard1 :cardType="type[0]" @send="recordDetail" />
 				</navigator>
 			</block>
 			<block v-if="this.TabCur==1">
-				<navigator class="action" @tap="goToAgree">
-					<recordCard1 :cardType="type[1]" />
+				<navigator class="action" @tap="goToAllow">
+					<recordCard1 :cardType="type[1]" @send="recordDetail" />
 				</navigator>
 			</block>
 			<block v-if="this.TabCur==2">
-				<navigator class="action" @tap="goToDisAgree">
-					<recordCard1 :cardType="type[2]" />
+				<navigator class="action" @tap="goToAllow">
+					<recordCard1 :cardType="type[2]" @send="recordDetail" />
 				</navigator>
 			</block>
 		</scroll-view>
@@ -87,6 +87,7 @@
 				modalName: null,
 				TabCur: 0,
 				scrollLeft: 0,
+				recordData: '',
 				reason: '被访人出差',
 				type: [{
 					id: 0,
@@ -126,19 +127,15 @@
 				console.log(this.TabCur)
 			},
 			goToAllow() {
+				var onjs = JSON.stringify(this.recordData)
 				uni.navigateTo({
-					url: "/pages/verify/index"
+					url: "/pages/verify/index?onjs=" + onjs
 				});
 			},
-			goToAgree() {
-				uni.navigateTo({
-					url: "/pages/verify/index1"
-				});
-			},
-			goToDisAgree() {
-				uni.navigateTo({
-					url: "/pages/verify/index2"
-				});
+			recordDetail(value) {
+				console.log("222222222222222222")
+				console.log(value)
+				this.recordData = value
 			}
 
 		}

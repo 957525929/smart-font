@@ -3,7 +3,7 @@
 		<view v-for="(item,index) in applylist" :key="index">
 			<!-- 判断传递过来的值显示对应状态 -->
 			<view v-if="item.type==cardType.type">
-				<view class="card">
+				<view class="card" @tap="recordDetail(item)">
 					<span>
 						<!-- 显示不同图片 -->
 						<image class="card-img" :src="imgSrc[cardType.id]" mode="scaleToFill"
@@ -75,7 +75,9 @@
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + "08:00",
 						type: '待审核',
-						cancel: '撤回'
+						cancel: '撤回',
+						startTime:"14.00",
+						endTime:"16.00"
 					},
 					{
 						visit: '李二喜',
@@ -84,7 +86,9 @@
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + "09:05",
 						type: '待审核',
-						cancel: '撤回'
+						cancel: '撤回',
+						startTime:"15.00",
+						endTime:"17.00"
 					},
 					{
 						visit: '张冰冰',
@@ -93,7 +97,9 @@
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + "11:20",
 						type: '待审核',
-						cancel: '撤回'
+						cancel: '撤回',
+						startTime:"12.30",
+						endTime:"14.00"
 					},
 					{
 						visit: '王莎莎',
@@ -105,6 +111,9 @@
 							(new Date().getMonth() - 1) + "月" +
 							(new Date().getDate() + 5) + "日" + " " + '10:24',
 						type: '已通过',
+						startTime:"13.30",
+						endTime:"15.00"
+						
 					},
 					{
 						visit: '孙逸仙',
@@ -116,6 +125,8 @@
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() + 10) + "日" + " " + '11:42',
 						type: '已通过',
+						startTime:"15.30",
+						endTime:"17.00"
 					},
 					{
 						visit: '王宇轩',
@@ -127,6 +138,8 @@
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '12:18',
 						type: '已通过',
+						startTime:"14.30",
+						endTime:"16.30"
 					},
 					{
 						visit: '林雨馨',
@@ -138,6 +151,9 @@
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() - 20) + "日" + " " + '13:24',
 						type: '已拒绝',
+						disagree:'11',
+						startTime:"14.00",
+						endTime:"16.00"
 					},
 					{
 						visit: '王尼玛',
@@ -149,6 +165,9 @@
 							(new Date().getMonth()+1) + "月" +
 							(new Date().getDate()) + "日" + " " + '14:34',
 						type: '已拒绝',
+						disagree:'11',
+						startTime:"15.30",
+						endTime:"17.00"
 					},
 				],
 				// 图片
@@ -184,6 +203,10 @@
 			hideModal(e) {
 				this.modalName = null
 			},
+			recordDetail(item){
+				// console.log(e)
+				this.$emit("send",item)			
+			}
 		}
 	}
 </script>
