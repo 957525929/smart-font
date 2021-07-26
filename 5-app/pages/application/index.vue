@@ -53,10 +53,18 @@
 				<input name="seatNum"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">用车时间</view>
+				<view class="title">日期选择</view>
 				<picker mode="date" :value="date" @change="DateChange">
 					<view class="picker">
 						{{date}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">时间选择</view>
+				<picker mode="time" :value="time" start="00:00" end="23:59" @change="TimeChange">
+					<view class="picker">
+						{{time}}
 					</view>
 				</picker>
 			</view>
@@ -94,6 +102,7 @@
 			return {
 				date: currentDate,
 				labelWidth: 85,
+				time: '00:00',
 				formData: {
 					user: '姜轶枫',
 					phone: '13756372788',
@@ -130,7 +139,7 @@
 				let year = date.getFullYear();
 				let month = date.getMonth() + 1;
 				let day = date.getDate();
-
+				
 				if (type === 'start') {
 					year = year - 60;
 				} else if (type === 'end') {
@@ -139,6 +148,9 @@
 				month = month > 9 ? month : '0' + month;
 				day = day > 9 ? day : '0' + day;
 				return `${year}-${month}-${day}`;
+			},
+			TimeChange(e) {
+				this.time = e.detail.value
 			}
 		}
 	}
