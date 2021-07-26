@@ -14,193 +14,65 @@
 				</picker>
 			</view>
 		</view>
-		<view class="cu-timeline">
-			<view class="cu-item text-blue" @click="modalVisable = true">
+		
+		<view class="cu-modal" :class="modalVisable==true?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">预约详情</view>
+						<view class="action" @tap="hideModal1">
+							<text class="cuIcon-close text-red"></text>
+						</view>
+					
+				</view>
+				
+				<view class="padding-xl m-view">
+					<view class="m-bottom">
+						会议名称：{{curData.title}}
+					</view>
+					<view class="m-bottom">
+						预约人：{{curData.reservations}}
+					</view>
+					<view class="m-bottom">
+						预约人电话：{{curData.reserphone}}
+					</view>
+					<view class="m-bottom">
+						预约时段：{{curData.time}}{{curData.period}}
+					</view>
+					<view class="m-bottom">
+						预约会议室：{{curData.room}}
+					</view>
+					<view class="m-bottom">
+						参会人数：{{curData.peoples}}人
+					</view>
+					<view class="m-bottom">
+						备注：{{curData.remark}}
+					</view>
+				</view>
+			<button  v-if="curData.tag==true" class="bg-blue cu-btn round" style="margin-top: 10px;margin-bottom: 10px;"  @tap="showModal" data-target="Modal">撤销会议</button>
+			</view>
+		</view>
+		<view class="cu-timeline"  v-for="(item,index) in meetingdate">
+			<view class="cu-item text-blue" @click="detial(item)">
 				<view class="cu-list menu-avatar radius" >
 					<view class="cu-item bg-gradual-blue">
 						<view class="content" style="left: 8px;">
-							<text>2021-06-07</text> 
-							无记录
+							<text>{{item.time}}</text> 
+							      {{item.title}}
+							<view class="margin-top">{{item.content}}</view>
 						</view>
 						<view class="action" style="margin-right: 8px">
-							<view class="text-white text-xs">22:20</view>
-							<view v-if="tag==true" class="cu-tag round bg-green sm" >待开会</view>
-							<view v-if="tag==false" class="cu-tag round bg-orange sm">已撤销</view>
+							<view class="text-white text-xs">{{item.seconde}}</view>
+							<view v-if="item.tag!=null ">
+								<view v-if="item.tag==true" class="cu-tag round bg-green sm" >待开会</view>
+								<view v-if="item.tag==false" class="cu-tag round bg-orange sm">已撤销</view>
+							</view>
+							<view v-else="item.tag==null " >
+								<view class="cu-tag round bg-orange sm">{{item.state}}</view>
+							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-			<view class="cu-item text-blue" @click="modalVisable1 = true">
-				<view class="cu-list menu-avatar radius" >
-					<view class="cu-item bg-gradual-blue">
-						<view class="content" style="left: 8px;">
-							<text>2021-06-06</text> 
-							XX会议记录5
-							<view class="margin-top">出售烟草战略5</view>
-						</view>
-						<view class="action" style="margin-right: 8px">
-							<view class="text-white text-xs">22:20</view>
-							<view class="cu-tag round bg-gray sm">已完成</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="cu-item text-blue" @click="modalVisable2 = true">
-				<view class="cu-list menu-avatar radius" >
-					<view class="cu-item bg-gradual-blue">
-						<view class="content" style="left: 8px;">
-							<text>2021-06-05</text> 
-							XX会议记录4
-							<view class="margin-top">出售烟草战略4</view>
-						</view>
-						<view class="action" style="margin-right: 8px">
-							<view class="text-white text-xs">22:20</view>
-							<view class="cu-tag round bg-orange sm">已撤销</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="cu-item text-blue" @click="modalVisable3 = true">
-				<view class="cu-list menu-avatar radius" >
-					<view class="cu-item bg-gradual-blue">
-						<view class="content" style="left: 8px;">
-							<text>2021-06-04</text> 
-							XX会议记录3
-							<view class="margin-top">出售烟草战略3</view>
-						</view>
-						<view class="action" style="margin-right: 8px">
-							<view class="text-white text-xs">22:20</view>
-							<view class="cu-tag round bg-red sm">强制撤销</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="cu-item text-blue" @click="modalVisable4 = true">
-				<view class="cu-list menu-avatar radius" >
-					<view class="cu-item bg-gradual-blue">
-						<view class="content" style="left: 8px;">
-							<text>2021-06-03</text> 
-							XX会议记录1
-							<view class="margin-top">出售烟草战略2</view>
-						</view>
-						<view class="action" style="margin-right: 8px">
-							<view class="text-white text-xs">22:20</view>
-							<view class="cu-tag round bg-gray sm">已完成</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="cu-modal" :class="modalVisable==true?'show':''">
-				<view class="cu-dialog" style="height: 30%;">
-					<view class="cu-bar bg-white justify-end">
-						<view class="content">预约详情</view>
-						<view class="action" @tap="modalVisable = false">
-							<text class="cuIcon-close text-red"></text>
-						</view>
-					</view>
-					<view class="padding-xl" style="padding: 0px;height:100%;">
-						<view class="cu-form-group align-start"  style="height:55%;">
-							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
-							placeholder="会议名称：项目周例会议
-											预约时间：2021-06-07 上午 
-											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
-											参会人数:10人"
-							>
-							</textarea>
-							</br>
-						</view>
-						<button  v-if="tag==true" class="bg-blue cu-btn round" style="margin-top: 10px;"  @tap="showModal" data-target="Modal">撤销会议</button>
-					</view>
-				</view>
-			</view>
-			<view class="cu-modal" :class="modalVisable1==true?'show':''">
-				<view class="cu-dialog" style="height: 30%;">
-					<view class="cu-bar bg-white justify-end">
-						<view class="content">预约详情</view>
-						<view class="action" @tap="modalVisable1 = false">
-							<text class="cuIcon-close text-red"></text>
-						</view>
-					</view>
-					<view class="padding-xl" style="padding: 0px;height:100%;">
-						<view class="cu-form-group align-start"  style="height:55%;">
-							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
-							placeholder="会议名称：项目周例会议
-											预约时间：2021-06-06 上午 
-											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
-											参会人数:10人"
-							>
-							</textarea>
-							</br>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="cu-modal" :class="modalVisable2==true?'show':''">
-				<view class="cu-dialog" style="height: 30%;">
-					<view class="cu-bar bg-white justify-end">
-						<view class="content">预约详情</view>
-						<view class="action" @tap="modalVisable2 = false">
-							<text class="cuIcon-close text-red"></text>
-						</view>
-					</view>
-					<view class="padding-xl" style="padding: 0px;height:100%;">
-						<view class="cu-form-group align-start"  style="height:55%;">
-							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
-							placeholder="会议名称：项目周例会议
-											预约时间：2021-06-05 上午 
-											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
-											参会人数:10人"
-							>
-							</textarea>
-							</br>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="cu-modal" :class="modalVisable3==true?'show':''">
-				<view class="cu-dialog" style="height: 30%;">
-					<view class="cu-bar bg-white justify-end">
-						<view class="content">预约详情</view>
-						<view class="action" @tap="modalVisable3 = false">
-							<text class="cuIcon-close text-red"></text>
-						</view>
-					</view>
-					<view class="padding-xl" style="padding: 0px;height:100%;">
-						<view class="cu-form-group align-start"  style="height:55%;">
-							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
-							placeholder="会议名称：项目周例会议
-											预约时间：2021-06-04 上午 
-											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
-											参会人数:10人"
-							>
-							</textarea>
-							</br>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="cu-modal" :class="modalVisable4==true?'show':''">
-				<view class="cu-dialog" style="height: 30%;">
-					<view class="cu-bar bg-white justify-end">
-						<view class="content">预约详情</view>
-						<view class="action" @tap="modalVisable4 = false">
-							<text class="cuIcon-close text-red"></text>
-						</view>
-					</view>
-					<view class="padding-xl" style="padding: 0px;height:100%;">
-						<view class="cu-form-group align-start"  style="height:55%;">
-							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
-							placeholder="会议名称：项目周例会议
-											预约时间：2021-06-03 上午 
-											预约会议室:烟草公司.A区域.1号楼.1-205 会议室
-											参会人数:10人"
-							>
-							</textarea>
-							</br>
-						</view>
-					</view>
-				</view>
-			</view>
+			</view>	
 			<view class="cu-modal" :class="modalName=='Modal'?'show':''">
 				<view class="cu-dialog" >
 					<view class="cu-bar bg-white justify-end">
@@ -225,13 +97,92 @@
 				modalName: null,
 				indexDate:0,
 				date: "2021-06",
-				modalVisable: false,
-				modalVisable1: false,
-				modalVisable2: false,
-				modalVisable3: false,
-				modalVisable4: false,
 				size: false,
-				tag:true
+				tag:true,
+				curData:{},
+				modalVisable:false,
+				meetingdate:[
+					{
+						reservations:"王安",
+						reserphone:"15877875112",
+						tag:true,
+						title:"XX会议记录6",
+						content:"出售烟草战略6",
+						seconde:"22:20",
+						time:'2021-06-07',
+						period:"上午",
+						room:"烟草公司.A区域.1号楼.1-205",
+						detail:"会议名称：项目周例会议 预约时间：2021-06-07 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人",
+						state:"待开会",
+						color:"bg-green",
+						peoples:10,
+						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
+					},
+					{
+						reservations:"王安",
+						reserphone:"15877875112",
+						tag:false,
+						title:"XX会议记录5",
+						content:"出售烟草战略5",
+						seconde:"22:20",
+						time:'2021-06-06',
+						period:"上午",
+						room:"烟草公司.A区域.1号楼.1-205",
+						detail:"会议名称：项目周例会议 预约时间：2021-06-06 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人"	,
+						state:"已完成",
+						color:"bg-gray",
+						peoples:10,
+						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
+					},
+					{
+						reservations:"王安",
+						reserphone:"15877875112",
+						tag:false,
+						title:"XX会议记录4",
+						content:"出售烟草战略4",
+						seconde:"22:20",
+						time:'2021-06-05',
+						period:"上午",
+						room:"烟草公司.A区域.1号楼.1-205",
+						detail:"会议名称：项目周例会议 预约时间：2021-06-05 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人"	,
+						state:"已撤销",
+						color:"bg-orange",
+						peoples:10,
+						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
+					},
+					{
+						reservations:"王安",
+						reserphone:"15877875112",
+						tag:false,
+						title:"XX会议记录3",
+						content:"出售烟草战略3",
+						seconde:"22:20",
+						time:'2021-06-04',
+						period:"上午",
+						room:"烟草公司.A区域.1号楼.1-205",
+						detail:"会议名称：项目周例会议 预约时间：2021-06-04 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人"	,
+						state:"强制撤销",
+						color:"bg-red",
+						peoples:10,
+						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
+					},
+					{
+						reservations:"王安",
+						reserphone:"15877875112",
+						tag:false,
+						title:"XX会议记录2",
+						content:"出售烟草战略2",
+						seconde:"22:20",
+						time:'2021-06-03',
+						period:"上午",
+						room:"烟草公司.A区域.1号楼.1-205",
+						detail:"会议名称：项目周例会议 预约时间：2021-06-03 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人"	,
+						state:"已完成",
+						color:"bg-gray",
+						peoples:10,
+						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
+					},
+				]
 			};
 		},
 		methods:{
@@ -239,18 +190,30 @@
 			DateChange(e) {
 				this.date = e.detail.value
 			},
+			detial(item) {
+				this.curData = item;
+				this.modalVisable = true;
+			},
 			//撤销对话框
 			showModal(e) {
 				this.modalName = e.currentTarget.dataset.target;
-				this.tag=false;
+				this.curData.tag=false;
 			},
 			hideModal(e) {
 				this.modalName = null
+			},
+			hideModal1(e) {
+				this.modalVisable = false
 			},
 		}
 	}
 </script>
 
 <style>
-
+.m-view {
+	text-align: left;
+}
+.m-bottom {
+	margin-bottom: 10rpx;
+}
 </style>

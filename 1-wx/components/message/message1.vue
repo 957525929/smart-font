@@ -1,12 +1,12 @@
 <template>
 	<view>
 		<view v-for="(item,index) in messagelist" :key="index">
-			<view class="card">
+			<view class="card" @tap="clickDetail(item)">
 				<span class="card-left">
 					<image class="card-img" src="../../static/message.png" mode="scaleToFill"
 						style="width: 60px; height: 60px;"></image>
 				</span>
-				<span class="card-center">
+				<span class="card-center" >
 					<view>
 						来自
 						<span class="name">{{' '+ item.name +' '}}</span>
@@ -24,9 +24,9 @@
 					<view @tap="colorChange">
 						{{item.type}}
 					</view>
-					<view v-if="item.red" class="cu-tag round bg-red sm"></view>
-					<view v-if="item.green" class="cu-tag round bg-green sm"></view>
+					<view v-if="item.message" class="cu-tag round bg-red sm" style="margin-bottom: 12px;">1</view>
 				</span>
+
 			</view>
 		</view>
 	</view>
@@ -40,16 +40,22 @@
 				messagelist: [{
 						name: '赵大华',
 						content: '项目会议',
+						contentData: `请您于${new Date().getFullYear() + "-" +
+							(new Date().getMonth() + 1) + "-" +
+							(new Date().getDate() - 20)}下午的3:00的参加项目会议`,
 						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth()+1) + "月" +
-							(new Date().getDate()-20) + "日"+" "+'12:46',
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate() - 20) + "日" + " " + '12:46',
 						// type: "删除",
 						typeId: 0,
-						red: '1'
+						message: '1'
 					},
 					{
 						name: '王鹏翔',
 						content: '私人访问',
+						contentData: `请您于${new Date().getFullYear() + "-" +
+							(new Date().getMonth() + 1) + "-" +
+							(new Date().getDate() - 10)}下午的3:00的参加项目会议`,
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() - 10) + "日" + " " + '13:46',
@@ -60,21 +66,27 @@
 					{
 						name: '赵二喜',
 						content: '项目会议',
+						contentData: `请您于${new Date().getFullYear() + "-" +
+							(new Date().getMonth() + 1) + "-" +
+							(new Date().getDate() - 7)}上午的10:00的参加项目会议`,
 						type: "删除",
 						typeId: 1,
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() - 7) + "日" + " " + '10:31',
+							(new Date().getDate() - 7) + "日" + " " + '08:31',
 					},
 					{
 						name: '赵冰冰',
 						content: '项目会议改期',
+						contentData: `请您于${new Date().getFullYear() + "-" +
+							(new Date().getMonth() + 1) + "-" +
+							(new Date().getDate())}上午的5:00的参加项目会议`,
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '15:46',
 						// type: "删除",
 						typeId: 2,
-						green: '1'
+						message: '1'
 					},
 
 				],
@@ -98,7 +110,10 @@
 
 
 		methods: {
-
+			clickDetail(index) {
+				console.log(index)
+				this.$emit('send', index)
+			},
 		}
 	}
 </script>

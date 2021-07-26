@@ -77,6 +77,12 @@
 	}]
 
 	export default {
+		onLoad(op){
+			if(op){
+				this.onjs = JSON.parse(op.onjs)
+				console.log(this.onjs)
+			}
+		},
 		data() {
 			return {
 				title: "你好，管理员",

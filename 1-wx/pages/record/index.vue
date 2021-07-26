@@ -29,16 +29,18 @@
 			</scroll-view>
 
 			<block v-if="TabCur==0">
-				<recordCard :cardType="type[0]" />
+				<navigator class="action" @tap="gotoDetail" >
+					<recordCard :cardType="type[0]" @send="recordDetailed"/>
+				</navigator>
 			</block>
 			<block v-if="TabCur==1">
-				<navigator class="action" url="../allow/index">
-					<recordCard :cardType="type[1]" />
+				<navigator class="action" @tap="gotoAllow">
+					<recordCard :cardType="type[1]" @send="recordDetailed"/>
 				</navigator>
 			</block>
 			<block v-if="TabCur==2">
-				<navigator class="action" @tap="goToDisAgree">
-					<recordCard :cardType="type[2]" />
+				<navigator class="action" @tap="gotoDetail" >
+					<recordCard :cardType="type[2]" @send="recordDetailed"/>
 				</navigator>
 			</block>
 		</scroll-view>
@@ -56,25 +58,6 @@
 			</view>
 		</scroll-view>
 
-<!-- 		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
-			<view class="cu-dialog">
-				<view class="cu-bar bg-white justify-end">
-					<view class="content">拒绝原因</view>
-					<view class="action" @tap="hideModal">
-						<text class="cuIcon-close text-red"></text>
-					</view>
-				</view>
-				<view class="padding-xl">
-					{{reason}}
-				</view>
-				<view class="cu-bar bg-white justify-end">
-					<view class="action">
-						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
-					</view>
-				</view>
-			</view>
-		</view> -->
-
 	</view>
 </template>
 
@@ -84,6 +67,7 @@
 	export default {
 		data() {
 			return {
+				recordData:'',
 				modalName: null,
 				reason: '被访人出差',
 				TabCur: 0,
@@ -119,11 +103,22 @@
 				this.TabCur = data
 				console.log(this.TabCur)
 			},
-			goToDisAgree() {
+			gotoDetail() {
+				var onjs = JSON.stringify(this.recordData)
+				console.log(this.onjs)
 				uni.navigateTo({
-					url: "/pages/verify/index3"
+					url: "/pages/verify/index3?onjs=" + onjs
 				});
 				// console.log('1111')
+			},
+			gotoAllow(){
+				var onjs = JSON.stringify(this.recordData)
+				uni.navigateTo({
+					url: "/pages/allow/index?onjs=" + onjs
+				});
+			},
+			recordDetailed(item){
+				this.recordData=item
 			}
 		}
 	}

@@ -24,6 +24,12 @@
 				</view>
 				<view class="padding-xl m-view">
 					<view class="m-bottom">
+						预订人：{{curData.reservations}}
+					</view>
+					<view class="m-bottom">
+						预定人电话：{{curData.reserphone}}
+					</view>
+					<view class="m-bottom">
 						预订时间：{{curData.time}}
 					</view>
 					<view class="m-bottom">
@@ -55,55 +61,7 @@
 					</view>
 				</view>
 			</view>
-			<!-- <view class="cu-modal" :class="modalVisable2==true?'show':''">
-				<view class="cu-dialog" style="height: 30%;">
-					<view class="cu-bar bg-white justify-end">
-						<view class="content">预订详情</view>
-						<view class="action" @tap="modalVisable2 = false">
-							<text class="cuIcon-close text-red"></text>
-						</view>
-					</view>
-					<view class="padding-xl" style="padding: 0px;height:100%;">
-						<view class="cu-form-group align-start"  style="height:65%;">
-							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
-							placeholder="预定酒店：福州品悦酒店
-											预约时间：2021-06-06号至10号(共4天)
-											酒店地址:福州东浦路59号
-											联系人:尤晓梅   电话号码:13053955537
-											备注:一间标间,入住人:刘毅,吴查
-											"
-							>
-							</textarea>
-							</br>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="cu-modal" :class="modalVisable3==true?'show':''">
-				<view class="cu-dialog" style="height: 30%;">
-					<view class="cu-bar bg-white justify-end">
-						<view class="content">预订详情</view>
-						<view class="action" @tap="modalVisable3 = false">
-							<text class="cuIcon-close text-red"></text>
-						</view>
-					</view>
-					<view class="padding-xl" style="padding: 0px;height:100%;">
-						<view class="cu-form-group align-start"  style="height:65%;">
-							<textarea maxlength="-1" disabled=true @input="textareaBInput"  style="height:100%;text-align:left;"
-							placeholder="预定酒店：福州世纪金源酒店
-											预约时间：2021-06-07号至09号(共2天)
-											酒店地址:福州温泉公园路59号
-											联系人:黄丽娟   电话号码:13659655381
-											备注:一间大床房,入住人:张钰
-											"
-							>
-							</textarea>
-							</br>
-						</view>
-					</view>
-				</view>
-			</view> -->
-
+			
 		</view>
 	</view>
 </template>
@@ -119,10 +77,10 @@
 				modalVisable:false,
 				curData:{},
 				// modalVisable: false,
-				// modalVisable1: false,
-				// modalVisable2: false,
-				// modalVisable3: false,
+
 				hoteldate: [{
+						reservations:"王安",
+						reserphone:"15877875112",
 						time: '2021-06-05',
 						name: '福州富力威斯汀酒店预定',
 						address:'福州东浦路',
@@ -131,6 +89,8 @@
 						remark: "两间标间,入住人:刘嘉林,李查,林夕,郑华"
 					},
 					{
+						reservations:"王安",
+						reserphone:"15877875112",
 						time: '2021-06-06',
 						name: '福州品悦酒店',
 						address:'福州东浦路59号',
@@ -139,6 +99,8 @@
 						remark: "备注:一间标间,入住人:刘毅,吴查"
 					},
 					{
+						reservations:"王安",
+						reserphone:"15877875112",
 						time: '2021-06-07',
 						name: '福州温泉公园路59号',
 						linkman:'林梅',

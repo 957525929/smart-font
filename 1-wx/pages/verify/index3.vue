@@ -13,7 +13,8 @@
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">申请状态</view>
-			<view class="text-red">已拒绝</view>
+			<view v-if="this.onjs.disagree" class="text-red">已拒绝</view>
+			<view v-else class="text-blue">待审核</view>
 		</view>
 
 
@@ -25,12 +26,12 @@
 
 		<view class="cu-form-group ">
 			<view class="title">部门</view>
-			{{person.department}}
+			{{this.onjs.department}}
 		</view>
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">姓名</view>
-			<view>{{person.name}}</view>
+			<view>{{this.onjs.visit}}</view>
 		</view>
 
 
@@ -42,7 +43,7 @@
 
 		<view class="cu-form-group">
 			<view class="title">日期</view>
-			{{date}}
+			{{this.date}}
 		</view>
 
 		<view class="cu-bar bg-white">
@@ -50,22 +51,37 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">开始时间</view>
-			{{time}}
+			{{this.onjs.startTime}}
 		</view>
 		<view class="cu-form-group">
 			<view class="title">结束时间</view>
-			{{time1}}
+			{{this.onjs.endTime}}
 		</view>
-
-		<view class="cu-bar bg-white margin-top">
-			<view class='text-xl padding'>
-				<text class="text-black text-bold">· 拒绝原因</text>
+		
+		<view v-if="!this.onjs.disagree">
+			<view class="cu-bar bg-white margin-top">
+				<view class='text-xl padding'>
+					<text class="text-black text-bold">· 备注</text>
+				</view>
+			</view>
+		
+			<view class="cu-form-group align-start ">
+				<!-- <view class="title">被访人不在</view> -->
+				{{content}}
 			</view>
 		</view>
 
-		<view class="cu-form-group align-start ">
-			<!-- <view class="title">被访人不在</view> -->
-			{{content}}
+		<view v-if="this.onjs.disagree">
+			<view class="cu-bar bg-white margin-top">
+				<view class='text-xl padding'>
+					<text class="text-black text-bold">· 拒绝原因</text>
+				</view>
+			</view>
+
+			<view class="cu-form-group align-start ">
+				<!-- <view class="title">被访人不在</view> -->
+				{{disagreeContent}}
+			</view>
 		</view>
 
 	</view>
@@ -73,32 +89,20 @@
 </template>
 <script>
 	export default {
-		created: function() {
-			let aData = new Date();
-
-			// this.date =
-			// 	aData.getFullYear() + "-" +
-			// 	(aData.getMonth() + 1) + "-" +
-			// 	(aData.getDate())
-
+		onLoad(op) {
+			if (op) {
+				this.onjs = JSON.parse(op.onjs)
+				console.log(this.onjs)
+				this.date = this.onjs.time.slice(0, 10);
+				console.log(this.date)
+			}
 		},
 		data() {
 			return {
 				modalName: null,
 				index: -1,
-				time: '14.00',
-				time1: '16.00',
-				person: {
-					name: '林雨馨',
-					department: '安全管理处',
-					type: 'allow',
-					people: '倪友聪',
-				},
-				PageCur: 'appoient',
-				date: new Date().getFullYear() + "-" +
-					(new Date().getMonth()) + "-" +
-					(new Date().getDate() - 20),
-				content: '被访问人不在'
+				disagreeContent: '被访问人不在',
+				content:'私人访问'
 			}
 		},
 		methods: {
