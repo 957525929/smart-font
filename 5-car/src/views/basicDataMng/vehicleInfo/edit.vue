@@ -34,7 +34,7 @@
             <a-input v-model="basicInfo.seatNum" />
           </a-form-model-item>
           <a-form-model-item label="购车时间">
-            <a-date-picker v-model="basicInfo.date1" type="date" placeholder="选择发车时间" style="width: 100%" />
+            <a-date-picker v-model="basicInfo.date1" type="date" placeholder="选择用车时间" style="width: 100%" />
           </a-form-model-item>
           <a-form-model-item label="车辆图片">
             <a-button> <a-icon type="upload" /> 重新上传 </a-button>

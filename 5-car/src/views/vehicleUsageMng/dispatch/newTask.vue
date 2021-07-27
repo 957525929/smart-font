@@ -24,7 +24,7 @@
         <a-input v-model="form.seatNum" />
       </a-form-model-item>
       <a-form-model-item label="用车时间">
-        <a-date-picker v-model="form.date1" show-time type="date" placeholder="选择发车时间" style="width: 100%" />
+        <a-date-picker v-model="form.date1" show-time type="date" placeholder="选择用车时间" style="width: 100%" />
       </a-form-model-item>
       <a-form-model-item label="用车事由">
         <a-input v-model="form.reason" />

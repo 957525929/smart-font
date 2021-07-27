@@ -1,189 +1,208 @@
 <template>
-    <a-row :gutter="10">
-        <a-col :md="24" :sm="24">
-            <a-card :bordered="false">
-                <TableModal ref="groupModal" title="添加分组" :infoDetail="groupInfo"></TableModal>
-                <a-row>
-                    <!-- <a-col :md="7" :sm="24"> -->
-                    <a-button @click="handleAdd(2)" type="primary" style="margin: 10px">添加分组</a-button>
-                    <a-button
-                        type="primary"
-                        icon="download"
-                        @click="handleExportXls('部门信息')"
-                        style="margin-left: 10px"
-                        >导出</a-button
-                    >
-                    <a-upload
-                        name="file"
-                        :showUploadList="false"
-                        :multiple="false"
-                        :headers="tokenHeader"
-                        :action="importExcelUrl"
-                        @change="handleImportExcel"
-                    >
-                        <a-button type="primary" icon="import" style="margin: 10px">导入</a-button>
-                    </a-upload>
-                    <a-button style="margin: 10px" @click="handleAdd">批量删除</a-button>                        
-                    <!-- </a-col> -->
+  <div>
+    <a-card>
+      <div class="table-operator">
+        <a-button
+          @click="handleAdd"
+          type="primary"
+          icon="plus"
+        >新增</a-button>
+        <a-modal
+          v-model="addVisible"
+          title="新增"
+          @ok="addOk"
+        >
+          <a-row
+            type="flex"
+            align="middle"
+          >
+            <a-col :span="4">名称：</a-col>
+            <a-col :span="10">
+              <a-input
+                style="width: 100%"
+                placeholder="请输入名称"
+                v-model="title"
+                allowClear
+              ></a-input>
+            </a-col>
+          </a-row>
+        </a-modal>
+      </div>
+      <a-table
+        :columns="columns"
+        :data-source="dataSource"
+        :expandedRowsChange="expandedRowKeys"
+      >
+        <span
+          slot="action"
+          slot-scope="text, record"
+        >
+          <a @click="nextAdd(record)">添加下级</a>
+          <a-modal
+            v-model="nextAddVisible"
+            title="添加下级"
+            @ok="nextAddOk"
+          >
+            <a-row
+              type="flex"
+              align="middle"
+            >
+              <a-col :span="4">名称：</a-col>
+              <a-col :span="14">
+                <a-input
+                  style="width: 100%"
+                  placeholder="请输入名称"
+                  v-model="nextName"
+                  allowClear
+                ></a-input>
+              </a-col>
+            </a-row>
+            <br />
+            <a-row
+              type="flex"
+              align="middle"
+              v-if="rowRecord.value == 2 || rowRecord.value == 3"
+            >
+              <a-col :span="4">上级名称：</a-col>
+              <a-col :span="14">
+                <a-input
+                  style="width: 100%"
+                  v-model="rowRecord.upName"
+                  allowClear
+                ></a-input>
+              </a-col>
+            </a-row>
+          </a-modal>
 
-                </a-row>
-                <div style="background: #fff; padding-left: 16px; height: 100%; margin-top: 5px">
-                    <a-input-search style="width: 100%; margin-top: 10px" placeholder="请输入分组名称" />
-                    <!-- 树-->
-                    <template v-if="departTree.length > 0">
-                        <!--组织机构-->
-                        <a-tree
-                            :checkable="checkable"
-                            @check="onCheck"
-                            :selectedKeys="selectedKeys"
-                            :checkStrictly="true"
-                            @select="onSelect"
-                            :dropdownStyle="{ maxHeight: '200px', overflow: 'auto' }"
-                            :treeData="departTree"
-                            :autoExpandParent="autoExpandParent"
-                            :expandedKeys="iExpandedKeys"
-                            @expand="onExpand"
-                        />
-                    </template>
-                </div>
-            </a-card>
-        </a-col>
-        <!-- <a-col :md="17" :sm="24">
-            <a-card :bordered="false">
-                <TableModal
-                 title="添加分类"
-                  :infoDetail="devInfo"
-                   ref="devModal"
-                   />
-                <PageTemplate
-                    @clearSelectedDepartKeys="clearSelectedDepartKeys"
-                    :columns="devColumns"
-                    :searchCon="searchCon"
-                >
-                    <a-button @click="handleAdd(1)" type="primary" v-show="visible" style="marginBottom:10px" icon="plus">新增</a-button>
-                    
-                    <a-table :columns="devColumns" :data-source="data" v-show="visible">
-                        <span slot="action" slot-scope="text, record">
-                            <template v-for="(i, index) in record.action">
-                                <a-popconfirm
-                                    title="确认删除此零件?"
-                                    ok-text="是"
-                                    cancel-text="否"
-                                    @confirm="confirm"
-                                    @cancel="cancel"
-                                    v-if="i.com === 'TableDelete'"
-                                >
-                                    <a href="#" @click="showDelete">{{ i.tagName }}</a>
-                                </a-popconfirm>
-                                <template v-else>
-                                    <a href="#" @click.stop="handleOps(i.com, record.devId)">{{ i.tagName }}</a>
-                                    <component
-                                        :is="i.com"
-                                        :ref="i.com"
-                                        :key="index"
-                                        :title="i.tagName"
-                                        :infoDetail="infoDetail"
-                                    ></component>
-                                </template>
-                                <a-divider type="vertical" v-if="index !== record.action.length - 1" />
-                            </template>
-                        </span>
-                    </a-table>
-                </PageTemplate>
-            </a-card>
-        </a-col> -->
-    </a-row>
+          <a-divider type="vertical" />
+
+          <a @click="edit(record)">编辑</a>
+          <a-modal
+            v-model="editVisible"
+            title="编辑"
+            @ok="editOk"
+          >
+            <a-row
+              type="flex"
+              align="middle"
+            >
+              <a-col :span="4">名称：</a-col>
+              <a-col :span="14">
+                <a-input
+                  style="width: 100%"
+                  v-model="rowRecord.title"
+                  allowClear
+                ></a-input>
+              </a-col>
+            </a-row>
+            <br />
+
+            <a-row
+              type="flex"
+              align="middle"
+              v-if="rowRecord.value == 2 || rowRecord.value == 3"
+            >
+              <a-col :span="4">上级名称：</a-col>
+              <a-col :span="14">
+                <a-input
+                  style="width: 100%"
+                  v-model="rowRecord.upName"
+                  allowClear
+                ></a-input>
+              </a-col>
+            </a-row>
+          </a-modal>
+
+          <a-divider type="vertical" />
+
+          <a-popconfirm
+            title="确定删除吗？"
+            ok-text="确定"
+            cancel-text="取消"
+            @confirm="confirm"
+            @cancel="cancel"
+          >
+            <a
+              href="#"
+              v-if="record.value != 1"
+            >删除</a>
+          </a-popconfirm>
+        </span>
+      </a-table>
+    </a-card>
+  </div>
 </template>
-
 <script>
-//   import {queryMyDepartTreeList, searchByKeywords} from '@/api/api'
-//   import {JeecgListMixin} from '@/mixins/JeecgListMixin'
-import PageTemplate from '@/components/page/PageTemplate.vue'
-import TableModal from '@/components/tableOperation/modal/TableModal.vue'
-// js
-import { typeToComponent,DepartTree } from '@/utils/dataDictionary.js'
-import { groupInfo, devInfo, devColumns, data } from './js/index.js'
-const NEW_TOOLLIST = Object.freeze({ devColumns, data, groupInfo, typeToComponent, devInfo })
+import { DepartTree } from '@/utils/dataDictionary.js'
+
+const columns = [
+  { title: '名称', dataIndex: 'title', key: 'title', width: '40%' },
+  { title: '操作', dataIndex: 'action', scopedSlots: { customRender: 'action' } },
+]
+
 export default {
-    name: 'devConfig',
-    components: {
-        PageTemplate,
-        TableModal,
+  data() {
+    return {
+      columns: columns,
+      expandedRowKeys: [],
+      dataSource: DepartTree,
+      addVisible: false,
+      title: '',
+      editVisible: false,
+      rowRecord: '',
+      nextAddVisible: false,
+      count: 2,
+      nextName: '',
+      upName: '',
+    }
+  },
+  methods: {
+    handleAdd() {
+      this.addVisible = true
     },
-    data() {
-        return {
-            checkable:false,
-            departTree: DepartTree,
-            selectedKeys: [],
-            autoExpandParent: true,
-            iExpandedKeys: [],
-            //table
-            searchCon: {},
-            data: NEW_TOOLLIST.data,
-            devColumns: NEW_TOOLLIST.devColumns,
-            groupInfo: NEW_TOOLLIST.groupInfo.filter((item) => !item.hideInLogin),
-            devInfo: NEW_TOOLLIST.devInfo.filter((item) => !item.hideInLogin),
-            visible: false,
-            checkedSelected:[]
+    addOk() {
+      this.addVisible = false
+      if (this.title != '') {
+        const newData = {
+          key: this.count,
+          title: this.title,
+          value: 1,
+          children: [],
         }
+        this.dataSource = [...this.dataSource, newData]
+        this.count = this.count + 1
+      }
     },
-    mounted() {
-       this.devInfo.forEach(item=>{
-           if(item.valueEnum){
-               this.data.map(res=>{
-                   res[item.key] = item.valueEnum[res[item.key]].tableValue
-                   return res
-               })
-           }
-       })
+    edit(value) {
+      this.editVisible = true
+      this.rowRecord = value
     },
-    methods: {
-        handleAdd(num) {
-            this.checkable=true
-            if (num == 1) {
-                this.$refs.devModal.showModal()
-            } else if (num == 2) {
-                this.checkedSelected.length !== 1
-                    ? this.$message.warning('请选中唯一的上级部门！')
-                    : this.$refs.groupModal.showModal(this.selectedKeys);
-            }
-        },
-        onExpand(expandedKeys) {
-            this.iExpandedKeys = expandedKeys
-            this.autoExpandParent = false
-        },
-        onSelect(selectedKeys, e) {
-            this.currSelected = selectedKeys
-            let record = e.node.dataRef
-            this.visible = false
-            this.data = this.data.filter((item) => {
-                return item.devId == record.key
-            })
-            this.visible = true
+    editOk() {
+      this.editVisible = false
+    },
+    nextAdd(value) {
+      this.nextAddVisible = true
+      this.rowRecord = value
+    },
+    nextAddOk() {
+      this.nextAddVisible = false
 
-            // this.$refs.DeptRoleInfo.onClearSelected()
-            // this.$refs.DeptRoleInfo.open(record)
-        },
-        clearSelectedDepartKeys() {
-            this.checkedKeys = []
-            this.selectedKeys = []
-            this.currentDeptId = ''
-            this.$refs.DeptRoleInfo.currentDeptId = ''
-        },
-        onCheck(checkedKeys, info) {
-            this.checkedSelected = checkedKeys.checked
-            console.log('onCheck', checkedKeys, info)
-        },
+      if (this.nextName != '') {
+        const newData = {
+          key: this.count * 10,
+          title: this.nextName,
+          value: 2,
+          upName: this.upName,
+          children: [],
+        }
+        this.rowRecord.children = [...this.rowRecord.children, newData]
+        this.count = this.count * 10 + 1
+      }
     },
-    created() {
-
-        //   this.currFlowId = this.$route.params.id
-        //   this.currFlowName = this.$route.params.name
-        // this.loadTree()
-    },
+    confirm() {},
+    cancel() {},
+  },
 }
 </script>
-
-<style scoped>
-@import '~@assets/less/common.less';
+<style>
 </style>

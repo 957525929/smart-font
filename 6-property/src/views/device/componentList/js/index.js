@@ -1,4 +1,4 @@
-import { devType ,devStatus,DepartTree} from "@/utils/dataDictionary.js";
+import { devType, devStatus, DepartTree } from "@/utils/dataDictionary.js";
 import { handleTreeToCascade } from "@/utils/util.js";
 export const devColumns = [
     {
@@ -22,15 +22,15 @@ export const devColumns = [
         dataIndex: 'devStatus',
         width: 50,
         type: 'a-select',
-        valueEnum:devStatus ,
+        valueEnum: devStatus,
     },
     {
         title: '零件类型',
         dataIndex: 'devType',
         key: 'devType',
         width: 50,
-        type:"a-cascader",
-        valueEnum:handleTreeToCascade(DepartTree)
+        type: "a-cascader",
+        valueEnum: handleTreeToCascade(DepartTree)
     },
     // {
     //     dataIndex: 'institution',
@@ -79,7 +79,7 @@ export const devColumns = [
         key: 'action',
         scopedSlots: { customRender: 'action' },
         width: 80,
-        hideInSearch:true
+        hideInSearch: true
     },
 ]
 
@@ -89,26 +89,26 @@ export const data = [
         devId: 1001,
         devName: "日丰给排水管_1001",
         devType: "日丰给排水管",
-        devStatus: 4,
+        devStatus: "在用",
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
         techSituation: 0,
         fixStaff: '张英',
         loginTime: '2021-06-22 17:55:55',
-        manufacturer:"日丰企业集团有限公司",
-        batch:"M127894",
-        devPhone:"18259529231",
-        action:[{
-            tagName:"详情",
-            url:"device-DevDetail",
-            com:"router-link"
-        },{
-            tagName:"编辑",
-            com:"TableModal"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
+        manufacturer: "日丰企业集团有限公司",
+        batch: "M127894",
+        devPhone: "18259529231",
+        action: [{
+            tagName: "详情",
+            url: "device-DevDetail",
+            com: "router-link"
+        }, {
+            tagName: "编辑",
+            com: "TableModal"
+        }, {
+            tagName: "删除",
+            com: "TableDelete"
         }]
     },
     {
@@ -116,52 +116,52 @@ export const data = [
         devId: 2001,
         devName: "电线_2001",
         devType: "电线",
-        devStatus: 5,
+        devStatus: '在修',
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
         techSituation: 1,
         fixStaff: '刘涛',
         loginTime: '2021-06-21 10:55:55',
-        manufacturer:"国网福建省电力有限公司",
-        batch:"N2169",
-        devPhone:"18259529299",
-        action:[{
-            tagName:"详情",
-            url:"device-DevDetail",
-            com:"router-link"
-        },{
-            tagName:"编辑",
-            com:"TableModal"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
+        manufacturer: "国网福建省电力有限公司",
+        batch: "N2169",
+        devPhone: "18259529299",
+        action: [{
+            tagName: "详情",
+            url: "device-DevDetail",
+            com: "router-link"
+        }, {
+            tagName: "编辑",
+            com: "TableModal"
+        }, {
+            tagName: "删除",
+            com: "TableDelete"
         }]
     }, {
         key: 2,
         devId: 3001,
         devName: "格力巨型冷水机_3001",
         devType: "格力巨型冷水机",
-        devStatus: 6,
+        devStatus: '停用',
         assets: '烟草大厦',
         institution: '福建烟草公司',
         phone: '18232145698',
         techSituation: 2,
         fixStaff: '王翔',
         loginTime: '2021-06-29 08:55:55',
-        manufacturer:"珠海格力电器股份有限公司",
-        batch:"A2421",
-        devPhone:"18259529290",
-        action:[{
-            tagName:"详情",
-            url:"device-DevDetail",
-            com:"router-link"
-        },{
-            tagName:"编辑",
-            com:"TableModal"
-        },{
-            tagName:"删除",
-            com:""
+        manufacturer: "珠海格力电器股份有限公司",
+        batch: "A2421",
+        devPhone: "18259529290",
+        action: [{
+            tagName: "详情",
+            url: "device-DevDetail",
+            com: "router-link"
+        }, {
+            tagName: "编辑",
+            com: "TableModal"
+        }, {
+            tagName: "删除",
+            com: ""
         }]
     }
 ]
@@ -170,27 +170,27 @@ export const infoDetail = [
     {
         title: '零件编号',
         key: 'devId',
-        value:"",
-        hideInLogin:true
+        value: "",
+        hideInLogin: true
     },
     {
         title: '零件名称',
-        value:"",
+        value: "",
         key: 'devName'
     },
     {
         title: '零件类型',
-        value:"",
+        value: "",
         key: 'devType',
-        type:"a-cascader",
-        valueEnum:handleTreeToCascade(DepartTree)
+        type: "a-cascader",
+        valueEnum: handleTreeToCascade(DepartTree)
     },
     {
         title: '实际状态',
         key: 'devStatus',
-        value:"",
-        type:"a-select",
-        valueEnum:devStatus ,
+        value: "",
+        type: "a-select",
+        valueEnum: devStatus,
     },
     // {
     //     key: 'institution',
@@ -212,47 +212,47 @@ export const infoDetail = [
     {
         title: '维修员',
         key: 'fixStaff',
-        value:"",
+        value: "",
     },
     {
         title: '登记时间',
         key: 'loginTime',
-        value:"",
-        type:"a-date-picker",
-        hideInDetail:true
+        value: "",
+        type: "a-date-picker",
+        hideInDetail: true
     }
 ]
 
 export const loginInfo = [{
     title: '零件编号',
     key: 'devId',
-    value:"",
-    hideInLogin:true
+    value: "",
+    hideInLogin: true
 },
 {
     title: '零件名称',
-    value:"",
+    value: "",
     key: 'devName'
 },
 {
     title: '零件类型',
-    value:"",
+    value: "",
     key: 'devType',
-    type:"a-cascader",
-    valueEnum:handleTreeToCascade(DepartTree)
+    type: "a-cascader",
+    valueEnum: handleTreeToCascade(DepartTree)
 },
 {
     title: '实际状态',
     key: 'devStatus',
-    value:"",
-    type:"a-select",
-    valueEnum:devStatus
+    value: "",
+    type: "a-select",
+    valueEnum: devStatus
 },
-// {
-//     key: 'manufacturer',
-//     title: '生产厂家',
-//     value:"",
-//     type:"a-select",
-//     valueEnum:manufacturer
-// }
+    // {
+    //     key: 'manufacturer',
+    //     title: '生产厂家',
+    //     value:"",
+    //     type:"a-select",
+    //     valueEnum:manufacturer
+    // }
 ]

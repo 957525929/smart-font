@@ -82,7 +82,7 @@ const columns = [
     scopedSlots: { customRender: 'driver' },
   },
   {
-    title: '发车时间',
+    title: '用车时间',
     dataIndex: 'goTime',
   },
   {
