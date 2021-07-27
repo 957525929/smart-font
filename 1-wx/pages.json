@@ -142,13 +142,7 @@
 		}, {
 			"path": "pages/verify/index",
 			"style": {}
-		}, {
-			"path": "pages/verify/index1",
-			"style": {}
-		},  {
-			"path": "pages/verify/index2",
-			"style": {}
-		}, {
+		},{
 			"path": "pages/verify/index3",
 			"style": {}
 		}, {
@@ -170,6 +164,24 @@
 
 	    ,{
             "path" : "pages/trip/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/login/login",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/login/register",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

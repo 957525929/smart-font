@@ -6,7 +6,7 @@
 		</cu-custom>
 		<view class="firstRow">
 			<view class="text">
-				被访人：{{person.name}}
+				被访人：{{this.onjs.visit}}
 			</view>
 			<view class="refresh">
 				刷新 
@@ -15,14 +15,14 @@
 			</view>
 		</view>
 		<view class="secondRow">
-			被访部门：{{person.department}}
+			被访部门：{{this.onjs.department}}
 		</view>
 		<view class="thirdRow">
 			<view class="thirdTitle">
 				访问时段：
 			</view>
 			<view class="thirdContent">
-				{{person.time}}
+				{{this.date+" "+this.onjs.startTime +" "+"至"+" "+ this.date+" "+this.onjs.endTime}}
 			</view>
 		</view>
 		<view class="code">
@@ -41,19 +41,16 @@
 
 <script>
 	export default {
+		onLoad(op) {
+			if (op) {
+				this.onjs = JSON.parse(op.onjs)
+				console.log(this.onjs.time)
+				this.date = this.onjs.time.slice(0, 10);
+				console.log(this.onjs)
+			}
+		},
 		data() {
 			return {
-				person: {
-					name: '王莎莎',
-					department: '审计中心',
-					time: new Date().getFullYear() + "年" +
-							(new Date().getMonth()-1) + "月" +
-							(new Date().getDate()+6) + "日" +" "+"14:00"+ " "+"至"+" " +new Date().getFullYear() + "年" +
-							(new Date().getMonth()-1) + "月" +
-							(new Date().getDate()+6) + "日" +" "+"16:00",
-					type: 'allow'
-				},
-				value: '',
 
 			}
 		},

@@ -3,7 +3,7 @@
   <div class="table-page-search-wrapper">
     <a-form layout="inline">
       <a-row :gutter="10">
-        <a-col v-for="(item,index) in columns" :key="item.dataIndex" :md="5" :sm="10">
+        <a-col v-for="(item) in columns" :key="item.dataIndex" :md="5" :sm="10">
 
           <a-form-item :label="item.title">
             <a-select style="width:150px" v-if="item.type === 'a-select'" v-decorator="[`${item.dataIndex}`]" :placeholder="[`请选择${item.title}`]">

@@ -48,6 +48,14 @@
 					<input :value="formData.reason" name="reason"></input>
 				</view>
 				<view class="cu-form-group">
+					<view class="title">用车日期</view>
+					<input :value="date"></input>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">用车时间</view>
+					<input value="15:00"></input>
+				</view>
+				<view class="cu-form-group">
 					<view class="title">出发地</view>
 					<input value="福建省福州市闽侯县创业大厦" name="from"></input>
 					<text class='cuIcon-locationfill text-orange'></text>
@@ -95,12 +103,14 @@
 		        // console.log(option.reason); //打印出上个页面传递的参数。
 				this.formData.reason=option.reason
 				this.status=option.status
+				this.date=option.date
 		    },
 		data() {
 			return {
 				TabCur: 0,
 				scrollLeft: 0,
 				status:undefined,
+				date:undefined,
 				tabItems: ["基础信息", "调度信息"],
 				formData: {
 					user: '姜轶枫',

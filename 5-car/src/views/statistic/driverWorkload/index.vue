@@ -64,7 +64,7 @@ const columns = [
     dataIndex: 'passengerCount',
   },
   {
-    title: '发车时间',
+    title: '用车时间',
     dataIndex: 'goTime',
   },
   {

@@ -147,13 +147,13 @@ export default {
           title:'菜品分类',
           align:"center",
           dataIndex: 'type',
-          width:'30%',
+          width:'20%',
         },
         {
           title:'备注',
           align:"center",
           dataIndex: 'ps',
-          width:'50%',
+          width:'60%',
         },
         {
           title: '操作',

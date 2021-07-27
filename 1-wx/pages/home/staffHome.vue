@@ -25,11 +25,11 @@
 		data() {
 			return {
 				elements: [{
-						title: '申请记录',
-						name: 'applyList',
+						title: '预约记录',
+						name: 'appointList',
 						color: 'red',
 						cuIcon: 'calendar',
-						enName: 'ApplyList',
+						enName: 'AppointList',
 						route: '/pages/index/staff?PageCur=applyList'
 					},
 					{

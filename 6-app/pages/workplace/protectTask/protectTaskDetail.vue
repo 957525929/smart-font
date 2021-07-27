@@ -19,14 +19,12 @@
 		<FormDetail :dataSource="sourceData" v-else-if="TabCur===3">
 			<textarea slot="reason" placeholder="请输入" class="bg-grey radius margin"></textarea>
 			<textarea slot="handle" placeholder="请输入" class="bg-grey radius margin"></textarea>
-			<picker mode="time" :value="time" :start="time" @change="TimeChange"
-				slot="ficDoneTime">
+			<picker mode="time" :value="time" :start="time" @change="TimeChange" slot="ficDoneTime">
 				<view class="picker">
 					{{time}}
 				</view>
 			</picker>
-			<picker mode="date" :value="date" :start="date" @change="DateChange"
-				slot="ficDoneDate">
+			<picker mode="date" :value="date" :start="date" @change="DateChange" slot="ficDoneDate">
 				<view class="picker">
 					{{date}}
 				</view>
@@ -45,6 +43,7 @@
 	//vue
 	import DescriptionDetail from "@/components/DescriptionDetail/DescriptionDetail.vue"
 	import FormDetail from "@/components/FormDetail/FormDetail.vue"
+	import TaskCardItem from "@/components/TaskCardItem/TaskCardItem.vue"
 	const self = this
 	const NEW_PRODETAIL = Object.freeze({
 		...list,
@@ -62,13 +61,15 @@
 		},
 		components: {
 			DescriptionDetail,
-			FormDetail
+			FormDetail,
+			TaskCardItem
 		},
 		data() {
 			return {
 				img: NEW_PRODETAIL.img,
 				TabCur: 0,
 				taskId: "",
+<<<<<<< HEAD
 				areaKey:"",
 				basicData: [],
 				devData:[],
@@ -88,6 +89,33 @@
 					label: "proForm",
 					value: "表单上报",
 					dataIndex: "proForm"
+=======
+				currentData:[],
+				sourceData: [],
+				menuList: [{
+					label: "proAllBasicData",
+					value: "基本信息",
+					dataIndex: "proBasic",
+					comType: "DescriptionDetail",
+					key:"taskId"
+				}, {
+					label: "devData",
+					value: "养护设备",
+					dataIndex: "proDev",
+					comType: "TaskCardItem",
+					key:"devId"
+				}, {
+					label: "proAllPlanData",
+					value: "养护记录",
+					dataIndex: "proPlan",
+					comType: "DescriptionDetail"
+				}, {
+					label: "proForm",
+					value: "表单上报",
+					dataIndex: "proForm",
+					comType: "FormDetail",
+					key:"taskId"
+>>>>>>> 0396612c63343f3496255f0055c90232cdfa3362
 				}],
 				//time-picker
 				date: "",
@@ -97,8 +125,10 @@
 		methods: {
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id;
-				this.getData(this.menuList[this.TabCur].label, this.menuList[this.TabCur].dataIndex)
+				this.matchData(this.menuList[this.TabCur].label,this.menuList[this.TabCur].key)
+				this.getData(this.menuList[this.TabCur].label,this.menuList[this.TabCur].dataIndex)
 			},
+<<<<<<< HEAD
 			getBasic(){
 				this.basicData = []
 				let tempData = NEW_PRODETAIL.proAllBasicData.filter(item =>{
@@ -135,12 +165,23 @@
 				if (name !== "proForm") {
 					let tempData = NEW_PRODETAIL[name].filter(item =>{
 						return item.taskId == this.areaKey
+=======
+			matchData(name,key){
+				if (name !== "proForm") {
+					this.currentData = NEW_PRODETAIL[name].filter(item => {
+						return item[key] == this.taskId
+>>>>>>> 0396612c63343f3496255f0055c90232cdfa3362
 					})[0]
-					this.sourceData = NEW_PRODETAIL[dataIndex].filter(i=>!i.hideInDetail).map(item => {
-						if (item.valueEnum&&item.valueEnum.length!==0) {
-						    item.value = handleEnumData(item.valueEnum,tempData[item.key])
-						}else{
-							item.value = tempData[item.key]
+				} 			
+			},
+			getData(name,dataIndex) {
+				this.sourceData = []
+				if (name !== "proForm") {
+					this.sourceData = NEW_PRODETAIL[dataIndex].filter(i => !i.hideInDetail).map(item => {
+						if (item.valueEnum && item.valueEnum.length !== 0) {
+							item.value = handleEnumData(item.valueEnum, this.currentData[item.key])
+						} else {
+							item.value = this.currentData[item.key]
 						}
 						return item
 					})
@@ -157,4 +198,3 @@
 		}
 	}
 </script>
-

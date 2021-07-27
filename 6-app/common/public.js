@@ -192,10 +192,14 @@ const devData = [{
 		key: 0,
 		devId: 1001,
 		devName: "给水设备_1001",
+<<<<<<< HEAD
 		areaKey: "1-1-2",
 		address: "中国烟草总公司福建省公司机关-A区域-2号楼",
 		devType: 2,
 		devStatus: 4,
+=======
+		devType:"给排水系统",
+>>>>>>> 0396612c63343f3496255f0055c90232cdfa3362
 		loginTime: '2021-06-22 17:55:55',
 		manufacturer: "日丰企业集团有限公司",
 		batch: "M127894",
@@ -204,10 +208,14 @@ const devData = [{
 		key: 1,
 		devId: 2001,
 		devName: "供电设备_2001",
+<<<<<<< HEAD
 		areaKey: "1-2-1",
 		address: "中国烟草总公司福建省公司机关-B区域-1号楼",
 		devType: 1,
 		devStatus: 5,
+=======
+		devType: "电器系统",
+>>>>>>> 0396612c63343f3496255f0055c90232cdfa3362
 		loginTime: '2021-06-21 10:55:55',
 		manufacturer: "国网福建省电力有限公司",
 		batch: "N2169"
@@ -216,10 +224,14 @@ const devData = [{
 		key: 2,
 		devId: 3001,
 		devName: "空调_3001",
+<<<<<<< HEAD
 		areaKey: "1-2-3",
 		address: "中国烟草总公司福建省公司机关-B区域-3号楼",
 		devType: 0,
 		devStatus: 7,
+=======
+		devType:"空调、通风系统",
+>>>>>>> 0396612c63343f3496255f0055c90232cdfa3362
 		loginTime: '2021-06-19 08:55:55',
 		manufacturer: "珠海格力电器股份有限公司",
 		batch: "A2421"
@@ -230,7 +242,6 @@ const devData = [{
 		areaKey: "1-2-2",
 		address: "中国烟草总公司福建省公司机关-B区域-2号楼",
 		devType: "给排水系统 - 给排水系统",
-		devStatus: 6,
 		loginTime: '2021-06-12 17:55:55',
 		manufacturer: "日丰企业集团有限公司",
 		batch: "M127894"
@@ -242,7 +253,6 @@ const devData = [{
 		areaKey: "1-1-1",
 		address: "中国烟草总公司福建省公司机关-A区域-1号楼",
 		devType: "电器系统 - 供电设备",
-		devStatus: 8,
 		loginTime: '2021-06-11 10:55:55',
 		manufacturer: "国网福建省电力有限公司",
 		batch: "N2169"
@@ -254,7 +264,6 @@ const devData = [{
 		areaKey: "1-2-3",
 		address: "中国烟草总公司福建省公司机关-B区域-3号楼",
 		devType: "空调、通风系统 - 空调设备",
-		devStatus: 4,
 		loginTime: '2021-06-11 08:55:55',
 		manufacturer: "珠海格力电器股份有限公司",
 		batch: "A2421"

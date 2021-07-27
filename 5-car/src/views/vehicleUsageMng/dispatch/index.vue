@@ -18,7 +18,7 @@
             <div slot="description">
               {{ '用车人：' + item.user }}
               <a-divider type="vertical" />
-              {{ '用车时间：' + item.time }}
+              {{ '用车时间：' + item.time+'  15:00' }}
               <a-divider type="vertical" />
               {{ '出发地：' + item.from }}
               <a-divider type="vertical" />

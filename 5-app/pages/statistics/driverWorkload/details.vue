@@ -45,7 +45,7 @@
 					<input value="单程"></input>
 				</view>
 				<view class="cu-form-group">
-					<view class="title">发车时间</view>
+					<view class="title">用车时间</view>
 					<input value="2021-07-18 15:00"></input>
 				</view>
 				<view class="cu-form-group">

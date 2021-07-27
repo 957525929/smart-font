@@ -54,7 +54,7 @@
 <!--                        <a-date-picker  v-decorator="['startDate',{ rules: [{ required: true, message: '请选择!' }], initialValue:this.startDate }]" style="width: 45%"></a-date-picker>~<a-date-picker  v-decorator="['endDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>-->
                         <j-date  v-decorator="['startDate',{ rules: [{ required: true, message: '请选择!' }],initialValue:this.startDate, }]" style='width: 45%;'/>
                         <span class="query-group-split-cust"></span>
-                        <j-date  v-decorator="['endDate']" style='width: 45%;' />
+                        <j-date  v-decorator="['endDate',{ rules: [{ required: true, message: '请选择!' }],initialValue:this.endDate, }]" style='width: 45%;' />
                       </a-form-item>
                     </a-col>
                   </a-row>
@@ -81,7 +81,7 @@
                       <a-form-item label="付款周期">
                         <a-select
                           allowClear
-                          placeholder="请选择付款周期"
+                          default-value="年"
                         >
                           <a-select-option v-for="d in cycleSelectData" :key="d.value" >
                             {{ d.text }}
@@ -221,7 +221,7 @@
                     <a-form-item label="付款周期">
                       <a-select
                         allowClear
-                        placeholder="请选择付款周期"
+                        default-value="年"
                       >
                         <a-select-option v-for="d in cycleSelectData" :key="d.value" >
                           {{ d.text }}
@@ -305,6 +305,7 @@ export default {
       form1: this.$form.createForm(this),
       form2: this.$form.createForm(this),
       startDate:moment().format('YYYY-MM-DD'),
+      endDate:moment().subtract(-1, 'years').format('YYYY-MM-DD'),
       //承办人
       workerSelectData:[
         {
@@ -328,14 +329,10 @@ export default {
       userSelectData:[
         {
           value : 1,
-          text : '烟草公司',
-        },
-        {
-          value : 2,
           text : '方正有限公司',
         },
         {
-          value : 3,
+          value : 2,
           text : '卷烟厂',
         },
       ],
@@ -509,7 +506,7 @@ export default {
       console.log(value);
       this.a=this.userSelectData[value-1].text;
       console.log(this.a);
-      this.c=this.a+this.b+'合同';
+      this.c='出租'+this.b+'给'+this.a+'的合同';
       console.log(this.c);
     },
     //更改资产类型
@@ -517,7 +514,7 @@ export default {
       console.log(value)
       this.b=this.typeSelectData[value-1].text;
       console.log(this.b);
-      this.c=this.a+this.b+'合同';
+      this.c='出租'+this.b+'给'+this.a+'的合同';
       console.log(this.c);
     },
     //更改承租方
@@ -526,7 +523,7 @@ export default {
       this.a=this.userSelectData[value-1].text;
       this.a1=this.assetOwnerList[value-1].text;
       console.log(this.a);
-      this.d=this.a1+this.b+'合同';
+      this.d='承租'+this.a1+'的'+this.b1+'的合同';
       console.log(this.c);
     },
     //更改资产类型
@@ -534,7 +531,7 @@ export default {
       console.log(value)
       this.b1=this.typeSelectData[value-1].text;
       console.log(this.b);
-      this.d=this.a1+this.b1+'合同';
+      this.d='承租'+this.a1+'的'+this.b1+'的合同';
       console.log(this.c);
     },
   },

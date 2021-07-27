@@ -85,7 +85,8 @@
   .chart-card-content {
     margin-bottom: 12px;
     position: relative;
-    height: 46px;
+    //height: 45px;
+    height: 0px;
     width: 100%;
 
     .content-fix {

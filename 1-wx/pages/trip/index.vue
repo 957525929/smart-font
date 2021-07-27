@@ -31,22 +31,31 @@
 				<view class="cu-item" :class="2==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="2">
 					后日
 				</view>
+
+				<view class="cu-item" :class="3==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="3">
+					全部
+				</view>
 			</scroll-view>
 
 
 			<block v-if="TabCur==0">
 				<navigator class="action" @tap="goToAgree">
-					<recordCard2 :cardType="type[0]" />
+					<recordCard2 :cardType="type[0]" @send="dataDetail"/>
 				</navigator>
 			</block>
 			<block v-if="TabCur==1">
 				<navigator class="action" @tap="goToAgree">
-					<recordCard2 :cardType="type[1]" />
+					<recordCard2 :cardType="type[1]"  @send="dataDetail"/>
 				</navigator>
 			</block>
 			<block v-if="TabCur==2">
 				<navigator class="action" @tap="goToAgree">
-					<recordCard2 :cardType="type[2]" />
+					<recordCard2 :cardType="type[2]"  @send="dataDetail"/>
+				</navigator>
+			</block>
+			<block v-if="TabCur==3">
+				<navigator class="action" @tap="goToAgree">
+					<recordCard2 :cardType="allType[0]"  @send="dataDetail"/>
 				</navigator>
 			</block>
 		</scroll-view>
@@ -58,7 +67,7 @@
 
 			<search2 @send="getIndex1"></search2>
 			<view class="padding margin text-center">
-				<view class="cu-btn bg-yellow lg block shadow radius margin-xl" @tap="hideModal">
+				<view class="cu-btn bg-yellow lg block shadow radius margin-xl" @tap="hideModal1">
 					查询
 				</view>
 			</view>
@@ -81,6 +90,7 @@
 			return {
 				// time: '12:01',
 				// date: '2018-12-25',
+				appoientDetail:"",
 				modalName: null,
 				TabCur: 0,
 				scrollLeft: 0,
@@ -94,7 +104,13 @@
 				}, {
 					id: 2,
 					type: "后日"
-				}, ],
+				}],	
+				allType:[
+					{
+						id: 0,
+						allType: "全部"
+					}
+				]
 			};
 		},
 		components: {
@@ -114,6 +130,10 @@
 			hideModal(e) {
 				this.modalName = null
 			},
+			hideModal1(e) {
+				this.modalName = null
+				this.TabCur = '3'
+			},
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id;
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
@@ -122,16 +142,25 @@
 				this.TabCur = data
 				console.log(this.TabCur)
 			},
-			goToAllow() {
-				uni.navigateTo({
-					url: "/pages/verify/index"
-				});
-			},
+				
+			// goToAllow() {
+			// 	uni.navigateTo({
+			// 		url: "/pages/verify/index"
+			// 	});
+			// },
 			goToAgree() {
+				var onjs = JSON.stringify(this.appoientDetail)
 				uni.navigateTo({
-					url: "/pages/verify/index4"
+					url: "/pages/verify/index4?onjs="+onjs
 				});
 				// console.log('1111')
+				
+			},
+			dataDetail(value){
+				console.log("444444444444444")
+				console.log(value)
+				this.appoientDetail = value
+				// console.log(this.appoientDetail)
 			}
 		},
 	}

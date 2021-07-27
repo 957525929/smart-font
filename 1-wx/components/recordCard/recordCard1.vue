@@ -3,7 +3,7 @@
 		<view v-for="(item,index) in applylist" :key="index">
 			<!-- 判断传递过来的值显示对应状态 -->
 			<view v-if="item.type==cardType.type">
-				<view class="card">
+				<view class="card" @tap="recordDetail(item)">
 					<span class="picture">
 						<!-- 显示不同图片 -->
 						<image class="card-img" :src="imgSrc[cardType.id]" mode="scaleToFill"
@@ -53,6 +53,8 @@
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '09:46',
 						type: '待审核',
+						startTime:'10.00',
+						endTime:'12.00'
 					},
 					{
 						visit: '郑思楠',
@@ -61,14 +63,18 @@
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '13:51',
 						type: '待审核',
+						startTime:'14.00',
+						endTime:'16.00'
 					},
 					{
 						visit: '李伟恒',
 						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + " " + '17:46',
+							(new Date().getDate()) + "日" + " " + '11:46',
 						type: '待审核',
+						startTime:'13.00',
+						endTime:'15.00'
 					},
 					{
 						visit: '林泽宇',
@@ -78,19 +84,23 @@
 							(new Date().getDate() - 5) + "日" + " " + '15:24',
 						agreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth()) + "月" +
-							(new Date().getDate() - 5) + "日" + " " + '16:24',
+							(new Date().getDate() - 5) + "日" + " " + '15:30',
 						type: '已通过',
+						startTime:'16.00',
+						endTime:'18.00'
 					},
 					{
 						visit: '张国柱',
 						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() - 15) + "日" + " " + '4:26',
+							(new Date().getDate() - 15) + "日" + " " + '04:26',
 						agreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() - 15) + "日" + " " + '15:24',
+							(new Date().getDate() - 15) + "日" + " " + '10:24',
 						type: '已通过',
+						startTime:'13.00',
+						endTime:'15.00'
 					},
 					{
 						visit: '王鹏翔',
@@ -102,6 +112,8 @@
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '14:15',
 						type: '已通过',
+						startTime:'13.00',
+						endTime:'15.00'
 					},
 					{
 						visit: '华强北',
@@ -113,6 +125,8 @@
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() - 10) + "日" + " " + '16:59',
 						type: '已拒绝',
+						startTime:'17.00',
+						endTime:'19.00'
 					},
 					{
 						visit: '孙志远',
@@ -124,6 +138,8 @@
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() - 1) + "日" + " " + '17:31',
 						type: '已拒绝',
+						startTime:'18.00',
+						endTime:'20.00'
 					},
 				],
 				// 图片
@@ -153,7 +169,11 @@
 		props: ["cardType"],
 
 		methods: {
-			generatePhoneNum
+			generatePhoneNum,
+			recordDetail(item){
+				console.log(item)
+				this.$emit('send',item)
+			}
 		}
 	}
 </script>

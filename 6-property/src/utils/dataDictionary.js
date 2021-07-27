@@ -22,7 +22,7 @@ export const taskType = {
     4: { tableValue: '一级保养', searchValue: '一级保养', code: 4 },
     5: { tableValue: '二级保养', searchValue: '二级保养', code: 5 },
 }
-/*保养任务状态devStatus*/
+/*保养任务状态proStatus*/
 export const protaskStatus = {
     0: { tableValue: '待保养', searchValue: '待保养', code: 0 },
     1: { tableValue: '待核查', searchValue: '待核查', code: 1 },
@@ -339,38 +339,38 @@ export const groupTree = [{
         children: [{
             key: '1-1-1',
             title: '1号楼',
-            value: 'water-in'
+            value: '1号楼'
         },
         {
             key: '1-1-2',
             title: '2号楼',
-            value: 'water-out',
+            value: '2号楼',
         }],
         key: '1-1',
         title: 'A区域',
-        value: 'water',
+        value: 'A区域',
     }, {
         key: '1-2',
         title: 'B区域',
-        value: 'water',
+        value: 'B区域',
         children: [
             {
                 key: '1-2-1',
                 title: '1号楼',
-                value: 'water-in',
+                value: '1号楼',
             },
             {
                 key: '1-2-2',
                 title: '2号楼',
-                value: 'water-in',
+                value: '2号楼',
             },
             {
                 key: '1-2-3',
                 title: '3号楼',
-                value: 'water-in',
+                value: '3号楼',
             }]
     }],
     key: '1',
     title: '中国烟草总公司福建省公司机关',
-    value: 'water',
+    value: '中国烟草总公司福建省公司机关',
 }]

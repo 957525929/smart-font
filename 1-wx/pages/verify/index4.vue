@@ -14,11 +14,11 @@
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">姓名</view>
-			<view>{{person.name}}</view>
+			<view>{{this.onjs.visit}}</view>
 		</view>
 		<view class="cu-form-group solid-bottom">
 			<view class="title">手机号</view>
-			{{phone}}
+			{{this.onjs.phone}}
 		</view>
 
 		<view class="cu-bar bg-white margin-top">
@@ -29,20 +29,9 @@
 
 		<view class="cu-form-group">
 			<view class="title">日期</view>
-			{{date}}
+			{{this.onjs.time}}
 		</view>
 
-		<view class="cu-bar bg-white">
-			<view class="action">访问时间段</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="title">开始时间</view>
-			{{time}}
-		</view>
-		<view class="cu-form-group">
-			<view class="title">结束时间</view>
-			{{time1}}
-		</view>
 
 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
@@ -71,22 +60,27 @@
 			// 	(aData.getDate())
 
 		},
+		onLoad(op){
+			console.log(op)
+			if(op){
+				this.onjs = JSON.parse(op.onjs)
+				console.log(this.onjs)
+			}
+		},
 		data() {
 			return {
 				modalName: null,
 				index: -1,
-				time: '9.00',
-				time1: '12.00',
-				person: {
-					name: '王鹏翔',
-					type: 'allow',
-				},
-				PageCur: 'appoient',
-				date: new Date().getFullYear() + "-" +
-							(new Date().getMonth()) + "-" +
-							(new Date().getDate() - 10),
+				// person: {
+				// 	name: '王鹏翔',
+				// 	type: 'allow',
+				// },
+				// PageCur: 'appoient',
+				// date: new Date().getFullYear() + "-" +
+				// 			(new Date().getMonth()) + "-" +
+				// 			(new Date().getDate() - 10),
 				content: '私人会面',
-				phone: generatePhoneNum(),
+				// phone: generatePhoneNum(),
 			}
 		},
 		methods: {

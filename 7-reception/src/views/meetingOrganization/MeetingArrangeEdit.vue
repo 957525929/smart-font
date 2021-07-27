@@ -834,6 +834,7 @@ export default {
           this.$message.success('添加成功!')
           this.eatHotel = this.formHotel.hotel
           this.formHotel.hotel = undefined
+            this.flagHotel=false
         } else {
           console.log('error submit!!')
           return false
@@ -923,8 +924,10 @@ export default {
           }
           this.dataRoom.push(a)
           this.$message.success('添加成功!')
+           this.flagRoom=false
           this.formRoom.room = undefined
           this.formRoom.range = undefined
+          
         } else {
           console.log('error submit!!')
           return false

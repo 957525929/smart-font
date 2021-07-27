@@ -10,7 +10,11 @@
 					年份
 				</view>
 				<view class="mycard-ctx2">
-					2021
+					<picker @change="yearChange" :value="yearIndex" :range="yearRange">
+						<view class="picker">
+							{{yearIndex>-1?yearRange[yearIndex]:'2021'}}
+						</view>
+					</picker>
 				</view>
 			</view>
 			<view class="myCard2 backColor">
@@ -18,7 +22,11 @@
 					月份
 				</view>
 				<view class="mycard-ctx2">
-					7
+					<picker @change="monthChange" :value="monthIndex" :range="monthRange">
+						<view class="picker">
+							{{monthIndex>-1?monthRange[monthIndex]:'7'}}
+						</view>
+					</picker>
 				</view>
 			</view>
 		</view>
@@ -47,6 +55,10 @@
 	export default {
 		data() {
 			return {
+				yearIndex:-1,
+				yearRange:['2021','2020','2019','2018','2017','2016','2015','2014','2013','2012','2011','2010','2009','2008'],
+				monthIndex:-1,
+				monthRange:[1,2,3,4,5,6,7,8,9,10,11,12],
 				TabCur: 0,
 				scrollLeft: 0,
 				tabItems: ["审核中", "已通过", "未通过"],
@@ -106,6 +118,12 @@
 				uni.navigateTo({
 				    url: '/pages/useCarRecord/details?taskName='+item.taskName+'&user='+item.user+'&date='+item.date+'&reason='+item.reason+'&status='+this.TabCur
 				});
+			},
+			yearChange(e){
+				this.yearIndex = e.detail.value
+			},
+			monthChange(e){
+				this.monthIndex = e.detail.value
 			}
 		}
 	}
