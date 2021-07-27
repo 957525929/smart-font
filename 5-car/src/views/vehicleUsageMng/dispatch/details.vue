@@ -5,7 +5,7 @@
       <a-descriptions-item label="用车人"> {{ id.user }} </a-descriptions-item>
       <a-descriptions-item label="用车人电话"> {{ id.userContact }} </a-descriptions-item>
       <a-descriptions-item label="乘客数"> {{ id.passengerCount + '人' }}</a-descriptions-item>
-      <a-descriptions-item label="用车时间"> {{ id.time }}</a-descriptions-item>
+      <a-descriptions-item label="用车时间"> {{ id.time+'  15:00' }}</a-descriptions-item>
       <!-- <a-descriptions-item label="司机"> {{ id.driver }} </a-descriptions-item> -->
       <a-descriptions-item label="用车事由"> {{ id.reason }}</a-descriptions-item>
       <!-- <a-descriptions-item label="司机电话"> {{ id.driverContact }} </a-descriptions-item> -->
