@@ -4,7 +4,7 @@
       <a-descriptions-item label="用车人"> {{ id.user }} </a-descriptions-item>
       <a-descriptions-item label="用车人电话"> {{ id.userContact }} </a-descriptions-item>
       <a-descriptions-item label="乘客数"> {{ id.passengerCount + '人' }}</a-descriptions-item>
-      <a-descriptions-item label="用车时间"> {{ id.time }}</a-descriptions-item>
+      <a-descriptions-item label="用车时间"> {{ id.time +'  15:00'}}</a-descriptions-item>
       <a-descriptions-item label="用车事由" :span="2"> {{ id.reason }}</a-descriptions-item>
       <a-descriptions-item label="出发地"> {{ id.from }} </a-descriptions-item>
       <a-descriptions-item label="目的地">{{ id.to }} </a-descriptions-item>
