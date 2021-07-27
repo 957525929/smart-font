@@ -22,6 +22,29 @@
 					</span>
 				</view>
 			</view>
+
+			<view v-if="item.allType">
+				<view v-if="item.allType==cardType.allType">
+					<view class="card" @tap="dataDetail(item)">
+						<span>
+							<!-- 显示不同图片 -->
+							<image class="card-img" :src="'../../static/已通过.png'" mode="scaleToFill"
+								style="width: 60px; height: 60px;"></image>
+						</span>
+						<span class="card-center">
+							<view>
+								访问人：{{item.visit}}
+							</view>
+							<view>
+								电话号码：{{item.phone}}
+							</view>
+							<view>
+								预约见面时间：{{item.time}}
+							</view>
+						</span>
+					</view>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -38,6 +61,7 @@
 						visit: '林泽宇',
 						phone: generatePhoneNum(),
 						type: '今日',
+						allType: '全部',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + ' 09:00~12.00'
@@ -46,6 +70,7 @@
 						visit: '张国柱',
 						phone: generatePhoneNum(),
 						type: '今日',
+						allType: '全部',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + ' 14:00~16.00'
@@ -54,6 +79,7 @@
 						visit: '王鹏翔',
 						phone: generatePhoneNum(),
 						type: '今日',
+						allType: '全部',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + ' 16:00~18.00'
@@ -62,6 +88,7 @@
 						visit: '张全蛋',
 						phone: generatePhoneNum(),
 						type: '明日',
+						allType: '全部',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() + 1) + "日" + ' 09:00~11.00'
@@ -70,6 +97,7 @@
 						visit: '林二狗',
 						phone: generatePhoneNum(),
 						type: '明日',
+						allType: '全部',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() + 1) + "日" + ' 14:00~15.00'
@@ -78,6 +106,7 @@
 						visit: '王铁柱',
 						phone: generatePhoneNum(),
 						type: '明日',
+						allType: '全部',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() + 1) + "日" + ' 15:00~18.00'
@@ -86,6 +115,7 @@
 						visit: '林淑芬',
 						phone: generatePhoneNum(),
 						type: '后日',
+						allType: '全部',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() + 2) + "日" + ' 10:00~12.00'
@@ -94,74 +124,7 @@
 						visit: '李桂花',
 						phone: generatePhoneNum(),
 						type: '后日',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 2) + "日" + ' 15:00~18.00'
-					},
-					
-					
-					
-					
-					{
-						visit: '林泽宇',
-						phone: generatePhoneNum(),
-						type: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + ' 09:00~12.00'
-					},
-					{
-						visit: '张国柱',
-						phone: generatePhoneNum(),
-						type: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + ' 14:00~16.00'
-					},
-					{
-						visit: '王鹏翔',
-						phone: generatePhoneNum(),
-						type: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + ' 16:00~18.00'
-					},
-					{
-						visit: '张全蛋',
-						phone: generatePhoneNum(),
-						type: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 1) + "日" + ' 09:00~11.00'
-					},
-					{
-						visit: '林二狗',
-						phone: generatePhoneNum(),
-						type: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 1) + "日" + ' 14:00~15.00'
-					},
-					{
-						visit: '王铁柱',
-						phone: generatePhoneNum(),
-						type: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 1) + "日" + ' 15:00~18.00'
-					},
-					{
-						visit: '林淑芬',
-						phone: generatePhoneNum(),
-						type: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 2) + "日" + ' 10:00~12.00'
-					},
-					{
-						visit: '李桂花',
-						phone: generatePhoneNum(),
-						type: '全部',
+						allType: '全部',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() + 2) + "日" + ' 15:00~18.00'
@@ -189,7 +152,7 @@
 
 		methods: {
 			generatePhoneNum,
-			dataDetail(item){
+			dataDetail(item) {
 				console.log("11111111111111")
 				console.log(item)
 				this.$emit('send', item)

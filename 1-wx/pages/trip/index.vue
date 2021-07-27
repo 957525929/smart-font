@@ -55,7 +55,7 @@
 			</block>
 			<block v-if="TabCur==3">
 				<navigator class="action" @tap="goToAgree">
-					<recordCard2 :cardType="type[3]"  @send="dataDetail"/>
+					<recordCard2 :cardType="allType[0]"  @send="dataDetail"/>
 				</navigator>
 			</block>
 		</scroll-view>
@@ -104,10 +104,13 @@
 				}, {
 					id: 2,
 					type: "后日"
-				},{
-					id: 3,
-					type: "全部"
 				}],	
+				allType:[
+					{
+						id: 0,
+						allType: "全部"
+					}
+				]
 			};
 		},
 		components: {
