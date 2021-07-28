@@ -1314,7 +1314,7 @@ export default {
         {
           title: '采购单价(元)',
           key: 'materialPrice',
-          type: FormTypes.inputNumber,
+          type: FormTypes.input,
           placeholder: '请输入${title}',
           validateRules: [
             { required: true, message: '${title}不能为空' },
@@ -1323,13 +1323,13 @@ export default {
         {
           title: '采购数量',
           key: 'materialNum',
-          type: FormTypes.inputNumber,
+          type: FormTypes.input,
           placeholder: '请输入${title}',
           validateRules: [
             { required: true, message: '${title}不能为空' },
           ],
           defaultValue: 1,
-          statistics: "true",
+          // statistics: "true",
         },
         {
           title: '合计(元)',

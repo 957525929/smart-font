@@ -1457,7 +1457,7 @@ export default {
       searchedColumn: '',
       columns1: [
         {
-          title: '食料名称',
+          title: '食料分类名称',
           dataIndex: 'name',
           key: 'name',
           align: 'left',
