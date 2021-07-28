@@ -424,25 +424,25 @@ const user = {
                       "keepAlive": false,
                       "internalOrExternal": false,
                       "icon": "folder",
-                      "title": "个人预约会议"
+                      "title": "会议室预约"
                     },
                     "name": "meetingRoom-AppointmentPersonal",
                     "id": "1245154914959151105"
                   },
-                  {
-                    "path": "/meetingRoom/PersonalDetil",
-                    "component": "meetingRoom/PersonalDetil",
-                    "route": "1",
-                    "hidden": true,
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "icon": "folder",
-                      "title": "个人预约会议详情"
-                    },
-                    "name": "meetingRoom-PersonalDetil",
-                    "id": "1245154914959151105"
-                  },
+                  // {
+                  //   "path": "/meetingRoom/PersonalDetil",
+                  //   "component": "meetingRoom/PersonalDetil",
+                  //   "route": "1",
+                  //   "hidden": true,
+                  //   "meta": {
+                  //     "keepAlive": false,
+                  //     "internalOrExternal": false,
+                  //     "icon": "folder",
+                  //     "title": "个人预约会议详情"
+                  //   },
+                  //   "name": "meetingRoom-PersonalDetil",
+                  //   "id": "1245154914959151105"
+                  // },
                   {
                     "path": "/meetingRoom/UseStatistics",
                     "component": "meetingRoom/UseStatistics",

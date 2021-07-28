@@ -66,7 +66,7 @@
             </a-popconfirm>
           </template>
         </a-table-column>-->
-         <a slot="price" slot-scope="text,record" @click="typePrice(record)">{{ text }}</a>
+         <!-- <a slot="price" slot-scope="text,record" @click="typePrice(record)">{{ text }}</a> -->
         <span slot="operation" slot-scope="record">
           <!-- <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a> -->
           <a @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
@@ -90,12 +90,12 @@
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
 <!-- 协议酒店价格详情 -->
-<a-modal v-model="visiblePrice" :title="titleHotel" footer>
+<!-- <a-modal v-model="visiblePrice" :title="titleHotel" footer>
     <a-table :data-source="dataPrice" :pagination="false" rowKey="name">
         <a-table-column title="房型" data-index="roomType" align="center"></a-table-column>
         <a-table-column title="价格（元）" data-index="price" align="center"></a-table-column>
       </a-table>
-</a-modal>
+</a-modal> -->
     <!-- 新增 -->
     <a-Modal v-model="visibleAdd" title="新增酒店" footer>
       <a-form-model

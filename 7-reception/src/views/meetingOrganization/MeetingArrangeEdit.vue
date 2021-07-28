@@ -750,7 +750,7 @@ export default {
         room: undefined,
         dateStart: undefined,
         dateEnd: undefined,
-        range: undefined
+        range: "全天"
       },
       roomS: '',
       optionsRoom,

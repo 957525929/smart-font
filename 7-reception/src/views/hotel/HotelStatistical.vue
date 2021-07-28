@@ -29,6 +29,7 @@
             <a-select-option value="福州富力威斯汀酒店">福州富力威斯汀酒店</a-select-option>
             <a-select-option value="福州品悦酒店">福州品悦酒店</a-select-option>
             <a-select-option value="福州世纪金源酒店">福州世纪金源酒店</a-select-option>
+            <a-select-option value="全部">全部</a-select-option>
           </a-select>
         </a-col>
         <a-col :span="1"></a-col>
@@ -100,7 +101,7 @@
     <div class="table-page-search-wrapper">
       <a-row type="flex" align="middle">
         <a-col :span="10">
-          <pie title="饼图" v-bind:height="height" v-bind:dataSource="dataSourcePie"></pie>
+          <pie title="饼图" v-bind:height="heightPie" v-bind:dataSource="dataSourcePie"></pie>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col :span="12">
@@ -190,7 +191,8 @@ export default {
         { item: '福州富力威斯汀酒店', count: 40 },
         { item: '福州品悦酒店', count: 21 },
         { item: '福州世纪金源酒店', count: 17 }
-      ]
+      ],
+      heightPie:400
     }
   },
   created() {
@@ -202,20 +204,23 @@ export default {
   methods: {
     moment,
     handleChange(value) {
-      // if (value.length == 0) {
-      //   this.dataSource = dataSource
-      // } else {
-      //   let hotelSelect = []
-      //   value.forEach(element => {
-      //     //console.log(element)
-      //     dataSource.filter(item => {
-      //       if (item.x.includes(element)) {
-      //         hotelSelect.push(item)
-      //       }
-      //     })
-      //   })
-      //   this.dataSource = hotelSelect
-      // }
+      if (value.length == 0) {
+        this.dataSource = dataSource
+      } else if(value.indexOf('全部') != -1){
+        this.dataSource = dataSource
+         this.selectHotel=["全部"]
+        }else {
+        let hotelSelect = []
+        value.forEach(element => {
+          //console.log(element)
+          dataSource.filter(item => {
+            if (item.x.includes(element)) {
+              hotelSelect.push(item)
+            }
+          })
+        })
+        this.dataSource = hotelSelect
+      }
     },
     searchQuery() {},
     searchReset() {

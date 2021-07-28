@@ -23,6 +23,7 @@
             <a-select-option value="管理会议">管理会议</a-select-option>
             <a-select-option value="表彰会议">表彰会议</a-select-option>
             <a-select-option value="销售会议">销售会议</a-select-option>
+            <a-select-option value="全部">全部</a-select-option>
           </a-select>
         </a-col>
         <a-col :span="1"></a-col>
@@ -47,18 +48,18 @@
         </a-col>
       </a-row>
     </div>
-  <!-- 图 -->
-  <div>
-    <a-tabs default-active-key="1" @change="callback">
-      <a-tab-pane key="1" tab="会议次数">
-        <bar v-bind:dataSource="dataNumber"  v-bind:height="heightNumber"></bar>
-      </a-tab-pane>
-      <a-tab-pane key="2" tab="会议预算（元）" force-render>
-        <bar v-bind:dataSource="dataBudget"  v-bind:height="heightBudget"></bar>-->
-      </a-tab-pane>
-    </a-tabs>
-  </div>
-    
+    <!-- 图 -->
+    <div>
+      <a-tabs default-active-key="1" @change="callback">
+        <a-tab-pane key="1" tab="会议次数">
+          <bar v-bind:dataSource="dataNumber" v-bind:height="heightNumber"></bar>
+        </a-tab-pane>
+        <a-tab-pane key="2" tab="会议预算（元）" force-render>
+          <bar v-bind:dataSource="dataBudget" v-bind:height="heightBudget"></bar>-->
+        </a-tab-pane>
+      </a-tabs>
+    </div>
+
     <!-- <br />
     <bar v-bind:dataSource="dataNumber" v-bind:title="titleNumber" v-bind:height="heightNumber"></bar>
     <bar v-bind:dataSource="dataBudget" v-bind:title="titleBudget" v-bind:height="heightBudget"></bar>-->
@@ -179,28 +180,26 @@ export default {
   },
   watch: {
     select(val) {
-      console.log(val)
+      //console.log(val)
     }
   },
   methods: {
     moment,
     ChangeTheme(value) {
-      console.log(value.length)
+      //  console.log(value.indexOf('全部'))
       if (value.length == 0) {
         this.dataNumber = dataNumber
         this.dataBudget = dataBudget
+      } else if (value.indexOf('全部') != -1) {
+        console.log(1111)
+        this.dataNumber = dataNumber
+        this.dataBudget = dataBudget
+        this.selectTheme=["全部"]
       } else {
-        // console.log(value[value.length - 1])
-        // dataNumber.filter(item => {
-        //   if (item.x.includes(value[value.length - 1])) {
-        //     this.ThemeSelect.push(item)
-        //   }
-        // })
-        // this.dataNumber = this.ThemeSelect
         let themeSelect = []
         let budgetSelect = []
         value.forEach(element => {
-          console.log(element)
+          // console.log(element)
           dataNumber.filter(item => {
             if (item.x.includes(element)) {
               themeSelect.push(item)
@@ -220,7 +219,7 @@ export default {
     getCurrentData() {
       return new Date().toLocaleDateString()
     },
-    callback(){}
+    callback() {}
   }
 }
 </script>

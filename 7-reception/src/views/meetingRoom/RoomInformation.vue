@@ -176,7 +176,7 @@
         <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column> -->
         <a-table-column title="操作" align="center">
           <template slot-scope="record">
-           <a href="javascript:;" @click="detail(record)" :style="{  color: 'orange' }">查看详情</a>
+           <a href="javascript:;" @click="detail(record)" :style="{  color: 'orange' }">详情</a>
             <a-divider type="vertical" />
             <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
             <a-divider type="vertical" />
@@ -217,8 +217,8 @@
          <a-form-model-item ref="number" label="容纳人数" prop="number" >
           <a-input v-model="formAdd.number" placeholder="请输入房间容纳人数"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="基本条件" ref="condition" prop="condition">
-       <a-checkbox-group @change="onChangeCon" v-model="formAdd.condition">
+        <a-form-model-item label="基本条件">
+       <!-- <a-checkbox-group @change="onChangeCon" v-model="formAdd.condition">
         <a-row>
           <a-col :span="8">
             <a-checkbox value="茶水">
@@ -245,16 +245,20 @@
               电脑
             </a-checkbox>
           </a-col>
-              <a-col :span="8">
+          <a-col :span="8">
             <a-checkbox value="摄像机">
               摄像机
             </a-checkbox>
           </a-col>
         </a-row>
-      </a-checkbox-group>
+      </a-checkbox-group> -->
+      <a-checkbox :indeterminate="indeterminate" :checked="checkAll" @change="onCheckAllChangeAdd">
+        全部
+      </a-checkbox>
+        <br />
+       <a-checkbox-group v-model="formAdd.condition" :options="plainOptions" @change="onChangeCond"/>
         </a-form-model-item>
-                <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" >
-          <!-- <a-input v-model="formAdd.dutyName" placeholder="请输入管理员"></a-input> -->
+        <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" >
            <a-select  showSearch  v-model="formAdd.dutyName" placeholder="请选择管理员" @change="addDutyName">
             <a-select-option value="李霞">李霞</a-select-option>
             <a-select-option value="尤晓梅">尤晓梅</a-select-option>
@@ -299,47 +303,12 @@
          <a-form-model-item label="容纳人数" prop="number">
           <a-input v-model="formModify.number" ></a-input>
         </a-form-model-item>
-        <a-form-model-item label="基本条件" prop="condition">
-          <!-- <a-select v-model="formModify.condition" placeholder="请选择条件">
-            <a-select-option value="0">0：饮料、多媒体</a-select-option>
-            <a-select-option value="1">1：饮料、风扇、多媒体</a-select-option>
-            <a-select-option value="2">2：饮料、风扇、空调、多媒体</a-select-option>
-            <a-select-option value="3">3：饮料、风扇、景观、多媒体</a-select-option>
-          </a-select> -->
-           <a-checkbox-group @change="onChangeCon" v-model="formModify.condition">
-            <a-row>
-             <a-col :span="8">
-            <a-checkbox value="茶水">
-              茶水
-            </a-checkbox>
-          </a-col>
-          <a-col :span="8">
-            <a-checkbox value="白板">
-              白板
-            </a-checkbox>
-          </a-col>
-          <a-col :span="8">
-            <a-checkbox value="空调">
-              空调
-            </a-checkbox>
-          </a-col>
-          <a-col :span="8">
-            <a-checkbox value="投影仪">
-              投影仪
-            </a-checkbox>
-          </a-col>
-          <a-col :span="8">
-            <a-checkbox value="电脑">
-              电脑
-            </a-checkbox>
-          </a-col>
-           <a-col :span="8">
-            <a-checkbox value="摄像机">
-              摄像机
-            </a-checkbox>
-          </a-col>
-            </a-row>
-        </a-checkbox-group>
+        <a-form-model-item label="基本条件">
+        <a-checkbox :indeterminate="indeterminate" :checked="checkAll" @change="onCheckAllChangeModify">
+        全部
+      </a-checkbox>
+        <br />
+       <a-checkbox-group v-model="formModify.condition" :options="plainOptions" @change="onChangeCond"/>
         </a-form-model-item>
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
           <!-- <a-input v-model="formModify.dutyName"></a-input> -->
@@ -517,6 +486,7 @@ const columns = [
     dataIndex: 'action'
   }
 ]
+const plainOptions = ['茶水', '白板', '空调', '投影仪', '电脑', '摄像机'];
 export default {
   data() {
     return {
@@ -532,6 +502,9 @@ export default {
       visibleModify: false,
       labelCol: { span: 6 },
       wrapperCol: { span: 18 },
+       plainOptions,
+      indeterminate: true,
+      checkAll: false,
       formAdd: {
       area: [],
       room: undefined,
@@ -615,9 +588,26 @@ export default {
     areaChange(value){
       console.log(value)
     },
-    onChangeCon(checkedValues){
-       console.log('checked = ', checkedValues);
-      console.log('value = ', this.value);
+    onChangeCond(checkedList){
+      console.log("条件",checkedList)
+      this.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
+      this.checkAll = checkedList.length === plainOptions.length;
+    },
+    onChangeCon(){},
+    onCheckAllChangeAdd(e) {
+      //this.formAdd.condition=plainOptions
+      Object.assign(this.formAdd, {      
+        condition: e.target.checked ? plainOptions : [],
+        indeterminate: false,
+        checkAll: e.target.checked,
+      });
+    },
+    onCheckAllChangeModify(e){
+      Object.assign(this.formModify, {      
+        condition: e.target.checked ? plainOptions : [],
+        indeterminate: false,
+        checkAll: e.target.checked,
+      });
     },
     searchQuery() {
     },
