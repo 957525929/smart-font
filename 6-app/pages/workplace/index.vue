@@ -23,16 +23,16 @@
 						cuIcon: 'edit',
 						route:'fixReport'
 					},{
-						title: '维养核查',
+						title: '设备查询',
 						color: 'orange-shallow',
 						cuIcon: 'searchlist',
-						route:'checkTask'
+						route:'deviceList'
 					},
 					{
-						title: '业务记录',
+						title: '历史任务',
 						color: 'green',
 						cuIcon: 'medalfill',
-						route:'taskRecord'
+						route:'checkTask'
 					},
 					{
 						title: '维修任务',
