@@ -2,7 +2,7 @@
 	<view class="text-gray">
 		<cu-custom bgColor="bg-purple" :isBack="true"><block slot="backText">返回</block><block slot="content">历史任务</block></cu-custom>
 		<view class="cu-card article">
-			<TaskCardItem :item="item" v-for="item in taskList" :key="item.taskId" @handleTopRight="goTo"></TaskCardItem>
+			<TaskCardItem :item="item" v-for="item in taskList.concat(proTaskList)" :key="item.taskId" @handleTopRight="goTo" showImage></TaskCardItem>
 		</view>
 	</view>
 </template>
@@ -12,7 +12,8 @@
 	export default {
 		data() {
 			return {
-				taskList:list.taskList[1].filter(item=>item.type==4)
+				taskList:list.taskList[1].filter(item=>item.type==4),
+				proTaskList:list.proTaskList[2]
 			};
 		},
 		methods: {

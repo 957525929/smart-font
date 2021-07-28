@@ -35,7 +35,7 @@
 		}, {
 			"path": "fixReport/fixReport",
 			"style": {
-				"navigationBarTitleText": "故障上报",
+				"navigationBarTitleText": "维修上报",
 				"app-plus": {
 					"titleColor": "#FFFFFF",
 					"backgroundColor": "#04009A",
@@ -45,47 +45,7 @@
 		}, {
 			"path": "fixReport/fixReportList",
 			"style": {
-				"navigationBarTitleText": "故障上报记录",
-				"app-plus": {
-					"titleColor": "#FFFFFF",
-					"backgroundColor": "#04009A",
-					"titleSize": "16px"
-				}
-			}
-		}, {
-			"path": "checkTask/checkTask",
-			"style": {
-				"navigationBarTitleText": "核查列表",
-				"app-plus": {
-					"titleColor": "#FFFFFF",
-					"backgroundColor": "#04009A",
-					"titleSize": "16px"
-				}
-			}
-		},{
-			"path": "checkTask/checkTaskDetail",
-			"style": {
-				"navigationBarTitleText": "核查表单",
-				"app-plus": {
-					"titleColor": "#FFFFFF",
-					"backgroundColor": "#04009A",
-					"titleSize": "16px"
-				}
-			}
-		}, {
-			"path": "taskRecord/taskRecord",
-			"style": {
-				"navigationBarTitleText": "业务记录",
-				"app-plus": {
-					"titleColor": "#FFFFFF",
-					"backgroundColor": "#04009A",
-					"titleSize": "16px"
-				}
-			}
-		},{
-			"path": "taskRecord/taskRecordDetail",
-			"style": {
-				"navigationBarTitleText": "任务详情",
+				"navigationBarTitleText": "维修上报记录",
 				"app-plus": {
 					"titleColor": "#FFFFFF",
 					"backgroundColor": "#04009A",
@@ -112,6 +72,26 @@
 					"titleSize": "16px"
 				}
 			}
+		},{
+			"path": "fixTask/fixRecord",
+			"style": {
+				"navigationBarTitleText": "历史维修",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		},{
+			"path": "fixTask/fixRecordDetail",
+			"style": {
+				"navigationBarTitleText": "任务详情",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
 		},  {
 			"path": "protectTask/protectTask",
 			"style": {
@@ -126,6 +106,26 @@
 			"path": "protectTask/protectTaskDetail",
 			"style": {
 				"navigationBarTitleText": "保养任务详情",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		},{
+			"path": "protectTask/proRecord",
+			"style": {
+				"navigationBarTitleText": "历史维修",
+				"app-plus": {
+					"titleColor": "#FFFFFF",
+					"backgroundColor": "#04009A",
+					"titleSize": "16px"
+				}
+			}
+		},{
+			"path": "protectTask/proRecordDetail",
+			"style": {
+				"navigationBarTitleText": "任务详情",
 				"app-plus": {
 					"titleColor": "#FFFFFF",
 					"backgroundColor": "#04009A",
