@@ -16,25 +16,25 @@
 				<view :class="PageCur=='appoient'?'text-orange':'text-gray'">访问预约</view>
 			</view> -->
 			
-			<view class="action" @click="NavChange" data-cur="touristHome">
+	<!-- 		<view class="action" @click="NavChange" data-cur="touristHome">
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='touristHome'?'text-orange cuIcon-home':'text-gray cuIcon-home'"></text>
 				</view>
 				<view :class="PageCur=='touristHome'?'text-orange':'text-gray'">首页</view>
-			</view>
+			</view> -->
 
 			<view class="action" @click="NavChange" data-cur="record">
 				<view class='cuIcon-cu-image'>
-					<text :class="PageCur=='record'?'text-orange cuIcon-formfill':'text-gray cuIcon-formfill'"></text>
+					<text :class="PageCur=='record'?'text-orange cuIcon-home':'text-gray cuIcon-home'"></text>
 				</view>
-				<view :class="PageCur=='record'?'text-orange':'text-gray'">申请记录</view>
+				<view :class="PageCur=='record'?'text-orange':'text-gray'">我的预约</view>
 			</view>
 
 			<view class="action" @click="NavChange" data-cur="scan">
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='scan'?'text-orange cuIcon-scan':'text-gray cuIcon-scan'"></text>
 				</view>
-				<view :class="PageCur=='scan'?'text-orange':'text-gray'">扫码</view>
+				<view :class="PageCur=='scan'?'text-orange':'text-gray'">我的二维码</view>
 			</view>
 
 	<!-- 		<view class="action" @click="NavChange" data-cur="allow">
@@ -49,7 +49,7 @@
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='person'?'text-orange cuIcon-peoplefill':'text-gray cuIcon-people'"></text>
 				</view>
-				<view :class="PageCur=='person'?'text-orange':'text-gray'">个人中心</view>
+				<view :class="PageCur=='person'?'text-orange':'text-gray'">个人信息</view>
 			</view>
 
 		</view>

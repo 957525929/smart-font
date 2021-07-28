@@ -186,8 +186,7 @@
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
-            }
-            
+            }   
         }
     ],
 	"globalStyle": {
