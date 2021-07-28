@@ -5,7 +5,7 @@
 				<image src="/static/workplace/banner.png" mode="widthFix" class='response banner-back'></image>
 				<view class="banner-title">
 					<view>
-						注册
+						访客注册
 					</view>
 					<image class="img" src="/static/logo.png" mode="widthFix" style="width: 10vh"></image>
 				</view>
@@ -13,14 +13,7 @@
 
 			<view class="content">
 				<view class="content-list">
-					<view class="list cu-form-group margin-top">
-						<view class="title">注册角色：</view>
-						<picker @change="PickerChange" :value="index" :range="picker">
-							<view class="picker">
-								{{picker[index]}}
-							</view>
-						</picker>
-					</view>
+
 					<view class="list cu-form-group margin-top">
 						<view class="title">真实姓名：</view>
 						<input placeholder="请输入真实姓名" name="passwords"></input>
@@ -60,7 +53,6 @@
 		data() {
 			return {
 				index: 0,
-				picker: ['访客', '职员'],
 				name: '',
 				password: '',
 				changType:this.formtype

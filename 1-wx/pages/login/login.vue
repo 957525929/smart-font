@@ -13,21 +13,21 @@
 
 			<view class="content">
 				<view class="content-list">
-					<view class="list cu-form-group margin-top">
+					<!-- 			<view class="list cu-form-group margin-top">
 						<view class="title">登录角色：</view>
 						<picker @change="PickerChange" :value="index" :range="picker">
 							<view class="picker">
 								{{picker[index]}}
 							</view>
 						</picker>
-					</view>
+					</view> -->
 					<view class="list cu-form-group margin-top">
 						<view class="title">用 &nbsp;户 &nbsp;名：</view>
-						<input placeholder="请输入用户名" name="name"></input>
+						<input placeholder="请输入用户名" name="username" v-model="username" @input="inputChange"></input>
 					</view>
 					<view class="list cu-form-group margin-top">
 						<view class="title">密&nbsp; &nbsp; &nbsp; &nbsp; 码：</view>
-						<input placeholder="请输入密码" name="password"></input>
+						<input placeholder="请输入密码" name="password"  v-model="password"  @input="inputChange1"></input>
 					</view>
 
 					<view class="padding flex flex-direction margin-top">
@@ -50,17 +50,26 @@
 		props: ["formtype"],
 		data() {
 			return {
-				index: 0,
-				picker: ['访客', '职员'],
-				name: '',
+				// index: '',
+				// picker: ['访客', '职员'],
+				username: '',
 				password: '',
-				changType:this.formtype
+				changType: this.formtype
 			};
 		},
 		onShow() {},
 		methods: {
-			PickerChange(e) {
-				this.index = e.detail.value
+			// PickerChange(e) {
+			// 	this.index = e.detail.value
+			// },
+			inputChange(e) {
+				// this.index = e.detail.value
+				// console.log("1111")
+				console.log(this.username)
+			
+			},
+			inputChange1(){
+					console.log(this.password)
 			},
 			login() {
 				let router = [
@@ -69,7 +78,7 @@
 				]
 
 				uni.navigateTo({
-					url: router[this.index]
+					url: this.username=='admin'&&this.password=="123456"?router[1]:router[0]
 				})
 			},
 			toggle() {

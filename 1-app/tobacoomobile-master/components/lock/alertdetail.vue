@@ -11,10 +11,10 @@
 					<view class="title">报警时间：</view>
 					<view class="flex-sub text-left">{{value}}</view>
 				</view>
-				<view class="cu-form-group">
+				<!-- <view class="cu-form-group">
 					<view class="title">消除时间：</view>
 					<view class="flex-sub text-left">{{value1}}</view>
-				</view>
+				</view> -->
 				<view class="cu-form-group">
 					<view class="title">报警方式：</view>
 					<view class="flex-sub text-left">低电量</view>
@@ -22,7 +22,7 @@
 				
 				<view class="cu-form-group margin-top">
 					<view class="title">位置：</view>
-					<view class="flex-sub text-left">中国烟草总公司福建省公司机关A区域1号楼</view>
+					<view class="flex-sub text-left">中国烟草总公司福建省公司机关.A区域.1号楼</view>
 				</view>
 				<view class="cu-form-group ">
 					<view class="title">房间：</view>

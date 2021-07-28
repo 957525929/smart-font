@@ -144,8 +144,8 @@
 
               <span slot="action" slot-scope="text, record">
                 <a v-if='record.children'  @click='add()'>添加下级</a>
-                <a v-if='!record.children||!(record.children.length>0&&record.children[0].children)' style='margin-left: 5%' @click='edit(record)' >编辑</a>
-                <a v-if='!record.children||!(record.children.length>0&&record.children[0].children)' style='margin-left: 5%' @click="deleteRecord(record)">删除</a>
+                <a v-if='!record.children||!(record.children.length>0&&record.children[0].children&&record.children[0].children[0].children)' style='margin-left: 5%' @click='edit(record)' >编辑</a>
+                <a v-if='!record.children||!(record.children.length>0&&record.children[0].children&&record.children[0].children[0].children)' style='margin-left: 5%' @click="deleteRecord(record)">删除</a>
                </span>
             </a-table>
           </a-col>
@@ -1312,8 +1312,14 @@ const generateData = (options) => {
     temp1.children=arr2
     arr1.push(temp1)
   }
-  dataSource1=arr1
+  //变更需求 加根节点
+  let arr2=[{}]
+  arr2[0].key='食料分类名称'
+  arr2[0].name='食料分类名称'
+  arr2[0].children=arr1
+  dataSource1=arr2
   console.log(dataSource1)
+
 };
 generateData(options);
 
@@ -1457,7 +1463,7 @@ export default {
       searchedColumn: '',
       columns1: [
         {
-          title: '食料名称',
+          title: '食料分类树',
           dataIndex: 'name',
           key: 'name',
           align: 'left',

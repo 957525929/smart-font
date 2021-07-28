@@ -90,8 +90,15 @@
           </a-form-model-item>
           <a-form-model-item label="菜品分类" required prop="purchasePeople">
             <a-select allowClear v-model="model.purchasePeople" placeholder="请选择菜品分类">
-              <a-select-option value="客家菜">客家菜</a-select-option>
+              <a-select-option value="川菜">川菜</a-select-option>
               <a-select-option value="粤菜">粤菜</a-select-option>
+              <a-select-option value="鲁菜">鲁菜</a-select-option>
+              <a-select-option value="苏菜">苏菜</a-select-option>
+              <a-select-option value="浙菜">浙菜</a-select-option>
+              <a-select-option value="闽菜">闽菜</a-select-option>
+              <a-select-option value="湘菜">湘菜</a-select-option>
+              <a-select-option value="客家菜">客家菜</a-select-option>
+              <a-select-option value="徽菜">徽菜</a-select-option>
             </a-select>
           </a-form-model-item>
           <a-form-model-item label="辣度" required prop="purchaseDate">

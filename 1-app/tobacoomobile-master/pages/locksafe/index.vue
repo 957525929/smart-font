@@ -4,7 +4,7 @@
 
 			<view class="cu-bar bg-orange solid-bottom">
 				<view class="action">
-					<text class="cuIcon-title text-white"></text> 智能锁管理
+					<text class="cuIcon-title text-white"></text> 智能锁状态
 				</view>
 				<view class="action" @tap="showModal" data-target="viewModal">
 					
@@ -53,8 +53,8 @@
 			return {
 				modalName: null,
 				scrollLeft: 0,
-				index: 1,
-				picker: ['不限', '低电量', '关锁', '开锁'],
+				index: 0,
+				picker: ['低电量', '关锁', '开锁', '不限'],
 				type: [{
 					id: 0,
 					type: "低电量"

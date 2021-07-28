@@ -4,7 +4,7 @@
 
 			<view class="cu-bar bg-orange solid-bottom">
 				<view class="action">
-					<text class="cuIcon-title text-white"></text> 报警记录
+					<text class="cuIcon-title text-white"></text> 未消除报警
 				</view>
 				<view class="action" @tap="showModal" data-target="viewModal">
 					

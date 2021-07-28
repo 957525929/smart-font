@@ -14,14 +14,14 @@
     <a-row>
       <a-col :span='24'  >
         <a-tabs default-active-key="1" size="large" >
-          <a-tab-pane tab="菜品类别" key="1">
+          <a-tab-pane tab="菜品类别统计" key="1">
             <div id="chart1" style="width: 100%; height: 250px"></div>
           </a-tab-pane>
         </a-tabs>
       </a-col>
     </a-row>
-    <a-tabs default-active-key="1"  :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
-      <a-tab-pane tab="留样统计" key="1">
+    <a-tabs default-active-key="1"  size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
+      <a-tab-pane tab="留样次数统计" key="1">
         <a-row>
           <a-col :xl="24" :lg="12" :md="12" :sm="24" :xs="24">
             <LineChartMultid title="次数" :dataSource="dataSource3" :fields='fields3'/>

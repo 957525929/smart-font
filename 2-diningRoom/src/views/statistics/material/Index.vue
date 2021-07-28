@@ -31,21 +31,21 @@
     <a-row style='margin-top: 20px;'>
       <a-col :span='6'  >
         <a-tabs default-active-key="1" size="large" >
-          <a-tab-pane tab="审核统计" key="1">
+          <a-tab-pane tab="审核状态统计" key="1">
             <div id="chart1" style="width: 100%; height: 250px"></div>
           </a-tab-pane>
         </a-tabs>
       </a-col>
       <a-col :span='18'  >
         <a-tabs default-active-key="1" size="large" >
-          <a-tab-pane tab="食料采购分类" key="1">
+          <a-tab-pane tab="食料分类统计" key="1">
             <div id="chart2" style="width: 100%; height: 250px"></div>
           </a-tab-pane>
         </a-tabs>
       </a-col>
     </a-row>
-    <a-tabs default-active-key="1"  :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
-      <a-tab-pane tab="采购统计" key="1">
+    <a-tabs default-active-key="1"  size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
+      <a-tab-pane tab="采购次数统计" key="1">
         <a-row>
           <a-col :xl="24" :lg="12" :md="12" :sm="24" :xs="24">
             <LineChartMultid title="次数" :dataSource="dataSource3" :fields='fields3'/>
