@@ -13,17 +13,17 @@
 
 			<view class="content">
 				<view class="content-list">
-					<view class="list cu-form-group margin-top">
+					<!-- <view class="list cu-form-group margin-top">
 						<view class="title">登录角色：</view>
 						<picker @change="PickerChange" :value="index" :range="picker">
 							<view class="picker">
 								{{picker[index]}}
 							</view>
 						</picker>
-					</view>
+					</view> -->
 					<view class="list cu-form-group margin-top">
 						<view class="title">用 &nbsp;户 &nbsp;名：</view>
-						<input placeholder="请输入用户名" name="name"></input>
+						<input placeholder="请输入用户名" name="name" v-model="name"></input>
 					</view>
 					<view class="list cu-form-group margin-top">
 						<view class="title">密&nbsp; &nbsp; &nbsp; &nbsp; 码：</view>
@@ -35,7 +35,7 @@
 					</view>
 					<view class="flex-sub text-center">
 						<view class="padding">
-							<text class="text-grey"> 注册 &nbsp; | &nbsp; 找回密码 </text>
+							<text class="text-grey">找回密码 </text>
 						</view>
 					</view>
 				</view>
@@ -50,26 +50,37 @@
 		data() {
 			return {
 				index: 0,
-				picker: ['安装员', '维修员', '管养员'],
+				// picker: ['安装员', '维修员', '管养员'],
 				name: '',
 				password: '',
 			};
 		},
 		onShow() {},
 		methods: {
-			PickerChange(e) {
-				this.index = e.detail.value
-			},
+			// PickerChange(e) {
+			// 	this.index = e.detail.value
+			// },
 			login() {
-				let router = [
-					'../../pages/index/installindex',
-					'../../pages/index/repairindex',
-					'../../pages/index/safeindex',
-				]
-
+				let url = ''
+				if(this.name == "admin"){
+					//管养员
+					url = '../../pages/index/safeindex'
+				}
+				else{
+					//安维
+					url = '../../pages/index/installindex'
+				}
 				uni.navigateTo({
-					url: router[this.index]
+					url: url
 				})
+				// let router = [
+				// 	'../../pages/index/installindex',
+				// 	'../../pages/index/repairindex',
+				// 	'../../pages/index/safeindex',
+				// ]
+				// uni.navigateTo({
+				// 	url: router[this.index]
+				// })
 			}
 		}
 	}

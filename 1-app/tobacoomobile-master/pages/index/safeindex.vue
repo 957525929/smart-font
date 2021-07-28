@@ -7,18 +7,19 @@
 		
 		
 		<view class="cu-bar tabbar bg-white shadow foot">
-			<view class="action" @click="NavChange" data-cur="locksafe">
-				<view class='cuIcon-cu-image'>
-					<text :class="PageCur=='locksafe'?'text-orange cuIcon-paintfill':'text-gray cuIcon-paint'"></text>
-				</view>
-				<view :class="PageCur=='locksafe'?'text-orange':'text-gray'">智能锁管理</view>
-			</view>
 			
 			<view class="action" @click="NavChange" data-cur="lockrecord">
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='lockrecord'?'text-orange cuIcon-formfill':'text-gray cuIcon-form'"></text>
 				</view>
-				<view :class="PageCur=='lockrecord'?'text-orange':'text-gray'">报警记录</view>
+				<view :class="PageCur=='lockrecord'?'text-orange':'text-gray'">报警</view>
+			</view>
+			
+			<view class="action" @click="NavChange" data-cur="locksafe">
+				<view class='cuIcon-cu-image'>
+					<text :class="PageCur=='locksafe'?'text-orange cuIcon-paintfill':'text-gray cuIcon-paint'"></text>
+				</view>
+				<view :class="PageCur=='locksafe'?'text-orange':'text-gray'">智能锁状态</view>
 			</view>
 			
 			<view class="action" @click="NavChange" data-cur="lockcount">
@@ -42,7 +43,7 @@
 	export default {
 		data() {
 		return {
-				PageCur: 'locksafe'
+				PageCur: 'lockrecord'
 			}
 		},
 		methods: {
