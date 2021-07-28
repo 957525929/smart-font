@@ -62,7 +62,7 @@
         </a-col>
       </a-row>
     </div>
-
+    <br />
     <!-- 查询区域-END -->
     <!-- table区域-begin -->
     <!-- <div style="margin-top: 20px">
@@ -76,19 +76,18 @@
     <!-- <br />
     <pie title="饼图" v-bind:height="heightPie" v-bind:dataSource="dataSourcePie"></pie>
     <br />
-    <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar> -->
-<div>
-  <a-row type="flex" align="middle">
-      <a-col :span="10">
-           <pie title="饼图" v-bind:height="heightPie" v-bind:dataSource="dataSourcePie"></pie>
+    <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>-->
+    <div>
+      <a-row type="flex" align="middle">
+        <a-col :span="10">
+          <pie title="饼图" v-bind:height="heightPie" v-bind:dataSource="dataSourcePie"></pie>
         </a-col>
         <a-col :span="1"></a-col>
         <a-col :span="12">
-        <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>
+          <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>
         </a-col>
-     </a-row>
-</div>
-
+      </a-row>
+    </div>
   </a-card>
 </template>
 <script>
@@ -144,14 +143,14 @@ const dataSource = [
   {
     x: '会议室208',
     y: 17
-  },
+  }
 ]
 const dataSourcePie = [
   { item: '会议室203', count: 10 },
-  { item: '会议室204', count: 3},
-  { item: '会议室205', count: 3},
-  { item: '会议室207', count: 8},
-  { item: '会议室208', count: 17}
+  { item: '会议室204', count: 3 },
+  { item: '会议室205', count: 3 },
+  { item: '会议室207', count: 8 },
+  { item: '会议室208', count: 17 }
 ]
 export default {
   components: {
@@ -171,7 +170,7 @@ export default {
       height: 300,
       searchValue: '',
       dataSourcePie,
-      heightPie:400
+      heightPie: 400
     }
   },
   created() {
