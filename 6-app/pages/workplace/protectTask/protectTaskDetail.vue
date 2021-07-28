@@ -12,26 +12,27 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view class="cu-card article" v-if="comType==='TaskCardItem'">
-			<TaskCardItem v-for="item in sourceData" :key="item.devId" :item="item"></TaskCardItem>
-		</view>
-		<DescriptionDetail v-else-if="comType==='DescriptionDetail'" :dataSource="sourceData" :picList="img">
-		</DescriptionDetail>
-		<FormDetail v-else-if="comType==='FormDetail'" :dataSource="sourceData">
-			<textarea slot="reason" placeholder="请输入" class="bg-grey radius margin"></textarea>
-			<textarea slot="handle" placeholder="请输入" class="bg-grey radius margin"></textarea>
-			<picker mode="time" :value="time" :start="time" @change="TimeChange" slot="ficDoneTime">
-				<view class="picker">
-					{{time}}
-				</view>
-			</picker>
-			<picker mode="date" :value="date" :start="date" @change="DateChange" slot="ficDoneDate">
-				<view class="picker">
-					{{date}}
-				</view>
-			</picker>
-		</FormDetail>
-	</view>
+
+		<DescriptionDetail :dataSource="basicData" :picList="img" v-if="TabCur===0"></DescriptionDetail>
+		<view class="cu-card article" v-else-if="TabCur===1">
+			<TaskCardItem :item="item" v-for="item in devData" :key="item.areaKey" hideTitleIcon></TaskCardItem>
+			</view>
+				<DescriptionDetail :dataSource="devData" :picList="img" v-else-if="TabCur===2"></DescriptionDetail>
+				<FormDetail :dataSource="basicData" v-else-if="TabCur===3">
+					<textarea slot="reason" placeholder="请输入" class="bg-grey radius margin"></textarea>
+					<textarea slot="handle" placeholder="请输入" class="bg-grey radius margin"></textarea>
+					<picker mode="time" :value="time" :start="time" @change="TimeChange" slot="ficDoneTime">
+						<view class="picker">
+							{{time}}
+						</view>
+					</picker>
+					<picker mode="date" :value="date" :start="date" @change="DateChange" slot="ficDoneDate">
+						<view class="picker">
+							{{date}}
+						</view>
+					</picker>
+				</FormDetail>
+			</view>
 </template>
 
 <script>
@@ -57,48 +58,38 @@
 			this.date = getNow()[0].join("-")
 			this.time = getNow()[1].join(":")
 			//拿数据
-			this.getData('proAllBasicData', 'proBasic')
+			this.getBasic()
+			// this.getDev()
 		},
 		components: {
 			DescriptionDetail,
 			FormDetail,
 			TaskCardItem
 		},
-		computed: {
-			comType() {
-				return this.menuList[this.TabCur].comType
-			}
-		},
 		data() {
 			return {
 				img: NEW_PRODETAIL.img,
 				TabCur: 0,
 				taskId: "",
-				currentData:[],
-				sourceData: [],
+				areaKey: "",
+				basicData: [],
+				devData: [],
 				menuList: [{
 					label: "proAllBasicData",
 					value: "基本信息",
-					dataIndex: "proBasic",
-					comType: "DescriptionDetail",
-					key:"taskId"
+					dataIndex: "proBasic"
 				}, {
 					label: "devData",
 					value: "养护设备",
-					dataIndex: "proDev",
-					comType: "TaskCardItem",
-					key:"devId"
+					dataIndex: "proDev"
 				}, {
 					label: "proAllPlanData",
 					value: "养护记录",
-					dataIndex: "proPlan",
-					comType: "DescriptionDetail"
+					dataIndex: "proPlan"
 				}, {
 					label: "proForm",
 					value: "表单上报",
-					dataIndex: "proForm",
-					comType: "FormDetail",
-					key:"taskId"
+					dataIndex: "proForm"
 				}],
 				//time-picker
 				date: "",
@@ -108,30 +99,52 @@
 		methods: {
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id;
-				this.matchData(this.menuList[this.TabCur].label,this.menuList[this.TabCur].key)
-				this.getData(this.menuList[this.TabCur].label,this.menuList[this.TabCur].dataIndex)
+				let menu = new Map([
+					[0, "getBasic"],
+					[1, "getDev"],
+					[2, "getBasic"],
+					[3, "getBasic"]
+				])
+				let temp = [...menu].filter(([key, value]) => key == e.currentTarget.dataset.id)[0]
+				this[temp[1]]()
 			},
-			matchData(name,key){
-				if (name !== "proForm") {
-					this.currentData = NEW_PRODETAIL[name].filter(item => {
-						return item[key] == this.taskId
-					})[0]
-				} 			
+			getBasic() {
+				this.basicData = []
+				let tempData = NEW_PRODETAIL.proAllBasicData.filter(item => {
+					return item.taskId == this.taskId
+				})[0]
+
+				this.basicData = NEW_PRODETAIL.proBasic.map(item => {
+					if (item.valueEnum && item.valueEnum.length !== 0) {
+						item.value = handleEnumData(item.valueEnum, tempData[item.key])
+					} else {
+						item.value = tempData[item.key]
+					}
+					if (item.key === "areaKey") {
+						this.areaKey = tempData[item.key]
+					}
+					return item
+				}).filter(i => !i.hideInDetail)
 			},
-			getData(name,dataIndex) {
-				this.sourceData = []
-				if (name !== "proForm") {
-					this.sourceData = NEW_PRODETAIL[dataIndex].filter(i => !i.hideInDetail).map(item => {
-						if (item.valueEnum && item.valueEnum.length !== 0) {
-							item.value = handleEnumData(item.valueEnum, this.currentData[item.key])
-						} else {
-							item.value = this.currentData[item.key]
-						}
-						return item
-					})
-				} else {
-					this.sourceData = NEW_PRODETAIL[dataIndex]
-				}
+			getDev() {
+				this.devData = []
+				let self = this
+				this.devData = NEW_PRODETAIL.devData.filter(item => {
+					return item.areaKey == self.areaKey
+				}).map(item => {
+					return {
+						taskId: 0,
+						titleLeft: item.devName,
+						titleRight: item.devId,
+						content: item.devType,
+						footerRight: item.manufacturer
+					}
+				})
+				console.log(this.devData)
+				// this.devData = NEW_PRODETAIL.proDev.filter(i=>!i.hideInDetail).map(item => {
+				// 	item.value = tempData[item.key]
+				// 	return item
+				// })
 			},
 			TimeChange(e) {
 				this.time = e.detail.value

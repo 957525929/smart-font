@@ -103,34 +103,34 @@ const proTaskList = {
 		taskType: 1,
 		key: 0,
 		taskId: 1,
-		content: "烟草大厦18楼频繁断电",
+		content: "中国烟草总公司福建省公司机关-A区域-1号楼,例行养护",
 		taskType: "一级保养",
 		type: 0,
-		titleLeft: '烟草大厦',
+		titleLeft: '1号楼月度巡养计划',
 		titleRight: "查看",
-		footerRight: '2021-06-23 14:25:35'
+		footerRight: '2021-06-22 18：55：55',
 	}],
 	1: [{
 		taskType: 1,
 		key: 1,
 		taskId: 2,
-		content: "空调漏水",
+		content: "中国烟草总公司福建省公司机关-B区域-3号楼",
 		taskType: "设备点检",
 		type: 1,
-		titleLeft: '烟草大厦',
+		titleLeft: '空调维修检查',
 		titleRight: "查看",
-		footerRight: '2021-06-24 14:25:12'
+		footerRight: '2021-07-31 00：00：00'
 	}],
 	2: [{
 		taskType: 1,
 		key: 2,
 		taskId: 2,
-		content: "电路老化检查",
+		content: "中国烟草总公司福建省公司机关-B区域-2号楼",
 		taskType: "设备巡检",
 		type: 2,
-		titleLeft: '烟草大厦',
+		titleLeft: '电路老化检查',
 		titleRight: "查看",
-		footerRight: '2021-06-19 14:25:35'
+		footerRight: '2021-07-31 00：00：00'
 	}]
 }
 //详情数据
@@ -140,7 +140,7 @@ const proAllBasicData = [{
 		taskName: "1号楼月度巡养计划",
 		taskType: 0,
 		taskStatus: 0,
-		taskPeriod: 2,
+		taskPeriod: "每月",
 		dispatchTime: '2021-06-22 18：55：55',
 		areaKey: '1-1-1',
 		address: "中国烟草总公司福建省公司机关-A区域-1号楼",
@@ -157,7 +157,7 @@ const proAllBasicData = [{
 		taskName: "空调维修检查",
 		taskType: 1,
 		taskStatus: 1,
-		taskPeriod: 0,
+		taskPeriod: "每天",
 		dispatchTime: '2021-07-21 10:55:11',
 		areaKey: '1-2-3',
 		address: "中国烟草总公司福建省公司机关-B区域-3号楼",
@@ -174,7 +174,7 @@ const proAllBasicData = [{
 		taskName: "电路老化检查",
 		taskType: 4,
 		taskStatus: 2,
-		taskPeriod: 1,
+		taskPeriod: "每周",
 		dispatchTime: '2021-06-19 10:55:55',
 		areaKey: '1-2-2',
 		address: "中国烟草总公司福建省公司机关-B区域-2号楼",
@@ -192,6 +192,9 @@ const devData = [{
 		key: 0,
 		devId: 1001,
 		devName: "给水设备_1001",
+		areaKey: "1-1-2",
+		address: "中国烟草总公司福建省公司机关-A区域-2号楼",
+		// devStatus: 4,
 		devType:"给排水系统",
 		loginTime: '2021-06-22 17:55:55',
 		manufacturer: "日丰企业集团有限公司",
@@ -201,6 +204,9 @@ const devData = [{
 		key: 1,
 		devId: 2001,
 		devName: "供电设备_2001",
+		areaKey: "1-2-1",
+		address: "中国烟草总公司福建省公司机关-B区域-1号楼",
+		// devStatus: 5,
 		devType: "电器系统",
 		loginTime: '2021-06-21 10:55:55',
 		manufacturer: "国网福建省电力有限公司",
@@ -210,6 +216,9 @@ const devData = [{
 		key: 2,
 		devId: 3001,
 		devName: "空调_3001",
+		areaKey: "1-2-3",
+		address: "中国烟草总公司福建省公司机关-B区域-3号楼",
+		// devStatus: 7,
 		devType:"空调、通风系统",
 		loginTime: '2021-06-19 08:55:55',
 		manufacturer: "珠海格力电器股份有限公司",
@@ -218,6 +227,8 @@ const devData = [{
 		key: 3,
 		devId: 4001,
 		devName: "给水管网_4001",
+		areaKey: "1-2-2",
+		address: "中国烟草总公司福建省公司机关-B区域-2号楼",
 		devType: "给排水系统 - 给排水系统",
 		loginTime: '2021-06-12 17:55:55',
 		manufacturer: "日丰企业集团有限公司",
@@ -227,6 +238,8 @@ const devData = [{
 		key: 4,
 		devId: 5001,
 		devName: "供电线路_5001",
+		areaKey: "1-1-1",
+		address: "中国烟草总公司福建省公司机关-A区域-1号楼",
 		devType: "电器系统 - 供电设备",
 		loginTime: '2021-06-11 10:55:55',
 		manufacturer: "国网福建省电力有限公司",
@@ -236,20 +249,15 @@ const devData = [{
 		key: 5,
 		devId: 6001,
 		devName: "冷水机组_6001",
+		areaKey: "1-2-3",
+		address: "中国烟草总公司福建省公司机关-B区域-3号楼",
 		devType: "空调、通风系统 - 空调设备",
 		loginTime: '2021-06-11 08:55:55',
 		manufacturer: "珠海格力电器股份有限公司",
 		batch: "A2421"
 	}
-].map(item => {
-	return {
-		taskId: 0,
-		titleLeft: item.devName,
-		titleRight: item.devId,
-		content: item.devType,
-		footerRight: item.manufacturer
-	}
-})
+]
+
 
 const devTypeTree = [{
 		children: [{

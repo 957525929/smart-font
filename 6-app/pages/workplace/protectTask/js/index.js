@@ -24,7 +24,7 @@ const proBasic = [{
 		label: '任务周期',
 		key: 'taskPeriod',
 		value: "",
-		valueEnum: proPeriod
+		// valueEnum: proPeriod
 	},
 	{
 		label: '任务下发时间',
@@ -78,7 +78,7 @@ const proDev = [{
 		title: '设备类型',
 		key: 'devType',
 		value: "",
-		valueEnum:devTypeTree
+		// valueEnum:devTypeTree
 	},
 	{
 		key: 'manufacturer',

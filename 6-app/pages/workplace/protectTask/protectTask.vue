@@ -2,7 +2,7 @@
 	<view class="text-gray">
 		<cu-custom bgColor="bg-purple" :isBack="true"><block slot="backText">返回</block><block slot="content">养护任务</block></cu-custom>
 		<view class="cu-card article">
-			<TaskCardItem :item="item" v-for="item in taskList" :key="item.taskId" @handleTopRight="goTo"></TaskCardItem>
+			<TaskCardItem :item="item" v-for="item in taskList" :key="item.taskId" @handleTopRight="goTo" hideTitleIcon></TaskCardItem>
 		</view>
 	</view>
 </template>
@@ -17,7 +17,6 @@
 		},
 		methods: {
 			goTo(data){
-				// console.log(data)
 				this.$goPage({name:'protectTaskDetail',query:{taskId:data}})
 			}
 		}
