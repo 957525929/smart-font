@@ -3,7 +3,7 @@
 		<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
 			<cu-custom bgColor="bg-yellow" :isBack="true">
 				<block slot="backText">返回</block>
-				<block slot="content">申请记录</block>
+				<block slot="content">我的预约</block>
 				<block slot="right">
 					<view class="action">
 						<view class='cuIcon-cu-image'>
@@ -12,10 +12,10 @@
 					</view>
 				</block>
 			</cu-custom>
-
+<!-- 
 			<scroll-view scroll-x class="bg-white nav flex text-center">
 				<view class="cu-item" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
-					待审核
+					我发起的
 				</view>
 
 				<view class="cu-item" :class="1==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="1">
@@ -26,7 +26,15 @@
 					已拒绝
 				</view>
 
-			</scroll-view>
+			</scroll-view> -->
+				<scroll-view scroll-x class="bg-white nav">
+						<view class="flex text-center">
+							<view class="cu-item flex-sub" :class="index==TabCur?'text-orange cur':''" v-for="(item,index) in list" :key="index"
+							 @tap="tabSelect" :data-id="index">
+								{{item}}
+							</view>
+						</view>
+					</scroll-view>
 
 			<block v-if="TabCur==0">
 				<navigator class="action" @tap="gotoDetail" >
@@ -36,11 +44,6 @@
 			<block v-if="TabCur==1">
 				<navigator class="action" @tap="gotoAllow">
 					<recordCard :cardType="type[1]" @send="recordDetailed"/>
-				</navigator>
-			</block>
-			<block v-if="TabCur==2">
-				<navigator class="action" @tap="gotoDetail" >
-					<recordCard :cardType="type[2]" @send="recordDetailed"/>
 				</navigator>
 			</block>
 		</scroll-view>
@@ -67,9 +70,10 @@
 	export default {
 		data() {
 			return {
+				list:['我发起的','被邀请的'],
 				recordData:'',
 				modalName: null,
-				reason: '被访人出差',
+				// reason: '被访人出差',
 				TabCur: 0,
 				scrollLeft: 0,
 				type: [{

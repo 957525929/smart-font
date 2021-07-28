@@ -22,31 +22,32 @@
 						color: 'orange',
 						cuIcon: 'edit',
 						route:'fixReport'
-					},{
-						title: '设备查询',
-						color: 'orange-shallow',
-						cuIcon: 'searchlist',
-						route:'deviceList'
-					},
-					{
-						title: '历史任务',
-						color: 'green',
-						cuIcon: 'medalfill',
-						route:'checkTask'
 					},
 					{
 						title: '维修任务',
-						color: 'blue',
+						color: 'orange-shallow',
 						cuIcon: 'repairfill',
 						route:'fixTask'
 					},
 					{
-						title: '保养任务',
+						title: '历史维修',
+						color: 'green',
+						cuIcon: 'list',
+						route:'fixRecord'
+					},
+
+					{
+						title: '历史保养',
+						color: 'blue',
+						cuIcon: 'list',
+						route:'proRecord'
+					},
+					{
+						title: '保养计划',
 						color: 'purple',
 						cuIcon: 'calendar',
 						route:'protectTask'
 					},
-
 				],
 			};
 		}

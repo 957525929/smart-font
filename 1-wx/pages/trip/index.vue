@@ -40,22 +40,22 @@
 
 			<block v-if="TabCur==0">
 				<navigator class="action" @tap="goToAgree">
-					<recordCard2 :cardType="type[0]" @send="dataDetail"/>
+					<recordCard2 :value="value[0]" @send="dataDetail" />
 				</navigator>
 			</block>
 			<block v-if="TabCur==1">
 				<navigator class="action" @tap="goToAgree">
-					<recordCard2 :cardType="type[1]"  @send="dataDetail"/>
+					<recordCard2 :value="value[1]" @send="dataDetail" />
 				</navigator>
 			</block>
 			<block v-if="TabCur==2">
 				<navigator class="action" @tap="goToAgree">
-					<recordCard2 :cardType="type[2]"  @send="dataDetail"/>
+					<recordCard2 :value="value[2]" @send="dataDetail" />
 				</navigator>
 			</block>
 			<block v-if="TabCur==3">
 				<navigator class="action" @tap="goToAgree">
-					<recordCard2 :cardType="allType[0]"  @send="dataDetail"/>
+					<recordCard2 :value="value[3]" @send="dataDetail" />
 				</navigator>
 			</block>
 		</scroll-view>
@@ -90,27 +90,12 @@
 			return {
 				// time: '12:01',
 				// date: '2018-12-25',
-				appoientDetail:"",
+				appoientDetail: "",
 				modalName: null,
 				TabCur: 0,
 				scrollLeft: 0,
 				reason: '被访人出差',
-				type: [{
-					id: 0,
-					type: "今日"
-				}, {
-					id: 1,
-					type: "明日"
-				}, {
-					id: 2,
-					type: "后日"
-				}],	
-				allType:[
-					{
-						id: 0,
-						allType: "全部"
-					}
-				]
+				value: ['0', '1', '2', '3']
 			};
 		},
 		components: {
@@ -142,7 +127,7 @@
 				this.TabCur = data
 				console.log(this.TabCur)
 			},
-				
+
 			// goToAllow() {
 			// 	uni.navigateTo({
 			// 		url: "/pages/verify/index"
@@ -151,12 +136,12 @@
 			goToAgree() {
 				var onjs = JSON.stringify(this.appoientDetail)
 				uni.navigateTo({
-					url: "/pages/verify/index4?onjs="+onjs
+					url: "/pages/verify/index4?onjs=" + onjs
 				});
 				// console.log('1111')
-				
+
 			},
-			dataDetail(value){
+			dataDetail(value) {
 				console.log("444444444444444")
 				console.log(value)
 				this.appoientDetail = value

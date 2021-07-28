@@ -16,12 +16,6 @@ const router = [{
 	{
 		name: "workplace",
 		path: baseWorkplace+"/index",
-	}, {
-		name: "checkTask",
-		path: baseWorkplace+"/checkTask/checkTask",
-	},{
-		name: "checkTaskDetail",
-		path: baseWorkplace+"/checkTask/checkTaskDetail",
 	},  {
 		name: "fixReport",
 		path: baseWorkplace+"/fixReport/fixReport",
@@ -29,11 +23,11 @@ const router = [{
 		name: "fixReportList",
 		path: baseWorkplace+"/fixReport/fixReportList",
 	},{
-		name: "taskRecord",
-		path: baseWorkplace+"/taskRecord/taskRecord"
+		name: "fixRecord",
+		path: baseWorkplace+"/fixTask/fixRecord"
 	},{
-		name: "taskRecordDetail",
-		path: baseWorkplace+"/taskRecord/taskRecordDetail"
+		name: "fixRecordDetail",
+		path: baseWorkplace+"/fixTask/fixRecordDetail"
 	}, {
 		name: "fixTask",
 		path: baseWorkplace+"/fixTask/fixTask"
@@ -46,6 +40,12 @@ const router = [{
 	},{
 		name: "protectTaskDetail",
 		path: baseWorkplace+"/protectTask/protectTaskDetail"
+	},{
+		name: "proRecord",
+		path: baseWorkplace+"/protectTask/proRecord"
+	},{
+		name: "proRecordDetail",
+		path: baseWorkplace+"/protectTask/proRecordDetail"
 	},
 	// 个人中心
 	{

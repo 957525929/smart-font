@@ -1,49 +1,24 @@
 <template>
 	<view>
-		<view v-for="(item,index) in applylist" :key="index">
+		<view v-for="(item,index) in infoList" :key="index">
 			<!-- 判断传递过来的值显示对应状态 -->
-			<view v-if="item.type==cardType.type">
-				<view class="card" @tap="dataDetail(item)">
-					<span>
-						<!-- 显示不同图片 -->
-						<image class="card-img" :src="'../../static/已通过.png'" mode="scaleToFill"
-							style="width: 60px; height: 60px;"></image>
-					</span>
-					<span class="card-center">
-						<view>
-							访问人：{{item.visit}}
-						</view>
-						<view>
-							电话号码：{{item.phone}}
-						</view>
-						<view>
-							预约见面时间：{{item.time}}
-						</view>
-					</span>
-				</view>
-			</view>
-
-			<view v-if="item.allType">
-				<view v-if="item.allType==cardType.allType">
-					<view class="card" @tap="dataDetail(item)">
-						<span>
-							<!-- 显示不同图片 -->
-							<image class="card-img" :src="'../../static/已通过.png'" mode="scaleToFill"
-								style="width: 60px; height: 60px;"></image>
-						</span>
-						<span class="card-center">
-							<view>
-								访问人：{{item.visit}}
-							</view>
-							<view>
-								电话号码：{{item.phone}}
-							</view>
-							<view>
-								预约见面时间：{{item.time}}
-							</view>
-						</span>
+			<view class="card" @tap="dataDetail(item)">
+				<span>
+					<!-- 显示不同图片 -->
+					<image class="card-img" :src="'../../static/已通过.png'" mode="scaleToFill"
+						style="width: 60px; height: 60px;"></image>
+				</span>
+				<span class="card-center">
+					<view>
+						访问人：{{item.visit}}
 					</view>
-				</view>
+					<view>
+						电话号码：{{item.phone}}
+					</view>
+					<view>
+						预约见面时间：{{item.time}}
+					</view>
+				</span>
 			</view>
 		</view>
 	</view>
@@ -51,112 +26,66 @@
 
 <script>
 	import {
-		generatePhoneNum
-	} from '../../util/mathFunc.js'
+		List
+	} from './data/List.js'
 	export default {
+		beforeCreate() {
+			let obj = []
+			for (let i = 0; i < List.length; i++) {
+				if (List[i].id == 1) {
+					obj.push(List[i])
+				}
+			}
+			// console.log(obj)
+			this.firstChange = obj
+		},
 		data() {
 			return {
-				date: '',
-				applylist: [{
-						visit: '林泽宇',
-						phone: generatePhoneNum(),
-						type: '今日',
-						allType: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + ' 09:00~12.00'
-					},
-					{
-						visit: '张国柱',
-						phone: generatePhoneNum(),
-						type: '今日',
-						allType: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + ' 14:00~16.00'
-					},
-					{
-						visit: '王鹏翔',
-						phone: generatePhoneNum(),
-						type: '今日',
-						allType: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate()) + "日" + ' 16:00~18.00'
-					},
-					{
-						visit: '张全蛋',
-						phone: generatePhoneNum(),
-						type: '明日',
-						allType: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 1) + "日" + ' 09:00~11.00'
-					},
-					{
-						visit: '林二狗',
-						phone: generatePhoneNum(),
-						type: '明日',
-						allType: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 1) + "日" + ' 14:00~15.00'
-					},
-					{
-						visit: '王铁柱',
-						phone: generatePhoneNum(),
-						type: '明日',
-						allType: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 1) + "日" + ' 15:00~18.00'
-					},
-					{
-						visit: '林淑芬',
-						phone: generatePhoneNum(),
-						type: '后日',
-						allType: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 2) + "日" + ' 10:00~12.00'
-					},
-					{
-						visit: '李桂花',
-						phone: generatePhoneNum(),
-						type: '后日',
-						allType: '全部',
-						time: new Date().getFullYear() + "年" +
-							(new Date().getMonth() + 1) + "月" +
-							(new Date().getDate() + 2) + "日" + ' 15:00~18.00'
-					},
-				],
-				// 颜色
-				styleObject: [{
-						color: '#3f7dcc',
-						fontSize: '16px',
-					},
-					{
-						color: '#31bb50',
-						fontSize: '16px',
-					},
-					{
-						color: '#f93c3c',
-						fontSize: '16px',
-					},
-				],
-
+				infoList: this.firstChange
+			}
+		},
+		watch: {
+			value() {
+				if (this.value == 3) {
+					this.infoList = List
+				} else {
+					this.getinfoList()
+				}
 			}
 		},
 
-		props: ["cardType"],
+		props: {
+			value: String
+		},
 
 		methods: {
-			generatePhoneNum,
 			dataDetail(item) {
 				console.log("11111111111111")
 				console.log(item)
 				this.$emit('send', item)
-			}
+			},
+			getinfoList() {
+				let obj = []
+				for (let i = 0; i < List.length; i++) {
+					if (List[i].id == this.value) {
+						obj.push(List[i])
+					}
+				}
+				this.infoList = obj
+			},
+			// getFirstList() {
+			// 	let obj = []
+			// 		if (List.id == 1 ){
+			// 			obj.push(List)
+			// 		}
+			// 	// this.infoList = obj
+			// 	// let cc = [],
+			// 		// if (List.id == 1) {
+			// 		// 	obj.push(List[i])
+			// 		// }
+			// 	// this.infoList = obj
+			// 	console.log(obj)
+			// },
 		}
 	}
 </script>

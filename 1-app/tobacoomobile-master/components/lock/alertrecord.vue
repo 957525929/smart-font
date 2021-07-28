@@ -9,28 +9,23 @@
 						<image class="card-img" :src="imgSrc[0]" mode="scaleToFill"
 							style="width: 5vh; height: 5vh;"></image>
 					</span>
-					<span class="card-center">
-						<view>
-							<span class="title">名称：</span>
-							<span class="title flex-sub text-left">{{item.name}}</span>
+					
+					<view class="card-center">
+						<view class="flex">
+							<view class="flex-sub">位 &nbsp; &nbsp;置：</view>
+							<view class="flex-treble"> &nbsp; {{item.area}}</view>
 						</view>
-						<view>
-							<span class="title">位置：</span>
-							<span class="title flex-sub text-left">{{item.area}}</span>
-						</view>
+						
 						<view>
 							<span class="title">房间号：</span>
 							<span class="title flex-sub text-left">{{item.roomnum}}</span>
-
-							<!-- 切换不同颜色 -->
-							<span class="itemtype" :style="styleObject[0]">
-								{{item.type}}
-							</span>
+					
 						</view>
-						<view>
-							<span class="title">报警时间：</span>
-							<span class="title flex-sub text-left">{{item.day}}</span>
-						</view>
+					</view>
+					
+					<!-- 切换不同颜色 -->
+					<span class="itemtype" :style="styleObject[0]">
+						{{item.type}}
 					</span>
 				</view>
 			</view>
@@ -55,16 +50,14 @@
 		data() {
 			return {
 				locklist: [{
-						name: '中国烟草总公司福建省公司机关',
-						area: 'A区域1号楼',
+						area: '中国烟草总公司福建省公司机关.A区域.1号楼',
 						roomnum: '101',
 						day: '2021年7月19日 08:34:22',
 						time: '08:34:22',
 						type: '低电量',
 					},
 					{
-						name: '中国烟草总公司福建省公司机关',
-						area: 'B区域3号楼',
+						area: '中国烟草总公司福建省公司机关.B区域.3号楼',
 						roomnum: '305',
 						day: '2021年7月17日 16:30:16',
 						time: '16:30:16',
@@ -102,7 +95,7 @@
 	.card {
 		margin: 1vh 1vh;
 		background-color: white;
-		height: 12.5vh;
+		height: 10.5vh;
 		display: flex;
 		border-radius: 10px;
 	}
@@ -117,6 +110,8 @@
 
 	.itemtype {
 		float: right;
+		width: 20%;
+		margin-top: 7%;
 	}
 
 	.card-type {
