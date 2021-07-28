@@ -10,13 +10,14 @@
       <a-divider type="vertical" />
 
       <span>位置：</span>
-      <a-cascader
-        style="width: 28%"
-        :options="selectOptions"
-        change-on-select
-        @change="areaChange"
+      <a-tree-select
+        v-model="value"
         placeholder="请选择位置"
-        :display-render="displayRender"
+        style="width: 27%"
+        :tree-data="treeData"
+        tree-checkable
+        :show-checked-strategy="SHOW_PARENT"
+        search-placeholder="Please select"
       />
 
       <a-divider type="vertical" />
@@ -49,13 +50,14 @@
             <a-row type="flex" align="middle">
               <a-col :span="6">位置：</a-col>
               <a-col :span="17">
-                <a-cascader
+                <a-tree-select
+                  v-model="value1"
+                  placeholder="请选择区域"
                   style="width: 100%"
-                  :options="selectOptions"
-                  change-on-select
-                  @change="areaChange1"
-                  placeholder="请选择位置"
-                  :display-render="displayRender"
+                  :tree-data="treeData"
+                  tree-checkable
+                  :show-checked-strategy="SHOW_PARENT"
+                  search-placeholder="Please select"
                 />
               </a-col>
             </a-row>
@@ -65,7 +67,11 @@
             <a-row type="flex" align="middle">
               <a-col :span="6">房间：</a-col>
               <a-col :span="17">
-                <a-input style="width: 100%" placeholder="请输入房间号" v-model="roomNum1" allowClear></a-input>
+                <a-select mode="multiple" style="width: 100%" placeholder="请选择房间号" @change="handleChange">
+                  <a-select-option v-for="(item, index) in roomnumber" :key="index">
+                    {{ item }}
+                  </a-select-option>
+                </a-select>
               </a-col>
             </a-row>
           </a-modal>
@@ -143,6 +149,9 @@
 <script>
 import { areaData } from '../../components/roomManager/data/area.js'
 import { installdata } from './data/installdata'
+import { treeData } from './data/treeData.js'
+import { TreeSelect } from 'ant-design-vue'
+const SHOW_PARENT = TreeSelect.SHOW_PARENT
 
 const columns = [
   { title: '位置', dataIndex: 'area', key: 'area', width: '30%' },
@@ -162,9 +171,17 @@ export default {
       columns: columns,
       visibleEdit: false,
       rowrecord: '',
+      value: [],
+      treeData: treeData,
+      SHOW_PARENT,
+      value1: [],
+      roomnumber: ['101', '102', '103', '104'],
     }
   },
   methods: {
+    handleChange(value) {
+      console.log(`selected ${value}`)
+    },
     displayRender({ labels }) {
       return labels.join('.')
     },

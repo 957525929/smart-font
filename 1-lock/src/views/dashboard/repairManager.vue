@@ -79,7 +79,7 @@
               <a-col :span="4">负责区域：</a-col>
               <a-col :span="17">
                 <a-tree-select
-                  v-model="value"
+                  v-model="value1"
                   placeholder="请选择区域"
                   style="width: 100%"
                   :tree-data="treeData"
@@ -194,6 +194,7 @@ export default {
       rowRecord: '',
       valueEdit: [],
       selectvalue: '1',
+      value1: [],
     }
   },
   methods: {

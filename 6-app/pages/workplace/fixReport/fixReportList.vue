@@ -1,6 +1,6 @@
 <template>
 	<view class="text-gray">
-		<cu-custom bgColor="bg-purple" :isBack="true"><block slot="backText">返回</block><block slot="content">问题列表</block></cu-custom>
+		<cu-custom bgColor="bg-purple" :isBack="true"><block slot="backText">返回</block><block slot="content">报修列表</block></cu-custom>
 		<scroll-view scroll-x class="bg-white nav">
 			<view class="flex text-center">
 				<view class="cu-item flex-sub" :class="index==TabCur?'text-blue cur':''"

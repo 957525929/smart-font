@@ -63,8 +63,14 @@
 		</view> -->
 		<view v-if="TabCur==0" class="itembox">
 			<view class="cu-form-group">
-				<view class="title">最近一周安装统计图表：</view>
+				<view class="title">智能锁安装统计图表</view>
+				<picker @change="PickerChange" :value="index" :range="picker">
+					<view class="picker">
+						{{picker[index]}}
+					</view>
+				</picker>
 			</view>
+			
 			<view class="charts-box">
 				<qiun-data-charts type="pie" :chartData="chartData2" background="white" />
 			</view>
@@ -102,8 +108,14 @@
 
 		<view v-if="TabCur==1" class="itembox">
 			<view class="cu-form-group">
-				<view class="title">最近一周报警统计图表：</view>
+				<view class="title">智能锁报警记录统计图表</view>
+				<picker @change="PickerChange1" :value="index1" :range="picker1">
+					<view class="picker">
+						{{picker1[index1]}}
+					</view>
+				</picker>
 			</view>
+			
 			<view class="charts-box">
 				<qiun-data-charts type="column" :chartData="chartData1" background="white" />
 			</view>
@@ -145,6 +157,11 @@
 		data() {
 			return {
 				TabCur: 0,
+				
+				index: 1,
+				picker: ['当天', '近7天', '近1月', '近3月', '近半年', '近1年', '全部'],
+				index1: 1,
+				picker1: ['当天', '近7天', '近1月', '近3月', '近半年', '近1年', '全部'],
 				// chartData: {
 				// 	categories: [
 				// 		"密码开锁",
@@ -237,6 +254,13 @@
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id;
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
+			},
+			
+			PickerChange(e) {
+				this.index = e.detail.value
+			},
+			PickerChange1(e) {
+				this.index = e.detail.value
 			},
 		}
 	}

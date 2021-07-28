@@ -3,9 +3,37 @@
 		<!-- 未安装 -->
 		<view v-if="type==0" class="cu-form-group margin-top">
 			<view class="title">绑定锁编号：</view>
-			<input placeholder="请输入锁编号" name="input"></input>
-			<text class='cuIcon-favorfill text-red'></text>
+			<input placeholder="请输入锁编号" name="locknum" v-model="locknum"></input>
+			<button class='cu-btn bg-blue' @tap="getlocknum" data-target="DialogModal">获取</button>
 		</view>
+
+		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">获取锁编号</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl bg-white">
+					<view class="cu-form-group">
+						<view class="title">WiFi:</view>
+						<input placeholder="请输入提供的WiFi名" name="wifi" v-model="wifi"></input>
+					</view>
+					<view class="cu-form-group">
+						<view class="title">密码:</view>
+						<input placeholder="请输入提供的WiFi密码" name="wifipassword" v-model="wifipassword"></input>
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-center">
+					<view class="action">
+						<button class="cu-btn bg-blue" @tap="okconfirm">连接</button>
+					</view>
+				</view>
+			</view>
+		</view>
+
+
 		<view v-if="type==3 || type==4 || type==5" class="cu-form-group margin-top">
 			<view class="title">锁编号：</view>
 			<input v-model="input" name="input"></input>
@@ -109,6 +137,9 @@
 				value: '',
 				value: '',
 				input: 'S0001',
+				locknum: '',
+				wifi: '@ZeoMap',
+				wifipassword: '******',
 			}
 		},
 
@@ -152,7 +183,18 @@
 
 			textareaBInput(e) {
 				this.textareaBValue = e.detail.value
-			}
+			},
+
+			getlocknum(e) {
+				this.modalName = e.currentTarget.dataset.target
+			},
+			hideModal(e) {
+				this.modalName = null
+			},
+			okconfirm() {
+				this.modalName = null
+				this.locknum = 'S0001'
+			},
 		}
 	}
 </script>

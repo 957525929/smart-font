@@ -67,7 +67,7 @@
 				</view>
 				<view class="cu-form-group">
 					<view class="title">往返类型</view>
-					<uni-data-checkbox v-model="formData.singleOrRound" :localdata="tripType" />
+					<input value="单程"></input>
 				</view>
 				<button v-if="status==0||status==2" type="primary" class="margin-top" @click="submitForm">提交修改</button>
 			</form>

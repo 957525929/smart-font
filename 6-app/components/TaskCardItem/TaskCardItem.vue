@@ -2,7 +2,7 @@
 	<view class="cu-item shadow">
 		<view class="text-xl flex padding-lr justify-between align-center">
 			<view class="fl text-cut">
-				<text class="cuIcon-locationfill text-purple shadow-blue" v-if="!hideTitleIcon"></text>
+				<text :class="titleIcon" v-if="!hideTitleIcon"></text>
 				<text class=" title">{{item.titleLeft}}</text>
 			</view>
 			<view class="text-orange-shallow fr text-lg " @tap="$emit('handleTopRight',item.taskId)">{{item.titleRight}}
@@ -43,6 +43,10 @@
 			hideTitleIcon: {
 				type: Boolean,
 				default: false
+			},
+			titleIcon:{
+				type: String,
+				default: "cuIcon-locationfill text-purple shadow-blue"
 			}
 		}
 	}

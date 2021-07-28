@@ -263,8 +263,8 @@ const getNow = () => {
 	let M = autoChange(date.getMonth() + 1); //计算机的月份是从0开始滴，需要+1
 	let D = autoChange(date.getDate());
 
-	let h = autoChange(date.getHours()) + ":";
-	let m = autoChange(date.getMinutes()) + ":";
+	let h = autoChange(date.getHours());
+	let m = autoChange(date.getMinutes());
 	let s = autoChange(date.getSeconds());
 
 	return [[Y, M, D], [h, m, s]];

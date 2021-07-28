@@ -2,7 +2,7 @@
 	<view class="">
 		<cu-custom bgColor="bg-purple" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">故障上报</block>
+			<block slot="content">维修上报</block>
 			<view class="action" slot="right" @tap="$goPage('fixReportList')">
 				<text class="cuIcon-list"></text>
 			</view>
