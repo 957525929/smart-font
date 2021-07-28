@@ -67,7 +67,7 @@
 								<view v-if="item.tag==false" class="cu-tag round bg-orange sm">已撤销</view>
 							</view>
 							<view v-else="item.tag==null " >
-								<view class="cu-tag round bg-orange sm">{{item.state}}</view>
+								<view  :class="item.color">{{item.state}}</view>
 							</view>
 						</view>
 					</view>
@@ -114,14 +114,14 @@
 						room:"烟草公司.A区域.1号楼.1-205",
 						detail:"会议名称：项目周例会议 预约时间：2021-06-07 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人",
 						state:"待开会",
-						color:"bg-green",
+						color:"bg-green  cu-tag round sm",
 						peoples:10,
 						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
 					},
 					{
 						reservations:"王安",
 						reserphone:"15877875112",
-						tag:false,
+						tag:null,
 						title:"XX会议记录5",
 						content:"出售烟草战略5",
 						seconde:"22:20",
@@ -130,14 +130,14 @@
 						room:"烟草公司.A区域.1号楼.1-205",
 						detail:"会议名称：项目周例会议 预约时间：2021-06-06 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人"	,
 						state:"已完成",
-						color:"bg-gray",
+						color:"bg-gray  cu-tag round sm",
 						peoples:10,
 						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
 					},
 					{
 						reservations:"王安",
 						reserphone:"15877875112",
-						tag:false,
+						tag:null,
 						title:"XX会议记录4",
 						content:"出售烟草战略4",
 						seconde:"22:20",
@@ -146,14 +146,14 @@
 						room:"烟草公司.A区域.1号楼.1-205",
 						detail:"会议名称：项目周例会议 预约时间：2021-06-05 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人"	,
 						state:"已撤销",
-						color:"bg-orange",
+						color:"bg-orange  cu-tag round sm",
 						peoples:10,
 						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
 					},
 					{
 						reservations:"王安",
 						reserphone:"15877875112",
-						tag:false,
+						tag:null,
 						title:"XX会议记录3",
 						content:"出售烟草战略3",
 						seconde:"22:20",
@@ -162,14 +162,14 @@
 						room:"烟草公司.A区域.1号楼.1-205",
 						detail:"会议名称：项目周例会议 预约时间：2021-06-04 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人"	,
 						state:"强制撤销",
-						color:"bg-red",
+						color:"bg-red  cu-tag round sm",
 						peoples:10,
 						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
 					},
 					{
 						reservations:"王安",
 						reserphone:"15877875112",
-						tag:false,
+						tag:null,
 						title:"XX会议记录2",
 						content:"出售烟草战略2",
 						seconde:"22:20",
@@ -178,7 +178,7 @@
 						room:"烟草公司.A区域.1号楼.1-205",
 						detail:"会议名称：项目周例会议 预约时间：2021-06-03 上午	预约会议室:烟草公司.A区域.1号楼.1-205 会议室  参会人数:10人"	,
 						state:"已完成",
-						color:"bg-gray",
+						color:"bg-gray  cu-tag round sm",
 						peoples:10,
 						remark:"参与人:产品组所有人  内容:第一期XX项目周例会",
 					},
