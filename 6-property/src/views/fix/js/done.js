@@ -25,7 +25,7 @@ export const columns = [
         valueEnum: devType
     },
     {
-        title: '问题上报时间',
+        title: '报修时间',
         key: 'deliveryTime',
         dataIndex: 'deliveryTime',
         scopedSlots: { customRender: 'tags' },
@@ -136,7 +136,7 @@ export const infoDetail = [
         hideInDetail: true
     },
     {
-        title: '上报时间',
+        title: '报修时间',
         key: 'deliveryTime',
         value: "",
         type: "a-range-picker"

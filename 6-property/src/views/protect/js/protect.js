@@ -15,14 +15,14 @@ import {
 } from "@/views/device/deviceList/js/index.js";
 export const columns = [{
     dataIndex: 'taskId',
-    title: '任务编号',
+    title: '计划编号',
     width: 50,
     key: 'taskId',
     value: ""
 },
 {
     dataIndex: 'taskName',
-    title: '任务名',
+    title: '计划名',
     width: 80,
     key: 'taskName',
     value: ""
@@ -30,7 +30,7 @@ export const columns = [{
 {
     dataIndex: 'taskType',
     key: 'taskType',
-    title: '任务类型',
+    title: '养护类型',
     width: 80,
     type: 'a-select',
     valueEnum: taskType,
@@ -38,7 +38,7 @@ export const columns = [{
 },
 {
     dataIndex: 'taskPeriod',
-    title: '任务周期',
+    title: '养护周期',
     width: 40,
     key: 'taskPeriod',
     value: "",
@@ -46,7 +46,7 @@ export const columns = [{
     valueEnum: proPeriod
 },
 {
-    title: '任务下发时间',
+    title: '计划生效时间',
     key: 'dispatchTime',
     dataIndex: 'dispatchTime',
     width: 100,
@@ -96,7 +96,7 @@ export const columns = [{
     value: ""
 },
 {
-    title: '任务描述',
+    title: '计划描述',
     dataIndex: 'description',
     width: 100,
     key: 'description',
@@ -155,7 +155,7 @@ export const addplan = [{
     })
 },
 {
-    title: '任务类型',
+    title: '养护类型',
     value: "",
     key: 'proType',
     type: "a-select",

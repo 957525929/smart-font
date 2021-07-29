@@ -1,17 +1,23 @@
-import { devType ,devStatus,staffStatus,techSituation} from "@/utils/dataDictionary.js";
+import { devType, devStatus, staffStatus, techSituation } from "@/utils/dataDictionary.js";
 export const columns = [
     {
         dataIndex: 'devId',
         scopedSlots: { customRender: 'devId' },
         title: '员工编号',
-        width: 80,
+        width: 40,
         key: 'devId'
     },
     {
         title: '姓名',
         dataIndex: 'devName',
-        width: 80,
+        width: 40,
         key: 'devName'
+    },
+    {
+        title: '角色',
+        dataIndex: 'role',
+        width: 40,
+        key: 'role'
     },
     {
         title: '维修类别',
@@ -28,42 +34,27 @@ export const columns = [
         scopedSlots: { customRender: 'staffStatus' },
         width: 50,
         type: 'a-select',
-        valueEnum:staffStatus
+        valueEnum: staffStatus
     },
     {
         title: '联系方式',
         dataIndex: 'phone',
         key: 'phone',
-        width: 80,
+        width: 100,
     },
-    // {
-    //     title: '所绑资产',
-    //     key: 'assets',
-    //     width: 80,
-    //     type: 'a-select',
-    //     dataIndex:'assets'
-    // },
     {
         title: '入职时间',
         key: 'loginTime',
         dataIndex: 'loginTime',
-        width: 80,
+        width: 100,
         type: 'a-range-picker',
     },
-    // {
-    //     title: '服务综合评价',
-    //     key: 'evaluation',
-    //     dataIndex: 'evaluation',
-    //     scopedSlots: { customRender: 'eva' },
-    //     width: 80,
-    //     hideInSearch:true
-    // },
     {
         title: '操作',
         key: 'action',
         scopedSlots: { customRender: 'action' },
         width: 80,
-        hideInSearch:true
+        hideInSearch: true
     },
 ]
 
@@ -72,138 +63,163 @@ export const data = [
         key: 0,
         devId: '1',
         devName: "刘涛",
+        role: "维修",
         devType: 1,
         staffStatus: 0,
         assets: '烟草大厦',
         phone: '18232145698',
         loginTime: '2021-05-21 17：55：55',
-        eva:4.5,
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        },{
-            tagName:"编辑",
-            com:"TableModal"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
+        eva: 4.5,
+        action: [{
+            tagName: "详情",
+            com: "TableDrawer"
+        }, {
+            tagName: "编辑",
+            com: "TableModal"
+        }, {
+            tagName: "删除",
+            com: "TableDelete"
         }]
     },
     {
         key: 1,
         devId: '2',
         devName: "张英",
+        role: "养护",
         devType: 0,
         staffStatus: 1,
         assets: '烟草大厦',
         phone: '13332145698',
         loginTime: '2021-05-21 17：55：55',
-        eva:4,
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        },{
-            tagName:"编辑",
-            com:"TableModal"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
+        eva: 4,
+        action: [{
+            tagName: "详情",
+            com: "TableDrawer"
+        }, {
+            tagName: "编辑",
+            com: "TableModal"
+        }, {
+            tagName: "删除",
+            com: "TableDelete"
         }]
     },
     {
         key: 2,
         devId: '3',
         devName: "王翔",
+        role: "维修",
         devType: 2,
         staffStatus: 2,
         assets: '烟草大厦',
         phone: '18832149956',
         loginTime: '2021-05-20 17：55：55',
-        eva:5,
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        },{
-            tagName:"编辑",
-            com:"TableModal"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
+        eva: 5,
+        action: [{
+            tagName: "详情",
+            com: "TableDrawer"
+        }, {
+            tagName: "编辑",
+            com: "TableModal"
+        }, {
+            tagName: "删除",
+            com: "TableDelete"
+        }]
+    },
+    {
+        key: 3,
+        devId: '4',
+        devName: "李明",
+        role: "养护",
+        devType: 2,
+        staffStatus: 2,
+        assets: '烟草大厦',
+        phone: '18832149956',
+        loginTime: '2021-05-20 17：55：55',
+        eva: 5,
+        action: [{
+            tagName: "详情",
+            com: "TableDrawer"
+        }, {
+            tagName: "编辑",
+            com: "TableModal"
+        }, {
+            tagName: "删除",
+            com: "TableDelete"
         }]
     },
 ]
-export const infoDetail =[
+export const infoDetail = [
     {
         title: '员工编号',
         key: 'devId',
-        value:"",
-        hideInLogin:true,
-        hideInDetail:true
+        value: "",
+        hideInLogin: true,
+        hideInDetail: true
     },
     {
         title: '姓名',
-        value:"",
+        value: "",
         key: 'devName'
     },
     {
         title: '手机号',
-        value:"",
+        value: "",
         key: 'phone'
     },
     {
         title: '维养类型',
-        value:"",
+        value: "",
         key: 'devType',
-        type:"a-select",
-        valueEnum:devType      
+        type: "a-select",
+        valueEnum: devType
     },
     {
         title: '工作状态',
         key: 'devStatus',
-        value:"",
-        type:"a-select",
-        valueEnum:devStatus,
-        hideInLogin:true,
-        hideInDetail:true
+        value: "",
+        type: "a-select",
+        valueEnum: devStatus,
+        hideInLogin: true,
+        hideInDetail: true
     },
     {
         title: '负责资产',
         key: 'assets',
-        value:"",
-        hideInLogin:true,
+        value: "",
+        hideInLogin: true,
     },
     {
         title: '入职时间',
         key: 'loginTime',
-        value:"",
-        type:"a-range-picker",
-        hideInLogin:true,
-        hideInDetail:true
+        value: "",
+        type: "a-range-picker",
+        hideInLogin: true,
+        hideInDetail: true
     }
 ]
-export const devDetail =[
+export const devDetail = [
     {
         title: '设备编号',
         key: 'Id',
-        value:""
+        value: ""
     },
     {
         title: '设备名称',
-        value:"",
+        value: "",
         key: 'devName'
     },
     {
         title: '设备类型',
-        value:"",
+        value: "",
         key: 'devType',
-        type:"a-select",
-        valueEnum:devType
+        type: "a-select",
+        valueEnum: devType
     },
     {
         title: '实际状态',
         key: 'devStatus',
-        value:"",
-        type:"a-select"
+        value: "",
+        type: "a-select"
     },
     // {
     //     key: 'institution',
@@ -218,22 +234,22 @@ export const devDetail =[
     {
         title: '技术状况',
         key: 'techSituation',
-        value:"",
-        type:"a-select",
-        valueEnum:techSituation
+        value: "",
+        type: "a-select",
+        valueEnum: techSituation
     },
     {
         title: '维修员',
         key: 'devId',
-        value:"",
-        hideInDetail:true
+        value: "",
+        hideInDetail: true
     },
     {
         title: '登记时间',
         key: 'loginTime',
-        value:"",
-        type:"a-range-picker",
-        hideInDetail:true
+        value: "",
+        type: "a-range-picker",
+        hideInDetail: true
     }
 ]
 export const detailDevData = [
@@ -262,7 +278,7 @@ export const detailDevData = [
         techSituation: 1,
         devId: '刘涛',
         loginTime: '2021-06-21 10：55：55'
-    },    {
+    }, {
         key: 2,
         Id: '3001',
         devName: "air_3001",

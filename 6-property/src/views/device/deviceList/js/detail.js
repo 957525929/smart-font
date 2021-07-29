@@ -102,7 +102,7 @@ export const fixInfo = [{
     valueEnum: devType
 },
 {
-    title: '问题上报时间',
+    title: '报修时间',
     key: 'deliveryTime',
     dataIndex: 'deliveryTime',
     scopedSlots: {

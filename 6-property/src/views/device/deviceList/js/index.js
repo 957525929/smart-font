@@ -246,16 +246,16 @@ export const loginInfo = [{
     hideInDetail: true
 },
 {
-    title: '设备名称',
-    value: "",
-    key: 'devName'
-},
-{
     title: '设备类型',
     value: "",
     key: 'devType',
     type: "a-cascader",
     valueEnum: handleTreeToCascade(DepartTree)
+},
+{
+    title: '设备名称',
+    value: "",
+    key: 'devName'
 },
 {
     title: '实际状态',
