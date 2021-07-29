@@ -131,31 +131,32 @@
     }
 
     function goto(index) {
-        var url = 'http://172.16.1.219:3001/';
+        var base = 'http://172.16.3.111:12000/fjyc/web/';
+        var url = 'lock/';
         switch (index) {
             case 2:
-                url = 'http://172.16.1.219:3002/';
+                url = 'diningRoom/';
                 break;
             case 3:
-                url = 'http://172.16.1.219:3003/';
+                url = 'asset/';
                 break;
             case 4:
-                url = 'http://172.16.1.219:3004/';
+                url = 'officeSupplies/';
                 break;
             case 5:
-                url = 'http://172.16.1.219:3005/';
+                url = 'car/';
                 break;
             case 6:
-                url = 'http://172.16.1.219:3006/';
+                url = 'property/';
                 break;
             case 7:
-                url = 'http://172.16.1.219:3007/';
+                url = 'reception/';
                 break;
             case 8:
-                url = 'http://172.16.1.219:3008/';
+                url = 'synthesize/';
                 break;
         }
-        window.open( url);
+        window.open( base + url);
     }
 
 </script>
