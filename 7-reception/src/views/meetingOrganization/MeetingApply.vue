@@ -361,7 +361,7 @@ export default {
       }
     }
   },
-    created() {
+  created() {
     let end = moment(new Date())
       .subtract(-3, 'days')
       .format('YYYY-MM-DD')

@@ -54,7 +54,7 @@
         <a-table-column title="序号" data-index="index" align="left" fixed="left"></a-table-column>
         <a-table-column title="管理员" data-index="dutyName" align="center"></a-table-column>
         <a-table-column title="管理员电话" data-index="dutyTel" align="center"></a-table-column>
-        <a-table-column title="管理位置" data-index="area" align="center"></a-table-column>
+        <a-table-column title="会议室位置" data-index="area" align="center"></a-table-column>
         <!-- <a-table-column title="备注信息" data-index="remark" align="center"></a-table-column> -->
         <a-table-column title="操作" align="center" fixed="right">
           <template slot-scope="record">
@@ -92,7 +92,7 @@
         <a-form-model-item label="管理员电话" prop="dutyTel">
           <a-input v-model="formAdd.dutyTel"  placeholder="管理员电话" disabled></a-input>
         </a-form-model-item>
-        <a-form-model-item ref="area" label="管理位置" prop="area">
+        <a-form-model-item ref="area" label="会议室位置" prop="area">
           <a-tree-select
             v-model="formAdd.area"
             placeholder="请选择位置"
@@ -128,7 +128,7 @@
         <a-form-model-item label="管理员电话" prop="dutyTel">
           <a-input v-model="formModify.dutyTel" disabled></a-input>
         </a-form-model-item>
-        <a-form-model-item label="管理位置" prop="area">
+        <a-form-model-item label="会议室位置" prop="area">
           <!-- <a-input v-model="formModify.area" disabled></a-input> -->
           <a-tree-select
             v-model="formModify.area"
