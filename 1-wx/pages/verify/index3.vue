@@ -13,8 +13,7 @@
 
 		<view class="cu-form-group align-center bg-white">
 			<view class="title">申请状态</view>
-			<view v-if="this.onjs.disagree" class="text-red">已拒绝</view>
-			<view v-else class="text-blue">待审核</view>
+			<view >{{this.onjs.type}}</view>
 		</view>
 
 

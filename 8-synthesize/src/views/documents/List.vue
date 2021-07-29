@@ -32,6 +32,8 @@
               <a-select class="w150" placeholder="请选择文档格式">
                 <a-select-option value="0">doc</a-select-option>
                 <a-select-option value="1">xlsx</a-select-option>
+                <a-select-option value="2">ppt</a-select-option>
+                <a-select-option value="3">pdf</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
@@ -59,17 +61,23 @@
           <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
           <a-button @click="handleAdd" type="dashed" icon="plus">新增</a-button>
 
-          <a-button v-if="selectedRowKeys.length > 0" style="margin-left: 8px">
-            批量删除
-          </a-button>
-
+          <a-button v-if="selectedRowKeys.length > 0" style="margin-left: 8px"> 批量删除 </a-button>
         </a-col>
       </a-row>
     </div>
 
     <!-- table区域-begin -->
     <div>
-      <a-table ref="table" size="middle" bordered rowKey="id" :columns="columns" :dataSource="data" :loading="loading" :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }">
+      <a-table
+        ref="table"
+        size="middle"
+        bordered
+        rowKey="id"
+        :columns="columns"
+        :dataSource="data"
+        :loading="loading"
+        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+      >
         <a slot="documentNameList" slot-scope="text" @click="showDetails(text), handleExportXls3(`${currentItem}`)">{{
           text
         }}</a>

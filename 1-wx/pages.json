@@ -1,5 +1,14 @@
 {
-	"pages": [{
+	"pages": [  {
+            "path" : "pages/home/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+		{
 			"path": "pages/login/index",
 			"style": {
 				"navigationBarTitleText": "",
