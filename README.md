@@ -13,8 +13,10 @@ yarn run build
   打包时注意事项:
   vue.config.js 20行 注释放开 publicPath:'./',
   由于ant-design-pro-vue的路由默认采用history模式，这会导致你后续页面都是找不到的。
-  src/router/index.js 18行 mode: 'history' 需要注释掉 或值改为hash
-  src/components/tools/UserMenu.vue 171行  //window.location.href="/"; window.location.reload();
+  src/router/index.js 18行 mode: 'history' 值改为hash
+  src/components/tools/UserMenu.vue 171行  
+  //window.location.href="/";  注释 
+  window.location.reload(); 放开
   打包成h5 在配置项中的运行的基础路径 填上 ./
   
 测试帐号admin 123456

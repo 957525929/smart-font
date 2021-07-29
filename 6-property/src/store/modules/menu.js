@@ -147,7 +147,7 @@ export const menuMock = {
                     "meta": {
                         "keepAlive": false,
                         "internalOrExternal": false,
-                        "title": "工单查询统计"
+                        "title": "查询统计"
                     },
                     "name": "fix-fixList",
                     "id": "1261213213500452866"
@@ -209,7 +209,7 @@ export const menuMock = {
                     "meta": {
                         "keepAlive": false,
                         "internalOrExternal": false,
-                        "title": "计划查询统计"
+                        "title": "查询统计"
                     },
                     "name": "device-protectList-list",
                     "id": "1261213213500452866"

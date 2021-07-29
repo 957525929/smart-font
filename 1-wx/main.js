@@ -13,7 +13,7 @@ Vue.component('scan',scan)
 // import workplace from './pages/workplace/index.vue'
 // Vue.component('workplace',workplace)
 
-import allow from './pages/allow/index.vue'
+import allow from './pages/allow/allowCode.vue'
 Vue.component('allow',allow)
 
 import applyList from './pages/applyList/index.vue'

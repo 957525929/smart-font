@@ -34,7 +34,7 @@
 			{{this.onjs.phone}}
 		</view>
 
-		<view class="cu-bar bg-white margin-top">
+<!-- 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
 				<text class="text-black text-bold">· 预约时间</text>
 			</view>
@@ -55,7 +55,7 @@
 		<view class="cu-form-group">
 			<view class="title">结束时间</view>
 			{{this.onjs.endTime}}
-		</view>
+		</view> -->
 
 		<view v-if="!this.onjs.disagreeTime">
 			<view class="cu-bar bg-white margin-top">

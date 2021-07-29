@@ -25,20 +25,12 @@
 		data() {
 			return {
 				elements: [{
-						title: '预约记录',
+						title: '预约管理',
 						name: 'appointList',
 						color: 'red',
 						cuIcon: 'calendar',
 						enName: 'AppointList',
 						route: '/pages/index/staff?PageCur=applyList'
-					},
-					{
-						title: '预约行程',
-						name: 'trip',
-						color: 'blue',
-						cuIcon: 'taxi',
-						enName: 'Trip',
-						route: '/pages/index/staff?PageCur=trip'
 					},
 					{
 						title: '个人中心',

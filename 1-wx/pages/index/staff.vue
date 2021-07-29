@@ -22,15 +22,15 @@
 					<text
 						:class="PageCur=='applyList'?'text-orange cuIcon-calendar':'text-gray cuIcon-calendar'"></text>
 				</view>
-				<view :class="PageCur==''?'text-orange':'text-gray'">申请记录</view>
+				<view :class="PageCur==''?'text-orange':'text-gray'">预约管理</view>
 			</view>
 
-			<view class="action" @click="NavChange" data-cur="trip">
+	<!-- 		<view class="action" @click="NavChange" data-cur="trip">
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='trip'?'text-orange cuIcon-taxi':'text-gray cuIcon-taxi'"></text>
 				</view>
 				<view :class="PageCur==''?'text-orange':'text-gray'">预约行程</view>
-			</view>
+			</view> -->
 
 			<!-- 			<view class="action" @click="NavChange" data-cur="verify">
 				<view class='cuIcon-cu-image'>

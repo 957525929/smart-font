@@ -112,7 +112,7 @@
 	.card {
 		margin: 1vh 1vh;
 		background-color: white;
-		height: 12.5vh;
+		/* height: 12.5vh; */
 		display: flex;
 		border-radius: 10px;
 	}

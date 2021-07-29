@@ -9,20 +9,22 @@ import {
 } from "@/utils/util.js";
 export const columns = [{
     dataIndex: 'taskId',
-    title: '任务编号',
+    title: '计划编号',
     width: 50,
     key: 'taskId',
-    value: ""
+    value: "",
+    hideInSearch: true
 },
 {
     dataIndex: 'taskName',
-    title: '任务名',
+    title: '计划名',
     width: 80,
     key: 'taskName',
-    value: ""
+    value: "",
+    hideInSearch: true
 },
 {
-    title: '任务状态',
+    title: '计划状态',
     dataIndex: 'taskStatus',
     width: 60,
     key: 'taskStatus',
@@ -33,27 +35,10 @@ export const columns = [{
 {
     dataIndex: 'taskType',
     key: 'taskType',
-    title: '任务类型',
+    title: '养护类型',
     width: 80,
     type: 'a-select',
     valueEnum: taskType,
-    value: ""
-},
-{
-    dataIndex: 'taskPeriod',
-    title: '任务周期',
-    width: 40,
-    key: 'taskPeriod',
-    value: "",
-    type: 'a-select',
-    valueEnum: proPeriod
-},
-{
-    title: '任务下发时间',
-    key: 'dispatchTime',
-    dataIndex: 'dispatchTime',
-    width: 100,
-    type: 'a-range-picker',
     value: ""
 },
 {
@@ -64,6 +49,31 @@ export const columns = [{
     value: "",
     valueEnum: handleTreeToCascade(groupTree),
     type: 'a-cascader',
+},
+{
+    dataIndex: 'taskPeriod',
+    title: '养护周期',
+    width: 40,
+    key: 'taskPeriod',
+    value: "",
+    type: 'a-select',
+    valueEnum: proPeriod
+},
+{
+    title: '计划生效时间',
+    key: 'dispatchTime',
+    dataIndex: 'dispatchTime',
+    width: 100,
+    type: 'a-range-picker',
+    value: ""
+},
+{
+    title: '计划结束时间',
+    key: 'expectTime',
+    dataIndex: 'expectTime',
+    width: 80,
+    type: 'a-range-picker',
+    value: ""
 },
 {
     title: '保养员',
@@ -80,16 +90,9 @@ export const columns = [{
     value: "",
     hideInSearch: true,
 },
+
 {
-    title: '预计完成时间',
-    key: 'expectTime',
-    dataIndex: 'expectTime',
-    width: 80,
-    type: 'a-range-picker',
-    value: ""
-},
-{
-    title: '任务描述',
+    title: '计划描述',
     dataIndex: 'description',
     width: 100,
     key: 'description',
@@ -115,7 +118,9 @@ export const data = [{
     taskName: "1号楼月度巡养计划",
     taskType: 0,
     taskStatus: 0,
-    taskPeriod: 2,
+    taskPeriod: "每月",
+    taskNum: "2",
+    ifPlanDone: "未完成",
     dispatchTime: '2021-06-22 18：55：55',
     areaKey: '1-1-1',
     address: "中国烟草总公司福建省公司机关-A区域-1号楼",
@@ -135,7 +140,9 @@ export const data = [{
     taskName: "空调维修检查",
     taskType: 1,
     taskStatus: 1,
-    taskPeriod: 0,
+    taskPeriod: "每日",
+    taskNum: "11",
+    ifPlanDone: "全部完成",
     dispatchTime: '2021-07-21 10:55:11',
     areaKey: '1-2-3',
     address: "中国烟草总公司福建省公司机关-B区域-3号楼",
@@ -183,7 +190,9 @@ export const data = [{
     taskName: "电路老化检查",
     taskType: 4,
     taskStatus: 2,
-    taskPeriod: 1,
+    taskPeriod: "每周",
+    taskNum: "5",
+    ifPlanDone: "部分完成",
     records: [{
         recordId: 0,
         ifRun: 0,
@@ -251,7 +260,7 @@ export const infoDetail = [{
     value: ""
 },
 {
-    title: '任务状态',
+    title: '养护状态',
     key: 'taskStatus',
     dataIndex: 'taskStatus',
     width: 80,
@@ -260,24 +269,19 @@ export const infoDetail = [{
     value: ""
 },
 {
-    title: '任务描述',
+    title: '计划描述',
     key: 'devName',
     value: ""
 },
 {
-    title: '任务下发时间',
+    title: '计划生效时间',
     key: 'fixedTime',
     type: 'a-range-picker',
     value: ""
 },
 {
-    title: '任务地点',
-    key: 'assets',
-    value: ""
-},
-{
     key: 'taskType',
-    title: '任务类型',
+    title: '养护类型',
     type: 'a-select',
     valueEnum: taskType,
     value: ""
