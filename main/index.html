@@ -10,6 +10,9 @@
         <div>
             <img  src="./images/title.png" class="titleDiv" />
         </div>
+        <div class="app" onclick="goto('app/main')">
+
+        </div>
         <div id="show"></div>
         <div class="videoStyle">
             <video autoplay muted loop style="margin: 0 auto; width: 100%;">
@@ -18,28 +21,28 @@
         </div>
         <div class="barStyle">
             <div class="divStyle">
-                <img  src="./images/bg1.png" class="imgStyle" onclick="goto(1)" />
+                <img  src="./images/bg1.png" class="imgStyle" onclick="goto('web/lock/')" />
             </div>
             <div class="divStyle">
-                <img  src="./images/bg2.png"  class="imgStyle" onclick="goto(2)" />
+                <img  src="./images/bg2.png"  class="imgStyle" onclick="goto('web/diningRoom/')" />
             </div>
             <div class="divStyle">
-                <img  src="./images/bg3.png" class="imgStyle" onclick="goto(3)" />
+                <img  src="./images/bg3.png" class="imgStyle" onclick="goto('web/asset/')" />
             </div>
             <div class="divStyle">
-                <img  src="./images/bg4.png" class="imgStyle" onclick="goto(4)" />
+                <img  src="./images/bg4.png" class="imgStyle" onclick="goto('web/officeSupplies/')" />
             </div>
             <div class="divStyle">
-                <img  src="./images/bg5.png"  class="imgStyle" onclick="goto(5)" />
+                <img  src="./images/bg5.png"  class="imgStyle" onclick="goto('web/car/')" />
             </div>
             <div class="divStyle">
-                <img  src="./images/bg6.png"  class="imgStyle" onclick="goto(6)" />
+                <img  src="./images/bg6.png"  class="imgStyle" onclick="goto('web/property/')" />
             </div>
             <div class="divStyle">
-                <img  src="./images/bg7.png"  class="imgStyle" onclick="goto(7)" />
+                <img  src="./images/bg7.png"  class="imgStyle" onclick="goto('web/reception/')" />
             </div>
             <div class="divStyle">
-                <img  src="./images/bg8.png" class="imgStyle" onclick="goto(8)" />
+                <img  src="./images/bg8.png" class="imgStyle" onclick="goto('web/synthesize/')" />
             </div>
         </div>
     </div>
@@ -84,12 +87,23 @@
         height: 250px
     }
     #show {
-        width: 350px;
+        width: 360px;
         position: absolute;
         color: #328BBC;
         font-size: 30px;
         left: 20px;
         top: 28px
+    }
+    .app {
+        width: 50px;
+        height: 50px;
+        background-image: url(./images/app.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        z-index: 2;
     }
 </style>
 <script type="text/javascript">
@@ -99,7 +113,7 @@
         var time = new Date();
         var year = time.getFullYear();
         var month = time.getMonth() + 1; //获取的月份数值在 0～11 即数值需要加一
-        var day = time.getDay();
+        var day = time.getDate();
         var hour = time.getHours();
         var minute = time.getMinutes();
         var second = time.getSeconds();
@@ -130,32 +144,8 @@
         }
     }
 
-    function goto(index) {
-        var base = 'http://172.16.3.111:12000/fjyc/web/';
-        var url = 'lock/';
-        switch (index) {
-            case 2:
-                url = 'diningRoom/';
-                break;
-            case 3:
-                url = 'asset/';
-                break;
-            case 4:
-                url = 'officeSupplies/';
-                break;
-            case 5:
-                url = 'car/';
-                break;
-            case 6:
-                url = 'property/';
-                break;
-            case 7:
-                url = 'reception/';
-                break;
-            case 8:
-                url = 'synthesize/';
-                break;
-        }
+    function goto(url) {
+        var base = 'http://172.16.3.111:12000/fjyc/';
         window.open( base + url);
     }
 

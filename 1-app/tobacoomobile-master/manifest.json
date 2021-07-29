@@ -87,7 +87,10 @@
         }
     },
     "h5" : {
-        "title" : "ColorUi for UniApp",
-        "domain" : "demo.color-ui.com"
+        "title" : "lockApp",
+        "domain" : "",
+        "router" : {
+            "base" : "./"
+        }
     }
 }

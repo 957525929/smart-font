@@ -5,7 +5,7 @@
 				<image src="/static/workplace/banner.png" mode="widthFix" class='response banner-back'></image>
 				<view class="banner-title">
 					<view>
-						预约访问系统
+						职工登录
 					</view>
 					<image class="img" src="/static/logo.png" mode="widthFix" style="width: 10vh"></image>
 				</view>
@@ -33,11 +33,11 @@
 					<view class="padding flex flex-direction margin-top">
 						<button class="cu-btn bg-green lg" @tap="login">登录</button>
 					</view>
-					<view class="flex-sub text-center">
+		<!-- 			<view class="flex-sub text-center">
 						<view class="padding">
 							<text class="text-grey" @tap="toggle"> 注册 &nbsp; | &nbsp; 找回密码 </text>
 						</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 
@@ -52,8 +52,8 @@
 			return {
 				// index: '',
 				// picker: ['访客', '职员'],
-				username: '',
-				password: '',
+				username: 'admin',
+				password: '123456',
 				changType: this.formtype
 			};
 		},
@@ -63,8 +63,6 @@
 			// 	this.index = e.detail.value
 			// },
 			inputChange(e) {
-				// this.index = e.detail.value
-				// console.log("1111")
 				console.log(this.username)
 			
 			},
@@ -73,12 +71,12 @@
 			},
 			login() {
 				let router = [
-					'/pages/index/tourist?PageCur=touristHome',
+					// '/pages/index/tourist?PageCur=touristHome',
 					'/pages/index/staff?PageCur=staffHome',
 				]
 
 				uni.navigateTo({
-					url: this.username=='admin'&&this.password=="123456"?router[1]:router[0]
+					url: this.username=='admin'&&this.password=="123456"?router[0]:''
 				})
 			},
 			toggle() {

@@ -1,15 +1,15 @@
 <template>
 	<view>
-		<view v-for="(item,index) in applylist" :key="index">
+		<view v-for="(item,index) in applylist" :key="index" @tap="recordDetail(item)">
 			<!-- 判断传递过来的值显示对应状态 -->
 			<view v-if="item.type==cardType.type">
-				<view class="card" @tap="recordDetail(item)">
-					<span class="picture">
+				<view class="card">
+					<span class="picture"  >
 						<!-- 显示不同图片 -->
 						<image class="card-img" :src="imgSrc[cardType.id]" mode="scaleToFill"
 							style="width: 60px; height: 60px;"></image>
 					</span>
-					<span class="card-center">
+					<span class="card-center" @tap="goToAllow(item)">
 						<view>
 							访问人：{{item.visit}}
 						</view>
@@ -28,10 +28,11 @@
 					</span>
 					<span class="card-right">
 						<!-- 切换不同颜色 -->
-						<view :style="styleObject[cardType.id]">
+				<!-- 		<view :style="styleObject[cardType.id]">
 							{{item.type}}
-						</view>
-
+						</view> -->
+						<view v-if="item.type=='待审核'" class="text-green" @tap="agreeGoto">通过</view>
+						<view v-if="item.type=='待审核'" class="text-red" style="margin-top: 50rpx;" @tap="disagreeGoto">驳回</view>
 					</span>
 				</view>
 			</view>
@@ -173,14 +174,32 @@
 			recordDetail(item){
 				console.log(item)
 				this.$emit('send',item)
-			}
+			},
+			goToAllow(item) {
+				var onjs = JSON.stringify(item)
+				uni.navigateTo({
+					url: "/pages/verify/index?onjs=" + onjs
+				});
+			},
+			agreeGoto(e) {
+				this.modalName = null;
+				uni.navigateTo({
+					url: '/pages/index/staff?PageCur=applyList&TabCur=1'
+				});
+			},
+			disagreeGoto(e){
+				this.modalName = null;
+				uni.navigateTo({
+					url: '/pages/index/staff?PageCur=applyList&TabCur=2'
+				});
+			},
 		}
 	}
 </script>
 
 <style>
 	.card {
-		margin: 5px 10px 0px 10px;
+		margin: 5px 10px 10px 10px;
 		background-color: white;
 		height: 90px;
 		display: flex;

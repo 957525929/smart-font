@@ -35,7 +35,7 @@
 
 
 			<block v-if="this.TabCur==0">
-				<navigator class="action" @tap="goToAllow">
+				<navigator class="action">
 					<recordCard1 :cardType="type[0]" @send="recordDetail" />
 				</navigator>
 			</block>
@@ -88,7 +88,7 @@
 				TabCur: 0,
 				scrollLeft: 0,
 				recordData: '',
-				reason: '被访人出差',
+				// reason: '被访人出差',
 				type: [{
 					id: 0,
 					type: "待审核"
@@ -132,6 +132,7 @@
 					url: "/pages/verify/index?onjs=" + onjs
 				});
 			},
+
 			recordDetail(value) {
 				console.log("222222222222222222")
 				console.log(value)
