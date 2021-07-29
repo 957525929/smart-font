@@ -3,7 +3,6 @@
     <a-modal :visible="visible" title="养护计划" okText="提交" @cancel="handleCancel" @ok="handleCancel" :width="750"
       destroyOnClose>
       <a-form layout="vertical" :form="form">
-        <!-- <a-row :gutter="24" type="flex" justify="center" class="formWrapper"> -->
         <a-card :bordered="false">
           <a-form-item label="时间范围" class="formItem" :labelCol="{ span: 6 }" :wrapperCol="{ span: 18 }">
             <a-range-picker style="width: 100%" />
@@ -45,7 +44,6 @@
             </a-select>
           </a-form-item>
         </a-card>
-        <!-- </a-row> -->
       </a-form>
     </a-modal>
     <PageTemplate :columns="columns" :searchCon="searchCon" :formdata="data">
@@ -65,13 +63,7 @@
                     showTotal: (total, range) => `第${range[0]}-${range[1]}条/总共${total}条`,
                 }">
         <span slot="action" slot-scope="text, record">
-          <template v-for="(i, index) in record.action">
-            <template v-if="i.com === 'router-link'">
-              <router-link :to="{ name: i.url, params: { id: record.taskId } }">{{
-                                i.tagName
-                            }}</router-link>
-            </template>
-          </template>
+          <router-link :to="{ name: 'device-proDetail', params: { id: record.taskId } }">详情</router-link>
         </span>
       </a-table>
     </PageTemplate>

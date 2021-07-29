@@ -63,12 +63,12 @@ export const columns = [{
 {
     dataIndex: 'orderPerson',
     key: 'orderPerson',
-    title: '上报人',
+    title: '报修人',
     width: 80,
     value: ""
 },
 {
-    title: '上报人联系方式',
+    title: '报修人联系方式',
     dataIndex: 'phone',
     key: 'phone',
     width: 80,
@@ -77,7 +77,7 @@ export const columns = [{
     hideInTable: true,
 },
 {
-    title: '上报时间',
+    title: '报修时间',
     key: 'orderTime',
     dataIndex: 'orderTime',
     width: 100,
@@ -85,7 +85,7 @@ export const columns = [{
     value: ""
 },
 {
-    title: '上报描述',
+    title: '报修描述',
     dataIndex: 'description',
     width: 100,
     key: 'description',
@@ -93,7 +93,7 @@ export const columns = [{
     hideInTable: true,
     value: ""
 }, {
-    title: '上报图片',
+    title: '报修图片',
     dataIndex: 'imgs',
     width: 100,
     key: 'imgs',
@@ -114,6 +114,17 @@ export const columns = [{
         customRender: 'handleimgs'
     },
     value: ""
+},
+{
+    title: '电子签名',
+    dataIndex: 'writingimgs',
+    key: 'writingimgs',
+    value: "",
+    hideInSearch: true,
+    hideInTable: true,
+    scopedSlots: {
+        customRender: 'writingimgs'
+    },
 },
 {
     title: '操作',
@@ -141,7 +152,8 @@ export const data = [{
     orderTime: '2021-07-20 17:55:55',
     description: "卫生间停水",
     imgs: ['/assets/logo.png'],
-    handleimgs: ['/assets/logo.png']
+    handleimgs: ['/assets/logo.png'],
+    writingimgs: ['/assets/logo.png']
 }]
 export const searchCon = {}
 export const infoDetail = [{
@@ -177,9 +189,16 @@ export const infoDetail = [{
     value: ""
 },
 {
-    title: '上报时间',
+    title: '报修时间',
     key: 'deliveryTime',
     value: "",
     type: "a-range-picker"
 }
 ]
+
+export const taskList = [{
+    title: '反馈回复',
+    key: 'feedback',
+    value: "",
+    type: 'a-textarea'
+}]

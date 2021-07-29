@@ -29,7 +29,7 @@ export const columns = [{
     value: ""
 },
 {
-    title: '上报时间',
+    title: '报修时间',
     key: 'orderTime',
     dataIndex: 'orderTime',
     width: 100,
@@ -39,12 +39,12 @@ export const columns = [{
 {
     dataIndex: 'orderPerson',
     key: 'orderPerson',
-    title: '上报人',
+    title: '报修人',
     width: 60,
     value: ""
 },
 {
-    title: '上报人联系方式',
+    title: '报修人联系方式',
     dataIndex: 'phone',
     key: 'phone',
     width: 80,
@@ -52,7 +52,7 @@ export const columns = [{
     hideInSearch: true
 },
 {
-    title: '上报地址',
+    title: '报修地址',
     dataIndex: 'address',
     key: 'address',
     width: 80,
@@ -61,7 +61,7 @@ export const columns = [{
 },
 
 {
-    title: '上报描述',
+    title: '报修描述',
     dataIndex: 'description',
     width: 100,
     key: 'description',
@@ -69,7 +69,7 @@ export const columns = [{
     hideInTable: true,
     value: ""
 }, {
-    title: '上报图片',
+    title: '报修图片',
     dataIndex: 'imgs',
     width: 100,
     key: 'imgs',
@@ -79,6 +79,17 @@ export const columns = [{
         customRender: 'imgs'
     },
     value: ""
+},
+{
+    title: '电子签名',
+    dataIndex: 'writingimgs',
+    key: 'writingimgs',
+    value: "",
+    hideInSearch: true,
+    hideInTable: true,
+    scopedSlots: {
+        customRender: 'writingimgs'
+    },
 },
 {
     title: '操作',
@@ -159,6 +170,7 @@ export const data = [{
     description: "卫生间停水",
     imgs: ['/assets/logo.png'],
     handleimgs: ['/assets/logo.png'],
+    writingimgs: ['/assets/logo.png'],
     action: [{
         tagName: "详情",
         com: "TableDrawer"
@@ -179,6 +191,7 @@ export const data = [{
     description: "18楼停电",
     imgs: ['/assets/logo.png'],
     handleimgs: ['/assets/logo.png'],
+    writingimgs: ['/assets/logo.png'],
     action: [{
         tagName: "详情",
         com: "TableDrawer"

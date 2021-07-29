@@ -33,6 +33,7 @@ export const devType = {
     0: { tableValue: '空调、通风系统', searchValue: '空调、通风系统', code: 0 },
     1: { tableValue: '电器系统', searchValue: '电器系统', code: 1 },
     2: { tableValue: '给排水系统', searchValue: '给排水系统', code: 2 },
+    3: { tableValue: '其他', searchValue: '其他', code: 3 },
 }
 /*设备状态devStatus*/
 export const devStatus = {
