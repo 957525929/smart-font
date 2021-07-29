@@ -18,6 +18,7 @@
       <a-steps :current="current">
         <a-step v-for="item in steps" :key="item.title" :title="item.title" />
       </a-steps>
+      <!-- 选择协议酒店 -->
       <div class="steps-content" slot="description" v-if="current == 0">
         <a-form-model
           ref="ruleFormHotel"
@@ -121,6 +122,7 @@
           </a-table-column>
         </a-table>
       </div>
+      <!-- 选择就餐地点 -->
       <div class="steps-content" slot="description" v-if="current == 1">
         <a-form-model
           ref="ruleFormEat"
@@ -154,7 +156,6 @@
           </a-form-model-item>
           <a-form-model-item label="就餐地点" prop="way">
             <a-select v-model="formEat.way" placeholder="选择就餐方式">
-              <!-- <a-select-option value="酒店">{{eatHotel}}</a-select-option> -->
               <a-select-option :value="eatHotel">{{eatHotel}}</a-select-option>
               <a-select-option value="食堂">食堂</a-select-option>
             </a-select>
@@ -165,7 +166,7 @@
             <a-button style="margin-left: 10px;" @click="resetFormEat">重置</a-button>
           </a-form-model-item>
         </a-form-model>
-        <!--  -->
+        <!-- 就餐地点表格 -->
         <a-table :data-source="dataEat" :pagination="false" rowKey="eatIndex">
           <a-table-column title="序号" data-index="eatIndex" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
@@ -182,6 +183,7 @@
           </a-table-column>
         </a-table>
       </div>
+      <!-- 选择会议室地点 -->
       <div class="steps-content" slot="description" v-if="current == 2">
         <a-form-model
           ref="ruleFormRoom"
@@ -219,7 +221,7 @@
               placeholder="请选择会议室"
               v-model="formRoom.room"
               @change="onChangeRoom"
-              style="width: 460px"
+              style="width: 460px;textAlign:left"
               :display-render="displayRender"
             />
           </a-form-model-item>
@@ -242,10 +244,9 @@
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
             <a-button type="primary" @click="onSubmitRoom">创建</a-button>
             <a-button style="margin-left: 10px;" @click="resetFormRoom">重置</a-button>
-            <!-- <a-button :style="{background:'red',color:'white',marginLeft:' 100px'}" >通知</a-button> -->
           </a-form-model-item>
         </a-form-model>
-
+<!-- 会议室安排表格 -->
         <a-table
           :data-source="dataRoom"
           :scroll="{ y: 450 }"
@@ -277,7 +278,6 @@
           </a-form-model-item>
         </a-form-model>
       </div>
-      <!-- <div class="steps-content" slot="description">{{ steps[current].content }}</div> -->
       <div class="steps-action">
         <a-button v-if="current < steps.length - 1" type="primary" @click="next">下一步</a-button>
         <a-button v-if="current == steps.length - 1" type="primary" @click="complete">会议安排提交</a-button>
@@ -669,8 +669,8 @@ export default {
       current: 0,
       steps: [
         {
-          title: '协议酒店'
-          //content: "First-content"
+          title: '协议酒店',
+          content: "First-content"
         },
         {
           title: '就餐地点',
@@ -750,7 +750,7 @@ export default {
         room: undefined,
         dateStart: undefined,
         dateEnd: undefined,
-        range: undefined
+        range: "全天"
       },
       roomS: '',
       optionsRoom,

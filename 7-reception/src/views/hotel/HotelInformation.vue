@@ -66,7 +66,7 @@
             </a-popconfirm>
           </template>
         </a-table-column>-->
-         <a slot="price" slot-scope="text,record" @click="typePrice(record)">{{ text }}</a>
+         <!-- <a slot="price" slot-scope="text,record" @click="typePrice(record)">{{ text }}</a> -->
         <span slot="operation" slot-scope="record">
           <!-- <a href="javascript:;" @click="Modify(record)" :style="{  color: 'blue' }">修改</a> -->
           <a @click="Modify(record)" :style="{  color: 'blue' }">修改</a>
@@ -90,12 +90,12 @@
       <a-pagination size="small" :total="50" show-size-changer show-quick-jumper align="center" />
     </div>
 <!-- 协议酒店价格详情 -->
-<a-modal v-model="visiblePrice" :title="titleHotel" footer>
+<!-- <a-modal v-model="visiblePrice" :title="titleHotel" footer>
     <a-table :data-source="dataPrice" :pagination="false" rowKey="name">
         <a-table-column title="房型" data-index="roomType" align="center"></a-table-column>
         <a-table-column title="价格（元）" data-index="price" align="center"></a-table-column>
       </a-table>
-</a-modal>
+</a-modal> -->
     <!-- 新增 -->
     <a-Modal v-model="visibleAdd" title="新增酒店" footer>
       <a-form-model
@@ -129,7 +129,7 @@
         <a-form-model-item label="位置" prop="address">
           <a-input v-model="formAdd.address" placeholder="请输入位置"></a-input>
         </a-form-model-item>
-          <a-form-model-item label="价格范围（元）" prop="priceMin">
+          <a-form-model-item label="价格范围（元）">
           <a-input v-model="formAdd.priceMin" placeholder="请输入价格最小值" :style="{width:'165px'}"></a-input>
           <span>&nbsp;~&nbsp;</span>
           <a-input v-model="formAdd.priceMax" placeholder="请输入价格最大值" :style="{width:'165px'}"></a-input>
@@ -175,7 +175,7 @@
         <a-form-model-item label="位置" prop="address">
           <a-input v-model="formModify.address"></a-input>
         </a-form-model-item>
-        <a-form-model-item label="价格范围（元）" prop="priceMin">
+        <a-form-model-item label="价格范围（元）">
           <a-input v-model="formModify.priceMin" placeholder="请输入价格最小值" :style="{width:'165px'}"></a-input>
           <span>&nbsp;~&nbsp;</span>
           <a-input v-model="formModify.priceMax" placeholder="请输入价格最大值" :style="{width:'165px'}"></a-input>
@@ -195,6 +195,7 @@
 <script>
 const dataHotel = [
   {
+    index:1,
     id: 'N1201',
     dutyName: '李霞',
     dutyTel: '13759655332',
@@ -228,6 +229,7 @@ const dataHotel = [
     ]
   },
   {
+    index:2,
     id: 'N1202',
     dutyName: '尤晓梅',
     dutyTel: '13053955537',
@@ -261,6 +263,7 @@ const dataHotel = [
     ]
   },
   {
+    index:3,
     id: 'N1203',
     dutyName: '黄丽娟',
     dutyTel: '13659655381',
@@ -295,6 +298,11 @@ const dataHotel = [
   }
 ]
 const columns = [
+    {
+     title: '序号',
+    dataIndex: 'index',
+    align: 'center',
+  },
   {
      title: '协议酒店名称',
     dataIndex: 'hotel',

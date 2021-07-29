@@ -114,6 +114,7 @@
   </a-card>
 </template>
 <script>
+//只要显示待安排的数据
 const data = [
   // {
   //   id: 'A1201',
@@ -125,7 +126,7 @@ const data = [
   //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
   //   dutyName: '陈宏涛',
   //   dutyTel: '152690314587',
-  //   audit: '已通过'
+  //   state: '已通过'
   // },
   // {
   //   id: 'A1202',
@@ -137,7 +138,7 @@ const data = [
   //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
   //   dutyName: '李小玲',
   //   dutyTel: '152690314587',
-  //   audit: '0'
+  //   state: '0'
   // },
   // {
   //   id: 'A1203',
@@ -149,7 +150,7 @@ const data = [
   //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
   //   dutyName: '林诺汐',
   //   dutyTel: '152690314587',
-  //   audit: '0'
+  //   state: '0'
   // },
   // {
   //   id: 'A1204',
@@ -161,7 +162,7 @@ const data = [
   //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
   //   dutyName: '林诺汐',
   //   dutyTel: '152690314587',
-  //    audit: '未通过'
+  //    state: '未通过'
   // },
   {
     id: 'A1205',
@@ -174,7 +175,7 @@ const data = [
     number: '4',
     dutyName: '林诺汐',
     dutyTel: '152690314587',
-    audit: '已通过'
+    state: '待安排'
   },
   // {
   //   id: 'A1206',
@@ -186,7 +187,7 @@ const data = [
   //   members: '陈宏涛；李小玲；林诺汐；陈熙雨',
   //   dutyName: '林诺汐',
   //   dutyTel: '152690314587',
-  //   audit: '未通过'
+  //   state: '未通过'
   // },
   {
     id: 'A1207',
@@ -199,7 +200,7 @@ const data = [
     number: '4',
     dutyName: '林诺汐',
     dutyTel: '152690314587',
-    audit: '已通过'
+    state: '待安排'
   }
 ]
 export default {

@@ -41,7 +41,7 @@
             @change="areaChange"
             :default-value="defaultT"
             placeholder="请选择位置"
-             :display-render="displayRender"
+            :display-render="displayRender"
           />
         </a-col>
         <a-col :span="1"></a-col>
@@ -62,7 +62,7 @@
         </a-col>
       </a-row>
     </div>
-
+    <br />
     <!-- 查询区域-END -->
     <!-- table区域-begin -->
     <!-- <div style="margin-top: 20px">
@@ -73,8 +73,21 @@
         <a-table-column title="会议预算" data-index="budget" align="center"></a-table-column>
       </a-table>
     </div>-->
+    <!-- <br />
+    <pie title="饼图" v-bind:height="heightPie" v-bind:dataSource="dataSourcePie"></pie>
     <br />
-    <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>
+    <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>-->
+    <div>
+      <a-row type="flex" align="middle">
+        <a-col :span="10">
+          <pie title="饼图" v-bind:height="heightPie" v-bind:dataSource="dataSourcePie"></pie>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col :span="12">
+          <bar v-bind:dataSource="dataSource" v-bind:title="title" v-bind:height="height"></bar>
+        </a-col>
+      </a-row>
+    </div>
   </a-card>
 </template>
 <script>
@@ -83,6 +96,7 @@ import Bar from '@/components/chart/Bar'
 import { formatDate } from '@/utils/util'
 import JDate from '@/components/jeecg/JDate'
 import { areaData } from './data/area.js'
+import Pie from '@/components/chart/Pie'
 const dataSta = [
   {
     theme: '福建烟草公司机关A区域1号楼',
@@ -129,16 +143,20 @@ const dataSource = [
   {
     x: '会议室208',
     y: 17
-  },
-  {
-    x: '会议室209',
-    y: 10
   }
+]
+const dataSourcePie = [
+  { item: '会议室203', count: 10 },
+  { item: '会议室204', count: 3 },
+  { item: '会议室205', count: 3 },
+  { item: '会议室207', count: 8 },
+  { item: '会议室208', count: 17 }
 ]
 export default {
   components: {
     Bar,
-    JDate
+    JDate,
+    Pie
   },
   data() {
     return {
@@ -150,7 +168,9 @@ export default {
       dataSource,
       title: '会议室预约次数',
       height: 300,
-      searchValue: ''
+      searchValue: '',
+      dataSourcePie,
+      heightPie: 400
     }
   },
   created() {
@@ -161,8 +181,8 @@ export default {
   },
   methods: {
     moment,
-         displayRender({ labels }){
-      return  labels.join('.')
+    displayRender({ labels }) {
+      return labels.join('.')
     },
     areaChange(value) {
       console.log(value)
