@@ -2,7 +2,7 @@
   <!-- 会议室预约 -->
   <a-card :bordered="false">
     <div class="meetingApply">
-      <table class="meetingInfo">
+      <table class="meetingInfoPer">
         <tbody>
           <tr>
             <td colspan="2">
@@ -207,6 +207,19 @@ export default {
       dataRoom: dataRoom
     }
   },
+  created(){
+    console.log(this.optionsRoom)
+    let a,a1
+    this.optionsRoom[0].children.forEach(item1=>{
+        console.log("item1",item1)
+        a= this.optionsRoom[0].value+"."+item1.value
+        item1.children.forEach(item2=>{
+           console.log("item2",item2)
+           a1=a+"."+item2.value
+           console.log(a1)
+        })
+    })
+  },
   methods: {
     moment,
     getCurrentData() {
@@ -240,22 +253,21 @@ export default {
   display: flex;
   flex-wrap: nowrap;
 }
-.meetingInfo {
+.meetingInfoPer {
   flex: 4;
   font-size: 14px;
   font-weight: bold;
   border-collapse: separate;
-  /* border: 2px solid #f0f2f5; */
 }
 
-.meetingInfo tr td {
+.meetingInfoPer tr td {
   margin-right: 10px;
 }
-.meetingInfo tr:nth-of-type(1) td {
+.meetingInfoPer tr:nth-of-type(1) td {
   width: 20%;
   margin-top: 20px;
 }
-.meetingInfo tr td .bgc {
+.meetingInfoPer tr td .bgc {
   padding: 6px 6px;
   border-radius: 10px;
   margin-left: 80px;

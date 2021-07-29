@@ -423,7 +423,7 @@ const user = {
                     "meta": {
                       "keepAlive": false,
                       "internalOrExternal": false,
-                      "icon": "folder",
+                      "icon": "edit",
                       "title": "会议室预约"
                     },
                     "name": "meetingRoom-AppointmentPersonal",
