@@ -60,7 +60,7 @@
 		<view v-if="!this.onjs.disagreeTime">
 			<view class="cu-bar bg-white margin-top">
 				<view class='text-xl padding'>
-					<text class="text-black text-bold">· 备注</text>
+					<text class="text-black text-bold">· 到访事由</text>
 				</view>
 			</view>
 
