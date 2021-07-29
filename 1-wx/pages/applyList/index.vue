@@ -88,7 +88,7 @@
 				TabCur: 0,
 				scrollLeft: 0,
 				recordData: '',
-				reason: '被访人出差',
+				// reason: '被访人出差',
 				type: [{
 					id: 0,
 					type: "待审核"

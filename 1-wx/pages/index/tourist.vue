@@ -4,7 +4,7 @@
 		<touristHome v-if="PageCur=='touristHome'"></touristHome>
 		<record v-if="PageCur=='record'"></record>
 		<scan v-if="PageCur=='scan'"></scan>
-		<!-- <allow v-if="PageCur=='allow'"></allow> -->
+		<allow v-if="PageCur=='allow'"></allow>
 		<person v-if="PageCur=='person'"></person>
 
 		<view class="cu-bar tabbar bg-white shadow foot">
@@ -34,16 +34,16 @@
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='scan'?'text-orange cuIcon-scan':'text-gray cuIcon-scan'"></text>
 				</view>
-				<view :class="PageCur=='scan'?'text-orange':'text-gray'">我的二维码</view>
+				<view :class="PageCur=='scan'?'text-orange':'text-gray'">扫码</view>
 			</view>
 
-	<!-- 		<view class="action" @click="NavChange" data-cur="allow">
+			<view class="action" @click="NavChange" data-cur="allow">
 				<view class='cuIcon-cu-images'>
 					<text
 						:class="PageCur=='allow'?'text-orange cuIcon-squarecheck':'text-gray cuIcon-squarecheck'"></text>
 				</view>
-				<view :class="PageCur=='allow'?'text-orange':'text-gray'">访问许可</view>
-			</view> -->
+				<view :class="PageCur=='allow'?'text-orange':'text-gray'">我的二维码</view>
+			</view>
 
 			<view class="action" @click="NavChange" data-cur="person">
 				<view class='cuIcon-cu-image'>

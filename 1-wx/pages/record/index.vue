@@ -12,40 +12,25 @@
 					</view>
 				</block>
 			</cu-custom>
-<!-- 
-			<scroll-view scroll-x class="bg-white nav flex text-center">
-				<view class="cu-item" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
-					我发起的
+			<scroll-view scroll-x class="bg-white nav">
+				<view class="flex text-center">
+					<view class="cu-item flex-sub" :class="index==TabCur?'text-orange cur':''"
+						v-for="(item,index) in list" :key="index" @tap="tabSelect" :data-id="index">
+						{{item}}
+					</view>
 				</view>
+			</scroll-view>
 
-				<view class="cu-item" :class="1==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="1">
-					已通过
-				</view>
-
-				<view class="cu-item" :class="2==TabCur?'text-orange cur':''" @tap="tabSelect" data-id="2">
-					已拒绝
-				</view>
-
-			</scroll-view> -->
-				<scroll-view scroll-x class="bg-white nav">
-						<view class="flex text-center">
-							<view class="cu-item flex-sub" :class="index==TabCur?'text-orange cur':''" v-for="(item,index) in list" :key="index"
-							 @tap="tabSelect" :data-id="index">
-								{{item}}
-							</view>
-						</view>
-					</scroll-view>
-
-			<block v-if="TabCur==0">
-				<navigator class="action" @tap="gotoDetail" >
-					<recordCard :cardType="type[0]" @send="recordDetailed"/>
+			<view v-if="TabCur==0">
+				<navigator class="action" @tap="gotoDetail">
+					<recordCard :value="value[0]" @send="recordDetailed" />
 				</navigator>
-			</block>
-			<block v-if="TabCur==1">
+			</view>
+			<view v-if="TabCur==1">
 				<navigator class="action" @tap="gotoAllow">
-					<recordCard :cardType="type[1]" @send="recordDetailed"/>
+					<recordCard :value="value[1]" @send="recordDetailed" />
 				</navigator>
-			</block>
+			</view>
 		</scroll-view>
 
 		<view class="DrawerClose" :class="modalName=='viewModal'?'show':''" @tap="hideModal">
@@ -70,22 +55,13 @@
 	export default {
 		data() {
 			return {
-				list:['我发起的','被邀请的'],
-				recordData:'',
+				list: ['我发起的', '被邀请的'],
+				recordData: '',
 				modalName: null,
 				// reason: '被访人出差',
 				TabCur: 0,
 				scrollLeft: 0,
-				type: [{
-					id: 0,
-					type: "待审核"
-				}, {
-					id: 1,
-					type: "已通过"
-				}, {
-					id: 2,
-					type: "已拒绝"
-				}, ],
+				value: ['0', '1']
 			};
 		},
 		components: {
@@ -108,21 +84,27 @@
 				console.log(this.TabCur)
 			},
 			gotoDetail() {
-				var onjs = JSON.stringify(this.recordData)
-				console.log(this.onjs)
-				uni.navigateTo({
-					url: "/pages/verify/index3?onjs=" + onjs
-				});
+				if (this.recordData.status == '1') {
+					var onjs = JSON.stringify(this.recordData)
+					uni.navigateTo({
+						url: "/pages/allow/index?onjs=" + onjs
+					});
+				} else {
+					var onjs = JSON.stringify(this.recordData)
+					console.log(this.onjs)
+					uni.navigateTo({
+						url: "/pages/verify/index3?onjs=" + onjs
+					});
+				}
 				// console.log('1111')
 			},
-			gotoAllow(){
-				var onjs = JSON.stringify(this.recordData)
-				uni.navigateTo({
-					url: "/pages/allow/index?onjs=" + onjs
-				});
-			},
-			recordDetailed(item){
-				this.recordData=item
+			// gotoAllow() {
+
+			// },
+			recordDetailed(item) {
+				console.log("4444444444444444444444")
+				console.log(this.recordData)
+				this.recordData = item
 			}
 		}
 	}
@@ -134,7 +116,7 @@
 		width: 100vw;
 		overflow: hidden;
 	}
-	
+
 	.DrawerPage {
 		position: fixed;
 		width: 100vw;
@@ -143,14 +125,14 @@
 		background-color: #f1f1f1;
 		transition: all 0.4s;
 	}
-	
+
 	.DrawerPage.show {
 		transform: scale(0.9, 0.9);
 		left: 85vw;
 		box-shadow: 0 0 60upx rgba(0, 0, 0, 0.2);
 		transform-origin: 0;
 	}
-	
+
 	.DrawerWindow {
 		position: absolute;
 		width: 85vw;
@@ -163,13 +145,13 @@
 		transition: all 0.4s;
 		padding: 100upx 0;
 	}
-	
+
 	.DrawerWindow.show {
 		transform: scale(1, 1) translateX(0%);
 		opacity: 1;
 		pointer-events: all;
 	}
-	
+
 	.DrawerClose {
 		position: absolute;
 		width: 40vw;
@@ -188,14 +170,14 @@
 		pointer-events: none;
 		transition: all 0.4s;
 	}
-	
+
 	.DrawerClose.show {
 		opacity: 1;
 		pointer-events: all;
 		width: 15vw;
 		color: #fff;
 	}
-	
+
 	.DrawerPage .cu-bar.tabbar .action button.cuIcon {
 		width: 64upx;
 		height: 64upx;
@@ -203,20 +185,20 @@
 		margin: 0;
 		display: inline-block;
 	}
-	
+
 	.DrawerPage .cu-bar.tabbar .action .cu-avatar {
 		margin: 0;
 	}
-	
+
 	.DrawerPage .nav {
 		flex: 1;
 	}
-	
+
 	.DrawerPage .nav .cu-item.cur {
 		border-bottom: 0;
 		position: relative;
 	}
-	
+
 	.DrawerPage .nav .cu-item.cur::after {
 		content: "";
 		width: 10upx;
@@ -229,9 +211,8 @@
 		right: 0;
 		margin: auto;
 	}
-	
+
 	.DrawerPage .cu-bar.tabbar .action {
 		flex: initial;
 	}
-
 </style>
