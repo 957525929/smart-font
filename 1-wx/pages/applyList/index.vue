@@ -35,7 +35,7 @@
 
 
 			<block v-if="this.TabCur==0">
-				<navigator class="action" @tap="goToAllow">
+				<navigator class="action">
 					<recordCard1 :cardType="type[0]" @send="recordDetail" />
 				</navigator>
 			</block>
@@ -132,6 +132,7 @@
 					url: "/pages/verify/index?onjs=" + onjs
 				});
 			},
+
 			recordDetail(value) {
 				console.log("222222222222222222")
 				console.log(value)

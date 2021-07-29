@@ -25,6 +25,13 @@
 				<navigator class="action" @tap="gotoDetail">
 					<recordCard :value="value[0]" @send="recordDetailed" />
 				</navigator>
+				<view style="z-index:999">
+					<view class="cu-avatar xl round margin-right  bg-blue shadow-warp"
+						style=" float: right;">
+						<text class="avatar-text" @tap="openAppoient">发起<br>预约</text>
+					</view>
+				</view>
+
 			</view>
 			<view v-if="TabCur==1">
 				<navigator class="action" @tap="gotoAllow">
@@ -45,6 +52,7 @@
 				</view>
 			</view>
 		</scroll-view>
+
 
 	</view>
 </template>
@@ -84,17 +92,19 @@
 				console.log(this.TabCur)
 			},
 			gotoDetail() {
-				if (this.recordData.status == '1') {
-					var onjs = JSON.stringify(this.recordData)
-					uni.navigateTo({
-						url: "/pages/allow/index?onjs=" + onjs
-					});
-				} else {
-					var onjs = JSON.stringify(this.recordData)
-					console.log(this.onjs)
-					uni.navigateTo({
-						url: "/pages/verify/index3?onjs=" + onjs
-					});
+				if (this.recordData) {
+					if (this.recordData.status == '1') {
+						var onjs = JSON.stringify(this.recordData)
+						uni.navigateTo({
+							url: "/pages/allow/index?onjs=" + onjs
+						});
+					} else {
+						var onjs = JSON.stringify(this.recordData)
+						console.log(this.onjs)
+						uni.navigateTo({
+							url: "/pages/verify/index3?onjs=" + onjs
+						});
+					}
 				}
 				// console.log('1111')
 			},
@@ -105,8 +115,16 @@
 				console.log("4444444444444444444444")
 				console.log(this.recordData)
 				this.recordData = item
+			},
+			openAppoient() {
+				uni.navigateTo({
+					url: '/pages/appoient/index'
+				});
 			}
-		}
+		},
+		// onUnload() {
+		// 	this.recordData={}
+		// }
 	}
 </script>
 

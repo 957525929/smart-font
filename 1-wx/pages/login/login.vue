@@ -52,8 +52,8 @@
 			return {
 				// index: '',
 				// picker: ['访客', '职员'],
-				username: '',
-				password: '',
+				username: 'admin',
+				password: '123456',
 				changType: this.formtype
 			};
 		},
@@ -63,8 +63,6 @@
 			// 	this.index = e.detail.value
 			// },
 			inputChange(e) {
-				// this.index = e.detail.value
-				// console.log("1111")
 				console.log(this.username)
 			
 			},

@@ -91,7 +91,7 @@
 			},
 			back() {
 				uni.navigateTo({
-					url: "/pages/login/index"
+					url: "/pages/home/index"
 				});
 			}
 		}

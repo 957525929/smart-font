@@ -1,6 +1,16 @@
 <template>
 	<view>
-		
+		<!-- 		<view class="cu-bar search bg-gray">
+			<view class="search-form round">
+				<text class="cuIcon-search"></text>
+				<input @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text"
+					placeholder="搜索图片、文章、视频" confirm-type="search"></input>
+			</view>
+			<view class="action">
+				<button class="cu-btn bg-green shadow-blur round">搜索</button>
+			</view>
+		</view> -->
+
 		<view v-for="(item,index) in applylist" :key="index">
 			<!-- 判断传递过来的值显示对应状态 -->
 			<view v-if="item.id==value">
@@ -26,7 +36,7 @@
 						<view :style="styleObject[item.status]">
 							{{item.type}}
 						</view>
-<!-- 						<view class="text-red" style="margin-top: 18px;" @tap="showModal" data-target="DialogModal1">
+						<!-- 						<view class="text-red" style="margin-top: 18px;" @tap="showModal" data-target="DialogModal1">
 							{{item.cancel}}
 						</view> -->
 					</span>
@@ -41,6 +51,7 @@
 		data() {
 			return {
 				// date:'',
+				InputBottom: 0,
 				modalName: null,
 				applylist: [{
 						visit: '赵大华',
@@ -48,69 +59,70 @@
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + "08:00",
+						id: '0',
+						status: '0',
+						type: "审核中",
+						cancel: '撤回',
+						startTime: "14.00",
+						endTime: "16.00"
+					},
+					{
+						visit: '李二喜',
+						department: '财务管理处',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() + 1) + "月" +
+							(new Date().getDate()) + "日" + " " + "09:05",
 						id:'0',
 						status:'0',
 						type:"审核中",
 						cancel: '撤回',
-						startTime:"14.00",
-						endTime:"16.00"
+						startTime:"15.00",
+						endTime:"17.00",
 					},
-					// {
-					// 	visit: '李二喜',
-					// 	department: '财务管理处',
-					// 	time: new Date().getFullYear() + "年" +
-					// 		(new Date().getMonth() + 1) + "月" +
-					// 		(new Date().getDate()) + "日" + " " + "09:05",
-					// 	id:'0',
-					// 	status:'0',
-					// 	type:"审核中",
-					// 	cancel: '撤回',
-					// 	startTime:"15.00",
-					// 	endTime:"17.00",
-					// },
 					{
 						visit: '张冰冰',
 						department: '财务管理处',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + "11:20",
+						id: '0',
+						status: '1',
+						type: "通过",
+						cancel: '撤回',
+						startTime: "12.30",
+						endTime: "14.00"
+					},
+					{
+						visit: '王莎莎',
+						department: '审计处',
+						time: new Date().getFullYear() + "年" +
+							(new Date().getMonth() - 1) + "月" +
+							(new Date().getDate() + 5) + "日" + " " + "09:00",
+						agreeTime: new Date().getFullYear() + "年" +
+							(new Date().getMonth() - 1) + "月" +
+							(new Date().getDate() + 5) + "日" + " " + '10:24',
 						id:'0',
 						status:'1',
 						type:"通过",
-						cancel: '撤回',
-						startTime:"12.30",
-						endTime:"14.00"
+						startTime:"13.30",
+						endTime:"15.00"
+
 					},
-					// {
-					// 	visit: '王莎莎',
-					// 	department: '审计处',
-					// 	time: new Date().getFullYear() + "年" +
-					// 		(new Date().getMonth() - 1) + "月" +
-					// 		(new Date().getDate() + 5) + "日" + " " + "09:00",
-					// 	agreeTime: new Date().getFullYear() + "年" +
-					// 		(new Date().getMonth() - 1) + "月" +
-					// 		(new Date().getDate() + 5) + "日" + " " + '10:24',
-					// 	id:'0',
-					// 	status:'1',
-					// 	type:"通过",
-					// 	startTime:"13.30",
-					// 	endTime:"15.00"
-						
-					// },
 					{
 						visit: '孙逸仙',
 						department: '科技处',
+						disagree:'11',
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() + 10) + "日" + " " + "10:00",
 						agreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() + 10) + "日" + " " + '11:42',
-						id:'0',
-						status:'2',
-						type:"驳回",
-						startTime:"15.30",
-						endTime:"17.00"
+						id: '0',
+						status: '2',
+						type: "驳回",
+						startTime: "15.30",
+						endTime: "17.00"
 					},
 					// {
 					// 	visit: '王宇轩',
@@ -136,11 +148,11 @@
 						disagreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() - 20) + "日" + " " + '13:24',
-						id:'1',
-						status:'1',
-						disagree:'11',
-						startTime:"14.00",
-						endTime:"16.00"
+						id: '1',
+						status: '1',
+						disagree: '11',
+						startTime: "14.00",
+						endTime: "16.00"
 					},
 					{
 						visit: '王尼玛',
@@ -149,13 +161,13 @@
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + "13:20",
 						disagreeTime: new Date().getFullYear() + "年" +
-							(new Date().getMonth()+1) + "月" +
+							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '14:34',
-						id:'1',
-						status:'1',
-						disagree:'11',
-						startTime:"15.30",
-						endTime:"17.00"
+						id: '1',
+						status: '1',
+						disagree: '11',
+						startTime: "15.30",
+						endTime: "17.00"
 					},
 				],
 				// 图片
@@ -193,10 +205,17 @@
 			hideModal(e) {
 				this.modalName = null
 			},
-			recordDetail(item){
+			recordDetail(item) {
 				// console.log(e)
-				this.$emit("send",item)			
-			}
+				this.$emit("send", item)
+			},
+			InputFocus(e) {
+				this.InputBottom = e.detail.height
+			},
+			InputBlur(e) {
+				this.InputBottom = 0
+			},
+
 		}
 	}
 </script>

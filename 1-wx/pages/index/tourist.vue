@@ -40,7 +40,7 @@
 			<view class="action" @click="NavChange" data-cur="allow">
 				<view class='cuIcon-cu-images'>
 					<text
-						:class="PageCur=='allow'?'text-orange cuIcon-squarecheck':'text-gray cuIcon-squarecheck'"></text>
+						:class="PageCur=='allow'?'text-orange cuIcon-barcode':'text-gray cuIcon-barcode'"></text>
 				</view>
 				<view :class="PageCur=='allow'?'text-orange':'text-gray'">我的二维码</view>
 			</view>

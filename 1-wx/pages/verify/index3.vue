@@ -34,7 +34,7 @@
 		</view>
 
 
-		<view class="cu-bar bg-white margin-top">
+<!-- 		<view class="cu-bar bg-white margin-top">
 			<view class='text-xl padding'>
 				<text class="text-black text-bold">· 预约时间</text>
 			</view>
@@ -55,18 +55,18 @@
 		<view class="cu-form-group">
 			<view class="title">结束时间</view>
 			{{this.onjs.endTime}}
-		</view>
+		</view> -->
 		
 		<view v-if="!this.onjs.disagree">
 			<view class="cu-bar bg-white margin-top">
 				<view class='text-xl padding'>
-					<text class="text-black text-bold">· 备注</text>
+					<text class="text-black text-bold">· 到访事由</text>
 				</view>
 			</view>
 		
 			<view class="cu-form-group align-start ">
 				<!-- <view class="title">被访人不在</view> -->
-				{{content}}
+				本人已与{{this.onjs.department}}{{this.onjs.visit}}联系,到公司处理或者沟通项目细节。请尽快审核审批。
 			</view>
 		</view>
 
@@ -101,7 +101,7 @@
 				modalName: null,
 				index: -1,
 				disagreeContent: '被访问人不在',
-				content:'私人访问'
+				content:'本人已与xxx处（中心）xxx联系,到公司处理或者沟通XXX事情。请审核审批'
 			}
 		},
 		methods: {
