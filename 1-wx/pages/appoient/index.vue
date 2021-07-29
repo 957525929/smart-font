@@ -11,25 +11,10 @@
 			<view class="flex  justify-between">
 				<view class=" padding-sm margin-xs radius">预约信息</view>
 				<view class="padding-sm margin-xs radius">
-					<button class="cu-btn bg-blue  sm">我的预约</button>
+					<button class="cu-btn bg-blue  sm" @click="goToRecord">我的预约</button>
 				</view>
 			</view>
 		</view>
-		<!-- 
-		<view class="cu-bar bg-white">
-			<view class="text-xl padding">
-				<text class="text-black text-bold">· 访问对象</text>
-			</view>
-		</view> -->
-
-		<!-- 	<view class="cu-form-group">
-			<view class="title">部门</view>
-			<picker placeholder="请选择部门" @change="PickerChange" :value="index" :range="picker">
-				<view class="picker">
-					{{ picker[index] }}
-				</view>
-			</picker>
-		</view> -->
 
 		<view class="cu-form-group">
 			<view class="title">被访人员</view>
@@ -59,7 +44,7 @@
 		</view>
 
 		<view class="cu-form-group">
-			<view class="title">部&nbsp; &nbsp;门</view>
+			<view class="title">交通工具</view>
 			<picker placeholder="请选择部门" @change="PickerChange" :value="index" :range="picker">
 				<view class="picker">
 					{{ picker[index] }}
