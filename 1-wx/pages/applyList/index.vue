@@ -21,15 +21,15 @@
 			</cu-custom>
 			<scroll-view scroll-x class="bg-white nav flex text-center">
 				<view class="cu-item" :class="0==this.TabCur?'text-orange cur':''" @tap="tabSelect" data-id="0">
-					待审核
+					审核
 				</view>
 
 				<view class="cu-item" :class="1==this.TabCur?'text-orange cur':''" @tap="tabSelect" data-id="1">
-					已通过
+					通过
 				</view>
 
 				<view class="cu-item" :class="2==this.TabCur?'text-orange cur':''" @tap="tabSelect" data-id="2">
-					已拒绝
+					驳回
 				</view>
 			</scroll-view>
 
@@ -91,13 +91,13 @@
 				// reason: '被访人出差',
 				type: [{
 					id: 0,
-					type: "待审核"
+					type: "审核"
 				}, {
 					id: 1,
-					type: "已通过"
+					type: "通过"
 				}, {
 					id: 2,
-					type: "已拒绝"
+					type: "驳回"
 				}, ],
 			};
 		},
