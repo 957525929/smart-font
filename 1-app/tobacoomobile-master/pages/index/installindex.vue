@@ -35,7 +35,7 @@
 	export default {
 		data() {
 		return {
-				PageCur: 'lockinstall'
+				PageCur: 'lockinstall',
 			}
 		},
 		methods: {

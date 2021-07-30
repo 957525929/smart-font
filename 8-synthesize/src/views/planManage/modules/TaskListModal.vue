@@ -32,8 +32,8 @@
         </a-form-item>
         <a-form-item v-if="this.model.key" :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务状态">
           <a-select style="width: 100px" ref="select" v-decorator="['status']">
-            <a-select-option value="0">进行中</a-select-option>
-            <a-select-option value="1">未开始</a-select-option>
+            <a-select-option value="0">未开始</a-select-option>
+            <a-select-option value="1">进行中</a-select-option>
             <a-select-option value="2">已完成</a-select-option>
             <a-select-option value="3">已超期</a-select-option>
           </a-select>

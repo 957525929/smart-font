@@ -2,13 +2,19 @@
   <!-- 会议查看详情 -->
   <div>
     <a-card :bordered="false">
-      <a-button :style="{marginBottom:'10px'}">
+      <!-- <a-button :style="{marginBottom:'10px'}">
         <a-icon type="download" />导出
-      </a-button>
+      </a-button> -->
+      <a-button   icon="download" @click="handleExportXls('会议总览')">导出</a-button>
         <span>&nbsp;&nbsp;</span>
-      <a-button>
-        <a-icon type="upload" />上传附件
-      </a-button>
+        <a-upload :style="{fontWeight:'400'}"
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          >
+            <a-button>
+              <a-icon type="upload" />上传附件
+            </a-button>
+          </a-upload>
+          <br>
       <!-- <a href="javascript:;" :style="{  color: 'orange' }">增加附件</a> -->
       <a-collapse @change="changeActivekey" v-model="activeKey">
         <a-collapse-panel key="1" header="会议申请信息" :disabled="false" :style="{fontWeight:'700'}">
@@ -93,6 +99,7 @@
   </div>
 </template>
 <script>
+  import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 const dataHotel = [
   {
     id: '1',
@@ -179,6 +186,7 @@ const dataArrive = [
   }
 ]
 export default {
+  mixins:[JeecgListMixin],
   data() {
     return {
       activeKey: ['1', '2', '3', '4', '5'],
@@ -202,7 +210,11 @@ export default {
           status: 'done',
           url: 'http://www.baidu.com/yyy.png'
         }
-      ]
+      ],
+      url: {      
+        list: "/sys/user/list",
+        exportXlsUrl: "/sys/user/exportXls",      
+       },
     }
   },
   mounted() {

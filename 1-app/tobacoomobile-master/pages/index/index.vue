@@ -40,7 +40,6 @@
 					</view>
 				</view>
 			</view>
-
 			<view class="cu-tabbar-height"></view>
 		</scroll-view>
 	</view>

@@ -59,9 +59,7 @@
             icon="plus"
             :style="{ color: 'white', background:'orange'}"
           >新增会议室</a-button>&nbsp;&nbsp;
-          <a-button>
-            <a-icon type="download" />导出
-          </a-button>
+          <a-button   icon="download" @click="handleExportXls('会议室信息')">导出</a-button>
         </a-col>
       </a-row>
       <!-- <a-form layout="inline" @keyup.enter.native="searchQuery">
@@ -252,11 +250,11 @@
           </a-col>
         </a-row>
       </a-checkbox-group> -->
-      <a-checkbox :indeterminate="indeterminate" :checked="checkAll" @change="onCheckAllChangeAdd">
+      <a-checkbox :indeterminate="formAdd.indeterminate" :checked="formAdd.checkAll" @change="onCheckAllChangeAdd">
         全部
       </a-checkbox>
         <br />
-       <a-checkbox-group v-model="formAdd.condition" :options="plainOptions" @change="onChangeCond"/>
+       <a-checkbox-group v-model="formAdd.condition" :options="plainOptions" @change="onChangeCond" />
         </a-form-model-item>
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" >
            <a-select  showSearch  v-model="formAdd.dutyName" placeholder="请选择管理员" @change="addDutyName">
@@ -304,11 +302,11 @@
           <a-input v-model="formModify.number" ></a-input>
         </a-form-model-item>
         <a-form-model-item label="基本条件">
-        <a-checkbox :indeterminate="indeterminate" :checked="checkAll" @change="onCheckAllChangeModify">
+        <a-checkbox :indeterminate="formModify.indeterminate" :checked="formModify.checkAll" @change="onCheckAllChangeModify">
         全部
       </a-checkbox>
         <br />
-       <a-checkbox-group v-model="formModify.condition" :options="plainOptions" @change="onChangeCond"/>
+       <a-checkbox-group v-model="formModify.condition" :options="plainOptions" @change="onChangeCondM"/>
         </a-form-model-item>
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
           <!-- <a-input v-model="formModify.dutyName"></a-input> -->
@@ -397,6 +395,7 @@
 <script>
 import { areaData } from './data/area.js'
 import { dataRoom } from './data/dataRoom.js'
+import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 const columns = [
   {
     title: '序号',
@@ -447,8 +446,12 @@ const columns = [
 ]
 const plainOptions = ['茶水', '白板', '空调', '投影仪', '电脑', '摄像机'];
 export default {
+   mixins:[JeecgListMixin],
   data() {
     return {
+      plainOptions,
+      // indeterminate: true,
+      // checkAll: false,
       selectOptions: areaData,
       dataRoom:dataRoom,
       columns,
@@ -461,10 +464,9 @@ export default {
       visibleModify: false,
       labelCol: { span: 6 },
       wrapperCol: { span: 18 },
-       plainOptions,
-      indeterminate: true,
-      checkAll: false,
       formAdd: {
+      indeterminate: false,
+      checkAll: false,
       area: [],
       room: undefined,
       number: undefined,
@@ -479,6 +481,8 @@ export default {
         lineHeight: "30px"
       },
       formModify: {
+      indeterminate: true,
+      checkAll: false,
       number: '',
       dutyName: '',
       dutyTel: '',
@@ -486,13 +490,6 @@ export default {
       state: '',
       },      
       rules: {
-        condition:[
-            {
-            required: true,
-            message: '请选择基本条件',
-            trigger: 'change'
-          }
-        ],
          area: [
           {
             required: true,
@@ -537,7 +534,11 @@ export default {
         ]
       },
       visibleDetail:false,
-      formDetail:{}
+      formDetail:{},
+      url: {      
+        list: "/sys/user/list",
+        exportXlsUrl: "/sys/user/exportXls",      
+       },
     }
   },
   methods: {
@@ -547,12 +548,13 @@ export default {
     areaChange(value){
       console.log(value)
     },
-    onChangeCond(checkedList){
-      console.log("条件",checkedList)
-      this.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
-      this.checkAll = checkedList.length === plainOptions.length;
-    },
     onChangeCon(){},
+    onChangeCond(checkedList){
+      console.log("条件",checkedList)    
+      this.formAdd.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
+      this.formAdd.checkAll = checkedList.length === plainOptions.length;    
+    },
+
     onCheckAllChangeAdd(e) {
       //this.formAdd.condition=plainOptions
       Object.assign(this.formAdd, {      
@@ -561,12 +563,19 @@ export default {
         checkAll: e.target.checked,
       });
     },
+      onChangeCondM(checkedList){
+      console.log("条件",checkedList)    
+      this.formModify.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
+      this.formModify.checkAll = checkedList.length === plainOptions.length;    
+    },
     onCheckAllChangeModify(e){
       Object.assign(this.formModify, {      
         condition: e.target.checked ? plainOptions : [],
         indeterminate: false,
         checkAll: e.target.checked,
       });
+     // debugger
+      console.log(this.formModify)
     },
     searchQuery() {
     },
