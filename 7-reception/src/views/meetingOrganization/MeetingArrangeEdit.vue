@@ -630,6 +630,10 @@ let optionsRoom = [
       },
     ],
   },
+  {
+    value: '福州富力威斯汀酒店',
+    label: '福州富力威斯汀酒店',
+    }
 ]
 const dataRoomIn = [
   {
@@ -849,8 +853,11 @@ export default {
     },
     displayRender({ labels }) {
       //return labels.join('.')
-            if(labels.length==0){
+     if(labels.length==0){
         return
+      }
+      if(labels.length==1){
+        return labels
       }
       console.log( labels )     
       let lab =[labels[0],labels[1],labels[2],labels[3]]  
