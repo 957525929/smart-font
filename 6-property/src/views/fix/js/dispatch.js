@@ -5,7 +5,8 @@ export const columns = [{
     title: '工单编号',
     width: 80,
     key: 'orderId',
-    value: ""
+    value: "",
+    hideInSearch: true
 },
 {
     title: '工单类型',
@@ -135,13 +136,6 @@ export const infoDetail = [
         type: "a-select",
         valueEnum: devType
     },
-    // {
-    //     title: '实际状态',
-    //     key: 'devStatus',
-    //     value:"",
-    //     type:"a-select",
-    //     valueEnum:devStatus
-    // },
     {
         key: 'institution',
         title: '业主单位',
@@ -152,17 +146,6 @@ export const infoDetail = [
         key: 'phone',
         value: "",
     },
-    // {
-    //     title: '技术状况',
-    //     key: 'techSituation',
-    //     value:"",
-    //     type:"a-select"
-    // },
-    // {
-    //     title: '维修员',
-    //     key: 'fixStaff',
-    //     value:""
-    // },
     {
         title: '报修时间',
         key: 'deliveryTime',

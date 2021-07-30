@@ -160,16 +160,6 @@ export default {
     cancel() {
       this.visible = false
     },
-    // onChange(labels) {
-    //   return
-    // },
-    // (value, selectedOptions) {
-
-    //   console.log('====================================')
-    //   console.log(value, selectedOptions)
-    //   console.log('====================================')
-    //   value.join('·')
-    // },
   },
 }
 </script>

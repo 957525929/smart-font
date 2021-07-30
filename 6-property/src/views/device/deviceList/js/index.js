@@ -26,7 +26,8 @@ export const devColumns = [{
     width: 40,
     key: 'devId',
     value: "",
-    hideInEdit: true
+    hideInEdit: true,
+    hideInSearch: true
 },
 {
     title: '设备名称',
@@ -34,6 +35,7 @@ export const devColumns = [{
     width: 50,
     key: 'devName',
     value: "",
+    hideInSearch: true
 },
 {
     title: '设备类型',
@@ -118,7 +120,7 @@ export const data = [{
     key: 0,
     devId: 1001,
     devName: "给水设备_1001",
-    devType: 2,
+    devType: "给排水系统",
     devStatus: "在用",
     areaGroup: "区域",
     groupKey: "1-1-2",
@@ -132,7 +134,7 @@ export const data = [{
     key: 1,
     devId: 2001,
     devName: "供电设备_2001",
-    devType: 1,
+    devType: "电器系统",
     devStatus: '在修',
     areaGroup: "区域",
     groupKey: "1-2-1",
@@ -146,7 +148,7 @@ export const data = [{
     key: 2,
     devId: 3001,
     devName: "空调_3001",
-    devType: 0,
+    devType: "空调、通风系统",
     devStatus: '闲置',
     areaGroup: "区域",
     groupKey: "1-2-3",

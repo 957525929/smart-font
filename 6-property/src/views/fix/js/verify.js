@@ -7,7 +7,8 @@ export const columns = [{
     title: '工单编号',
     width: 80,
     key: 'orderId',
-    value: ""
+    value: "",
+    hideInSearch: true
 },
 {
     title: '工单类型',

@@ -81,9 +81,9 @@ import PageTemplate from '@/components/page/PageTemplate.vue'
 import TableDrawer from '@/components/tableOperation/drawer/TableDrawer.vue'
 import TableModal from '@/components/tableOperation/modal/TableModal.vue'
 //js
-import { columns, data, taskList, infoDetail } from './js/verify.js'
+import { columns, data, taskList } from './js/verify.js'
 import { typeToComponent } from '@/utils/dataDictionary.js'
-const NEW_FIXLIST = Object.freeze({ columns, data, taskList, infoDetail, typeToComponent })
+const NEW_FIXLIST = Object.freeze({ columns, data, taskList, typeToComponent })
 
 export default {
   name: 'fixverify',

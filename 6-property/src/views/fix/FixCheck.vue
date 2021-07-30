@@ -21,7 +21,7 @@
             <TableDrawer ref="TableDrawer" title="详情" :infoDetail="infoDetail"></TableDrawer>
           </a>
           <a-divider type="vertical" />
-          <a-popconfirm title="确认通过并开始受理?" ok-text="是" cancel-text="否" @confirm="confirm" @cancel="cancel">
+          <a-popconfirm title="确认通过核查?" ok-text="是" cancel-text="否" @confirm="confirm" @cancel="cancel">
             <a href="#" @click="showDelete">通过</a>
           </a-popconfirm>
           <a-divider type="vertical" />
@@ -78,7 +78,7 @@ export default {
       })
     },
     handleNoPass() {
-      this.infoDetail = NEW_FIXLIST.taskList.filter((item) => !item.hideInDetail)
+      this.infoDetail = NEW_CHECK.taskList.filter((item) => !item.hideInDetail)
       this.$refs.TableModal.showModal()
     },
     handleDetail(id) {

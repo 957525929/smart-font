@@ -18,14 +18,16 @@ export const columns = [{
     title: '计划编号',
     width: 50,
     key: 'taskId',
-    value: ""
+    value: "",
+    hideInSearch: true
 },
 {
     dataIndex: 'taskName',
     title: '计划名',
     width: 80,
     key: 'taskName',
-    value: ""
+    value: "",
+    hideInSearch: true
 },
 {
     dataIndex: 'taskType',

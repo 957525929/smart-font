@@ -9,7 +9,8 @@ export const columns = [{
     title: '工单编号',
     width: 80,
     key: 'orderId',
-    value: ""
+    value: "",
+    hideInSearch: true
 },
 {
     title: '工单类型',
@@ -45,9 +46,18 @@ export const columns = [{
     hideInTable: true
 },
 {
-    title: '预计完成时间',
+    title: '期望完成时间',
     key: 'expectTime',
     dataIndex: 'expectTime',
+    width: 100,
+    type: 'a-range-picker',
+    hideInTable: true,
+    value: ""
+},
+{
+    title: '维修完成时间',
+    key: 'endTime',
+    dataIndex: 'endTime',
     width: 100,
     type: 'a-range-picker',
     value: ""
@@ -146,6 +156,7 @@ export const data = [{
     fixPhone: "18254621147",
     fixAddition: "已维修",
     expectTime: "2021-07-22 20:00: 00",
+    endTime: "2021-07-21 09:00: 00",
     orderPerson: '小昭',
     phone: '18232145694',
     address: '烟草大厦3楼卫生间',

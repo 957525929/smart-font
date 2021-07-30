@@ -120,14 +120,6 @@ export default {
           return tempList[1]
         }
       })
-      // let temp = this.data[0].records.filter()[0]
-
-      console.log(this.proRecord)
-      //     return  temp[1]
-      // this.infoDetail.map((item) => {
-      //     item.value = temp[item.key]
-      //     return item
-      // })
       this.$refs[type][0].showDrawer()
     },
     loadData() {
@@ -137,14 +129,6 @@ export default {
         this.columns = temp[0]
         return temp[1]
       })
-      // this.columns.forEach((item) => {
-      //     if (item.valueEnum) {
-      //         this.data.map((res) => {
-      //             res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-      //             return res
-      //         })
-      //     }
-      // })
     },
   },
 }

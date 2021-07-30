@@ -81,17 +81,6 @@ export const columns = [{
     value: ""
 },
 {
-    title: '电子签名',
-    dataIndex: 'writingimgs',
-    key: 'writingimgs',
-    value: "",
-    hideInSearch: true,
-    hideInTable: true,
-    scopedSlots: {
-        customRender: 'writingimgs'
-    },
-},
-{
     title: '操作',
     dataIndex: 'action',
     scopedSlots: {
@@ -163,6 +152,7 @@ export const data = [{
     fixPhone: "18254621147",
     fixAddition: "已维修",
     expectTime: "2021-07-22 20:00:00",
+    endTime: "2021-07-21 09:00: 00",
     orderPerson: '阿蛛',
     phone: '18232145694',
     address: '烟草大厦3楼卫生间',
@@ -184,6 +174,7 @@ export const data = [{
     fixStaff: '刘涛',
     fixPhone: "18232145698",
     expectTime: "2021-07-23 17：55：55",
+    endTime: "2021-07-21 09:00: 00",
     orderPerson: '小昭',
     phone: '18232145694',
     address: '烟草大厦18楼',

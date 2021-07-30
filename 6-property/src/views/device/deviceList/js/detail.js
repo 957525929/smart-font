@@ -17,13 +17,13 @@ export const basicInfo = [{
     value: "",
     key: 'devName'
 },
-// {
-//     title: '设备类型',
-//     value:"",
-//     key: 'devType',
-//     type:"a-select",
-//     valueEnum:devType
-// },
+{
+    title: '设备类型',
+    value: "",
+    key: 'devType',
+    type: "a-select",
+    valueEnum: devType
+},
 {
     title: '实际状态',
     key: 'devStatus',
@@ -31,17 +31,6 @@ export const basicInfo = [{
     type: "a-select",
     valueEnum: devStatus
 },
-// {
-//     title: '技术状况',
-//     key: 'techSituation',
-//     value:"",
-//     type:"a-select"
-// },
-// {
-//     title: '维修员',
-//     key: 'fixStaff',
-//     value:"",
-// },
 {
     title: '登记时间',
     key: 'loginTime',
@@ -70,12 +59,6 @@ export const fixInfo = [{
 },
 {
     dataIndex: 'devId',
-    slots: {
-        title: '问题编号'
-    },
-    scopedSlots: {
-        customRender: 'devId'
-    },
     title: '问题编号',
     width: 50,
     key: 'devId'
@@ -213,7 +196,7 @@ export const proInfo = [{
 },
 
 {
-    title: '预计完成时间',
+    title: '期望完成时间',
     key: 'expectTime',
     dataIndex: 'expectTime',
     width: 80,

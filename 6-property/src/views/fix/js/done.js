@@ -52,7 +52,7 @@ export const columns = [
         width: 80,
     },
     {
-        title: '预计完成时间',
+        title: '期望完成时间',
         key: 'fixedTime',
         dataIndex: 'fixedTime',
         scopedSlots: { customRender: 'tags' },

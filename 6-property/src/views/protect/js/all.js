@@ -299,7 +299,7 @@ export const infoDetail = [{
 },
 
 {
-    title: '预计完成时间',
+    title: '期望完成时间',
     key: 'expectTime',
     type: 'a-range-picker',
 }

@@ -2,121 +2,37 @@
   <!-- <page-layout title="设备详情"> -->
   <a-card :bordered="false">
     <a-descriptions title="基本信息">
-      <a-descriptions-item
-        :label="item.title"
-        v-for="item in basicInfo"
-        :key="item.key"
-      >{{
+      <a-descriptions-item :label="item.title" v-for="item in basicInfo" :key="item.key">{{
                 item.value
             }}</a-descriptions-item>
     </a-descriptions>
     <a-divider style="margin-bottom: 32px" />
 
     <div class="title">维修记录</div>
-    <a-table
-      style="margin-bottom: 24px"
-      :columns="fixInfo"
-      :data-source="fixData"
-    > </a-table>
+    <a-table style="margin-bottom: 24px" :columns="fixInfo" :data-source="fixData"> </a-table>
 
     <div class="title">保养记录</div>
-    <a-table
-      style="margin-bottom: 24px"
-      :columns="proInfo"
-      :data-source="proData"
-    > </a-table>
+    <a-table style="margin-bottom: 24px" :columns="proInfo" :data-source="proData"> </a-table>
 
-    <div class="title">运维参数</div>
-    <a-table
-      style="margin-bottom: 24px"
-      :columns="runInfo"
-      :data-source="runData"
-    > </a-table>
-
-    <div class="title">零部件信息</div>
-    <a-table
-      :columns="toolInfo"
-      :data-source="toolData"
-      class="components-table-demo-nested"
-    >
-      <a-table
-        slot="expandedRowRender"
-        slot-scope="text"
-        :columns="innerInfo"
-        :data-source="innerData"
-        :pagination="false"
-      >
-      </a-table>
-    </a-table>
   </a-card>
   <!-- </page-layout> -->
 </template>
 
 <script>
 //js
-import { data } from './js/index.js'
-import { basicInfo, fixInfo, proInfo, runInfo, toolInfo, innerColumns } from './js/detail.js'
+import { data as basic } from './js/index.js'
+import { basicInfo, fixInfo, proInfo } from './js/detail.js'
 import PageLayout from '@/components/page/PageLayout'
-import STable from '@/components/table/'
-const NEW_DETAIL = Object.freeze({ basicInfo, fixInfo, proInfo, runInfo, toolInfo, innerColumns })
-const basic = [
-  {
-    id: 1001,
-    key: 0,
-    devId: 1001,
-    devName: '给水设备_1001',
-    devType: 2,
-    devStatus: '在用',
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 0,
-    fixStaff: '张英',
-    loginTime: '2021-06-22 17：55：55',
-    manufacturer: '日丰企业集团有限公司',
-    batch: 'M127894',
-  },
-  {
-    id: 2001,
-    key: 1,
-    devId: 2001,
-    devName: '供电设备_2001',
-    devType: 1,
-    devStatus: '在修',
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 1,
-    fixStaff: '刘涛',
-    loginTime: '2021-06-21 10：55：55',
-    manufacturer: '国网福建省电力有限公司',
-    batch: 'N2169',
-  },
-  {
-    id: 3001,
-    key: 2,
-    devId: 3001,
-    devName: '空调_3001',
-    devType: 0,
-    devStatus:  '闲置',
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 2,
-    fixStaff: '王翔',
-    loginTime: '2021-06-29 08：55：55',
-    manufacturer: '珠海格力电器股份有限公司',
-    batch: 'A2421',
-  },
-]
+
+const NEW_DETAIL = Object.freeze({ basicInfo, fixInfo, proInfo })
 const fix = [
   {
     id: 2001,
     key: 0,
     devId: 1,
     devName: '18楼停电',
-    taskStatus: 1,
-    devType: 1,
+    taskStatus: '待审核',
+    devType: '电器系统',
     assets: '烟草大厦',
     institution: '福建烟草公司',
     phone: '18232145698',
@@ -143,8 +59,8 @@ const fix = [
     key: 1,
     devId: 2,
     devName: '18楼频繁断电停电',
-    taskStatus: 2,
-    devType: 1,
+    taskStatus: '待派单',
+    devType: '电器系统',
     deliveryTime: '2021-06-22 10：55：55',
     assets: '烟草大厦',
     institution: '福建烟草公司',
@@ -164,8 +80,8 @@ const fix = [
     key: 2,
     devId: 3,
     devName: '卫生间停水',
-    taskStatus: 3,
-    devType: 2,
+    taskStatus: '待维修',
+    devType: '给排水系统',
     assets: '烟草大厦',
     institution: '福建烟草公司',
     phone: '18232145698',
@@ -184,8 +100,8 @@ const fix = [
     key: 3,
     devId: 4,
     devName: '空调调控温度无反应',
-    taskStatus: 4,
-    devType: 0,
+    taskStatus: '待核查',
+    devType: '空调、通风系统',
     deliveryTime: '2021-06-19 17：55：55',
     assets: '烟草大厦',
     institution: '福建烟草公司',
@@ -205,8 +121,8 @@ const fix = [
     key: 4,
     devId: 5,
     devName: '18楼停电',
-    taskStatus: 5,
-    devType: 1,
+    taskStatus: '已完成',
+    devType: '电器系统',
     assets: '烟草大厦',
     institution: '福建烟草公司',
     phone: '18232145698',
@@ -227,9 +143,9 @@ const pro = [
     key: 0,
     devId: 1,
     devName: '烟草大厦18楼频繁断电',
-    taskType: 2,
-    taskStatus: 1,
-    devStatus: 1,
+    taskType: '设备巡检',
+    taskStatus: '待保养',
+    devStatus: '在修',
     assets: '烟草大厦',
     institution: '福建烟草公司',
     phone: '18232145698',
@@ -248,9 +164,9 @@ const pro = [
     key: 1,
     devId: 2,
     devName: '空调漏水',
-    taskType: 1,
-    taskStatus: 2,
-    devStatus: 0,
+    taskType: '设备点检',
+    taskStatus: '待核查',
+    devStatus: '在用',
     assets: '烟草大厦',
     institution: '福建烟草公司',
     phone: '13332145698',
@@ -269,9 +185,9 @@ const pro = [
     key: 2,
     devId: 3,
     devName: '电路老化检查',
-    taskType: 0,
-    taskStatus: 3,
-    devStatus: 0,
+    taskType: '一级保养',
+    taskStatus: '已完成',
+    devStatus: '在用',
     assets: '烟草大厦',
     institution: '福建烟草公司',
     phone: '18232145698',
@@ -286,132 +202,24 @@ const pro = [
     ],
   },
 ]
-const tool = [
-  {
-    key: 0,
-    devId: 1001,
-    devName: '给水管网_1001',
-    devType: 2,
-    devStatus: '在用',
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 0,
-    fixStaff: '张英',
-    loginTime: '2021-06-22 17:55:55',
-    manufacturer: '日丰企业集团有限公司',
-    batch: 'M127894',
-    devPhone: '18259529231',
-  },
-  {
-    key: 1,
-    devId: 2001,
-    devName: '供电线路_2001',
-    devType: 1,
-    devStatus: '在修',
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 1,
-    fixStaff: '刘涛',
-    loginTime: '2021-06-21 10:55:55',
-    manufacturer: '国网福建省电力有限公司',
-    batch: 'N2169',
-    devPhone: '18259529299',
-  },
-  {
-    key: 2,
-    devId: 3001,
-    devName: '冷水机组_3001',
-    devType: 0,
-    devStatus: '停用',
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 2,
-    fixStaff: '王翔',
-    loginTime: '2021-06-29 08:55:55',
-    manufacturer: '珠海格力电器股份有限公司',
-    batch: 'A2421',
-    devPhone: '18259529290',
-  },
-]
-const inner = [
-  {
-    key: 0,
-    devId: 1001,
-    devName: '日丰给排水管_1001',
-    devType: 2,
-    devStatus: '在用',
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 0,
-    fixStaff: '张英',
-    loginTime: '2021-06-22 17:55:55',
-    manufacturer: '日丰企业集团有限公司',
-    batch: 'M127894',
-    devPhone: '18259529231',
-  },
-  {
-    key: 1,
-    devId: 2001,
-    devName: '公牛电线_2001',
-    devType: 1,
-    devStatus: '在修',
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 1,
-    fixStaff: '刘涛',
-    loginTime: '2021-06-21 10:55:55',
-    manufacturer: '国网福建省电力有限公司',
-    batch: 'N2169',
-    devPhone: '18259529299',
-  },
-  {
-    key: 2,
-    devId: 3001,
-    devName: '格力巨型冷水机_3001',
-    devType: 0,
-    devStatus: '停用',
-    assets: '烟草大厦',
-    institution: '福建烟草公司',
-    phone: '18232145698',
-    techSituation: 2,
-    fixStaff: '王翔',
-    loginTime: '2021-06-29 08:55:55',
-    manufacturer: '珠海格力电器股份有限公司',
-    batch: 'A2421',
-    devPhone: '18259529290',
-  },
-]
+
 export default {
-  // onLoad(params){console.log(params,this.$route.params.id);},
   components: {
     PageLayout,
-    STable,
   },
   mounted() {
     this.getBasic()
     this.getFix()
     this.getPro()
-    this.getTool()
   },
   data() {
     return {
       basicInfo: NEW_DETAIL.basicInfo,
-      basicData: {},
+      basic: {},
       fixInfo: NEW_DETAIL.fixInfo,
       fixData: fix,
       proInfo: NEW_DETAIL.proInfo,
       proData: pro,
-      runInfo: NEW_DETAIL.runInfo,
-      runData: NEW_DETAIL.run,
-      toolInfo: NEW_DETAIL.toolInfo,
-      toolData: tool,
-      innerInfo: NEW_DETAIL.innerColumns,
-      innerData: inner,
     }
   },
   computed: {
@@ -421,70 +229,30 @@ export default {
   },
   methods: {
     getBasic() {
-      this.basicData = basic.filter((item) => {
+      this.basic = basic.filter((item) => {
         return item.devId == this.Id
       })[0]
       this.basicInfo.map((item) => {
-        if (item.valueEnum) {
-          this.basicData[item.key] = item.valueEnum[this.basicData[item.key]].tableValue
-        } else {
-          item.value = this.basicData[item.key]
-        }
+        item.value = this.basic[item.key]
         return item
       })
     },
     getFix() {
       this.fixData = fix.filter((item) => {
-        console.log(item)
         return item.id == this.Id
       })
-      console.log(this.fixData)
-      this.fixInfo.forEach((item) => {
-        if (item.valueEnum) {
-          this.fixData.map((res) => {
-            res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-            return res
-          })
-        }
+      this.fixInfo.map((item) => {
+        item.value = this.fixData[item.key]
+        return item
       })
     },
     getPro() {
-      this.proData = this.proData.filter((item) => {
+      this.proData = pro.filter((item) => {
         return item.id == this.Id
       })
-      this.proInfo.forEach((item) => {
-        if (item.valueEnum) {
-          this.proData.map((res) => {
-            res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-            return res
-          })
-        }
-      })
-    },
-    getTool() {
-      this.toolData = this.toolData.filter((item) => {
-        return item.devId == this.Id
-      })
-
-      this.toolInfo.forEach((item) => {
-        if (item.valueEnum) {
-          this.toolData.map((res) => {
-            res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-            return res
-          })
-        }
-      })
-      this.innerData = this.innerData.filter((item) => {
-        return item.devId == this.Id
-      })
-
-      this.innerInfo.forEach((item) => {
-        if (item.valueEnum) {
-          this.innerData.map((res) => {
-            res[item.dataIndex] = item.valueEnum[res[item.dataIndex]].tableValue
-            return res
-          })
-        }
+      this.proInfo.map((item) => {
+        item.value = this.proData[item.key]
+        return item
       })
     },
   },
