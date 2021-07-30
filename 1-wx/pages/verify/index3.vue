@@ -66,7 +66,7 @@
 		
 			<view class="cu-form-group align-start ">
 				<!-- <view class="title">被访人不在</view> -->
-				本人已与{{this.onjs.department}}{{this.onjs.visit}}联系,到公司处理或者沟通项目细节。请尽快审核审批。
+				本人到公司沟通项目细节。请尽快审核审批。
 			</view>
 		</view>
 

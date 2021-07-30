@@ -25,7 +25,13 @@
 		</view>
 
 		<view class="cu-form-group">
-			<view class="title">到访事由
+			<view>
+				<span class="title">
+					到访事由
+				</span>
+				<span class="tipContent">
+					(注：请按照如下格式填写到访事由)
+				</span>
 			</view>
 
 		</view>
@@ -182,5 +188,9 @@
 		width: 50%;
 		margin: auto;
 		text-align: center;
+	}
+	.tipContent{
+		font-size: 12px;
+		color: #ff6701;
 	}
 </style>
