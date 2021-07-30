@@ -46,8 +46,8 @@ export default {
   data() {
     return {
       moment,
-      current_start_date: formatDate(new Date().getTime() - 150 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
-      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
+      current_start_date: formatDate('2021-02', 'yyyy-MM-dd'),
+      current_stop_date: formatDate('2021-07', 'yyyy-MM-dd'),
       field: ['2021.02', '2021.03', '2021.04', '2021.05', '2021.06', '2021.07'],
       dataSource: [
         {
