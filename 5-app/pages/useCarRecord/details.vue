@@ -21,7 +21,7 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view v-if="TabCur==0">
+		<view v-if="status!=1">
 			<form>
 				<view class="cu-form-group">
 					<view class="title">用车人/单位</view>
@@ -57,12 +57,12 @@
 				</view>
 				<view class="cu-form-group">
 					<view class="title">出发地</view>
-					<input value="福建省福州市闽侯县创业大厦" name="from"></input>
+					<input value="福建省福州市鼓楼区烟草大厦" name="from"></input>
 					<text class='cuIcon-locationfill text-orange'></text>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">目的地</view>
-					<input value="福建省福州市宝龙广场" name="to"></input>
+					<input value="福建省福州市晋安区" name="to"></input>
 					<text class='cuIcon-locationfill text-orange'></text>
 				</view>
 				<view class="cu-form-group">
@@ -72,7 +72,7 @@
 				<button v-if="status==0||status==2" type="primary" class="margin-top" @click="submitForm">提交修改</button>
 			</form>
 		</view>
-		<view v-if="TabCur==1">
+		<view v-if="TabCur==0&&status==1">
 			<form>
 				<view class="cu-form-group">
 					<view class="title">车牌号码</view>
@@ -93,6 +93,57 @@
 				</view>
 				<button type="primary" class="margin-top" @click="submitForm">呼叫司机</button>
 			</form>
+		</view>
+		<view v-if="TabCur==1&&status==1">
+			<form>
+				<view class="cu-form-group">
+					<view class="title">用车人/单位</view>
+					<input value="姜轶枫" name="user"></input>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">联系电话</view>
+					<input value="13756372788" name="phone"></input>
+					<view class="cu-capsule radius">
+						<view class='cu-tag bg-blue '>
+							+86
+						</view>
+						<view class="cu-tag line-blue">
+							中国大陆
+						</view>
+					</view>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">乘客数</view>
+					<input name="seatNum" value="4"></input>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">用车事由</view>
+					<input :value="formData.reason" name="reason"></input>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">用车日期</view>
+					<input :value="date"></input>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">用车时间</view>
+					<input value="15:00"></input>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">出发地</view>
+					<input value="福建省福州市鼓楼区烟草大厦" name="from"></input>
+					<text class='cuIcon-locationfill text-orange'></text>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">目的地</view>
+					<input value="福建省福州市晋安区" name="to"></input>
+					<text class='cuIcon-locationfill text-orange'></text>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">往返类型</view>
+					<input value="单程"></input>
+				</view>
+				<button v-if="status==0||status==2" type="primary" class="margin-top" @click="submitForm">提交修改</button>
+			</form>
 		</view>	
 	</view>
 </template>
@@ -111,7 +162,7 @@
 				scrollLeft: 0,
 				status:undefined,
 				date:undefined,
-				tabItems: ["基础信息", "调度信息"],
+				tabItems: ["派车信息","基础信息" ],
 				formData: {
 					user: '姜轶枫',
 					phone: '13756372788',
