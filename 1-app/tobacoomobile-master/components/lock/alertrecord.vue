@@ -95,13 +95,13 @@
 	.card {
 		margin: 1vh 1vh;
 		background-color: white;
-		height: 10.5vh;
+		/* height: 10.5vh; */
 		display: flex;
 		border-radius: 10px;
 	}
 
 	.card-img {
-		margin: 3.5vh 3vh;
+		margin: 2.5vh 3vh;
 	}
 
 	.card-center {

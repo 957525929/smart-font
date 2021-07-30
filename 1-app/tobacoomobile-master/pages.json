@@ -303,6 +303,14 @@
                 "enablePullDownRefresh": false
             }
             
+        },{
+            "path" : "pages/lockinstall/installrecord2",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	"globalStyle": {

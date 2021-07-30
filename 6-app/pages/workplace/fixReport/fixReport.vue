@@ -9,19 +9,16 @@
 		</cu-custom>
 		<form class="cu-list menu sm-border card-menu margin-top" @submit="formSubmit" @reset="formReset">
 			<view class="cu-form-group">
-				<view class="title">故障地点</view>
+				<view class="title">报修地点</view>
 				<input placeholder="输入框带个图标" name="address"></input>
 				<text class='cuIcon-locationfill text-orange'></text>
 			</view>
-			<view class="cu-form-group">
-				<view class="title">故障发现时间</view>
-				<input placeholder="输入框带个按钮" name="time"></input>
-			</view>
-			<view class="cu-form-group align-start">
-				<view class="title">故障描述</view>
+			<view class="cu-form-group align-start">  
+				<view class="title">报修描述</view>
 				<textarea maxlength="-1" @input="textareaInput"
 					placeholder="多行文本输入框"></textarea>
 			</view>
+			<!-- 测试 -->
 			<view class="cu-bar bg-white margin-top">
 				<view class="action">
 					图片上传

@@ -1,43 +1,29 @@
 <template>
 	<view>
+		<cu-custom bgColor="bg-yellow" :isBack="true">
+			<block slot="backText">返回</block>
+			<block slot="content">我的预约</block>
+			<block slot="right">
+				<view class="action">
+					<view class='cuIcon-cu-image'>
+						<text class="cuIcon-searchlist" @tap="showModal" data-target="viewModal"></text>
+					</view>
+				</view>
+			</block>
+		</cu-custom>
 		<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
-			<cu-custom bgColor="bg-yellow" :isBack="true">
-				<block slot="backText">返回</block>
-				<block slot="content">我的预约</block>
-				<block slot="right">
-					<view class="action">
-						<view class='cuIcon-cu-image'>
-							<text class="cuIcon-searchlist" @tap="showModal" data-target="viewModal"></text>
-						</view>
-					</view>
-				</block>
-			</cu-custom>
-			<scroll-view scroll-x class="bg-white nav">
-				<view class="flex text-center">
-					<view class="cu-item flex-sub" :class="index==TabCur?'text-orange cur':''"
-						v-for="(item,index) in list" :key="index" @tap="tabSelect" :data-id="index">
-						{{item}}
-					</view>
-				</view>
-			</scroll-view>
-
-			<view v-if="TabCur==0">
-				<navigator class="action" @tap="gotoDetail">
-					<recordCard :value="value[0]" @send="recordDetailed" />
-				</navigator>
-				<view style="z-index:999">
-					<view class="cu-avatar xl round margin-right  bg-blue shadow-warp"
-						style=" float: right;">
-						<text class="avatar-text" @tap="openAppoient">发起<br>预约</text>
-					</view>
-				</view>
-
+			<view @tap="gotoDetail">
+				<recordCard :value="value[0]" @send="recordDetailed" />
 			</view>
-			<view v-if="TabCur==1">
-				<navigator class="action" @tap="gotoAllow">
-					<recordCard :value="value[1]" @send="recordDetailed" />
-				</navigator>
+			
+			<view style="z-index:999">
+				<view class="cu-avatar xl round margin-right  bg-blue shadow-warp"
+					style=" float: right;">
+					<text class="avatar-text" @tap="openAppoient">发起<br>预约</text>
+				</view>
 			</view>
+	
+			
 		</scroll-view>
 
 		<view class="DrawerClose" :class="modalName=='viewModal'?'show':''" @tap="hideModal">

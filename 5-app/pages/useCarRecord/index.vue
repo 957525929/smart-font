@@ -64,9 +64,9 @@
 				tabItems: ["审核中", "已通过", "未通过"],
 				listData1:[
 					{
-						taskName:"公司团建2021-07-20-01",
+						taskName:"公务出差2021-07-20-01",
 						user:'姜轶枫',
-						reason:'公司团建',
+						reason:'公务出差',
 						date:'2021-07-20'
 					},
 					{
@@ -78,16 +78,16 @@
 				],
 				listData2:[
 					{
-						taskName:"党员学习2021-07-07-01",
-						reason:'党员学习',
+						taskName:"公务出差2021-07-07-01",
+						reason:'公务出差',
 						user:'姜轶枫',
 						date:'2021-07-07'
 					},
 				],
 				listData3:[
 					{
-						taskName:"公司团建2021-07-20-01",
-						reason:'公司团建',
+						taskName:"公务出差2021-07-20-01",
+						reason:'公务出差',
 						user:'姜轶枫',
 						date:'2021-07-20'
 					},

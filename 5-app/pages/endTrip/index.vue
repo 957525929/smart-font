@@ -47,7 +47,7 @@
 				labelWidth: 85,
 				cars: [],
 				formData: {
-					licenseNum: '闽A123401',
+					licenseNum: '闽A',
 					distance: '7公里',
 					trueDistance:undefined,
 					remark: ''
