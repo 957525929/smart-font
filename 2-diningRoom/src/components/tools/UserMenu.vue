@@ -168,8 +168,9 @@
           content: '真的要注销登录吗 ?',
           onOk() {
             return that.Logout({}).then(() => {
-                window.location.href="/";
-              //window.location.reload()
+                // window.location.href="/";
+              window.location.reload()
+              //防止回到tomcat根
             }).catch(err => {
               that.$message.error({
                 title: '错误',

@@ -16,16 +16,16 @@
 				<view :class="PageCur=='appoient'?'text-orange':'text-gray'">访问预约</view>
 			</view> -->
 			
-	<!-- 		<view class="action" @click="NavChange" data-cur="touristHome">
+			<view class="action" @click="NavChange" data-cur="touristHome">
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='touristHome'?'text-orange cuIcon-home':'text-gray cuIcon-home'"></text>
 				</view>
 				<view :class="PageCur=='touristHome'?'text-orange':'text-gray'">首页</view>
-			</view> -->
+			</view>
 
 			<view class="action" @click="NavChange" data-cur="record">
 				<view class='cuIcon-cu-image'>
-					<text :class="PageCur=='record'?'text-orange cuIcon-home':'text-gray cuIcon-home'"></text>
+					<text :class="PageCur=='record'?'text-orange cuIcon-text':'text-gray cuIcon-text'"></text>
 				</view>
 				<view :class="PageCur=='record'?'text-orange':'text-gray'">我的预约</view>
 			</view>
@@ -49,7 +49,7 @@
 				<view class='cuIcon-cu-image'>
 					<text :class="PageCur=='person'?'text-orange cuIcon-peoplefill':'text-gray cuIcon-people'"></text>
 				</view>
-				<view :class="PageCur=='person'?'text-orange':'text-gray'">个人信息</view>
+				<view :class="PageCur=='person'?'text-orange':'text-gray'">个人中心</view>
 			</view>
 
 		</view>

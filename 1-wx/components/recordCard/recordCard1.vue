@@ -4,7 +4,7 @@
 			<!-- 判断传递过来的值显示对应状态 -->
 			<view v-if="item.type==cardType.type">
 				<view class="card">
-					<span class="picture"  >
+					<span class="picture">
 						<!-- 显示不同图片 -->
 						<image class="card-img" :src="imgSrc[cardType.id]" mode="scaleToFill"
 							style="width: 60px; height: 60px;"></image>
@@ -23,17 +23,64 @@
 							通过时间：{{item.agreeTime}}
 						</view>
 						<view v-if="cardType.id==2">
-							拒绝时间：{{item.disagreeTime}}
+							驳回时间：{{item.disagreeTime}}
 						</view>
 					</span>
 					<span class="card-right">
 						<!-- 切换不同颜色 -->
-				<!-- 		<view :style="styleObject[cardType.id]">
+						<!-- 		<view :style="styleObject[cardType.id]">
 							{{item.type}}
 						</view> -->
-						<view v-if="item.type=='待审核'" class="text-green" @tap="agreeGoto">通过</view>
-						<view v-if="item.type=='待审核'" class="text-red" style="margin-top: 50rpx;" @tap="disagreeGoto">驳回</view>
+						<view v-if="item.type=='审核'" class="text-green" @tap="showModal" data-target="DialogModal">通过</view>
+						<view v-if="item.type=='审核'" class="text-red" style="margin-top: 50rpx;" @tap="showModal" data-target="DialogModal1">驳回
+						</view>
 					</span>
+					
+					<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
+						<view class="cu-dialog">
+							<view class="cu-bar bg-white justify-end">
+								<!-- <view class="content">Modal标题</view> -->
+								<view class="action" @tap="hideModal">
+									<text class="cuIcon-close text-red"></text>
+								</view>
+							</view>
+							<view class="padding-xl">
+								是否确认通过？
+							</view>
+							<view class="cu-bar bg-white justify-end">
+								<view class="action">
+									<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+									<button class="cu-btn bg-green margin-left" @tap="agreeGoto">确定</button>
+					
+								</view>
+							</view>
+						</view>
+					</view>
+
+
+					<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
+						<view class="cu-dialog">
+							<view class="cu-bar bg-white justify-end">
+								<view class="content">驳回原因</view>
+								<view class="action" @tap="hideModal">
+									<text class="cuIcon-close text-red"></text>
+								</view>
+							</view>
+							<view class="padding-xl">
+								<view class="cu-form-group">
+									<view class="title">驳回原因</view>
+									<input placeholder="请说明驳回原因" name="input"></input>
+								</view>
+							</view>
+							<view class="cu-bar bg-white justify-end">
+								<view class="action">
+									<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+									<button class="cu-btn bg-green margin-left" @tap="disagreeGoto">确定</button>
+
+								</view>
+							</view>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -47,15 +94,16 @@
 	export default {
 		data() {
 			return {
+				modalName: null,
 				applylist: [{
 						visit: '魏佳楠',
 						phone: generatePhoneNum(),
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '09:46',
-						type: '待审核',
-						startTime:'10.00',
-						endTime:'12.00'
+						type: '审核',
+						startTime: '10.00',
+						endTime: '12.00'
 					},
 					{
 						visit: '郑思楠',
@@ -63,9 +111,9 @@
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '13:51',
-						type: '待审核',
-						startTime:'14.00',
-						endTime:'16.00'
+						type: '审核',
+						startTime: '14.00',
+						endTime: '16.00'
 					},
 					{
 						visit: '李伟恒',
@@ -73,9 +121,9 @@
 						time: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '11:46',
-						type: '待审核',
-						startTime:'13.00',
-						endTime:'15.00'
+						type: '审核',
+						startTime: '13.00',
+						endTime: '15.00'
 					},
 					{
 						visit: '林泽宇',
@@ -86,9 +134,9 @@
 						agreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() - 5) + "日" + " " + '15:30',
-						type: '已通过',
-						startTime:'16.00',
-						endTime:'18.00'
+						type: '通过',
+						startTime: '16.00',
+						endTime: '18.00'
 					},
 					{
 						visit: '张国柱',
@@ -99,9 +147,9 @@
 						agreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() - 15) + "日" + " " + '10:24',
-						type: '已通过',
-						startTime:'13.00',
-						endTime:'15.00'
+						type: '通过',
+						startTime: '13.00',
+						endTime: '15.00'
 					},
 					{
 						visit: '王鹏翔',
@@ -112,9 +160,9 @@
 						agreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate()) + "日" + " " + '14:15',
-						type: '已通过',
-						startTime:'13.00',
-						endTime:'15.00'
+						type: '通过',
+						startTime: '13.00',
+						endTime: '15.00'
 					},
 					{
 						visit: '华强北',
@@ -125,9 +173,9 @@
 						disagreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth()) + "月" +
 							(new Date().getDate() - 10) + "日" + " " + '16:59',
-						type: '已拒绝',
-						startTime:'17.00',
-						endTime:'19.00'
+						type: '驳回',
+						startTime: '17.00',
+						endTime: '19.00'
 					},
 					{
 						visit: '孙志远',
@@ -138,9 +186,9 @@
 						disagreeTime: new Date().getFullYear() + "年" +
 							(new Date().getMonth() + 1) + "月" +
 							(new Date().getDate() - 1) + "日" + " " + '17:31',
-						type: '已拒绝',
-						startTime:'18.00',
-						endTime:'20.00'
+						type: '驳回',
+						startTime: '18.00',
+						endTime: '20.00'
 					},
 				],
 				// 图片
@@ -171,9 +219,9 @@
 
 		methods: {
 			generatePhoneNum,
-			recordDetail(item){
+			recordDetail(item) {
 				console.log(item)
-				this.$emit('send',item)
+				this.$emit('send', item)
 			},
 			goToAllow(item) {
 				var onjs = JSON.stringify(item)
@@ -187,11 +235,17 @@
 					url: '/pages/index/staff?PageCur=applyList&TabCur=1'
 				});
 			},
-			disagreeGoto(e){
+			disagreeGoto(e) {
 				this.modalName = null;
 				uni.navigateTo({
 					url: '/pages/index/staff?PageCur=applyList&TabCur=2'
 				});
+			},
+			showModal(e) {
+				this.modalName = e.currentTarget.dataset.target
+			},
+			hideModal(e) {
+				this.modalName = null
 			},
 		}
 	}

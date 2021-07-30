@@ -25,19 +25,27 @@
 			return {
 				elements: [
 					{
-						title: '申请访问',
+						title: '我的预约',
 						name: 'staff',
 						color: 'blue',
+						cuIcon: 'text',
+						enName:'Appoint',
+						route:'/pages/index/tourist?PageCur=record'
+					},
+					{
+						title: '扫码',
+						name: 'staff',
+						color: 'purple',
 						cuIcon: 'scan',
 						enName:'Scan',
 						route:'/pages/index/tourist?PageCur=scan'
 					},{
-						title: '申请记录',
+						title: '我的二维码',
 						name: 'tourist',
 						color: 'black',
-						cuIcon: 'formfill',
-						enName:'ApplyList',
-						route:'/pages/index/tourist?PageCur=record'
+						cuIcon: 'barcode',
+						enName:'code',
+						route:'/pages/index/tourist?PageCur=allow'
 					},
 					{
 						title: '个人中心',

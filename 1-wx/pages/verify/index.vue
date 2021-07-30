@@ -60,7 +60,7 @@
 		<view v-if="!this.onjs.disagreeTime">
 			<view class="cu-bar bg-white margin-top">
 				<view class='text-xl padding'>
-					<text class="text-black text-bold">· 备注</text>
+					<text class="text-black text-bold">· 到访事由</text>
 				</view>
 			</view>
 
@@ -73,7 +73,7 @@
 		<view v-if="this.onjs.disagreeTime" >
 			<view class="cu-bar bg-white margin-top">
 				<view class='text-xl padding'>
-					<text class="text-black text-bold">· 拒绝原因</text>
+					<text class="text-black text-bold">· 驳回原因</text>
 				</view>
 			</view>
 
@@ -86,13 +86,13 @@
 		<view class="bottom padding" v-if="!this.onjs.agreeTime&&!this.onjs.disagreeTime">
 			<view class="leftBottom">
 				<view class='padding'>
-					<button class="cu-btn lg bg-red" @tap="showModal" data-target="DialogModal1">拒绝</button>
+					<button class="cu-btn lg bg-red" @tap="showModal" data-target="DialogModal1">驳回</button>
 				</view>
 				<!-- 	<view class="text-orange"></view> -->
 			</view>
 			<view class="rightBottom">
 				<view class='padding'>
-					<button class="cu-btn lg bg-white" @click="agreeGoto">同意</button>
+					<button class="cu-btn lg bg-white" @click="agreeGoto">通过</button>
 				</view>
 			</view>
 		</view>
@@ -100,15 +100,15 @@
 		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
-					<view class="content">拒绝原因</view>
+					<view class="content">驳回原因</view>
 					<view class="action" @tap="hideModal">
 						<text class="cuIcon-close text-red"></text>
 					</view>
 				</view>
 				<view class="padding-xl">
 					<view class="cu-form-group">
-						<view class="title">拒绝原因</view>
-						<input placeholder="请说明拒绝原因" name="input"></input>
+						<view class="title">驳回原因</view>
+						<input placeholder="请说明驳回原因" name="input"></input>
 					</view>
 				</view>
 				<view class="cu-bar bg-white justify-end">

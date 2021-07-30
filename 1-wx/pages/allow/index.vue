@@ -17,14 +17,14 @@
 		<view class="secondRow">
 			被访部门：{{this.onjs.department}}
 		</view>
-		<view class="thirdRow">
+<!-- 		<view class="thirdRow">
 			<view class="thirdTitle">
 				访问时段：
 			</view>
 			<view class="thirdContent">
 				{{this.date+" "+this.onjs.startTime +" "+"至"+" "+ this.date+" "+this.onjs.endTime}}
 			</view>
-		</view>
+		</view> -->
 		<view class="code">
 			<image class="codeImg" src="../../static/allowCode.png" mode="aspectFit"></image>
 		</view>

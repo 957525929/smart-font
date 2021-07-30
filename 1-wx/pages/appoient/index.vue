@@ -6,23 +6,32 @@
 		</cu-custom>
 
 		<view>
-			<!-- 		<view class="text-gray">预约信息</view>
-			<view class="text-gray">我的预约</view> -->
 			<view class="flex  justify-between">
 				<view class=" padding-sm margin-xs radius">预约信息</view>
 				<view class="padding-sm margin-xs radius">
-					<button class="cu-btn bg-blue  sm" @click="goToRecord">我的预约</button>
+					<button class="cu-btn bg-blue  sm" @click="returnRecord">我的预约</button>
 				</view>
 			</view>
 		</view>
 
 		<view class="cu-form-group">
 			<view class="title">被访人员</view>
-			<input placeholder="请输入被访人员手机号" name="input" v-model="people" @blur="checkPhone"></input>
+			<input placeholder="请输入被访人员手机号" name="input" v-model="people"  @input="checkPhone"></input>
+		</view>
+
+		<view class="cu-form-group" v-if="this.truePhone">
+			<view class="title">被访部门</view>
+			<input name="input" v-model="department"></input>
 		</view>
 
 		<view class="cu-form-group">
-			<view class="title">到访事由
+			<view>
+				<span class="title">
+					到访事由
+				</span>
+				<span class="tipContent">
+					(注：请按照如下格式填写到访事由)
+				</span>
 			</view>
 
 		</view>
@@ -43,14 +52,14 @@
 			<input placeholder="请输入" name="input" @input="inputChange" v-model="phone"></input>
 		</view>
 
-		<view class="cu-form-group">
+		<!-- 		<view class="cu-form-group">
 			<view class="title">交通工具</view>
 			<picker placeholder="请选择部门" @change="PickerChange" :value="index" :range="picker">
 				<view class="picker">
 					{{ picker[index] }}
 				</view>
 			</picker>
-		</view>
+		</view> -->
 
 		<!-- 	<view class="padding margin text-center">
 			<view class="cu-btn bg-yellow lg block shadow radius margin-xl" @click="goToRecord">
@@ -67,7 +76,7 @@
 			</view>
 			<view class="rightBottom">
 				<view>
-					<button class="cu-btn  lg round bg-blue" style="width: 300rpx;"  @click="goToRecord">提交</button>
+					<button class="cu-btn  lg round bg-blue" style="width: 300rpx;" @click="goToRecord">提交</button>
 				</view>
 			</view>
 		</view>
@@ -83,11 +92,12 @@
 				name: '',
 				phone: '',
 				modalName: null,
+				truePhone: "",
 				PageCur: "appoient",
 				index: 0,
-				picker: ["电动自行车", "步行", "机动车"],
-				textContent: "本人已与xxx处（中心）xxx联系,到公司处理或者沟通XXX事情。请审核审批。",
-				telephone:["18350076748","13950311263"]
+				// picker: ["电动自行车", "步行", "机动车"],
+				textContent: "本人到公司处理或者沟通XXX事情。请尽快审核审批。",
+				telephone: ["15159091707", "13950311263","18350076748"]
 			};
 		},
 		methods: {
@@ -103,7 +113,7 @@
 				this.PageCur = e.currentTarget.dataset.cur;
 			},
 			goToRecord() {
-				disabled:false;
+				disabled: false;
 				// var onjs = JSON.stringify(this.recordData)
 				var _that = this
 				if (_that.people == "") {
@@ -118,7 +128,7 @@
 						icon: 'none',
 						duration: 1000
 					});
-				}else if (_that.phone == "") {
+				} else if (_that.phone == "") {
 					uni.showToast({
 						title: '请输入电话号码',
 						icon: 'none',
@@ -130,28 +140,36 @@
 					});
 				}
 			},
-			checkPhone(){
-				// if(this.people!="18350076748"){
-				// 	uni.showToast({
-				// 		title: '未找到被访人信息',
-				// 		icon: 'none',
-				// 		duration: 1000
-				// 	});
-				// }
-				for (let i = 0; i < this.telephone.length; i++) {
-					if (this.telephone[i] !== this.people) {
-						uni.showToast({
-							title: '未找到被访人信息',
-							icon: 'none',
-							duration: 1000
-						});
-						console.log(this.telephone[i])
-						console.log("222222222222222")
-						console.log(this.phone)
-						// console.log(this.telephone[i])
+			returnRecord() {
+				uni.navigateTo({
+					url: "/pages/index/tourist?PageCur=record"
+				});
+			},
+			checkPhone() {
+				let result = 0
+				for (let value of this.telephone) {
+					if (value == this.people) {
+						result = 1;
+						this.truePhone = value
+						if(value==this.telephone[0]){this.people = "赵大华";this.department="财务管理处"}
+						if(value==this.telephone[1]){this.people = "李铁柱";this.department="审计处"}	
+						if(value==this.telephone[2]){this.people = "李二喜";this.department="烟草管理处"}	
 					}
-			}
-			}
+				}
+				if (result == 0) {
+					uni.showToast({
+						title: '未找到被访人信息',
+						icon: 'none',
+						duration: 1000
+					});
+					this.truePhone = ''
+				}
+	
+			},
+			// inputChange(e){
+			// 	// console.log(e.detail.value)
+			// 	this.truePhone = ''
+			// }
 		},
 	};
 </script>
@@ -172,5 +190,9 @@
 		width: 50%;
 		margin: auto;
 		text-align: center;
+	}
+	.tipContent{
+		font-size: 12px;
+		color: #ff6701;
 	}
 </style>
