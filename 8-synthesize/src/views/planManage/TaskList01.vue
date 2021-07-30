@@ -49,7 +49,7 @@
         </span>
 
         <!-- 状态渲染模板 -->
-        <template slot="customRenderStatus" slot-scope="status, record">
+        <template slot="customRenderStatus" slot-scope="status">
           <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
           <a-tag v-if="status === '1'" color="green">进行中</a-tag>
           <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>

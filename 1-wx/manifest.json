@@ -87,10 +87,17 @@
         }
     },
     "h5" : {
-        "title" : "appointmentApp",
+        "title" : "accessApp",
         "domain" : "",
         "router" : {
             "base" : "./"
+        },
+        "sdkConfigs" : {
+            "maps" : {
+                "qqmap" : {
+                    "key" : ""
+                }
+            }
         }
     }
 }

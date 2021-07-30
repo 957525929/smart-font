@@ -73,7 +73,7 @@
 		<view v-if="this.onjs.disagree">
 			<view class="cu-bar bg-white margin-top">
 				<view class='text-xl padding'>
-					<text class="text-black text-bold">· 拒绝原因</text>
+					<text class="text-black text-bold">· 驳回原因</text>
 				</view>
 			</view>
 

@@ -16,7 +16,7 @@
 
 		<view class="cu-form-group">
 			<view class="title">被访人员</view>
-			<input placeholder="请输入被访人员手机号" name="input" v-model="people" @blur="checkPhone" @input="inputChange"></input>
+			<input placeholder="请输入被访人员手机号" name="input" v-model="people"  @input="checkPhone"></input>
 		</view>
 
 		<view class="cu-form-group" v-if="this.truePhone">
@@ -97,7 +97,7 @@
 				index: 0,
 				// picker: ["电动自行车", "步行", "机动车"],
 				textContent: "本人到公司处理或者沟通XXX事情。请尽快审核审批。",
-				telephone: ["18350076748", "13950311263"]
+				telephone: ["15159091707", "13950311263","18350076748"]
 			};
 		},
 		methods: {
@@ -153,6 +153,7 @@
 						this.truePhone = value
 						if(value==this.telephone[0]){this.people = "赵大华";this.department="财务管理处"}
 						if(value==this.telephone[1]){this.people = "李铁柱";this.department="审计处"}	
+						if(value==this.telephone[2]){this.people = "李二喜";this.department="烟草管理处"}	
 					}
 				}
 				if (result == 0) {
@@ -161,13 +162,14 @@
 						icon: 'none',
 						duration: 1000
 					});
+					this.truePhone = ''
 				}
 	
 			},
-			inputChange(e){
-				// console.log(e.detail.value)
-				this.truePhone = ''
-			}
+			// inputChange(e){
+			// 	// console.log(e.detail.value)
+			// 	this.truePhone = ''
+			// }
 		},
 	};
 </script>
