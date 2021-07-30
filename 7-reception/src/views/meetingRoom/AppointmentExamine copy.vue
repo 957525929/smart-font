@@ -43,21 +43,17 @@
         </a-col>
       </a-row>
     </div>
-    <br>
     <!-- 操作按钮区域 -->
-    <div class="table-operator">
+    <!-- <div>
       <a-dropdown v-if="selectedRowKeys.length > 0">
-            <a-menu slot="overlay">
-          <a-menu-item   @click="agreen">通过</a-menu-item>
-            <a-menu-item   @click="noAgreen">不通过</a-menu-item>
-        </a-menu>
-        <a-button style="margin-left: 8px"> 一键审核 <a-icon type="down" /></a-button>
+        <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
       <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择
       <a style="font-weight: 600">{{ selectedRowKeys.length }}</a
       >项
       <a style="margin-left: 12px" @click="onClearSelected">清空</a>
-    </div>
+      <list-columns-setter v-model="columns" :def-columns="columns" style="float: right" />
+    </div> -->
     <!-- table区域-begin -->
     <div id="RoomAudit">
       <a-table
@@ -65,8 +61,7 @@
         :data-source="data"
         :columns="columns"
         :pagination="false"
-        :rowSelection="{ selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange }"
-        @change="handleTableChange"
+    
       >
         <!-- <a-table-column title="序号" data-index="index" align="left"></a-table-column>
         <a-table-column title="会议名称" data-index="name" align="center"></a-table-column>
@@ -126,8 +121,7 @@
 <script>
 import moment from 'moment'
 import { areaData } from './data/area.js'
-import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-import { billListMixin } from '../erp/mixins/billListMixin'
+import ListColumnsSetter from '../erp/components/ListColumnsSetter'
 const data = [
   {
     id: 'A1202',
@@ -268,11 +262,9 @@ const innerColumns = [
     align: 'center',
   },
 ]
-
 export default {
-  mixins:[JeecgListMixin,billListMixin ],
   components: {
-    
+    ListColumnsSetter,
   },
 
   data() {
@@ -280,7 +272,6 @@ export default {
       data,
       columns,
       innerColumns,
-     
       selectOptions: areaData,
       visibleReason: false,
       labelCol: { span: 3 },
@@ -385,23 +376,6 @@ export default {
           this.formReason.reason = ''
         }
       })
-    },
-    agreen(){
-        const _this = this
-        this.$confirm({
-          title: '是否确定全部通过',
-          content: '',
-          okText: '是',
-          cancelText: '否',
-          onOk() {
-            console.log('ok')
-            //_this.visibleReason = true
-            _this.data=[]
-          },
-        })
-    },
-    noAgreen(){
-      this.visibleReason = true
     },
   },
 }
