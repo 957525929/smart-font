@@ -32,7 +32,7 @@
 				</view>
 				<view class="cu-form-group">
 					<view class="title">出发地</view>
-					<input value="福建省福州市闽侯县创业大厦"></input>
+					<input value="福建省福州市鼓楼区烟草大厦"></input>
 					<text class='cuIcon-locationfill text-orange'></text>
 				</view>
 				<view class="cu-form-group">

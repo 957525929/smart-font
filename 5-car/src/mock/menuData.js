@@ -34,10 +34,11 @@ export const menu = {
         }],
         "menu": [
             {
-                "redirect": null,
+                "redirect": "/vehicleUsageMng/verify",
                 "path": "/dashboard/analysis",
                 "component": "dashboard/Workplace",
                 "route": "1",
+                "hidden":true,
                 "meta": {
                     "keepAlive": false,
                     "internalOrExternal": false,

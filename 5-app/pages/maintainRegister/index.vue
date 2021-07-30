@@ -39,7 +39,7 @@
 		<form>
 			<view class="cu-form-group">
 				<view class="title">车牌号</view>
-				<input></input>
+				<uni-combox :candidates="cars" v-model="licenseNum" style="width:200rpx"></uni-combox>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">保养类型</view>
@@ -123,6 +123,7 @@
 				format: true
 			})
 			return {
+				licenseNum:'闽A',
 				maintainTypeIndex: -1,
 				date1: currentDate,
 				date2: currentDate,
