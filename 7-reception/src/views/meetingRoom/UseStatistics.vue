@@ -8,7 +8,7 @@
           <span>按预约类型筛选：</span>
         </a-col>
         <a-col>
-          <a-select :style="{width:'150px'}" @change="handleChange" placeholder="请选择预约类型">
+          <a-select :style="{width:'200px'}" @change="handleChange" placeholder="请选择预约类型">
             <a-select-option value="公司会议">公司会议</a-select-option>
             <a-select-option value="个人">个人</a-select-option>
           </a-select>
@@ -35,7 +35,7 @@
         </a-col>
         <a-col>
           <a-cascader
-            style="width: 350px"
+            style="width: 400px"
             :options="selectOptions"
             change-on-select
             @change="areaChange"

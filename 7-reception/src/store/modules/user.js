@@ -404,19 +404,6 @@ const user = {
                     "id": "1245154570166390786"
                   },
                   {
-                    "path": "/meetingRoom/AppointmentExamine",
-                    "component": "meetingRoom/AppointmentExamine",
-                    "route": "1",
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      'icon': "solution",
-                      "title": "预约审核"
-                    },
-                    "name": "meetingRoom-AppointmentExamine",
-                    "id": "1245154914959151105"
-                  },
-                  {
                     "path": "/meetingRoom/AppointmentPersonal",
                     "component": "meetingRoom/AppointmentPersonal",
                     "route": "1",
@@ -427,6 +414,19 @@ const user = {
                       "title": "会议室预约"
                     },
                     "name": "meetingRoom-AppointmentPersonal",
+                    "id": "1245154914959151105"
+                  },
+                  {
+                    "path": "/meetingRoom/AppointmentExamine",
+                    "component": "meetingRoom/AppointmentExamine",
+                    "route": "1",
+                    "meta": {
+                      "keepAlive": false,
+                      "internalOrExternal": false,
+                      'icon': "solution",
+                      "title": "预约审核"
+                    },
+                    "name": "meetingRoom-AppointmentExamine",
                     "id": "1245154914959151105"
                   },
                   // {

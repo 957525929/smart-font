@@ -31,14 +31,14 @@
             <a-date-picker
               v-model="formHotel.dateStart"
               placeholder="选择开始日期"
-              style="width: 45%;"
+              style="width: 45%"
               :format="dateFormat"
             ></a-date-picker>
             <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
             <a-date-picker
               v-model="formHotel.dateEnd"
               placeholder="选择结束日期"
-              style="width: 45%;"
+              style="width: 45%"
               :format="dateFormat"
             ></a-date-picker>
           </a-form-model-item>
@@ -56,33 +56,33 @@
             <a-row type="flex" align="middle">
               <a-col :span="1"></a-col>
               <a-col>
-                <span>协议编号：{{hotelIDInfor}}</span>
+                <span>协议编号：{{ hotelIDInfor }}</span>
               </a-col>
               <a-col :span="2"></a-col>
               <a-col>
-                <span>星级：{{hotelLevelInfor}}</span>
+                <span>星级：{{ hotelLevelInfor }}</span>
               </a-col>
             </a-row>
             <br />
             <a-row type="flex" align="middle">
               <a-col :span="1"></a-col>
               <a-col>
-                <span>位置：{{hotelAddressInfor}}</span>
+                <span>位置：{{ hotelAddressInfor }}</span>
               </a-col>
               <a-col :span="1"></a-col>
               <a-col>
-                <span>价格范围（元）：{{hotelPriceInfor}}</span>
+                <span>价格范围（元）：{{ hotelPriceInfor }}</span>
               </a-col>
             </a-row>
             <br />
             <a-row type="flex" align="middle">
               <a-col :span="1"></a-col>
               <a-col>
-                <span>联系人：{{hotelNameInfor}}</span>
+                <span>联系人：{{ hotelNameInfor }}</span>
               </a-col>
               <a-col :span="1"></a-col>
               <a-col>
-                <span>联系电话：{{hotelTelInfor}}</span>
+                <span>联系电话：{{ hotelTelInfor }}</span>
               </a-col>
             </a-row>
             <br />
@@ -92,31 +92,26 @@
                 <span>通知消息：</span>
               </a-col>
               <a-col :span="7">
-                <a-input type="textarea" v-model="defaultInfor" :style="{height:'80px'}"/>
+                <a-input type="textarea" v-model="defaultInfor" :style="{ height: '80px' }" />
               </a-col>
             </a-row>
           </div>
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
             <a-button type="primary" @click="onSubmitHotel">创建</a-button>
-            <a-button style="margin-left: 10px;" @click="resetFormHotel">重置</a-button>
+            <a-button style="margin-left: 10px" @click="resetFormHotel">重置</a-button>
           </a-form-model-item>
         </a-form-model>
         <!-- 协议酒店表格 -->
-        <a-table
-          :data-source="dataHotel"
-          :scroll="{ y: 450 }"
-          :pagination="false"
-          rowKey="hotelIndex"
-        >
+        <a-table :data-source="dataHotel" :scroll="{ y: 450 }" :pagination="false" rowKey="hotelIndex">
           <a-table-column title="序号" data-index="hotelIndex" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="协议酒店" data-index="hotel" align="center"></a-table-column>
           <a-table-column title="操作" align="center">
             <template slot-scope="record">
-              <a href="javascript:;" @click="hotelModify(record)" :style="{  color: 'blue' }">修改</a>
+              <a href="javascript:;" @click="hotelModify(record)" :style="{ color: 'blue' }">修改</a>
               <a-divider type="vertical" />
               <a-popconfirm title="确定删除吗?" @confirm="() => hotelDelete(record.hotelIndex)">
-                <a href="javascript:;" :style="{  color: 'red' }">删除</a>
+                <a href="javascript:;" :style="{ color: 'red' }">删除</a>
               </a-popconfirm>
             </template>
           </a-table-column>
@@ -135,14 +130,14 @@
             <a-date-picker
               v-model="formEat.dateStart"
               placeholder="选择开始日期"
-              style="width: 45%;"
+              style="width: 45%"
               :format="dateFormat"
             ></a-date-picker>
             <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
             <a-date-picker
               v-model="formEat.dateEnd"
               placeholder="选择结束日期"
-              style="width: 45%;"
+              style="width: 45%"
               :format="dateFormat"
             ></a-date-picker>
           </a-form-model-item>
@@ -156,14 +151,14 @@
           </a-form-model-item>
           <a-form-model-item label="就餐地点" prop="way">
             <a-select v-model="formEat.way" placeholder="选择就餐方式">
-              <a-select-option :value="eatHotel">{{eatHotel}}</a-select-option>
+              <a-select-option :value="eatHotel">{{ eatHotel }}</a-select-option>
               <a-select-option value="食堂">食堂</a-select-option>
             </a-select>
           </a-form-model-item>
 
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
             <a-button type="primary" @click="onSubmitEat">创建</a-button>
-            <a-button style="margin-left: 10px;" @click="resetFormEat">重置</a-button>
+            <a-button style="margin-left: 10px" @click="resetFormEat">重置</a-button>
           </a-form-model-item>
         </a-form-model>
         <!-- 就餐地点表格 -->
@@ -174,10 +169,10 @@
           <a-table-column title="就餐地点" data-index="way" align="center"></a-table-column>
           <a-table-column title="操作" align="center">
             <template slot-scope="record">
-              <a href="javascript:;" @click="eatModify(record)" :style="{  color: 'blue' }">修改</a>
+              <a href="javascript:;" @click="eatModify(record)" :style="{ color: 'blue' }">修改</a>
               <a-divider type="vertical" />
               <a-popconfirm title="确定删除吗?" @confirm="() => eatDelete(record.eatIndex)">
-                <a href="javascript:;" :style="{  color: 'red' }">删除</a>
+                <a href="javascript:;" :style="{ color: 'red' }">删除</a>
               </a-popconfirm>
             </template>
           </a-table-column>
@@ -196,14 +191,14 @@
             <a-date-picker
               v-model="formRoom.dateStart"
               placeholder="选择开始日期"
-              style="width: 45%;"
+              style="width: 45%"
               :format="dateFormat"
             ></a-date-picker>
             <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
             <a-date-picker
               v-model="formRoom.dateEnd"
               placeholder="选择结束日期"
-              style="width: 45%;"
+              style="width: 45%"
               :format="dateFormat"
             ></a-date-picker>
           </a-form-model-item>
@@ -221,12 +216,13 @@
               placeholder="请选择会议室"
               v-model="formRoom.room"
               @change="onChangeRoom"
-              style="width: 460px;textAlign:left"
+              style="width: 460px; textAlign: left"
+              
               :display-render="displayRender"
             />
           </a-form-model-item>
           <!-- 会议室详情信息 -->
-          <div v-show="flagRoom">
+          <!-- <div v-show="flagRoom">
             <a-row type="flex" align="middle">
               <a-col :span="2"></a-col>
               <a-col>
@@ -240,36 +236,31 @@
                 <span>基本条件：{{conditionRoomInfor}}</span>
               </a-col>
             </a-row>
-          </div>
+          </div> -->
           <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
             <a-button type="primary" @click="onSubmitRoom">创建</a-button>
-            <a-button style="margin-left: 10px;" @click="resetFormRoom">重置</a-button>
+            <a-button style="margin-left: 10px" @click="resetFormRoom">重置</a-button>
           </a-form-model-item>
         </a-form-model>
-<!-- 会议室安排表格 -->
-        <a-table
-          :data-source="dataRoom"
-          :scroll="{ y: 450 }"
-          :pagination="false"
-          rowKey="roomIndex"
-        >
+        <!-- 会议室安排表格 -->
+        <a-table :data-source="dataRoom" :scroll="{ y: 450 }" :pagination="false" rowKey="roomIndex">
           <a-table-column title="序号" data-index="roomIndex" align="center"></a-table-column>
           <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
           <a-table-column title="时段" data-index="range" align="center"></a-table-column>
           <a-table-column title="会议地点" data-index="room" align="center"></a-table-column>
           <a-table-column title="操作" align="center">
             <template slot-scope="record">
-              <a href="javascript:;" @click="roomModify(record)" :style="{  color: 'blue' }">修改</a>
+              <a href="javascript:;" @click="roomModify(record)" :style="{ color: 'blue' }">修改</a>
               <a-divider type="vertical" />
               <a-popconfirm title="确定删除吗?" @confirm="() => roomDelete(record.roomIndex)">
-                <a href="javascript:;" :style="{  color: 'red' }">删除</a>
+                <a href="javascript:;" :style="{ color: 'red' }">删除</a>
               </a-popconfirm>
             </template>
           </a-table-column>
         </a-table>
       </div>
       <div class="steps-content" slot="description" v-if="current == 3">
-        <a-form-model :label-col="labelCol" :wrapper-col=" { span: 4 }">
+        <a-form-model :label-col="labelCol" :wrapper-col="{ span: 4 }">
           <a-form-model-item label="会议开始前（天）">
             <a-input v-model="numDate"></a-input>
           </a-form-model-item>
@@ -297,14 +288,14 @@
           <a-date-picker
             v-model="ModifyHotel.dateStart"
             placeholder="选择开始日期"
-            style="width: 45%;"
+            style="width: 45%"
             :format="dateFormat"
           ></a-date-picker>
           <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
           <a-date-picker
             v-model="ModifyHotel.dateEnd"
             placeholder="选择结束日期"
-            style="width: 45%;"
+            style="width: 45%"
             :format="dateFormat"
           ></a-date-picker>
         </a-form-model-item>
@@ -315,9 +306,9 @@
             <a-select-option value="福州世纪金源酒店">福州世纪金源酒店</a-select-option>
           </a-select>
         </a-form-model-item>
-        <a-form-model-item :wrapper-col="{ span: 17, offset:8 }">
+        <a-form-model-item :wrapper-col="{ span: 17, offset: 8 }">
           <a-button type="primary" @click="SubmitModifyHotel()">修改</a-button>
-          <a-button style="margin-left: 10px;" @click="CancelModifyHotel()">取消</a-button>
+          <a-button style="margin-left: 10px" @click="CancelModifyHotel()">取消</a-button>
         </a-form-model-item>
       </a-form-model>
     </a-modal>
@@ -334,14 +325,14 @@
           <a-date-picker
             v-model="ModifyEat.dateStart"
             placeholder="选择开始日期"
-            style="width: 45%;"
+            style="width: 45%"
             :format="dateFormat"
           ></a-date-picker>
           <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
           <a-date-picker
             v-model="ModifyEat.dateEnd"
             placeholder="选择结束日期"
-            style="width: 45%;"
+            style="width: 45%"
             :format="dateFormat"
           ></a-date-picker>
         </a-form-model-item>
@@ -355,13 +346,13 @@
         </a-form-model-item>
         <a-form-model-item label="就餐地点" prop="way">
           <a-select v-model="ModifyEat.way" placeholder="选择就餐方式">
-            <a-select-option :value="eatHotel">{{eatHotel}}</a-select-option>
+            <a-select-option :value="eatHotel">{{ eatHotel }}</a-select-option>
             <a-select-option value="食堂">食堂</a-select-option>
           </a-select>
         </a-form-model-item>
-        <a-form-model-item :wrapper-col="{ span: 17, offset:8 }">
+        <a-form-model-item :wrapper-col="{ span: 17, offset: 8 }">
           <a-button type="primary" @click="SubmitModifyEat()">修改</a-button>
-          <a-button style="margin-left: 10px;" @click="CancelModifyEat()">取消</a-button>
+          <a-button style="margin-left: 10px" @click="CancelModifyEat()">取消</a-button>
         </a-form-model-item>
       </a-form-model>
     </a-modal>
@@ -378,14 +369,14 @@
           <a-date-picker
             v-model="ModifyRoom.dateStart"
             placeholder="选择开始日期"
-            style="width: 45%;"
+            style="width: 45%"
             :format="dateFormat"
           ></a-date-picker>
           <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
           <a-date-picker
             v-model="ModifyRoom.dateEnd"
             placeholder="选择结束日期"
-            style="width: 45%;"
+            style="width: 45%"
             :format="dateFormat"
           ></a-date-picker>
         </a-form-model-item>
@@ -407,9 +398,9 @@
             :display-render="displayRender"
           />
         </a-form-model-item>
-        <a-form-model-item :wrapper-col="{ span: 17, offset:8 }">
+        <a-form-model-item :wrapper-col="{ span: 17, offset: 8 }">
           <a-button type="primary" @click="SubmitModifyRoom()">修改</a-button>
-          <a-button style="margin-left: 10px;" @click="CancelModifyRoom()">取消</a-button>
+          <a-button style="margin-left: 10px" @click="CancelModifyRoom()">取消</a-button>
         </a-form-model-item>
       </a-form-model>
     </a-modal>
@@ -431,25 +422,25 @@ const dataHotelIn = [
       {
         key: 21,
         roomType: '普通单人间',
-        price: 135
+        price: 135,
       },
       {
         key: 21,
         roomType: '普通双人间',
-        price: 185
+        price: 185,
       },
       {
         key: 22,
         roomType: '豪华单人间',
-        price: 160
+        price: 160,
       },
 
       {
         key: 22,
         roomType: '豪华双人间',
-        price: 215
-      }
-    ]
+        price: 215,
+      },
+    ],
   },
   {
     id: 'N1202',
@@ -464,25 +455,25 @@ const dataHotelIn = [
       {
         key: 21,
         roomType: '普通单人间',
-        price: 120
+        price: 120,
       },
       {
         key: 21,
         roomType: '普通双人间',
-        price: 165
+        price: 165,
       },
       {
         key: 22,
         roomType: '豪华单人间',
-        price: 140
+        price: 140,
       },
 
       {
         key: 22,
         roomType: '豪华双人间',
-        price: 190
-      }
-    ]
+        price: 190,
+      },
+    ],
   },
   {
     id: 'N1203',
@@ -497,26 +488,26 @@ const dataHotelIn = [
       {
         key: 21,
         roomType: '普通单人间',
-        price: 120
+        price: 120,
       },
       {
         key: 21,
         roomType: '普通双人间',
-        price: 150
+        price: 150,
       },
       {
         key: 22,
         roomType: '豪华单人间',
-        price: 140
+        price: 140,
       },
 
       {
         key: 22,
         roomType: '豪华双人间',
-        price: 180
-      }
-    ]
-  }
+        price: 180,
+      },
+    ],
+  },
 ]
 let optionsRoom = [
   {
@@ -533,13 +524,33 @@ let optionsRoom = [
             children: [
               {
                 value: '会议室203',
-                label: '会议室203'
+                label: '会议室203',
+                children: [
+                  {
+                   
+                    label: '容纳人数：5-6',
+                  },
+                  {
+                  
+                    label: '基本条件： 茶水，投影仪，白板，摄像机',
+                  },
+                ],
               },
               {
                 value: '会议室204',
-                label: '会议室204'
-              }
-            ]
+                label: '会议室204',
+                children: [
+                  {
+                    
+                    label: '容纳人数：8-10',
+                  },
+                  {
+                    
+                    label: '基本条件： 茶水，投影仪，摄像机',
+                  },
+                ],
+              },
+            ],
           },
           {
             value: '2号楼',
@@ -547,15 +558,35 @@ let optionsRoom = [
             children: [
               {
                 value: '会议室204',
-                label: '会议室204'
+                label: '会议室204',
+                children: [
+                  {
+                    
+                    label: '容纳人数：6-8',
+                  },
+                  {
+                    
+                    label: '基本条件：茶水，空调，投影仪，白板',
+                  },
+                ],
               },
               {
                 value: '会议室205',
-                label: '会议室205'
-              }
-            ]
-          }
-        ]
+                label: '会议室205',
+                children: [
+                  {
+                    
+                    label: '容纳人数：6-8',
+                  },
+                  {
+                    
+                    label: '基本条件：茶水，空调，投影仪，白板',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         value: 'B区域',
@@ -567,18 +598,38 @@ let optionsRoom = [
             children: [
               {
                 value: '会议室204',
-                label: '会议室204'
+                label: '会议室204',
+                children: [
+                  {
+                   
+                    label: '容纳人数：3-4',
+                  },
+                  {
+                    
+                    label: '基本条件：茶水，投影仪，电脑',
+                  },
+                ],
               },
               {
                 value: '会议室205',
-                label: '会议室205'
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                label: '会议室205',
+                children: [
+                  {
+                    
+                    label: '容纳人数：3-4',
+                  },
+                  {
+                   
+                    label: '基本条件：茶水，空调，投影仪，电脑，白板',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ]
 const dataRoomIn = [
   {
@@ -588,7 +639,7 @@ const dataRoomIn = [
     dutyName: '李霞',
     dutyTel: '13759655332',
     room: '会议室203',
-    condition: '茶水，投影仪，白板，摄像机'
+    condition: '茶水，投影仪，白板，摄像机',
   },
   {
     index: 1,
@@ -597,7 +648,7 @@ const dataRoomIn = [
     dutyName: '李霞',
     dutyTel: '13759655332',
     room: '会议室204',
-    condition: '茶水，投影仪，白板，摄像机'
+    condition: '茶水，投影仪，白板，摄像机',
   },
   {
     index: 2,
@@ -606,7 +657,7 @@ const dataRoomIn = [
     dutyName: '王莉莉',
     dutyTel: '13759655348',
     room: '会议室204',
-    condition: '茶水，空调，投影仪，白板'
+    condition: '茶水，空调，投影仪，白板',
   },
   {
     index: 2,
@@ -615,7 +666,7 @@ const dataRoomIn = [
     dutyName: '王莉莉',
     dutyTel: '13759655348',
     room: '会议室205',
-    condition: '茶水，空调，投影仪，白板'
+    condition: '茶水，空调，投影仪，白板',
   },
   {
     index: 3,
@@ -624,7 +675,7 @@ const dataRoomIn = [
     dutyName: '尤晓梅',
     dutyTel: '13053955537',
     room: '会议室205',
-    condition: '茶水，投影仪，电脑'
+    condition: '茶水，投影仪，电脑',
   },
   {
     index: 4,
@@ -633,8 +684,8 @@ const dataRoomIn = [
     dutyName: '黄丽娟',
     dutyTel: '13659655381',
     room: '会议室205',
-    condition: '茶水，空调，投影仪，电脑，白板'
-  }
+    condition: '茶水，空调，投影仪，电脑，白板',
+  },
 ]
 export default {
   data() {
@@ -649,8 +700,8 @@ export default {
           dateTime: this.$route.query.record.dateTime,
           number: this.$route.query.record.number,
           dutyName: this.$route.query.record.dutyName,
-          dutyTel: this.$route.query.record.dutyTel
-        }
+          dutyTel: this.$route.query.record.dutyTel,
+        },
       ],
       hotelInfor: undefined,
       hotelIDInfor: undefined,
@@ -660,30 +711,30 @@ export default {
       hotelNameInfor: undefined,
       hotelTelInfor: undefined,
       defaultInfor: undefined,
-      flagRoom: false,
+      // flagRoom: false,
       roomInfor: undefined,
-      numberRoomInfor: undefined,
-      conditionRoomInfor: undefined,
+      // numberRoomInfor: undefined,
+      // conditionRoomInfor: undefined,
       eatHotel: '',
       numDate: '1',
       current: 0,
       steps: [
         {
           title: '协议酒店',
-          content: "First-content"
+          content: 'First-content',
         },
         {
           title: '就餐地点',
-          content: 'Second-content'
+          content: 'Second-content',
         },
         {
           title: '会议地点',
-          content: 'Last-content'
+          content: 'Last-content',
         },
         {
           title: '通知设置',
-          content: 'Last-content'
-        }
+          content: 'Last-content',
+        },
       ],
       dateFormat: 'YYYY-MM-DD',
       labelCol: { span: 2 },
@@ -692,7 +743,7 @@ export default {
         index: '',
         hotel: undefined,
         dateStart: undefined,
-        dateEnd: undefined
+        dateEnd: undefined,
       },
       dataHotel: [],
       hotelIndex: 1,
@@ -701,10 +752,10 @@ export default {
           {
             required: true,
             message: '请选择协议酒店',
-            trigger: 'change'
-          }
+            trigger: 'change',
+          },
         ],
-        dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }]
+        dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }],
       },
       visibleHotel: false,
       labelColModify: { span: 6 },
@@ -712,13 +763,13 @@ export default {
       ModifyHotel: {
         hotel: undefined,
         dateStart: undefined,
-        dateEnd: undefined
+        dateEnd: undefined,
       },
       formEat: {
         dateStart: undefined,
         dateEnd: undefined,
         type: undefined,
-        way: undefined
+        way: undefined,
       },
       dataEat: [],
       eatIndex: 1,
@@ -727,30 +778,30 @@ export default {
           {
             required: true,
             message: '请选择餐别',
-            trigger: 'change'
-          }
+            trigger: 'change',
+          },
         ],
         way: [
           {
             required: true,
             message: '请选择就餐方式',
-            trigger: 'change'
-          }
+            trigger: 'change',
+          },
         ],
-        dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }]
+        dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }],
       },
       visibleEat: false,
       ModifyEat: {
         dateStart: undefined,
         dateEnd: undefined,
         type: undefined,
-        way: undefined
+        way: undefined,
       },
       formRoom: {
         room: undefined,
         dateStart: undefined,
         dateEnd: undefined,
-        range: "全天"
+        range: '全天',
       },
       roomS: '',
       optionsRoom,
@@ -761,21 +812,21 @@ export default {
           {
             required: true,
             message: '请选择会议地点',
-            trigger: 'change'
-          }
+            trigger: 'change',
+          },
         ],
         dateStart: [{ required: true, message: '请选择日期', trigger: 'change' }],
-        range: [{ required: true, message: '请选择时段', trigger: 'change' }]
+        range: [{ required: true, message: '请选择时段', trigger: 'change' }],
       },
       visibleRoom: false,
       ModifyRoom: {
         room: undefined,
         dateStart: undefined,
         dateEnd: undefined,
-        range: undefined
+        range: undefined,
       },
       labelColModifyRoom: { span: 6 },
-      wrapperColModifyRoom: { span: 18 }
+      wrapperColModifyRoom: { span: 18 },
     }
   },
   created() {
@@ -797,7 +848,13 @@ export default {
       this.current--
     },
     displayRender({ labels }) {
-      return labels.join('.')
+      //return labels.join('.')
+            if(labels.length==0){
+        return
+      }
+      console.log( labels )     
+      let lab =[labels[0],labels[1],labels[2],labels[3]]  
+      return lab.join(".");
     },
     onChangeRoom(value) {
       console.log(value)
@@ -805,7 +862,7 @@ export default {
       let area = value[0] + '.' + value[1] + '.' + value[2]
       this.flagRoom = true
       this.roomInfor = this.roomS
-      dataRoomIn.filter(item => {
+      dataRoomIn.filter((item) => {
         if (area == item.area && value[3] == item.room) {
           this.numberRoomInfor = item.number
           this.conditionRoomInfor = item.condition
@@ -815,7 +872,7 @@ export default {
     },
     onSubmitHotel() {
       console.log(this.formHotel.dateStart)
-      this.$refs.ruleFormHotel.validate(valid => {
+      this.$refs.ruleFormHotel.validate((valid) => {
         if (valid) {
           if (!this.formHotel.dateEnd) {
             this.$message.error('请输入结束日期')
@@ -827,14 +884,14 @@ export default {
           let a = {
             hotelIndex: this.hotelIndex++,
             dateTime: dateTime,
-            hotel: this.formHotel.hotel
+            hotel: this.formHotel.hotel,
           }
           this.dataHotel.push(a)
           // alert("添加成功!");
           this.$message.success('添加成功!')
           this.eatHotel = this.formHotel.hotel
           this.formHotel.hotel = undefined
-            this.flagHotel=false
+          this.flagHotel = false
         } else {
           console.log('error submit!!')
           return false
@@ -844,13 +901,13 @@ export default {
     resetFormHotel() {
       this.$refs.ruleFormHotel.resetFields()
       this.formHotel.hotel = undefined
-      this.flagHotel=false
+      this.flagHotel = false
     },
     selectHotel(value) {
       console.log(value)
       this.flagHotel = true
       this.hotelInfor = value
-      dataHotelIn.filter(item => {
+      dataHotelIn.filter((item) => {
         if (item.hotel == value) {
           this.hotelIDInfor = item.id
           this.hotelLevelInfor = item.level
@@ -874,7 +931,7 @@ export default {
       })
     },
     onSubmitEat() {
-      this.$refs.ruleFormEat.validate(valid => {
+      this.$refs.ruleFormEat.validate((valid) => {
         if (valid) {
           if (!this.formEat.dateEnd) {
             // alert("请输入结束日期");
@@ -888,7 +945,7 @@ export default {
             eatIndex: this.eatIndex++,
             dateTime: dateTime,
             type: this.formEat.type,
-            way: this.formEat.way
+            way: this.formEat.way,
           }
           this.dataEat.push(a)
           this.$message.success('添加成功!')
@@ -906,7 +963,7 @@ export default {
       this.formEat.way = undefined
     },
     onSubmitRoom() {
-      this.$refs.ruleFormRoom.validate(valid => {
+      this.$refs.ruleFormRoom.validate((valid) => {
         if (valid) {
           if (!this.formRoom.dateEnd) {
             this.$message.error('请输入结束日期')
@@ -918,16 +975,15 @@ export default {
           let a = {
             roomIndex: this.roomIndex++,
             dateTime: dateTime,
-            // room: this.roomS,'
-            room: this.formRoom.room,
-            range: this.formRoom.range
+             room: this.roomS,
+            // room: this.formRoom.room,
+            range: this.formRoom.range,
           }
           this.dataRoom.push(a)
           this.$message.success('添加成功!')
-           this.flagRoom=false
+          this.flagRoom = false
           this.formRoom.room = undefined
-          this.formRoom.range = undefined
-          
+          this.formRoom.range = "全天"
         } else {
           console.log('error submit!!')
           return false
@@ -938,7 +994,7 @@ export default {
       this.$refs.ruleFormRoom.resetFields()
       this.formRoom.room = undefined
       this.formRoom.range = undefined
-       this.flagRoom=false
+      this.flagRoom = false
     },
     complete() {
       this.$message.success('提交成功!')
@@ -947,7 +1003,7 @@ export default {
         title: '是否立刻预通知',
         content: '',
         okText: '是',
-        cancelText: '否'
+        cancelText: '否',
       })
     },
     onSubmitB() {},
@@ -969,7 +1025,7 @@ export default {
     },
     hotelDelete(hotelIndex) {
       const dataHotel = [...this.dataHotel]
-      this.dataHotel = dataHotel.filter(item => item.hotelIndex !== hotelIndex)
+      this.dataHotel = dataHotel.filter((item) => item.hotelIndex !== hotelIndex)
     },
     eatModify(record) {
       this.visibleEat = true
@@ -987,29 +1043,29 @@ export default {
     },
     eatDelete(eatIndex) {
       const dataEat = [...this.dataEat]
-      this.dataEat = dataEat.filter(item => item.eatIndex !== eatIndex)
+      this.dataEat = dataEat.filter((item) => item.eatIndex !== eatIndex)
     },
     roomDelete(roomIndex) {
       const dataRoom = [...this.dataRoom]
-      this.dataRoom = dataRoom.filter(item => item.roomIndex !== roomIndex)
+      this.dataRoom = dataRoom.filter((item) => item.roomIndex !== roomIndex)
     },
     roomModify(record) {
       this.visibleRoom = true
-      console.log(111)
-      console.log(record)
+      console.log("roomModify",record)
       this.ModifyRoom.range = record.range
       let dateA = record.dateTime.split('~')
       this.ModifyRoom.dateStart = this.moment(dateA[0], 'YYYY-MM-DD')
       this.ModifyRoom.dateEnd = this.moment(dateA[1], 'YYYY-MM-DD')
-      this.ModifyRoom.room = record.room
+       let roomM = record.room.split('.')
+      this.ModifyRoom.room =roomM
     },
     SubmitModifyRoom() {
       this.visibleRoom = false
     },
     CancelModifyRoom() {
       this.visibleRoom = false
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>

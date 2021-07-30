@@ -189,12 +189,12 @@
                 @click="submitApply"
                 shape="round"
                 size="large"
-                :style="{ width: '150px', background: '#77acf1', color: 'white', marginRight: '20PX'}"
+                :style="{ width: '150px', background: '#49a9ee', color: 'white', marginRight: '20PX'}"
               >提交申请</a-button>
               <a-button
                 shape="round"
                 size="large"
-                :style="{ width: '150px', background: '#77acf1', color: 'white' }"
+                :style="{ width: '150px', background: '#49a9ee', color: 'white' }"
               >保存草稿</a-button>
             </td>
           </tr>
