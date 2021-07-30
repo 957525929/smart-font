@@ -141,6 +141,17 @@ export const menuMock = {
                     "name": "fix-FixCheck",
                     "id": "1261213213500452865"
                 }, {
+                    "path": "/fix/complaint",
+                    "component": "fix/complaint",
+                    "route": "1",
+                    "meta": {
+                        "keepAlive": false,
+                        "internalOrExternal": false,
+                        "title": "用户投诉"
+                    },
+                    "name": "complaint-list",
+                    "id": "944abf0a8fc22fe1f1154a389a574154"
+                }, {
                     "path": "/fix/Fixlist",
                     "component": "fix/Fixlist",
                     "route": "1",
@@ -218,7 +229,7 @@ export const menuMock = {
                     "keepAlive": false,
                     "internalOrExternal": false,
                     "icon": "schedule",
-                    "title": "巡养管理"
+                    "title": "保养管理"
                 },
                 "name": "protect",
                 "id": "9502685863ab87f0ad1134142788a389"
@@ -295,18 +306,6 @@ export const menuMock = {
                     "name": "modules-message-sysMessageList",
                     "id": "944abf0a8fc22fe1f1154a389a574154"
                 },
-                // {
-                // 	"path": "/modules/message/sysMessageTemplateList",
-                // 	"component": "modules/message/SysMessageTemplateList",
-                // 	"route": "1",
-                // 	"meta": {
-                // 		"keepAlive": false,
-                // 		"internalOrExternal": false,
-                // 		"title": "模板管理"
-                // 	},
-                // 	"name": "modules-message-sysMessageTemplateList",
-                // 	"id": "f780d0d3083d849ccbdb1b1baee4911d"
-                // },
                 {
                     "path": "/isps/userAnnouncement",
                     "component": "system/UserAnnouncementList",

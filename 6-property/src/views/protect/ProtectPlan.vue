@@ -19,7 +19,8 @@
             <a-input-number :min="1" :default-value="3" /><span style="marginLeft:10px">天</span>
           </a-form-item>
           <a-form-item label="养护范围" class="formItem" :labelCol="{ span: 6 }" :wrapperCol="{ span: 18 }">
-            <a-cascader :options="groupTree" change-on-select placeholder="" :displayRender="renderFormat">
+            <a-cascader :options="groupTree" change-on-select placeholder="" :displayRender="renderFormat"
+              @change="onAreaChange">
             </a-cascader>
           </a-form-item>
           <a-form-item label="养护设备'" class="formItem" :labelCol="{ span: 6 }" :wrapperCol="{ span: 18 }">
@@ -37,7 +38,7 @@
             <router-link :to="{name:'person-staff-list'}">
               <a-button type="primary" style="width:20%;float:right" icon="plus">新增</a-button>
             </router-link>
-            <a-select style="width:80%;float:left">
+            <a-select style="width:80%;float:left" @change="onStaffChange">
               <a-select-option :value="x.devName" v-for="x in facData" :key="x.key">
                 {{ x.devName }}
               </a-select-option>
@@ -109,9 +110,35 @@ export default {
       infoDetail: NEW_PROLIST.columns.filter((item) => {
         return !item.hideInDetail
       }),
+      treeValue: '全部',
     }
   },
+  mounted() {
+    this.facData = []
+    this.facData = facData.filter((item) => item.role === '养护')
+    this.devData = devData.map((res) => {
+      return {
+        key: res.key,
+        value: res.devName,
+        label: res.devName,
+      }
+    })
+    this.devData.push({ key: 'all', value: '全部', label: '全部' })
+  },
   methods: {
+    onAreaChange(value, selectedOptions) {
+      let tempData = value.join('·')
+      this.devData = []
+      this.devData = devData
+        .filter((item) => item.groupDetail == tempData)
+        .map((res) => {
+          return {
+            key: res.key,
+            value: res.devName,
+            label: res.devName,
+          }
+        })
+    },
     loadData() {
       // 请求数据
       this.data.map((item) => {

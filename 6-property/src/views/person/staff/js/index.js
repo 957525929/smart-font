@@ -5,7 +5,11 @@ export const columns = [
         scopedSlots: { customRender: 'devId' },
         title: '员工编号',
         width: 40,
-        key: 'devId'
+        key: 'devId',
+        hideInLogin: true,
+        hideInEdit: true,
+        hideInLogin: true,
+        hideInSearch: true
     },
     {
         title: '姓名',
@@ -17,7 +21,12 @@ export const columns = [
         title: '角色',
         dataIndex: 'role',
         width: 40,
-        key: 'role'
+        key: 'role',
+        type: "a-select",
+        valueEnum: {
+            0: { tableValue: "保养", searchValue: "保养", code: 0 },
+            1: { tableValue: "维修", searchValue: "维修", code: 1 }
+        }
     },
     {
         title: '维修类别',
@@ -26,6 +35,7 @@ export const columns = [
         width: 50,
         valueEnum: devType,
         type: 'a-select',
+        hideInTable: true
     },
     {
         title: '工作状态',
@@ -40,21 +50,27 @@ export const columns = [
         title: '联系方式',
         dataIndex: 'phone',
         key: 'phone',
-        width: 100,
+        width: 70,
+        hideInSearch: true
     },
     {
         title: '入职时间',
         key: 'loginTime',
         dataIndex: 'loginTime',
-        width: 100,
+        width: 80,
         type: 'a-range-picker',
+        hideInLogin: true,
+        hideInEdit: true
     },
     {
         title: '操作',
         key: 'action',
         scopedSlots: { customRender: 'action' },
         width: 80,
-        hideInSearch: true
+        hideInSearch: true,
+        hideInDetail: true,
+        hideInEdit: true,
+        hideInLogin: true
     },
 ]
 
@@ -64,8 +80,8 @@ export const data = [
         devId: '1',
         devName: "刘涛",
         role: "维修",
-        devType: 1,
-        staffStatus: 0,
+        devType: "电器系统",
+        staffStatus: '请假',
         assets: '烟草大厦',
         phone: '18232145698',
         loginTime: '2021-05-21 17：55：55',
@@ -86,8 +102,7 @@ export const data = [
         devId: '2',
         devName: "张英",
         role: "养护",
-        devType: 0,
-        staffStatus: 1,
+        staffStatus: "在职",
         assets: '烟草大厦',
         phone: '13332145698',
         loginTime: '2021-05-21 17：55：55',
@@ -108,8 +123,8 @@ export const data = [
         devId: '3',
         devName: "王翔",
         role: "维修",
-        devType: 2,
-        staffStatus: 2,
+        devType: "给排水系统",
+        staffStatus: "待工",
         assets: '烟草大厦',
         phone: '18832149956',
         loginTime: '2021-05-20 17：55：55',
@@ -130,8 +145,7 @@ export const data = [
         devId: '4',
         devName: "李明",
         role: "养护",
-        devType: 2,
-        staffStatus: 2,
+        staffStatus: "待工",
         assets: '烟草大厦',
         phone: '18832149956',
         loginTime: '2021-05-20 17：55：55',
@@ -148,55 +162,52 @@ export const data = [
         }]
     },
 ]
-export const infoDetail = [
-    {
-        title: '员工编号',
-        key: 'devId',
-        value: "",
-        hideInLogin: true,
-        hideInDetail: true
-    },
+
+export const loginInfo = [
     {
         title: '姓名',
         value: "",
         key: 'devName'
     },
     {
-        title: '手机号',
+        title: '角色',
+        dataIndex: 'role',
+        width: 40,
+        key: 'role',
+        type: "a-select",
+        valueEnum: {
+            0: { tableValue: "保养", searchValue: "保养", code: 0 },
+            1: { tableValue: "维修", searchValue: "维修", code: 1 }
+        },
         value: "",
-        key: 'phone'
     },
     {
-        title: '维养类型',
-        value: "",
+        title: '维修类别',
+        dataIndex: 'devType',
         key: 'devType',
-        type: "a-select",
-        valueEnum: devType
+        width: 50,
+        valueEnum: devType,
+        type: 'a-select',
+        value: "",
     },
     {
         title: '工作状态',
-        key: 'devStatus',
-        value: "",
-        type: "a-select",
-        valueEnum: devStatus,
-        hideInLogin: true,
-        hideInDetail: true
+        key: 'staffStatus',
+        dataIndex: 'staffStatus',
+        width: 50,
+        type: 'a-select',
+        valueEnum: staffStatus,
+        value: ""
     },
     {
-        title: '负责资产',
-        key: 'assets',
+        title: '联系方式',
+        dataIndex: 'phone',
+        key: 'phone',
+        width: 70,
         value: "",
-        hideInLogin: true,
-    },
-    {
-        title: '入职时间',
-        key: 'loginTime',
-        value: "",
-        type: "a-range-picker",
-        hideInLogin: true,
-        hideInDetail: true
     }
 ]
+
 export const devDetail = [
     {
         title: '设备编号',

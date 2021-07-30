@@ -1,4 +1,4 @@
-import { devType ,devStatus,techSituation} from "@/utils/dataDictionary.js";
+import { devType, devStatus, techSituation } from "@/utils/dataDictionary.js";
 export const columns = [
     {
         dataIndex: 'devId',
@@ -6,7 +6,8 @@ export const columns = [
         scopedSlots: { customRender: 'devId' },
         title: '业主编号',
         width: 40,
-        key: 'devId'
+        key: 'devId',
+        hideInSearch: true
     },
     {
         title: '业主名称',
@@ -30,7 +31,7 @@ export const columns = [
         dataIndex: 'loginTime',
         width: 80,
         type: 'a-range-picker',
-        hideInDetail:true
+        hideInDetail: true
     }
 ]
 
@@ -43,22 +44,22 @@ export const data = [
         phone: '18259529231',
         principal: '乔峰',
         loginTime: '2021-04-11 08：55：55',
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
+        action: [{
+            tagName: "详情",
+            com: "TableDrawer"
+        }, {
+            tagName: "删除",
+            com: "TableDelete"
         }],
-        euips:[{
-            tagName:"水管",
-            com:"TableDrawer"
-        },{
-            tagName:"水泵",
-            com:"TableDelete"
-        },{
-            tagName:"水阀",
-            com:"TableDelete"
+        euips: [{
+            tagName: "水管",
+            com: "TableDrawer"
+        }, {
+            tagName: "水泵",
+            com: "TableDelete"
+        }, {
+            tagName: "水阀",
+            com: "TableDelete"
         }]
     },
     {
@@ -70,92 +71,92 @@ export const data = [
         phone: '18259529299',
         principal: '段誉',
         loginTime: '2021-04-11 10：55：55',
-        action:[{
-            tagName:"详情",
-            com:"TableDrawer"
-        },{
-            tagName:"删除",
-            com:"TableDelete"
+        action: [{
+            tagName: "详情",
+            com: "TableDrawer"
+        }, {
+            tagName: "删除",
+            com: "TableDelete"
         }],
-        euips:[{
-            tagName:"电线",
-            com:"TableDrawer"
-        },{
-            tagName:"变压器",
-            com:"TableDelete"
-        },{
-            tagName:"电闸",
-            com:"TableDelete"
+        euips: [{
+            tagName: "电线",
+            com: "TableDrawer"
+        }, {
+            tagName: "变压器",
+            com: "TableDelete"
+        }, {
+            tagName: "电闸",
+            com: "TableDelete"
         }]
     }
 ]
 
-export const infoDetail =[
+export const infoDetail = [
     {
         title: '厂商编号',
         key: 'devId',
-        value:"",
-        hideInLogin:true
+        value: "",
+        hideInLogin: true
     },
     {
         title: '厂商名称',
-        value:"",
+        value: "",
         key: 'devName'
     },
     {
         title: '厂商类型',
-        value:"",
+        value: "",
         key: 'devType',
-        type:"a-select",
-        valueEnum:devType
+        type: "a-select",
+        valueEnum: devType
     },
     {
         title: '提供设备/零件',
         key: 'equips',
-        value:"",
-        type:"a-select",
-        hideInLogin:true
+        value: "",
+        type: "a-select",
+        hideInLogin: true
     },
     {
         title: '负责人',
         key: 'principal',
-        value:"",
+        value: "",
     },
     {
         title: '联系方式',
-        key: 'phone',        
-        value:"",
+        key: 'phone',
+        value: "",
     },
     {
         title: '登记时间',
         key: 'loginTime',
-        value:"",
-        type:"a-range-picker",
-        hideInLogin:true
+        value: "",
+        type: "a-range-picker",
+        hideInLogin: true
     }
 ]
 
 export const loginInfo = [{
     title: '设备编号',
     key: 'devId',
-    value:""
+    value: ""
 },
 {
     title: '设备名称',
-    value:"",
+    value: "",
     key: 'devName'
 },
 {
     title: '设备类型',
-    value:"",
+    value: "",
     key: 'devType',
-    type:"a-select",
-    valueEnum:devType
+    type: "a-select",
+    valueEnum: devType
 },
 {
     title: '实际状态',
     key: 'devStatus',
-    value:"",
-    type:"a-select",
-    valueEnum:devStatus
+    value: "",
+    type: "a-select",
+    valueEnum: devStatus
 }]

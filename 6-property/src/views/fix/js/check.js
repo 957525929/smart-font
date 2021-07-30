@@ -166,7 +166,6 @@ export const data = [{
     handleimgs: ['/assets/logo.png'],
     writingimgs: ['/assets/logo.png']
 }]
-export const searchCon = {}
 export const infoDetail = [{
     title: '问题编号',
     key: 'devId',

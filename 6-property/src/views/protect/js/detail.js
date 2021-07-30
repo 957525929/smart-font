@@ -64,7 +64,7 @@ export const basicInfo = [{
     key: 'address',
     width: 100,
     value: "",
-    valueEnum: handleTreeToCascade(groupTree),
+    valueEnum: groupTree,
     type: 'a-cascader',
 },
 {

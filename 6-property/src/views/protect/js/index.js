@@ -20,7 +20,7 @@ export const proRecord = [{
     key: 'recordId',
     value: "",
     hideInSearch: true
-  },{
+}, {
     dataIndex: 'ifRun',
     title: '任务是否按期执行',
     width: 40,
@@ -28,22 +28,22 @@ export const proRecord = [{
     type: 'a-select',
     scopedSlots: {
         customRender: 'ifRun'
-      },
+    },
     valueEnum: {
-      0: {
-        tableValue: "是",
-        searchValue: "是",
-        code: 'success'
-      },
-      1: {
-        tableValue: "否",
-        searchValue: "否",
-        code:'error'
-      }
+        0: {
+            tableValue: "是",
+            searchValue: "是",
+            code: 'success'
+        },
+        1: {
+            tableValue: "否",
+            searchValue: "否",
+            code: 'error'
+        }
     },
     value: ""
-  },
-  {
+},
+{
     dataIndex: 'ifnormal',
     title: '设备是否正常',
     width: 40,
@@ -51,30 +51,30 @@ export const proRecord = [{
     type: 'a-select',
     scopedSlots: {
         customRender: 'ifnormal'
-      },
+    },
     valueEnum: {
-      0: {
-        tableValue: "是",
-        searchValue: "是",
-        code: 'success'
-      },
-      1: {
-        tableValue: "否",
-        searchValue: "否",
-        code: 'error'
-      }
+        0: {
+            tableValue: "是",
+            searchValue: "是",
+            code: 'success'
+        },
+        1: {
+            tableValue: "否",
+            searchValue: "否",
+            code: 'error'
+        }
     },
     value: ""
-  },
-  {
+},
+{
     dataIndex: 'proDesc',
     title: '保养描述',
     width: 80,
     key: 'proDesc',
     value: "",
     hideInSearch: true
-  },
-  {
+},
+{
     dataIndex: 'proimgs',
     title: '保养图片',
     width: 80,
@@ -83,28 +83,28 @@ export const proRecord = [{
     hideInTable: true,
     hideInSearch: true,
     scopedSlots: {
-      customRender: 'proimgs'
+        customRender: 'proimgs'
     }
-  },
-  {
+},
+{
     dataIndex: 'proTime',
     title: '保养时间',
     width: 80,
     key: 'proTime',
     type: "a-range-picker",
     value: ""
-  },
-  {
+},
+{
     title: '操作',
     dataIndex: 'action',
     key: "action",
     scopedSlots: {
-      customRender: 'action'
+        customRender: 'action'
     },
     width: 80,
     hideInSearch: true,
     hideInDetail: true
-  }
+}
 ]
 
 //-------------------------------以下废弃---------------------------------------------
@@ -148,7 +148,7 @@ export const loginInfo = [{
     value: "",
     key: 'devGroup',
     type: "a-cascader",
-    valueEnum: handleTreeToCascade(groupTree)
+    valueEnum: groupTree
 },
 {
     title: '养护设备',

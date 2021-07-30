@@ -2,11 +2,10 @@ import { devType, devStatus, techSituation } from "@/utils/dataDictionary.js";
 export const columns = [
     {
         dataIndex: 'devId',
-        slots: { title: '厂商编号' },
-        scopedSlots: { customRender: 'devId' },
         title: '厂商编号',
         width: 40,
-        key: 'devId'
+        key: 'devId',
+        hideInSearch: true
     },
     {
         title: '厂商名称',
@@ -146,13 +145,6 @@ export const infoDetail = [
         key: 'devType',
         type: "a-select",
         valueEnum: devType
-    },
-    {
-        title: '提供设备/零件',
-        key: 'equips',
-        value: "",
-        type: "a-select",
-        hideInLogin: true
     },
     {
         title: '负责人',

@@ -71,7 +71,7 @@ export const columns = [{
     key: 'address',
     width: 100,
     value: "",
-    valueEnum: handleTreeToCascade(groupTree),
+    valueEnum: groupTree,
     type: 'a-cascader',
 },
 {
@@ -142,19 +142,14 @@ export const addplan = [{
     value: "",
     key: 'devGroup',
     type: "a-cascader",
-    valueEnum: handleTreeToCascade(groupTree)
+    valueEnum: groupTree
 },
 {
     title: '养护设备',
     value: "全部",
     key: 'devData',
     type: "a-tree-select",
-    valueEnum: devData.filter(item => item.devType == 0).map(item => {
-        return {
-            label: item.devName,
-            key: item.devId
-        }
-    })
+    valueEnum: devData
 },
 {
     title: '养护类型',
