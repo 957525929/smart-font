@@ -179,7 +179,7 @@ export const data = [{
     }],
     dispatchTime: '2021-07-21 10:55:11',
     areaKey: '1-2-3',
-    address: "中国烟草总公司福建省公司机关-B区域-3号楼",
+    address: "中国烟草总公司福建省公司机关·B区域·3号楼",
     proStaff: '张英',
     phone: '13332145698',
     expectTime: '2021-07-31 00：00：00',

@@ -175,23 +175,3 @@ export const addplan = [{
 
 }
 ]
-// export const data = [{
-//     key: 0,
-//     taskId: '1',
-//     taskName: "1号楼月度巡养计划",
-//     taskType: 0,
-//     taskStatus: 0,
-//     taskPeriod: 2,
-//     dispatchTime: '2021-06-22 18：55：55',
-//     areaKey:'1-1-1',
-//     address: "中国烟草总公司福建省公司机关-A区域-1号楼",
-//     proStaff: '刘涛',
-//     phone: '18232145698',
-//     expectTime: '2021-07-31 00：00：00',
-//     description: "例行养护",
-//     action: [{
-//         url: "device-proDetail",
-//         tagName: "详情",
-//         com: "router-link"
-//     }]
-// }]
