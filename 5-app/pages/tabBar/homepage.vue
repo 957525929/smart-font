@@ -1,171 +1,103 @@
 <template>
-	<view class="home-root backColor">
-		<!-- #ifdef APP-PLUS -->
-		<!-- 状态栏占位 -->
-		<view class="top-wrapper"></view>
-		<!-- #endif -->
-		<view class="home-header"></view>
-		<view class="home-notice">
-			<uni-notice-bar showIcon="true" scrollable="true" single="true" :text="noticeText"></uni-notice-bar>
-		</view>
-		<view class="home-menu" v-for="(menu,index1) in menuTree" :key="index1">
-			<view class="home-menu-title">
-				{{menu.title}}
+	<view>
+		<scroll-view scroll-y class="page">
+			<view class="banner">
+				<image src="/static/homepage/banner.png" mode="widthFix" class='response banner-back'></image>
+				<view class="banner-title">车辆管理</view>
 			</view>
-			<view class="home-menu-content">
-				<view class="home-menu-content-item" v-for="(child,index2) in menu.children" :key="index2">
-					<image :src="child.icon" mode="widthFix" @tap="goto(child.title)"></image>
-					<!-- <view class="home-menu-content-item-font">
-						{{child.title}}
-					</view> -->
-				</view>
+			
+			<view class="nav-list">
+				<navigator hover-class="none" :url="'/pages/' +item.route+'/index'" class="nav-li" navigateTo :class="'bg-'+item.color"
+				 :style="[{animation: 'show ' + ((index+1)*0.2+1) + 's 1'}]" v-for="(item,index) in elements" :key="index">
+					<view class="nav-title">{{item.title}}</view>
+					<!-- <view class="nav-name">{{item.route}}</view> -->
+					<text :class="'cuIcon-' + item.cuIcon"></text>
+				</navigator>
 			</view>
-		</view>
+			<view class="cu-tabbar-height"></view>
+		</scroll-view>
 	</view>
 </template>
-
 <script>
 	export default {
+		name: "basics",
 		data() {
 			return {
-				noticeText: '您于2021年7月13日9:30申请的用车事务已审核通过，祝您旅途一帆风顺！',
-				menuTree: [{
-						title: '用车管理',
-						children: [{
-								title: '用车申请',
-								icon: '../../static/homepage/car1.png'
-							},
-							{
-								title: '申请记录',
-								icon: '../../static/homepage/log.png'
-							},
-							{
-								title: '收车登记',
-								icon: '../../static/homepage/car2.png'
-							}
-						]
+				elements: [{
+						title: '用车申请',
+						name: 'layout',
+						color: 'purple',
+						cuIcon: 'taxi',
+						route:'application'
 					},
 					{
-						title: '车辆维护',
-						children: [{
-								title: '加油登记',
-								icon: '../../static/homepage/supply.png'
-							},
-							{
-								title: '保养登记',
-								icon: '../../static/homepage/maintain.png'
-							},
-							{
-								title: '维修登记',
-								icon: '../../static/homepage/fix.png'
-							}
-						]
+						title: '申请记录',
+						name: 'background',
+						color: 'mauve',
+						cuIcon: 'calendar',
+						route:'useCarRecord'
 					},
 					{
-						title: '查询统计',
-						children: [
-							// {
-							// 	title: '车辆使用',
-							// 	icon: '../../static/homepage/sta1.png'
-							// },
-							{
-								title: '司机工作量',
-								icon: '../../static/homepage/sta2.png'
-							}
-						]
+						title: '收车登记',
+						name: 'text',
+						color: 'pink',
+						cuIcon: 'vipcard',
+						route:'endTrip'
+					},
+					{
+						title: '加油登记',
+						name: 'icon',
+						color: 'brown',
+						cuIcon: 'formfill',
+						route:'supplyRegister'
+					},
+					{
+						title: '保养登记',
+						name: 'button',
+						color: 'red',
+						cuIcon: 'formfill',
+						route:'maintainRegister'
+					},
+					{
+						title: '维修登记',
+						name: 'button',
+						color: 'orange',
+						cuIcon: 'formfill',
+						route:'fixRecord'
+					},
+					{
+						title: '司机工作量',
+						name: 'button',
+						color: 'green',
+						cuIcon: 'newsfill',
+						route:'statistics/driverWorkload'
 					}
-				]
-			}
+				],
+			};
 		},
-		methods: {
-			goto(target) {
-				// console.log(target);
-				if (target == '用车申请') {
-					uni.navigateTo({
-						url: '/pages/application/index'
-					})
-				} else if (target == '申请记录') {
-					uni.navigateTo({
-						url: '/pages/useCarRecord/index'
-					})
-				} else if (target == '收车登记') {
-					uni.navigateTo({
-						url: '/pages/endTrip/index'
-					})
-				} else if (target == '加油登记') {
-					uni.navigateTo({
-						url: '/pages/supplyRegister/index'
-					})
-				} else if (target == '保养登记') {
-					uni.navigateTo({
-						url: '/pages/maintainRegister/index'
-					})
-				} else if (target == '维修登记') {
-					uni.navigateTo({
-						url: '/pages/fixRecord/index'
-					})
-				} else if (target == '车辆使用') {
-					uni.navigateTo({
-						url: '/pages/statistics/carUsage/index'
-					})
-				} else if (target == '司机工作量') {
-					uni.navigateTo({
-						url: '/pages/statistics/driverWorkload/index'
-					})
-				}
-			}
+		onShow() {
+			console.log("success")
 		}
 	}
 </script>
 
 <style scoped>
-	.home-root {
-		height: 100%;
-		widows: 100%;
+	.page {
+		height: 100vh;
 	}
-
-	.home-header {
-		height: 180px;
-		background-image: url(~@/static/homepage/bg.png);
-		background-repeat: no-repeat;
-		background-size: cover;
+	.banner{
+		position: relative;	
 	}
-
-	.home-notice {
-		height: 40px;
-		/* border: solid; */
-	}
-
-	.home-menu {
-		margin-top: 20rpx;
-		margin-bottom: 30rpx;
-		/* height: 300rpx; */
-		/* border: solid; */
-	}
-
-	.home-menu-title {
-		margin-left: 20rpx;
-		font-size: 30rpx;
-		font-weight: 700;
-		margin-bottom: 20rpx;
-	}
-
-	.home-menu-content {
-		display: flex;
-		width: 100%;
-		flex-wrap: wrap;
-		/* border: solid; */
-	}
-
-	.home-menu-content-item {
-		margin: 20rpx 20rpx 0 35rpx;
-		width: 100rpx;
-		height: 120rpx;
-		/* border: solid; */
-	}
-
-	.home-menu-content-item-font {
-		white-space: nowrap;
-		font-size: 10px;
+	.banner-title{
+		width:400rpx;
+		position: absolute;
+		top: 45%;
+		left:50%;
+		transform: translate(-50%,-50%);
+		font-family: '黑体';
+		font-size: 100rpx;
+		background-image:-webkit-linear-gradient(90deg,rgb(77, 205, 240),rgb(116,226,230),rgb(218,247,246)); 
+		-webkit-background-clip:text; 
+		-webkit-text-fill-color:transparent; 
 	}
 </style>
