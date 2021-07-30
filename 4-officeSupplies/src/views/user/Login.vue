@@ -162,8 +162,8 @@
           username:{rules: [{ required: true, message: '请输入用户名!'},{validator: this.handleUsernameOrEmail}]},
           password:{rules: [{ required: true, message: '请输入密码!',validator: 'click'}]},
           mobile:{rules: [{validator:this.validateMobile}]},
-          captcha:{rule: [{ required: true, message: '请输入验证码!'}]},
-          inputCode:{rules: [{ required: true, message: '请输入验证码!'}]}
+          //captcha:{rule: [{ required: true, message: '请输入验证码!'}]},
+          //inputCode:{rules: [{ required: true, message: '请输入验证码!'}]}
         },
         verifiedCode:"",
         inputCodeContent:"",
@@ -243,11 +243,12 @@
               loginParams.captcha = that.inputCodeContent
               loginParams.checkKey = that.currdatetime
               console.log("登录参数",loginParams)
-              that.Login(loginParams).then((res) => {
-                this.departConfirm(res)
-              }).catch((err) => {
-                that.requestFailed(err);
-              });
+              this.departConfirm([])
+              // that.Login(loginParams).then((res) => {
+              //   this.departConfirm(res)
+              // }).catch((err) => {
+              //   that.requestFailed(err);
+              // });
 
 
             }else {
