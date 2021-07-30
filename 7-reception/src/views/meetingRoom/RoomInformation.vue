@@ -59,9 +59,7 @@
             icon="plus"
             :style="{ color: 'white', background:'orange'}"
           >新增会议室</a-button>&nbsp;&nbsp;
-          <a-button>
-            <a-icon type="download" />导出
-          </a-button>
+          <a-button   icon="download" @click="handleExportXls('会议室信息')">导出</a-button>
         </a-col>
       </a-row>
       <!-- <a-form layout="inline" @keyup.enter.native="searchQuery">
@@ -256,7 +254,7 @@
         全部
       </a-checkbox>
         <br />
-       <a-checkbox-group v-model="formAdd.condition" :options="plainOptions" @change="onChangeCond"/>
+       <a-checkbox-group v-model="formAdd.condition" :options="plainOptions" @change="onChangeCond" />
         </a-form-model-item>
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName" >
            <a-select  showSearch  v-model="formAdd.dutyName" placeholder="请选择管理员" @change="addDutyName">
@@ -397,6 +395,7 @@
 <script>
 import { areaData } from './data/area.js'
 import { dataRoom } from './data/dataRoom.js'
+import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 const columns = [
   {
     title: '序号',
@@ -447,8 +446,12 @@ const columns = [
 ]
 const plainOptions = ['茶水', '白板', '空调', '投影仪', '电脑', '摄像机'];
 export default {
+   mixins:[JeecgListMixin],
   data() {
     return {
+      plainOptions,
+      indeterminate: true,
+      checkAll: false,
       selectOptions: areaData,
       dataRoom:dataRoom,
       columns,
@@ -461,9 +464,7 @@ export default {
       visibleModify: false,
       labelCol: { span: 6 },
       wrapperCol: { span: 18 },
-       plainOptions,
-      indeterminate: true,
-      checkAll: false,
+
       formAdd: {
       area: [],
       room: undefined,
@@ -486,13 +487,6 @@ export default {
       state: '',
       },      
       rules: {
-        condition:[
-            {
-            required: true,
-            message: '请选择基本条件',
-            trigger: 'change'
-          }
-        ],
          area: [
           {
             required: true,
@@ -537,7 +531,11 @@ export default {
         ]
       },
       visibleDetail:false,
-      formDetail:{}
+      formDetail:{},
+            url: {      
+        list: "/sys/user/list",
+        exportXlsUrl: "/sys/user/exportXls",      
+       },
     }
   },
   methods: {
@@ -548,13 +546,16 @@ export default {
       console.log(value)
     },
     onChangeCond(checkedList){
-      console.log("条件",checkedList)
+      this.formAdd.condition=checkedList
+      console.log("条件",checkedList)    
       this.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
-      this.checkAll = checkedList.length === plainOptions.length;
+      this.checkAll = (checkedList.length === plainOptions.length);    
+      console.log(this.checkAll)
     },
     onChangeCon(){},
     onCheckAllChangeAdd(e) {
       //this.formAdd.condition=plainOptions
+
       Object.assign(this.formAdd, {      
         condition: e.target.checked ? plainOptions : [],
         indeterminate: false,
@@ -567,6 +568,8 @@ export default {
         indeterminate: false,
         checkAll: e.target.checked,
       });
+     // debugger
+      console.log(this.formModify)
     },
     searchQuery() {
     },
@@ -620,6 +623,7 @@ export default {
        this.formModify.room = record.room
       this.formModify.number = record.number
       this.formModify.dutyName = record.dutyName
+      debugger;
        this.formModify.condition=record.condition.split('，')
       this.formModify.dutyTel = record.dutyTel
         this.formModify.state=record.state

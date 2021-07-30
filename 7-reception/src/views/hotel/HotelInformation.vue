@@ -40,9 +40,7 @@
             icon="plus"
             :style="{ color: 'white', background:'orange'}"
           >新增酒店</a-button>&nbsp;&nbsp;
-          <a-button>
-            <a-icon type="download" />导出
-          </a-button>
+         <a-button   icon="download" @click="handleExportXls('协议酒店')">导出</a-button>
         </a-col>
       </a-row>
     </div>
@@ -193,6 +191,7 @@
 </template>
 
 <script>
+import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 const dataHotel = [
   {
     index:1,
@@ -361,6 +360,7 @@ const innerColumns = [
   }
 ]
 export default {
+  mixins:[JeecgListMixin],
   data() {
     return {
       dataHotel,
@@ -448,8 +448,13 @@ export default {
             message: '请输入价格范围',
             trigger: 'blur'
           }
-        ]
-      }
+        ],
+
+      },
+             url: {      
+        list: "/sys/user/list",
+        exportXlsUrl: "/sys/user/exportXls",      
+       },
     }
   },
   methods: {

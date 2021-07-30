@@ -61,9 +61,7 @@
             @click="searchQuery"
           >查询</a-button>
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
-          <a-button style="margin-left: 8px">
-            <a-icon type="download" />导出
-          </a-button>
+            <a-button   icon="download" style="margin-left: 8px" @click="handleExportXls('会议总览')">导出</a-button>
         </a-col>
       </a-row>
     </div>
@@ -121,6 +119,7 @@
 
 <script>
 import moment from 'moment'
+  import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 const data = [
   {
     id: 'A1203',
@@ -273,6 +272,7 @@ const dataRoom = [
   }
 ]
 export default {
+   mixins:[JeecgListMixin],
   data() {
     return {
       data,
@@ -286,7 +286,11 @@ export default {
         dateEnd: undefined,
         state: undefined
       },
-      dateFormat: 'YYYY年MM月DD日'
+      dateFormat: 'YYYY年MM月DD日',
+            url: {      
+        list: "/sys/user/list",
+        exportXlsUrl: "/sys/user/exportXls",      
+       },
     }
   },
   created() {
