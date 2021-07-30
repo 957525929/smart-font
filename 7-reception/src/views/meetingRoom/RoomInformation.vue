@@ -250,7 +250,7 @@
           </a-col>
         </a-row>
       </a-checkbox-group> -->
-      <a-checkbox :indeterminate="indeterminate" :checked="checkAll" @change="onCheckAllChangeAdd">
+      <a-checkbox :indeterminate="formAdd.indeterminate" :checked="formAdd.checkAll" @change="onCheckAllChangeAdd">
         全部
       </a-checkbox>
         <br />
@@ -302,11 +302,11 @@
           <a-input v-model="formModify.number" ></a-input>
         </a-form-model-item>
         <a-form-model-item label="基本条件">
-        <a-checkbox :indeterminate="indeterminate" :checked="checkAll" @change="onCheckAllChangeModify">
+        <a-checkbox :indeterminate="formModify.indeterminate" :checked="formModify.checkAll" @change="onCheckAllChangeModify">
         全部
       </a-checkbox>
         <br />
-       <a-checkbox-group v-model="formModify.condition" :options="plainOptions" @change="onChangeCond"/>
+       <a-checkbox-group v-model="formModify.condition" :options="plainOptions" @change="onChangeCondM"/>
         </a-form-model-item>
         <a-form-model-item ref="dutyName" label="管理员" prop="dutyName">
           <!-- <a-input v-model="formModify.dutyName"></a-input> -->
@@ -450,8 +450,8 @@ export default {
   data() {
     return {
       plainOptions,
-      indeterminate: true,
-      checkAll: false,
+      // indeterminate: true,
+      // checkAll: false,
       selectOptions: areaData,
       dataRoom:dataRoom,
       columns,
@@ -464,8 +464,9 @@ export default {
       visibleModify: false,
       labelCol: { span: 6 },
       wrapperCol: { span: 18 },
-
       formAdd: {
+      indeterminate: false,
+      checkAll: false,
       area: [],
       room: undefined,
       number: undefined,
@@ -480,6 +481,8 @@ export default {
         lineHeight: "30px"
       },
       formModify: {
+      indeterminate: true,
+      checkAll: false,
       number: '',
       dutyName: '',
       dutyTel: '',
@@ -532,7 +535,7 @@ export default {
       },
       visibleDetail:false,
       formDetail:{},
-            url: {      
+      url: {      
         list: "/sys/user/list",
         exportXlsUrl: "/sys/user/exportXls",      
        },
@@ -545,22 +548,25 @@ export default {
     areaChange(value){
       console.log(value)
     },
-    onChangeCond(checkedList){
-      this.formAdd.condition=checkedList
-      console.log("条件",checkedList)    
-      this.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
-      this.checkAll = (checkedList.length === plainOptions.length);    
-      console.log(this.checkAll)
-    },
     onChangeCon(){},
+    onChangeCond(checkedList){
+      console.log("条件",checkedList)    
+      this.formAdd.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
+      this.formAdd.checkAll = checkedList.length === plainOptions.length;    
+    },
+
     onCheckAllChangeAdd(e) {
       //this.formAdd.condition=plainOptions
-
       Object.assign(this.formAdd, {      
         condition: e.target.checked ? plainOptions : [],
         indeterminate: false,
         checkAll: e.target.checked,
       });
+    },
+      onChangeCondM(checkedList){
+      console.log("条件",checkedList)    
+      this.formModify.indeterminate = !!checkedList.length && checkedList.length < plainOptions.length;
+      this.formModify.checkAll = checkedList.length === plainOptions.length;    
     },
     onCheckAllChangeModify(e){
       Object.assign(this.formModify, {      
@@ -623,7 +629,6 @@ export default {
        this.formModify.room = record.room
       this.formModify.number = record.number
       this.formModify.dutyName = record.dutyName
-      debugger;
        this.formModify.condition=record.condition.split('，')
       this.formModify.dutyTel = record.dutyTel
         this.formModify.state=record.state
