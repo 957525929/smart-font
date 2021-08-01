@@ -8,7 +8,7 @@
 </template>
 
 <script>
-	import list from "@/common/public.js"
+	import list from "./js/task.js"
 	export default {
 		data() {
 			return {

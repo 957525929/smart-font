@@ -1,39 +1,4 @@
 
-const proTaskList = {
-	0: [{
-		taskType: 1,
-		key: 0,
-		taskId: 1,
-		content: "中国烟草总公司福建省公司机关-A区域-1号楼",
-		taskType: "一级保养",
-		type: 0,
-		titleLeft: '1号楼月度巡养计划',
-		titleRight: "查看",
-		footerRight: '2021-06-22 18：55：55',
-	}],
-	1: [{
-		taskType: 1,
-		key: 1,
-		taskId: 2,
-		content: "中国烟草总公司福建省公司机关-B区域-3号楼",
-		taskType: "设备点检",
-		type: 1,
-		titleLeft: '空调维修检查',
-		titleRight: "查看",
-		footerRight: '2021-07-31 00：00：00'
-	}],
-	2: [{
-		taskType: 1,
-		key: 2,
-		taskId: 3,
-		content: "中国烟草总公司福建省公司机关-B区域-2号楼",
-		taskType: "设备巡检",
-		type: 2,
-		titleLeft: '电路老化检查',
-		titleRight: "查看",
-		footerRight: '2021-07-31 00：00：00'
-	}]
-}
 
 const devTypeTree = [{
 		children: [{
@@ -329,93 +294,55 @@ const groupTree = [{
 	title: '中国烟草总公司福建省公司机关',
 	value: 'water',
 }]
-/*保养任务类型proTaskType*/
-const proTaskType = {
-	0: {
-		tableValue: '设备巡检',
-		searchValue: '巡检',
-		code: 0
-	},
-	1: {
-		tableValue: '设备点检',
-		searchValue: '点检',
-		code: 1
-	},
-	2: {
-		tableValue: '维修中保养',
-		searchValue: '维修中保养',
-		code: 2
-	},
-	3: {
-		tableValue: '日常维护',
-		searchValue: '日常维护',
-		code: 3
-	},
-	4: {
-		tableValue: '一级保养',
-		searchValue: '一级保养',
-		code: 4
-	},
-	5: {
-		tableValue: '二级保养',
-		searchValue: '二级保养',
-		code: 5
-	},
+
+const taskList = {
+	0: [{
+		taskType: 0,
+		taskId: 0,
+		type: 0,
+		titleLeft: "烟草大厦18楼",
+		titleRight: "查看",
+		content: "18楼停电，请尽快修复",
+		footerRight: "2021-06-22 17:55:55"
+	}, {
+		taskType: 0,
+		taskId: 1,
+		type: 1,
+		titleLeft: "烟草大厦6楼",
+		titleRight: "查看",
+		content: "空调调控温度无反应",
+		footerRight: "2021-06-22 10:55:55"
+	}, {
+		taskType: 0,
+		taskId: 2,
+		type: 2,
+		titleLeft: "烟草大厦18楼",
+		titleRight: "查看",
+		content: "18楼频繁断电停电",
+		footerRight: "2021-06-20 17:55:55"
+	}, {
+		taskType: 0,
+		taskId: 4,
+		type: 3,
+		titleLeft: "烟草大厦3楼卫生间",
+		titleRight: "查看",
+		content: "卫生间停水",
+		footerRight: "2021-06-22 17:55:55"
+	}],
+	1: [{
+		taskType: 0,
+		taskId: 5,
+		type: 4,
+		titleLeft: "烟草大厦18楼",
+		titleRight: "查看",
+		content: "18楼停电",
+		footerRight: "2021-06-22 17:55:55"
+	}]
 }
-/*保养任务状态protaskStatus*/
-const protaskStatus = {
-	0: {
-		tableValue: '待保养',
-		searchValue: '待保养',
-		code: 0
-	},
-	1: {
-		tableValue: '待核查',
-		searchValue: '待核查',
-		code: 1
-	},
-	2: {
-		tableValue: '已完成',
-		searchValue: '已完成',
-		code: 2
-	}
-}
-/*养护周期 proPeriod*/
-const proPeriod = {
-	0: {
-		tableValue: '每日',
-		searchValue: '每日',
-		code: 0
-	},
-	1: {
-		tableValue: '每周',
-		searchValue: '每周',
-		code: 1
-	},
-	2: {
-		tableValue: '每月',
-		searchValue: '每月',
-		code: 2
-	},
-	3: {
-		tableValue: '每季度',
-		searchValue: '每季度',
-		code: 3
-	},
-	4: {
-		tableValue: '每年',
-		searchValue: '每年',
-		code: 4
-	},
-	5: {
-		tableValue: '自定义',
-		searchValue: '自定义',
-		code: 5
-	},
-}
+const img = ["/static/logo.png", "/static/tabbar/plugin.png"]
+
 module.exports = {
-	proTaskList,
-	protaskStatus,
-	proTaskType,
-	proPeriod
+	devTypeTree,
+	taskList,
+	img
 }

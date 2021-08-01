@@ -36,7 +36,7 @@
 
 <script>
 	import list from "@/common/public.js"
-	import data from '@/pages/workplace/protectTask/js/index.js';
+	import data from '@/pages/workplace/protectTask/js/detail.js';
 	import {
 		handleEnumData
 	} from "@/common/util.js"
