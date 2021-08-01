@@ -18,12 +18,12 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">报修地点</view>
-				<input placeholder="输入框带个图标" name="address"></input>
+				<input placeholder="报修地点" name="address"></input>
 				<text class='cuIcon-locationfill text-orange'></text>
 			</view>
 			<view class="cu-form-group align-start">
 				<view class="title">报修描述</view>
-				<textarea maxlength="-1" @input="textareaInput" placeholder="多行文本输入框"></textarea>
+				<textarea maxlength="-1" @input="textareaInput" placeholder="报修描述"></textarea>
 			</view>
 			<!-- 测试 -->
 			<view class="cu-bar bg-white margin-top">
