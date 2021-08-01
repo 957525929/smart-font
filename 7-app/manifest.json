@@ -87,8 +87,8 @@
         }
     },
     "h5" : {
-        "title" : "receptionApp",
-        "domain" : "",
+        "title" : "ColorUi for UniApp",
+        "domain" : "demo.color-ui.com",
         "router" : {
             "base" : "./"
         }
