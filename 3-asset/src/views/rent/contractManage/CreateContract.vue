@@ -193,8 +193,7 @@
                     <a-form-item label="合同有效期">
 <!--                      <a-date-picker placeholder='' v-decorator="['startDate', {initialValue:startDate},{ rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>~<a-date-picker placeholder='' v-decorator="['endDate', { rules: [{ required: true, message: '请选择!' }] }]" style="width: 45%"></a-date-picker>-->
                       <j-date  v-decorator="['startDate', { rules: [{ required: true, message: '请选择!' }],initialValue:this.startDate, }]" style='width: 45%;'/>
-                      <span class="query-group-split-cust"></span>
-                      <j-date  v-decorator="['endDate']" style='width: 45%;' />
+                      <j-date  v-decorator="['endDate',{ rules: [{ required: true, message: '请选择!' }],initialValue:this.endDate, }]" style='width: 45%;' />
                     </a-form-item>
                   </a-col>
                 </a-row>

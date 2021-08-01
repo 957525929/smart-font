@@ -7,10 +7,15 @@
 		<view class="padding" :class="size?'solids':'solid'" style="padding: 3px 0 3px 0;">
 			<view class="cu-form-group">
 				<text>选择时间</text>
-				<picker mode="date" :value="date" start="2010-01" end="2030-01" fields='month' @change="DateChange">
+				<picker mode="date" :value="date" start="2010-01-01" end="2090-01-01"   @change="DateChange">
 					<view class="picker">
 						{{date}}
 					</view>
+				</picker>
+				<picker mode="date" :value="enddate" start="2010-01-01" end="2090-01-01"   @change="DateChange1">
+				  <view class="picker">
+				    {{enddate}}
+				  </view>
 				</picker>
 			</view>
 		</view>
@@ -71,7 +76,8 @@
 		data() {
 			return {
 				indexDate: 0,
-				date: "2021-06",
+				date: "2021-06-01",
+				enddate:"2021-08-30",
 				size: false,
 				k: "",
 				modalVisable:false,
@@ -113,7 +119,10 @@
 		methods: {
 			//下拉框
 			DateChange(e) {
-				this.date = e.detail.value
+			  this.date = e.detail.value
+			},
+			DateChange1(e) {
+			  this.enddate = e.detail.value
 			},
 			//撤销对话框
 			showModal(e) {

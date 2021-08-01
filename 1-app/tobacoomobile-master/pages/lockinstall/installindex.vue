@@ -38,7 +38,7 @@
 				</view>
 			</view>
 			<view class="nav-list">
-				<navigator hover-class="none" url="../../pages/lockinstall/index" class="nav-li bg-grey" navigateTo>
+				<navigator hover-class="none" url="../../pages/lockinstall/installrecord2" class="nav-li bg-grey" navigateTo>
 					<view class="nav-title">记录</view>
 					<view class="nav-name">Record</view>
 					<text class="cuIcon-edit"></text>

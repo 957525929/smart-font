@@ -98,46 +98,16 @@
               </span>
               <span slot="action" slot-scope="text,record">
                 <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
+                <a class="ant-dropdown-link"  @click="myHandleedit(record)" >编辑 </a>
                 <a-divider type="vertical" />
-                <a-dropdown>
-
-                  <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
-                  <a-menu slot="overlay">
-                    <a-menu-item key="1" >编辑</a-menu-item>
-                    <a-menu-item key="2" >
-                      <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>
-                    </a-menu-item>
-                  </a-menu>
-                </a-dropdown>
+                <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>
               </span>
 
             </a-table>
           </div>
-          <!-- 租赁合同包含资产 -->
-<!--          <a-modal-->
-<!--            title="租赁合同包含资产"-->
-<!--            width="70%"-->
-<!--            :visible="detailvisible"-->
-<!--            :confirm-loading="confirmLoading"-->
-<!--            @ok="handleOk1"-->
-<!--            @cancel="handleCancel1"-->
-<!--          >-->
-<!--            <div>-->
-<!--              <a-table-->
-<!--                ref="table"-->
-<!--                size="middle"-->
-<!--                bordered-->
-<!--                rowKey="id"-->
-<!--                :scroll="{x:2500}"-->
-<!--                :columns="assetcolumn"-->
-<!--                :dataSource="assetSource"-->
-<!--                :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"-->
-<!--              >-->
-<!--              </a-table>-->
-<!--              </div>-->
-<!--          </a-modal>-->
+
           <!-- 添加租赁合同记录 -->
-<!--            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel'></EnrollLent>-->
+            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel' :curdata="curdata"></EnrollLent>
           </a-card>
       </a-tab-pane>
  <!-- 承租列表 -->
@@ -209,10 +179,6 @@
             <div class="table-operator">
               <a-button type="link"  @click="myHandleAdd"   icon="plus">新增</a-button>
               <a-button type="link" icon="download">导出</a-button>
-              <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-                <a-button type="link" icon="import">导入</a-button>
-              </a-upload> -->
-
               <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
               <a style="margin-left: 12px" @click="onClearSelected">清空</a>
 
@@ -234,46 +200,15 @@
                  <a class="ant-dropdown-link"  >下载</a>
               </span>
                 <span slot="action" slot-scope="text,record">
-          <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
-          <a-divider type="vertical" />
-          <a-dropdown>
-
-            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
-            <a-menu slot="overlay">
-              <a-menu-item key="1" >编辑</a-menu-item>
-              <a-menu-item key="2" >
+                <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
+                <a class="ant-dropdown-link"  @click="myHandleedit(record)" >编辑 </a>
+                <a-divider type="vertical" />
                 <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
-        </span>
+              </span>
 
               </a-table>
             </div>
-<!--            &lt;!&ndash; 租赁合同包含资产 &ndash;&gt;-->
-<!--            <a-modal-->
-<!--              title="租赁合同包含资产"-->
-<!--              width="70%"-->
-<!--              :visible="detailvisiblepay"-->
-<!--              :confirm-loading="confirmLoading"-->
-<!--              @ok="handleOkpay"-->
-<!--              @cancel="handleCancelpay"-->
-<!--            >-->
-<!--              <div>-->
-<!--                <a-table-->
-<!--                  ref="table"-->
-<!--                  size="middle"-->
-<!--                  bordered-->
-<!--                  rowKey="id"-->
-<!--                  :scroll="{x:2500}"-->
-<!--                  :columns="assetcolumn"-->
-<!--                  :dataSource="assetSourcepay"-->
-<!--                  :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"-->
-<!--                >-->
-<!--                </a-table>-->
-<!--              </div>-->
-<!--            </a-modal>-->
-<!--            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel'></EnrollLent>-->
+            <EnrollLent  :modalVisible='visible' @handleCancel='handleCancel' :curdata="curdata"></EnrollLent>
           </a-card>
       </a-tab-pane>
     </a-tabs>
@@ -294,6 +229,7 @@ export default {
   data () {
       return {
         description: '资产变化表',
+        curdata:{},
         startDate:moment().subtract(12, 'years').format('YYYY-MM-DD'),
         endDate:moment().format('YYYY-MM-DD'),
         //合同名称
@@ -410,8 +346,8 @@ export default {
             payCycle:'按年付',
             lentValue: '10000.00',
             worker:'王一',
-            noticeWay:'',
-            noticeDay:'',
+            noticeWay:'短信通知',
+            noticeDay:'3',
             electContract:'合同电子版',
             remark : '承租方负责维护',
           },
@@ -519,17 +455,18 @@ export default {
             align:"center",
             dataIndex: 'noticeDay'
           },
+
+          {
+            title:'备注',
+            align:"center",
+            dataIndex: 'remark'
+          },
           {
             title:'合同电子版',
             align:"center",
             dataIndex: 'electContract',
             scopedSlots: { customRender: 'electContract' },
-           // scopedSlots: { customRender: 'contractAsset' },
-          },
-          {
-            title:'备注',
-            align:"center",
-            dataIndex: 'remark'
+            // scopedSlots: { customRender: 'contractAsset' },
           },
           {
             title: '操作',
@@ -608,17 +545,18 @@ export default {
             align:"center",
             dataIndex: 'noticeDay'
           },
+
+          {
+            title:'备注',
+            align:"center",
+            dataIndex: 'remark'
+          },
           {
             title:'合同电子版',
             align:"center",
             dataIndex: 'electContract',
             scopedSlots: { customRender: 'electContract' },
             // scopedSlots: { customRender: 'contractAsset' },
-          },
-          {
-            title:'备注',
-            align:"center",
-            dataIndex: 'remark'
           },
           {
             title: '操作',
@@ -630,100 +568,8 @@ export default {
         dictOptions:{},
         toggleSearchStatus: false,
         selectedRowKeys: [],
-        visible: false,   //新增面板
-        detailvisible:false,  //包含资产详情
-        detailvisiblepay:false,  //包含资产详情
+        visible: false,   //编辑面板
         confirmLoading: false,
-        // //资产列表表头
-        // assetcolumn:[
-        //   {
-        //     title:'资产编号',
-        //     fixed:'left',
-        //     width:130,
-        //     align:"center",
-        //     dataIndex: 'assetNunmber',
-        //   },
-        //   {
-        //     title:'资产名称',
-        //     align:"center",
-        //     dataIndex: 'assetName'
-        //   },
-        //   {
-        //     title:'资产类型',
-        //     align:"center",
-        //     dataIndex: 'assetType'
-        //   },
-        //   {
-        //     title:'资产价值',
-        //     align:"center",
-        //     dataIndex: 'assetValue'
-        //   },
-        //   {
-        //     title:'资产所有方',
-        //     align:"center",
-        //     dataIndex: 'assetOwner'
-        //   },
-        //   {
-        //     title:'资产使用方',
-        //     align:"center",
-        //     dataIndex: 'assetUser'
-        //   },
-        //   {
-        //     title:'资产状态',
-        //     align:"center",
-        //     dataIndex: 'assetStates'
-        //   },
-        // ],
-        // //资产数据
-        // assetSource:[
-        //   {
-        //     key:'1',
-        //     assetNunmber: 'ZCAT2021070501',
-        //     assetName: '烟草烘干机',
-        //     assetValue: '10000.00',
-        //     assetType:'专用设备',
-        //     assetOwner: '烟草公司',
-        //     assetUser: '卷烟厂',
-        //     assetStates:'租出',
-        //     remark : '无',
-        //   },
-        //   {
-        //     key:'2',
-        //     assetNunmber: 'ZCAT2021070502',
-        //     assetName: '联想M710S',
-        //     assetType:'专用设备',
-        //     assetValue: '5000.00',
-        //     assetOwner: '烟草公司',
-        //     assetUser: '卷烟厂',
-        //     assetStates:'租出',
-        //     remark : '无',
-        //   },
-        // ],
-        // //承租列表资产数据
-        // assetSourcepay:[
-        //   {
-        //     key:'1',
-        //     assetNunmber: 'ZCAT2021070504',
-        //     assetName: '四角办公大楼负一楼仓库',
-        //     assetValue: '135000.00',
-        //     assetType:'房屋和建筑物',
-        //     assetOwner: '福州朝阳贸易有限公司',
-        //     assetUser: '烟草公司',
-        //     assetStates:'租入',
-        //     remark : '无',
-        //   },
-        //   {
-        //     key:'2',
-        //     assetNunmber: 'ZCAT2021070505',
-        //     assetName: '卷烟厂污水处理设备',
-        //     assetType:'专用设备',
-        //     assetValue: '15000.00',
-        //     assetOwner: '福州烟草加工厂',
-        //     assetUser: '烟草公司',
-        //     assetStates:'租入',
-        //     remark : '无',
-        //   },
-        // ],
         modalVisible:false,
       }
     },
@@ -741,65 +587,37 @@ export default {
       console.log('selectedRowKeys changed: ', selectedRowKeys);
       this.selectedRowKeys = selectedRowKeys;
     },
+      //清空
       onClearSelected() {
       this.selectedRowKeys = [];
-    },
-      deletConfirm(e) {
-      console.log("e",e);
-      // const dataSource = [...this.dataSource];
-      // this.dataSource = dataSource.filter(item => item.key !== key);
-      this.$message.success('删除成功');
-      console.log("ddddataSource",this.dataSource)
     },
       purchaseDateOnChange(date, dateString) {
       console.log(date, dateString);
     },
-      //包含资产详情
-      viewDetail() {
-        this.detailvisible = true;
-      },
-      //包含资产详情
-      viewDetailpay() {
-        this.detailvisiblepay = true;
-      },
-      //新增模块
+      //新增合同
       myHandleAdd() {
-        this.visible = true;
+        this.$router.push({ name: 'CreateContract', params: { }})
       },
-      handleOk(e) {
-        this.ModalText = 'The modal will be closed after two seconds';
-        this.confirmLoading = true;
-        const newdata=this.form;
-        setTimeout(() => {
-          this.visible = false;
-          this.confirmLoading = false;
-        }, 2000);
-        // this.dataSource=[...dataSource,form];
-        // console.log("dataSource",this.dataSource)
-        const { dataSource } = this;
-        this.dataSource = [...dataSource,  newdata];
-        console.log("dataSource",this.dataSource)
-        this.form={};
+      //编辑合同面板
+      myHandleedit(record) {
+        console.log("e",record)
+        this.curdata=record;
+        console.log("ecurdata",this.curdata)
+        this.visible=true;
       },
-      //新增合同面板
       handleCancel(e) {
         console.log('Clicked cancel button');
+
         this.visible = false;
       },
-      // //关闭包含资产详情
-      // handleCancel1(e) {
-      //   this.detailvisible = false;
-      // },
-      // //关闭包含资产详情
-      // handleCancelpay(e) {
-      //   this.detailvisiblepay = false;
-      // },
-      // handleOk1(e) {
-      //   this.detailvisible = false;
-      // },
-      // handleOkpay(e) {
-      //   this.detailvisiblepay = false;
-      // },
+      //删除合同
+      deletConfirm(e) {
+        console.log("e",e);
+        // const dataSource = [...this.dataSource];
+        // this.dataSource = dataSource.filter(item => item.key !== key);
+        this.$message.success('删除成功');
+        console.log("ddddataSource",this.dataSource)
+      },
     }
 
   }
