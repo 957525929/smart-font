@@ -31,7 +31,7 @@
     <a-row style='margin-top: 20px;'>
       <a-col :span='6'  >
         <a-tabs default-active-key="1" size="large" >
-          <a-tab-pane tab="审核状态统计" key="1">
+          <a-tab-pane tab="采购状态统计" key="1">
             <div id="chart1" style="width: 100%; height: 250px"></div>
           </a-tab-pane>
         </a-tabs>
