@@ -70,7 +70,9 @@
 
         <!-- 操作按钮区域 -->
         <div class="table-operator">
-          <a-button type="link"  @click="myHandleAdd"  icon="plus">新增</a-button>
+          <a-button type="link"  @click="myHandleAdd"  icon="plus">
+            新增
+          </a-button>
           <a-button type="link" icon="download">导出</a-button>
           <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
             <a-button type="link" icon="import">导入</a-button>
@@ -80,46 +82,6 @@
           <a style="margin-left: 12px" @click="onClearSelected">清空</a>
 
         </div>
-
-<!--        &lt;!&ndash; 统计数值区域 &ndash;&gt;-->
-<!--        <div class="table-statistic " style="background: #ECECEC; padding: 15px">-->
-<!--          <a-row :gutter="16">-->
-<!--            <a-col :span="12">-->
-<!--              <a-card>-->
-<!--                <a-statistic-->
-<!--                  title="收租总次数"-->
-<!--                  :value="21"-->
-<!--                  suffix="次"-->
-<!--                  :value-style="{ color: '#3f8600' }"-->
-<!--                  style="margin-right: 50px"-->
-<!--                >-->
-<!--                  <template #prefix>-->
-<!--                    <a-icon type="fund" />-->
-<!--                    &lt;!&ndash;                <a-icon type="arrow-up" />&ndash;&gt;-->
-<!--                  </template>-->
-<!--                </a-statistic>-->
-<!--              </a-card>-->
-<!--            </a-col>-->
-<!--            <a-col :span="12">-->
-<!--              <a-card>-->
-<!--                <a-statistic-->
-<!--                  title="收租收入总金额"-->
-<!--                  :value="24"-->
-<!--                  :precision="2"-->
-<!--                  suffix="万"-->
-<!--                  class="demo-class"-->
-<!--                  :value-style="{ color: '#cf1322' }"-->
-<!--                >-->
-<!--                  <template #prefix>-->
-<!--                    <a-icon type="dollar" />-->
-<!--                    &lt;!&ndash;                <a-icon type="arrow-down" />&ndash;&gt;-->
-<!--                  </template>-->
-<!--                </a-statistic>-->
-<!--              </a-card>-->
-<!--            </a-col>-->
-<!--          </a-row>-->
-<!--        </div>-->
-
         <br/>
         <!-- table区域-begin -->
         <div>
@@ -136,17 +98,17 @@
             <span slot="voucher">
                  <a class="ant-dropdown-link"  >查看</a>
               </span>
-            <span slot="action" slot-scope="text, record">
-              <a-dropdown>
-                <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
-                <a-menu slot="overlay">
-                  <a-menu-item key="1" >编辑</a-menu-item>
-                  <a-menu-item key="2" >
-                    <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>
-                  </a-menu-item>
-                </a-menu>
-              </a-dropdown>
-            </span>
+<!--            <span slot="action" slot-scope="text, record">-->
+<!--              <a-dropdown>-->
+<!--                <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>-->
+<!--                <a-menu slot="overlay">-->
+<!--                  <a-menu-item key="1" >编辑</a-menu-item>-->
+<!--                  <a-menu-item key="2" >-->
+<!--                    <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>-->
+<!--                  </a-menu-item>-->
+<!--                </a-menu>-->
+<!--              </a-dropdown>-->
+<!--            </span>-->
 
           </a-table>
         </div>
@@ -237,45 +199,6 @@
 
         </div>
 
-<!--        &lt;!&ndash; 统计数值区域 &ndash;&gt;-->
-<!--        <div class="table-statistic " style="background: #ECECEC; padding: 15px">-->
-<!--          <a-row :gutter="16">-->
-<!--            <a-col :span="12">-->
-<!--              <a-card>-->
-<!--                <a-statistic-->
-<!--                  title="缴租总次数"-->
-<!--                  :value="11"-->
-<!--                  suffix="次"-->
-<!--                  :value-style="{ color: '#3f8600' }"-->
-<!--                  style="margin-right: 50px"-->
-<!--                >-->
-<!--                  <template #prefix>-->
-<!--                    <a-icon type="fund" />-->
-<!--                    &lt;!&ndash;                <a-icon type="arrow-up" />&ndash;&gt;-->
-<!--                  </template>-->
-<!--                </a-statistic>-->
-<!--              </a-card>-->
-<!--            </a-col>-->
-<!--            <a-col :span="12">-->
-<!--              <a-card>-->
-<!--                <a-statistic-->
-<!--                  title="缴租支出租总金额"-->
-<!--                  :value="12"-->
-<!--                  :precision="2"-->
-<!--                  suffix="万"-->
-<!--                  class="demo-class"-->
-<!--                  :value-style="{ color: '#cf1322' }"-->
-<!--                >-->
-<!--                  <template #prefix>-->
-<!--                    <a-icon type="dollar" />-->
-<!--                    &lt;!&ndash;                <a-icon type="arrow-down" />&ndash;&gt;-->
-<!--                  </template>-->
-<!--                </a-statistic>-->
-<!--              </a-card>-->
-<!--            </a-col>-->
-<!--          </a-row>-->
-<!--        </div>-->
-
         <br/>
         <!-- table区域-begin -->
         <div>
@@ -292,17 +215,17 @@
              <span slot="voucher">
                  <a class="ant-dropdown-link"  >查看</a>
               </span>
-            <span slot="action" slot-scope="text, record">
-              <a-dropdown>
-                <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
-                <a-menu slot="overlay">
-                  <a-menu-item key="1" >编辑</a-menu-item>
-                  <a-menu-item key="2" >
-                    <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>
-                  </a-menu-item>
-                </a-menu>
-              </a-dropdown>
-            </span>
+<!--            <span slot="action" slot-scope="text, record">-->
+<!--              <a-dropdown>-->
+<!--                <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>-->
+<!--                <a-menu slot="overlay">-->
+<!--                  <a-menu-item key="1" >编辑</a-menu-item>-->
+<!--                  <a-menu-item key="2" >-->
+<!--                    <a-popconfirm title="确定删除吗?" @confirm="() => deletConfirm(record)">删除</a-popconfirm>-->
+<!--                  </a-menu-item>-->
+<!--                </a-menu>-->
+<!--              </a-dropdown>-->
+<!--            </span>-->
 
           </a-table>
         </div>
@@ -319,6 +242,7 @@
 import JDate from "@comp/jeecg/JDate";
 import Register from "@views/rent/rentManage/Register";
 import moment from "moment";
+
 export default {
   name: "collect",
   components: {
@@ -511,22 +435,22 @@ export default {
             dataIndex: 'worker'
           },
           {
-            title:'收租凭证',
-            align:"center",
-            dataIndex: 'voucher',
-            scopedSlots: { customRender: 'voucher' },
-          },
-          {
             title:'备注',
             align:"center",
             dataIndex: 'remark'
           },
           {
-            title: '操作',
-            dataIndex: 'action',
+            title:'收租凭证',
             align:"center",
-            scopedSlots: { customRender: 'action' },
-          }
+            dataIndex: 'voucher',
+            scopedSlots: { customRender: 'voucher' },
+          },
+          // {
+          //   title: '操作',
+          //   dataIndex: 'action',
+          //   align:"center",
+          //   scopedSlots: { customRender: 'action' },
+          // }
         ],
         // 缴租表头
         columnspay: [
@@ -576,27 +500,29 @@ export default {
             dataIndex: 'worker'
           },
           {
-            title:'收租凭证',
-            align:"center",
-            dataIndex: 'voucher',
-            scopedSlots: { customRender: 'voucher' },
-          },
-          {
             title:'备注',
             align:"center",
             dataIndex: 'remark'
           },
           {
-            title: '操作',
-            dataIndex: 'action',
+            title:'收租凭证',
             align:"center",
-            scopedSlots: { customRender: 'action' },
-          }
+            dataIndex: 'voucher',
+            fixed: 'right',
+            scopedSlots: { customRender: 'voucher' },
+          },
+          // {
+          //   title: '操作',
+          //   dataIndex: 'action',
+          //   align:"center",
+          //   fixed: 'right',
+          //   scopedSlots: { customRender: 'action' },
+          // }
         ],
         dictOptions:{},
         toggleSearchStatus: false,
         selectedRowKeys: [],
-        visible: false,
+       // visible: false,
         modalVisible:false,
         confirmLoading: false,
       }
@@ -627,8 +553,11 @@ export default {
       },
       //新增模块
       myHandleAdd() {
-        this.visible = true;
+        this.$router.push({ name: 'CreateRegister', params: { }})
       },
+      // myHandleAdd1() {
+      //   this.$router.push({ name: 'CreateRegister', params: { }})
+      // },
       handleOk(e) {
         this.ModalText = 'The modal will be closed after two seconds';
         this.confirmLoading = true;
@@ -644,10 +573,10 @@ export default {
         this.form={};
         console.log("dataSource",this.dataSource)
       },
-      handleCancel(e) {
-        console.log('Clicked cancel button');
-        this.visible = false;
-      },
+      // handleCancel(e) {
+      //   console.log('Clicked cancel button');
+      //   this.visible = false;
+      // },
 
     }
 
