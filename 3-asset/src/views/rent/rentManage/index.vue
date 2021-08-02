@@ -73,7 +73,7 @@
           <a-button type="link"  @click="myHandleAdd"  icon="plus">
             新增
           </a-button>
-          <a-button type="link" icon="download">导出</a-button>
+          <a-button type="link" icon="download"  @click="handleExportXls('收租信息')">导出</a-button>
           <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
             <a-button type="link" icon="import">导入</a-button>
           </a-upload> -->
@@ -189,7 +189,7 @@
         <!-- 操作按钮区域 -->
         <div class="table-operator">
           <a-button type="link"  @click="myHandleAdd"  icon="plus">新增</a-button>
-          <a-button type="link" icon="download">导出</a-button>
+          <a-button type="link" icon="download"  @click="handleExportXls('缴租信息')">导出</a-button>
           <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
             <a-button type="link" icon="import">导入</a-button>
           </a-upload> -->
@@ -242,9 +242,10 @@
 import JDate from "@comp/jeecg/JDate";
 import Register from "@views/rent/rentManage/Register";
 import moment from "moment";
-
+import { JeecgListMixin } from '../../../mixins/JeecgListMixin';
 export default {
   name: "collect",
+  mixins:[JeecgListMixin],
   components: {
     JDate,
     Register,
@@ -508,7 +509,6 @@ export default {
             title:'收租凭证',
             align:"center",
             dataIndex: 'voucher',
-            fixed: 'right',
             scopedSlots: { customRender: 'voucher' },
           },
           // {
@@ -525,6 +525,9 @@ export default {
        // visible: false,
         modalVisible:false,
         confirmLoading: false,
+        url: {
+          exportXlsUrl: "/sys/user/exportXls",
+        },
       }
     },
     computed: {

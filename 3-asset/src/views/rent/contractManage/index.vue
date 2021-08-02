@@ -71,7 +71,7 @@
           <!-- 操作按钮区域 -->
           <div class="table-operator">
             <a-button type="link"  @click="myHandleAdd"   icon="plus">新增</a-button>
-            <a-button type="link" icon="download">导出</a-button>
+            <a-button type="link" icon="download" @click="handleExportXls('合同信息')">导出</a-button>
             <!-- <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
               <a-button type="link" icon="import">导入</a-button>
             </a-upload> -->
@@ -87,13 +87,15 @@
               ref="table"
               size="middle"
               bordered
+              key="key"
               rowKey="id"
               :scroll="{x:2500}"
               :columns="columns"
-              :dataSource="dataSource"
+              :data-source="dataSource"
               :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
               >
               <span slot="electContract">
+<!--                 <a class="ant-dropdown-link"   @click="uploadFile(text)">下载</a>-->
                  <a class="ant-dropdown-link"  >下载</a>
               </span>
               <span slot="action" slot-scope="text,record">
@@ -178,18 +180,18 @@
             <!-- 操作按钮区域 -->
             <div class="table-operator">
               <a-button type="link"  @click="myHandleAdd"   icon="plus">新增</a-button>
-              <a-button type="link" icon="download">导出</a-button>
+              <a-button type="link" icon="download"  @click="handleExportXls('合同信息')">导出</a-button>
               <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
               <a style="margin-left: 12px" @click="onClearSelected">清空</a>
 
             </div>
-
             <!-- table区域-begin -->
             <div>
               <a-table
                 ref="table"
                 size="middle"
                 bordered
+                key="key"
                 rowKey="id"
                 :scroll="{x:2500}"
                 :columns="columnspay"
@@ -197,7 +199,7 @@
                 :rowSelection="{selectedRowKeys: selectedRowKeys, columnWidth: 40, onChange: onSelectChange}"
               >
               <span slot="electContract">
-                 <a class="ant-dropdown-link"  >下载</a>
+                 <a class="ant-dropdown-link" >下载</a>
               </span>
                 <span slot="action" slot-scope="text,record">
                 <!-- <router-link :to="{path:'/material/warehousing/warehousingDetails', params:{data:record} }">查看详情</router-link> -->
@@ -219,9 +221,11 @@
 import {setDataSource} from "@views/modules/online/cgform/util/TableUtils";
 import JDate from "@comp/jeecg/JDate";
 import EnrollLent from "./EnrollLent";
+import { JeecgListMixin } from '../../../mixins/JeecgListMixin';
 import moment from "moment";
 export default {
   name: "rent",
+  mixins:[JeecgListMixin],
   components: {
     JDate,
     EnrollLent,
@@ -571,6 +575,10 @@ export default {
         visible: false,   //编辑面板
         confirmLoading: false,
         modalVisible:false,
+        url: {
+
+          exportXlsUrl: "/sys/user/exportXls",
+        },
       }
     },
     computed: {
