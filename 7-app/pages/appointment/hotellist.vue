@@ -43,7 +43,7 @@
 				<view class="card" @tap="recordDetail(item,index)">
 					<span class="picture">
 						<!-- 显示不同图片 -->
-						<image class="card-img" src="../../static/meeting/images/楼房.png" mode="scaleToFill" style="width: 60px; height: 60px;"></image>
+						<image class="card-img" src="../../static/meeting/images/hotels.png" mode="scaleToFill" style="width: 60px; height: 60px;"></image>
 					</span>
 					<span class="card-center">
 						<view>
