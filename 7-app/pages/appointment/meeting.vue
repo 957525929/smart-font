@@ -162,13 +162,17 @@ export default {
     };
   },
   onLoad(option) {
-    this.curData=JSON.parse(option.curData);
-    this.meetingdata.name=this.curData.title;
-    this.meetingdata.peoples=this.curData.peoples;
-    this.meetingdata.time=this.curData.time;
-    this.meetingdata.period=this.curData.period;
-    this.meetingdata.remark=this.curData.remark;
-    console.log("主页面",this.meetingdata);
+	  if(option.curData)
+	  {
+		  this.curData=JSON.parse(option.curData);
+		  this.meetingdata.name=this.curData.title;
+		  this.meetingdata.peoples=this.curData.peoples;
+		  this.meetingdata.time=this.curData.time;
+		  this.meetingdata.period=this.curData.period;
+		  this.meetingdata.remark=this.curData.remark;
+		  console.log("主页面",this.meetingdata);
+	  }
+    
   },
   methods: {
     //时段选择
