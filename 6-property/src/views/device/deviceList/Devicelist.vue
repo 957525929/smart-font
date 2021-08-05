@@ -19,7 +19,7 @@
               </a-select-option>
             </a-select>
           </a-form-item>
-          <a-form-item label="区域组别'" class="formItem" :labelCol="{ span: 6 }" :wrapperCol="{ span: 18 }">
+          <a-form-item label="区域组别" class="formItem" :labelCol="{ span: 6 }" :wrapperCol="{ span: 18 }">
             <a-cascader :options="groupTree" change-on-select placeholder="" :displayRender="renderFormat">
             </a-cascader>
           </a-form-item>
