@@ -41,10 +41,20 @@
 		</view>
 
 		<view class=" padding-sm margin-xs radius">访客信息</view>
+		
+		<view class="cu-form-group">
+			<view class="title"> 单&nbsp; &nbsp; 位</view>
+			<input placeholder="请输入" name="input" v-model="company"></input>
+		</view>
 
 		<view class="cu-form-group">
 			<view class="title"> 姓&nbsp; &nbsp; 名</view>
 			<input placeholder="请输入" name="input" v-model="name"></input>
+		</view>
+
+		<view class="cu-form-group">
+			<view class="title">身份证</view>
+			<input placeholder="请输入" name="input" v-model="idName"></input>
 		</view>
 
 		<view class="cu-form-group">
@@ -91,6 +101,8 @@
 				people: '',
 				name: '',
 				phone: '',
+				idName:'',
+				company:'',
 				modalName: null,
 				truePhone: "",
 				PageCur: "appoient",
@@ -122,15 +134,27 @@
 						icon: 'none',
 						duration: 1000
 					});
-				} else if (_that.name == "") {
+				} else if (_that.company == "") {
 					uni.showToast({
-						title: '请输入姓名',
+						title: '请输入您的单位名称',
 						icon: 'none',
 						duration: 1000
 					});
-				} else if (_that.phone == "") {
+				}else if (_that.name == "") {
 					uni.showToast({
-						title: '请输入电话号码',
+						title: '请输入您的姓名',
+						icon: 'none',
+						duration: 1000
+					});
+				} else if (_that.idName == "") {
+					uni.showToast({
+						title: '请输入您的身份证号码',
+						icon: 'none',
+						duration: 1000
+					});
+				}else if (_that.phone == "") {
+					uni.showToast({
+						title: '请输入您的电话号码',
 						icon: 'none',
 						duration: 1000
 					});
