@@ -142,7 +142,7 @@
                     </a-form-item>
                   </a-col>
                   <a-col :span="2">
-                    <a-button type="link" icon="download" @click="handleExportXls()">下载电子合同</a-button>
+                    <a-button type="link" icon="download" @click="handleExportXls('电子合同')">下载电子合同</a-button>
 <!--                    <div style="margin-top:45px;color:#2eabff">下载电子合同</div>-->
                   </a-col>
                 </a-row>
@@ -222,7 +222,9 @@ import { FormTypes } from '@/utils/JEditableTableUtil'
 import moment from 'moment'
 import JDate from "@comp/jeecg/JDate";
 import JImportModal from '@/components/jeecg/JImportModal'
+import { JeecgListMixin } from '../../../mixins/JeecgListMixin'
 export default {
+  mixins:[JeecgListMixin],
   name: "CreateRegister",
   components: {
     JEditableTable,
@@ -327,6 +329,9 @@ export default {
       dataSource: [],
       headers: {
         authorization: 'authorization-text',
+      },
+      url: {
+        exportXlsUrl: "/sys/user/exportXls",
       },
     }
   },
@@ -436,35 +441,8 @@ export default {
     getImportUrl(){
       return '/online/cgform/api/importXls/'+this.code
     },
-    handleExportXls(){
-
-        this.$refs.importModal.show()
-
-      // let param = this.queryParam;
-      // if(this.table.selectedRowKeys && this.table.selectedRowKeys.length>0){
-      //   param['selections'] = this.table.selectedRowKeys.join(",")
-      // }
-      // console.log("导出参数",param)
-      // let paramsStr = JSON.stringify(filterObj(param));
-      // downFile(this.url.exportXls+this.code,{paramsStr:paramsStr}).then((data)=>{
-      //   if (!data) {
-      //     this.$message.warning("文件下载失败")
-      //     return
-      //   }
-      //   if (typeof window.navigator.msSaveBlob !== 'undefined') {
-      //     window.navigator.msSaveBlob(new Blob([data]), this.description+'.xls')
-      //   }else{
-      //     let url = window.URL.createObjectURL(new Blob([data]))
-      //     let link = document.createElement('a')
-      //     link.style.display = 'none'
-      //     link.href = url
-      //     link.setAttribute('download', this.description+'.xls')
-      //     document.body.appendChild(link)
-      //     link.click()
-      //     document.body.removeChild(link); //下载完成移除元素
-      //     window.URL.revokeObjectURL(url); //释放掉blob对象
-      //   }
-      // })
+    importOk(){
+      this.loadData(1)
     },
   },
 

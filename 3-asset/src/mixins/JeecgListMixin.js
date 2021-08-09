@@ -3,10 +3,10 @@
  * 高级查询按钮调用 superQuery方法  高级查询组件ref定义为superQueryModal
  * data中url定义 list为查询列表  delete为删除单条记录  deleteBatch为批量删除
  */
-import { filterObj } from '@/utils/util';
-import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
+import { filterObj } from '../utils/util';
+import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '../api/manage'
 import Vue from 'vue'
-import { ACCESS_TOKEN } from "@/store/mutation-types"
+import { ACCESS_TOKEN } from "../store/mutation-types"
 
 export const JeecgListMixin = {
   data(){
@@ -63,7 +63,7 @@ export const JeecgListMixin = {
   methods:{
     loadData(arg) {
       if(!this.url.list){
-        this.$message.error("请设置url.list属性!")
+       // this.$message.error("请设置url.list属性!")
         return
       }
       //加载数据 若传入参数1则加载第一页的内容

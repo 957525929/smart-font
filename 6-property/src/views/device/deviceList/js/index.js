@@ -71,7 +71,7 @@ export const devColumns = [{
     dataIndex: 'groupDetail',
     key: 'groupDetail',
     width: 100,
-    valueEnum: handleTreeToCascade(groupTree),
+    valueEnum: groupTree,
     type: 'a-cascader',
     value: "",
     hideInDetail: true
