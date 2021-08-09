@@ -8,7 +8,6 @@ export const columns = [
         key: 'devId',
         hideInLogin: true,
         hideInEdit: true,
-        hideInLogin: true,
         hideInSearch: true
     },
     {
@@ -37,15 +36,15 @@ export const columns = [
         type: 'a-select',
         hideInTable: true
     },
-    {
-        title: '工作状态',
-        key: 'staffStatus',
-        dataIndex: 'staffStatus',
-        scopedSlots: { customRender: 'staffStatus' },
-        width: 50,
-        type: 'a-select',
-        valueEnum: staffStatus
-    },
+    // {
+    //     title: '工作状态',
+    //     key: 'staffStatus',
+    //     dataIndex: 'staffStatus',
+    //     scopedSlots: { customRender: 'staffStatus' },
+    //     width: 50,
+    //     type: 'a-select',
+    //     valueEnum: staffStatus
+    // },
     {
         title: '联系方式',
         dataIndex: 'phone',
@@ -190,15 +189,15 @@ export const loginInfo = [
         type: 'a-select',
         value: "",
     },
-    {
-        title: '工作状态',
-        key: 'staffStatus',
-        dataIndex: 'staffStatus',
-        width: 50,
-        type: 'a-select',
-        valueEnum: staffStatus,
-        value: ""
-    },
+    // {
+    //     title: '工作状态',
+    //     key: 'staffStatus',
+    //     dataIndex: 'staffStatus',
+    //     width: 50,
+    //     type: 'a-select',
+    //     valueEnum: staffStatus,
+    //     value: ""
+    // },
     {
         title: '联系方式',
         dataIndex: 'phone',
@@ -239,7 +238,7 @@ export const devDetail = [
     // },
     // {
     //     title: '业主联系方式',
-    //     key: 'phone',        
+    //     key: 'phone',
     //     value:"",
     // },
     {
