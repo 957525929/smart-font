@@ -39,14 +39,14 @@
 		data() {
 			return {
 				elements: [{
-						title: '酒店预定',
+						title: '酒店预订',
 						name: 'layout',
 						color: 'cyan',
 						cuIcon: 'homefill',
 						route:'hotel'
 					},
 					{
-						title: '会议室预定',
+						title: '会议室预订',
 						name: 'background',
 						color: 'blue',
 						cuIcon: 'remind',

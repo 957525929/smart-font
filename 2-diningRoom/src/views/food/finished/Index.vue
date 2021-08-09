@@ -282,8 +282,9 @@ export default {
     },
 
     add () {
-      this.model={}
+
       this.model={
+        number:1,
         time:moment()
       }
       this.visible = true;

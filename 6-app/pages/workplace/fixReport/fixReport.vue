@@ -9,14 +9,21 @@
 		</cu-custom>
 		<form class="cu-list menu sm-border card-menu margin-top" @submit="formSubmit" @reset="formReset">
 			<view class="cu-form-group">
+				<view class="title">报修类型</view>
+				<picker :value="pickerValue" :range="fixType" @change="TimeChange">
+					<view class="picker">
+						{{fixType[pickerValue]}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
 				<view class="title">报修地点</view>
-				<input placeholder="输入框带个图标" name="address"></input>
+				<input placeholder="报修地点" name="address"></input>
 				<text class='cuIcon-locationfill text-orange'></text>
 			</view>
-			<view class="cu-form-group align-start">  
+			<view class="cu-form-group align-start">
 				<view class="title">报修描述</view>
-				<textarea maxlength="-1" @input="textareaInput"
-					placeholder="多行文本输入框"></textarea>
+				<textarea maxlength="-1" @input="textareaInput" placeholder="报修描述"></textarea>
 			</view>
 			<!-- 测试 -->
 			<view class="cu-bar bg-white margin-top">
@@ -50,10 +57,20 @@
 
 <script>
 	import {
+		devTypeTree
+	} from "@/common/public.js"
+	const NEW_DEVDATA = Object.freeze(devTypeTree)
+	import {
 		mapState
 	} from "vuex"
 	export default {
 		name: "fixReport",
+		data() {
+			return {
+				fixType:NEW_DEVDATA.map(item => item.title),
+				pickerValue: 0
+			}
+		},
 		computed: {
 			...mapState(['fixImgList', 'textareaValue'])
 		},
@@ -95,6 +112,10 @@
 			},
 			textareaInput(e) {
 				this.$store.commit("changeSingleVal", ["textareaValue", e.detail.value])
+			},
+			TimeChange(e) {
+				this.pickerValue = e.detail.value
+
 			},
 			formSubmit: function(e) {
 				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))

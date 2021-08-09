@@ -12,8 +12,12 @@
 			</view>
 			<view class="cu-list menu-avatar">
 				<view class="cu-item" @click="modalVisable = true">
-					<view class="cu-avatar radius  lg" style="background-image:url(../../static/notice/面性信息信息短信消息.png);">
+					<view class="cu-avatar radius lg">
+						<!-- 显示不同图片 -->
+						<image  src="../../static/notice/message.png" mode="scaleToFill" style="width: 55px; height: 55px;"></image>
 					</view>
+					<!-- <view class="cu-avatar radius  lg" style="background-image:url(../../static/notice/消息.png);">
+					</view> -->
 					<view class="content">
 						<!-- <navigator  :url="'/pages/notice/' +'chat'"  > -->
 						<view class="text-cut">【会议室预约通知】</view>
@@ -32,15 +36,19 @@
 					</view>
 				</view>
 				<view class="cu-item"  @click="modalVisable1 = true">
-					<view class="cu-avatar radius lg" style="background-image:url(../../static/notice/面性通知消息铃铛.png)">
-						<!-- <view class="cu-tag badge">99+</view> -->
+					<view class="cu-avatar radius lg">
+						<!-- 显示不同图片 -->
+						<image  src="../../static/notice/notice.png" mode="scaleToFill" style="width: 55px; height: 55px;"></image>
 					</view>
+					<!-- <view class="cu-avatar radius lg" style="background-image:url(../../static/notice/提醒.png)">
+						
+					</view> -->
 					<view class="content">
 						<view class="text-cut">【会议室预约通知】</view>
 						<!-- <view class="cu-tag round bg-orange sm">重要会议</view> -->
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
-								<text class="cuIcon-infofill text-red  margin-right-xs"></text>
+								<text class="  margin-right-xs"></text>
 								您于2021-07-19上午预约的会议，已被撤销。
 							</view>
 						</view>
@@ -52,8 +60,12 @@
 					</view>
 				</view>
 				<view class="cu-item ">
-					<view class="cu-avatar radius lg" style="background-image:url(../../static/notice/面性信息信息短信消息.png);">
+					<view class="cu-avatar radius lg">
+						<!-- 显示不同图片 -->
+						<image  src="../../static/notice/message.png" mode="scaleToFill" style="width: 55px; height: 55px;"></image>
 					</view>
+					<!-- <view class="cu-avatar radius lg" style="background-image:url(../../static/notice/消息.png);">
+					</view> -->
 					<view class="content">
 						<view class="text-cut">
 							<view class="text-cut">【会议室预约通知】</view>
@@ -70,8 +82,12 @@
 					</view>
 				</view>
 				<view class="cu-item">
-					<view class="cu-avatar radius lg" style="background-image:url(../../static/notice/面性信息信息短信消息.png);">
+					<view class="cu-avatar radius lg">
+						<!-- 显示不同图片 -->
+						<image  src="../../static/notice/message.png" mode="scaleToFill" style="width: 55px; height: 55px;"></image>
 					</view>
+<!-- 					<view class="cu-avatar radius lg" style="background-image:url(../../static/notice/消息.png);"> -->
+					<!-- </view> -->
 					<view class="content">
 						<view class="text-cut">【会议室预约通知】</view>
 						<!-- <view class="cu-tag round bg-orange sm">会议未参加...</view> -->
@@ -87,9 +103,13 @@
 					</view>
 				</view>
 				<view class="cu-item cur">
-					<view class="cu-avatar radius lg" style="background-image:url(../../static/notice/面性信息信息短信消息.png);">
-						<!-- <view class="cu-tag badge"></view> -->
+					<view class="cu-avatar radius lg">
+						<!-- 显示不同图片 -->
+						<image  src="../../static/notice/message.png" mode="scaleToFill" style="width: 55px; height: 55px;"></image>
 					</view>
+					<!-- <view class="cu-avatar radius lg" style="background-image:url(../../static/notice/消息.png);">
+						<view class="cu-tag badge"></view> 
+					</view> -->
 					<view class="content">
 						<view>
 							<view class="text-cut">【会议室预约通知】</view>
@@ -160,4 +180,8 @@
 </script>
 
 <style>
+	.cu-avatar.lg {
+		height: 55px;
+		width: 55px;
+	}
 </style>

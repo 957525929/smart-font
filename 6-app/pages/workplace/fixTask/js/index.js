@@ -1,54 +1,4 @@
-import {
-	proPeriod,
-	proTaskType,
-	devTypeTree
-} from "@/common/public.js"
-//保养
-const taskList = {
-	0: [{
-		taskType: 0,
-		taskId: 0,
-		type: 0,
-		titleLeft: "烟草大厦18楼",
-		titleRight: "查看",
-		content: "18楼停电，请尽快修复",
-		footerRight: "2021-06-22 17:55:55"
-	}, {
-		taskType: 0,
-		taskId: 1,
-		type: 1,
-		titleLeft: "烟草大厦6楼",
-		titleRight: "查看",
-		content: "空调调控温度无反应",
-		footerRight: "2021-06-22 10:55:55"
-	}, {
-		taskType: 0,
-		taskId: 2,
-		type: 2,
-		titleLeft: "烟草大厦18楼",
-		titleRight: "查看",
-		content: "18楼频繁断电停电",
-		footerRight: "2021-06-20 17:55:55"
-	}, {
-		taskType: 0,
-		taskId: 4,
-		type: 3,
-		titleLeft: "烟草大厦3楼卫生间",
-		titleRight: "查看",
-		content: "卫生间停水",
-		footerRight: "2021-06-22 17:55:55"
-	}],
-	1: [{
-		taskType: 0,
-		taskId: 5,
-		type: 4,
-		titleLeft: "烟草大厦18楼",
-		titleRight: "查看",
-		content: "18楼停电",
-		footerRight: "2021-06-22 17:55:55"
-	}]
-}
-const img = ["/static/logo.png", "/static/tabbar/plugin.png"]
+
 const taskAllBasicData = [{
 	taskType: 0,
 	taskId: 0,
@@ -96,19 +46,19 @@ const taskAllBasicData = [{
 	taskType: 0,
 	taskId: 5,
 	taskState: 4,
-	area:"中国烟草总公司福建省公司机关-B区域-1号楼",
+	area: "中国烟草总公司福建省公司机关-B区域-1号楼",
 	address: "烟草大厦18楼",
 	description: "18楼停电",
 	complaintTime: "2021-06-22 17:55:55",
 	owner: "乔峰",
 	ownerPhone: "18259529231",
 	devType: "电器设备",
-	devName:"供电设备_2001",
-	reason:"发生短路",
-	handle:"更换线路",
-	ficDoneDate:"2021-06-22",
-	ficDoneTime:"19:00:06",
-	ownerWrite:"/static/writer.png"
+	devName: "供电设备_2001",
+	reason: "发生短路",
+	handle: "更换线路",
+	ficDoneDate: "2021-06-22",
+	ficDoneTime: "19:00:06",
+	ownerWrite: "/static/writer.png"
 }]
 
 const fixBasic = [{
@@ -137,11 +87,11 @@ const fixBasic = [{
 	value: ""
 }]
 
-const fixRecord=[ {
+const fixRecord = [{
 	key: "area",
 	label: "设备区域",
 	value: ""
-},{
+}, {
 	key: "devName",
 	label: "维修设备",
 	value: ""
@@ -175,8 +125,6 @@ const fixRecord=[ {
 	valueEnum: ""
 }]
 module.exports = {
-	taskList,
-	img,
 	taskAllBasicData,
 	fixBasic,
 	fixRecord

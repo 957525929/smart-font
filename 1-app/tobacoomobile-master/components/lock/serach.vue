@@ -55,6 +55,9 @@
 </template>
 
 <script>
+	import {
+		objectMultiArray
+	} from './data/areaTree.js'
 	export default {
 		onLoad(option) {},
 		
@@ -70,9 +73,10 @@
 				(aData.getMonth() + 1) + "-" +
 				(aData.getDate())
 		},
-		
 		mounted() {},
-		
+		onLoad(option) {
+			this.init();
+		},
 		data() {
 			return {
 				date: '',
@@ -81,39 +85,29 @@
 				index1: 0,
 				picker1: ['未安装', '已安装'],
 				multiArray: [
-					['中国烟草总公司福建省公司机关'],
-					['A区域', 'B区域'],
-					['1号楼', '2号楼']
+					[],
+					[],
+					[]
 				],
-				objectMultiArray: [
-					[{
-						id: 0,
-						name: '中国烟草总公司福建省公司机关'
-					}, ],
-					[{
-							id: 0,
-							name: 'A区域'
-						},
-						{
-							id: 1,
-							name: 'B区域'
-						},
-					],
-					[{
-							id: 0,
-							name: '1号楼'
-						},
-						{
-							id: 1,
-							name: '2号楼'
-						}
-					]
-				],
+				objectMultiArray,
 				multiIndex: [0, 0, 0],
 			}
 		},
 		
 		methods: {
+			init() {
+				for (var i = 0; i < this.objectMultiArray.length; i++) {
+					this.multiArray[0].push(this.objectMultiArray[i].name);
+				}
+				for (var j = 0; j < this.objectMultiArray[this.multiIndex[0]].tower.length; j++) {
+					this.multiArray[1].push(this.objectMultiArray[this.multiIndex[0]].tower[j].name);
+				}
+				for (var k = 0; k < this.objectMultiArray[this.multiIndex[0]].tower[this.multiIndex[1]].room
+					.length; k++) {
+					this.multiArray[2].push(this.objectMultiArray[this.multiIndex[0]].tower[this.multiIndex[1]].room[k]
+						.name);
+				}
+			},
 			PickerChange(e) {
 				this.index = e.detail.value
 			},
@@ -128,7 +122,46 @@
 				this.multiIndex = e.detail.value
 			},
 			
-			MultiColumnChange(e) {},
+			MultiColumnChange(e) {
+				let data = {
+					multiArray: this.multiArray,
+					multiIndex: this.multiIndex
+				};
+				data.multiIndex[e.detail.column] = e.detail.value;
+				switch (e.detail.column) {
+					case 0:
+						data.multiIndex[1] = 0;
+						data.multiIndex[2] = 0;
+						let result = this.searchColumn();
+						data.multiArray[1] = result[0]
+						data.multiArray[2] = result[1]
+						break;
+					case 1:
+						data.multiIndex[2] = 0;
+						data.multiArray[2] = this.searchColumn()[1]
+						break;
+				}
+				this.multiArray = data.multiArray;
+				this.multiIndex = data.multiIndex;
+			
+			},
+			searchColumn() {
+				var arr1 = [];
+				var arr2 = [];
+				for (var i = 0; i < this.objectMultiArray.length; i++) {
+					if (i == this.multiIndex[0]) {
+						for (var j = 0; j < this.objectMultiArray[i].tower.length; j++) {
+							arr1.push(this.objectMultiArray[i].tower[j].name);
+							if (j == this.multiIndex[1]) {
+								for (var k = 0; k < this.objectMultiArray[i].tower[j].room.length; k++) {
+									arr2.push(this.objectMultiArray[i].tower[j].room[k].name);
+								}
+							}
+						}
+					}
+				}
+				return [arr1, arr2];
+			},
 			
 			DateChange(e) {
 				this.date = e.detail.value

@@ -10,7 +10,7 @@
 			</view>
 		</scroll-view>
 		<view class="cu-card article">
-			<TaskCardItem :item="item" v-for="item in taskList[TabCur]" :key="item.taskId" @handleTopRight="$goPage({name:'fixTaskDetail',params:{taskId:data.taskId}})"></TaskCardItem>
+			<TaskCardItem :item="item" v-for="item in taskList[TabCur]" :key="item.taskId" @handleTopRight="goTo"></TaskCardItem>
 		</view>
 	</view>
 </template>
@@ -29,6 +29,9 @@
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id;
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
+			},
+			goTo(data){
+				this.$goPage({name:'fixRecordDetail',query:{taskId:data,type:this.TabCur,showBtn:true}})
 			}
 		}
 	}

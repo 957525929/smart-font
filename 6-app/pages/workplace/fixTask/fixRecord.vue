@@ -12,7 +12,7 @@
 </template>
 
 <script>
-	import list from "./js/index.js"
+	import list from "@/common/public.js"
 	export default {
 		data() {
 			return {

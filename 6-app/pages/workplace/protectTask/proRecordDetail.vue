@@ -25,12 +25,16 @@
 </template>
 
 <script>
-	import list from "./js/index.js"
+	import {img} from "@/common/public.js"
+	import list from "./js/detail.js"
 	import {handleEnumData} from "@/common/util.js"
 	//vue
 	import DescriptionDetail from "@/components/DescriptionDetail/DescriptionDetail.vue"
 	import TaskCardItem from "@/components/TaskCardItem/TaskCardItem.vue"
-	const NEW_PRORECORD = Object.freeze(list)
+	const NEW_PRORECORD = Object.freeze({
+		img,
+		...list
+	})
 	export default {
 		onLoad() {
 			this.taskId = this.$parseURL().taskId

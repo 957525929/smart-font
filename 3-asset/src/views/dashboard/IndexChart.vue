@@ -50,10 +50,8 @@
             </a-col>
           </div>
         </a-tab-pane>
-
       </a-tabs>
       </div>
-
     </a-row>
     <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
       <div class="salesCard">

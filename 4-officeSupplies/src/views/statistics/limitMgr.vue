@@ -42,6 +42,8 @@
         @change="handleTableChange">
         <span slot="action" slot-scope="text, record">
           <a @click="editLimitPrice(record)">编辑</a>
+             <a-divider type="vertical" />
+          <a @click="handleRecordDetail(record)">记录</a>
         </span>
       </a-table>
     </div>
@@ -52,6 +54,18 @@
         label="月限额(元)">
         <a-input-number v-model="curData.limitPrice" class="inputWitdh"  placeholder="请输入部门月限额" :min="0" :max="10000000" :decimalSeparator="0"/>
       </a-form-item>
+      <a-form-item
+        :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }"
+        label="调整理由">
+        <a-textarea
+          placeholder="请输入部门限额调整理由"
+          :auto-size="{ minRows: 3, maxRows: 6 }"
+        />
+      </a-form-item>
+    </a-modal>
+
+    <a-modal v-model="recordVisible" :title="curData.title" :footer="null">
+      <record-modal></record-modal>
     </a-modal>
   </a-card>
 </template>
@@ -60,16 +74,19 @@
 <script>
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
+  import RecordModal from './modules/RecordModal'
 
   export default {
     name: "StocK",
     mixins:[JeecgListMixin],
     components: {
-      JDate
+      JDate,
+      RecordModal
     },
     data () {
       return {
         description: '部门领用统计页面',
+        recordVisible: false,
         visible:false,
         // 查询条件
         queryParam: {},
@@ -155,6 +172,11 @@
       editLimitPrice(record) {
         this.curData = record;
         this.visible = true;
+      },
+      handleRecordDetail(record) {
+        this.curData = record;
+        this.curData.title = this.curData.department + '限额调整记录' ;
+        this.recordVisible = true;
       },
       handleOk() {
         this.$message.success('修改成功！');

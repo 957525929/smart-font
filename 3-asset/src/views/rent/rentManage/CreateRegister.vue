@@ -37,7 +37,7 @@
                     </a-form-item>
                   </a-col>
                   <a-col :span="2">
-                    <div style="margin-top:45px;color:#2eabff">下载电子合同</div>
+                    <a-button style="bottom: 5px" type="link" icon="download" @click="handleExportXls()">下载电子合同</a-button>
                   </a-col>
                 </a-row>
                 <a-row :gutter="16">
@@ -142,7 +142,8 @@
                     </a-form-item>
                   </a-col>
                   <a-col :span="2">
-                    <div style="margin-top:45px;color:#2eabff">下载电子合同</div>
+                    <a-button type="link" icon="download" @click="handleExportXls('电子合同')">下载电子合同</a-button>
+<!--                    <div style="margin-top:45px;color:#2eabff">下载电子合同</div>-->
                   </a-col>
                 </a-row>
                 <a-row :gutter="16">
@@ -209,6 +210,7 @@
             </a-tab-pane>
           </a-tabs>
         </a-card>
+        <j-import-modal ref="importModal" :url="getImportUrl()" @ok="importOk"></j-import-modal>
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -219,10 +221,14 @@ import  JEditableTable from '@comp/jeecg/JEditableTable'
 import { FormTypes } from '@/utils/JEditableTableUtil'
 import moment from 'moment'
 import JDate from "@comp/jeecg/JDate";
+import JImportModal from '@/components/jeecg/JImportModal'
+import { JeecgListMixin } from '../../../mixins/JeecgListMixin'
 export default {
+  mixins:[JeecgListMixin],
   name: "CreateRegister",
   components: {
     JEditableTable,
+    JImportModal,
     JDate,
   },
   props: {
@@ -323,6 +329,9 @@ export default {
       dataSource: [],
       headers: {
         authorization: 'authorization-text',
+      },
+      url: {
+        exportXlsUrl: "/sys/user/exportXls",
       },
     }
   },
@@ -429,6 +438,12 @@ export default {
     },
     onValueChange() {},
     onInEntryAdded() {},
+    getImportUrl(){
+      return '/online/cgform/api/importXls/'+this.code
+    },
+    importOk(){
+      this.loadData(1)
+    },
   },
 
 }

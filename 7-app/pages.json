@@ -22,6 +22,14 @@
 			}
 		},
 		{
+			"path": "pages/appointment/hotellist",
+			"style":{
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+		},
+		{
 			"path": "pages/appointment/meeting",
 			"style":{
 				"app-plus":{
