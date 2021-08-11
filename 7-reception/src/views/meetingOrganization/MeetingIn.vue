@@ -15,10 +15,10 @@
             <a-select-option value="待安排">待安排</a-select-option>
             <a-select-option value="待审核">待审核</a-select-option>          
             <a-select-option value="未通过">未通过</a-select-option>
+             <a-select-option value="全部">全部</a-select-option>
           </a-select>
         </a-col>
         <a-col :span="1"></a-col>
-
         <a-col>会议时间：</a-col>
         <a-col>
           <a-date-picker
@@ -107,8 +107,9 @@
             slot-scope="text, record"
             replace
           >
-            <a-button :style="{ background: '#49a9ee', color: 'white' }">查看详情</a-button>
+            <a>详情</a>                   
           </router-link>
+
         </a-table-column>
       </a-table>
       <br />
