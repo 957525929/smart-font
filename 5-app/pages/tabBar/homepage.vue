@@ -44,13 +44,13 @@
 						cuIcon: 'vipcard',
 						route:'endTrip'
 					},
-					{
-						title: '加油登记',
-						name: 'icon',
-						color: 'brown',
-						cuIcon: 'formfill',
-						route:'supplyRegister'
-					},
+					// {
+					// 	title: '加油登记',
+					// 	name: 'icon',
+					// 	color: 'brown',
+					// 	cuIcon: 'formfill',
+					// 	route:'supplyRegister'
+					// },
 					{
 						title: '保养登记',
 						name: 'button',

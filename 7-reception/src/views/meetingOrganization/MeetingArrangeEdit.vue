@@ -716,7 +716,7 @@ export default {
       hotelTelInfor: undefined,
       defaultInfor: undefined,
       // flagRoom: false,
-      roomInfor: undefined,
+      // roomInfor: undefined,
       // numberRoomInfor: undefined,
       // conditionRoomInfor: undefined,
       eatHotel: '',
@@ -864,18 +864,13 @@ export default {
       return lab.join(".");
     },
     onChangeRoom(value) {
-      console.log(value)
-      this.roomS = value[0] + '.' + value[1] + '.' + value[2] + '.' + value[3]
-      let area = value[0] + '.' + value[1] + '.' + value[2]
+      if(value=='福州富力威斯汀酒店'){
+        this.roomS=value
+      }else{
+      let a =[value[0],value[1],value[2],value[3]]  
+      this.roomS = a.join('.')
+      }
       this.flagRoom = true
-      this.roomInfor = this.roomS
-      dataRoomIn.filter((item) => {
-        if (area == item.area && value[3] == item.room) {
-          this.numberRoomInfor = item.number
-          this.conditionRoomInfor = item.condition
-        }
-      })
-      // console.log(this.formRoom.room)
     },
     onSubmitHotel() {
       console.log(this.formHotel.dateStart)
@@ -1063,8 +1058,13 @@ export default {
       let dateA = record.dateTime.split('~')
       this.ModifyRoom.dateStart = this.moment(dateA[0], 'YYYY-MM-DD')
       this.ModifyRoom.dateEnd = this.moment(dateA[1], 'YYYY-MM-DD')
-       let roomM = record.room.split('.')
+      if(record.room.length==1){
+        this.ModifyRoom.room =record.room
+      }else{
+      let roomM = record.room.split('.')
       this.ModifyRoom.room =roomM
+      }
+
     },
     SubmitModifyRoom() {
       this.visibleRoom = false
