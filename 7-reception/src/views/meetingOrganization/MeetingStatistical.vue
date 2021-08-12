@@ -3,18 +3,25 @@
   <div>
     <div class="statisticlalOne">
       <a-row type="flex" align="middle">
-        <a-col :span="1"></a-col>
+        <!-- <a-col :span="1"></a-col> -->
         <a-col>
           <a-row>
-            <h1 style='font-weight: bold; text-align: center;'>请选择</h1>
-          </a-row>
-          <a-row style='margin-bottom: 10px; margin-top: 10px; text-align: center;'>
+            <span style='font-weight: bold;margin-right:20px;font-size:16px'>请选择</span>
             <a-radio-group v-model="time">
               <a-radio-button value="week">本周</a-radio-button>
               <a-radio-button value="month">本月</a-radio-button>
               <a-radio-button value="month">本季度</a-radio-button>
               <a-radio-button value="year">本年</a-radio-button>
             </a-radio-group>
+          </a-row>
+          <a-row style='margin-bottom: 10px; margin-top: 10px; text-align: center;'>
+            <span style='font-weight: bold;margin-right:20px;font-size:16px'>自定义</span>
+            <a-date-picker placeholder="请选择开始" :format="dateFormat"></a-date-picker>
+            <span>&nbsp;~&nbsp;</span>
+            <a-date-picker placeholder="请选择结束" :format="dateFormat"></a-date-picker>
+          </a-row>
+          <a-row style='margin-bottom: 10px; margin-top: 10px; text-align: center;'>
+            <a-button :style="{ background: '#49a9ee', color: 'white'}" @click="analysis">智能分析</a-button>
           </a-row>
         </a-col>
         <a-col :span="2"></a-col>
@@ -26,55 +33,71 @@
         <a-col :span="1"></a-col>
         <a-col>
           <div style='border:1px solid #c7b2b2'>
-            <a-statistic title="会议总开销" :value="150000" style="margin:20px 50px" />
+            <a-statistic title="会议总开销（元）" :value="150000" style="margin:20px 50px" />
+          </div>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
+          <div v-if="visibleSta">
+            <h4>智能分析结果</h4>
+            <p>本年度开展项目会议次数最多，为25次，占总次数28%；开销占总会议支出17%，位居第二；</p>
+            <p>年度会议次数最少，为5次，占6%。</p>
+            <span>开展表彰会议开销过高，占总会议总支出18%。</span>
           </div>
         </a-col>
       </a-row>
     </div>
     <div class="statisticlalTwo">
-      <a-row type="flex" align="middle">
-        <a-col :span="13">
-          <a-row>
-            <h1 style='font-weight: bold; text-align: left;'>会议主题</h1>
+      <a-tabs default-active-key="1" @change="callback">
+        <a-tab-pane key="1" tab="会议次数" style="font-size:18px">
+          <a-row type="flex" align="middle">
+            <a-col :span="13">
+              <!-- <a-row>
+                <h1 style='font-weight: bold; text-align: left;'>会议主题</h1>
+              </a-row> -->
+              <a-row style='margin-top: 10px; text-align: center;'>
+                <div ref="meetingNumber" style="height:400px"></div>
+              </a-row>
+            </a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10">
+              <a-row>
+                <h1 style='font-weight: bold; text-align: left;margin-left:100px'></h1>
+              </a-row>
+              <a-row style='margin-top: 50px;'>
+                <pie v-bind:height="heightPie" v-bind:dataSource="dataSourcePie"></pie>
+              </a-row>
+            </a-col>
           </a-row>
-          <a-row style='margin-top: 10px; text-align: center;'>
-            <div ref="meetingNumber" style="height:400px"></div>
+        </a-tab-pane>
+        <a-tab-pane key="2" tab="会议开销（元）" force-render>
+          <a-row type="flex" align="middle">
+            <a-col :span="12">
+              <LineChartMultid style='margin-top: 50px;' :dataSource="dataSource1" :fields='fields1' />
+              <!-- <a-row>
+                <h1 style='font-weight: bold; text-align: left;'>会议开销（按主题）</h1>
+              </a-row> -->
+              <!-- <a-row style='margin-top: 50px;'>
+                <LineChartMultid :dataSource="dataSource1" :fields='fields1' />
+              </a-row> -->
+            </a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="11">
+              <pie style='margin-top: 50px;' v-bind:height="heightPie" v-bind:dataSource="dataSourcePieB"></pie>
+              <!-- <a-row>
+                <h1 style='font-weight: bold; text-align: left;margin-left:100px'>会议开销（按月份）</h1>
+              </a-row> -->
+              <!-- <a-row style='margin-top: 50px;'>
+                <LineChartMultid :dataSource="dataSource3" :fields='fields3' />
+              </a-row> -->
+            </a-col>
           </a-row>
-        </a-col>
-        <a-col :span="1"></a-col>
-        <a-col :span="10">
-          <a-row>
-            <h1 style='font-weight: bold; text-align: left;margin-left:100px'>会议状态</h1>
-          </a-row>
-          <a-row style='margin-top: 50px;'>
-            <pie v-bind:height="heightPie" v-bind:dataSource="dataSourcePie"></pie>
-          </a-row>
-        </a-col>
-      </a-row>
+        </a-tab-pane>
+      </a-tabs>
+
     </div>
-    <div class="statisticlalTwo">
-      <a-row type="flex" align="middle">
-        <a-col :span="10">
-          <a-row>
-            <h1 style='font-weight: bold; text-align: left;'>会议开销（按主题）</h1>
-          </a-row>
-          <a-row style='margin-top: 50px;'>
-            <LineChartMultid  :dataSource="dataSource1" :fields='fields1' />
-          </a-row>
-        </a-col>
-        <a-col :span="1"></a-col>
-        <a-col :span="13">
-          <a-row>
-            <h1 style='font-weight: bold; text-align: left;margin-left:100px'>会议开销（按月份）</h1>
-          </a-row>
-          <a-row style='margin-top: 50px;'>
-            <LineChartMultid  :dataSource="dataSource3" :fields='fields3'/>
-          </a-row>
-        </a-col>
-      </a-row>
-    </div>
-    <!-- 图 -->
-    <div>
+    <!-- 表格 -->
+    <div class="statisticlalThree">
       <a-row type="flex" align="middle">
         <a-col>
           <span>按主题筛选：</span>
@@ -102,22 +125,18 @@
         </a-col>
         <a-col :span="2"></a-col>
         <a-col>
-          <!-- <a-button
-            :style="{ background: '#49a9ee', color: 'white' }"
-            icon="search"
-            @click="searchQuery"
-          >查询</a-button>-->
+          <a-button :style="{ background: '#49a9ee', color: 'white' }" icon="search" @click="searchQuery">查询</a-button>
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
         </a-col>
       </a-row>
-      <a-tabs default-active-key="1" @change="callback">
-        <a-tab-pane key="1" tab="会议次数">
-          <bar v-bind:dataSource="dataNumber" v-bind:height="heightNumber"></bar>
-        </a-tab-pane>
-        <a-tab-pane key="2" tab="会议预算（元）" force-render>
-          <bar v-bind:dataSource="dataBudget" v-bind:height="heightBudget"></bar>-->
-        </a-tab-pane>
-      </a-tabs>
+      <a-table rowKey="id" :data-source="dataSelet" :pagination="false" style="margin-top:20px">
+        <a-table-column title="序号" data-index="id" align="left" width="150px"></a-table-column>
+        <a-table-column title="会议主题" data-index="theme" align="center"></a-table-column>
+        <a-table-column title="会议次数" data-index="number" align="center"></a-table-column>
+        <a-table-column title="会议次数占比（%）" data-index="numberProportion" align="center"></a-table-column>
+        <a-table-column title="会议开销（元）" data-index="expenses" align="center"></a-table-column>
+        <a-table-column title="会议开销占比（%）" data-index="expensesProportion" align="center"></a-table-column>
+      </a-table>
     </div>
   </div>
 </template>
@@ -149,64 +168,6 @@
       number: '1',
       membersNumber: '30',
       budget: '21000'
-    }
-  ]
-  const dataNumber = [{
-      x: '年度总结',
-      y: 10
-    },
-    {
-      x: '项目会议',
-      y: 3
-    },
-    {
-      x: '物流会议',
-      y: 3
-    },
-    {
-      x: '安全会议',
-      y: 7
-    },
-    {
-      x: '管理会议',
-      y: 9
-    },
-    {
-      x: '表彰会议',
-      y: 6
-    },
-    {
-      x: '销售会议',
-      y: 5
-    }
-  ]
-  const dataBudget = [{
-      x: '年度总结',
-      y: 20000
-    },
-    {
-      x: '项目会议',
-      y: 5000
-    },
-    {
-      x: '物流会议',
-      y: 3000
-    },
-    {
-      x: '安全会议',
-      y: 9000
-    },
-    {
-      x: '管理会议',
-      y: 8500
-    },
-    {
-      x: '表彰会议',
-      y: 30000
-    },
-    {
-      x: '销售会议',
-      y: 5000
     }
   ]
   const theme = [{
@@ -247,34 +208,34 @@
         theme,
         heightPie: 350,
         dataSourcePie: [{
-            item: '进行中',
-            count: 3
+            item: '年度总结',
+            count: 5
           },
           {
-            item: '待开始',
-            count: 10
+            item: '项目会议',
+            count: 25
           },
           {
-            item: '待安排',
+            item: '管理会议',
+            count: 12
+          },
+          {
+            item: '物流会议',
+            count: 18
+          },
+          {
+            item: '表彰会议',
             count: 17
           },
           {
-            item: '待审核',
+            item: '销售会议',
             count: 13
-          },
-          {
-            item: '已完成',
-            count: 37
-          },
-          {
-            item: '待安排',
-            count: 10
           }
         ],
         fields1: ["会议开销", ],
         dataSource1: [{
             "type": "年度总结",
-            "会议开销": 24000
+            "会议开销": 4000
           },
           {
             "type": "项目会议",
@@ -282,7 +243,7 @@
           },
           {
             "type": "物流会议",
-            "会议开销": 25000
+            "会议开销": 35000
           },
           {
             "type": "管理会议",
@@ -295,67 +256,87 @@
           {
             "type": "销售会议",
             "会议开销": 23500
-          },      
-        ],
-          fields3: ["会议开销", ],
-        dataSource3: [{
-            "type": "1月",
-            "会议开销": 12500
-          },
-          {
-            "type": "2月",
-            "会议开销": 8000
-          },
-          {
-            "type": "3月",
-            "会议开销": 5000
-          },
-          {
-            "type": "4月",
-            "会议开销":30000
-          },
-          {
-            "type": "5月",
-            "会议开销": 3000
-          },
-          {
-            "type": "6月",
-            "会议开销": 15000
-          },
-          {
-            "type": "7月",
-            "会议开销": 10000
-          },
-          {
-            "type": "8月",
-            "会议开销": 15000
-          },
-          {
-            "type": "9月",
-            "会议开销": 6000
-          },
-          {
-            "type": "10月",
-            "会议开销": 8000
-          },
-          {
-            "type": "11月",
-            "采购次数": 17500
-          },
-          {
-            "type": "12月",
-            "采购次数": 20000
           },
         ],
+        // fields3: ["会议开销", ],
+        // dataSource3: [{
+        //     "type": "1月",
+        //     "会议开销": 12500
+        //   },
+        //   {
+        //     "type": "2月",
+        //     "会议开销": 8000
+        //   },
+        //   {
+        //     "type": "3月",
+        //     "会议开销": 5000
+        //   },
+        //   {
+        //     "type": "4月",
+        //     "会议开销": 30000
+        //   },
+        //   {
+        //     "type": "5月",
+        //     "会议开销": 3000
+        //   },
+        //   {
+        //     "type": "6月",
+        //     "会议开销": 15000
+        //   },
+        //   {
+        //     "type": "7月",
+        //     "会议开销": 10000
+        //   },
+        //   {
+        //     "type": "8月",
+        //     "会议开销": 15000
+        //   },
+        //   {
+        //     "type": "9月",
+        //     "会议开销": 6000
+        //   },
+        //   {
+        //     "type": "10月",
+        //     "会议开销": 8000
+        //   },
+        //   {
+        //     "type": "11月",
+        //     "会议开销": 17500
+        //   },
+        //   {
+        //     "type": "12月",
+        //     "会议开销": 20000
+        //   },
+        // ],
+        dataSourcePieB: [{
+            item: '年度总结',
+            count: 4000
+          },
+          {
+            item: '项目会议',
+            count: 26000
+          },
+          {
+            item: '管理会议',
+            count: 25000
+          },
+          {
+            item: '物流会议',
+            count: 35000
+          },
+          {
+            item: '表彰会议',
+            count: 26500
+          },
+          {
+            item: '销售会议',
+            count: 23500
+          }
+        ],
+        visibleSta: false,
         dateFormat: 'YYYY年MM月DD日',
         dataSta,
         selectTheme: [],
-        dataNumber,
-        titleNumber: '会议次数',
-        heightNumber: 300,
-        dataBudget,
-        titleBudget: '会议预算（元）',
-        heightBudget: 300
       }
     },
     created() {
@@ -404,12 +385,12 @@
             }
           },
           series: [{
-            data: [20, 10, 12, 18, 17, 13],
+            data: [5, 25, 12, 18, 17, 13],
             type: "bar",
             itemStyle: {
               normal: {
                 color: function (params) {
-                  var colorList = ['#5470c5', '#90cb75', '#f9c758', '#ea7ccc', '#3ba272', '#9a60b4']
+                  var colorList = ['#3aa1ff', '#36cbcb', '#fbd437', '#4ecb73', '#f2637b', '#975fe5']
                   return colorList[params.dataIndex]
                 }
               }
@@ -424,7 +405,13 @@
         };
         meetingNumberChar.setOption(option);
       },
-
+      analysis() {
+        if (this.visibleSta) {
+          this.visibleSta = false
+        } else {
+          this.visibleSta = true
+        }
+      },
       ChangeTheme(value) {
         //  console.log(value.indexOf('全部'))
         if (value.length == 0) {
@@ -438,15 +425,14 @@
         } else {
           let themeSelect = []
           let budgetSelect = []
-          value.forEach(element => {
-            // console.log(element)
-            dataNumber.filter(item => {
-              if (item.x.includes(element)) {
-                themeSelect.push(item)
-                budgetSelect.push(item)
-              }
-            })
-          })
+          // value.forEach(element => {
+          //   dataNumber.filter(item => {
+          //     if (item.x.includes(element)) {
+          //       themeSelect.push(item)
+          //       budgetSelect.push(item)
+          //     }
+          //   })
+          // })
           this.dataNumber = themeSelect
           this.dataBudget = budgetSelect
         }
@@ -470,8 +456,20 @@
   }
 
   .statisticlalTwo {
+    /* margin-top: 10px; */
+    background-color: #fff;
+    padding: 15px 0px 10px 10px;
+  }
+
+  .statisticlalThree {
     margin-top: 10px;
-    background-color: #fff;  
-     padding: 15px 0px 10px 10px;
+    background-color: #fff;
+    padding: 15px 0px 10px 10px;
+  }
+</style>
+<style scoped>
+  >>>.ant-tabs-nav .ant-tabs-tab-active {
+    font-size: 16px;
+    font-weight: 600;
   }
 </style>
