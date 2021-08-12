@@ -87,6 +87,18 @@ export const menuMock = {
             "name": "dashboard-repairManager",
             "id": "1261213213500452866"
           },
+          {
+            "path": "/dashboard/typemanage",
+            "component": "dashboard/typemanage",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "internalOrExternal": false,
+              "title": "智能锁事件类型管理"
+            },
+            "name": "dashboard-typemanage",
+            "id": "1261213213500452866"
+          },
           // {
           //   "path": "/erp/stock/rubricPurIn",
           //   "component": "erp/stock/RubricPurInBillList",
