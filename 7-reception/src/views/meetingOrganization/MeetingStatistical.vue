@@ -1,21 +1,87 @@
 <template>
   <!-- 会议统计 -->
-  <a-card :bordered="false">
-    <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
+  <div>
+    <div class="statisticlalOne">
+      <a-row type="flex" align="middle">
+        <a-col :span="1"></a-col>
+        <a-col>
+          <a-row>
+            <h1 style='font-weight: bold; text-align: center;'>请选择</h1>
+          </a-row>
+          <a-row style='margin-bottom: 10px; margin-top: 10px; text-align: center;'>
+            <a-radio-group v-model="time">
+              <a-radio-button value="week">本周</a-radio-button>
+              <a-radio-button value="month">本月</a-radio-button>
+              <a-radio-button value="month">本季度</a-radio-button>
+              <a-radio-button value="year">本年</a-radio-button>
+            </a-radio-group>
+          </a-row>
+        </a-col>
+        <a-col :span="2"></a-col>
+        <a-col>
+          <div style='border:1px solid #c7b2b2'>
+            <a-statistic title="会议总次数" :value="90" style="margin:20px 50px" />
+          </div>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col>
+          <div style='border:1px solid #c7b2b2'>
+            <a-statistic title="会议总开销" :value="150000" style="margin:20px 50px" />
+          </div>
+        </a-col>
+      </a-row>
+    </div>
+    <div class="statisticlalTwo">
+      <a-row type="flex" align="middle">
+        <a-col :span="13">
+          <a-row>
+            <h1 style='font-weight: bold; text-align: left;'>会议主题</h1>
+          </a-row>
+          <a-row style='margin-top: 10px; text-align: center;'>
+            <div ref="meetingNumber" style="height:400px"></div>
+          </a-row>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col :span="10">
+          <a-row>
+            <h1 style='font-weight: bold; text-align: left;margin-left:100px'>会议状态</h1>
+          </a-row>
+          <a-row style='margin-top: 50px;'>
+            <pie v-bind:height="heightPie" v-bind:dataSource="dataSourcePie"></pie>
+          </a-row>
+        </a-col>
+      </a-row>
+    </div>
+    <div class="statisticlalTwo">
+      <a-row type="flex" align="middle">
+        <a-col :span="10">
+          <a-row>
+            <h1 style='font-weight: bold; text-align: left;'>会议开销（按主题）</h1>
+          </a-row>
+          <a-row style='margin-top: 50px;'>
+            <LineChartMultid  :dataSource="dataSource1" :fields='fields1' />
+          </a-row>
+        </a-col>
+        <a-col :span="1"></a-col>
+        <a-col :span="13">
+          <a-row>
+            <h1 style='font-weight: bold; text-align: left;margin-left:100px'>会议开销（按月份）</h1>
+          </a-row>
+          <a-row style='margin-top: 50px;'>
+            <LineChartMultid  :dataSource="dataSource3" :fields='fields3'/>
+          </a-row>
+        </a-col>
+      </a-row>
+    </div>
+    <!-- 图 -->
+    <div>
       <a-row type="flex" align="middle">
         <a-col>
           <span>按主题筛选：</span>
         </a-col>
         <a-col>
-          <a-select
-            mode="tags"
-            :style="{width:'300px'}"
-            showSearch
-            @change="ChangeTheme"
-            placeholder="请选择会议主题"
-            v-model="selectTheme"
-          >
+          <a-select mode="tags" :style="{width:'300px'}" showSearch @change="ChangeTheme" placeholder="请选择会议主题"
+            v-model="selectTheme">
             <a-select-option value="年度总结">年度总结</a-select-option>
             <a-select-option value="项目会议">项目会议</a-select-option>
             <a-select-option value="物流会议">物流管理</a-select-option>
@@ -31,11 +97,8 @@
         <a-col>
           <a-date-picker placeholder="请选择开始" :format="dateFormat" v-model="dateStart"></a-date-picker>
           <span>&nbsp;~&nbsp;</span>
-          <a-date-picker
-            placeholder="请选择结束"
-            :format="dateFormat"
-            :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')"
-          ></a-date-picker>
+          <a-date-picker placeholder="请选择结束" :format="dateFormat"
+            :defaultValue="moment(getCurrentData(), 'YYYY年MM月DD日')"></a-date-picker>
         </a-col>
         <a-col :span="2"></a-col>
         <a-col>
@@ -47,9 +110,6 @@
           <a-button @click="searchReset()" icon="reload" style="margin-left: 8px">重置</a-button>
         </a-col>
       </a-row>
-    </div>
-    <!-- 图 -->
-    <div>
       <a-tabs default-active-key="1" @change="callback">
         <a-tab-pane key="1" tab="会议次数">
           <bar v-bind:dataSource="dataNumber" v-bind:height="heightNumber"></bar>
@@ -59,167 +119,359 @@
         </a-tab-pane>
       </a-tabs>
     </div>
-
-    <!-- <br />
-    <bar v-bind:dataSource="dataNumber" v-bind:title="titleNumber" v-bind:height="heightNumber"></bar>
-    <bar v-bind:dataSource="dataBudget" v-bind:title="titleBudget" v-bind:height="heightBudget"></bar>-->
-  </a-card>
+  </div>
 </template>
 <script>
-import moment from 'moment'
-import Bar from '@/components/chart/Bar'
-const dataSta = [
-  {
-    theme: '项目会议',
-    number: '30',
-    membersNumber: '90',
-    budget: '12500'
-  },
-  {
-    theme: '物流管理',
-    number: '4',
-    membersNumber: '12',
-    budget: '900'
-  },
-  {
-    theme: '安全管理',
-    number: '9',
-    membersNumber: '30',
-    budget: '18000'
-  },
-  {
-    theme: '年度总结',
-    number: '1',
-    membersNumber: '30',
-    budget: '21000'
-  }
-]
-const dataNumber = [
-  {
-    x: '年度总结',
-    y: 10
-  },
-  {
-    x: '项目会议',
-    y: 3
-  },
-  {
-    x: '物流会议',
-    y: 3
-  },
-  {
-    x: '安全会议',
-    y: 7
-  },
-  {
-    x: '管理会议',
-    y: 9
-  },
-  {
-    x: '表彰会议',
-    y: 6
-  },
-  {
-    x: '销售会议',
-    y: 5
-  }
-]
-const dataBudget = [
-  {
-    x: '年度总结',
-    y: 20000
-  },
-  {
-    x: '项目会议',
-    y: 5000
-  },
-  {
-    x: '物流会议',
-    y: 3000
-  },
-  {
-    x: '安全会议',
-    y: 9000
-  },
-  {
-    x: '管理会议',
-    y: 8500
-  },
-  {
-    x: '表彰会议',
-    y: 30000
-  },
-  {
-    x: '销售会议',
-    y: 5000
-  }
-]
-export default {
-  components: {
-    Bar
-  },
-  data() {
-    return {
-      dateStart: undefined,
-      dateFormat: 'YYYY年MM月DD日',
-      dataSta,
-      selectTheme: [],
-      dataNumber,
-      titleNumber: '会议次数',
-      heightNumber: 300,
-      dataBudget,
-      titleBudget: '会议预算（元）',
-      heightBudget: 300
+  import moment from 'moment'
+  import Bar from '@/components/chart/Bar'
+  import Pie from '@/components/chart/Pie'
+  import LineChartMultid from '@/components/chart/LineChartMultid'
+  const dataSta = [{
+      theme: '项目会议',
+      number: '30',
+      membersNumber: '90',
+      budget: '12500'
+    },
+    {
+      theme: '物流管理',
+      number: '4',
+      membersNumber: '12',
+      budget: '900'
+    },
+    {
+      theme: '安全管理',
+      number: '9',
+      membersNumber: '30',
+      budget: '18000'
+    },
+    {
+      theme: '年度总结',
+      number: '1',
+      membersNumber: '30',
+      budget: '21000'
     }
-  },
-  created() {
-    let start = moment(new Date())
-      .subtract(1, 'months')
-      .format('YYYY-MM-DD')
-    this.dateStart = this.moment(start, 'YYYY-MM-DD')
-  },
-  watch: {
-    select(val) {
-      //console.log(val)
+  ]
+  const dataNumber = [{
+      x: '年度总结',
+      y: 10
+    },
+    {
+      x: '项目会议',
+      y: 3
+    },
+    {
+      x: '物流会议',
+      y: 3
+    },
+    {
+      x: '安全会议',
+      y: 7
+    },
+    {
+      x: '管理会议',
+      y: 9
+    },
+    {
+      x: '表彰会议',
+      y: 6
+    },
+    {
+      x: '销售会议',
+      y: 5
     }
-  },
-  methods: {
-    moment,
-    ChangeTheme(value) {
-      //  console.log(value.indexOf('全部'))
-      if (value.length == 0) {
-        this.dataNumber = dataNumber
-        this.dataBudget = dataBudget
-      } else if (value.indexOf('全部') != -1) {
-        console.log(1111)
-        this.dataNumber = dataNumber
-        this.dataBudget = dataBudget
-        this.selectTheme=["全部"]
-      } else {
-        let themeSelect = []
-        let budgetSelect = []
-        value.forEach(element => {
-          // console.log(element)
-          dataNumber.filter(item => {
-            if (item.x.includes(element)) {
-              themeSelect.push(item)
-              budgetSelect.push(item)
-            }
-          })
-        })
-        this.dataNumber = themeSelect
-        this.dataBudget = budgetSelect
+  ]
+  const dataBudget = [{
+      x: '年度总结',
+      y: 20000
+    },
+    {
+      x: '项目会议',
+      y: 5000
+    },
+    {
+      x: '物流会议',
+      y: 3000
+    },
+    {
+      x: '安全会议',
+      y: 9000
+    },
+    {
+      x: '管理会议',
+      y: 8500
+    },
+    {
+      x: '表彰会议',
+      y: 30000
+    },
+    {
+      x: '销售会议',
+      y: 5000
+    }
+  ]
+  const theme = [{
+      value: '年度总结',
+      label: '年度总结'
+    }, {
+      value: '项目会议',
+      label: '项目会议'
+    }, {
+      value: '物流会议',
+      label: '物流会议'
+    }, {
+      value: '管理会议',
+      label: '管理会议'
+    }, {
+      value: '表彰会议',
+      label: '表彰会议'
+    },
+    {
+      value: '销售会议',
+      label: '销售会议'
+    },
+    {
+      value: '全部',
+      label: '全部'
+    },
+  ]
+  export default {
+    components: {
+      Bar,
+      Pie,
+      LineChartMultid
+    },
+    data() {
+      return {
+        time: 'year',
+        dateStart: undefined,
+        theme,
+        heightPie: 350,
+        dataSourcePie: [{
+            item: '进行中',
+            count: 3
+          },
+          {
+            item: '待开始',
+            count: 10
+          },
+          {
+            item: '待安排',
+            count: 17
+          },
+          {
+            item: '待审核',
+            count: 13
+          },
+          {
+            item: '已完成',
+            count: 37
+          },
+          {
+            item: '待安排',
+            count: 10
+          }
+        ],
+        fields1: ["会议开销", ],
+        dataSource1: [{
+            "type": "年度总结",
+            "会议开销": 24000
+          },
+          {
+            "type": "项目会议",
+            "会议开销": 26000
+          },
+          {
+            "type": "物流会议",
+            "会议开销": 25000
+          },
+          {
+            "type": "管理会议",
+            "会议开销": 25000
+          },
+          {
+            "type": "表彰会议",
+            "会议开销": 26500
+          },
+          {
+            "type": "销售会议",
+            "会议开销": 23500
+          },      
+        ],
+          fields3: ["会议开销", ],
+        dataSource3: [{
+            "type": "1月",
+            "会议开销": 12500
+          },
+          {
+            "type": "2月",
+            "会议开销": 8000
+          },
+          {
+            "type": "3月",
+            "会议开销": 5000
+          },
+          {
+            "type": "4月",
+            "会议开销":30000
+          },
+          {
+            "type": "5月",
+            "会议开销": 3000
+          },
+          {
+            "type": "6月",
+            "会议开销": 15000
+          },
+          {
+            "type": "7月",
+            "会议开销": 10000
+          },
+          {
+            "type": "8月",
+            "会议开销": 15000
+          },
+          {
+            "type": "9月",
+            "会议开销": 6000
+          },
+          {
+            "type": "10月",
+            "会议开销": 8000
+          },
+          {
+            "type": "11月",
+            "采购次数": 17500
+          },
+          {
+            "type": "12月",
+            "采购次数": 20000
+          },
+        ],
+        dateFormat: 'YYYY年MM月DD日',
+        dataSta,
+        selectTheme: [],
+        dataNumber,
+        titleNumber: '会议次数',
+        heightNumber: 300,
+        dataBudget,
+        titleBudget: '会议预算（元）',
+        heightBudget: 300
       }
     },
-    searchReset() {
-      this.dataNumber = dataNumber
-      this.dataBudget = dataBudget
-      this.selectTheme = []
+    created() {
+      let start = moment(new Date())
+        .subtract(1, 'months')
+        .format('YYYY-MM-DD')
+      this.dateStart = this.moment(start, 'YYYY-MM-DD')
     },
-    getCurrentData() {
-      return new Date().toLocaleDateString()
+    watch: {
+      select(val) {
+        //console.log(val)
+      }
     },
-    callback() {}
+    mounted() {
+      this.getMeetingNumber();
+    },
+    methods: {
+      moment,
+      getMeetingNumber() {
+        const meetingNumberChar = this.$echarts.init(this.$refs.meetingNumber);
+        const option = {
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          // title: {
+          //   text: '会议主题（次）',
+          //   left: 'left'
+          // },
+          xAxis: {
+            type: "category",
+            name: '会议主题',
+            data: ["年度总结", "项目会议", "物流会议", "管理会议", "表彰会议", "销售会议"]
+          },
+          yAxis: {
+            type: "value",
+            name: '次数',
+            nameLocation: 'end',
+            splitLine: {
+              show: true,
+              lineStyle: {
+                type: 'dashed'
+              }
+            }
+          },
+          series: [{
+            data: [20, 10, 12, 18, 17, 13],
+            type: "bar",
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  var colorList = ['#5470c5', '#90cb75', '#f9c758', '#ea7ccc', '#3ba272', '#9a60b4']
+                  return colorList[params.dataIndex]
+                }
+              }
+            }
+          }],
+          //   grid: {
+          //     left: '3%',
+          //     right: '4%',
+          //     bottom: '3%',
+          //     containLabel: true
+          //   },
+        };
+        meetingNumberChar.setOption(option);
+      },
+
+      ChangeTheme(value) {
+        //  console.log(value.indexOf('全部'))
+        if (value.length == 0) {
+          this.dataNumber = dataNumber
+          this.dataBudget = dataBudget
+        } else if (value.indexOf('全部') != -1) {
+          console.log(1111)
+          this.dataNumber = dataNumber
+          this.dataBudget = dataBudget
+          this.selectTheme = ["全部"]
+        } else {
+          let themeSelect = []
+          let budgetSelect = []
+          value.forEach(element => {
+            // console.log(element)
+            dataNumber.filter(item => {
+              if (item.x.includes(element)) {
+                themeSelect.push(item)
+                budgetSelect.push(item)
+              }
+            })
+          })
+          this.dataNumber = themeSelect
+          this.dataBudget = budgetSelect
+        }
+      },
+      searchReset() {
+        this.dataNumber = dataNumber
+        this.dataBudget = dataBudget
+        this.selectTheme = []
+      },
+      getCurrentData() {
+        return new Date().toLocaleDateString()
+      },
+      callback() {}
+    }
   }
-}
 </script>
+<style>
+  .statisticlalOne {
+    background-color: #fff;
+    padding: 15px 10px;
+  }
+
+  .statisticlalTwo {
+    margin-top: 10px;
+    background-color: #fff;  
+     padding: 15px 0px 10px 10px;
+  }
+</style>

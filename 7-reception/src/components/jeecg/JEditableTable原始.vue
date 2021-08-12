@@ -701,7 +701,7 @@
             <div v-if="dragSort" class="td td-ds" :style="style.tdLeftDs">
             </div>
             <div v-if="rowSelection" class="td td-cb" :style="style.tdLeft">
-              <!-- 统计 -->
+              统计
             </div>
             <div v-if="rowNumber" class="td td-num" :style="style.tdLeft">
               <span v-if="!rowSelection">统计</span>
@@ -717,8 +717,8 @@
               >
                 <span
                   v-show="col.type === formTypes.inputNumber"
-                   style="padding: 0 5px;font-weight: bolder;font-size: larger;"
-                >总计：{{statisticsColumns[col.key]}}</span>
+                  style="padding: 0 5px;"
+                >{{statisticsColumns[col.key]}}</span>
               </div>
             </template>
 
