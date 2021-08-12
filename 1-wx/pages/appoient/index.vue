@@ -61,21 +61,88 @@
 			<view class="title">手机号</view>
 			<input placeholder="请输入" name="input" @input="inputChange" v-model="phone"></input>
 		</view>
-
-		<!-- 		<view class="cu-form-group">
-			<view class="title">交通工具</view>
-			<picker placeholder="请选择部门" @change="PickerChange" :value="index" :range="picker">
-				<view class="picker">
-					{{ picker[index] }}
-				</view>
-			</picker>
-		</view> -->
-
-		<!-- 	<view class="padding margin text-center">
-			<view class="cu-btn bg-yellow lg block shadow radius margin-xl" @click="goToRecord">
-				提交
+		
+		<view class="cu-form-group">
+			<view class="title">车牌号</view>
+			<input placeholder="请输入" name="input" v-model="carNumber"></input>
+		</view>		
+		
+		
+		<view class="padding-sm margin-xs radius">
+			<button class="cu-btn bg-blue sm" @tap="showModal" data-target="DialogModal">添加随访人员</button>
+		</view>
+		
+		<view class="cu-form-group withLayout" v-if="this.tableData.length>0">
+			<view class="title"> 随访人员</view>
+			<view class="uni-container">
+				<uni-table ref="table"  border stripe emptyText="暂无更多数据">
+					<uni-tr>
+						<uni-th align="center">姓&nbsp; 名</uni-th>
+						<uni-th align="center">手机号</uni-th>
+					</uni-tr>
+					<uni-tr v-for="(item, index) in tableData" :key="index">
+						<uni-td>
+							{{ item.withName }}
+						</uni-td>
+						<uni-td>{{ item.withPhone }}</uni-td>
+					</uni-tr>
+				</uni-table>
 			</view>
-		</view> -->
+		</view>
+		
+
+
+			<view class="cu-bar bg-white margin-top">
+					<view class="action">
+						健康码
+					</view>
+					<view class="action">
+						{{imgList.length}}/4
+					</view>
+			</view>
+
+		
+		<view class="cu-form-group">
+			<view class="grid col-4 grid-square flex-sub">
+				<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
+				 <image :src="imgList[index]" mode="aspectFill"></image>
+					<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+						<text class='cuIcon-close'></text>
+					</view>
+				</view>
+				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+					<text class='cuIcon-cameraadd'></text>
+				</view>
+			</view>
+		</view>
+		
+		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<!-- <view class="content">Modal标题</view> -->
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					<view class="cu-form-group">
+						<view class="title">姓&nbsp; &nbsp; 名</view>
+						<input placeholder="请填写随访人员姓名" name="input"  v-model="withName"></input>
+					</view>
+					<view class="cu-form-group">
+						<view class="title">手机号</view>
+						<input placeholder="请填写随访人员手机号" name="input"  v-model="withPhone"></input>
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action">
+						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
+						<button class="cu-btn bg-green margin-left" @tap="addData">确定</button>
+					</view>
+				</view>
+			</view>
+		</view>
+		
 
 		<view class="bottom padding">
 			<view class="leftBottom">
@@ -98,18 +165,23 @@
 	export default {
 		data() {
 			return {
+				modalName: null,
 				people: '',
 				name: '',
 				phone: '',
 				idName:'',
 				company:'',
-				modalName: null,
+				carNumber:'',
 				truePhone: "",
+				withName:"",
+				withPhone:"",
 				PageCur: "appoient",
 				index: 0,
 				// picker: ["电动自行车", "步行", "机动车"],
 				textContent: "本人到公司处理或者沟通XXX事情。请尽快审核审批。",
-				telephone: ["15159091707", "13950311263","18350076748"]
+				telephone: ["15159091707", "13950311263","18350076748"],
+				tableData:[],
+				imgList:[]
 			};
 		},
 		methods: {
@@ -190,10 +262,41 @@
 				}
 	
 			},
-			// inputChange(e){
-			// 	// console.log(e.detail.value)
-			// 	this.truePhone = ''
-			// }
+			addData(){
+				console.log(this.tableData)
+				this.tableData.push({
+					withName:this.withName,
+					withPhone:this.withPhone
+				})
+				console.log(this.tableData)
+			},
+			showModal(e) {
+				this.modalName = e.currentTarget.dataset.target
+				console.log("1111111111")
+			},
+			hideModal(e) {
+				this.modalName = null
+			},
+			ChooseImage() {
+				uni.chooseImage({
+					count: 4, //默认9
+					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album'], //从相册选择
+					success: (res) => {
+						if (this.imgList.length != 0) {
+							this.imgList = this.imgList.concat(res.tempFilePaths)
+						} else {
+							this.imgList = res.tempFilePaths
+						}
+					}
+				});
+			},
+			ViewImage(e) {
+					uni.previewImage({
+						urls: this.imgList,
+						current: e.currentTarget.dataset.url
+					});
+			},
 		},
 	};
 </script>
@@ -218,5 +321,8 @@
 	.tipContent{
 		font-size: 12px;
 		color: #ff6701;
+	}
+	.withLayout{
+		padding: 20rpx;
 	}
 </style>
