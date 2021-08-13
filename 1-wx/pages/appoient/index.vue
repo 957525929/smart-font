@@ -73,20 +73,21 @@
 		</view>
 		
 		<view class="cu-form-group withLayout" v-if="this.tableData.length>0">
-			<view class="title"> 随访人员</view>
-			<view class="uni-container">
-				<uni-table ref="table"  border stripe emptyText="暂无更多数据">
-					<uni-tr>
-						<uni-th align="center">姓&nbsp; 名</uni-th>
-						<uni-th align="center">手机号</uni-th>
-					</uni-tr>
-					<uni-tr v-for="(item, index) in tableData" :key="index">
-						<uni-td>
-							{{ item.withName }}
-						</uni-td>
-						<uni-td>{{ item.withPhone }}</uni-td>
-					</uni-tr>
-				</uni-table>
+			<view class="content">
+				<view class="table">
+					<uni-table ref="table"  border stripe emptyText="暂无更多数据">
+						<uni-tr>
+							<uni-th align="center">姓&nbsp; 名</uni-th>
+							<uni-th align="center">手机号</uni-th>
+						</uni-tr>
+						<uni-tr v-for="(item, index) in tableData" :key="index">
+							<uni-td align="center">
+								{{ item.withName }}
+							</uni-td>
+							<uni-td align="center">{{ item.withPhone }}</uni-td>
+						</uni-tr>
+					</uni-table>
+				</view>
 			</view>
 		</view>
 		
@@ -97,7 +98,7 @@
 						健康码
 					</view>
 					<view class="action">
-						{{imgList.length}}/4
+						{{imgList.length}}/1
 					</view>
 			</view>
 
@@ -110,7 +111,7 @@
 						<text class='cuIcon-close'></text>
 					</view>
 				</view>
-				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+				<view class="solids" @tap="ChooseImage" v-if="imgList.length<1">
 					<text class='cuIcon-cameraadd'></text>
 				</view>
 			</view>
@@ -119,7 +120,7 @@
 		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
-					<!-- <view class="content">Modal标题</view> -->
+					<view class="content">随访人员信息登记</view>
 					<view class="action" @tap="hideModal">
 						<text class="cuIcon-close text-red"></text>
 					</view>
@@ -147,7 +148,7 @@
 		<view class="bottom padding">
 			<view class="leftBottom">
 				<view>
-					<button class="cu-btn  lg round bg-white" style="width: 300rpx;">取消</button>
+					<button class="cu-btn  lg round bg-white" style="width: 300rpx;" >取消</button>
 				</view>
 				<!-- 	<view class="text-orange"></view> -->
 			</view>
@@ -268,10 +269,13 @@
 					withName:this.withName,
 					withPhone:this.withPhone
 				})
+				this.hideModal()
 				console.log(this.tableData)
 			},
 			showModal(e) {
-				this.modalName = e.currentTarget.dataset.target
+				this.modalName = e.currentTarget.dataset.target,
+				this.withName='',
+				this.withPhone='',
 				console.log("1111111111")
 			},
 			hideModal(e) {
@@ -296,6 +300,9 @@
 						urls: this.imgList,
 						current: e.currentTarget.dataset.url
 					});
+			},
+			DelImg(e) {
+				this.imgList.splice(e.currentTarget.dataset.index, 1)
 			},
 		},
 	};
@@ -323,6 +330,11 @@
 		color: #ff6701;
 	}
 	.withLayout{
-		padding: 20rpx;
+		padding: 20rpx 0rpx 20rpx ;
+	}
+	.content{
+		width: 100%;
+		display: flex;
+		justify-content: center;
 	}
 </style>
