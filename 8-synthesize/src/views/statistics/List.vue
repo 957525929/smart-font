@@ -85,7 +85,7 @@
         </a-card>
       </a-col>
 
-      <a-col :sm="6" :md="6" :xl="6">
+      <a-col :sm="6" :md="6" :xl="7">
         <a-row :gutter="24" :style="{ marginBottom: '10px' }">
           <chart-card title="文件累计上传总数" total="108">
             <a-tooltip title="指标说明" slot="action">
@@ -106,7 +106,7 @@
         </a-row>
       </a-col>
 
-      <a-col :sm="8" :md="8" :xl="6">
+      <a-col :sm="8" :md="8" :xl="7">
         <!-- <a-row :gutter="24" :style="{ marginBottom: '10px' }"> -->
         <chart-card title="文件累计下载总数" total="108">
           <a-tooltip title="指标说明" slot="action">
