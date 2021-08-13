@@ -28,8 +28,8 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="10" :sm="12">
-            <a-form-item label="时间" :labelCol="{ span: 5 }" :wrapperCol="{ span: 18, offset: 1 }">
+          <a-col :md="11" :sm="12">
+            <a-form-item label="申请时间" :labelCol="{ span: 5 }" :wrapperCol="{ span: 18, offset: 1 }">
               <j-date
                 v-model="queryParam.time_begin"
                 :showTime="true"

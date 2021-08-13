@@ -71,12 +71,12 @@
           <a-input
             class="inputWitdh"
             placeholder="请输入申请名称"
-            v-decorator.trim="['articleName', validatorRules.articleName]"
+            v-decorator.trim="['articleName', { initialValue: '办公用品' }, validatorRules.articleName]"
             :disabled="disableSubmit"
           />
         </a-form-item>
 
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="申请数量">
+        <!-- <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="申请数量">
           <a-input-number
             class="inputWitdh"
             placeholder="请输入申请数量"
@@ -85,7 +85,7 @@
             :max="10000000"
             :disabled="disableSubmit"
           />
-        </a-form-item>
+        </a-form-item> -->
 
         <!-- <a-form-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id">
           <a-select
@@ -116,14 +116,19 @@
 
         <a-form-item label="申请理由" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-textarea
-            v-decorator.trim="['applyReason', validatorRules.applyReason]"
+            v-decorator.trim="['applyReason', { initialValue: '办公需要' }, validatorRules.applyReason]"
             placeholder="请输入申请理由"
             auto-size
             :disabled="disableSubmit"
           />
         </a-form-item>
 
-        <a-form-item v-if="!!model.id" :labelCol="labelCol" :wrapperCol="wrapperCol" label="审核时间">
+        <a-form-item
+          v-if="!!model.id && model.checkTime != ''"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="审核时间"
+        >
           <j-date
             class="inputWitdh"
             v-decorator.trim="['checkTime', validatorRules.checkTime]"
@@ -134,7 +139,7 @@
           ></j-date>
         </a-form-item>
 
-        <a-form-item label="备注" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id">
+        <a-form-item label="备注" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id && model.remark != ''">
           <a-textarea
             v-decorator.trim="['remark', validatorRules.remark]"
             placeholder=""
@@ -155,6 +160,19 @@
             :rowSelection="true"
             :actionButton="true"
           >
+            <template v-slot:materialName="props">
+              <a-select
+                :defaultValue="1"
+                placeholder="请选择办公用品名称"
+                :disabled="disableSubmit"
+                style="width: 100%"
+                @change="onChangeSelect($event, props)"
+              >
+                <a-select-option :value="1">马克笔</a-select-option>
+                <a-select-option :value="2">打印机</a-select-option>
+                <a-select-option :value="3">A4纸</a-select-option>
+              </a-select>
+            </template>
           </j-editable-table>
         </a-tab-pane>
       </a-tabs>
@@ -169,6 +187,19 @@
             :rowNumber="true"
             :disabled="true"
           >
+            <template v-slot:materialName="props">
+              <a-select
+                :defaultValue="1"
+                placeholder="请选择办公用品名称"
+                :disabled="disableSubmit"
+                style="width: 100%"
+                @change="onChangeSelect($event, props)"
+              >
+                <a-select-option :value="1">马克笔</a-select-option>
+                <a-select-option :value="2">打印机</a-select-option>
+                <a-select-option :value="3">A4纸</a-select-option>
+              </a-select>
+            </template>
           </j-editable-table>
         </a-tab-pane>
       </a-tabs>
@@ -220,46 +251,37 @@ export default {
       dataSource: [
         {
           key: 1,
-          materialName: '马克笔',
-          materialUnits: '盒',
-          materialNum: '3',
+          materialName: '1',
+          materialUnits: '1',
+          materialNum: 3,
         },
       ],
       columns: [
         {
           title: '办公用品名称',
           key: 'materialName',
-          type: FormTypes.select,
+          type: FormTypes.slot,
           width: '25%',
-          options: [
-            {
-              value: '订书机',
-              label: '订书机',
-            },
-            {
-              value: '马克笔',
-              label: '马克笔',
-            },
-            {
-              value: '打印机',
-              label: '打印机',
-            },
-          ],
+          slotName: 'materialName',
         },
         {
           title: '计量单位',
           key: 'materialUnits',
+          // type: FormTypes.slot,
+          // slotName: 'materialUnits',
           type: FormTypes.select,
+          defaultValue: '1',
           options: [
-            { title: '盒', value: '盒' },
-            { title: '台', value: '台' },
-            { title: '箱', value: '箱' },
+            { title: '盒', value: '1' },
+            { title: '台', value: '2' },
+            { title: '箱', value: '3' },
           ],
         },
         {
           title: '申请数量',
           key: 'materialNum',
           type: FormTypes.inputNumber,
+          defaultValue: 1,
           statistics: 'true',
         },
       ],
@@ -413,7 +435,7 @@ export default {
       switch (value) {
         case 1:
           this.model.unit = '盒'
-          this.model.price = '20'
+          this.model.materialNum = 5
           break
         case 2:
           this.model.unit = '台'
@@ -425,6 +447,41 @@ export default {
           break
       }
       this.form.setFieldsValue(pick(this.model, 'price', 'unit'))
+    },
+    onChangeSelect(value, props) {
+      let { rowId, target } = props
+      switch (value) {
+        case 1:
+          target.setValues([
+            {
+              rowKey: rowId,
+              values: {
+                materialUnits: '盒',
+              },
+            },
+          ])
+          break
+        case 2:
+          target.setValues([
+            {
+              rowKey: rowId,
+              values: {
+                materialUnits: '台',
+              },
+            },
+          ])
+          break
+        case 3:
+          target.setValues([
+            {
+              rowKey: rowId,
+              values: {
+                materialUnits: '箱',
+              },
+            },
+          ])
+          break
+      }
     },
   },
 }
