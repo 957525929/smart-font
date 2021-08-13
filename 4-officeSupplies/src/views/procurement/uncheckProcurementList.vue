@@ -17,8 +17,8 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="10" :sm="12">
-            <a-form-item label="时间" :labelCol="{ span: 5 }" :wrapperCol="{ span: 18, offset: 1 }">
+          <a-col :md="11" :sm="12">
+            <a-form-item label="申请时间" :labelCol="{ span: 5 }" :wrapperCol="{ span: 18, offset: 1 }">
               <j-date
                 v-model="queryParam.time_begin"
                 :showTime="true"
@@ -87,9 +87,18 @@
         <span slot="action" slot-scope="text, record">
           <a @click="handleDetail(record)">详情</a>
           <a-divider type="vertical" />
-          <a-button :style="btnredStyle" @click="handleCheck(record.id, 1)">不通过</a-button>
+          <a-popconfirm
+            title="请进行审批"
+            ok-text="通过"
+            cancel-text="不通过"
+            @confirm="handleCheck(record.id, 2)"
+            @cancel="handleCheck(record.id, 1)"
+          >
+            <a>审批</a>
+          </a-popconfirm>
+          <!-- <a-button :style="btnredStyle" @click="handleCheck(record.id, 1)">不通过</a-button>
           <a-divider type="vertical" />
-          <a-button :style="btnStyle" @click="handleCheck(record.id, 2)">通过</a-button>
+          <a-button :style="btnStyle" @click="handleCheck(record.id, 2)">通过</a-button> -->
         </span>
       </a-table>
     </div>
