@@ -11,6 +11,32 @@
     style="top: 5%; height: 95%; overflow-y: hidden"
   >
     <a-spin :spinning="confirmLoading">
+      <a-descriptions  v-if="disableSubmit" title="" bordered>
+        <a-descriptions-item label="申请部门">
+          {{model.applyDepertment}}
+        </a-descriptions-item>
+        <a-descriptions-item label="申请人">
+          {{model.applyName}}
+        </a-descriptions-item>
+        <a-descriptions-item label="状态">
+          {{model.status  == '1' ? "待审核" : "通过"}}
+        </a-descriptions-item>
+        <a-descriptions-item label="申请名称">
+          {{model.articleName}}
+        </a-descriptions-item>
+        <a-descriptions-item label="申请时间">
+          {{model.applyTime}}
+        </a-descriptions-item>
+        <a-descriptions-item label="申请理由">
+          {{model.applyReason}}
+        </a-descriptions-item>
+        <a-descriptions-item  v-if="!!model.id && model.checkTime != '' && disableSubmit" label="审核时间">
+          {{model.checkTime}}
+        </a-descriptions-item>
+        <a-descriptions-item label="备注">
+          {{model.remark}}
+        </a-descriptions-item>
+      </a-descriptions>
       <a-form :form="form">
         <a-form-item v-if="!disableSubmit" label="申请部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select
@@ -23,10 +49,6 @@
             <a-select-option value="3">烟叶管理处</a-select-option>
             <a-select-option value="4">人事处</a-select-option>
           </a-select>
-        </a-form-item>
-
-        <a-form-item v-if="disableSubmit" label="申请部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          {{ this.model.applyDepertment }}
         </a-form-item>
 
         <a-form-item v-if="!disableSubmit" label="申请人" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -43,10 +65,6 @@
           </a-select>
         </a-form-item>
 
-        <a-form-item v-if="disableSubmit" label="申请人" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          {{ this.model.applyName }}
-        </a-form-item>
-
         <a-form-item label="状态" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id && !disableSubmit">
           <a-select
             v-decorator.trim="['status', { initialValue: '1' }, validatorRules.status]"
@@ -58,11 +76,6 @@
             <a-select-option :value="2">通过</a-select-option>
             <a-select-option :value="3">未通过</a-select-option>
           </a-select>
-        </a-form-item>
-
-        <a-form-item label="状态" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id && disableSubmit">
-          <!-- {{ this.model.status }} -->
-          待审批
         </a-form-item>
 
         <!-- <a-form-item label="办公用品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -85,10 +98,6 @@
             placeholder="请输入申请名称"
             v-decorator.trim="['articleName', { initialValue: '办公用品' }, validatorRules.articleName]"
           />
-        </a-form-item>
-
-        <a-form-item v-if="disableSubmit" label="申请名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          {{ this.model.articleName }}
         </a-form-item>
 
         <!-- <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="申请数量">
@@ -128,10 +137,6 @@
           ></j-date>
         </a-form-item>
 
-        <a-form-item v-if="!!model.id && disableSubmit" label="申请时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          {{ this.model.applyTime }}
-        </a-form-item>
-
         <a-form-item v-if="!disableSubmit" label="申请理由" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-textarea
             v-decorator.trim="['applyReason', { initialValue: '办公需要' }, validatorRules.applyReason]"
@@ -140,16 +145,13 @@
           />
         </a-form-item>
 
-        <a-form-item v-if="disableSubmit" label="申请理由" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          {{ this.model.applyReason }}
-        </a-form-item>
-
         <a-form-item
           v-if="!!model.id && model.checkTime != '' && !disableSubmit"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="审核时间"
         >
+
           <j-date
             class="inputWitdh"
             v-decorator.trim="['checkTime', validatorRules.checkTime]"
@@ -177,14 +179,6 @@
           <a-textarea v-decorator.trim="['remark', validatorRules.remark]" placeholder="" auto-size />
         </a-form-item>
 
-        <a-form-item
-          v-if="!!model.id && model.remark != '' && disableSubmit"
-          label="备注"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          {{ this.model.remark }}
-        </a-form-item>
       </a-form>
 
       <a-tabs default-active-key="1" v-if="!disableSubmit">
