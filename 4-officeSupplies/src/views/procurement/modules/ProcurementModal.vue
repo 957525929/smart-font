@@ -71,7 +71,7 @@
           <a-input
             class="inputWitdh"
             placeholder="请输入申请名称"
-            v-decorator.trim="['applyText', validatorRules.applyText]"
+            v-decorator.trim="['articleName', validatorRules.articleName]"
             :disabled="disableSubmit"
           />
         </a-form-item>
