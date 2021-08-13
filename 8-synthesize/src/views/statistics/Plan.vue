@@ -84,7 +84,7 @@
               <a-list-item-meta>
                 <a-avatar slot="avatar" size="large" shape="square" :src="item.avatar" />
                 <a slot="title">{{ item.title }}</a>
-                <div slot="description"><a-icon type="environment"></a-icon>{{ item.description }}</div>
+                <div slot="description">{{ item.description }}</div>
               </a-list-item-meta>
               <div slot="actions">
                 <a>详情</a>
@@ -93,7 +93,7 @@
           </a-list>
         </a-card>
       </a-col>
-      <a-col :sm="6" :md="6" :xl="6">
+      <a-col :sm="6" :md="6" :xl="7">
         <a-row :gutter="24" :style="{ marginBottom: '10px' }">
           <chart-card title="完成数" total="18">
             <a-tooltip title="指标说明" slot="action">
@@ -113,31 +113,26 @@
           </chart-card>
         </a-row>
         <!-- <a-divider /> -->
-        <a-row :gutter="24">
-          <chart-card title="任务完成率" total="78%">
-            <a-tooltip title="指标说明" slot="action">
-              <a-icon type="info-circle-o" />
-            </a-tooltip>
-            <div>
-              <mini-progress color="rgb(19, 194, 194)" :target="80" :percentage="78" :height="8" />
-            </div>
-            <template slot="footer">
-              <trend flag="down" style="margin-right: 16px">
-                <span slot="term">同周比</span>
-                12%
-              </trend>
-              <trend flag="up">
-                <span slot="term">日环比</span>
-                80%
-              </trend>
-            </template>
-          </chart-card>
-        </a-row>
       </a-col>
-      <a-col :sm="8" :md="8" :xl="8">
-        <a-card title="月度完成英雄榜" :bordered="false">
-          <rank-list :list="rankList" style="width: 500px; margin: 0 auto" />
-        </a-card>
+      <a-col :sm="8" :md="8" :xl="7">
+        <chart-card title="任务完成率" total="78%">
+          <a-tooltip title="指标说明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <div>
+            <mini-progress color="rgb(19, 194, 194)" :target="80" :percentage="78" :height="8" />
+          </div>
+          <template slot="footer">
+            <trend flag="down" style="margin-right: 16px">
+              <span slot="term">同周比</span>
+              12%
+            </trend>
+            <trend flag="up">
+              <span slot="term">日环比</span>
+              80%
+            </trend>
+          </template>
+        </chart-card>
       </a-col>
     </a-row>
 
@@ -227,7 +222,7 @@ export default {
         {
           title: '2021年第三季度总结',
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
-          description: '福建省福州市烟草大厦一期3号楼',
+          description: '逾期时间：2021-09-30 23:59:59',
           owner: '刘涛',
           startAt: '2021-06-22 17:55:55',
           progress: {
