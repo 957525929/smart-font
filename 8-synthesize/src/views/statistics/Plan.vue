@@ -222,7 +222,7 @@ export default {
         {
           title: '2021年第三季度总结',
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
-          description: '逾期时间：2021-09-30 00:00:00',
+          description: '逾期时间：2021-09-30 23:59:59',
           owner: '刘涛',
           startAt: '2021-06-22 17:55:55',
           progress: {
