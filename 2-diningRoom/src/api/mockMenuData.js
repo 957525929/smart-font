@@ -56,12 +56,13 @@ export const mockMenuData = {
         "component": "layouts/RouteView",
         "route": "1",
         "meta":
-          {
-            "keepAlive": false,
-            "internalOrExternal": false,
-            "icon": "form",
-            "title": "食料采购管理"
-          },
+        {
+          "keepAlive": false,
+          "internalOrExternal": false,
+          "icon": "form",
+          // "title": "食料采购管理"
+          "title": "食料管理"
+        },
         "name": "material-warehousing",
         "id": "1",
         "children":
@@ -72,11 +73,11 @@ export const mockMenuData = {
               "component": "material/warehousing/Index",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": true,
-                  "internalOrExternal": false,
-                  "title": "入库管理"
-                },
+              {
+                "keepAlive": true,
+                "internalOrExternal": false,
+                "title": "入库管理"
+              },
               "name": "material-warehousing-warehousingIndex",
               "id": "2"
             },
@@ -85,24 +86,50 @@ export const mockMenuData = {
               "component": "material/warehousing/Check",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "入库审核"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "入库审核"
+              },
               "name": "material-warehousing-warehousingCheck",
               "id": "2111"
+            },
+            {
+              "path": "/material/warehousing/warehousingOutput",
+              "component": "material/warehousing/Output",
+              "route": "1",
+              "meta":
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "出库管理"
+              },
+              "name": "material-warehousing-warehousingOutput",
+              "id": "21111"
+            },
+            {
+              "path": "/material/warehousing/warehousingInventory",
+              "component": "material/warehousing/Inventory",
+              "route": "1",
+              "meta":
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "库存管理"
+              },
+              "name": "material-warehousing-warehousingInventory",
+              "id": "211111"
             },
             {
               "path": "/material/warehousing/warehousingQuery",
               "component": "material/warehousing/Query",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "采购查询"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "采购查询"
+              },
               "name": "material-warehousing-warehousingQuery",
               "id": "2111"
             },
@@ -112,11 +139,11 @@ export const mockMenuData = {
               "component": "material/warehousing/Details",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "入库详情"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "入库详情"
+              },
               "name": "material-warehousing-warehousingDetails",
               "id": "3"
             },
@@ -128,12 +155,12 @@ export const mockMenuData = {
         "component": "layouts/RouteView",
         "route": "1",
         "meta":
-          {
-            "keepAlive": false,
-            "internalOrExternal": false,
-            "icon": "snippets",
-            "title": "食品管理"
-          },
+        {
+          "keepAlive": false,
+          "internalOrExternal": false,
+          "icon": "snippets",
+          "title": "食品及订餐管理"
+        },
         "name": "food-menu",
         "id": "6",
         "children":
@@ -143,11 +170,11 @@ export const mockMenuData = {
               "component": "food/menu/Index",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "菜品管理"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "菜品管理"
+              },
               "name": "food-menu-menuIndex",
               "id": "7"
             },
@@ -156,28 +183,72 @@ export const mockMenuData = {
               "component": "food/finished/Index",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "成品留样"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "成品留样"
+              },
               "name": "food-finished-finishedIndex",
               "id": "8"
             },
+            {
+              "path": "/food/menu/Scheduled",
+              "component": "food/menu/Scheduled",
+              "route": "1",
+              "meta":
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "订餐管理"
+              },
+              "name": "food-menu-scheduled",
+              "id": "91111"
+            },
           ],
       },
+      // {
+      //   "redirect": null,
+      //   "path": "/scheduled",
+      //   "component": "layouts/RouteView",
+      //   "route": "1",
+      //   "meta":
+      //   {
+      //     "keepAlive": false,
+      //     "internalOrExternal": false,
+      //     "icon": "cluster",
+      //     "title": "食堂预定"
+      //   },
+      //   "name": "scheduled",
+      //   "id": "6",
+      //   "children":
+      //     [
+      //       {
+      //         "path": "/scheduled/Scheduled",
+      //         "component": "scheduled/Scheduled",
+      //         "route": "1",
+      //         "meta":
+      //         {
+      //           "keepAlive": false,
+      //           "internalOrExternal": false,
+      //           "title": "食堂预定列表"
+      //         },
+      //         "name": "canteen-scheduled",
+      //         "id": "7"
+      //       },
+      //     ],
+      // },
       {
         "redirect": null,
         "path": "/statistics/table",
         "component": "layouts/RouteView",
         "route": "1",
         "meta":
-          {
-            "keepAlive": false,
-            "internalOrExternal": false,
-            "icon": "dot-chart",
-            "title": "报表统计"
-          },
+        {
+          "keepAlive": false,
+          "internalOrExternal": false,
+          "icon": "dot-chart",
+          "title": "报表统计"
+        },
         "name": "statistics-table",
         "id": "11",
         "children":
@@ -187,11 +258,11 @@ export const mockMenuData = {
               "component": "statistics/material/Index",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "食料采购统计"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "食料采购统计"
+              },
               "name": "statistics-material-materialIndex",
               "id": "111"
             },
@@ -200,11 +271,11 @@ export const mockMenuData = {
               "component": "statistics/food/Index",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "食品统计"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "食品统计"
+              },
               "name": "statistics-food-foodIndex",
               "id": "112"
             },
@@ -216,12 +287,12 @@ export const mockMenuData = {
         "component": "layouts/RouteView",
         "route": "1",
         "meta":
-          {
-            "keepAlive": false,
-            "internalOrExternal": false,
-            "icon": "setting",
-            "title": "系统管理"
-          },
+        {
+          "keepAlive": false,
+          "internalOrExternal": false,
+          "icon": "setting",
+          "title": "系统管理"
+        },
         "name": "system-mange",
         "id": "6",
         "children":
@@ -231,11 +302,11 @@ export const mockMenuData = {
               "component": "material/staff/Index",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "人员管理"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "人员管理"
+              },
               "name": "material-staff-staffIndex",
               "id": "4"
             },
@@ -244,11 +315,11 @@ export const mockMenuData = {
               "component": "material/manu/Index",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "供应商管理"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "供应商管理"
+              },
               "name": "material-manu-Index",
               "id": "5"
             },
@@ -257,11 +328,11 @@ export const mockMenuData = {
               "component": "material/warehousing/Category",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "食料分类管理"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "食料分类管理"
+              },
               "name": "material-warehousing-Category",
               "id": "21111"
             },
@@ -270,13 +341,26 @@ export const mockMenuData = {
               "component": "food/menu/Classify",
               "route": "1",
               "meta":
-                {
-                  "keepAlive": false,
-                  "internalOrExternal": false,
-                  "title": "菜品分类管理"
-                },
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "菜品分类管理"
+              },
               "name": "food-menu-menuClassify",
               "id": "9"
+            },
+            {
+              "path": "/food/menu/Order",
+              "component": "food/menu/Order",
+              "route": "1",
+              "meta":
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "订餐配置"
+              },
+              "name": "food-menu-Order",
+              "id": "911"
             },
           ],
       },
