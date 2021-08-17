@@ -69,10 +69,22 @@
 		
 		
 		<view class="padding-sm margin-xs radius">
-			<button class="cu-btn bg-blue sm" @tap="showModal" data-target="DialogModal">添加随访人员</button>
+			<button class="cu-btn bg-blue sm" @tap="addData">添加随访人员</button>
 		</view>
 		
-		<view class="cu-form-group withLayout" v-if="this.tableData.length>0">
+<!-- 		<view class="padding-sm margin-xs radius">
+			<button type="default">添加随访人员</button>
+		</view>	 -->
+		
+		<view class="cu-form-group" v-for="(item, index) in tableData" >
+			<view>姓名：</view>
+			<input placeholder="请输入" name="input"></input>
+			<view>手机号：</view>
+			<input placeholder="请输入" name="input"></input>
+			<text class="cuIcon-close" @tap="getRow(index)"></text>
+		</view>
+		
+	<!-- 	<view class="cu-form-group withLayout" v-if="this.tableData.length>0">
 			<view class="content">
 				<view class="table">
 					<uni-table ref="table"  border stripe emptyText="暂无更多数据">
@@ -89,7 +101,7 @@
 					</uni-table>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		
 
 
@@ -117,34 +129,6 @@
 			</view>
 		</view>
 		
-		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
-			<view class="cu-dialog">
-				<view class="cu-bar bg-white justify-end">
-					<view class="content">随访人员信息登记</view>
-					<view class="action" @tap="hideModal">
-						<text class="cuIcon-close text-red"></text>
-					</view>
-				</view>
-				<view class="padding-xl">
-					<view class="cu-form-group">
-						<view class="title">姓&nbsp; &nbsp; 名</view>
-						<input placeholder="请填写随访人员姓名" name="input"  v-model="withName"></input>
-					</view>
-					<view class="cu-form-group">
-						<view class="title">手机号</view>
-						<input placeholder="请填写随访人员手机号" name="input"  v-model="withPhone"></input>
-					</view>
-				</view>
-				<view class="cu-bar bg-white justify-end">
-					<view class="action">
-						<button class="cu-btn line-green text-green" @tap="hideModal">取消</button>
-						<button class="cu-btn bg-green margin-left" @tap="addData">确定</button>
-					</view>
-				</view>
-			</view>
-		</view>
-		
-
 		<view class="bottom padding">
 			<view class="leftBottom">
 				<view>
@@ -269,8 +253,8 @@
 					withName:this.withName,
 					withPhone:this.withPhone
 				})
-				this.hideModal()
-				console.log(this.tableData)
+				// this.hideModal()
+				// console.log(this.tableData)
 			},
 			showModal(e) {
 				this.modalName = e.currentTarget.dataset.target,
@@ -304,6 +288,9 @@
 			DelImg(e) {
 				this.imgList.splice(e.currentTarget.dataset.index, 1)
 			},
+			getRow(value){
+				this.tableData.splice(value, 1)
+			}
 		},
 	};
 </script>

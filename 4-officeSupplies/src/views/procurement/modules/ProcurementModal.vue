@@ -11,13 +11,38 @@
     style="top: 5%; height: 95%; overflow-y: hidden"
   >
     <a-spin :spinning="confirmLoading">
+      <a-descriptions  v-if="disableSubmit" title="" bordered>
+        <a-descriptions-item label="申请部门">
+          {{model.applyDepertment}}
+        </a-descriptions-item>
+        <a-descriptions-item label="申请人">
+          {{model.applyName}}
+        </a-descriptions-item>
+        <a-descriptions-item label="状态">
+          {{model.status  == '1' ? "待审核" : "通过"}}
+        </a-descriptions-item>
+        <a-descriptions-item label="申请名称">
+          {{model.articleName}}
+        </a-descriptions-item>
+        <a-descriptions-item label="申请时间">
+          {{model.applyTime}}
+        </a-descriptions-item>
+        <a-descriptions-item label="申请理由">
+          {{model.applyReason}}
+        </a-descriptions-item>
+        <a-descriptions-item  v-if="!!model.id && model.checkTime != '' && disableSubmit" label="审核时间">
+          {{model.checkTime}}
+        </a-descriptions-item>
+        <a-descriptions-item label="备注">
+          {{model.remark}}
+        </a-descriptions-item>
+      </a-descriptions>
       <a-form :form="form">
-        <a-form-item label="申请部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item v-if="!disableSubmit" label="申请部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select
             v-decorator.trim="['applyDepertment', { initialValue: '1' }, validatorRules.applyDepertment]"
             placeholder="请选择申请部门"
             :getPopupContainer="(target) => target.parentNode"
-            :disabled="disableSubmit"
           >
             <a-select-option value="1">卷烟销售管理处</a-select-option>
             <a-select-option value="2">物流管理处</a-select-option>
@@ -26,7 +51,7 @@
           </a-select>
         </a-form-item>
 
-        <a-form-item label="申请人" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item v-if="!disableSubmit" label="申请人" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select
             v-decorator.trim="['applyName', { initialValue: '1' }, validatorRules.applyName]"
             placeholder="请选择申请人"
@@ -40,7 +65,7 @@
           </a-select>
         </a-form-item>
 
-        <a-form-item label="状态" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id">
+        <a-form-item label="状态" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id && !disableSubmit">
           <a-select
             v-decorator.trim="['status', { initialValue: '1' }, validatorRules.status]"
             placeholder="请选择审批状态"
@@ -67,12 +92,11 @@
             <a-select-option :value="2">打印机</a-select-option>
           </a-select>
         </a-form-item> -->
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="申请名称">
+        <a-form-item v-if="!disableSubmit" :labelCol="labelCol" :wrapperCol="wrapperCol" label="申请名称">
           <a-input
             class="inputWitdh"
             placeholder="请输入申请名称"
             v-decorator.trim="['articleName', { initialValue: '办公用品' }, validatorRules.articleName]"
-            :disabled="disableSubmit"
           />
         </a-form-item>
 
@@ -103,50 +127,58 @@
           </a-select>
         </a-form-item> -->
 
-        <a-form-item v-if="!!model.id" :labelCol="labelCol" :wrapperCol="wrapperCol" label="申请时间">
+        <a-form-item v-if="!!model.id && !disableSubmit" :labelCol="labelCol" :wrapperCol="wrapperCol" label="申请时间">
           <j-date
             class="inputWitdh"
             v-decorator.trim="['applyTime', validatorRules.applyTime]"
             :showTime="true"
             date-format="YYYY-MM-DD HH:mm:ss"
             placeholder="请选择申请时间"
-            :disabled="disableSubmit"
           ></j-date>
         </a-form-item>
 
-        <a-form-item label="申请理由" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item v-if="!disableSubmit" label="申请理由" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-textarea
             v-decorator.trim="['applyReason', { initialValue: '办公需要' }, validatorRules.applyReason]"
             placeholder="请输入申请理由"
             auto-size
-            :disabled="disableSubmit"
           />
         </a-form-item>
 
         <a-form-item
-          v-if="!!model.id && model.checkTime != ''"
+          v-if="!!model.id && model.checkTime != '' && !disableSubmit"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="审核时间"
         >
+
           <j-date
             class="inputWitdh"
             v-decorator.trim="['checkTime', validatorRules.checkTime]"
             :showTime="true"
             date-format="YYYY-MM-DD HH:mm:ss"
             placeholder="请选择审核时间"
-            :disabled="disableSubmit"
           ></j-date>
         </a-form-item>
 
-        <a-form-item label="备注" :labelCol="labelCol" :wrapperCol="wrapperCol" v-if="!!model.id && model.remark != ''">
-          <a-textarea
-            v-decorator.trim="['remark', validatorRules.remark]"
-            placeholder=""
-            auto-size
-            :disabled="disableSubmit"
-          />
+        <a-form-item
+          v-if="!!model.id && model.checkTime != '' && disableSubmit"
+          label="审核时间"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          {{ this.model.checkTime }}
         </a-form-item>
+
+        <a-form-item
+          label="备注"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          v-if="!!model.id && model.remark != '' && !disableSubmit"
+        >
+          <a-textarea v-decorator.trim="['remark', validatorRules.remark]" placeholder="" auto-size />
+        </a-form-item>
+
       </a-form>
 
       <a-tabs default-active-key="1" v-if="!disableSubmit">
@@ -181,17 +213,15 @@
         <a-tab-pane key="1" tab="申请明细">
           <j-editable-table
             ref="detailInfoForm1"
-            :columns="columns"
-            :dataSource="dataSource"
+            :columns="columns1"
+            :dataSource="dataSource1"
             :maxHeight="300"
             :rowNumber="true"
-            :disabled="true"
           >
-            <template v-slot:materialName="props">
+            <!-- <template v-slot:materialName="props">
               <a-select
                 :defaultValue="1"
                 placeholder="请选择办公用品名称"
-                :disabled="disableSubmit"
                 style="width: 100%"
                 @change="onChangeSelect($event, props)"
               >
@@ -199,7 +229,7 @@
                 <a-select-option :value="2">打印机</a-select-option>
                 <a-select-option :value="3">A4纸</a-select-option>
               </a-select>
-            </template>
+            </template> -->
           </j-editable-table>
         </a-tab-pane>
       </a-tabs>
@@ -282,6 +312,44 @@ export default {
           key: 'materialNum',
           type: FormTypes.inputNumber,
           defaultValue: 1,
+          statistics: 'true',
+        },
+      ],
+      dataSource1: [
+        {
+          key: 1,
+          materialName: '马克笔',
+          materialUnits: '盒',
+          materialNum: 3,
+        },
+      ],
+      columns1: [
+        {
+          title: '办公用品名称',
+          key: 'materialName',
+          // type: FormTypes.input,
+          width: '25%',
+          slotName: 'materialName',
+        },
+        {
+          title: '计量单位',
+          key: 'materialUnits',
+          // type: FormTypes.slot,
+          // slotName: 'materialUnits',
+          // type: FormTypes.input,
+          // defaultValue: '1',
+          // options: [
+          //   { title: '盒', value: '1' },
+          //   { title: '台', value: '2' },
+          //   { title: '箱', value: '3' },
+          // ],
+        },
+        {
+          title: '申请数量',
+          key: 'materialNum',
+          type: FormTypes.inputNumber,
+          disabled: true,
+          // defaultValue: 1,
           statistics: 'true',
         },
       ],

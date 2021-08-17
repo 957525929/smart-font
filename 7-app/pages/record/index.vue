@@ -12,12 +12,14 @@
 		</scroll-view>
 		<timeline v-if="TabCur==1"></timeline>
 		<timelineHotel v-if="TabCur==0"></timelineHotel>
+		<timelineDing v-if="TabCur==2"></timelineDing>
 	</view>
 </template>
 
 <script>
 	import timeline from './timeline.vue';
 	import timelineHotel from './timelineHotel.vue';
+	import timelineDing from './timelineDing.vue';
 	export default {
 		data() {
 			return {
@@ -31,13 +33,18 @@
 					{
 						index:2,
 						name:'会议预约记录',
-					}
+					},
+					{
+						index:3,
+						name:'食堂预约记录',
+					},
 				]
 			};
 		},
 		components:{
 			timeline,
 			timelineHotel,
+			timelineDing
 		},
 		methods: {
 			tabSelect(e) {
