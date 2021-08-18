@@ -357,10 +357,23 @@ export const mockMenuData = {
               {
                 "keepAlive": false,
                 "internalOrExternal": false,
-                "title": "订餐配置"
+                "title": "订餐权限配置"
               },
               "name": "food-menu-Order",
               "id": "911"
+            },
+            {
+              "path": "/food/menu/Message",
+              "component": "food/menu/Message",
+              "route": "1",
+              "meta":
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "消息通知配置"
+              },
+              "name": "food-menu-Message",
+              "id": "9111"
             },
           ],
       },

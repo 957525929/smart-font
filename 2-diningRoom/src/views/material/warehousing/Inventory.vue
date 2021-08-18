@@ -148,7 +148,7 @@ export default {
           dataIndex: 'fresh',
           customRender: function (text) {
             return text == 0 ? (
-              <a-badge color="blue" text="即将过期" />
+              <a-badge color="blue" text="将过期" />
             ) : text == 1 ? (
               <a-badge color="green" text="新鲜" />
             ) : (
@@ -209,7 +209,7 @@ export default {
         {
           id: '3',
           foodName: '蔬菜类 / 花叶类 / 上海青',
-          storageTime: formatDate(new Date().getTime() - 14 * 24 * 3600 * 1000, 'yyyy-MM-dd  hh:mm:ss'),
+          storageTime: formatDate(new Date().getTime() - 14 * 24 * 3600 * 1000, 'yyyy-MM-dd  10:22:36'),
           storageNum: '5',
           purchase: '3',
           values: '15',
