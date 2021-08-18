@@ -1,5 +1,6 @@
 <template>
   <j-modal :title="'会后结算'" :width="'1200px'" :visible="modalVisible" :maskClosable="false" @cancel="handleCancel">
+    <a-button icon="download" style="margin-left: 8px" @click="handleExportXls('会后结算')">导出</a-button>
     <a-tabs default-active-key="1">
       <a-tab-pane key="1" tab="会议基本信息">
         <a-descriptions :column="3">
@@ -22,6 +23,13 @@
           <template v-slot:dateTime="props">
             <a-range-picker @change="onChangeTime($event, props)" :default-value="defaultDateTime" />
           </template>
+          <template v-slot:operation>
+            <a-upload :style="{fontWeight:'400'}" action="https://www.mocky.io/v2/5cc8019d300000980a055e76">
+              <a-button>
+                <a-icon type="upload" />上传附件
+              </a-button>
+            </a-upload>
+          </template>
         </j-editable-table>
       </a-tab-pane>
     </a-tabs>
@@ -35,7 +43,9 @@
 
 <script>
   import JEditableTable from '@/components/jeecg/JEditableTable'
-
+  import {
+    JeecgListMixin
+  } from '@/mixins/JeecgListMixin'
   import {
     FormTypes
   } from '@/utils/JEditableTableUtil'
@@ -46,7 +56,7 @@
     components: {
       JEditableTable
     },
-
+    mixins: [JeecgListMixin],
     props: {
       modalVisible: Boolean,
       basicInfo: Object
@@ -148,14 +158,22 @@
             title: '备注',
             key: 'remark',
             type: FormTypes.input_pop,
-            placeholder: '请输入${title}',
-            validateRules: [{
-              required: true,
-              message: '${title}不能为空'
-            }]
+            placeholder: '请输入${title}'
+          },
+          {
+            title: '操作',
+            key: 'operation',
+            type: FormTypes.slot,
+            slotName: 'operation',
+            width: '25%',
           },
         ],
         defaultDateTime: [],
+        url: {
+          //  list: "/sys/user/list",
+          // list: "/stock/stkCheckBill/list",
+          exportXlsUrl: "/sys/user/exportXls",
+        },
       }
     },
     methods: {

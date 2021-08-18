@@ -719,7 +719,7 @@ export default {
       // roomInfor: undefined,
       // numberRoomInfor: undefined,
       // conditionRoomInfor: undefined,
-      eatHotel: '',
+      eatHotel: '酒店',
       numDate: '1',
       current: 0,
       steps: [
