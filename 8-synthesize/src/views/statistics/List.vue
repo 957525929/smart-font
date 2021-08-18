@@ -93,36 +93,36 @@
             </a-tooltip>
             <div>
               <trend flag="up" style="margin-right: 16px">
-                <span slot="term">周同比</span>
+                <span slot="term">月同比</span>
                 12%
               </trend>
               <trend flag="down">
-                <span slot="term">日同比</span>
+                <span slot="term">周同比</span>
                 11%
               </trend>
             </div>
-            <template slot="footer">日均上传数<span>5</span></template>
+            <template slot="footer">月均上传数<span>25</span></template>
           </chart-card>
         </a-row>
       </a-col>
 
       <a-col :sm="8" :md="8" :xl="7">
         <!-- <a-row :gutter="24" :style="{ marginBottom: '10px' }"> -->
-        <chart-card title="文件累计下载总数" total="108">
+        <chart-card title="文件累计下载总数" total="101">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
           <div>
             <trend flag="up" style="margin-right: 16px">
-              <span slot="term">周同比</span>
+              <span slot="term">月同比</span>
               14%
             </trend>
             <trend flag="down">
-              <span slot="term">日同比</span>
+              <span slot="term">周同比</span>
               11%
             </trend>
           </div>
-          <template slot="footer">日均下载数<span>7</span></template>
+          <template slot="footer">月均下载数<span>20</span></template>
         </chart-card>
         <!-- </a-row> -->
       </a-col>

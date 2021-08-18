@@ -1,6 +1,6 @@
 <template>
-  <div :style="{ padding: '0 0 32px 32px' }">
-    <h4 :style="{ marginBottom: '20px' }">{{ title }}</h4>
+  <div>
+    <!-- <h4 :style="{ marginBottom: '20px' }">{{ title }}</h4> -->
     <v-chart :data="data" :height="height" :force-fit="true" :onClick="handleClick">
       <v-tooltip/>
       <v-axis/>
