@@ -43,13 +43,13 @@
 		<view class=" padding-sm margin-xs radius">访客信息</view>
 		
 		<view class="cu-form-group">
-			<view class="title"> 单&nbsp; &nbsp; 位</view>
-			<input placeholder="请输入" name="input" v-model="company"></input>
-		</view>
-
-		<view class="cu-form-group">
 			<view class="title"> 姓&nbsp; &nbsp; 名</view>
 			<input placeholder="请输入" name="input" v-model="name"></input>
+		</view>
+		
+		<view class="cu-form-group">
+			<view class="title"> 单&nbsp; &nbsp; 位</view>
+			<input placeholder="请输入" name="input" v-model="company"></input>
 		</view>
 
 		<view class="cu-form-group">
