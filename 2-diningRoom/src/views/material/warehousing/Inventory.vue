@@ -69,10 +69,11 @@
             showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`,
           }"
         >
-          <span slot="action" slot-scope="text, record">
-            <a>查看详情</a>
+          <span slot="action">
+            <a>编辑</a>
             <a-divider type="vertical" />
-            <a-dropdown>
+            <a>删除</a>
+            <!-- <a-dropdown>
               <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
               <a-menu slot="overlay">
                 <a-menu-item key="1" @click="purInEditOnClick(record)">编辑</a-menu-item>
@@ -82,7 +83,7 @@
                   </a-popconfirm>
                 </a-menu-item>
               </a-menu>
-            </a-dropdown>
+            </a-dropdown> -->
           </span>
         </a-table>
       </div>
@@ -189,7 +190,7 @@ export default {
       dataSource: [
         {
           id: '1',
-          foodName: '茄子',
+          foodName: '蔬菜类 / 果菜类 / 茄子',
           storageTime: formatDate(new Date().getTime(), 'yyyy-MM-d 08:15:22'),
           storageNum: '5',
           purchase: '4',
@@ -198,7 +199,7 @@ export default {
         },
         {
           id: '2',
-          foodName: '五花肉',
+          foodName: '肉食类 / 猪肉类 / 五花肉',
           storageTime: formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyy-MM-d  hh:mm:ss'),
           storageNum: '10',
           purchase: '20',
@@ -207,7 +208,7 @@ export default {
         },
         {
           id: '3',
-          foodName: '上海青',
+          foodName: '蔬菜类 / 花叶类 / 上海青',
           storageTime: formatDate(new Date().getTime() - 14 * 24 * 3600 * 1000, 'yyyy-MM-dd  hh:mm:ss'),
           storageNum: '5',
           purchase: '3',
@@ -228,11 +229,11 @@ export default {
     //   if (this.toggleSearchStatus) this.toggleSearchStatus = false
     //   else this.toggleSearchStatus = true
     // },
-    purInOnClick() {},
-    purInEditOnClick() {},
-    deletConfirm(e) {
-      this.$message.success('删除成功')
-    },
+    // purInOnClick() {},
+    // purInEditOnClick() {},
+    // deletConfirm(e) {
+    //   this.$message.success('删除成功')
+    // },
     onSelectChange(selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys
     },
