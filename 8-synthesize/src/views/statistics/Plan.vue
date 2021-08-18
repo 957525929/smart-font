@@ -74,7 +74,7 @@
     </a-card>
 
     <a-row :gutter="24" class="margin-top">
-      <a-col :sm="10" :md="10" :xl="10" :style="{ marginBottom: '15px' }" :height="450">
+      <a-col :sm="10" :md="10" :xl="8" :style="{ marginBottom: '15px' }" :height="450">
         <a-card :bordered="false" :title="`即将逾期(${dataSource2.length})`">
           <!-- <div slot="extra">
             <a v-if="dataSource2 && dataSource2.length > 0" @click="goPage">更多</a>
@@ -91,9 +91,54 @@
               </div>
             </a-list-item>
           </a-list>
+          <div class="chart-card-footer">
+            <span slot="term">您的任务将在20天后过期。</span>
+          </div>
         </a-card>
       </a-col>
-      <a-col :sm="6" :md="6" :xl="7">
+      <a-col :sm="10" :md="10" :xl="8" :style="{ marginBottom: '15px' }">
+        <a-card :bordered="false" :title="`已完成(${dataSource3.length})`">
+          <a-list size="small">
+            <a-list-item :key="index" v-for="(item, index) in dataSource3">
+              <a-list-item-meta>
+                <a-avatar slot="avatar" size="large" shape="square" :src="item.avatar" />
+                <a slot="title">{{ item.title }}</a>
+                <span slot="description">{{ item.description }}</span>
+                <span slot="description" style="margin-left:30px">{{ item.time }}</span>
+              </a-list-item-meta>
+              <div slot="actions">
+                <a>详情</a>
+              </div>
+            </a-list-item>
+          </a-list>
+          <div class="chart-card-footer">
+            <trend flag="down" style="margin-right: 16px">
+              <span slot="term">同上一次完成任务所耗时间对比</span>
+              12%
+            </trend>
+          </div>
+        </a-card>
+      </a-col>
+      <a-col :sm="10" :md="10" :xl="8" :style="{ marginBottom: '15px' }" :height="450">
+        <a-card :bordered="false" :title="`已超期(${dataSource4.length})`">
+          <a-list size="small">
+            <a-list-item :key="index" v-for="(item, index) in dataSource4">
+              <a-list-item-meta>
+                <a-avatar slot="avatar" size="large" shape="square" :src="item.avatar" />
+                <a slot="title">{{ item.title }}</a>
+                <span slot="description">{{ item.description }}</span>
+              </a-list-item-meta>
+              <div slot="actions">
+                <a>详情</a>
+              </div>
+            </a-list-item>
+          </a-list>
+          <div class="chart-card-footer">
+            <span slot="term">您的任务已超期20天啦，请尽快完成！</span>
+          </div>
+        </a-card>
+      </a-col>
+      <!-- <a-col :sm="6" :md="6" :xl="7">
         <a-row :gutter="24" :style="{ marginBottom: '10px' }">
           <chart-card title="完成数" total="18">
             <a-tooltip title="指标说明" slot="action">
@@ -111,9 +156,9 @@
             </div>
             <template slot="footer">日均完成数<span>5</span></template>
           </chart-card>
-        </a-row>
-        <!-- <a-divider /> -->
-      </a-col>
+        </a-row> -->
+      <!-- <a-divider /> -->
+      <!-- </a-col>
       <a-col :sm="8" :md="8" :xl="7">
         <chart-card title="任务完成率" total="78%">
           <a-tooltip title="指标说明" slot="action">
@@ -133,7 +178,7 @@
             </trend>
           </template>
         </chart-card>
-      </a-col>
+      </a-col> -->
     </a-row>
 
     <!-- <a-card class="margin-top">
@@ -229,6 +274,21 @@ export default {
             value: 90
           }
         }
+      ],
+      dataSource3: [
+        {
+          title: '2020年第四季度总结',
+          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
+          description: '完成时间：2020-12-19 16:10:20',
+          time: '总计耗时101天'
+        }
+      ],
+      dataSource4: [
+        {
+          title: '2020年第四季度策略',
+          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
+          description: '逾期时间：2020-11-08 23:59:59'
+        }
       ]
     }
   },
@@ -285,5 +345,21 @@ export default {
 }
 .margin-top {
   margin-top: 10px;
+}
+.chart-card-footer {
+  border-top: 1px solid #e8e8e8;
+  padding-top: 9px;
+  margin-top: 8px;
+
+  > * {
+    position: relative;
+  }
+
+  .field {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
 }
 </style>
