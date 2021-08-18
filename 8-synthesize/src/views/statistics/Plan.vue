@@ -92,7 +92,7 @@
             </a-list-item>
           </a-list>
           <div class="chart-card-footer">
-            <span slot="term">您的任务将在20天后过期</span>
+            <span slot="term">您的任务将在20天后过期。</span>
           </div>
         </a-card>
       </a-col>
