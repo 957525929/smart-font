@@ -7,7 +7,7 @@
           <span style='font-weight: bold;margin-right:10px;font-size:15px'>按主题筛选</span>
         </a-col>
         <a-col>
-          <a-select mode="tags" :style="{width:'250px'}" showSearch @change="ChangeTheme" placeholder="请选择会议主题"
+          <a-select mode="tags" :style="{width:'210px'}" showSearch @change="ChangeTheme" placeholder="请选择会议主题"
             v-model="selectTheme">
             <a-select-option value="年度总结">年度总结</a-select-option>
             <a-select-option value="项目会议">项目会议</a-select-option>

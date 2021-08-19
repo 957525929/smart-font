@@ -223,6 +223,19 @@ const user = {
                     "id": "1245154050731200514"
                   },
                   {
+                    "path": "/meetingOrganization/Settlement",
+                    "component": "meetingOrganization/Settlement",
+                    "route": "1",
+                    "meta": {
+                      "keepAlive": false,
+                      "internalOrExternal": false,
+                      "icon": "edit",
+                      "title": "会后结算"
+                    },
+                    "name": "meetingSettlement",
+                    "id": "1244271300749729794"
+                  },
+                  {
                     "path": "/meetingOrganization/MeetingIn",
                     "component": "meetingOrganization/MeetingIn",
                     "route": "1",

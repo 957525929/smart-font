@@ -97,8 +97,13 @@
             <a-table-column title="日期" data-index="dateTime" align="center"></a-table-column>
             <a-table-column title="费用类型" data-index="type" align="center"></a-table-column>
             <a-table-column title="费用（元）" data-index="price" align="center"></a-table-column>
+            <a-table-column title="操作" align="center">
+              <template slot-scope="record">
+               <a href="javascript:;" @click="Download(record)">下载附件</a>
+              </template>
+            </a-table-column>
           </a-table>
-          <div :style="{fontWeight:'700',fontSize:'15px',marginLeft:'90%',marginTop:'10px'}">总计：1900</div>
+          <div :style="{fontWeight:'700',fontSize:'15px',marginLeft:'72%',marginTop:'10px'}">总计：1900</div>
         </a-collapse-panel>
 
       </a-collapse>

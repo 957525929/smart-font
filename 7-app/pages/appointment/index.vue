@@ -1,18 +1,5 @@
 <template>
 	<view>
-		<!-- <scroll-view scroll-y class="page">
-			<navigator style="background-color: #7C97CA;" class="work-box work-box2 u-f-jsb u-f-ajc" url="/pages/appointment/hotel">
-				<view class="banner">
-					<image src="/static/meeting/images/hotel.png" mode="widthFix" class='response banner-back'></image>
-				</view>
-			</navigator>
-			<navigator style="background-color: #7C97CA;" class="work-box work-box2 u-f-jsb u-f-ajc" url="/pages/appointment/meeting">
-				<view class="banner">
-					<image src="/static/meeting/images/meeting.png" mode="widthFix" class='response banner-back'></image>
-				</view>
-			</navigator>
-		</scroll-view> -->
-		
 		<scroll-view scroll-y class="page">
 					<view class="banner">
 						<image src="/static/workplace/banner.png" mode="widthFix" class='response banner-back'></image>
@@ -29,8 +16,6 @@
 					</view>
 					<view class="cu-tabbar-height"></view>
 		</scroll-view>
-
-
 	</view>
 </template>
 <script>
@@ -51,6 +36,13 @@
 						color: 'blue',
 						cuIcon: 'remind',
 						route:'meeting'
+					},
+					{
+						title: '食堂预订',
+						name: 'dingroom',
+						color: 'green',
+						cuIcon: 'shopfill',
+						route:'dingroom'
 					},
 				],
 			};
