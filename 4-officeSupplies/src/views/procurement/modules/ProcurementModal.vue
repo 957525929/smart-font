@@ -1,7 +1,7 @@
 <template>
   <a-modal
     :title="title"
-    :width="800"
+    :width="950"
     :visible="visible"
     :confirmLoading="confirmLoading"
     @ok="handleOk"
@@ -162,15 +162,6 @@
         </a-form-item>
 
         <a-form-item
-          v-if="!!model.id && model.checkTime != '' && disableSubmit"
-          label="审核时间"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          {{ this.model.checkTime }}
-        </a-form-item>
-
-        <a-form-item
           label="备注"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
@@ -191,6 +182,7 @@
             :rowNumber="true"
             :rowSelection="true"
             :actionButton="true"
+            @valueChange='valueChangeEditable'
           >
             <template v-slot:materialName="props">
               <a-select
@@ -210,7 +202,7 @@
       </a-tabs>
 
       <a-tabs default-active-key="1" v-if="disableSubmit">
-        <a-tab-pane key="1" tab="申请明细">
+        <a-tab-pane key="1" tab="申请明细" >
           <j-editable-table
             ref="detailInfoForm1"
             :columns="columns1"
@@ -281,9 +273,12 @@ export default {
       dataSource: [
         {
           key: 1,
-          materialName: '1',
-          materialUnits: '1',
+          materialName: '2',
+          materialBrand:'得力',
+          materialUnits: '盒',
+          materialPrice: '20',
           materialNum: 3,
+          materialTotalValue:'60'
         },
       ],
       columns: [
@@ -291,15 +286,49 @@ export default {
           title: '办公用品名称',
           key: 'materialName',
           type: FormTypes.slot,
-          width: '25%',
           slotName: 'materialName',
+        },
+        {
+          title: '品牌',
+          defaultValue: '得力',
+          key: 'materialBrand',
+          type: FormTypes.select,
+          allowInput:true,
+          options: [
+            { title: '得力', value: '1' },
+            { title: '晨光', value: '2' },
+            { title: '惠普', value: '3' },
+          ],
+        },
+        {
+          title: '型号',
+          defaultValue: 'liit',
+          key: 'materialModel',
+          type: FormTypes.select,
+          allowInput:true,
+          options: [
+            { title: 'liit', value: '1' },
+            { title: 'tk-001', value: '2' },
+            { title: 'APMV0901', value: '3' },
+          ],
+        },
+        {
+          title: '单价(元)',
+          key: 'materialPrice',
+          type: FormTypes.input,
+          defaultValue: '20',
+          placeholder: '请输入${title}',
+          validateRules: [
+            { required: true, message: '${title}不能为空' },
+          ],
         },
         {
           title: '计量单位',
           key: 'materialUnits',
           // type: FormTypes.slot,
-          // slotName: 'materialUnits',
+          slotName: 'materialUnits',
           type: FormTypes.select,
+          allowInput:true,
           defaultValue: '1',
           options: [
             { title: '盒', value: '1' },
@@ -314,13 +343,27 @@ export default {
           defaultValue: 1,
           statistics: 'true',
         },
+        {
+          title: '合计(元)',
+          key: 'materialTotalValue',
+          type: FormTypes.inputNumber,
+          defaultValue: 20,
+          placeholder: '',
+          validateRules: [
+            { required: true, message: '${title}不能为空' },
+          ],
+          statistics: "true",
+        },
       ],
       dataSource1: [
         {
           key: 1,
-          materialName: '马克笔',
+          materialName: '马克笔11',
           materialUnits: '盒',
           materialNum: 3,
+          materialBrand:'得力',
+          materialPrice: 20,
+          materialTotalValue:60
         },
       ],
       columns1: [
@@ -328,8 +371,26 @@ export default {
           title: '办公用品名称',
           key: 'materialName',
           // type: FormTypes.input,
-          width: '25%',
           slotName: 'materialName',
+        },
+        {
+          title: '品牌',
+          key: 'materialBrand',
+          placeholder: '请输入${title}'
+        },
+        {
+          title: '型号',
+          key: 'materialModel',
+          placeholder: '请输入${title}'
+        },
+        {
+          title: '单价(元)',
+          key: 'materialPrice',
+          defaultValue: '20',
+          placeholder: '请输入${title}',
+          validateRules: [
+            { required: true, message: '${title}不能为空' },
+          ],
         },
         {
           title: '计量单位',
@@ -351,6 +412,17 @@ export default {
           disabled: true,
           // defaultValue: 1,
           statistics: 'true',
+        },
+        {
+          title: '合计(元)',
+          key: 'materialTotalValue',
+          type: FormTypes.inputNumber,
+          disabled: true,
+          placeholder: '',
+          validateRules: [
+            { required: true, message: '${title}不能为空' },
+          ],
+          statistics: "true",
         },
       ],
       // columns1: [
@@ -416,13 +488,15 @@ export default {
   created() {},
   methods: {
     add() {
+      this.dataSource = []
       this.edit({})
     },
     edit(record) {
       this.form.resetFields()
       this.model = Object.assign({}, record)
       this.visible = true
-
+      this.dataSource = Object.assign([], record.detail);
+      this.dataSource1 = Object.assign([], record.detail);
       this.$nextTick(() => {
         this.form.setFieldsValue(
           pick(
@@ -525,6 +599,10 @@ export default {
               rowKey: rowId,
               values: {
                 materialUnits: '盒',
+                materialPrice:20,
+                materialBrand:'得力',
+                materialModel:'APMV0901',
+                materialTotalValue:20
               },
             },
           ])
@@ -535,6 +613,10 @@ export default {
               rowKey: rowId,
               values: {
                 materialUnits: '台',
+                materialPrice:1600,
+                materialBrand:'惠普',
+                materialModel:'HP01231',
+                materialTotalValue:1600
               },
             },
           ])
@@ -545,11 +627,28 @@ export default {
               rowKey: rowId,
               values: {
                 materialUnits: '箱',
+                materialPrice:128,
+                materialBrand:'晨光',
+                materialModel:'WSFA0901',
+                materialTotalValue:128
               },
             },
           ])
           break
       }
+      props.target.recalcAllStatisticsColumns()
+    },
+    valueChangeEditable(value) {
+      // console.log(value.row)
+      value.target.setValues([
+        {
+          rowKey: value.row.id,
+          values: {
+            'materialTotalValue': parseFloat(value.row.materialPrice)* parseFloat(value.row.materialNum)
+          }
+        }
+      ])
+      value.target.recalcAllStatisticsColumns()
     },
   },
 }

@@ -27,7 +27,7 @@
           </a-col>
 
           <a-col :md="10" :sm="12">
-            <a-form-item label="时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
+            <a-form-item label="领用时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
               <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date>
               <span style="width: 10px;">~</span>
               <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择结束时间"></j-date>
@@ -126,9 +126,29 @@
             articleName: '马克笔',
             receiveNum: '2',
             price: '20',
-            receivePrice: '40',
+            receivePrice: '148',
             unit:'盒',
-            receiveTime: formatDate(new Date().getTime()-3*24*3600*1000,"yyyy-MM-dd") + ' 09:48:59'
+            receiveTime: formatDate(new Date().getTime()-3*24*3600*1000,"yyyy-MM-dd") + ' 09:48:59',
+            detail:[{
+              key: 1,
+              materialName: '马克笔',
+              materialModel:'APMV0901',
+              materialUnits: '盒',
+              materialNum: 1,
+              materialBrand:'得力',
+              materialPrice: 20,
+              materialTotalValue:20
+            },
+              {
+                key: 2,
+                materialName: 'A4纸',
+                materialModel:'DSS0123',
+                materialUnits: '箱',
+                materialNum: 1,
+                materialBrand:'晨光',
+                materialPrice: 128,
+                materialTotalValue:128
+              }],
           },
           {
             id:2,
@@ -139,7 +159,17 @@
             price: '1600',
             receivePrice: '1600',
             unit:'台',
-            receiveTime: formatDate(new Date().getTime()-5*24*3600*1000,"yyyy-MM-dd") + ' 15:10:11'
+            receiveTime: formatDate(new Date().getTime()-5*24*3600*1000,"yyyy-MM-dd") + ' 15:10:11',
+            detail:[{
+              key: 1,
+              materialName: '打印机',
+              materialModel:'HP0901',
+              materialUnits: '台',
+              materialNum: 1,
+              materialBrand:'惠普',
+              materialPrice: 1600,
+              materialTotalValue:1600
+            }],
           },
           {
             id:3,
@@ -150,7 +180,17 @@
             price: '128',
             receivePrice: '128',
             unit:'箱',
-            receiveTime:  formatDate(new Date().getTime()-7*24*3600*1000,"yyyy-MM-dd") + ' 10:24:18'
+            receiveTime:  formatDate(new Date().getTime()-7*24*3600*1000,"yyyy-MM-dd") + ' 10:24:18',
+            detail:[{
+                key: 1,
+                materialName: 'A4纸',
+                materialModel:'DSS0123',
+                materialUnits: '箱',
+                materialNum: 1,
+                materialBrand:'晨光',
+                materialPrice: 128,
+                materialTotalValue:128
+              }],
           },
         ],
         // 表头
@@ -175,21 +215,21 @@
             align:"center",
             dataIndex: 'receiveName'
           },
-          {
-            title: '办公用品名称',
-            align:"center",
-            dataIndex: 'articleName'
-          },
+          // {
+          //   title: '办公用品名称',
+          //   align:"center",
+          //   dataIndex: 'articleName'
+          // },
           {
             title: '领用数量',
             dataIndex: 'receiveNum',
             align:"center"
           },
-          {
-            title: '计量单位',
-            dataIndex: 'unit',
-            align:"center"
-          },
+          // {
+          //   title: '计量单位',
+          //   dataIndex: 'unit',
+          //   align:"center"
+          // },
           {
             title: '金额(元)',
             dataIndex: 'receivePrice',

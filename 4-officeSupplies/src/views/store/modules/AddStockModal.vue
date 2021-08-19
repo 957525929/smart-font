@@ -12,10 +12,10 @@
   >
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
-        <a-form-item v-if="!disableSubmit" label="领用部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item v-if="!disableSubmit" label="申请部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select
-            v-decorator.trim="['receiveDepertment', { initialValue: '1' }, validatorRules.receiveDepertment]"
-            placeholder="请选择领用部门"
+            v-decorator.trim="['applyDepertment', { initialValue: '1' }, validatorRules.applyDepertment]"
+            placeholder="请选择申请部门"
             :getPopupContainer="(target) => target.parentNode"
           >
             <a-select-option value="1">卷烟销售管理处</a-select-option>
@@ -25,12 +25,12 @@
           </a-select>
         </a-form-item>
 
-        <a-form-item v-if="!disableSubmit" label="领用人" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item v-if="!disableSubmit" label="申请人" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select
-            v-decorator.trim="['receiveName', { initialValue: '1' }, validatorRules.receiveName]"
-            placeholder="请选择领用人"
+            v-decorator.trim="['applyName', { initialValue: '1' }, validatorRules.applyName]"
+            placeholder="请选择申请人"
             :getPopupContainer="(target) => target.parentNode"
-            :disabled="disableSubmit"
+            @change="handleChange"
           >
             <a-select-option value="1">张丰</a-select-option>
             <a-select-option value="2">王立成</a-select-option>
@@ -38,20 +38,10 @@
             <a-select-option value="4">林研希</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item v-if="!!model.id && !disableSubmit" :labelCol="labelCol" :wrapperCol="wrapperCol" label="领用时间">
-          <j-date
-            class="inputWitdh"
-            v-decorator.trim="['receiveTime', validatorRules.receiveTime]"
-            :showTime="true"
-            date-format="YYYY-MM-DD HH:mm:ss"
-            placeholder="请选择领用时间"
-          ></j-date>
-        </a-form-item>
-        </a-form-item>
       </a-form>
 
-      <a-tabs default-active-key="1" v-if="!disableSubmit">
-        <a-tab-pane key="1" tab="领用明细">
+      <a-tabs default-active-key="1">
+        <a-tab-pane key="1" tab="入库明细">
           <j-editable-table
             ref="detailInfoForm"
             :columns="columns"
@@ -78,31 +68,6 @@
           </j-editable-table>
         </a-tab-pane>
       </a-tabs>
-
-      <a-tabs default-active-key="1" v-if="disableSubmit">
-        <a-tab-pane key="1" tab="申请明细" >
-          <j-editable-table
-            ref="detailInfoForm1"
-            :columns="columns1"
-            :dataSource="dataSource1"
-            :maxHeight="300"
-            :rowNumber="true"
-          >
-            <!-- <template v-slot:materialName="props">
-              <a-select
-                :defaultValue="1"
-                placeholder="请选择办公用品名称"
-                style="width: 100%"
-                @change="onChangeSelect($event, props)"
-              >
-                <a-select-option :value="1">马克笔</a-select-option>
-                <a-select-option :value="2">打印机</a-select-option>
-                <a-select-option :value="3">A4纸</a-select-option>
-              </a-select>
-            </template> -->
-          </j-editable-table>
-        </a-tab-pane>
-      </a-tabs>
     </a-spin>
 
     <template slot="footer">
@@ -126,9 +91,35 @@ export default {
     OfficeCategory,
     JEditableTable,
   },
+  props: {
+    visible: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       dataSource: [
+        {
+          key: 1,
+          materialName: '马克笔',
+          materialBrand:'得力',
+          materialModel:'MK001',
+          materialUnits: '盒',
+          materialPrice: '20',
+          materialNum: 3,
+          materialTotalValue:'60'
+        },
+        {
+          key: 2,
+          materialName: 'A4纸',
+          materialBrand:'晨光',
+          materialModel:'SES256',
+          materialUnits: '箱',
+          materialPrice: '128',
+          materialNum: 2,
+          materialTotalValue:'256'
+        }
       ],
       columns: [
         {
@@ -142,8 +133,8 @@ export default {
           title: '品牌',
           defaultValue: '得力',
           key: 'materialBrand',
-          type: FormTypes.select,
           allowInput:true,
+          type: FormTypes.select,
           options: [
             { title: '得力', value: '1' },
             { title: '晨光', value: '2' },
@@ -152,14 +143,14 @@ export default {
         },
         {
           title: '型号',
-          defaultValue: 'liit',
           key: 'materialModel',
-          type: FormTypes.select,
           allowInput:true,
+          type: FormTypes.select,
+          defaultValue: '1',
           options: [
-            { title: 'liit', value: '1' },
-            { title: 'tk-001', value: '2' },
-            { title: 'APMV0901', value: '3' },
+            { title: 'MK001', value: '1' },
+            { title: 'SES256', value: '2' },
+            { title: 'ESE541', value: '3' },
           ],
         },
         {
@@ -177,8 +168,8 @@ export default {
           key: 'materialUnits',
           // type: FormTypes.slot,
           slotName: 'materialUnits',
-          type: FormTypes.select,
           allowInput:true,
+          type: FormTypes.select,
           defaultValue: '1',
           options: [
             { title: '盒', value: '1' },
@@ -206,6 +197,15 @@ export default {
         },
       ],
       dataSource1: [
+        {
+          key: 1,
+          materialName: '马克笔11',
+          materialUnits: '盒',
+          materialNum: 3,
+          materialBrand:'得力',
+          materialPrice: 20,
+          materialTotalValue:60
+        },
       ],
       columns1: [
         {
@@ -217,11 +217,6 @@ export default {
         {
           title: '品牌',
           key: 'materialBrand',
-          placeholder: '请输入${title}'
-        },
-        {
-          title: '型号',
-          key: 'materialModel',
           placeholder: '请输入${title}'
         },
         {
@@ -266,8 +261,7 @@ export default {
           statistics: "true",
         },
       ],
-      title: '操作',
-      visible: false,
+      title: '新增入库',
       disableSubmit: false,
       roleDisabled: false,
       model: {},
@@ -282,23 +276,19 @@ export default {
       confirmLoading: false,
       form: this.$form.createForm(this),
       validatorRules: {
-        receiveDepertment: {
-          rules: [{ required: true, message: '请选择领用部门!' }],
+        applyDepertment: {
+          rules: [{ required: true, message: '请选择申请部门!' }],
         },
-        receiveName: {
-          rules: [{ required: true, message: '请选择领用人!' }],
-        },
-        receiveTime: {
-          rules: [{ required: true, message: '请选择领用时间!' }],
+        applyName: {
+          rules: [{ required: true, message: '请选择申请人!' }],
         }
       },
     }
   },
-  created() {
-
-  },
+  created() {},
   methods: {
     add() {
+      this.dataSource = []
       this.edit({})
     },
     edit(record) {
@@ -312,9 +302,17 @@ export default {
           pick(
             this.model,
             'id',
-            'receiveDepertment',
-            'receiveName',
-            'receiveTime'
+            'applyDepertment',
+            'applyName',
+            'status',
+            'articleName',
+            'applyNum',
+            'applyText',
+            'unit',
+            'applyTime',
+            'applyReason',
+            'checkTime',
+            'remark'
           )
         )
       })
@@ -376,18 +374,60 @@ export default {
       }
     },
     handleChange(value) {
-      switch (value) {
+      console.log(value)
+      this.dataSource = [];
+      switch (parseInt(value)) {
         case 1:
-          this.model.unit = '盒'
-          this.model.materialNum = 5
+          this.dataSource = [
+            {
+              key: 1,
+              materialName: '马克笔',
+              materialBrand:'得力',
+              materialModel:'MK001',
+              materialUnits: '盒',
+              materialPrice: '20',
+              materialNum: 3,
+              materialTotalValue:'60'
+            },
+            {
+              key: 2,
+              materialName: 'A4纸',
+              materialBrand:'晨光',
+              materialModel:'SES256',
+              materialUnits: '箱',
+              materialPrice: '128',
+              materialNum: 2,
+              materialTotalValue:'256'
+            }
+          ]
           break
         case 2:
-          this.model.unit = '台'
-          this.model.price = '1600'
+          this.dataSource = [
+            {
+              key: 1,
+              materialName: '打印机',
+              materialBrand:'惠普',
+              materialModel:'HP8461',
+              materialUnits: '台',
+              materialPrice: '1600',
+              materialNum: 1,
+              materialTotalValue:'1600'
+            },
+          ]
           break
         case 3:
-          this.model.unit = '箱'
-          this.model.price = '128'
+          this.dataSource = [
+            {
+              key: 1,
+              materialName: '马克笔',
+              materialBrand:'得力',
+              materialModel:'MK001',
+              materialUnits: '盒',
+              materialPrice: '20',
+              materialNum: 2,
+              materialTotalValue:'40'
+            },
+          ]
           break
       }
       this.form.setFieldsValue(pick(this.model, 'price', 'unit'))
@@ -402,8 +442,8 @@ export default {
               values: {
                 materialUnits: '盒',
                 materialPrice:20,
+                materialNum: 1,
                 materialBrand:'得力',
-                materialModel:'APMV0901',
                 materialTotalValue:20
               },
             },
@@ -416,8 +456,8 @@ export default {
               values: {
                 materialUnits: '台',
                 materialPrice:1600,
+                materialNum: 1,
                 materialBrand:'惠普',
-                materialModel:'HP01231',
                 materialTotalValue:1600
               },
             },
@@ -430,8 +470,8 @@ export default {
               values: {
                 materialUnits: '箱',
                 materialPrice:128,
+                materialNum: 1,
                 materialBrand:'晨光',
-                materialModel:'WSFA0901',
                 materialTotalValue:128
               },
             },

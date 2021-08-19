@@ -29,6 +29,14 @@
           <j-date class="inputWitdh" v-decorator.trim="[ 'enterTime', validatorRules.enterTime]"  :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择入库时间" :disabled="!!model.id"></j-date>
         </a-form-item>
 
+        <a-form-item label="品牌" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input class="inputWitdh"  placeholder="请输入品牌名称"   v-decorator.trim="[ 'brandName', validatorRules.brandName]" />
+        </a-form-item>
+
+        <a-form-item label="型号" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input class="inputWitdh"  placeholder="请输入型号"   v-decorator.trim="[ 'model', validatorRules.model]" />
+        </a-form-item>
+
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
@@ -51,8 +59,7 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="单价(元)">
-          <router-link v-if="!!model.id" to="/article/manage/articleList"><a-button  size="small" type="primary" icon="edit" class="link" /></router-link>
-          <a-input-number  class="inputWitdh" placeholder="请输入单价"   v-decorator.trim="['price', validatorRules.price]"  :min="1" :max="10000000" :disabled="!!model.id" />
+          <a-input-number  class="inputWitdh" placeholder="请输入单价"   v-decorator.trim="['price', validatorRules.price]"  :min="1" :max="10000000"  />
         </a-form-item>
 
         <a-form-item  v-if="!!model.id"
@@ -105,6 +112,14 @@
             rules: [
               { required: true, message: '请选择购入批次!'}
             ]},
+          brandName:{
+            rules: [
+              { required: true, message: '请输入品牌名称!'}
+            ]},
+          model:{
+            rules: [
+              { required: true, message: '请输入型号!'}
+            ]},
           stockNum: {
             rules: [
             { required: true, message: '请输入库存数量!' }
@@ -136,7 +151,7 @@
         this.visible = true;
 
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'id', 'articleName', 'enterTime','stockNum','unit', 'price', 'threshold'))
+          this.form.setFieldsValue(pick(this.model,'id', 'articleName', 'enterTime','stockNum','unit', 'price', 'threshold', 'brandName', 'model'))
         });
 
       },

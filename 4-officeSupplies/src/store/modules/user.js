@@ -264,7 +264,21 @@ const user = {
                 },
                 "name": "statistics-manage-office",
                 "id": "1245154914959151105"
-              }],
+              }
+              // ,{
+              //     "path": "/statistics/manage/brandMgr",
+              //     "component": "statistics/brandMgr",
+              //     "route": "1",
+              //     "meta": {
+              //       "keepAlive": false,
+              //       "internalOrExternal": false,
+              //       "icon": "fund",
+              //       "title": "品牌数据管理"
+              //     },
+              //     "name": "statistics-manage-brandMgr",
+              //     "id": "1245154914959152205"
+              //   }
+               ],
               "meta": {
                 "keepAlive": false,
                 "internalOrExternal": false,

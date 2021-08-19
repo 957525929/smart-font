@@ -7,10 +7,16 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="6" :sm="8">
-            <a-form-item label="名称" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
+            <a-form-item label="办公用品名称" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
               <a-input placeholder="请输入办公用品名称查询" v-model="queryParam.name"></a-input>
             </a-form-item>
           </a-col>
+
+<!--          <a-col :md="6" :sm="8">-->
+<!--            <a-form-item label="品牌" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">-->
+<!--              <a-input placeholder="请输入品牌名称查询" v-model="queryParam.brandName"></a-input>-->
+<!--            </a-form-item>-->
+<!--          </a-col>-->
 
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :md="6" :sm="24">
@@ -96,18 +102,24 @@
           {
             id:1,
             articleName: '马克笔',
+            brandName:'得力',
+            price:20,
             threshold: '10',
             unit:'盒'
           },
           {
             id:2,
             articleName: '打印机',
+            brandName:'惠普',
+            price:1600,
             threshold: '2',
             unit:'台'
           },
           {
             id:3,
             articleName: 'A4纸',
+            brandName:'晨光',
+            price:128,
             threshold: '5',
             unit:'箱',
           },
@@ -129,6 +141,16 @@
             align:"center",
             dataIndex: 'articleName'
           },
+          // {
+          //   title: '品牌',
+          //   dataIndex: 'brandName',
+          //   align:"center"
+          // },
+          // {
+          //   title: '单价(元)',
+          //   dataIndex: 'price',
+          //   align:"center"
+          // },
           {
             title: '警示阀值',
             dataIndex: 'threshold',

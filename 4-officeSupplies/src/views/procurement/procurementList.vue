@@ -154,6 +154,16 @@ export default {
           applyReason: '办公需要',
           checkTime: '',
           remark: '',
+          detail:[{
+            key: 1,
+            materialName: '马克笔',
+            materialModel:'APMV0901',
+            materialUnits: '盒',
+            materialNum: 3,
+            materialBrand:'得力',
+            materialPrice: 20,
+            materialTotalValue:60
+          }],
         },
         {
           id: 4,
@@ -167,6 +177,16 @@ export default {
           applyReason: '办公需要',
           checkTime: '',
           remark: '',
+          detail:[{
+            key: 1,
+            materialName: '马克笔',
+            materialUnits: '盒',
+            materialNum: 2,
+            materialBrand:'得力',
+            materialModel:'MSIE31',
+            materialPrice: 20,
+            materialTotalValue:40
+          }],
         },
         {
           id: 2,
@@ -180,6 +200,16 @@ export default {
           applyReason: '会议需要',
           checkTime: formatDate(new Date().getTime() - 1 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' 15:32:50',
           remark: '',
+          detail:[{
+            key: 1,
+            materialName: '马克笔',
+            materialUnits: '盒',
+            materialNum: 2,
+            materialBrand:'得力',
+            materialPrice: 20,
+            materialModel:'MSIE31',
+            materialTotalValue:40
+          }],
         },
         {
           id: 3,
@@ -193,6 +223,16 @@ export default {
           applyReason: '业务需要',
           checkTime: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' 15:32:50',
           remark: '已有库存，可到仓库领取',
+          detail:[{
+            key: 1,
+            materialName: '马克笔',
+            materialUnits: '盒',
+            materialModel:'SA1231',
+            materialNum: 1,
+            materialBrand:'得力',
+            materialPrice: 20,
+            materialTotalValue:20
+          }],
         },
       ],
       // 表头

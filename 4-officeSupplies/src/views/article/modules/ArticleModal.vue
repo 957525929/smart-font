@@ -16,6 +16,15 @@
         <a-form-item label="办公用品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator.trim="[ 'articleName', validatorRules.name]" placeholder="请输入办公用品名称" :disabled="disableSubmit"/>
         </a-form-item>
+<!--        <a-form-item label="品牌" :labelCol="labelCol" :wrapperCol="wrapperCol">-->
+<!--          <a-input v-decorator.trim="[ 'brandName', validatorRules.brandName]" placeholder="请输入品牌名称" :disabled="disableSubmit"/>-->
+<!--        </a-form-item>-->
+<!--        <a-form-item-->
+<!--          :labelCol="labelCol"-->
+<!--          :wrapperCol="wrapperCol"-->
+<!--          label="单价(元)">-->
+<!--          <a-input-number  class="inputWitdh" placeholder="请输入单价"   v-decorator.trim="['price', validatorRules.price]"  :min="1" :max="10000000"/>-->
+<!--        </a-form-item>-->
 
         <a-form-item
           :labelCol="labelCol"
@@ -69,6 +78,14 @@
             rules: [
               { required: true, message: '请输入办公用品名称!' },
             ]},
+          brandName:{
+            rules: [
+              { required: true, message: '请输入品牌名称!' },
+            ]},
+          price:{
+            rules: [
+              { required: true, message: '请输入单价!' },
+            ]},
           threshold:{
             rules: [
               { required: true, message: '请输入警示阀值!'}
@@ -92,7 +109,7 @@
         this.visible = true;
 
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'id', 'articleName', 'threshold','unit'))
+          this.form.setFieldsValue(pick(this.model,'id', 'articleName', 'threshold','unit', 'price', 'brandName'))
         });
 
       },

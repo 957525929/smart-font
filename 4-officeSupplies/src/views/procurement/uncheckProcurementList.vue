@@ -156,6 +156,26 @@ export default {
           applyReason: '办公需要',
           checkTime: '',
           remark: '',
+          detail:[{
+            key: 1,
+            materialName: '马克笔',
+            materialModel:'MSIE31',
+            materialUnits: '盒',
+            materialNum: 2,
+            materialBrand:'得力',
+            materialPrice: 20,
+            materialTotalValue:40
+        },
+            {
+              key: 2,
+              materialName: 'A4纸',
+              materialModel:'TOS30',
+              materialUnits: '箱',
+              materialNum: 1,
+              materialBrand:'晨光',
+              materialPrice: 128,
+              materialTotalValue:128
+            }],
         },
         {
           id: 4,
@@ -169,6 +189,16 @@ export default {
           applyReason: '办公需要',
           checkTime: '',
           remark: '',
+          detail:[{
+            key: 1,
+            materialName: '马克笔',
+            materialModel:'MSIE31',
+            materialUnits: '盒',
+            materialNum: 2,
+            materialBrand:'得力',
+            materialPrice: 20,
+            materialTotalValue:40
+          }],
         },
       ],
       // 表头

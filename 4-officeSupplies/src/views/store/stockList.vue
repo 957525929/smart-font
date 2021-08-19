@@ -7,7 +7,7 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="6" :sm="8">
-            <a-form-item label="名称" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
+            <a-form-item label="办公用品名称" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
               <a-input placeholder="请输入办公用品名称查询" v-model="queryParam.name"></a-input>
             </a-form-item>
           </a-col>
@@ -32,7 +32,7 @@
           </a-col>-->
 
           <a-col :md="10" :sm="12">
-            <a-form-item label="时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
+            <a-form-item label="入库时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
               <j-date v-model="queryParam.time_begin" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择开始时间" ></j-date>
               <span style="width: 10px;">~</span>
               <j-date v-model="queryParam.time_end" :showTime="true" date-format="YYYY-MM-DD" style="width:45%" placeholder="请选择结束时间"></j-date>
@@ -53,7 +53,7 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator"  style="margin-top: 5px">
-      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+      <a-button @click="show=!show" type="primary" icon="plus">新增</a-button>
       <a-button type="primary" icon="download" @click="handleExportXls('库存信息')">导出</a-button>
 <!--      <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">-->
 <!--        <a-button type="primary" icon="import">导入</a-button>-->
@@ -105,12 +105,14 @@
     <!-- table区域-end -->
     <!-- 表单区域 -->
     <stock-modal ref="modalForm" @ok="modalFormOk"></stock-modal>
+    <add-stock-modal :visible="show"></add-stock-modal>
   </a-card>
 </template>
 
 
 <script>
   import StockModal from './modules/StockModal'
+  import AddStockModal from './modules/AddStockModal'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
   import {formatDate} from "@/utils/util";
@@ -120,11 +122,14 @@
     mixins:[JeecgListMixin],
     components: {
       StockModal,
-      JDate
+      JDate,
+      AddStockModal
     },
     data () {
       return {
         description: '库存管理页面',
+        show:false,
+        data:{},
         // 查询条件
         queryParam: {
           roleName:'',
@@ -135,6 +140,8 @@
           {
             id:1,
             articleName: '马克笔',
+            brandName:'得力',
+            model:'MK001',
             enterTime: formatDate(new Date().getTime()-2*24*3600*1000,"yyyy-MM-dd") + '  14:36:45',
             stockNum: '20',
             price: '20',
@@ -146,6 +153,8 @@
           {
             id:2,
             articleName: '打印机',
+            brandName:'兄弟',
+            model:'HP8461',
             enterTime: formatDate(new Date().getTime()-10*24*3600*1000,"yyyy-MM-dd") + '  09:31:45',
             stockNum: '2',
             price: '1600',
@@ -157,6 +166,8 @@
           {
             id:3,
             articleName: 'A4纸',
+            brandName:'晨光',
+            model:'SES256',
             enterTime:formatDate(new Date().getTime()-15*24*3600*1000,"yyyy-MM-dd") + '  16:26:15',
             stockNum: '0',
             price: '128',
@@ -182,6 +193,16 @@
             title: '办公用品名称',
             align:"center",
             dataIndex: 'articleName'
+          },
+          {
+            title: '品牌',
+            align:"center",
+            dataIndex: 'brandName'
+          },
+          {
+            title: '型号',
+            align:"center",
+            dataIndex: 'model'
           },
           {
             title: '入库时间',
