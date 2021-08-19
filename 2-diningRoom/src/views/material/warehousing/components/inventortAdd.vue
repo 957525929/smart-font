@@ -102,7 +102,7 @@
           @valueChange="valueChangeEditable"
           :disabled="true"
         >
-          <!-- <template v-slot:materialName="props">
+          <template v-slot:materialName="props">
             <a-cascader
               :default-value="props.text.split('/')"
               :options="options"
@@ -110,8 +110,9 @@
               placeholder="请选择"
               style="width: 100%"
               @change="onChangeCascader1($event, props)"
+              :disabled="true"
             />
-          </template> -->
+          </template>
         </j-editable-table>
       </a-tab-pane>
     </a-tabs>
@@ -1331,9 +1332,9 @@ export default {
         {
           title: '食料名称',
           key: 'materialName',
-          type: FormTypes.input,
+          type: FormTypes.slot,
           //   validateRules: [{ required: true, message: '${title}不能为空' }],
-          // slotName: 'materialName',
+          slotName: 'materialName',
           width: '25%'
         },
         // {
