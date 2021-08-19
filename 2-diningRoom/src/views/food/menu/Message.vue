@@ -1,9 +1,10 @@
 <template>
   <div>
     <a-card>
-      <div style="font-weight:bold; margin-bottom:20px">选择要推送消息的食堂师傅</div>
+      <div style="font-weight:bold; margin-bottom:20px">选择要推送消息的食堂员工</div>
       <a-transfer
         :data-source="mockData"
+        :titles="['不推送', '推送']"
         show-search
         :filter-option="filterOption"
         :target-keys="targetKeys"
@@ -16,7 +17,10 @@
         }"
       />
       <div class="btn">
-        <a-button type="primary" style="width: 100px">推送通知</a-button>
+        <a-button @click="showModal" type="primary" style="width: 100px">推送通知</a-button>
+        <a-modal v-model="visible" title="推送通知" @ok="handleOk">
+          <p>是否推动通知给这些员工的手机号？</p>
+        </a-modal>
       </div>
     </a-card>
   </div>
@@ -27,7 +31,8 @@ export default {
   data() {
     return {
       mockData: [],
-      targetKeys: []
+      targetKeys: [],
+      visible: false
     }
   },
   mounted() {
@@ -86,6 +91,13 @@ export default {
     },
     handleSearch(dir, value) {
       console.log('search:', dir, value)
+    },
+    showModal() {
+      this.visible = true
+    },
+    handleOk(e) {
+      console.log(e)
+      this.visible = false
     }
   }
 }

@@ -76,7 +76,7 @@ export const mockMenuData = {
               {
                 "keepAlive": true,
                 "internalOrExternal": false,
-                "title": "入库管理"
+                "title": "采购管理"
               },
               "name": "material-warehousing-warehousingIndex",
               "id": "2"
@@ -95,19 +95,6 @@ export const mockMenuData = {
               "id": "2111"
             },
             {
-              "path": "/material/warehousing/warehousingOutput",
-              "component": "material/warehousing/Output",
-              "route": "1",
-              "meta":
-              {
-                "keepAlive": false,
-                "internalOrExternal": false,
-                "title": "出库管理"
-              },
-              "name": "material-warehousing-warehousingOutput",
-              "id": "21111"
-            },
-            {
               "path": "/material/warehousing/warehousingInventory",
               "component": "material/warehousing/Inventory",
               "route": "1",
@@ -120,6 +107,20 @@ export const mockMenuData = {
               "name": "material-warehousing-warehousingInventory",
               "id": "211111"
             },
+            {
+              "path": "/material/warehousing/warehousingOutput",
+              "component": "material/warehousing/Output",
+              "route": "1",
+              "meta":
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "出库管理"
+              },
+              "name": "material-warehousing-warehousingOutput",
+              "id": "21111"
+            },
+            
             {
               "path": "/material/warehousing/warehousingQuery",
               "component": "material/warehousing/Query",

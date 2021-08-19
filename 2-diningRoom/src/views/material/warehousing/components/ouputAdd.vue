@@ -69,7 +69,11 @@
             </a-col>
             <a-col :span="6">
               <a-form-item label="备注">
-                <a-input allowClear placeholder="请输入备注信息" v-decorator="['note']"></a-input>
+                <a-input
+                  allowClear
+                  placeholder="请输入备注信息"
+                  v-decorator="['note', { initialValue: '第二食堂' }]"
+                ></a-input>
               </a-form-item>
             </a-col>
           </a-row>
