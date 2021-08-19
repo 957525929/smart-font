@@ -6,14 +6,14 @@
         <a-form layout="inline" :form="form1">
           <a-row :gutter="24">
             <a-col :xl="8" :lg="8" :md="9" :sm="24">
-              <a-form-item label="申请日期">
+              <a-form-item label="入库日期">
                 <j-date v-decorator="['applyStartDate', { initialValue: this.applyStartDate }]" style="width: 45%" />
                 <span class="query-group-split-cust"></span>
                 <j-date v-decorator="['applyEndDate', { initialValue: this.applyEndDate }]" style="width: 45%" />
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="5" :md="6" :sm="24">
-              <a-form-item label="申请名称">
+              <a-form-item label="食料名称">
                 <a-input placeholder="请输入" v-decorator="['headline']"></a-input>
               </a-form-item>
             </a-col>
