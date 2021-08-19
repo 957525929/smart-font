@@ -147,6 +147,20 @@ export const mockMenuData = {
               "name": "material-warehousing-warehousingDetails",
               "id": "3"
             },
+            {
+              "hidden": true,
+              "path": "/material/warehousing/components/outputDetails",
+              "component": "material/warehousing/components/outputDetails",
+              "route": "1",
+              "meta":
+              {
+                "keepAlive": false,
+                "internalOrExternal": false,
+                "title": "出库详情"
+              },
+              "name": "material-warehousing-ouputDetails",
+              "id": "31111"
+            },
           ],
       },
       {

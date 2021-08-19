@@ -66,13 +66,16 @@
           :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
           :pagination="{
             total: this.dataSource.length,
-            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`,
+            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
           }"
         >
-          <span slot="action">
-            <a>编辑</a>
-            <a-divider type="vertical" />
-            <a>删除</a>
+          <span slot="action" slot-scope="text, record">
+            <a @click="purInEditOnClick(record)">编辑</a>
+            <a>
+              <a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style="margin-left: 10%">
+                删除
+              </a-popconfirm>
+            </a>
             <!-- <a-dropdown>
               <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
               <a-menu slot="overlay">
@@ -88,6 +91,13 @@
         </a-table>
       </div>
     </a-card>
+
+    <invAdd
+      v-if="modalVisible"
+      :modalVisible="modalVisible"
+      @handleCancel="handleCancel"
+      :basicInfo="basicInfo"
+    ></invAdd>
   </div>
 </template>
 
@@ -96,13 +106,18 @@ import { formatDate } from '../../../utils/util'
 import moment from 'moment'
 import JDate from '../../../components/jeecg/JDate'
 
+import invAdd from './components/inventortAdd'
+
 export default {
   components: {
     JDate,
+    invAdd
   },
   data() {
     return {
-      applyStartDate: moment().subtract(1, 'weeks').format('YYYY-MM-DD'),
+      applyStartDate: moment()
+        .subtract(1, 'weeks')
+        .format('YYYY-MM-DD'),
       applyEndDate: moment().format('YYYY-MM-DD'),
       basicInfo: {},
       form1: this.$form.createForm(this),
@@ -113,40 +128,40 @@ export default {
           dataIndex: '',
           key: 'rowIndex',
           align: 'center',
-          customRender: function (t, r, index) {
+          customRender: function(t, r, index) {
             return parseInt(index) + 1
-          },
+          }
         },
         {
           title: '食料名称',
           align: 'center',
-          dataIndex: 'foodName',
+          dataIndex: 'foodName'
         },
         {
           title: '入库时间',
           align: 'center',
-          dataIndex: 'storageTime',
+          dataIndex: 'storageTime'
         },
         {
           title: '库存数量',
           align: 'center',
-          dataIndex: 'storageNum',
+          dataIndex: 'storageNum'
         },
         {
           title: '采购单价(元)',
           align: 'center',
-          dataIndex: 'purchase',
+          dataIndex: 'purchase'
         },
         {
           title: '库存价值(元)',
           align: 'center',
-          dataIndex: 'values',
+          dataIndex: 'values'
         },
         {
           title: '质量状态',
           align: 'center',
           dataIndex: 'fresh',
-          customRender: function (text) {
+          customRender: function(text) {
             return text == 0 ? (
               <a-badge color="blue" text="将过期" />
             ) : text == 1 ? (
@@ -154,7 +169,7 @@ export default {
             ) : (
               <a-badge color="red" text="已过期" />
             )
-          },
+          }
         },
         // {
         //   title: '审核人',
@@ -184,56 +199,63 @@ export default {
           title: '操作',
           dataIndex: 'action',
           align: 'center',
-          scopedSlots: { customRender: 'action' },
-        },
+          scopedSlots: { customRender: 'action' }
+        }
       ],
       dataSource: [
         {
           id: '1',
-          foodName: '蔬菜类 / 果菜类 / 茄子',
+          foodName: '蔬菜类/果菜类/茄子',
           storageTime: formatDate(new Date().getTime(), 'yyyy-MM-d 08:15:22'),
           storageNum: '5',
           purchase: '4',
           values: '20',
-          fresh: 1,
+          fresh: 1
         },
         {
           id: '2',
-          foodName: '肉食类 / 猪肉类 / 五花肉',
+          foodName: '肉食类/猪肉类/五花肉',
           storageTime: formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyy-MM-d  hh:mm:ss'),
           storageNum: '10',
           purchase: '20',
           values: '200',
-          fresh: 0,
+          fresh: 0
         },
         {
           id: '3',
-          foodName: '蔬菜类 / 花叶类 / 上海青',
+          foodName: '蔬菜类/花叶类/上海青',
           storageTime: formatDate(new Date().getTime() - 14 * 24 * 3600 * 1000, 'yyyy-MM-dd  10:22:36'),
           storageNum: '5',
           purchase: '3',
           values: '15',
-          fresh: -1,
-        },
+          fresh: -1
+        }
       ],
       selectedRowKeys: [],
+      modalVisible: false
     }
   },
   computed: {
     hasSelected() {
       return this.selectedRowKeys.length > 0
-    },
+    }
   },
   methods: {
     // handleToggleSearch() {
     //   if (this.toggleSearchStatus) this.toggleSearchStatus = false
     //   else this.toggleSearchStatus = true
     // },
-    // purInOnClick() {},
-    // purInEditOnClick() {},
-    // deletConfirm(e) {
-    //   this.$message.success('删除成功')
-    // },
+    purInOnClick() {
+      this.basicInfo = {}
+      this.modalVisible = true
+    },
+    purInEditOnClick(record) {
+      this.basicInfo = record
+      this.modalVisible = true
+    },
+    deletConfirm(e) {
+      this.$message.success('删除成功')
+    },
     onSelectChange(selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys
     },
@@ -250,9 +272,11 @@ export default {
         }
       })
     },
-  },
+    handleCancel() {
+      this.modalVisible = false
+    }
+  }
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

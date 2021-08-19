@@ -66,14 +66,14 @@
           :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
           :pagination="{
             total: this.dataSource.length,
-            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`,
+            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
           }"
         >
           <span slot="action" slot-scope="text, record">
-            <a>查看详情</a>
+            <router-link :to="{ name: 'material-warehousing-ouputDetails', params: record }">查看详情</router-link>
             <a-divider type="vertical" />
             <a-dropdown>
-              <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
+              <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
               <a-menu slot="overlay">
                 <a-menu-item key="1" @click="purInEditOnClick(record)">编辑</a-menu-item>
                 <a-menu-item key="2">
@@ -87,6 +87,13 @@
         </a-table>
       </div>
     </a-card>
+
+    <ouputAdd
+      v-if="modalVisible"
+      :modalVisible="modalVisible"
+      @handleCancel="handleCancel"
+      :basicInfo="basicInfo"
+    ></ouputAdd>
   </div>
 </template>
 
@@ -94,14 +101,18 @@
 import { formatDate } from '../../../utils/util'
 import moment from 'moment'
 import JDate from '../../../components/jeecg/JDate'
+import ouputAdd from './components/ouputAdd.vue'
 
 export default {
   components: {
     JDate,
+    ouputAdd
   },
   data() {
     return {
-      applyStartDate: moment().subtract(1, 'weeks').format('YYYY-MM-DD'),
+      applyStartDate: moment()
+        .subtract(1, 'weeks')
+        .format('YYYY-MM-DD'),
       applyEndDate: moment().format('YYYY-MM-DD'),
       basicInfo: {},
       form1: this.$form.createForm(this),
@@ -112,19 +123,19 @@ export default {
           dataIndex: '',
           key: 'rowIndex',
           align: 'center',
-          customRender: function (t, r, index) {
+          customRender: function(t, r, index) {
             return parseInt(index) + 1
-          },
+          }
         },
         {
           title: '申请人',
           align: 'center',
-          dataIndex: 'applicant',
+          dataIndex: 'applicant'
         },
         {
           title: '申请名称',
           align: 'center',
-          dataIndex: 'goodsName',
+          dataIndex: 'headline'
         },
         // {
         //   title: '申请数量(kg)',
@@ -134,12 +145,12 @@ export default {
         {
           title: '申请时间',
           align: 'center',
-          dataIndex: 'applyTime',
+          dataIndex: 'applyTime'
         },
         {
           title: '备注',
           align: 'center',
-          dataIndex: 'note',
+          dataIndex: 'note'
         },
         // {
         //   title: '审核人',
@@ -169,59 +180,66 @@ export default {
           title: '操作',
           dataIndex: 'action',
           align: 'center',
-          scopedSlots: { customRender: 'action' },
-        },
+          scopedSlots: { customRender: 'action' }
+        }
       ],
       dataSource: [
         {
           id: '1',
           applicant: '王五',
-          goodsName: '8月18日食材申请清单',
+          headline: '8月18日食材申请清单',
           // weight: '2',
           applyTime: formatDate(new Date().getTime(), 'yyyy-MM-d 08:15:22'),
           // checkoutPeople: '-',
           // checkoutDate: '-',
           // checkState: 0,
-          note: '第二食堂',
+          note: '第二食堂'
         },
         {
           id: '2',
           applicant: '赵六',
-          goodsName: '8月17日食材申请清单',
+          headline: '8月17日食材申请清单',
           // weight: '3',
           applyTime: formatDate(new Date().getTime() - 1 * 24 * 3600 * 1000, 'yyyy-MM-d  hh:mm:ss'),
           // checkoutPeople: '张三',
           // checkoutDate: formatDate(new Date().getTime() - 1 * 24 * 3600 * 1000, 'yyyy-MM-d'),
           // checkState: -1,
-          note: '早餐食材',
+          note: '早餐食材'
         },
         {
           id: '3',
           applicant: '钱七',
-          goodsName: '8月17日水果申请清单',
+          headline: '8月17日水果申请清单',
           // weight: '2',
           applyTime: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-d  06:30:42'),
           // checkoutPeople: '李四',
           // checkoutDate: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-d'),
           // checkState: 1,
-          note: '',
-        },
+          note: ''
+        }
       ],
       selectedRowKeys: [],
+      modalVisible: false
     }
   },
   computed: {
     hasSelected() {
       return this.selectedRowKeys.length > 0
-    },
+    }
   },
   methods: {
     // handleToggleSearch() {
     //   if (this.toggleSearchStatus) this.toggleSearchStatus = false
     //   else this.toggleSearchStatus = true
     // },
-    purInOnClick() {},
-    purInEditOnClick() {},
+    purInOnClick() {
+      this.basicInfo = {}
+      this.modalVisible = true
+    },
+    purInEditOnClick(record) {
+      this.basicInfo = record
+      this.modalVisible = true
+    },
     deletConfirm(e) {
       this.$message.success('删除成功')
     },
@@ -241,9 +259,11 @@ export default {
         }
       })
     },
-  },
+    handleCancel() {
+      this.modalVisible = false
+    }
+  }
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
