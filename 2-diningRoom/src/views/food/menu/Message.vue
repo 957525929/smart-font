@@ -17,9 +17,9 @@
         }"
       />
       <div class="btn">
-        <a-button @click="showModal" type="primary" style="width: 100px">推送通知</a-button>
-        <a-modal v-model="visible" title="推送通知" @ok="handleOk">
-          <p>是否推动通知给这些员工的手机号？</p>
+        <a-button @click="showModal" type="primary" style="width: 200px">设置推送人员</a-button>
+        <a-modal v-model="visible" title="推送设置" @ok="handleOk">
+          <p>是否将这些员工设置为接收消息人员？</p>
         </a-modal>
       </div>
     </a-card>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       mockData: [],
-      targetKeys: [],
+      targetKeys: [1, 2],
       visible: false
     }
   },
@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     getMock() {
-      const targetKeys = []
       const mockData = [
         {
           key: 1,
@@ -66,6 +65,16 @@ export default {
           key: 5,
           title: '胜七',
           description: '17654787878'
+        },
+        {
+          key: 6,
+          title: '李芸',
+          description: '18896547520'
+        },
+        {
+          key: 7,
+          title: '楚非',
+          description: '13459665565'
         }
       ]
       // for (let i = 0; i < 20; i++) {
@@ -80,7 +89,6 @@ export default {
       //   mockData.push(data)
       // }
       this.mockData = mockData
-      this.targetKeys = targetKeys
     },
     filterOption(inputValue, option) {
       return option.description.indexOf(inputValue) > -1

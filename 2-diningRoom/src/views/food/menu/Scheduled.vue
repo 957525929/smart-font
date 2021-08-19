@@ -99,12 +99,7 @@
                 </a-select-option>
               </a-select>
             </a-form-item>
-            <a-form-item label="预定人">
-              <a-input
-                placeholder="请输入姓名"
-                v-decorator="['name', { rules: [{ required: true, message: '请输入姓名' }] }]"
-              />
-            </a-form-item>
+
             <a-form-item label="所属部门">
               <a-select
                 v-decorator="['dept', { rules: [{ required: true, message: '请选择部门' }] }]"
@@ -121,6 +116,12 @@
                   安全管理处
                 </a-select-option>
               </a-select>
+            </a-form-item>
+            <a-form-item label="预定人">
+              <a-input
+                placeholder="请输入姓名"
+                v-decorator="['name', { rules: [{ required: true, message: '请输入姓名' }] }]"
+              />
             </a-form-item>
             <a-form-item label="联系电话">
               <a-input
@@ -203,7 +204,7 @@
         <a-form-item label="预定餐别">
           <a-select
             v-decorator="[
-              'dinner',
+              'dinner1',
               { rules: [{ required: true, message: '请选择餐别' }], initialValue: this.editRecord.dinner }
             ]"
             placeholder="请选择餐别"
@@ -224,7 +225,7 @@
           <a-input
             placeholder="请输入人数"
             v-decorator="[
-              'num',
+              'num1',
               { rules: [{ required: true, message: '请输入人数' }], initialValue: this.editRecord.num }
             ]"
           />
@@ -232,7 +233,7 @@
         <a-form-item label="预定类型">
           <a-select
             v-decorator="[
-              'type',
+              'type1',
               { rules: [{ required: true, message: '请选择类型' }], initialValue: this.editRecord.type }
             ]"
             placeholder="请选择预定类型"
@@ -246,19 +247,11 @@
             </a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item label="预定人">
-          <a-input
-            placeholder="请输入姓名"
-            v-decorator="[
-              'name',
-              { rules: [{ required: true, message: '请输入姓名' }], initialValue: this.editRecord.people }
-            ]"
-          />
-        </a-form-item>
+
         <a-form-item label="所属部门">
           <a-select
             v-decorator="[
-              'dept',
+              'dept1',
               { rules: [{ required: true, message: '请选择部门' }], initialValue: this.editRecord.dept }
             ]"
             placeholder="请选择所属部门"
@@ -275,17 +268,26 @@
             </a-select-option>
           </a-select>
         </a-form-item>
+        <a-form-item label="预定人">
+          <a-input
+            placeholder="请输入姓名"
+            v-decorator="[
+              'name1',
+              { rules: [{ required: true, message: '请输入姓名' }], initialValue: this.editRecord.people }
+            ]"
+          />
+        </a-form-item>
         <a-form-item label="联系电话">
           <a-input
             placeholder="请输入电话号码"
             v-decorator="[
-              'tel',
+              'tel1',
               { rules: [{ required: true, message: '请输入电话号码' }], initialValue: this.editRecord.tel }
             ]"
           />
         </a-form-item>
         <a-form-item label="备注">
-          <a-input placeholder="请输入备注信息" v-decorator="['tel', { initialValue: this.editRecord.remark }]" />
+          <a-input placeholder="请输入备注信息" v-decorator="['remark1', { initialValue: this.editRecord.remark }]" />
         </a-form-item>
       </a-form>
     </a-modal>
@@ -340,15 +342,16 @@ export default {
           dataIndex: 'type'
         },
         {
-          title: '预订人',
-          align: 'center',
-          dataIndex: 'people'
-        },
-        {
           title: '所属部门',
           align: 'center',
           dataIndex: 'dept'
         },
+        {
+          title: '预订人',
+          align: 'center',
+          dataIndex: 'people'
+        },
+
         {
           title: '联系电话',
           align: 'center',
