@@ -4,7 +4,7 @@
     <v-chart :forceFit="true" :height="height" :data="dataSource" :scale="scale" :padding="padding">
       <v-tooltip/>
       <v-axis/>
-      <v-bar position="x*y"/>
+      <v-bar position="x*次数"/>
     </v-chart>
   </div>
 </template>
