@@ -264,7 +264,19 @@ const user = {
                 },
                 "name": "statistics-manage-office",
                 "id": "1245154914959151105"
-              }
+              },{
+                  "path": "/statistics/manage/comprehensive",
+                  "component": "statistics/comprehensive",
+                  "route": "1",
+                  "meta": {
+                    "keepAlive": false,
+                    "internalOrExternal": false,
+                    "icon": "fund",
+                    "title": "综合报表"
+                  },
+                  "name": "statistics-manage-comprehensive",
+                  "id": "1245154916589151105"
+                }
               // ,{
               //     "path": "/statistics/manage/brandMgr",
               //     "component": "statistics/brandMgr",
