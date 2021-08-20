@@ -102,7 +102,7 @@
           @valueChange="valueChangeEditable"
           :disabled="true"
         >
-          <!-- <template v-slot:materialName="props">
+          <template v-slot:materialName="props">
             <a-cascader
               :default-value="props.text.split('/')"
               :options="options"
@@ -110,8 +110,9 @@
               placeholder="请选择"
               style="width: 100%"
               @change="onChangeCascader1($event, props)"
+              :disabled="true"
             />
-          </template> -->
+          </template>
         </j-editable-table>
       </a-tab-pane>
     </a-tabs>
@@ -1292,7 +1293,7 @@ export default {
           key: 1,
           materialName: ['蔬菜类/果菜类/茄子'],
           materialCategory: '肉类',
-          materialUnits: 'kg',
+          materialUnits: '斤',
           materialPrice: '10',
           materialNum: '10',
           materialTotalValue: '100'
@@ -1301,7 +1302,7 @@ export default {
           key: 2,
           materialName: ['肉食类/猪肉类/五花肉'],
           materialCategory: '肉类',
-          materialUnits: 'kg',
+          materialUnits: '斤',
           materialPrice: '20',
           materialNum: '10',
           materialTotalValue: '200'
@@ -1312,7 +1313,7 @@ export default {
           key: 1,
           materialName: ['蔬菜类/果菜类/茄子'],
           materialCategory: '肉类',
-          materialUnits: 'kg',
+          materialUnits: '斤',
           materialPrice: '4',
           materialNum: '5',
           materialTotalValue: '20'
@@ -1331,9 +1332,9 @@ export default {
         {
           title: '食料名称',
           key: 'materialName',
-          type: FormTypes.input,
+          type: FormTypes.slot,
           //   validateRules: [{ required: true, message: '${title}不能为空' }],
-          // slotName: 'materialName',
+          slotName: 'materialName',
           width: '25%'
         },
         // {
@@ -1358,6 +1359,20 @@ export default {
           validateRules: [{ required: true, message: '${title}不能为空' }],
           defaultValue: 1,
           statistics: 'true'
+        },
+        {
+          title: '计量单位',
+          key: 'materialUnits',
+          type: FormTypes.select,
+          placeholder: '请选择${title}',
+          validateRules: [{ required: true, message: '${title}不能为空' }],
+          defaultValue: '斤',
+          options: [
+            { title: '吨', value: '吨' },
+            { title: '公斤', value: '公斤' },
+            { title: '斤', value: '斤' },
+            { title: '克', value: '克' }
+          ]
         },
         {
           title: '采购单价(元)',

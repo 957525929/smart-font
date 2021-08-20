@@ -1299,19 +1299,19 @@ export default {
           key: 1,
           materialName: ['粮油类/原粮/稻谷'],
           materialCategory: '肉类',
-          materialUnits: 'kg',
+          materialUnits: '斤',
           materialPrice: '10.00',
           materialNum: '10',
           materialTotalValue: '100.00'
         },
         {
           id: '2',
-          materialName: ['粮油类/原粮/稻谷'],
+          materialName: ['蔬菜类/果菜类/茄子'],
           materialCategory: '肉类',
-          materialUnits: 'kg',
-          materialPrice: '10.00',
-          materialNum: '10',
-          materialTotalValue: '100.00'
+          materialUnits: '斤',
+          materialPrice: '4',
+          materialNum: '5',
+          materialTotalValue: '20'
         }
       ],
       columns: [

@@ -199,6 +199,7 @@ import ChartCard from '@/components/ChartCard'
 import RankList from '@/components/chart/RankList'
 import Trend from '@/components/Trend'
 import MiniProgress from '@/components/chart/MiniProgress'
+import LineChartMultid from '@/components/chart/LineChartMultid'
 export default {
   name: 'ChartDemo',
   components: {

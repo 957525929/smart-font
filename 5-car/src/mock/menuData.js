@@ -162,18 +162,18 @@ export const menu = {
                         },
                         "name": "statistic-driverWorkload"
                     },
-                    {
-                        "path": "/statistic/supplyRecord",
-                        "component": "statistic/supplyRecord/index",
-                        "route": "1",
-                        "meta": {
-                            "keepAlive": false,
-                            "internalOrExternal": false,
-                            "icon": "api",
-                            "title": "加油记录"
-                        },
-                        "name": "statistic-supplyRecord"
-                    },
+                    // {
+                    //     "path": "/statistic/supplyRecord",
+                    //     "component": "statistic/supplyRecord/index",
+                    //     "route": "1",
+                    //     "meta": {
+                    //         "keepAlive": false,
+                    //         "internalOrExternal": false,
+                    //         "icon": "api",
+                    //         "title": "加油记录"
+                    //     },
+                    //     "name": "statistic-supplyRecord"
+                    // },
                     {
                         "path": "/statistic/maintainRecord",
                         "component": "statistic/maintainRecord/index",

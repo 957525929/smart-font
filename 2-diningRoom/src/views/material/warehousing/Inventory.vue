@@ -6,14 +6,14 @@
         <a-form layout="inline" :form="form1">
           <a-row :gutter="24">
             <a-col :xl="8" :lg="8" :md="9" :sm="24">
-              <a-form-item label="申请日期">
+              <a-form-item label="入库日期">
                 <j-date v-decorator="['applyStartDate', { initialValue: this.applyStartDate }]" style="width: 45%" />
                 <span class="query-group-split-cust"></span>
                 <j-date v-decorator="['applyEndDate', { initialValue: this.applyEndDate }]" style="width: 45%" />
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="5" :md="6" :sm="24">
-              <a-form-item label="申请名称">
+              <a-form-item label="食料名称">
                 <a-input placeholder="请输入" v-decorator="['headline']"></a-input>
               </a-form-item>
             </a-col>
@@ -148,6 +148,11 @@ export default {
           dataIndex: 'storageNum'
         },
         {
+          title: '计量单位',
+          align: 'center',
+          dataIndex: 'units'
+        },
+        {
           title: '采购单价(元)',
           align: 'center',
           dataIndex: 'purchase'
@@ -210,7 +215,8 @@ export default {
           storageNum: '5',
           purchase: '4',
           values: '20',
-          fresh: 1
+          fresh: 1,
+          units: '斤'
         },
         {
           id: '2',
@@ -219,7 +225,8 @@ export default {
           storageNum: '10',
           purchase: '20',
           values: '200',
-          fresh: 0
+          fresh: 0,
+          units: '斤'
         },
         {
           id: '3',
@@ -228,7 +235,8 @@ export default {
           storageNum: '5',
           purchase: '3',
           values: '15',
-          fresh: -1
+          fresh: -1,
+          units: '斤'
         }
       ],
       selectedRowKeys: [],

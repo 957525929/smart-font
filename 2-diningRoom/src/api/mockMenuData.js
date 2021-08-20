@@ -364,19 +364,19 @@ export const mockMenuData = {
               "name": "food-menu-menuClassify",
               "id": "9"
             },
-            {
-              "path": "/food/menu/Order",
-              "component": "food/menu/Order",
-              "route": "1",
-              "meta":
-              {
-                "keepAlive": false,
-                "internalOrExternal": false,
-                "title": "订餐权限配置"
-              },
-              "name": "food-menu-Order",
-              "id": "911"
-            },
+            // {
+            //   "path": "/food/menu/Order",
+            //   "component": "food/menu/Order",
+            //   "route": "1",
+            //   "meta":
+            //   {
+            //     "keepAlive": false,
+            //     "internalOrExternal": false,
+            //     "title": "订餐权限配置"
+            //   },
+            //   "name": "food-menu-Order",
+            //   "id": "911"
+            // },
             {
               "path": "/food/menu/Message",
               "component": "food/menu/Message",
