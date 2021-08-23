@@ -2,7 +2,7 @@
   <div class="root">
     <div class="overview">
       <div class="fontPrt">
-        <div class="title">
+        <!-- <div class="title">
           <font size="5" color="#FF6701">总计用车次数</font>
           <font size="5" color="#FEA82F">前30日用车次数</font>
           <font size="5" color="#FFC288">前7日用车次数</font>
@@ -15,48 +15,66 @@
           <font size="5" color="#3EDBF0">17</font>
           <font size="5" color="#3EDBF0">13</font>
           <font size="5" color="#3EDBF0">9</font>
+        </div> -->
+        <div class="box">
+          <div class="title"><font class="title" size="5" color="#FF6701">总计用车次数</font></div>
+          <div class="value"><font class="value" size="5" color="#3EDBF0">60</font></div>
         </div>
-        <div class="than">
-          <font style="margin-left:21%">
-            <trend flag="up" style="margin-right: 16px">
-              <span slot="term">同比</span>
-              14%
-            </trend>
-            <trend flag="down">
+        <div class="box">
+          <div class="title"><font class="title" size="5" color="#FEA82F">前30日用车次数</font></div>
+          <div class="value"><font class="value" size="5" color="#3EDBF0">21</font></div>
+          <div class="compare">
+            <trend flag="down" style="margin-right: 5px">
               <span slot="term">环比</span>
+              12%
+            </trend>
+            <trend flag="up">
+              <span slot="term">同比</span>
+              15%
+            </trend>
+          </div>
+        </div>
+        <div class="box">
+          <div class="title"><font class="title" size="5" color="#FFC288">前7日用车次数</font></div>
+          <div class="value"><font class="value" size="5" color="#3EDBF0">60</font></div>
+          <div class="compare">
+            <trend flag="down" style="margin-right: 5px">
+              <span slot="term">环比</span>
+              19%
+            </trend>
+            <trend flag="up">
+              <span slot="term">同比</span>
               11%
             </trend>
-          </font>
-          <font style="margin-left:6%">
-            <trend flag="up" style="margin-right: 16px">
-              <span slot="term">同比</span>
-              14%
-            </trend>
-            <trend flag="down">
+          </div>
+        </div>
+        <div class="box">
+          <div class="title"><font class="title" size="5" color="#77ACF1">昨日用车次数</font></div>
+          <div class="value"><font class="value" size="5" color="#3EDBF0">13</font></div>
+          <div class="compare">
+            <trend flag="down" style="margin-right: 5px">
               <span slot="term">环比</span>
-              11%
+              8%
             </trend>
-          </font>
-          <font style="margin-left:3%">
-            <trend flag="up" style="margin-right: 16px">
+            <trend flag="up">
               <span slot="term">同比</span>
-              14%
+              12%
             </trend>
-            <trend flag="down">
+          </div>
+        </div>
+        <div class="box">
+          <div class="title"><font class="title" size="5" color="#FF6701">今日用车次数</font></div>
+          <div class="value"><font class="value" size="5" color="#3EDBF0">9</font></div>
+          <div class="compare">
+            <trend flag="down" style="margin-right: 5px">
               <span slot="term">环比</span>
-              11%
+              21%
             </trend>
-          </font>
-          <font style="margin-left:6%">
-            <trend flag="up" style="margin-right: 16px">
+            <trend flag="up">
               <span slot="term">同比</span>
-              14%
+              19%
             </trend>
-            <trend flag="down">
-              <span slot="term">环比</span>
-              11%
-            </trend>
-          </font>
+          </div>
         </div>
       </div>
       <div class="chartPrt">
@@ -321,27 +339,28 @@ export default {
     justify-content: space-between;
     .fontPrt {
       width: 70%;
-      .title {
-        width: 100%;
-        height: 35%;
+      display: flex;
+      justify-content: space-around;
+      .box {
+        // width: 35%;
         display: flex;
-        justify-content: space-around;
-        font {
-          margin-top: auto;
-          margin-bottom: auto;
+        flex-flow: column;
+        align-items: center;
+        margin-top: 7%;
+        // justify-content: center;
+        .title {
+          margin-bottom: 7%;
+          font {
+            margin-top: auto;
+            margin-bottom: auto;
+          }
         }
-      }
-      .value {
-        width: 100%;
-        height: 35%;
-        display: flex;
-        justify-content: space-around;
-      }
-      .than {
-        width: 100%;
-        height: 35%;
-        // display: flex;
-        // justify-content: space-around;
+        .value {
+          margin-bottom: 7%;
+        }
+        .compare {
+          // width: 90%;
+        }
       }
     }
     .chartPrt {
