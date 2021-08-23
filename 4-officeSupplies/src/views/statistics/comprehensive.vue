@@ -44,9 +44,10 @@
         :data-source="data"
         bordered
         size="middle"
-        :pagination="ipagination"
         :loading="loading"
-        :scroll="{ x: 'calc(700px + 50%)', y: auto }"
+        :scroll="{ x: 'calc(700px + 50%)'}"
+        :customRow="customRow"
+        :pagination="false"
       >
            <span slot="applyYearBasis" slot-scope="applyYearBasis">
             <a-tag
@@ -161,6 +162,20 @@ export default {
           receivePrice: '570',
           receiveYearBasis:'+14.8%',
           receiveChainBasis:'-7.2%'
+        },
+        {
+          key: 5,
+          name: '汇总',
+          applyNumber: '12',
+          applyAmount: '20',
+          applyPrice: 5585,
+          applyYearBasis:'+15.8%',
+          applyChainBasis:'-14.3%',
+          receiveNumber: '10',
+          receiveAmount: '20',
+          receivePrice: '5732',
+          receiveYearBasis:'+20.1%',
+          receiveChainBasis:'-15.2%'
         }
       ],
       columns:[
@@ -297,14 +312,27 @@ export default {
     handleOk() {
       this.$message.success('修改成功！');
       this.visible = false;
-    }
+    },
+    customRow(record, index) {
+      if(record.name == '汇总') {
+        return {
+          // 这个style就是我自定义的属性，也就是官方文档中的props
+          style: {
+            // 字体颜色
+            color: 'red',
+            'font-weight': 'bolder',
+            'background-color':  '#F0FFF0',
+          }
+        }
+      }
+    },
   }
 }
 </script>
 @import '~@assets/less/common.less'
 <style scoped>
 .inputWitdh {
-  width: 100%
+  width: 100%;
 }
 
 </style>
