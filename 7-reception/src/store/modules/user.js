@@ -162,8 +162,8 @@ const user = {
               //   },
               //   "name": "hotel-analysisyyy",
               //   "id": "9502685863ab87f0ad1134142788a385"
-              // }, 
-              //申请       
+              // },
+              //申请
               {
                 "redirect": null,
                 "path": "/meetingOrganization",
@@ -223,19 +223,6 @@ const user = {
                     "id": "1245154050731200514"
                   },
                   {
-                    "path": "/meetingOrganization/Settlement",
-                    "component": "meetingOrganization/Settlement",
-                    "route": "1",
-                    "meta": {
-                      "keepAlive": false,
-                      "internalOrExternal": false,
-                      "icon": "edit",
-                      "title": "会后结算"
-                    },
-                    "name": "meetingSettlement",
-                    "id": "1244271300749729794"
-                  },
-                  {
                     "path": "/meetingOrganization/MeetingIn",
                     "component": "meetingOrganization/MeetingIn",
                     "route": "1",
@@ -246,6 +233,19 @@ const user = {
                       "title": "会议总览"
                     },
                     "name": "meetingOrganization-in",
+                    "id": "1244271300749729794"
+                  },
+                  {
+                    "path": "/meetingOrganization/Settlement",
+                    "component": "meetingOrganization/Settlement",
+                    "route": "1",
+                    "meta": {
+                      "keepAlive": false,
+                      "internalOrExternal": false,
+                      "icon": "edit",
+                      "title": "会后结算"
+                    },
+                    "name": "meetingSettlement",
                     "id": "1244271300749729794"
                   },
                   {
@@ -494,7 +494,7 @@ const user = {
               //   },
               //   "name": "dashboard-analysis",
               //   "id": "9502685863ab87f0ad1134142788a385"
-              // }, 
+              // },
               // {
               //   "redirect": null,
               //   "path": "/erp/stock",
@@ -1074,7 +1074,7 @@ const user = {
               //   },
               //   "name": "erp-bas",
               //   "id": "1242263502445903874"
-              // }, 
+              // },
 
               // {
               //   "redirect": null,
