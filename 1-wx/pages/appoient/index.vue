@@ -76,7 +76,7 @@
 			<button type="default">添加随访人员</button>
 		</view>	 -->
 		
-		<view class="cu-form-group" v-for="(item, index) in tableData" >
+		<view class="cu-form-group" v-for="(item, index) in tableData" :key="item.key">
 			<view>姓名：</view>
 			<input placeholder="请输入" name="input"></input>
 			<view>手机号：</view>
@@ -250,8 +250,9 @@
 			addData(){
 				console.log(this.tableData)
 				this.tableData.push({
-					withName:this.withName,
-					withPhone:this.withPhone
+					// withName:this.withName,
+					// withPhone:this.withPhone,
+					key:this.tableData.length
 				})
 				// this.hideModal()
 				// console.log(this.tableData)
@@ -288,8 +289,8 @@
 			DelImg(e) {
 				this.imgList.splice(e.currentTarget.dataset.index, 1)
 			},
-			getRow(value){
-				this.tableData.splice(value, 1)
+			getRow(item){
+				this.tableData.splice(item, 1)
 			}
 		},
 	};
