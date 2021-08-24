@@ -226,9 +226,10 @@ export default {
   },
   components: { Pie, personalInfo, RankList, Bar, LineChartMultid, Trend },
   created() {
-    setTimeout(() => {
-      this.loadRankListData()
-    }, 1000)
+    // setTimeout(() => {
+
+    // }, 1000)
+    this.loadRankListData()
     // this.initLogInfo()
   },
   methods: {
