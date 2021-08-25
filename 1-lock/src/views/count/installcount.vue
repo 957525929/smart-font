@@ -40,14 +40,11 @@
         <a-col :span="8"></a-col> -->
       <!-- </a-row> -->
     </a-card>
-    <!-- <a-card>
-      <a-table :columns="columns" :data-source="data"></a-table>
-    </a-card> -->
     <div class="countcard">
       <a-card class="leftcard">
         <div class="lccontent">
           <div style="font-weight: bold; margin-bottom: 20px">智能锁安装总体完成量</div>
-          <a-progress type="circle" status="success" :percent="75" :format="(percent) => percent + '%'" />
+          <a-progress type="circle" status="success" :percent="75" :format="percent => percent + '%'" />
         </div>
         <div style="margin-top: 20px">
           <span style="margin-right: 20px; font-weight: bold">已完成:75</span>
@@ -71,7 +68,7 @@
       <a-card class="rightcard1">
         <div class="rc1content">
           <div style="font-weight: bold; margin: 20px">各区域每天平均安装量</div>
-          <NanD/>
+          <NanD />
         </div>
       </a-card>
       <a-card class="rightcard1">
@@ -81,6 +78,9 @@
         </div>
       </a-card>
     </div>
+    <a-card>
+      <a-table :columns="columns" :data-source="data"></a-table>
+    </a-card>
   </div>
 </template>
 <script>
@@ -90,25 +90,25 @@ import LineChartMultid from '@/components/chart/LineChartMultid'
 import Mutibar from './components/mutibar.vue'
 import NanD from './components/NanD.vue'
 // import Pie from '@/components/chart/Pie'
-// import { installcount } from './data/installdata.js'
+import { installcount } from './data/installdata.js'
 
-// const columns = [
-//   { title: '位置', dataIndex: 'area', key: 'area', width: '40%' },
-//   { title: '智能锁已安装', dataIndex: 'install', key: 'install', width: '15%' },
-//   { title: '智能锁未安装', dataIndex: 'uninstall', key: 'uninstall' },
-// ]
+const columns = [
+  { title: '位置', dataIndex: 'area', key: 'area', width: '40%' },
+  { title: '智能锁已安装', dataIndex: 'install', key: 'install', width: '15%' },
+  { title: '智能锁未安装', dataIndex: 'uninstall', key: 'uninstall' }
+]
 
 export default {
   data() {
     return {
       selectOptions: areaData,
-      // roomNum: '',
-      // dataSource: [
-      //   { item: '已安装', count: 192 },
-      //   { item: '未安装', count: 108 },
-      // ],
-      // data: installcount,
-      // columns: columns,
+      roomNum: '',
+      dataSource: [
+        { item: '已安装', count: 192 },
+        { item: '未安装', count: 108 }
+      ],
+      data: installcount,
+      columns: columns,
       dataSource: [
         { type: '1月', jeecg: 0 },
         { type: '2月', jeecg: 30 },
@@ -117,9 +117,9 @@ export default {
         { type: '5月', jeecg: 100 },
         { type: '6月', jeecg: 100 },
         { type: '7月', jeecg: 110 },
-        { type: '8月', jeecg: 150 },
+        { type: '8月', jeecg: 150 }
       ],
-      aliases: [{ field: 'jeecg', alias: '智能锁' }],
+      aliases: [{ field: 'jeecg', alias: '智能锁' }]
     }
   },
   components: {
@@ -146,10 +146,10 @@ export default {
         },
         onCancel() {
           // console.log('Cancel')
-        },
+        }
       })
-    },
-  },
+    }
+  }
 }
 </script>
 <style>
@@ -187,7 +187,7 @@ export default {
   margin: 1px;
   width: 100%;
 }
-.lc1content{
+.lc1content {
   width: 100%;
 }
 .rightcard1 {
@@ -195,7 +195,7 @@ export default {
   margin: 1px;
   width: 100%;
 }
-.rc1content{
+.rc1content {
   width: 100%;
 }
 </style>

@@ -10,49 +10,73 @@
         :options="selectOptions"
         change-on-select
         @change="areaChange"
-        :default-value="['0','01','011']"
+        :default-value="['0', '01', '011']"
         placeholder="请选择位置"
         :display-render="displayRender"
       />
       <a-divider type="vertical" />
       <span>开锁时间段：</span>
-    <a-date-picker
-      style="width: 18.3%"
-      :default-value="moment(getstardate())"
-      v-model="startValue"
-      :disabled-date="disabledStartDate"
-      format="YYYY-MM-DD"
-      @openChange="handleStartOpenChange"
-    />
-    <a-divider type="vertical" />
-    <!-- :placeholder="endDate" -->
-    <a-date-picker
-      style="width: 18%"
-      :default-value="moment(getenddate())"
-      v-model="endValue"
-      :disabled-date="disabledEndDate"
-      format="YYYY-MM-DD"
-      :open="endOpen"
-      @openChange="handleEndOpenChange"
-    />
+      <a-date-picker
+        style="width: 18.3%"
+        :default-value="moment(getstardate())"
+        v-model="startValue"
+        :disabled-date="disabledStartDate"
+        format="YYYY-MM-DD"
+        @openChange="handleStartOpenChange"
+      />
+      <a-divider type="vertical" />
+      <!-- :placeholder="endDate" -->
+      <a-date-picker
+        style="width: 18%"
+        :default-value="moment(getenddate())"
+        v-model="endValue"
+        :disabled-date="disabledEndDate"
+        format="YYYY-MM-DD"
+        :open="endOpen"
+        @openChange="handleEndOpenChange"
+      />
       <a-divider type="vertical" />
       <a-button @click="check">查询</a-button>
       <a-divider type="vertical" />
       <a-button @click="showConfirm">导出</a-button>
     </a-card>
+    <div class="chart">
+      <a-card class="chart1">
+        <div style="font-weight: bold">开锁次数统计</div>
+        <Dabiao />
+      </a-card>
+      <a-card class="chart2">
+        <div style="font-weight: bold">开锁方式统计</div>
+        <Pie />
+      </a-card>
+      <a-card class="chart3">
+        <!-- <div style="font-weight: bold">异常开锁信息</div>
+        <br /><br />
+        <a-timeline>
+          <a-timeline-item color="red">{{ starDate }} 21:25:11 密码开锁</a-timeline-item>
+          <a-timeline-item color="red">{{ endDate }} 22:11:36 远程开锁</a-timeline-item>
+        </a-timeline> -->
+      </a-card>
+    </div>
+    <lockcountForm />
   </div>
 </template>
 <script>
 // import countCheck from '../../components/count/countCheck.vue'
-// import lockcountForm from '../../components/count/lockcountForm.vue'
+import lockcountForm from '../../components/count/lockcountForm.vue'
 import { areaData } from '../../components/roomManager/data/area.js'
 import moment from 'moment'
 import { formatDate } from '@/utils/util'
 
+import Dabiao from './components/Dabiao.vue'
+import Pie from './components/Pie.vue'
+
 export default {
   components: {
     // countCheck,
-    // lockcountForm,
+    lockcountForm,
+    Dabiao,
+    Pie
   },
   data() {
     return {
@@ -61,10 +85,10 @@ export default {
       endDate: '',
       startValue: null,
       endValue: null,
-      endOpen: false,
+      endOpen: false
     }
   },
-  methods:{
+  methods: {
     moment,
     displayRender({ labels }) {
       return labels.join('.')
@@ -114,9 +138,23 @@ export default {
         },
         onCancel() {
           // console.log('Cancel')
-        },
+        }
       })
-    },
+    }
   }
 }
 </script>
+<style scoped>
+.chart {
+  display: flex;
+}
+.chart1 {
+  flex: 1;
+}
+.chart2 {
+  flex: 1;
+}
+.chart3 {
+  flex: 1;
+}
+</style>
