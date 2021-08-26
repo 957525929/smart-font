@@ -72,20 +72,24 @@
           <span slot="status" slot-scope="status">
             <a-tag :color="status == '正常' ? 'green' : status == '挂失' ? 'red' : 'geekblue'">
               {{ status }}
+              <!-- <div v-if="status == '挂失'" @click="status == '补卡'">{{status}}</div> -->
             </a-tag>
           </span>
           <span slot="action" slot-scope="text, record">
-            <router-link :to="{ name: 'material-warehousing-warehousingDetails', params: record }"
-              >查看记录</router-link
-            >
+            <router-link :to="{ name: 'card-list-detail', params: record }">查看记录</router-link>
             <a-divider type="vertical" />
             <a-dropdown>
               <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
               <a-menu slot="overlay">
                 <a-menu-item key="1" @click="purInEditOnClick(record)">编辑</a-menu-item>
-                <a-menu-item key="2">
-                  <a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style="margin-left: 10%;"
-                    >删除</a-popconfirm
+                <a-menu-item key="2" v-if="!(record.id == '2')">
+                  <a-popconfirm title="确定注销吗?" @confirm="deletConfirm(record)" style="margin-left: 10%;"
+                    >注销</a-popconfirm
+                  >
+                </a-menu-item>
+                <a-menu-item key="3" v-if="record.id === '3'">
+                  <a-popconfirm title="是否确认补卡?" @confirm="replaceCard(record)" style="margin-left: 10%;"
+                    >补卡</a-popconfirm
                   >
                 </a-menu-item>
               </a-menu>
@@ -281,7 +285,10 @@ export default {
     },
     deletConfirm(e) {
       console.log(e)
-      this.$message.success('删除成功')
+      this.$message.success('注销成功')
+    },
+    replaceCard(e) {
+      e.status = '正常'
     },
     handleReset() {
       this.form1.resetFields() //重置基本信息
