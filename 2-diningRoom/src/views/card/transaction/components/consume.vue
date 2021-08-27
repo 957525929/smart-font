@@ -14,7 +14,7 @@
         }"
       >
         <span slot="status" slot-scope="status">
-          <a-tag :color="status == '正常' ? 'green' : status == '挂失' ? 'red' : 'geekblue'">
+          <a-tag :color="status == '支付成功' ? 'green' : status == '支付失败' ? 'red' : 'geekblue'">
             {{ status }}
           </a-tag>
         </span>
@@ -48,35 +48,24 @@ export default {
         {
           id: '1',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMd'),
-          department: '烟草管理处',
-          name: '王富贵',
-          phone: '18350740255',
-          balance: '200.50元',
-          status: '正常',
-          totalMoney: '100',
-          operation: '需留样48小时'
+          place: '一号食堂',
+          time: '2021-08-25 18:01:02',
+          money: '13.50元',
+          endMoney: '200.50元',
+          status: '支付成功',
+          remark: '梦飞手抓饼',
+          content: ''
         },
         {
           id: '2',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
-          department: '烟草管理处',
-          name: '王富贵',
-          phone: '18350740255',
-          balance: '1000.50元',
-          status: '注销',
-          totalMoney: '100',
-          operation: '需留样48小时'
-        },
-        {
-          id: '3',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
-          department: '烟草管理处',
-          name: '王富贵',
-          phone: '18350740255',
-          balance: '10.50元',
-          status: '挂失',
-          totalMoney: '100',
-          operation: '需留样48小时'
+          place: '二号食堂',
+          time: '2021-08-24 12:01:02',
+          money: '15.50元',
+          endMoney: '10.50元',
+          status: '支付失败',
+          remark: '江南第一鸡',
+          content: '余额不足'
         }
       ],
       // 表头
@@ -96,36 +85,40 @@ export default {
           dataIndex: 'cardNumber'
         },
         {
-          title: '部门',
+          title: '地点',
           align: 'center',
-          dataIndex: 'department'
+          dataIndex: 'place'
         },
         {
-          title: '姓名',
+          title: '消费时间',
           align: 'center',
-          dataIndex: 'name'
+          dataIndex: 'time'
         },
         {
-          title: '联系方式',
+          title: '消费金额',
           align: 'center',
-          dataIndex: 'phone'
+          dataIndex: 'money'
         },
         {
           title: '余额',
           align: 'center',
-          dataIndex: 'balance'
+          dataIndex: 'endMoney'
         },
         {
-          title: '状态',
+          title: '支付状态',
           align: 'center',
           dataIndex: 'status',
           scopedSlots: { customRender: 'status' }
         },
         {
-          title: '操作',
-          dataIndex: 'action',
-          align: 'center',
-          scopedSlots: { customRender: 'action' }
+          title: '消费商户',
+          dataIndex: 'remark',
+          align: 'center'
+        },
+        {
+          title: '备注',
+          dataIndex: 'content',
+          align: 'center'
         }
       ]
     }

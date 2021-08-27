@@ -279,6 +279,18 @@ export const mockMenuData = {
             },
             name: 'statistics-food-foodIndex',
             id: '112'
+          },
+          {
+            path: '/statistics/card/foodCard',
+            component: 'statistics/card/foodCard',
+            route: '1',
+            meta: {
+              keepAlive: false,
+              internalOrExternal: false,
+              title: '餐卡统计'
+            },
+            name: 'statistics-card-foodCard',
+            id: '112'
           }
         ]
       },

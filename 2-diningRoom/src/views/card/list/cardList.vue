@@ -51,7 +51,7 @@
 
       <!-- 操作按钮区域 -->
       <div class="table-operator">
-        <a-button type="link" icon="plus" @click="add">新增</a-button>
+        <a-button type="link" icon="plus" @click="add('add')">新增</a-button>
         <a-button type="link" icon="download">导出</a-button>
       </div>
 
@@ -81,7 +81,7 @@
             <a-dropdown>
               <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
               <a-menu slot="overlay">
-                <a-menu-item key="1" @click="purInEditOnClick(record)">编辑</a-menu-item>
+                <a-menu-item key="1" @click="add(record)">编辑</a-menu-item>
                 <a-menu-item key="2" v-if="!(record.id == '2')">
                   <a-popconfirm title="确定注销吗?" @confirm="deletConfirm(record)" style="margin-left: 10%;"
                     >注销</a-popconfirm
@@ -100,47 +100,51 @@
     </a-card>
 
     <a-modal
-      :title="title"
+      :title="this.modelType == 'add' ? '开卡' : '编辑'"
       :width="800"
       :visible="visible"
       :confirmLoading="confirmLoading"
       @ok="handleOk"
       @cancel="handleCancel"
+      :okText="this.modelType == 'add' ? '增加' : '修改'"
       cancelText="关闭"
       wrapClassName="ant-modal-cust-warp"
       style="top:5%;height: 85%;overflow-y: hidden"
     >
       <a-spin :spinning="confirmLoading">
-        <a-form-model ref="form" v-bind="layout" :model="model" :rules="validatorRules">
-          <a-form-model-item label="菜品名称" required prop="name">
-            <a-select allowClear v-model="model.name" placeholder="请选择菜品名称">
-              <a-select-option value="小鸡炖蘑菇">小鸡炖蘑菇</a-select-option>
+        <a-form-model ref="form" v-bind="layout" :model="model">
+          <a-form-model-item label="卡号" prop="card">
+            <a-input allowClear v-if="this.modelType == 'add'" v-model="model.card" placeholder="请填写卡号" disabled />
+            <a-input
+              allowClear
+              v-if="!(this.modelType == 'add')"
+              v-model="this.modelType.cardNumber"
+              placeholder="请填写卡号"
+              disabled
+            />
+          </a-form-model-item>
+          <a-form-model-item label="部门" prop="department">
+            <a-select allowClear v-model="this.modelType.department" placeholder="请选择部门 ">
+              <a-select-option value="物流管理处">物流管理处</a-select-option>
+              <a-select-option value="烟叶管理处">烟叶管理处</a-select-option>
+              <a-select-option value="审计处">审计处</a-select-option>
             </a-select>
           </a-form-model-item>
-          <a-form-model-item label="餐别" required prop="type">
-            <a-select allowClear v-model="model.type" placeholder="请选择餐别">
-              <a-select-option value="早餐">早餐</a-select-option>
-              <a-select-option value="午餐">午餐</a-select-option>
-              <a-select-option value="晚餐">晚餐</a-select-option>
+          <a-form-model-item label="注册人姓名" prop="name">
+            <a-input v-model="this.modelType.name" placeholder="请输入注册人姓名" />
+          </a-form-model-item>
+          <a-form-model-item label="联系方式" prop="phone">
+            <a-input v-model="this.modelType.phone" placeholder="请输入联系方式" />
+          </a-form-model-item>
+          <a-form-model-item v-if="this.modelType == 'add'" label="存入金额" prop="money">
+            <a-input-number v-model="this.modelType.money" placeholder="存入金额" />
+          </a-form-model-item>
+          <a-form-model-item v-if="this.modelType == 'add'" label="支付方式" prop="method">
+            <a-select allowClear v-model="this.modelType.method" placeholder="请选择支付方式 ">
+              <a-select-option value="现金支付">现金支付</a-select-option>
+              <a-select-option value="支付宝">支付宝</a-select-option>
+              <a-select-option value="微信">微信</a-select-option>
             </a-select>
-          </a-form-model-item>
-          <a-form-model-item label="批次" required prop="number">
-            <a-input-number v-model="model.number" placeholder="请输入批次" style="width: 30%" />
-          </a-form-model-item>
-          <a-form-model-item label="留样时间" required prop="time">
-            <a-date-picker v-model="model.time" show-time placeholder="请选择留样时间" />
-          </a-form-model-item>
-          <a-form-model-item label="留样人员" required prop="people">
-            <a-select allowClear v-model="model.people" placeholder="请选择留样人员">
-              <a-select-option value="张三">张三</a-select-option>
-              <a-select-option value="李四">李四</a-select-option>
-            </a-select>
-          </a-form-model-item>
-          <a-form-model-item label="留样量(g)" required prop="size">
-            <a-input v-model="model.size" placeholder="请输入留样量" />
-          </a-form-model-item>
-          <a-form-model-item label="备注" prop="ps">
-            <a-textarea rows="5" v-model="model.ps" placeholder="请输入备注" />
           </a-form-model-item>
         </a-form-model>
       </a-spin>
@@ -165,6 +169,7 @@ export default {
         .format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
       description: '采购入库',
+      modelType: '',
       dataSource: [
         {
           id: '1',
@@ -174,30 +179,27 @@ export default {
           phone: '18350740255',
           balance: '200.50元',
           status: '正常',
-          totalMoney: '100',
-          operation: '需留样48小时'
+          totalMoney: '100'
         },
         {
           id: '2',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
-          department: '烟草管理处',
-          name: '王富贵',
-          phone: '18350740255',
+          department: '烟叶管理处',
+          name: '李翠花',
+          phone: '16250740952',
           balance: '1000.50元',
           status: '注销',
-          totalMoney: '100',
-          operation: '需留样48小时'
+          totalMoney: '100'
         },
         {
           id: '3',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
-          department: '烟草管理处',
-          name: '王富贵',
-          phone: '18350740255',
+          department: '审计处',
+          name: '王二蛋',
+          phone: '15910740100',
           balance: '10.50元',
           status: '挂失',
-          totalMoney: '100',
-          operation: '需留样48小时'
+          totalMoney: '100'
         }
       ],
       // 表头
@@ -252,7 +254,7 @@ export default {
       toggleSearchStatus: true,
       selectedRowKeys: [],
 
-      title: '操作',
+      title: '开卡',
       visible: false,
       model: {
         time: moment()
@@ -261,16 +263,15 @@ export default {
         labelCol: { span: 3 },
         wrapperCol: { span: 14 }
       },
-      confirmLoading: false,
-      validatorRules: {
-        name: [{ required: true, message: '请输入菜品名称!' }],
-        type: [{ required: true, message: '请选择餐别!' }],
-        number: [{ required: true, message: '请输入批次!' }],
-        time: [{ required: true, message: '请选择留样时间!' }],
-        people: [{ required: true, message: '请选择留样人员!' }],
-        size: [{ required: true, message: '请输入留样量!' }],
-        ps: [{ min: 0, max: 126, message: '长度不超过 126 个字符', trigger: 'blur' }]
-      }
+      confirmLoading: false
+      // validatorRules: {
+      //   card: [{ required: true, message: '请输入卡号!' }],
+      //   department: [{ required: true, message: '请选择所属部门!' }],
+      //   name: [{ required: true, message: '请输入注册人姓名!' }],
+      //   phone: [{ required: true, message: '请输入注册人联系方式!' }],
+      //   money: [{ required: true, message: '请存入一定金额用来激活餐卡!' }],
+      //   method: [{ required: true, message: '请选择充值方式!' }]
+      // }
     }
   },
   computed: {
@@ -301,12 +302,16 @@ export default {
       })
     },
 
-    add() {
+    add(type) {
       this.model = {
         number: 1,
-        time: moment()
+        time: moment(),
+        card: 'KHID' + formatDate(new Date().getTime() - 1 * 24 * 3600 * 1000, 'yyyyMMd')
       }
       this.visible = true
+      // console.log(record)
+      this.modelType = type
+      console.log(type)
     },
     close() {
       this.$emit('close')

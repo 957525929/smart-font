@@ -14,24 +14,12 @@
         }"
       >
         <span slot="status" slot-scope="status">
-          <a-tag :color="status == '正常' ? 'green' : status == '挂失' ? 'red' : 'geekblue'">
+          <a-tag :color="status == '支付成功' ? 'green' : status == '未支付' ? 'cyan' : 'geekblue'">
             {{ status }}
           </a-tag>
         </span>
         <span slot="action" slot-scope="text, record">
-          <router-link :to="{ name: 'material-warehousing-warehousingDetails', params: record }">查看记录</router-link>
-          <a-divider type="vertical" />
-          <a-dropdown>
-            <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
-            <a-menu slot="overlay">
-              <a-menu-item key="1" @click="purInEditOnClick(record)">编辑</a-menu-item>
-              <a-menu-item key="2">
-                <a-popconfirm title="确定删除吗?" @confirm="deletConfirm(record)" style="margin-left: 10%;"
-                  >删除</a-popconfirm
-                >
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
+          <a v-if="record.id == '1'" @click="update(record)">更新支付状态</a>
         </span>
       </a-table>
     </a-card>
@@ -48,35 +36,22 @@ export default {
         {
           id: '1',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMd'),
-          department: '烟草管理处',
-          name: '王富贵',
-          phone: '18350740255',
-          balance: '200.50元',
-          status: '正常',
-          totalMoney: '100',
-          operation: '需留样48小时'
+          place: '食堂app',
+          time: '2021-08-24 18:01:02',
+          money: '200.00元',
+          endMoney: '213.50元',
+          remark: '支付宝快捷支付',
+          status: '支付中'
         },
         {
           id: '2',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
-          department: '烟草管理处',
-          name: '王富贵',
-          phone: '18350740255',
-          balance: '1000.50元',
-          status: '注销',
-          totalMoney: '100',
-          operation: '需留样48小时'
-        },
-        {
-          id: '3',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
-          department: '烟草管理处',
-          name: '王富贵',
-          phone: '18350740255',
-          balance: '10.50元',
-          status: '挂失',
-          totalMoney: '100',
-          operation: '需留样48小时'
+          place: '财务处',
+          time: '2021-08-23 14:01:02',
+          money: '500.00元',
+          endMoney: '1000.50元',
+          remark: '公司统一餐补',
+          status: '未支付'
         }
       ],
       // 表头
@@ -96,33 +71,38 @@ export default {
           dataIndex: 'cardNumber'
         },
         {
-          title: '部门',
+          title: '充值地点',
           align: 'center',
-          dataIndex: 'department'
+          dataIndex: 'place'
         },
         {
-          title: '姓名',
+          title: '充值时间',
           align: 'center',
-          dataIndex: 'name'
+          dataIndex: 'time'
         },
         {
-          title: '联系方式',
+          title: '充值金额',
           align: 'center',
-          dataIndex: 'phone'
+          dataIndex: 'money'
         },
         {
           title: '余额',
           align: 'center',
-          dataIndex: 'balance'
+          dataIndex: 'endMoney'
         },
         {
-          title: '状态',
+          title: '支付状态',
           align: 'center',
           dataIndex: 'status',
           scopedSlots: { customRender: 'status' }
         },
         {
-          title: '操作',
+          title: '支付方式',
+          dataIndex: 'remark',
+          align: 'center'
+        },
+        {
+          title: '备注',
           dataIndex: 'action',
           align: 'center',
           scopedSlots: { customRender: 'action' }
@@ -131,7 +111,12 @@ export default {
     }
   },
   computed: {},
-  methods: {}
+  methods: {
+    update(record) {
+      console.log(record)
+      record.status = '支付成功'
+    }
+  }
 }
 </script>
 

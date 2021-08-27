@@ -112,7 +112,7 @@ export default {
           time: '2021-08-25 18:01:02',
           money: '13.50元',
           enrdMoney: '200.50元',
-          remark: '梦飞麻辣烫'
+          remark: '梦飞手抓饼'
         }
       ],
       columns: [
