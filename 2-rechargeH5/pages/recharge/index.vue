@@ -18,7 +18,7 @@
 						:class="cardData.status == '正常'?'bg-olive':cardData.status == '挂失'?'bg-orange':'bg-red'">
 						{{ cardData.status }}
 					</view>
-					<view class="margin-left-xs text-bold" @tap="edit">
+					<view v-if="cardData.status == '正常'" class="margin-left-xs text-bold" @tap="edit">
 						<text class="cuIcon-write"></text>
 					</view>
 				</view>
@@ -103,6 +103,30 @@
 				</view>
 			</view>
 		</view>
+		
+		<!-- 支付中模态框 -->
+		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">
+						支付中
+					</view>
+					<view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-black"></text>
+					</view>
+				</view>
+				<view class="padding-xl bg-white">
+					<view>
+						正在为您充值，请耐心等候...
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-center">
+					<view class="action">
+						<button class="cu-btn bg-blue" @tap="call">联系客服</button>
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -161,13 +185,19 @@
 						date: '2021-08-20' + ' ' + '10:19:12',
 						status: '失败'
 					},
-				]
+				],
+				modalName: null,
 			}
 		},
 
-		onLoad() {
+		onLoad(item) {
 			this.account()
 			this.numFormat()
+			
+			//接收状态变更
+			uni.$on('status', (status) => {
+				this.cardData.status = status
+			})
 		},
 
 		methods: {
@@ -215,16 +245,28 @@
 				// console.log('记录切换')
 				this.TabCur = e.currentTarget.dataset.id;
 			},
-			
-			gotoPage(item){
-				if(item.status == '未支付'){
+
+			gotoPage(item) {
+				if (item.status == '未支付') {
 					// console.log('继续支付')
 					uni.navigateTo({
-						url:'./pay?data=' + JSON.stringify(item)
+						url: './pay?data=' + JSON.stringify(item.recharge)
 					})
-				}else if(item.status == '支付中'){
+				} else if (item.status == '支付中') {
+					this.modalName = 'DialogModal'
 					console.log('查看支付状态')
 				}
+			},
+			
+			call(e) {
+				// console.log('联系客服')
+				uni.makePhoneCall({
+				    phoneNumber: '13459773336'
+				});
+			},
+			hideModal(e) {
+				// 关闭模态框
+				this.modalName = null
 			},
 
 			account() {
