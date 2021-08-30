@@ -21,19 +21,10 @@
       </a-col>
     </a-row>
     <a-tabs default-active-key="1" size="large" :tab-bar-style="{ marginBottom: '24px', paddingLeft: '16px' }">
-      <a-tab-pane tab="消费统计" key="1">
+      <a-tab-pane tab="流水统计" key="1">
         <a-row>
           <a-col :xl="24" :lg="12" :md="12" :sm="24" :xs="24">
             <LineChartMultid :dataSource="dataSource2" :fields="fields2" />
-          </a-col>
-        </a-row>
-      </a-tab-pane>
-    </a-tabs>
-    <a-tabs default-active-key="1" size="large" :tab-bar-style="{ marginBottom: '24px', paddingLeft: '16px' }">
-      <a-tab-pane tab="充值统计" key="1">
-        <a-row>
-          <a-col :xl="24" :lg="12" :md="12" :sm="24" :xs="24">
-            <LineChartMultid :dataSource="dataSource3" :fields="fields3" />
           </a-col>
         </a-row>
       </a-tab-pane>
@@ -155,66 +146,49 @@ export default {
           '7月': 2
         }
       ],
-      fields2: ['消费总金额'],
+      fields2: ['消费总金额', '充值总金额', '退款总金额'],
       dataSource2: [
         {
           type: '1月',
-          消费总金额: 100000.2
+          消费总金额: 100000.2,
+          充值总金额: 110000.0,
+          退款总金额: 12000.0
         },
         {
           type: '2月',
-          消费总金额: 85472.91
+          消费总金额: 85472.91,
+          充值总金额: 85000.0,
+          退款总金额: 10000.0
         },
         {
           type: '3月',
-          消费总金额: 64231.55
+          消费总金额: 64231.55,
+          充值总金额: 60000.0,
+          退款总金额: 13000.0
         },
         {
           type: '4月',
-          消费总金额: 67523.99
+          消费总金额: 67523.99,
+          充值总金额: 70000.0,
+          退款总金额: 8000.0
         },
         {
           type: '5月',
-          消费总金额: 75213.51
+          消费总金额: 75213.51,
+          充值总金额: 75000.0,
+          退款总金额: 11000.0
         },
         {
           type: '6月',
-          消费总金额: 85423.66
+          消费总金额: 85423.66,
+          充值总金额: 90000.0,
+          退款总金额: 14000.0
         },
         {
           type: '7月',
-          消费总金额: 75213.1
-        }
-      ],
-      fields3: ['充值总金额'],
-      dataSource3: [
-        {
-          type: '1月',
-          充值总金额: 110000.0
-        },
-        {
-          type: '2月',
-          充值总金额: 85000.0
-        },
-        {
-          type: '3月',
-          充值总金额: 60000.0
-        },
-        {
-          type: '4月',
-          充值总金额: 70000.0
-        },
-        {
-          type: '5月',
-          充值总金额: 75000.0
-        },
-        {
-          type: '6月',
-          充值总金额: 90000.0
-        },
-        {
-          type: '7月',
-          充值总金额: 80000.0
+          消费总金额: 75213.1,
+          充值总金额: 110000.0,
+          退款总金额: 9000.0
         }
       ],
       time: 'year'

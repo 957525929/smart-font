@@ -49,7 +49,7 @@ export default {
           id: '1',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
           place: '财务处',
-          time: '2021-08-24 14:01:02',
+          time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15:22:32',
           money: '1000.50元',
           method: '银行卡转账',
           endMoney: '0元',

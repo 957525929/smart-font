@@ -10,7 +10,7 @@
                 <a-input placeholder="请输入" v-decorator="['sampleNumber']"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+            <!-- <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="部门">
                 <a-input placeholder="请输入" v-decorator="['name']"></a-input>
               </a-form-item>
@@ -19,30 +19,30 @@
               <a-form-item label="姓名">
                 <a-input placeholder="请输入" v-decorator="['name']"></a-input>
               </a-form-item>
-            </a-col>
-            <template v-if="toggleSearchStatus">
-              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+            </a-col> -->
+            <!-- <template v-if="toggleSearchStatus"> -->
+            <!-- <a-col :xl="6" :lg="8" :md="9" :sm="24">
                 <a-form-item label="联系方式">
                   <a-input placeholder="请输入" v-decorator="['number']" />
                 </a-form-item>
-              </a-col>
-              <a-col :xl="8" :lg="8" :md="9" :sm="24">
-                <a-form-item label="余额">
-                  <a-input placeholder="请输入" style="width: 47%;" />
-                  <span class="query-group-split-cust"></span>
-                  <a-input placeholder="请输入" style="width: 47%;" />
-                </a-form-item>
-              </a-col>
-            </template>
+              </a-col> -->
+            <a-col :xl="8" :lg="8" :md="9" :sm="24">
+              <a-form-item label="余额">
+                <a-input placeholder="请输入" style="width: 47%;" />
+                <span class="query-group-split-cust"></span>
+                <a-input placeholder="请输入" style="width: 47%;" />
+              </a-form-item>
+            </a-col>
+            <!-- </template> -->
 
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-col :md="6" :sm="24">
                 <a-button icon="search" @click="handleQueryOk">查询</a-button>
                 <a-button icon="reload" style="margin-left: 8px" @click="handleReset">重置</a-button>
-                <a @click="handleToggleSearch" style="margin-left: 8px">
+                <!-- <a @click="handleToggleSearch" style="margin-left: 8px">
                   {{ toggleSearchStatus ? '收起' : '展开' }}
                   <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
-                </a>
+                </a> -->
               </a-col>
             </span>
           </a-row>
@@ -113,34 +113,27 @@
     >
       <a-spin :spinning="confirmLoading">
         <a-form-model ref="form" v-bind="layout" :model="model">
-          <a-form-model-item label="卡号" prop="card">
-            <a-input allowClear v-if="this.modelType == 'add'" v-model="model.card" placeholder="请填写卡号" disabled />
-            <a-input
-              allowClear
-              v-if="!(this.modelType == 'add')"
-              v-model="this.modelType.cardNumber"
-              placeholder="请填写卡号"
-              disabled
-            />
+          <a-form-model-item label="卡号" prop="card" v-if="this.modelType == 'add'">
+            <a-input allowClear v-model="selectStatus.card" placeholder="请填写卡号" disable />
           </a-form-model-item>
           <a-form-model-item label="部门" prop="department">
-            <a-select allowClear v-model="this.modelType.department" placeholder="请选择部门 ">
+            <a-select allowClear v-model="selectStatus.department" placeholder="请选择部门 ">
               <a-select-option value="物流管理处">物流管理处</a-select-option>
               <a-select-option value="烟叶管理处">烟叶管理处</a-select-option>
               <a-select-option value="审计处">审计处</a-select-option>
             </a-select>
           </a-form-model-item>
-          <a-form-model-item label="注册人姓名" prop="name">
-            <a-input v-model="this.modelType.name" placeholder="请输入注册人姓名" />
+          <a-form-model-item label="姓名" prop="name">
+            <a-input v-model="selectStatus.name" placeholder="请输入注册人姓名" />
           </a-form-model-item>
           <a-form-model-item label="联系方式" prop="phone">
-            <a-input v-model="this.modelType.phone" placeholder="请输入联系方式" />
+            <a-input v-model="selectStatus.phone" placeholder="请输入联系方式" />
           </a-form-model-item>
           <a-form-model-item v-if="this.modelType == 'add'" label="存入金额" prop="money">
-            <a-input-number v-model="this.modelType.money" placeholder="存入金额" />
+            <a-input-number v-model="selectStatus.money" placeholder="存入金额" />
           </a-form-model-item>
           <a-form-model-item v-if="this.modelType == 'add'" label="支付方式" prop="method">
-            <a-select allowClear v-model="this.modelType.method" placeholder="请选择支付方式 ">
+            <a-select allowClear v-model="selectStatus.method" placeholder="请选择支付方式 ">
               <a-select-option value="现金支付">现金支付</a-select-option>
               <a-select-option value="支付宝">支付宝</a-select-option>
               <a-select-option value="微信">微信</a-select-option>
@@ -173,7 +166,7 @@ export default {
       dataSource: [
         {
           id: '1',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMd'),
+          card: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMd'),
           department: '烟草管理处',
           name: '王富贵',
           phone: '18350740255',
@@ -183,7 +176,7 @@ export default {
         },
         {
           id: '2',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
+          card: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
           department: '烟叶管理处',
           name: '李翠花',
           phone: '16250740952',
@@ -193,7 +186,7 @@ export default {
         },
         {
           id: '3',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
+          card: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
           department: '审计处',
           name: '王二蛋',
           phone: '15910740100',
@@ -216,7 +209,7 @@ export default {
         {
           title: '卡号',
           align: 'center',
-          dataIndex: 'cardNumber'
+          dataIndex: 'card'
         },
         {
           title: '部门',
@@ -277,6 +270,9 @@ export default {
   computed: {
     hasSelected() {
       return this.selectedRowKeys.length > 0
+    },
+    selectStatus() {
+      return this.modelType == 'add' ? this.model : this.modelType
     }
   },
   methods: {
@@ -286,6 +282,7 @@ export default {
     },
     deletConfirm(e) {
       console.log(e)
+      e.status = '注销'
       this.$message.success('注销成功')
     },
     replaceCard(e) {

@@ -13,11 +13,6 @@
           showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
         }"
       >
-        <span slot="status" slot-scope="status">
-          <a-tag :color="status == '支付成功' ? 'green' : status == '支付失败' ? 'red' : 'geekblue'">
-            {{ status }}
-          </a-tag>
-        </span>
         <span slot="action" slot-scope="text, record">
           <router-link :to="{ name: 'material-warehousing-warehousingDetails', params: record }">查看记录</router-link>
           <a-divider type="vertical" />
@@ -52,7 +47,6 @@ export default {
           time: '2021-08-25 18:01:02',
           money: '13.50元',
           endMoney: '200.50元',
-          status: '支付成功',
           remark: '梦飞手抓饼',
           content: ''
         },
@@ -63,9 +57,7 @@ export default {
           time: '2021-08-24 12:01:02',
           money: '15.50元',
           endMoney: '10.50元',
-          status: '支付失败',
-          remark: '江南第一鸡',
-          content: '余额不足'
+          remark: '江南第一鸡'
         }
       ],
       // 表头
@@ -103,12 +95,6 @@ export default {
           title: '余额',
           align: 'center',
           dataIndex: 'endMoney'
-        },
-        {
-          title: '支付状态',
-          align: 'center',
-          dataIndex: 'status',
-          scopedSlots: { customRender: 'status' }
         },
         {
           title: '消费商户',

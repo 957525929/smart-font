@@ -6,7 +6,7 @@
       <a-col :xl="5" :lg="8" :md="9" :sm="24">
         <div class="detail-top">
           <div>卡号：</div>
-          <div>{{ detailsData.cardNumber }}</div>
+          <div>{{ detailsData.card }}</div>
         </div>
       </a-col>
       <a-col :xl="5" :lg="8" :md="9" :sm="24">
@@ -49,53 +49,54 @@
       </div>
     </a-row>
 
-    <h1 style="font-weight:bold">消费记录：</h1>
-    <a-divider />
-    <a-table
-      size="middle"
-      bordered
-      rowKey="id"
-      :columns="columns"
-      :dataSource="dataSource"
-      :pagination="{
-        total: this.dataSource.length,
-        showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
-      }"
-    >
-    </a-table>
-
-    <h1 style="font-weight:bold">充值记录：</h1>
-    <a-divider />
-    <a-table
-      size="middle"
-      bordered
-      rowKey="id"
-      :columns="columns1"
-      :dataSource="dataSource1"
-      :pagination="{
-        total: this.dataSource.length,
-        showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
-      }"
-    >
-    </a-table>
-
-    <h1 style="font-weight:bold">退款记录：</h1>
-    <a-divider />
-    <a-table
-      size="middle"
-      bordered
-      rowKey="id"
-      :columns="columns1"
-      :pagination="{
-        total: this.dataSource3.length,
-        showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
-      }"
-    >
-    </a-table>
+    <a-tabs>
+      <a-tab-pane key="1" tab="消费记录">
+        <a-table
+          size="middle"
+          bordered
+          rowKey="id"
+          :columns="columns"
+          :dataSource="dataSource"
+          :pagination="{
+            total: this.dataSource.length,
+            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
+          }"
+        >
+        </a-table>
+      </a-tab-pane>
+      <a-tab-pane key="2" tab="充值记录" force-render>
+        <a-table
+          size="middle"
+          bordered
+          rowKey="id"
+          :columns="columns1"
+          :dataSource="dataSource1"
+          :pagination="{
+            total: this.dataSource.length,
+            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
+          }"
+        >
+        </a-table>
+      </a-tab-pane>
+      <a-tab-pane key="3" tab="退款记录">
+        <a-table
+          size="middle"
+          bordered
+          rowKey="id"
+          :columns="columns1"
+          :pagination="{
+            total: this.dataSource3.length,
+            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
+          }"
+        >
+        </a-table>
+      </a-tab-pane>
+    </a-tabs>
   </a-card>
 </template>
 
 <script>
+import { formatDate } from '../../../utils/util'
 export default {
   name: 'ouputDetails',
 
@@ -155,7 +156,7 @@ export default {
         {
           id: '1',
           place: '食堂app',
-          time: '2021-08-24 18:01:02',
+          time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '18:01:02',
           money: '200.00元',
           enrdMoney: '213.50元',
           remark: '支付宝快捷支付'
