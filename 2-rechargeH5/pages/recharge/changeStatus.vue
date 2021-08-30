@@ -6,13 +6,13 @@
 		</cu-custom>
 
 		<view class="cu-form-group">
-			<view class="title">姓名</view>
-			<view>{{ cardData.name }}</view>
-		</view>
-
-		<view class="cu-form-group">
 			<view class="title">餐卡号</view>
 			<view>{{ cardData.cardID }}</view>
+		</view>
+		
+		<view class="cu-form-group">
+			<view class="title">姓名</view>
+			<view>{{ cardData.name }}</view>
 		</view>
 
 		<view class="cu-form-group">
@@ -22,6 +22,12 @@
 					{{ picker[index] }}
 				</view>
 			</picker>
+		</view>
+		
+		<view class="cu-form-group align-start">
+			<view class="title">备注</view>
+			<textarea maxlength="-1" :disabled="textmodalName!=null" @input="textareaBInput" v-model="textareaBValue"
+				placeholder="请输入备注信息"></textarea>
 		</view>
 
 		<view>
@@ -84,6 +90,8 @@
 				index: 0,
 				picker: ['挂失', '注销'],
 				modalName: null,
+				textmodalName: null,
+				textareaBValue: '',
 			}
 		},
 		methods: {
@@ -108,7 +116,12 @@
 				let status = this.index == 0 ? '挂失' : '注销'
 				uni.$emit('status', status)
 				uni.navigateBack({})
-			}
+			},
+			
+			// 备注
+			textareaBInput(e) {
+				this.textareaBValue = e.detail.value
+			},
 		}
 	}
 </script>

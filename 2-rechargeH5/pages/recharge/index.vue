@@ -25,13 +25,25 @@
 			</view>
 			<view class="margin-top-xs">{{ cardData.cardID }}</view>
 			<view class="margin-top-sm text-xs">可用余额(元)</view>
-			<view class="card-money">
+			<view class="flex align-center justify-between">
+				<view class="card-money">
+					<view class="text-xxl text-bold">{{ cardData.money }}</view>
+					<view class="margin-left text-bold text-green" @tap="refresh">
+						<text class="cuIcon-refresh"></text>
+					</view>
+				</view>
+				<view class="text-bold text-blue" @tap="recharge">
+					<span>充值</span>
+					<text class="cuIcon-recharge margin-left-xs"></text>
+				</view>
+			</view>
+			<!-- <view class="card-money">
 				<view class="text-xxl text-bold">{{ cardData.money }}</view>
 				<view class="margin-left text-bold text-green" @tap="refresh">
 					<text class="cuIcon-refresh"></text>
 				</view>
 			</view>
-			<view class="margin-top-sm text-bold text-blue" @tap="recharge">充值</view>
+			<view class="margin-top-sm text-bold text-blue" @tap="recharge">充值</view> -->
 		</view>
 
 		<!-- 记录 -->
@@ -90,7 +102,7 @@
 								{{ item.date }}
 							</view>
 						</view>
-						<view class="action">
+						<view class="action flex flex-direction align-end">
 							<!-- <view class="text-gray">
 								余额 {{ item.money }}
 							</view> -->
@@ -98,6 +110,8 @@
 								:class="item.status == '成功' ? 'text-green':item.status == '失败' ? 'text-red': item.status == '支付中' ? 'text-orange':'text-black'">
 								{{ item.status }}
 							</view>
+							<view v-if="item.status == '支付中'" class="text-blue text-sm">查询</view>
+							<view v-if="item.status == '未支付'" class="text-blue text-sm">重新支付</view>
 						</view>
 					</view>
 				</view>
@@ -105,7 +119,7 @@
 		</view>
 		
 		<!-- 支付中模态框 -->
-		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
+<!-- 		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
 					<view class="content">
@@ -123,6 +137,30 @@
 				<view class="cu-bar bg-white justify-center">
 					<view class="action">
 						<button class="cu-btn bg-blue" @tap="call">联系客服</button>
+					</view>
+				</view>
+			</view>
+		</view> -->
+		
+		<!-- 重新支付模态框 -->
+		<view class="cu-modal" :class="payModalName=='payDialogModal'?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">
+						重新支付
+					</view>
+					<view class="action" @tap="payHideModal">
+						<text class="cuIcon-close text-black"></text>
+					</view>
+				</view>
+				<view class="padding-xl bg-white">
+					<view>
+						该订单尚未支付，是否前往支付？
+					</view>
+				</view>
+				<view class="cu-bar bg-white justify-center">
+					<view class="action">
+						<button class="cu-btn bg-blue" @tap="gotoPay">去支付</button>
 					</view>
 				</view>
 			</view>
@@ -187,6 +225,8 @@
 					},
 				],
 				modalName: null,
+				payModalName: null,
+				payRecord: '',
 			}
 		},
 
@@ -249,24 +289,38 @@
 			gotoPage(item) {
 				if (item.status == '未支付') {
 					// console.log('继续支付')
-					uni.navigateTo({
-						url: './pay?data=' + JSON.stringify(item.recharge)
-					})
+					this.payModalName = 'payDialogModal'
+					this.payRecord = item.recharge
 				} else if (item.status == '支付中') {
-					this.modalName = 'DialogModal'
-					console.log('查看支付状态')
+					// this.modalName = 'DialogModal'
+					// console.log('查看支付状态')
+					uni.showToast({
+						title: '查询成功',
+						icon: 'none',
+						duration: 2000
+					})
 				}
 			},
 			
-			call(e) {
-				// console.log('联系客服')
-				uni.makePhoneCall({
-				    phoneNumber: '13459773336'
-				});
-			},
+			// call(e) {
+			// 	// console.log('联系客服')
+			// 	uni.makePhoneCall({
+			// 	    phoneNumber: '13459773336'
+			// 	});
+			// },
 			hideModal(e) {
 				// 关闭模态框
 				this.modalName = null
+			},
+			payHideModal(e) {
+				// 关闭模态框
+				this.payModalName = null
+			},
+			gotoPay(){
+				uni.navigateTo({
+					url: './pay?data=' + JSON.stringify(this.payRecord)
+				})
+				this.payModalName = null
 			},
 
 			account() {
