@@ -83,7 +83,7 @@
           size="middle"
           bordered
           rowKey="id"
-          :columns="columns1"
+          :columns="columns2"
           :pagination="{
             total: this.dataSource3.length,
             showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`
@@ -137,7 +137,7 @@ export default {
           dataIndex: 'time'
         },
         {
-          title: '金额',
+          title: '消费金额',
           align: 'center',
           dataIndex: 'money'
         },
@@ -145,11 +145,6 @@ export default {
           title: '余额',
           align: 'center',
           dataIndex: 'enrdMoney'
-        },
-        {
-          title: '备注',
-          align: 'center',
-          dataIndex: 'remark'
         }
       ],
       dataSource1: [
@@ -159,7 +154,7 @@ export default {
           time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '18:01:02',
           money: '200.00元',
           enrdMoney: '213.50元',
-          remark: '支付宝快捷支付'
+          remark: '支付宝'
         }
       ],
       columns1: [
@@ -178,12 +173,12 @@ export default {
           dataIndex: 'place'
         },
         {
-          title: '时间',
+          title: '充值时间',
           align: 'center',
           dataIndex: 'time'
         },
         {
-          title: '金额',
+          title: '充值金额',
           align: 'center',
           dataIndex: 'money'
         },
@@ -193,7 +188,38 @@ export default {
           dataIndex: 'enrdMoney'
         },
         {
-          title: '备注',
+          title: '支付方式',
+          align: 'center',
+          dataIndex: 'remark'
+        }
+      ],
+      columns2: [
+        {
+          title: '#',
+          dataIndex: '',
+          key: 'rowIndex',
+          align: 'center',
+          customRender: function(t, r, index) {
+            return parseInt(index) + 1
+          }
+        },
+        {
+          title: '地点',
+          align: 'center',
+          dataIndex: 'place'
+        },
+        {
+          title: '发起退款时间',
+          align: 'center',
+          dataIndex: 'time'
+        },
+        {
+          title: '退款金额',
+          align: 'center',
+          dataIndex: 'money'
+        },
+        {
+          title: '退款方式',
           align: 'center',
           dataIndex: 'remark'
         }

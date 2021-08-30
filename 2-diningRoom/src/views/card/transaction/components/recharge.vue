@@ -1,6 +1,74 @@
 <template>
   <div>
     <a-card>
+      <div class="table-page-search-wrapper">
+        <a-form layout="inline" :form="form1">
+          <a-row :gutter="24">
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="卡号">
+                <a-input placeholder="请输入" v-decorator="['sampleNumber']"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="部门">
+                <a-select allowClear v-decorator="['department']" placeholder="请选择">
+                  <a-select-option value="物流管理处">物流管理处</a-select-option>
+                  <a-select-option value="烟叶管理处">烟叶管理处</a-select-option>
+                  <a-select-option value="审计处">审计处</a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="姓名">
+                <a-input placeholder="请输入" v-decorator="['name']"></a-input>
+              </a-form-item>
+            </a-col>
+            <template v-if="toggleSearchStatus">
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="联系方式">
+                  <a-input placeholder="请输入" v-decorator="['number']" />
+                </a-form-item>
+              </a-col>
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="状态">
+                  <a-select allowClear v-decorator="['status']" placeholder="请选择">
+                    <a-select-option value="正常">正常</a-select-option>
+                    <a-select-option value="注销">注销</a-select-option>
+                    <a-select-option value="挂失">挂失</a-select-option>
+                  </a-select>
+                </a-form-item>
+              </a-col>
+              <a-col :xl="8" :lg="8" :md="9" :sm="24">
+                <a-form-item label="充值时间">
+                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['startTime']" />
+                  <span class="query-group-split-cust"></span>
+                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['endTime']" />
+                </a-form-item>
+              </a-col>
+
+              <a-col :xl="8" :lg="8" :md="9" :sm="24">
+                <a-form-item label="充值金额">
+                  <a-input placeholder="请输入" style="width: 47%;" v-decorator="['startMon']" />
+                  <span class="query-group-split-cust"></span>
+                  <a-input placeholder="请输入" style="width: 47%;" v-decorator="['endMon']" />
+                </a-form-item>
+              </a-col>
+            </template>
+
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-col :md="6" :sm="24">
+                <a-button icon="search" @click="handleQueryOk">查询</a-button>
+                <a-button icon="reload" style="margin-left: 8px" @click="handleReset">重置</a-button>
+                <a-button icon="reload" style="margin-left: 8px" @click="update">更新状态</a-button>
+                <a @click="handleToggleSearch" style="margin-left: 8px">
+                  {{ toggleSearchStatus ? '收起' : '展开' }}
+                  <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
+                </a>
+              </a-col>
+            </span>
+          </a-row>
+        </a-form>
+      </div>
       <a-table
         ref="table"
         size="middle"
@@ -23,7 +91,7 @@
           </a-tag>
         </span>
         <span slot="action" slot-scope="text, record">
-          <a v-if="record.id == '1'" @click="update(record)">查询</a>
+          <!-- <a v-if="record.id == '1'" @click="update(record)">查询</a> -->
           <div v-if="record.id == '3'">余额不足</div>
         </span>
       </a-table>
@@ -38,6 +106,7 @@ export default {
 
   data() {
     return {
+      toggleSearchStatus: true,
       dataSource: [
         {
           id: '1',
@@ -47,7 +116,10 @@ export default {
           money: '200.00元',
           endMoney: '213.50元',
           remark: '支付宝支付',
-          status: '支付中'
+          status: '支付中',
+          department: '烟草管理处',
+          name: '王富贵',
+          phone: '18350740255'
         },
         {
           id: '2',
@@ -57,7 +129,10 @@ export default {
           money: '500.00元',
           endMoney: '1000.50元',
           remark: '公司统一餐补',
-          status: '未支付'
+          status: '未支付',
+          department: '烟叶管理处',
+          name: '李翠花',
+          phone: '16250740952'
         },
         {
           id: '3',
@@ -67,7 +142,10 @@ export default {
           money: '50.00元',
           endMoney: '10.50元',
           remark: '微信支付',
-          status: '支付失败'
+          status: '支付失败',
+          department: '审计处',
+          name: '王二蛋',
+          phone: '15910740100'
         },
         {
           id: '4',
@@ -77,7 +155,10 @@ export default {
           money: '100.00元',
           endMoney: '105.50元',
           remark: '支付宝支付',
-          status: '支付成功'
+          status: '支付成功',
+          department: '审计处',
+          name: '许七安',
+          phone: '15910750111'
         }
       ],
       // 表头
@@ -95,6 +176,22 @@ export default {
           title: '卡号',
           align: 'center',
           dataIndex: 'cardNumber'
+        },
+
+        {
+          title: '部门',
+          align: 'center',
+          dataIndex: 'department'
+        },
+        {
+          title: '姓名',
+          align: 'center',
+          dataIndex: 'name'
+        },
+        {
+          title: '联系方式',
+          align: 'center',
+          dataIndex: 'phone'
         },
         {
           title: '充值地点',
@@ -138,9 +235,17 @@ export default {
   },
   computed: {},
   methods: {
-    update(record) {
-      console.log(record)
-      record.status = '支付成功'
+    update() {
+      console.log(this.dataSource)
+      this.dataSource.map(item => {
+        if (!item.status.indexOf('支付中')) {
+          item.status = '支付成功'
+        }
+      })
+    },
+    handleToggleSearch() {
+      if (this.toggleSearchStatus) this.toggleSearchStatus = false
+      else this.toggleSearchStatus = true
     }
   }
 }

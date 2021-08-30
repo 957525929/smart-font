@@ -1,6 +1,64 @@
 <template>
   <div>
     <a-card>
+      <div class="table-page-search-wrapper">
+        <a-form layout="inline" :form="form1">
+          <a-row :gutter="24">
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="卡号">
+                <a-input placeholder="请输入" v-decorator="['sampleNumber']"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="部门">
+                <a-select allowClear v-decorator="['department']" placeholder="请选择">
+                  <a-select-option value="物流管理处">物流管理处</a-select-option>
+                  <a-select-option value="烟叶管理处">烟叶管理处</a-select-option>
+                  <a-select-option value="审计处">审计处</a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="姓名">
+                <a-input placeholder="请输入" v-decorator="['name']"></a-input>
+              </a-form-item>
+            </a-col>
+            <template v-if="toggleSearchStatus">
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
+                <a-form-item label="联系方式">
+                  <a-input placeholder="请输入" v-decorator="['number']" />
+                </a-form-item>
+              </a-col>
+              <a-col :xl="8" :lg="8" :md="9" :sm="24">
+                <a-form-item label="消费时间">
+                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['startTime']" />
+                  <span class="query-group-split-cust"></span>
+                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['endTime']" />
+                </a-form-item>
+              </a-col>
+
+              <a-col :xl="8" :lg="8" :md="9" :sm="24">
+                <a-form-item label="消费金额">
+                  <a-input placeholder="请输入" style="width: 47%;" v-decorator="['startMon']" />
+                  <span class="query-group-split-cust"></span>
+                  <a-input placeholder="请输入" style="width: 47%;" v-decorator="['endMon']" />
+                </a-form-item>
+              </a-col>
+            </template>
+
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-col :md="6" :sm="24">
+                <a-button icon="search" @click="handleQueryOk">查询</a-button>
+                <a-button icon="reload" style="margin-left: 8px" @click="handleReset">重置</a-button>
+                <a @click="handleToggleSearch" style="margin-left: 8px">
+                  {{ toggleSearchStatus ? '收起' : '展开' }}
+                  <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
+                </a>
+              </a-col>
+            </span>
+          </a-row>
+        </a-form>
+      </div>
       <a-table
         ref="table"
         size="middle"
@@ -39,6 +97,7 @@ export default {
   name: 'consume',
   data() {
     return {
+      toggleSearchStatus: true,
       dataSource: [
         {
           id: '1',
@@ -48,7 +107,9 @@ export default {
           money: '13.50元',
           endMoney: '200.50元',
           remark: '梦飞手抓饼',
-          content: ''
+          department: '烟草管理处',
+          name: '王富贵',
+          phone: '18350740255'
         },
         {
           id: '2',
@@ -57,7 +118,9 @@ export default {
           time: '2021-08-24 12:01:02',
           money: '15.50元',
           endMoney: '10.50元',
-          remark: '江南第一鸡'
+          department: '审计处',
+          name: '王二蛋',
+          phone: '15910740100'
         }
       ],
       // 表头
@@ -75,6 +138,22 @@ export default {
           title: '卡号',
           align: 'center',
           dataIndex: 'cardNumber'
+        },
+
+        {
+          title: '部门',
+          align: 'center',
+          dataIndex: 'department'
+        },
+        {
+          title: '姓名',
+          align: 'center',
+          dataIndex: 'name'
+        },
+        {
+          title: '联系方式',
+          align: 'center',
+          dataIndex: 'phone'
         },
         {
           title: '地点',
@@ -95,22 +174,17 @@ export default {
           title: '余额',
           align: 'center',
           dataIndex: 'endMoney'
-        },
-        {
-          title: '消费商户',
-          dataIndex: 'remark',
-          align: 'center'
-        },
-        {
-          title: '备注',
-          dataIndex: 'content',
-          align: 'center'
         }
       ]
     }
   },
   computed: {},
-  methods: {}
+  methods: {
+    handleToggleSearch() {
+      if (this.toggleSearchStatus) this.toggleSearchStatus = false
+      else this.toggleSearchStatus = true
+    }
+  }
 }
 </script>
 

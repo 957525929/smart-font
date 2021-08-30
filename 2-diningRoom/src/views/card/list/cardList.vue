@@ -10,39 +10,52 @@
                 <a-input placeholder="请输入" v-decorator="['sampleNumber']"></a-input>
               </a-form-item>
             </a-col>
-            <!-- <a-col :xl="6" :lg="8" :md="9" :sm="24">
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="部门">
-                <a-input placeholder="请输入" v-decorator="['name']"></a-input>
+                <a-select allowClear v-decorator="['department']" placeholder="请选择">
+                  <a-select-option value="物流管理处">物流管理处</a-select-option>
+                  <a-select-option value="烟叶管理处">烟叶管理处</a-select-option>
+                  <a-select-option value="审计处">审计处</a-select-option>
+                </a-select>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="姓名">
                 <a-input placeholder="请输入" v-decorator="['name']"></a-input>
               </a-form-item>
-            </a-col> -->
-            <!-- <template v-if="toggleSearchStatus"> -->
-            <!-- <a-col :xl="6" :lg="8" :md="9" :sm="24">
+            </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="状态">
+                <a-select allowClear v-decorator="['status']" placeholder="请选择">
+                  <a-select-option value="正常">正常</a-select-option>
+                  <a-select-option value="注销">注销</a-select-option>
+                  <a-select-option value="挂失">挂失</a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
+            <template v-if="toggleSearchStatus">
+              <a-col :xl="6" :lg="8" :md="9" :sm="24">
                 <a-form-item label="联系方式">
                   <a-input placeholder="请输入" v-decorator="['number']" />
                 </a-form-item>
-              </a-col> -->
-            <a-col :xl="8" :lg="8" :md="9" :sm="24">
-              <a-form-item label="余额">
-                <a-input placeholder="请输入" style="width: 47%;" />
-                <span class="query-group-split-cust"></span>
-                <a-input placeholder="请输入" style="width: 47%;" />
-              </a-form-item>
-            </a-col>
-            <!-- </template> -->
+              </a-col>
+              <a-col :xl="8" :lg="8" :md="9" :sm="24">
+                <a-form-item label="余额">
+                  <a-input placeholder="请输入" style="width: 47%;" v-decorator="['startMon']" />
+                  <span class="query-group-split-cust"></span>
+                  <a-input placeholder="请输入" style="width: 47%;" v-decorator="['endMon']" />
+                </a-form-item>
+              </a-col>
+            </template>
 
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-col :md="6" :sm="24">
                 <a-button icon="search" @click="handleQueryOk">查询</a-button>
                 <a-button icon="reload" style="margin-left: 8px" @click="handleReset">重置</a-button>
-                <!-- <a @click="handleToggleSearch" style="margin-left: 8px">
+                <a @click="handleToggleSearch" style="margin-left: 8px">
                   {{ toggleSearchStatus ? '收起' : '展开' }}
                   <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
-                </a> -->
+                </a>
               </a-col>
             </span>
           </a-row>
@@ -81,16 +94,15 @@
             <a-dropdown>
               <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
               <a-menu slot="overlay">
-                <a-menu-item key="1" @click="add(record)">编辑</a-menu-item>
-                <a-menu-item key="2" v-if="!(record.id == '2')">
-                  <a-popconfirm title="确定注销吗?" @confirm="deletConfirm(record)" style="margin-left: 10%;"
-                    >注销</a-popconfirm
-                  >
+                <a-menu-item key="1" v-if="!(record.id == '2')" @click="add(record)">编辑</a-menu-item>
+                <a-menu-item key="2" v-if="!(record.id == '2')" @click="replaceCard(record, 'delete')">
+                  注销
                 </a-menu-item>
-                <a-menu-item key="3" v-if="record.id === '3'">
-                  <a-popconfirm title="是否确认补卡?" @confirm="replaceCard(record)" style="margin-left: 10%;"
-                    >补卡</a-popconfirm
-                  >
+                <a-menu-item key="3" v-if="record.id === '3'" @click="replaceCard(record, 'makeup')">
+                  补卡
+                </a-menu-item>
+                <a-menu-item key="4" v-if="record.id === '1'" @click="replaceCard(record)">
+                  挂失
                 </a-menu-item>
               </a-menu>
             </a-dropdown>
@@ -101,7 +113,7 @@
 
     <a-modal
       :title="this.modelType == 'add' ? '开卡' : '编辑'"
-      :width="800"
+      :width="700"
       :visible="visible"
       :confirmLoading="confirmLoading"
       @ok="handleOk"
@@ -109,7 +121,7 @@
       :okText="this.modelType == 'add' ? '增加' : '修改'"
       cancelText="关闭"
       wrapClassName="ant-modal-cust-warp"
-      style="top:5%;height: 85%;overflow-y: hidden"
+      style="top:5%;height: 75%;overflow-y: hidden"
     >
       <a-spin :spinning="confirmLoading">
         <a-form-model ref="form" v-bind="layout" :model="model">
@@ -124,13 +136,13 @@
             </a-select>
           </a-form-model-item>
           <a-form-model-item label="姓名" prop="name">
-            <a-input v-model="selectStatus.name" placeholder="请输入注册人姓名" />
+            <a-input v-model="selectStatus.name" placeholder="请输入姓名" />
           </a-form-model-item>
           <a-form-model-item label="联系方式" prop="phone">
             <a-input v-model="selectStatus.phone" placeholder="请输入联系方式" />
           </a-form-model-item>
           <a-form-model-item v-if="this.modelType == 'add'" label="存入金额" prop="money">
-            <a-input-number v-model="selectStatus.money" placeholder="存入金额" />
+            <a-input-number v-model="selectStatus.money" placeholder="存入金额" style="width:375px" />
           </a-form-model-item>
           <a-form-model-item v-if="this.modelType == 'add'" label="支付方式" prop="method">
             <a-select allowClear v-model="selectStatus.method" placeholder="请选择支付方式 ">
@@ -141,6 +153,30 @@
           </a-form-model-item>
         </a-form-model>
       </a-spin>
+    </a-modal>
+
+    <a-modal
+      :title="this.deleteIndex == 'delete' ? '注销' : this.deleteIndex == 'makeup' ? '补卡' : '挂失'"
+      :visible="visible1"
+      :confirm-loading="confirmLoading"
+      @ok="handleOk1"
+      @cancel="handleCancel"
+      :width="600"
+    >
+      <a-form-model ref="form" v-bind="layout" :model="model">
+        <a-form-model-item label="卡号" prop="card">
+          <a-input allowClear v-model="search.card" placeholder="请填写卡号" disable />
+        </a-form-model-item>
+        <a-form-model-item label="注销原因" prop="deleteReason" v-show="this.deleteIndex == 'delete'">
+          <a-input allowClear v-model="search.deleteReason" placeholder="请填写注销原因" disable />
+        </a-form-model-item>
+        <a-form-model-item label="挂失原因" prop="reportReason" v-show="this.deleteIndex == 'record'">
+          <a-input allowClear v-model="search.reportReason" placeholder="请填写挂失原因" disable />
+        </a-form-model-item>
+        <a-form-model-item label="补卡原因" prop="makeUpReason" v-show="this.deleteIndex == 'makeup'">
+          <a-input allowClear v-model="search.makeUpReason" placeholder="请填写补卡原因" disable />
+        </a-form-model-item>
+      </a-form-model>
     </a-modal>
   </div>
 </template>
@@ -163,6 +199,11 @@ export default {
       endDate: moment().format('YYYY-MM-DD'),
       description: '采购入库',
       modelType: '',
+      deleteIndex: '',
+      makeupIndex: '',
+      search: {
+        department: ''
+      },
       dataSource: [
         {
           id: '1',
@@ -249,6 +290,7 @@ export default {
 
       title: '开卡',
       visible: false,
+      visible1: false,
       model: {
         time: moment()
       },
@@ -285,8 +327,13 @@ export default {
       e.status = '注销'
       this.$message.success('注销成功')
     },
-    replaceCard(e) {
-      e.status = '正常'
+    replaceCard(record, del) {
+      this.visible1 = true
+      this.search = record
+      // e.status = '正常'
+      this.deleteIndex = del == 'delete' ? 'delete' : del == 'makeup' ? 'makeup' : 'record'
+      console.log(record, del)
+      console.log(this.deleteIndex)
     },
     handleReset() {
       this.form1.resetFields() //重置基本信息
@@ -313,6 +360,7 @@ export default {
     close() {
       this.$emit('close')
       this.visible = false
+      this.visible1 = false
     },
     handleOk() {
       const that = this
@@ -343,6 +391,11 @@ export default {
           return false
         }
       })
+    },
+    handleOk1() {
+      const that = this
+      this.search.status = this.deleteIndex == 'delete' ? '注销' : this.deleteIndex == 'makeup' ? '正常' : '挂失'
+      that.close()
     },
     handleCancel() {
       this.close()
