@@ -25,13 +25,25 @@
 			</view>
 			<view class="margin-top-xs">{{ cardData.cardID }}</view>
 			<view class="margin-top-sm text-xs">可用余额(元)</view>
-			<view class="card-money">
+			<view class="flex align-center justify-between">
+				<view class="card-money">
+					<view class="text-xxl text-bold">{{ cardData.money }}</view>
+					<view class="margin-left text-bold text-green" @tap="refresh">
+						<text class="cuIcon-refresh"></text>
+					</view>
+				</view>
+				<view class="text-bold text-blue" @tap="recharge">
+					<span>充值</span>
+					<text class="cuIcon-recharge margin-left-xs"></text>
+				</view>
+			</view>
+			<!-- <view class="card-money">
 				<view class="text-xxl text-bold">{{ cardData.money }}</view>
 				<view class="margin-left text-bold text-green" @tap="refresh">
 					<text class="cuIcon-refresh"></text>
 				</view>
 			</view>
-			<view class="margin-top-sm text-bold text-blue" @tap="recharge">充值</view>
+			<view class="margin-top-sm text-bold text-blue" @tap="recharge">充值</view> -->
 		</view>
 
 		<!-- 记录 -->
@@ -98,8 +110,8 @@
 								:class="item.status == '成功' ? 'text-green':item.status == '失败' ? 'text-red': item.status == '支付中' ? 'text-orange':'text-black'">
 								{{ item.status }}
 							</view>
-							<view v-if="item.status == '支付中'" class="text-blue text-sm text-bold">查询</view>
-							<view v-if="item.status == '未支付'" class="text-blue text-sm text-bold">重新支付</view>
+							<view v-if="item.status == '支付中'" class="text-blue text-sm">查询</view>
+							<view v-if="item.status == '未支付'" class="text-blue text-sm">重新支付</view>
 						</view>
 					</view>
 				</view>
@@ -107,7 +119,7 @@
 		</view>
 		
 		<!-- 支付中模态框 -->
-		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
+<!-- 		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
 					<view class="content">
@@ -123,12 +135,12 @@
 					</view>
 				</view>
 				<view class="cu-bar bg-white justify-center">
-					<!-- <view class="action">
+					<view class="action">
 						<button class="cu-btn bg-blue" @tap="call">联系客服</button>
-					</view> -->
+					</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 		
 		<!-- 重新支付模态框 -->
 		<view class="cu-modal" :class="payModalName=='payDialogModal'?'show':''">
@@ -280,8 +292,13 @@
 					this.payModalName = 'payDialogModal'
 					this.payRecord = item.recharge
 				} else if (item.status == '支付中') {
-					this.modalName = 'DialogModal'
+					// this.modalName = 'DialogModal'
 					// console.log('查看支付状态')
+					uni.showToast({
+						title: '查询成功',
+						icon: 'none',
+						duration: 2000
+					})
 				}
 			},
 			
