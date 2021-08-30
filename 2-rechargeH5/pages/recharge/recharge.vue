@@ -6,16 +6,16 @@
 		</cu-custom>
 
 		<view class="cu-form-group">
-			<view class="title">姓名</view>
-			<view>{{ cardData.name }}</view>
-		</view>
-
-		<view class="cu-form-group">
-			<view class="title">卡号</view>
+			<view class="title">餐卡号</view>
 			<view class="flex align-center">
 				<input placeholder="请输入要充值的餐卡号" name="input" v-model="cardData.cardID" @blur="changeName"></input>
 				<text class="cuIcon-edit text-gray"></text>
 			</view>
+		</view>
+		
+		<view class="cu-form-group">
+			<view class="title">姓名</view>
+			<view>{{ cardData.name }}</view>
 		</view>
 
 		<view class="cu-form-group">

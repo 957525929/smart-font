@@ -7,13 +7,13 @@
 
 		<view class="cu-list menu sm-border card-menu margin-top">
 			<view class="cu-form-group">
-				<view class="title">姓名</view>
-				<view>{{ cardData.name }}</view>
+				<view class="title">餐卡号</view>
+				<view>{{ cardData.cardID }}</view>
 			</view>
 			
 			<view class="cu-form-group">
-				<view class="title">餐卡号</view>
-				<view>{{ cardData.cardID }}</view>
+				<view class="title">姓名</view>
+				<view>{{ cardData.name }}</view>
 			</view>
 			
 			<view class="cu-form-group">

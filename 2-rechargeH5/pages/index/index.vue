@@ -5,7 +5,7 @@
 				<image src="/static/workplace/banner.png" mode="widthFix" class='response banner-back'></image>
 				<view class="banner-title">
 					<view>
-						食堂餐卡信息
+						食堂餐卡充值
 					</view>
 					<image class="img" src="/static/logo.png" mode="widthFix" style="width: 10vh"></image>
 				</view>
