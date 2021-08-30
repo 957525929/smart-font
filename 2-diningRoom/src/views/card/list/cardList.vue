@@ -136,7 +136,11 @@
             </a-select>
           </a-form-model-item>
           <a-form-model-item label="姓名" prop="name">
-            <a-input v-model="selectStatus.name" placeholder="请输入姓名" />
+            <a-select allowClear v-model="selectStatus.name" placeholder="请选择姓名" @change="handleChange">
+              <a-select-option value="王富贵">王富贵</a-select-option>
+              <a-select-option value="李翠花">李翠花</a-select-option>
+              <a-select-option value="王二蛋">王二蛋</a-select-option>
+            </a-select>
           </a-form-model-item>
           <a-form-model-item label="联系方式" prop="phone">
             <a-input v-model="selectStatus.phone" placeholder="请输入联系方式" />
@@ -391,6 +395,9 @@ export default {
           return false
         }
       })
+    },
+    handleChange(value) {
+      console.log(value)
     },
     handleOk1() {
       const that = this
