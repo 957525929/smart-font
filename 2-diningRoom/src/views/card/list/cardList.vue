@@ -90,9 +90,13 @@
           </span>
           <span slot="action" slot-scope="text, record">
             <router-link :to="{ name: 'card-list-detail', params: record }">查看记录</router-link>
-            <a-divider type="vertical" />
-            <a-dropdown>
-              <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
+            <a-divider type="vertical" v-if="!(record.id == '2')" />
+            <a v-if="!(record.id == '2')" @click="replaceCard(record, 'delete')">注销</a>
+            <a-divider type="vertical" v-if="!(record.id == '2')" />
+            <a v-if="record.id === '3'" @click="replaceCard(record, 'makeup')">补卡</a>
+            <a v-if="record.id === '1'" @click="replaceCard(record)">挂失</a>
+            <!-- <a-dropdown>
+              <a class="ant-dropdown-link">更多 <a-icon type="down" /> 注销</a>
               <a-menu slot="overlay">
                 <a-menu-item key="1" v-if="!(record.id == '2')" @click="add(record)">编辑</a-menu-item>
                 <a-menu-item key="2" v-if="!(record.id == '2')" @click="replaceCard(record, 'delete')">
@@ -105,7 +109,7 @@
                   挂失
                 </a-menu-item>
               </a-menu>
-            </a-dropdown>
+            </a-dropdown> -->
           </span>
         </a-table>
       </div>

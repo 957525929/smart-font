@@ -59,7 +59,6 @@
               <a-col :md="6" :sm="24">
                 <a-button icon="search" @click="handleQueryOk">查询</a-button>
                 <a-button icon="reload" style="margin-left: 8px" @click="handleReset">重置</a-button>
-                <a-button icon="reload" style="margin-left: 8px" @click="update">更新状态</a-button>
                 <a @click="handleToggleSearch" style="margin-left: 8px">
                   {{ toggleSearchStatus ? '收起' : '展开' }}
                   <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
@@ -87,6 +86,7 @@
               status == '支付成功' ? 'green' : status == '未支付' ? 'cyan' : status == '支付失败' ? 'red' : 'geekblue'
             "
           >
+            <a-icon v-if="status == '支付中'" type="reload" @click="update" />
             {{ status }}
           </a-tag>
         </span>
