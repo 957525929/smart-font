@@ -86,9 +86,12 @@
               status == '支付成功' ? 'green' : status == '未支付' ? 'cyan' : status == '支付失败' ? 'red' : 'geekblue'
             "
           >
-            <a-icon v-if="status == '支付中'" type="reload" @click="update" />
             {{ status }}
           </a-tag>
+
+          <a-tooltip v-if="status == '支付中'" title="更新支付状态">
+            <a-icon type="reload" @click="update" />
+          </a-tooltip>
         </span>
         <span slot="action" slot-scope="text, record">
           <!-- <a v-if="record.id == '1'" @click="update(record)">查询</a> -->
@@ -107,6 +110,7 @@ export default {
   data() {
     return {
       toggleSearchStatus: true,
+      seen: false,
       dataSource: [
         {
           id: '1',
