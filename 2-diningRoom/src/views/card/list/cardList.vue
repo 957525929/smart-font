@@ -196,6 +196,7 @@ export default {
   },
   data() {
     return {
+      telephone: ['16250740952', '18350740255', '15910740100'],
       form1: this.$form.createForm(this),
       startDate: moment()
         .subtract(1, 'weeks')
@@ -398,14 +399,16 @@ export default {
     },
     handleChange(value) {
       console.log(value)
-      if ((value = '李翠花')) {
-        this.selectStatus.phone = '16250740952'
-      }
-      if ((value = '王富贵')) {
-        this.selectStatus.phone = '18350740255'
-      }
-      if ((value = '王二蛋')) {
-        this.selectStatus.phone = '15910740100'
+
+      this.model.phone = ''
+      if (value == '李翠花') {
+        this.model.phone = '16250740952'
+      } else if (value == '王富贵') {
+        this.model.phone = '18350740255'
+        console.log('1111')
+      } else if (value == '王二蛋') {
+        this.model.phone = '15910740100'
+        console.log('222')
       }
     },
     handleOk1() {
