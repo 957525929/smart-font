@@ -59,6 +59,7 @@
               <a-col :md="6" :sm="24">
                 <a-button icon="search" @click="handleQueryOk">查询</a-button>
                 <a-button icon="reload" style="margin-left: 8px" @click="handleReset">重置</a-button>
+                <a-button style="margin-left: 8px" icon="download">导出</a-button>
                 <a @click="handleToggleSearch" style="margin-left: 8px">
                   {{ toggleSearchStatus ? '收起' : '展开' }}
                   <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
@@ -117,8 +118,8 @@ export default {
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMd'),
           place: '食堂app',
           time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '18:01:02',
-          money: '200.00元',
-          endMoney: '213.50元',
+          money: '200.00',
+          endMoney: '213.50',
           remark: '支付宝支付',
           status: '支付中',
           department: '烟草管理处',
@@ -130,8 +131,8 @@ export default {
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
           place: '财务处',
           time: formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '14:01:02',
-          money: '500.00元',
-          endMoney: '1000.50元',
+          money: '500.00',
+          endMoney: '1000.50',
           remark: '公司统一餐补',
           status: '未支付',
           department: '烟叶管理处',
@@ -143,8 +144,8 @@ export default {
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
           place: '食堂app',
           time: formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '10:01:02',
-          money: '50.00元',
-          endMoney: '10.50元',
+          money: '50.00',
+          endMoney: '10.50',
           remark: '微信支付',
           status: '支付失败',
           department: '审计处',
@@ -156,8 +157,8 @@ export default {
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 5 * 24 * 3600 * 1000, 'yyyyMMd'),
           place: '食堂app',
           time: formatDate(new Date().getTime() - 5 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '13:01:02',
-          money: '100.00元',
-          endMoney: '105.50元',
+          money: '100.00',
+          endMoney: '105.50',
           remark: '支付宝支付',
           status: '支付成功',
           department: '审计处',
@@ -208,12 +209,12 @@ export default {
           dataIndex: 'time'
         },
         {
-          title: '充值金额',
+          title: '充值金额(元)',
           align: 'center',
           dataIndex: 'money'
         },
         {
-          title: '余额',
+          title: '余额(元)',
           align: 'center',
           dataIndex: 'endMoney'
         },

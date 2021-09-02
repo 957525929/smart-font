@@ -59,6 +59,7 @@
               <a-col :md="6" :sm="24">
                 <a-button icon="search" @click="handleQueryOk">查询</a-button>
                 <a-button icon="reload" style="margin-left: 8px" @click="handleReset">重置</a-button>
+                <a-button style="margin-left: 8px" icon="download">导出</a-button>
                 <a @click="handleToggleSearch" style="margin-left: 8px">
                   {{ toggleSearchStatus ? '收起' : '展开' }}
                   <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
@@ -117,9 +118,9 @@ export default {
           id: '1',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
           time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15:22:32',
-          money: '1000.50元',
+          money: '1000.50',
           method: '银行卡转账',
-          endMoney: '0元',
+          endMoney: '0',
           remark: '离职',
           status: '退款成功',
           content: '',
@@ -132,9 +133,9 @@ export default {
           id: '2',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 6 * 24 * 3600 * 1000, 'yyyyMMd'),
           time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15:22:32',
-          money: '100.50元',
+          money: '100.50',
           method: '现金支付',
-          endMoney: '0元',
+          endMoney: '0',
           remark: '离职',
           status: '处理中',
           content: '',
@@ -147,9 +148,9 @@ export default {
           id: '3',
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 7 * 24 * 3600 * 1000, 'yyyyMMd'),
           time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15:22:32',
-          money: '500.50元',
+          money: '500.50',
           method: '银行卡转账',
-          endMoney: '0元',
+          endMoney: '0',
           remark: '离职',
           status: '退款失败',
           content: '未提供有效证明',
@@ -201,7 +202,7 @@ export default {
           dataIndex: 'time'
         },
         {
-          title: '退款金额',
+          title: '退款金额(元)',
           align: 'center',
           dataIndex: 'money'
         },
@@ -211,7 +212,7 @@ export default {
           dataIndex: 'method'
         },
         {
-          title: '余额',
+          title: '余额(元)',
           align: 'center',
           dataIndex: 'endMoney'
         },

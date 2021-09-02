@@ -29,7 +29,7 @@
       </a-col>
       <a-col :xl="4" :lg="8" :md="9" :sm="24">
         <div class="detail-top">
-          <div>余额：</div>
+          <div>余额(元)：</div>
           <div>{{ detailsData.balance }}</div>
         </div>
       </a-col>
@@ -111,8 +111,8 @@ export default {
           id: '1',
           place: '一号食堂',
           time: '2021-08-25 18:01:02',
-          money: '13.50元',
-          enrdMoney: '200.50元',
+          money: '13.50',
+          enrdMoney: '200.50',
           remark: '梦飞手抓饼'
         }
       ],
@@ -137,7 +137,7 @@ export default {
           dataIndex: 'time'
         },
         {
-          title: '消费金额',
+          title: '消费金额(元)',
           align: 'center',
           dataIndex: 'money'
         },
@@ -152,8 +152,8 @@ export default {
           id: '1',
           place: '食堂app',
           time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '18:01:02',
-          money: '200.00元',
-          enrdMoney: '213.50元',
+          money: '200.00',
+          enrdMoney: '213.50',
           remark: '支付宝'
         }
       ],
@@ -178,12 +178,12 @@ export default {
           dataIndex: 'time'
         },
         {
-          title: '充值金额',
+          title: '充值金额(元)',
           align: 'center',
           dataIndex: 'money'
         },
         {
-          title: '余额',
+          title: '余额(元)',
           align: 'center',
           dataIndex: 'enrdMoney'
         },
@@ -214,7 +214,7 @@ export default {
           dataIndex: 'time'
         },
         {
-          title: '退款金额',
+          title: '退款金额(元)',
           align: 'center',
           dataIndex: 'money'
         },

@@ -269,6 +269,18 @@ export const mockMenuData = {
             id: '111'
           },
           {
+            path: '/card/recharge/rechargePage',
+            component: 'card/recharge/recharge',
+            route: '1',
+            meta: {
+              keepAlive: false,
+              internalOrExternal: false,
+              title: '充值退款'
+            },
+            name: 'card-recharge-rechargePage',
+            id: '136'
+          },
+          {
             path: '/card/list/detail',
             component: 'card/list/detail',
             route: '1',

@@ -95,6 +95,11 @@
             <a-divider type="vertical" v-if="!(record.id == '2')" />
             <a v-if="record.id === '3'" @click="replaceCard(record, 'makeup')">补卡</a>
             <a v-if="record.id === '1'" @click="replaceCard(record)">挂失</a>
+            <a-divider type="vertical" />
+            <a-popconfirm title="确认删除吗?" ok-text="确认" cancel-text="取消" @confirm="confirm" @cancel="cancel">
+              <a>删除</a>
+            </a-popconfirm>
+
             <!-- <a-dropdown>
               <a class="ant-dropdown-link">更多 <a-icon type="down" /> 注销</a>
               <a-menu slot="overlay">
@@ -149,7 +154,7 @@
           <a-form-model-item label="联系方式" prop="phone">
             <a-input v-model="selectStatus.phone" placeholder="请输入联系方式" />
           </a-form-model-item>
-          <a-form-model-item v-if="this.modelType == 'add'" label="存入金额" prop="money">
+          <!-- <a-form-model-item v-if="this.modelType == 'add'" label="存入金额" prop="money">
             <a-input-number v-model="selectStatus.money" placeholder="存入金额" style="width:375px" />
           </a-form-model-item>
           <a-form-model-item v-if="this.modelType == 'add'" label="支付方式" prop="method">
@@ -158,7 +163,7 @@
               <a-select-option value="支付宝">支付宝</a-select-option>
               <a-select-option value="微信">微信</a-select-option>
             </a-select>
-          </a-form-model-item>
+          </a-form-model-item> -->
         </a-form-model>
       </a-spin>
     </a-modal>
@@ -173,16 +178,29 @@
     >
       <a-form-model ref="form" v-bind="layout" :model="model">
         <a-form-model-item label="卡号" prop="card">
-          <a-input allowClear v-model="search.card" placeholder="请填写卡号" disable />
+          <a-input allowClear v-model="search.card" placeholder="请填写卡号" />
         </a-form-model-item>
         <a-form-model-item label="注销原因" prop="deleteReason" v-show="this.deleteIndex == 'delete'">
-          <a-input allowClear v-model="search.deleteReason" placeholder="请填写注销原因" disable />
+          <a-select allowClear v-model="search.deleteReason" placeholder="请选择注销原因" @change="handlerChange">
+            <a-select-option value="调岗">调岗</a-select-option>
+            <a-select-option value="离职">离职</a-select-option>
+            <a-select-option value="其他">其他</a-select-option>
+          </a-select>
         </a-form-model-item>
-        <a-form-model-item label="挂失原因" prop="reportReason" v-show="this.deleteIndex == 'record'">
-          <a-input allowClear v-model="search.reportReason" placeholder="请填写挂失原因" disable />
+        <a-form-model-item label="挂失原因" prop="loseReason" v-show="this.deleteIndex == 'record'">
+          <a-select allowClear v-model="search.loseReason" placeholder="请选择挂失原因">
+            <a-select-option value="丢失">丢失</a-select-option>
+            <a-select-option value="其他">其他</a-select-option>
+          </a-select>
         </a-form-model-item>
         <a-form-model-item label="补卡原因" prop="makeUpReason" v-show="this.deleteIndex == 'makeup'">
-          <a-input allowClear v-model="search.makeUpReason" placeholder="请填写补卡原因" disable />
+          <a-select allowClear v-model="search.makeUpReason" placeholder="请选择补卡原因">
+            <a-select-option value="丢失">丢失</a-select-option>
+            <a-select-option value="其他">其他</a-select-option>
+          </a-select>
+        </a-form-model-item>
+        <a-form-model-item label="备注" prop="content" v-show="handlerKey == '1'">
+          <a-textarea placeholder="请输入具体原因" :rows="5" />
         </a-form-model-item>
       </a-form-model>
     </a-modal>
@@ -211,8 +229,12 @@ export default {
       deleteIndex: '',
       makeupIndex: '',
       search: {
-        department: ''
+        department: '',
+        makeUpReason: '',
+        loseReason: '',
+        deleteReason: ''
       },
+      handlerKey: '',
       dataSource: [
         {
           id: '1',
@@ -220,7 +242,7 @@ export default {
           department: '烟草管理处',
           name: '王富贵',
           phone: '18350740255',
-          balance: '200.50元',
+          balance: '200.50',
           status: '正常',
           totalMoney: '100'
         },
@@ -230,7 +252,7 @@ export default {
           department: '烟叶管理处',
           name: '李翠花',
           phone: '16250740952',
-          balance: '1000.50元',
+          balance: '1000.50',
           status: '注销',
           totalMoney: '100'
         },
@@ -240,7 +262,7 @@ export default {
           department: '审计处',
           name: '王二蛋',
           phone: '15910740100',
-          balance: '10.50元',
+          balance: '10.50',
           status: '挂失',
           totalMoney: '100'
         }
@@ -277,7 +299,7 @@ export default {
           dataIndex: 'phone'
         },
         {
-          title: '余额',
+          title: '余额(元)',
           align: 'center',
           dataIndex: 'balance'
         },
@@ -327,6 +349,13 @@ export default {
     }
   },
   methods: {
+    confirm(e) {
+      console.log(e)
+      this.$message.success('删除成功')
+    },
+    cancel(e) {
+      console.log(e)
+    },
     handleToggleSearch() {
       if (this.toggleSearchStatus) this.toggleSearchStatus = false
       else this.toggleSearchStatus = true
@@ -419,9 +448,18 @@ export default {
       const that = this
       this.search.status = this.deleteIndex == 'delete' ? '注销' : this.deleteIndex == 'makeup' ? '正常' : '挂失'
       that.close()
+      this.search = {}
+      this.handlerKey = ''
     },
     handleCancel() {
-      this.close()
+      this.close(), (this.handlerKey = '')
+      this.search = {}
+    },
+    handlerChange(value) {
+      console.log(value)
+      if (value == '其他') {
+        this.handlerKey = 1
+      }
     }
   }
 }

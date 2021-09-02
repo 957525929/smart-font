@@ -50,6 +50,7 @@
               <a-col :md="6" :sm="24">
                 <a-button icon="search" @click="handleQueryOk">查询</a-button>
                 <a-button icon="reload" style="margin-left: 8px" @click="handleReset">重置</a-button>
+                <a-button style="margin-left: 8px" icon="download">导出</a-button>
                 <a @click="handleToggleSearch" style="margin-left: 8px">
                   {{ toggleSearchStatus ? '收起' : '展开' }}
                   <a-icon :type="toggleSearchStatus ? 'up' : 'down'" />
@@ -104,8 +105,8 @@ export default {
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMd'),
           place: '一号食堂',
           time: '2021-08-25 18:01:02',
-          money: '13.50元',
-          endMoney: '200.50元',
+          money: '13.50',
+          endMoney: '200.50',
           remark: '梦飞手抓饼',
           department: '烟草管理处',
           name: '王富贵',
@@ -116,8 +117,8 @@ export default {
           cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
           place: '二号食堂',
           time: '2021-08-24 12:01:02',
-          money: '15.50元',
-          endMoney: '10.50元',
+          money: '15.50',
+          endMoney: '10.50',
           department: '审计处',
           name: '王二蛋',
           phone: '15910740100'
@@ -166,7 +167,7 @@ export default {
           dataIndex: 'time'
         },
         {
-          title: '消费金额',
+          title: '消费金额(元)',
           align: 'center',
           dataIndex: 'money'
         },
