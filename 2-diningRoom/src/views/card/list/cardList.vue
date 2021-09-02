@@ -181,20 +181,20 @@
           <a-input allowClear v-model="search.card" placeholder="请填写卡号" />
         </a-form-model-item>
         <a-form-model-item label="注销原因" prop="deleteReason" v-show="this.deleteIndex == 'delete'">
-          <a-select allowClear v-model="search.deleteReason" placeholder="请选择注销原因" @change="handlerChange">
+          <a-select v-model="search.deleteReason" placeholder="请选择注销原因" @change="handlerChange">
             <a-select-option value="调岗">调岗</a-select-option>
             <a-select-option value="离职">离职</a-select-option>
             <a-select-option value="其他">其他</a-select-option>
           </a-select>
         </a-form-model-item>
         <a-form-model-item label="挂失原因" prop="loseReason" v-show="this.deleteIndex == 'record'">
-          <a-select allowClear v-model="search.loseReason" placeholder="请选择挂失原因">
+          <a-select v-model="search.loseReason" placeholder="请选择挂失原因" @change="handlerChange">
             <a-select-option value="丢失">丢失</a-select-option>
             <a-select-option value="其他">其他</a-select-option>
           </a-select>
         </a-form-model-item>
         <a-form-model-item label="补卡原因" prop="makeUpReason" v-show="this.deleteIndex == 'makeup'">
-          <a-select allowClear v-model="search.makeUpReason" placeholder="请选择补卡原因">
+          <a-select v-model="search.makeUpReason" placeholder="请选择补卡原因" @change="handlerChange">
             <a-select-option value="丢失">丢失</a-select-option>
             <a-select-option value="其他">其他</a-select-option>
           </a-select>
@@ -450,10 +450,16 @@ export default {
       that.close()
       this.search = {}
       this.handlerKey = ''
+      this.search.loseReason = ''
+      this.search.deleteReason = ''
+      this.search.makeUpReason = ''
     },
     handleCancel() {
-      this.close(), (this.handlerKey = '')
-      this.search = {}
+      this.close()
+      this.handlerKey = ''
+      this.search.loseReason = ''
+      this.search.deleteReason = ''
+      this.search.makeUpReason = ''
     },
     handlerChange(value) {
       console.log(value)
