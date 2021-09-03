@@ -33,12 +33,18 @@
           <div>{{ detailsData.balance }}</div>
         </div>
       </a-col>
-      <a-col :xl="4" :lg="8" :md="9" :sm="24">
+      <a-col :xl="12" :lg="8" :md="9" :sm="24">
         <div class="detail-top">
           <div>状态：</div>
           <a-tag :color="status == '正常' ? 'green' : status == '挂失' ? 'red' : 'geekblue'">
             {{ detailsData.status }}
           </a-tag>
+        </div>
+      </a-col>
+      <a-col :xl="12" :lg="8" :md="9" :sm="24">
+        <div class="detail-top">
+          <div>创建时间：</div>
+          <div>{{ detailsData.createTime }}</div>
         </div>
       </a-col>
     </a-row>
@@ -51,6 +57,28 @@
 
     <a-tabs>
       <a-tab-pane key="1" tab="消费记录">
+        <a-form layout="inline">
+          <a-row>
+            <a-col :span="17"> </a-col>
+            <a-col :span="7" style="margin-bottom:10px">
+              <a-form-item label="消费时间">
+                <a-date-picker
+                  format="YYYY-MM-DD"
+                  placeholder="开始时间"
+                  v-decorator="['startTime']"
+                  :default-value="moment(current_start_date)"
+                />
+                <span class="query-group-split-cust"></span>
+                <a-date-picker
+                  format="YYYY-MM-DD"
+                  placeholder="结束时间"
+                  v-decorator="['completionTime']"
+                  :default-value="moment(current_stop_date)"
+                />
+              </a-form-item>
+            </a-col>
+          </a-row>
+        </a-form>
         <a-table
           size="middle"
           bordered
@@ -65,6 +93,28 @@
         </a-table>
       </a-tab-pane>
       <a-tab-pane key="2" tab="充值记录" force-render>
+        <a-form layout="inline">
+          <a-row>
+            <a-col :span="17"> </a-col>
+            <a-col :span="7" style="margin-bottom:10px">
+              <a-form-item label="充值时间">
+                <a-date-picker
+                  format="YYYY-MM-DD"
+                  placeholder="开始时间"
+                  v-decorator="['startTime']"
+                  :default-value="moment(current_start_date)"
+                />
+                <span class="query-group-split-cust"></span>
+                <a-date-picker
+                  format="YYYY-MM-DD"
+                  placeholder="结束时间"
+                  v-decorator="['completionTime']"
+                  :default-value="moment(current_stop_date)"
+                />
+              </a-form-item>
+            </a-col>
+          </a-row>
+        </a-form>
         <a-table
           size="middle"
           bordered
@@ -79,6 +129,28 @@
         </a-table>
       </a-tab-pane>
       <a-tab-pane key="3" tab="退款记录">
+        <a-form layout="inline">
+          <a-row>
+            <a-col :span="17"> </a-col>
+            <a-col :span="7" style="margin-bottom:10px">
+              <a-form-item label="退款时间">
+                <a-date-picker
+                  format="YYYY-MM-DD"
+                  placeholder="开始时间"
+                  v-decorator="['startTime']"
+                  :default-value="moment(current_start_date)"
+                />
+                <span class="query-group-split-cust"></span>
+                <a-date-picker
+                  format="YYYY-MM-DD"
+                  placeholder="结束时间"
+                  v-decorator="['completionTime']"
+                  :default-value="moment(current_stop_date)"
+                />
+              </a-form-item>
+            </a-col>
+          </a-row>
+        </a-form>
         <a-table
           size="middle"
           bordered
@@ -97,6 +169,7 @@
 
 <script>
 import { formatDate } from '../../../utils/util'
+import moment from 'moment'
 export default {
   name: 'ouputDetails',
 
@@ -105,12 +178,15 @@ export default {
   },
   data() {
     return {
+      moment,
+      current_start_date: formatDate(new Date().getTime() - 30 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
       detailsData: this.$route.params,
       dataSource: [
         {
           id: '1',
           place: '一号食堂',
-          time: '2021-08-25 18:01:02',
+          time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '18:01:02',
           money: '13.50',
           enrdMoney: '200.50',
           remark: '梦飞手抓饼'
@@ -132,7 +208,7 @@ export default {
           dataIndex: 'place'
         },
         {
-          title: '时间',
+          title: '消费时间',
           align: 'center',
           dataIndex: 'time'
         },

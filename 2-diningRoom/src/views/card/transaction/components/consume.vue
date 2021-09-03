@@ -29,11 +29,22 @@
                   <a-input placeholder="请输入" v-decorator="['number']" />
                 </a-form-item>
               </a-col>
+
               <a-col :xl="8" :lg="8" :md="9" :sm="24">
                 <a-form-item label="消费时间">
-                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['startTime']" />
+                  <a-date-picker
+                    format="YYYY-MM-DD"
+                    placeholder="开始时间"
+                    v-decorator="['startTime']"
+                    :default-value="moment(current_start_date)"
+                  />
                   <span class="query-group-split-cust"></span>
-                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['endTime']" />
+                  <a-date-picker
+                    format="YYYY-MM-DD"
+                    placeholder="结束时间"
+                    v-decorator="['completionTime']"
+                    :default-value="moment(current_stop_date)"
+                  />
                 </a-form-item>
               </a-col>
 
@@ -94,17 +105,21 @@
 
 <script>
 import { formatDate } from '../../../../utils/util'
+import moment from 'moment'
 export default {
   name: 'consume',
   data() {
     return {
+      moment,
+      current_start_date: formatDate(new Date().getTime() - 30 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
       toggleSearchStatus: true,
       dataSource: [
         {
           id: '1',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMd'),
+          cardNumber: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMdd'),
           place: '一号食堂',
-          time: '2021-08-25 18:01:02',
+          time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '18:01:02',
           money: '13.50',
           endMoney: '200.50',
           remark: '梦飞手抓饼',
@@ -114,9 +129,9 @@ export default {
         },
         {
           id: '2',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
+          cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMdd'),
           place: '二号食堂',
-          time: '2021-08-24 12:01:02',
+          time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '12:01:02',
           money: '15.50',
           endMoney: '10.50',
           department: '审计处',

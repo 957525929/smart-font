@@ -4,7 +4,7 @@
       <label slot="label">部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;门</label>
       <a-select
         v-decorator="['department', { rules: [{ required: true, message: '请选择所在部门' }] }]"
-        placeholder="请选择"
+        placeholder="请选择部门"
         v-model="form.department"
       >
         <a-select-option value="物流管理处">
@@ -64,6 +64,10 @@
           银行卡
         </a-select-option>
       </a-select>
+    </a-form-item>
+    <a-form-item v-show="!this.money && this.key">
+      <label slot="label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</label>
+      <a-textarea placeholder="请输入具体原因" :rows="5" />
     </a-form-item>
     <a-form-item v-show="this.money && this.key">
       <label slot="label">{{ money }}</label>

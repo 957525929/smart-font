@@ -6,11 +6,6 @@
         <a-form layout="inline" :form="form1">
           <a-row :gutter="24">
             <a-col :xl="6" :lg="8" :md="9" :sm="24">
-              <a-form-item label="卡号">
-                <a-input placeholder="请输入" v-decorator="['sampleNumber']"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="8" :md="9" :sm="24">
               <a-form-item label="部门">
                 <a-select allowClear v-decorator="['department']" placeholder="请选择">
                   <a-select-option value="物流管理处">物流管理处</a-select-option>
@@ -33,6 +28,11 @@
                 </a-select>
               </a-form-item>
             </a-col>
+            <a-col :xl="6" :lg="8" :md="9" :sm="24">
+              <a-form-item label="卡号">
+                <a-input placeholder="请输入" v-decorator="['sampleNumber']"></a-input>
+              </a-form-item>
+            </a-col>
             <template v-if="toggleSearchStatus">
               <a-col :xl="6" :lg="8" :md="9" :sm="24">
                 <a-form-item label="联系方式">
@@ -40,10 +40,20 @@
                 </a-form-item>
               </a-col>
               <a-col :xl="8" :lg="8" :md="9" :sm="24">
-                <a-form-item label="余额">
-                  <a-input placeholder="请输入" style="width: 47%;" v-decorator="['startMon']" />
+                <a-form-item label="创建时间">
+                  <a-date-picker
+                    format="YYYY-MM-DD"
+                    placeholder="开始时间"
+                    v-decorator="['startTime']"
+                    :default-value="moment(current_start_date)"
+                  />
                   <span class="query-group-split-cust"></span>
-                  <a-input placeholder="请输入" style="width: 47%;" v-decorator="['endMon']" />
+                  <a-date-picker
+                    format="YYYY-MM-DD"
+                    placeholder="结束时间"
+                    v-decorator="['completionTime']"
+                    :default-value="moment(current_stop_date)"
+                  />
                 </a-form-item>
               </a-col>
             </template>
@@ -91,7 +101,16 @@
           <span slot="action" slot-scope="text, record">
             <router-link :to="{ name: 'card-list-detail', params: record }">查看记录</router-link>
             <a-divider type="vertical" v-if="!(record.id == '2')" />
-            <a v-if="!(record.id == '2')" @click="replaceCard(record, 'delete')">注销</a>
+            <a-popconfirm
+              :title="`卡内余额为￥${record.balance}元，确认注销吗？`"
+              ok-text="确认"
+              cancel-text="取消"
+              @confirm="replaceCard(record, 'delete')"
+              @cancel="cancel"
+            >
+              <a v-if="!(record.id == '2')">注销</a>
+            </a-popconfirm>
+
             <a-divider type="vertical" v-if="!(record.id == '2')" />
             <a v-if="record.id === '3'" @click="replaceCard(record, 'makeup')">补卡</a>
             <a v-if="record.id === '1'" @click="replaceCard(record)">挂失</a>
@@ -218,7 +237,9 @@ export default {
   },
   data() {
     return {
-      telephone: ['16250740952', '18350740255', '15910740100'],
+      moment,
+      current_start_date: formatDate(new Date().getTime() - 30 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
       form1: this.$form.createForm(this),
       startDate: moment()
         .subtract(1, 'weeks')
@@ -238,33 +259,36 @@ export default {
       dataSource: [
         {
           id: '1',
-          card: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMd'),
+          card: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMdd'),
           department: '烟草管理处',
           name: '王富贵',
           phone: '18350740255',
           balance: '200.50',
           status: '正常',
-          totalMoney: '100'
+          totalMoney: '100',
+          createTime: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15.21.16'
         },
         {
           id: '2',
-          card: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
+          card: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMdd'),
           department: '烟叶管理处',
           name: '李翠花',
           phone: '16250740952',
           balance: '1000.50',
           status: '注销',
-          totalMoney: '100'
+          totalMoney: '100',
+          createTime: formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '10.15.01'
         },
         {
           id: '3',
-          card: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
+          card: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMdd'),
           department: '审计处',
           name: '王二蛋',
           phone: '15910740100',
           balance: '10.50',
           status: '挂失',
-          totalMoney: '100'
+          totalMoney: '100',
+          createTime: formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15.36.36'
         }
       ],
       // 表头
@@ -308,6 +332,11 @@ export default {
           align: 'center',
           dataIndex: 'status',
           scopedSlots: { customRender: 'status' }
+        },
+        {
+          title: '创建时间',
+          align: 'center',
+          dataIndex: 'createTime'
         },
         {
           title: '操作',
@@ -388,7 +417,7 @@ export default {
       this.model = {
         number: 1,
         time: moment(),
-        card: 'KHID' + formatDate(new Date().getTime() - 1 * 24 * 3600 * 1000, 'yyyyMMd')
+        card: 'KHID' + formatDate(new Date().getTime() - 1 * 24 * 3600 * 1000, 'yyyyMMdd')
       }
       this.visible = true
       // console.log(record)
@@ -447,19 +476,32 @@ export default {
     handleOk1() {
       const that = this
       this.search.status = this.deleteIndex == 'delete' ? '注销' : this.deleteIndex == 'makeup' ? '正常' : '挂失'
-      that.close()
-      this.search = {}
       this.handlerKey = ''
-      this.search.loseReason = ''
-      this.search.deleteReason = ''
-      this.search.makeUpReason = ''
+      this.deleteIndex == 'delete'
+        ? (this.search.deleteReason = '')
+        : this.deleteIndex == 'makeup'
+        ? (this.search.makeUpReason = '')
+        : (this.search.loseReason = '')
+
+      that.close()
     },
     handleCancel() {
-      this.close()
       this.handlerKey = ''
-      this.search.loseReason = ''
-      this.search.deleteReason = ''
-      this.search.makeUpReason = ''
+      // if (this.deleteIndex == 'delete') {
+      //   this.search.deleteReason = ''
+      // }
+      // if (this.deleteIndex == 'record') {
+      //   this.search.loseReason = ''
+      // }
+      // if (this.deleteIndex == 'makeup') {
+      //   this.search.makeUpReason = ''
+      // }
+      this.deleteIndex == 'delete'
+        ? (this.search.deleteReason = '')
+        : this.deleteIndex == 'makeup'
+        ? (this.search.makeUpReason = '')
+        : (this.search.loseReason = '')
+      this.close()
     },
     handlerChange(value) {
       console.log(value)

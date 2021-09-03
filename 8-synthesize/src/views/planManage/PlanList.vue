@@ -15,10 +15,19 @@
 
       <!-- table区域-begin -->
       <div>
-        <a-table ref="table" size="middle" :model="data" bordered :columns="data.columns" :dataSource="data.dataSource" :loading="loading" :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }">
+        <a-table
+          ref="table"
+          size="middle"
+          :model="data"
+          bordered
+          :columns="data.columns"
+          :dataSource="data.dataSource"
+          :loading="loading"
+          :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+        >
           <a slot="planNameList" slot-scope="text" @click="showDetails(text), handleExportXls3(`${currentItem}`)">{{
-          text
-        }}</a>
+            text
+          }}</a>
 
           <!-- <span slot="action" slot-scope="text, record, index">
             <a @click="showDetails(record), gotoMenu(key)">详情</a> -->
@@ -41,13 +50,13 @@
           </span> -->
           <span slot="action" slot-scope="text, record">
             <template v-for="(i, index) in record.action">
-
               <template v-if="i.com === 'router-link'">
                 <router-link :key="i.tagName" :to="{ name: i.url }">{{ i.tagName }}</router-link>
               </template>
               <template v-else>
                 <a-dropdown :key="i.tagName">
-                  <a class="ant-dropdown-link">{{ i.tagName }}
+                  <a class="ant-dropdown-link"
+                    >{{ i.tagName }}
                     <a-icon type="down" />
                   </a>
                   <a-menu slot="overlay">
@@ -82,7 +91,7 @@
     <!-- table区域-end -->
 
     <!-- 表单区域 -->
-    <PlanListModal ref="modalForm" @ok="modalFormOk"> </PlanListModal>
+    <PlanListModal ref="modalForm"> </PlanListModal>
   </div>
 </template>
 
@@ -90,8 +99,8 @@
 import PlanListModal from './modules/PlanListModal'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import JEllipsis from '@/components/jeecg/JEllipsis'
-import { status, importment } from "@/utils/dataDictionary.js";
-import PageTemplate from '@/components/page/PageTemplate.vue';
+import { status, importment } from '@/utils/dataDictionary.js'
+import PageTemplate from '@/components/page/PageTemplate.vue'
 
 export default {
   name: 'PlanList',
@@ -106,7 +115,7 @@ export default {
       onSelect: (record, selected, selectedRows) => {
         this.currentPlanName = record.planName
         console.log(this.currentPlanName)
-      },
+      }
     }
     // const gotoMenu = (key) => {
     //   if (key == 4) {
@@ -131,9 +140,9 @@ export default {
           key: 'rowIndex',
           width: 90,
           align: 'center',
-          customRender: function (t, r, index) {
+          customRender: function(t, r, index) {
             return parseInt(index) + 1
-          },
+          }
         },
         {
           title: '计划名称',
@@ -141,7 +150,7 @@ export default {
           dataIndex: 'planName',
           width: 200,
           unhidden: true,
-          scopedSlots: { customRender: 'planNameList' },
+          scopedSlots: { customRender: 'planNameList' }
         },
         {
           title: '计划状态',
@@ -151,39 +160,39 @@ export default {
           unhidden: true,
           type: 'a-select',
           valueEnum: status,
-          scopedSlots: { customRender: 'customRenderStatus' },
+          scopedSlots: { customRender: 'customRenderStatus' }
         },
         {
           title: '创建时间',
           align: 'center',
           width: 100,
-          dataIndex: 'createTime',
+          dataIndex: 'createTime'
         },
         {
           title: '截止时间',
           align: 'center',
           width: 100,
-          dataIndex: 'deadline',
+          dataIndex: 'deadline'
         },
         {
           title: '开始时间',
           align: 'center',
           width: 100,
-          dataIndex: 'startTime',
+          dataIndex: 'startTime'
         },
         {
           title: '实际完成时间',
           align: 'center',
           width: 100,
-          dataIndex: 'completionTime',
+          dataIndex: 'completionTime'
         },
         {
           title: '操作',
           dataIndex: 'action',
           align: 'center',
           width: 180,
-          scopedSlots: { customRender: 'action' },
-        },
+          scopedSlots: { customRender: 'action' }
+        }
       ],
       dataSource: [
         {
@@ -194,13 +203,16 @@ export default {
           deadline: '2021-11-20',
           completionTime: '',
           content: '',
-          action: [{
-            tagName: "详情",
-            url: "planManage-TaskList03",
-            com: "router-link"
-          }, {
-            tagName: "更多",
-          }]
+          action: [
+            {
+              tagName: '详情',
+              url: 'planManage-TaskList03',
+              com: 'router-link'
+            },
+            {
+              tagName: '更多'
+            }
+          ]
         },
         {
           key: '2',
@@ -211,13 +223,16 @@ export default {
           startTime: '2021-03-04 12:40:55',
           completionTime: '',
           content: '',
-          action: [{
-            tagName: "详情",
-            url: "planManage-TaskList02",
-            com: "router-link"
-          }, {
-            tagName: "更多",
-          }]
+          action: [
+            {
+              tagName: '详情',
+              url: 'planManage-TaskList02',
+              com: 'router-link'
+            },
+            {
+              tagName: '更多'
+            }
+          ]
         },
         {
           key: '3',
@@ -228,13 +243,16 @@ export default {
           startTime: '2020-02-08 10:40:52',
           completionTime: '',
           content: '',
-          action: [{
-            tagName: "详情",
-            url: "planManage-TaskList01",
-            com: "router-link"
-          }, {
-            tagName: "更多",
-          }]
+          action: [
+            {
+              tagName: '详情',
+              url: 'planManage-TaskList01',
+              com: 'router-link'
+            },
+            {
+              tagName: '更多'
+            }
+          ]
         },
         {
           key: '4',
@@ -246,16 +264,19 @@ export default {
           completionTime: '2020-12-19 16:10:20',
           content:
             '当工作到了一定的阶段，总结便是必不可少的。让我们从中发现优点，摒弃缺点，积累经验，推动未来工作的进展！',
-          action: [{
-            tagName: "详情",
-            url: "planManage-TaskList",
-            com: "router-link"
-          }, {
-            tagName: "更多",
-            // com: "TableModal
-          }]
-        },
-      ],
+          action: [
+            {
+              tagName: '详情',
+              url: 'planManage-TaskList',
+              com: 'router-link'
+            },
+            {
+              tagName: '更多'
+              // com: "TableModal
+            }
+          ]
+        }
+      ]
     }
 
     return {
@@ -274,17 +295,17 @@ export default {
         pause: '/sys/quartzJob/pause',
         resume: '/sys/quartzJob/resume',
         exportXlsUrl: 'sys/quartzJob/exportXls',
-        importExcelUrl: 'sys/quartzJob/importExcel',
+        importExcelUrl: 'sys/quartzJob/importExcel'
       },
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 5 },
+        sm: { span: 5 }
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 16 }
       },
-      visible: false,
+      visible: false
     }
   },
   methods: {
@@ -328,8 +349,8 @@ export default {
     },
     showDelete() {
       this.visible = true
-    },
-  },
+    }
+  }
 }
 </script>
 <style scoped>

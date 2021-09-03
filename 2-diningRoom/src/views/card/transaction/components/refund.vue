@@ -40,9 +40,19 @@
               </a-col>
               <a-col :xl="8" :lg="8" :md="9" :sm="24">
                 <a-form-item label="退款时间">
-                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['startTime']" />
+                  <a-date-picker
+                    format="YYYY-MM-DD"
+                    placeholder="开始时间"
+                    v-decorator="['startTime']"
+                    :default-value="moment(current_start_date)"
+                  />
                   <span class="query-group-split-cust"></span>
-                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['endTime']" />
+                  <a-date-picker
+                    format="YYYY-MM-DD"
+                    placeholder="结束时间"
+                    v-decorator="['completionTime']"
+                    :default-value="moment(current_stop_date)"
+                  />
                 </a-form-item>
               </a-col>
 
@@ -108,15 +118,20 @@
 
 <script>
 import { formatDate } from '../../../../utils/util'
+import moment from 'moment'
 export default {
   name: 'consume',
   data() {
     return {
+      moment,
+      current_start_date: formatDate(new Date().getTime() - 30 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
+      form1: this.$form.createForm(this),
       toggleSearchStatus: true,
       dataSource: [
         {
           id: '1',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
+          cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMdd'),
           time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15:22:32',
           money: '1000.50',
           method: '银行卡转账',
@@ -131,8 +146,8 @@ export default {
         },
         {
           id: '2',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 6 * 24 * 3600 * 1000, 'yyyyMMd'),
-          time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15:22:32',
+          cardNumber: 'KHID' + formatDate(new Date().getTime() - 6 * 24 * 3600 * 1000, 'yyyyMMdd'),
+          time: formatDate(new Date().getTime() - 1 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '11:01:19',
           money: '100.50',
           method: '现金支付',
           endMoney: '0',
@@ -146,8 +161,8 @@ export default {
         },
         {
           id: '3',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 7 * 24 * 3600 * 1000, 'yyyyMMd'),
-          time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15:22:32',
+          cardNumber: 'KHID' + formatDate(new Date().getTime() - 7 * 24 * 3600 * 1000, 'yyyyMMdd'),
+          time: formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '18:56:32',
           money: '500.50',
           method: '银行卡转账',
           endMoney: '0',

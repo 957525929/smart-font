@@ -40,9 +40,19 @@
               </a-col>
               <a-col :xl="8" :lg="8" :md="9" :sm="24">
                 <a-form-item label="充值时间">
-                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['startTime']" />
+                  <a-date-picker
+                    format="YYYY-MM-DD"
+                    placeholder="开始时间"
+                    v-decorator="['startTime']"
+                    :default-value="moment(current_start_date)"
+                  />
                   <span class="query-group-split-cust"></span>
-                  <a-date-picker placeholder="请输入" style="width: 47%;" v-decorator="['endTime']" />
+                  <a-date-picker
+                    format="YYYY-MM-DD"
+                    placeholder="结束时间"
+                    v-decorator="['completionTime']"
+                    :default-value="moment(current_stop_date)"
+                  />
                 </a-form-item>
               </a-col>
 
@@ -105,17 +115,21 @@
 
 <script>
 import { formatDate } from '../../../../utils/util'
+import moment from 'moment'
 export default {
   name: 'consume',
 
   data() {
     return {
+      moment,
+      current_start_date: formatDate(new Date().getTime() - 30 * 24 * 3600 * 1000, 'yyyy-MM-dd'),
+      current_stop_date: formatDate(new Date().getTime(), 'yyyy-MM-dd'),
       toggleSearchStatus: true,
       seen: false,
       dataSource: [
         {
           id: '1',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMd'),
+          cardNumber: 'KHID' + formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyyMMdd'),
           place: '食堂app',
           time: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '18:01:02',
           money: '200.00',
@@ -128,7 +142,7 @@ export default {
         },
         {
           id: '2',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMd'),
+          cardNumber: 'KHID' + formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyyMMdd'),
           place: '财务处',
           time: formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '14:01:02',
           money: '500.00',
@@ -141,7 +155,7 @@ export default {
         },
         {
           id: '3',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMd'),
+          cardNumber: 'KHID' + formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyyMMdd'),
           place: '食堂app',
           time: formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '10:01:02',
           money: '50.00',
@@ -154,7 +168,7 @@ export default {
         },
         {
           id: '4',
-          cardNumber: 'KHID' + formatDate(new Date().getTime() - 5 * 24 * 3600 * 1000, 'yyyyMMd'),
+          cardNumber: 'KHID' + formatDate(new Date().getTime() - 5 * 24 * 3600 * 1000, 'yyyyMMdd'),
           place: '食堂app',
           time: formatDate(new Date().getTime() - 5 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '13:01:02',
           money: '100.00',
