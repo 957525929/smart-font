@@ -118,6 +118,25 @@
 			</view>
 		</view>
 		
+		<!-- 退款记录 -->
+		<view v-if="TabCur == 2" class="bg-white">
+			<view class="cu-list menu">
+				<view class="cu-item" v-for="(item,index) in refound" :key="index">
+					<view class="content">
+						<view class="margin-top-xs">
+							-{{ item.pay }}
+						</view>
+						<view class="text-gray text-sm">
+							{{ item.date }}
+						</view>
+					</view>
+					<view class="action text-gray">
+						余额 {{ item.money }}
+					</view>
+				</view>
+			</view>
+		</view>
+		
 		<!-- 支付中模态框 -->
 <!-- 		<view class="cu-modal" :class="modalName=='DialogModal'?'show':''">
 			<view class="cu-dialog">
@@ -186,7 +205,7 @@
 				},
 				TabCur: 0,
 				scrollLeft: 0,
-				TabTitle: ['消费记录', '充值记录'],
+				TabTitle: ['消费记录', '充值记录', '退款记录'],
 				payData: [{
 						pay: 12,
 						date: this.getDate('day') + ' ' + '18:23:11',
@@ -215,18 +234,25 @@
 					},
 					{
 						recharge: 300,
-						date: '2021-08-20' + ' ' + '12:20:27',
+						date: '2021-09-01' + ' ' + '12:20:27',
 						status: '成功'
 					},
 					{
 						recharge: 300,
-						date: '2021-08-20' + ' ' + '10:19:12',
+						date: '2021-09-01' + ' ' + '10:19:12',
 						status: '失败'
 					},
 				],
 				modalName: null,
 				payModalName: null,
 				payRecord: '',
+				refound: [
+					{
+						pay: '100.00',
+						date: this.getDate('day') + ' ' + '08:40:12',
+						money: '500.00',
+					}
+				]
 			}
 		},
 

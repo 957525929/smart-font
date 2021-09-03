@@ -17,11 +17,12 @@
 
 		<view class="cu-form-group">
 			<view class="title">餐卡状态变更</view>
-			<picker @change="PickerChange" :value="index" :range="picker">
+			<!-- <picker @change="PickerChange" :value="index" :range="picker">
 				<view class="picker">
 					{{ picker[index] }}
 				</view>
-			</picker>
+			</picker> -->
+			<view>挂失</view>
 		</view>
 		
 		<view class="cu-form-group align-start">
@@ -33,7 +34,7 @@
 		<view>
 			<view class="margin margin-bottom-xs text-sm">温馨提示</view>
 			<view class="margin-left padding-left text-xs text-grey">1、挂失后请及时补办</view>
-			<view class="margin-left padding-left text-xs text-grey">2、注销时请注意您的账户余额</view>
+			<!-- <view class="margin-left padding-left text-xs text-grey">2、注销时请注意您的账户余额</view> -->
 		</view>
 
 		<view class="padding margin flex">
@@ -56,14 +57,15 @@
 					</view>
 				</view>
 				<view class="padding-xl bg-white">
-					<view v-if="index == 1">
+					<!-- <view v-if="index == 1">
 						当前可用余额还有
 						<text class="text-green text-bold text-lg">￥{{ cardData.money }}</text>
 						元，
-					</view>
+					</view> -->
 					<view>
 						您确定要将当前餐卡
-						<text class="text-bold text-red text-lg">{{ picker[index] }}</text>
+						<!-- <text class="text-bold text-red text-lg">{{ picker[index] }}</text> -->
+						<text class="text-bold text-red text-lg">挂失</text>
 						吗？
 					</view>
 				</view>
