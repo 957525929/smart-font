@@ -507,6 +507,8 @@ export default {
       console.log(value)
       if (value == '其他') {
         this.handlerKey = 1
+      } else {
+        this.handlerKey = ''
       }
     }
   }
