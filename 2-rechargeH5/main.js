@@ -1,20 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 
-import workplace from './pages/workplace/index.vue'
-Vue.component('workplace',workplace)
-
-
-import lockinstall from './pages/lockinstall/installindex.vue'
-Vue.component('lockinstall',lockinstall)
-import lockrepair from './pages/lockrepair/index.vue'
-Vue.component('lockrepair',lockrepair)
-import locksafe from './pages/locksafe/index.vue'
-Vue.component('locksafe',locksafe)
-import lockrecord from './pages/lockrecord/index.vue'
-Vue.component('lockrecord',lockrecord)
-import lockcount from './pages/lockcount/index.vue'
-Vue.component('lockcount',lockcount)
+// import workplace from './pages/workplace/index.vue'
+// Vue.component('workplace',workplace)
 
 import person from './pages/person/index.vue'
 Vue.component('person',person)
