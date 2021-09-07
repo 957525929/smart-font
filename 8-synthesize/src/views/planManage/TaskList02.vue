@@ -7,8 +7,7 @@
             <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
             <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
             <a-button type="dashed" icon="download" @click="handleExportXls(`${currentTaskName}`)">导出</a-button>
-   <a-button v-if="selectedRowKeys.length > 0" style="margin-left: 8px"> 批量删除
-              </a-button>
+            <a-button v-if="selectedRowKeys.length > 0" style="margin-left: 8px"> 批量删除 </a-button>
           </a-col>
         </a-row>
       </div>
@@ -51,10 +50,9 @@
 
         <!-- 状态渲染模板 -->
         <template slot="customRenderStatus" slot-scope="status">
-          <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
-          <a-tag v-if="status === '1'" color="green">进行中</a-tag>
-          <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status === '3'" color="red"> 已超期 </a-tag>
+          <a-tag :color="status == '0' ? 'orange' : status == '1' ? 'green' : status == '2' ? 'cyan' : 'red'">{{
+            status == 0 ? '未开始' : status == '1' ? '进行中' : status == '2' ? '已完成' : '已超期'
+          }}</a-tag>
         </template>
       </a-table>
     </PageTemplate>
@@ -78,14 +76,14 @@ export default {
   components: {
     PageTemplate,
     JEllipsis,
-    TaskListModal,
+    TaskListModal
   },
   data() {
     const rowSelection = {
       onSelect: (record, selected, selectedRows) => {
         this.currentTaskName = record.taskName
         console.log(this.currentTaskName)
-      },
+      }
     }
     return {
       rowSelection,
@@ -98,17 +96,17 @@ export default {
         pause: '/sys/quartzJob/pause',
         resume: '/sys/quartzJob/resume',
         exportXlsUrl: 'sys/quartzJob/exportXls',
-        importExcelUrl: 'sys/quartzJob/importExcel',
+        importExcelUrl: 'sys/quartzJob/importExcel'
       },
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 5 },
+        sm: { span: 5 }
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 16 }
       },
-      status_visible: false,
+      status_visible: false
     }
   },
   methods: {
@@ -127,10 +125,9 @@ export default {
       record.status = '4'
       this.$message.success('延期成功')
     },
-    cancel(e) {},
-  },
+    cancel(e) {}
+  }
 }
 </script>
 
-<style>
-</style>
+<style></style>

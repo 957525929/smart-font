@@ -50,41 +50,9 @@
 
         <!-- 状态渲染模板 -->
         <template slot="customRenderStatus" slot-scope="status">
-          <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
-          <a-tag v-if="status === '1'" color="green">进行中</a-tag>
-          <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
-          <a-tag v-if="status === '3'" color="red"> 已超期 </a-tag>
-          <!-- <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
-            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
-              <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" format="YYYY-MM-DD" />
-            </a-form-item>
-          </a-modal> -->
-          <!-- <a-tag
-            :color="
-              record.status === '0'
-                ? 'orange'
-                : record.status === '1'
-                ? 'green'
-                : record.status === '2'
-                ? 'cyan'
-                : record.status === '3'
-                ? 'red'
-                : 'pink'
-            "
-            @click="change(record)"
-          >
-            {{
-              record.status === '0'
-                ? '未开始'
-                : record.status === '1'
-                ? '进行中'
-                : record.status === '2'
-                ? '已完成'
-                : record.status === '3'
-                ? '未完成'
-                : '延时中'
-            }}
-          </a-tag> -->
+          <a-tag :color="status == '0' ? 'orange' : status == '1' ? 'green' : status == '2' ? 'cyan' : 'red'">{{
+            status == 0 ? '未开始' : status == '1' ? '进行中' : status == '2' ? '已完成' : '已超期'
+          }}</a-tag>
         </template>
       </a-table>
     </PageTemplate>
@@ -109,14 +77,14 @@ export default {
   components: {
     PageTemplate,
     JEllipsis,
-    TaskListModal,
+    TaskListModal
   },
   data() {
     const rowSelection = {
       onSelect: (record, selected, selectedRows) => {
         this.currentTaskName = record.taskName
         console.log(this.currentTaskName)
-      },
+      }
     }
     return {
       rowSelection,
@@ -130,16 +98,16 @@ export default {
         pause: '/sys/quartzJob/pause',
         resume: '/sys/quartzJob/resume',
         exportXlsUrl: 'sys/quartzJob/exportXls',
-        importExcelUrl: 'sys/quartzJob/importExcel',
+        importExcelUrl: 'sys/quartzJob/importExcel'
       },
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 5 },
+        sm: { span: 5 }
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
-      },
+        sm: { span: 16 }
+      }
     }
   },
   methods: {
@@ -176,10 +144,9 @@ export default {
       console.log('----------------------')
       console.log(this.timeOut)
     },
-    cancel(e) {},
-  },
+    cancel(e) {}
+  }
 }
 </script>
 
-<style>
-</style>
+<style></style>

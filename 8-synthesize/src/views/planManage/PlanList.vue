@@ -75,15 +75,9 @@
           </span>
           <!-- 状态渲染模板 -->
           <template slot="customRenderStatus" slot-scope="status">
-            <a-tag v-if="status === '0'" color="orange">未开始</a-tag>
-            <a-tag v-if="status === '1'" color="green">进行中</a-tag>
-            <a-tag v-if="status === '2'" color="cyan">已完成</a-tag>
-            <a-tag v-if="status === '3'" color="red"> 已超期 </a-tag>
-            <!-- <a-modal v-model="visible" title="是否确认延长时间" @ok="confirm(record)" @cancel="cancel">
-            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="任务名称" hasFeedback>
-              <a-date-picker @change="getDateTime" v-model="timeOut" style="width: 200px" />
-            </a-form-item>
-          </a-modal> -->
+            <a-tag :color="status == '0' ? 'orange' : status == '1' ? 'green' : status == '2' ? 'cyan' : 'red'">{{
+              status == 0 ? '未开始' : status == '1' ? '进行中' : status == '2' ? '已完成' : '已超期'
+            }}</a-tag>
           </template>
         </a-table>
       </div>
@@ -311,9 +305,7 @@ export default {
   methods: {
     showDetails(item) {
       this.currentItem = item
-      // console.log(this.currentItem);
       this.key = item.key
-      // console.log(this.key);
     },
     deleteIndex(index) {
       this.currentIndex = index
@@ -327,8 +319,6 @@ export default {
       this.rowIndex = index
     },
     confirm() {
-      // record.status = "1";
-      console.log(this.rowIndex)
       this.rowIndex.status = '4'
       this.$message.success('延期成功')
       console.log(this.rowIndex.deadline)
