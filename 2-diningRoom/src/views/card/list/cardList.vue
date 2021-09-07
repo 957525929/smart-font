@@ -99,7 +99,34 @@
             </a-tag>
           </span>
           <span slot="action" slot-scope="text, record">
-            <router-link :to="{ name: 'card-list-detail', params: record }">查看记录</router-link>
+            <span v-for="(i, index) in record.action" :key="i.type">
+              <span v-if="i.type == 'record'">
+                <router-link :to="{ name: 'card-list-detail', params: record }">{{ i.tagName }}</router-link>
+              </span>
+              <span v-else-if="i.type == 'lose'" @click="replaceCard(record)">
+                <a>{{ i.tagName }}</a>
+              </span>
+              <span v-if="i.type == 'cancellation'">
+                <a-popconfirm
+                  :key="i.tagName"
+                  :title="`卡内余额为￥${record.balance}元，确认注销吗？`"
+                  ok-text="确认"
+                  cancel-text="取消"
+                  @confirm="replaceCard(record, 'delete')"
+                  @cancel="cancel"
+                >
+                  <a> {{ i.tagName }}</a>
+                </a-popconfirm>
+              </span>
+              <span v-else-if="i.type == 'delete'">
+                <a @click="replaceCard(record, 'delete')">{{ i.tagName }}</a>
+              </span>
+              <span v-else-if="i.type == 'makeup'">
+                <a @click="replaceCard(record, 'makeup')">{{ i.tagName }}</a>
+              </span>
+              <a-divider type="vertical" v-if="index !== record.action.length - 1" />
+            </span>
+            <!-- <router-link :to="{ name: 'card-list-detail', params: record }">查看记录</router-link>
             <a-divider type="vertical" v-if="!(record.id == '2')" />
             <a-popconfirm
               :title="`卡内余额为￥${record.balance}元，确认注销吗？`"
@@ -109,15 +136,15 @@
               @cancel="cancel"
             >
               <a v-if="!(record.id == '2')">注销</a>
-            </a-popconfirm>
+            </a-popconfirm> -->
 
-            <a-divider type="vertical" v-if="!(record.id == '2')" />
+            <!-- <a-divider type="vertical" v-if="!(record.id == '2')" />
             <a v-if="record.id === '3'" @click="replaceCard(record, 'makeup')">补卡</a>
             <a v-if="record.id === '1'" @click="replaceCard(record)">挂失</a>
             <a-divider type="vertical" />
             <a-popconfirm title="确认删除吗?" ok-text="确认" cancel-text="取消" @confirm="confirm" @cancel="cancel">
               <a>删除</a>
-            </a-popconfirm>
+            </a-popconfirm> -->
 
             <!-- <a-dropdown>
               <a class="ant-dropdown-link">更多 <a-icon type="down" /> 注销</a>
@@ -266,7 +293,25 @@ export default {
           balance: '200.50',
           status: '正常',
           totalMoney: '100',
-          createTime: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15.21.16'
+          createTime: formatDate(new Date().getTime() - 2 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15.21.16',
+          action: [
+            {
+              tagName: '查看记录',
+              type: 'record'
+            },
+            {
+              tagName: '挂失',
+              type: 'lose'
+            },
+            {
+              tagName: '注销',
+              type: 'cancellation'
+            },
+            {
+              tagName: '删除',
+              type: 'delete'
+            }
+          ]
         },
         {
           id: '2',
@@ -277,7 +322,17 @@ export default {
           balance: '1000.50',
           status: '注销',
           totalMoney: '100',
-          createTime: formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '10.15.01'
+          createTime: formatDate(new Date().getTime() - 3 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '10.15.01',
+          action: [
+            {
+              tagName: '查看记录',
+              type: 'record'
+            },
+            {
+              tagName: '删除',
+              type: 'delete'
+            }
+          ]
         },
         {
           id: '3',
@@ -288,7 +343,25 @@ export default {
           balance: '10.50',
           status: '挂失',
           totalMoney: '100',
-          createTime: formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15.36.36'
+          createTime: formatDate(new Date().getTime() - 4 * 24 * 3600 * 1000, 'yyyy-MM-dd') + ' ' + '15.36.36',
+          action: [
+            {
+              tagName: '查看记录',
+              type: 'record'
+            },
+            {
+              tagName: '补卡',
+              type: 'makeup'
+            },
+            {
+              tagName: '注销',
+              type: 'cancellation'
+            },
+            {
+              tagName: '删除',
+              type: 'delete'
+            }
+          ]
         }
       ],
       // 表头
