@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 	<view>
 		<scroll-view scroll-y class="DrawerPage" :class="modalName=='viewModal'?'show':''">
 
@@ -197,3 +197,4 @@
 		flex: initial;
 	}
 </style>
+ -->

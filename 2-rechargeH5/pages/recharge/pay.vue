@@ -59,7 +59,7 @@
 			return {
 				cardData: {
 					name: '袁洪',
-					cardID: '6217 4545 0321 7821 123',
+					cardID: 'KHID20210903',
 					money: 500,
 					status: '正常',
 				},

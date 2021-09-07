@@ -104,214 +104,7 @@
 		}
 	    
        
-        ,{
-            "path" : "components/lock/lockitem",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-		,
-		{
-		    "path" : "pages/lockrepair/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		},{
-            "path" : "pages/lockcount/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-		{
-		    "path" : "pages/locksafe/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		}
-		,{
-		    "path" : "components/lock/detail",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		}
-        ,{
-            "path" : "components/lock/peopledetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },{
-            "path" : "components/lock/serach",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
         
-      
-      
-        ,{
-            "path" : "pages/index/installindex",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/repairindex",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/safeindex",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        
-        ,{
-            "path" : "pages/lockrecord/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "components/lock/safedetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "components/lock/safesearch",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "components/lock/recordcard",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "components/lock/recorddetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "components/lock/alertrecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "components/lock/alertdetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "components/lock/recordsearch",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "components/lock/repairsearch",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/lockinstall/installindex",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },{
-            "path" : "pages/lockinstall/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/lockinstall/install",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },{
-            "path" : "pages/lockinstall/installrecord2",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
         ,{
             "path" : "pages/recharge/index",
             "style" :                                                                                    
@@ -363,72 +156,72 @@
 		"backgroundColorTop": "#E0E0E0",
 		"backgroundColorBottom": "#E0E0E0"
 	},
-	"subPackages": [{
-		"root": "pages/workplace",
-		"name": "workplace",
-		"pages": [{
-			"path": "index",
-			"style": {
-				"navigationBarTitleText": "工作台",
-				"app-plus": {
-					"titleNView": false,
-					"bounce": "none"
-				}
-			}
-		}, {
-			"path": "property",
-			"style": {
-				"navigationBarTitleText": "物业管理",
-				"app-plus": {
-					"titleColor": "#FFFFFF",
-					"backgroundColor": "#04009A",
-					"titleSize": "16px"
-				}
-			}
-		}, {
-			"path": "car",
-			"style": {
-				"navigationBarTitleText": "车辆管理",
-				"app-plus": {
-					"titleColor": "#FFFFFF",
-					"backgroundColor": "#04009A",
-					"titleSize": "16px"
-				}
-			}
-		}, {
-			"path": "lock",
-			"style": {
-				"navigationBarTitleText": "锁管理",
-				"app-plus": {
-					"titleColor": "#FFFFFF",
-					"backgroundColor": "#04009A",
-					"titleSize": "16px"
-				}
-			}
-		}, {
-			"path": "access",
-			"style": {
-				"navigationBarTitleText": "访问管理",
-				"app-plus": {
-					"titleColor": "#FFFFFF",
-					"backgroundColor": "#04009A",
-					"titleSize": "16px"
-				}
-			}
-		}, {
-			"path": "meeting",
-			"style": {
-				"navigationBarTitleText": "会议接待",
-				"app-plus": {
-					"titleColor": "#FFFFFF",
-					"backgroundColor": "#04009A",
-					"titleSize": "16px"
-				}
-			}
-		}    
+	// "subPackages": [{
+	// 	"root": "pages/workplace",
+	// 	"name": "workplace",
+	// 	"pages": [{
+	// 		"path": "index",
+	// 		"style": {
+	// 			"navigationBarTitleText": "工作台",
+	// 			"app-plus": {
+	// 				"titleNView": false,
+	// 				"bounce": "none"
+	// 			}
+	// 		}
+	// 	}, {
+	// 		"path": "property",
+	// 		"style": {
+	// 			"navigationBarTitleText": "物业管理",
+	// 			"app-plus": {
+	// 				"titleColor": "#FFFFFF",
+	// 				"backgroundColor": "#04009A",
+	// 				"titleSize": "16px"
+	// 			}
+	// 		}
+	// 	}, {
+	// 		"path": "car",
+	// 		"style": {
+	// 			"navigationBarTitleText": "车辆管理",
+	// 			"app-plus": {
+	// 				"titleColor": "#FFFFFF",
+	// 				"backgroundColor": "#04009A",
+	// 				"titleSize": "16px"
+	// 			}
+	// 		}
+	// 	}, {
+	// 		"path": "lock",
+	// 		"style": {
+	// 			"navigationBarTitleText": "锁管理",
+	// 			"app-plus": {
+	// 				"titleColor": "#FFFFFF",
+	// 				"backgroundColor": "#04009A",
+	// 				"titleSize": "16px"
+	// 			}
+	// 		}
+	// 	}, {
+	// 		"path": "access",
+	// 		"style": {
+	// 			"navigationBarTitleText": "访问管理",
+	// 			"app-plus": {
+	// 				"titleColor": "#FFFFFF",
+	// 				"backgroundColor": "#04009A",
+	// 				"titleSize": "16px"
+	// 			}
+	// 		}
+	// 	}, {
+	// 		"path": "meeting",
+	// 		"style": {
+	// 			"navigationBarTitleText": "会议接待",
+	// 			"app-plus": {
+	// 				"titleColor": "#FFFFFF",
+	// 				"backgroundColor": "#04009A",
+	// 				"titleSize": "16px"
+	// 			}
+	// 		}
+	// 	}    
                 
-            ]
-	}],
+ //            ]
+	// }],
 	"usingComponts": true,
 	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
