@@ -5,6 +5,7 @@ import app from './modules/app'
 import user from './modules/user'
 import permission from './modules/permission'
 import enhance from './modules/enhance'
+import config from './modules/config'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -17,13 +18,9 @@ export default new Vuex.Store({
     enhance
   },
   state: {
-
+    config
   },
-  mutations: {
-
-  },
-  actions: {
-
-  },
+  mutations: {},
+  actions: {},
   getters
 })
